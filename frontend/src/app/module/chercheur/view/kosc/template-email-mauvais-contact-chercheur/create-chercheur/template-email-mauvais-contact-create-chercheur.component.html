@@ -1,0 +1,63 @@
+<p-dialog [(visible)]="createTemplateEmailMauvaisContactDialog" [draggable]="false"
+          [maximizable]="true" [modal]="true"
+          [resizable]="false" [style]="{width: '70vw'}" header="Template email mauvais contact" styleClass="p-fluid">
+
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Template email mauvais contact">
+                <div class="p-grid">
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="1">Libelle<span style="color: red;">*</span></label>
+                        <input [(ngModel)]="selectedTemplateEmailMauvaisContact.libelle" [ngClass]="{'ng-invalid ng-dirty' : !validTemplateEmailMauvaisContactLibelle}" class="p-mb-2 p-mr-2"
+                               id="1"
+                               pInputText placeholder="Libelle"
+                               type="text"/>
+                        <small *ngIf='!validTemplateEmailMauvaisContactLibelle' class='p-error'>Libelle est
+                            obligatoire.</small>
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="2">Objet<span style="color: red;">*</span></label>
+                        <input [(ngModel)]="selectedTemplateEmailMauvaisContact.objet" [ngClass]="{'ng-invalid ng-dirty' : !validTemplateEmailMauvaisContactObjet}" class="p-mb-2 p-mr-2"
+                               id="2"
+                               pInputText placeholder="Objet"
+                               type="text"/>
+                        <small *ngIf='!validTemplateEmailMauvaisContactObjet' class='p-error'>Objet est
+                            obligatoire.</small>
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="3">Corps<span style="color: red;">*</span></label>
+                        <textarea [(ngModel)]="selectedTemplateEmailMauvaisContact.corps" [ngClass]="{'ng-invalid ng-dirty' : !validTemplateEmailMauvaisContactCorps}" cols="30" id="3"
+                                  pInputTextarea placeholder="Corps"
+                                  rows="5"></textarea>
+                        <small *ngIf='!validTemplateEmailMauvaisContactCorps' class='p-error'>Corps est
+                            obligatoire.</small>
+                    </div>
+
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <div class="p-grid">
+            <div>
+                <button (click)="hideCreateDialog()" class="p-button-text" icon="pi pi-times" label="Annuler"
+                        pButton pRipple></button>
+            </div>
+            <div>
+                <button (click)="save()" icon="pi pi-check" label="Valider" pButton pRipple
+                        style="margin:10px"></button>
+            </div>
+        </div>
+    </ng-template>
+
+
+</p-dialog>

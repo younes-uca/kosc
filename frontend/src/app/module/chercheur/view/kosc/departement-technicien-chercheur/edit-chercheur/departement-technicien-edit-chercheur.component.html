@@ -1,0 +1,88 @@
+<p-dialog [(visible)]="editDepartementTechnicienDialog" [draggable]="false"
+          [maximizable]="true" [modal]="true"
+          [resizable]="false" [style]="{width: '70vw'}" header="Departement technicien" styleClass="p-fluid">
+
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Departement technicien">
+                <div class="p-grid">
+
+                                        <div class="p-field p-col-11 p-md-5">
+                                            <label for="1">Technicien<span style="color: red;">*</span></label>
+                                            <p-dropdown [options]="techniciens" [(ngModel)]="selectedDepartementTechnicien.technicienVo"
+                                                    id="1" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="identifiant"
+                                                    placeholder="Technicien" [ngClass]="{'ng-invalid ng-dirty' : !validDepartementTechnicienTechnicien}"  >
+                                            </p-dropdown>
+                                            <small class='p-error' *ngIf='!validDepartementTechnicienTechnicien'>Technicien est obligatoire.</small>
+                                        </div>
+                                        <div class="p-col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreateTechnicien('technicien')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+                                        <div class="p-field p-col-11 p-md-5">
+                                            <label for="2">Departement<span style="color: red;">*</span></label>
+                                            <p-dropdown [options]="departements" [(ngModel)]="selectedDepartementTechnicien.departementVo"
+                                                    id="2" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="libelle"
+                                                    placeholder="Departement" [ngClass]="{'ng-invalid ng-dirty' : !validDepartementTechnicienDepartement}"  >
+                                            </p-dropdown>
+                                            <small class='p-error' *ngIf='!validDepartementTechnicienDepartement'>Departement est obligatoire.</small>
+                                        </div>
+                                        <div class="p-col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreateDepartement('departement')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="3">Date debut<span style="color: red;">*</span></label>
+                                            <p-calendar id="3"   [showTime]="true" [showSeconds]="false"
+                                                        placeholder="Date debut"  [(ngModel)]="selectedDepartementTechnicien.dateDebut"
+                                                    dateFormat="{{dateFormat}}" [ngClass]="{'ng-invalid ng-dirty' : !validDepartementTechnicienDateDebut}"  >
+                                            </p-calendar>
+                                            <small class='p-error' *ngIf='!validDepartementTechnicienDateDebut'>DateDebut est obligatoire.</small>
+                                        </div>
+
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="4">Date fin<span style="color: red;">*</span></label>
+                        <p-calendar [(ngModel)]="selectedDepartementTechnicien.dateFin" [ngClass]="{'ng-invalid ng-dirty' : !validDepartementTechnicienDateFin}" [showSeconds]="false"
+                                    [showTime]="true" dateFormat="{{dateFormat}}"
+                                    id="4"
+                                    placeholder="Date fin">
+                        </p-calendar>
+                        <small *ngIf='!validDepartementTechnicienDateFin' class='p-error'>DateFin est
+                            obligatoire.</small>
+                    </div>
+
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <div class="p-grid">
+            <div>
+                <button (click)="hideEditDialog()" class="p-button-text" icon="pi pi-times" label="Annuler"
+                        pButton pRipple></button>
+            </div>
+            <div>
+                <button (click)="edit()" icon="pi pi-check" label="Valider" pButton pRipple
+                        style="margin:10px"></button>
+            </div>
+        </div>
+    </ng-template>
+
+    <app-technicien-create-chercheur></app-technicien-create-chercheur>
+    <app-departement-create-chercheur></app-departement-create-chercheur>
+
+
+</p-dialog>

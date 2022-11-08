@@ -1,0 +1,48 @@
+<p-dialog [(visible)]="viewEtatDemandeKoscDialog" [modal]="true"
+          [style]="{width: '70vw'}" header=""
+          styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="">
+                <div class="p-grid">
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="1">Code</label>
+                        <input [(ngModel)]="selectedEtatDemandeKosc.code" [(ngModel)]="selectedEtatDemandeKosc.code" [disabled]="true" autofocus
+                               class="p-mb-2 p-mr-2" id="1"
+                               pInputText placeholder="Code"
+                               type="text">
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="2">Libelle</label>
+                        <input [(ngModel)]="selectedEtatDemandeKosc.libelle" [(ngModel)]="selectedEtatDemandeKosc.libelle" [disabled]="true" autofocus
+                               class="p-mb-2 p-mr-2" id="2"
+                               pInputText placeholder="Libelle"
+                               type="text">
+                    </div>
+
+
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <div class="p-grid">
+            <div>
+                <button (click)="hideViewDialog()" class="p-button-text" icon="pi pi-times" label="Annuler"
+                        pButton pRipple></button>
+            </div>
+        </div>
+    </ng-template>
+
+
+</p-dialog>
+
+
+

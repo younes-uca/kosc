@@ -1,0 +1,456 @@
+<div class="p-grid">
+    <div class="p-col-12">
+        <p-toast></p-toast>
+        <div class="card">
+            <p-toolbar styleClass="p-mb-4">
+                <ng-template pTemplate="left">
+                    <button (click)="openCreateTechnicien('technicien')" class="p-button-success p-mr-2 p-mb-2" icon="pi pi-plus" label="Nouveau" pButton
+                            pRipple></button>
+
+
+                    <button (click)="this.findByCriteriaShow = !this.findByCriteriaShow" class="p-button-success p-mr-2 p-mb-2" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}"
+                            label="Chercher"
+                            pButton
+                            pRipple></button>
+                </ng-template>
+                <ng-template pTemplate="right">
+                    <div class="flex">
+                        <p-splitButton [model]="excelPdfButons" icon="pi pi-download" label="Exporter"
+                                       styleClass="p-button-help"></p-splitButton>
+                    </div>
+                </ng-template>
+
+            </p-toolbar>
+            <p-toolbar *ngIf="findByCriteriaShow">
+
+                <div class="align-form-search">
+                                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input [(ngModel)]="searchTechnicien.cellPhone" class="p-mr-2" id="1"
+                                           pInputText type="text">
+                                    <label for="1">Cell phone</label>
+                                </span>
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input [(ngModel)]="searchTechnicien.email" class="p-mr-2" id="2"
+                                           pInputText type="text">
+                                    <label for="2">Email</label>
+                                </span>
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input [(ngModel)]="searchTechnicien.emailAttachement" class="p-mr-2" id="3"
+                                           pInputText type="text">
+                                    <label for="3">Email attachement</label>
+                                </span>
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                <p-dropdown [(ngModel)]="searchTechnicien.entrepriseVo" [filter]="true"
+                                            [options]="entreprises"
+                                            [showClear]="true" id="4" optionLabel="libelle"
+                                            placeholder="Entreprise">
+                                </p-dropdown>
+                            </span>
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input [(ngModel)]="searchTechnicien.identifiant" class="p-mr-2" id="5"
+                                           pInputText type="text">
+                                    <label for="5">Identifiant</label>
+                                </span>
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input [(ngModel)]="searchTechnicien.motPasse" class="p-mr-2" id="6"
+                                           pInputText type="text">
+                                    <label for="6">Mot passe</label>
+                                </span>
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <p-dropdown [(ngModel)]="searchTechnicien.credentialsNonExpired" [filter]="false"
+                                                [options]="yesOrNoCredentialsNonExpired"
+                                                [showClear]="true" id="8"
+                                                optionLabel="label"
+                                                optionValue="value" placeholder="Credentials non expired">
+                                    </p-dropdown>
+                                </span>
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <p-dropdown [(ngModel)]="searchTechnicien.enabled" [filter]="false" [options]="yesOrNoEnabled"
+                                                [showClear]="true" id="9" optionLabel="label"
+                                                optionValue="value" placeholder="Enabled">
+                                    </p-dropdown>
+                                </span>
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <p-dropdown [(ngModel)]="searchTechnicien.accountNonExpired" [filter]="false"
+                                                [options]="yesOrNoAccountNonExpired"
+                                                [showClear]="true" id="10" optionLabel="label"
+                                                optionValue="value" placeholder="Account non expired">
+                                    </p-dropdown>
+                                </span>
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <p-dropdown [(ngModel)]="searchTechnicien.accountNonLocked" [filter]="false"
+                                                [options]="yesOrNoAccountNonLocked"
+                                                [showClear]="true" id="11" optionLabel="label"
+                                                optionValue="value" placeholder="Account non locked">
+                                    </p-dropdown>
+                                </span>
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <p-dropdown [(ngModel)]="searchTechnicien.passwordChanged" [filter]="false"
+                                                [options]="yesOrNoPasswordChanged"
+                                                [showClear]="true" id="12" optionLabel="label"
+                                                optionValue="value" placeholder="Password changed">
+                                    </p-dropdown>
+                                </span>
+
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                            <p-calendar
+                                    [(ngModel)]="searchTechnicien.createdAtMin" class="p-mr-2"
+                                    dateFormat="dd-MM-yy"
+                                    id="13-1"></p-calendar>
+                            <label for="13-1">Created at Min</label>
+                        </span>
+
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                            <p-calendar
+                                    [(ngModel)]="searchTechnicien.createdAtMax" class="p-mr-2"
+                                    dateFormat="dd-MM-yy"
+                                    id="13-2"></p-calendar>
+                            <label for="13-2">Created at Max</label>
+                        </span>
+
+
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                            <p-calendar
+                                    [(ngModel)]="searchTechnicien.updatedAtMin" class="p-mr-2"
+                                    dateFormat="dd-MM-yy"
+                                    id="14-1"></p-calendar>
+                            <label for="14-1">Updated at Min</label>
+                        </span>
+
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                            <p-calendar
+                                    [(ngModel)]="searchTechnicien.updatedAtMax" class="p-mr-2"
+                                    dateFormat="dd-MM-yy"
+                                    id="14-2"></p-calendar>
+                            <label for="14-2">Updated at Max</label>
+                        </span>
+
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input [(ngModel)]="searchTechnicien.username" class="p-mr-2" id="15"
+                                           pInputText type="text">
+                                    <label for="15">Username</label>
+                                </span>
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input [(ngModel)]="searchTechnicien.password" class="p-mr-2" id="16"
+                                           pInputText type="text">
+                                    <label for="16">Password</label>
+                                </span>
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input [(ngModel)]="searchTechnicien.prenom" class="p-mr-2" id="17"
+                                           pInputText type="text">
+                                    <label for="17">Prenom</label>
+                                </span>
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input [(ngModel)]="searchTechnicien.nom" class="p-mr-2" id="18"
+                                           pInputText type="text">
+                                    <label for="18">Nom</label>
+                                </span>
+                </div>
+
+                <div class="align-search-button">
+                    <button (click)="searchRequest()" class="p-button-info p-mr-2" icon="pi pi-sort-amount-down" label="Valider"
+                            pButton pRipple></button>
+                </div>
+            </p-toolbar>
+
+
+            <p-table #dt [(selection)]="selectedTechnicien" [columns]="cols" [globalFilterFields]="['cellPhone', 'email', 'emailAttachement', 'entrepriseVolibelle', 'identifiant', 'motPasse', 'credentialsNonExpired', 'enabled', 'accountNonExpired', 'accountNonLocked', 'passwordChanged', 'createdAt', 'updatedAt', 'username', 'password', 'prenom', 'nom']" [paginator]="true"
+                     [rowHover]="true"
+                     [rowsPerPageOptions]="[8,25,50]"
+                     [rows]="8" [showCurrentPageReport]="true" [value]="techniciens"
+                     currentPageReportTemplate="Les éléments de {first} à {last} sur {totalRecords} "
+                     dataKey="id" styleClass="p-datatable-customers">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+                        <h5 class="p-m-0">Liste des techniciens</h5>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input (input)="dt.filterGlobal($event.target.value, 'contains')" pInputText placeholder="Chercher..."
+                                   type="text"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+
+
+                        <th pSortableColumn="cellPhone">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Cell phone</span>
+                                <p-sortIcon field="cellPhone"></p-sortIcon>
+                                <p-columnFilter class="ml-auto" display="menu" field="technicien.cellPhone"
+                                                type="text"></p-columnFilter>
+                            </div>
+                        </th>
+
+
+                        <th pSortableColumn="email">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Email</span>
+                                <p-sortIcon field="email"></p-sortIcon>
+                                <p-columnFilter class="ml-auto" display="menu" field="technicien.email"
+                                                type="text"></p-columnFilter>
+                            </div>
+                        </th>
+
+
+                        <th pSortableColumn="emailAttachement">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Email attachement</span>
+                                <p-sortIcon field="emailAttachement"></p-sortIcon>
+                                <p-columnFilter class="ml-auto" display="menu" field="technicien.emailAttachement"
+                                                type="text"></p-columnFilter>
+                            </div>
+                        </th>
+
+
+                        <th pSortableColumn="entreprise">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Entreprise</span>
+                                <p-sortIcon field="entreprise"></p-sortIcon>
+                            </div>
+                        </th>
+
+
+                        <th pSortableColumn="identifiant">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Identifiant</span>
+                                <p-sortIcon field="identifiant"></p-sortIcon>
+                                <p-columnFilter class="ml-auto" display="menu" field="technicien.identifiant"
+                                                type="text"></p-columnFilter>
+                            </div>
+                        </th>
+
+
+                        <th pSortableColumn="motPasse">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Mot passe</span>
+                                <p-sortIcon field="motPasse"></p-sortIcon>
+                                <p-columnFilter class="ml-auto" display="menu" field="technicien.motPasse"
+                                                type="text"></p-columnFilter>
+                            </div>
+                        </th>
+
+
+                        <th pSortableColumn="credentialsNonExpired">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Credentials non expired</span>
+                                <p-sortIcon field="credentialsNonExpired"></p-sortIcon>
+                            </div>
+                        </th>
+
+
+                        <th pSortableColumn="enabled">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Enabled</span>
+                                <p-sortIcon field="enabled"></p-sortIcon>
+                            </div>
+                        </th>
+
+
+                        <th pSortableColumn="accountNonExpired">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Account non expired</span>
+                                <p-sortIcon field="accountNonExpired"></p-sortIcon>
+                            </div>
+                        </th>
+
+
+                        <!--
+                        <th pSortableColumn="accountNonLocked">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Account non locked</span>
+                                <p-sortIcon field="accountNonLocked"></p-sortIcon>
+                            </div>
+                        </th>
+                        -->
+
+
+                        <!--
+                        <th pSortableColumn="passwordChanged">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Password changed</span>
+                                <p-sortIcon field="passwordChanged"></p-sortIcon>
+                            </div>
+                        </th>
+                        -->
+
+
+                        <!--
+                        <th pSortableColumn="createdAt">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Created at</span>
+                                <p-sortIcon field="createdAt"></p-sortIcon>
+                            </div>
+                        </th>
+                        -->
+
+
+                        <!--
+                        <th pSortableColumn="updatedAt">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Updated at</span>
+                                <p-sortIcon field="updatedAt"></p-sortIcon>
+                            </div>
+                        </th>
+                        -->
+
+
+                        <!--
+                        <th pSortableColumn="username">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Username</span>
+                                <p-sortIcon field="username"></p-sortIcon>
+                                <p-columnFilter type="text" field="technicien.username" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        -->
+
+
+                        <!--
+                        <th pSortableColumn="password">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Password</span>
+                                <p-sortIcon field="password"></p-sortIcon>
+                                <p-columnFilter type="text" field="technicien.password" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        -->
+
+
+                        <!--
+                        <th pSortableColumn="prenom">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Prenom</span>
+                                <p-sortIcon field="prenom"></p-sortIcon>
+                                <p-columnFilter type="text" field="technicien.prenom" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        -->
+
+
+                        <!--
+                        <th pSortableColumn="nom">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Nom</span>
+                                <p-sortIcon field="nom"></p-sortIcon>
+                                <p-columnFilter type="text" field="technicien.nom" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        -->
+
+
+                        <th>Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template let-technicien pTemplate="body">
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="technicien"></p-tableCheckbox>
+                        </td>
+
+                        <td>{{technicien.cellPhone}}</td>
+
+
+                        <td>{{technicien.email}}</td>
+
+
+                        <td>{{technicien.emailAttachement}}</td>
+
+
+                        <td>{{technicien.entrepriseVo?.libelle}}</td>
+
+
+                        <td>{{technicien.identifiant}}</td>
+
+
+                        <td>{{technicien.motPasse}}</td>
+
+
+                        <td><i *ngIf="technicien.credentialsNonExpired" class="pi pi-check checked-toogle"></i>
+                            <i *ngIf="!technicien.credentialsNonExpired" class="pi pi-times unchecked-toogle"></i>
+                        </td>
+
+
+                        <td><i *ngIf="technicien.enabled" class="pi pi-check checked-toogle"></i>
+                            <i *ngIf="!technicien.enabled" class="pi pi-times unchecked-toogle"></i>
+                        </td>
+
+
+                        <!--
+                           <td><i *ngIf="technicien.accountNonExpired" class="pi pi-check checked-toogle"></i>
+                               <i *ngIf="!technicien.accountNonExpired" class="pi pi-times unchecked-toogle"></i>
+                           </td>
+                        -->
+
+                        <!--
+                           <td><i *ngIf="technicien.accountNonLocked" class="pi pi-check checked-toogle"></i>
+                               <i *ngIf="!technicien.accountNonLocked" class="pi pi-times unchecked-toogle"></i>
+                           </td>
+                        -->
+
+                        <!--
+                           <td><i *ngIf="technicien.passwordChanged" class="pi pi-check checked-toogle"></i>
+                               <i *ngIf="!technicien.passwordChanged" class="pi pi-times unchecked-toogle"></i>
+                           </td>
+                        -->
+
+                        <!--
+                           <td>{{technicien.createdAt | date :'dd/MM/yyyy HH:mm' }}</td>
+                        -->
+
+                        <!--
+                           <td>{{technicien.updatedAt | date :'dd/MM/yyyy HH:mm' }}</td>
+                        -->
+
+                        <!--
+                            <td>{{technicien.username}}</td>
+                        -->
+
+                        <!--
+                            <td>{{technicien.password}}</td>
+                        -->
+
+                        <!--
+                            <td>{{technicien.prenom}}</td>
+                        -->
+
+                        <!--
+                            <td>{{technicien.nom}}</td>
+                        -->
+
+
+                        <td>
+                            <button (click)="editTechnicien(technicien)" class="p-button-rounded p-button-success p-mr-2" icon="pi pi-pencil"
+                                    pButton
+                                    pRipple></button>
+                            <button (click)="viewTechnicien(technicien)" class="p-button-rounded p-button-info p-mr-2" icon="pi pi-list" pButton
+                                    pRipple></button>
+                            <button (click)="deleteTechnicien(technicien)" class="p-button-rounded p-button-danger p-mr-2" icon="pi pi-trash" pButton
+                                    pRipple></button>
+
+                            <button (click)="duplicateTechnicien(technicien)" class="p-button-rounded p-button-raised p-button-warning" icon="pi pi-copy"
+                                    pButton
+                                    pRipple></button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        En totale
+                        il {{techniciens ? techniciens.length == 1 ? 'y a' : 'y a' : 'y a' }} {{techniciens ? techniciens.length : 0 }} {{techniciens ? techniciens.length == 1 ? 'technicien' : 'techniciens' : 0 }}
+                        .
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <app-technicien-create-chercheur></app-technicien-create-chercheur>
+        <app-technicien-edit-chercheur></app-technicien-edit-chercheur>
+        <app-technicien-view-chercheur></app-technicien-view-chercheur>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>

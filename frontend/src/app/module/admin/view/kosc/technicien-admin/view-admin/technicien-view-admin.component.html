@@ -1,0 +1,200 @@
+<p-dialog [(visible)]="viewTechnicienDialog" [modal]="true"
+          [style]="{width: '70vw'}" header=""
+          styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="">
+                <div class="p-grid">
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="1">Cell phone</label>
+                        <input [(ngModel)]="selectedTechnicien.cellPhone" [(ngModel)]="selectedTechnicien.cellPhone" [disabled]="true" autofocus
+                               class="p-mb-2 p-mr-2" id="1"
+                               pInputText placeholder="Cell phone"
+                               type="text">
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="2">Email</label>
+                        <input [(ngModel)]="selectedTechnicien.email" [(ngModel)]="selectedTechnicien.email" [disabled]="true" autofocus
+                               class="p-mb-2 p-mr-2" id="2"
+                               pInputText placeholder="Email"
+                               type="text">
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="3">Email attachement</label>
+                        <input [(ngModel)]="selectedTechnicien.emailAttachement" [(ngModel)]="selectedTechnicien.emailAttachement" [disabled]="true" autofocus
+                               class="p-mb-2 p-mr-2" id="3"
+                               pInputText placeholder="Email attachement"
+                               type="text">
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="4">Entreprise</label>
+                        <p-dropdown [(ngModel)]="selectedTechnicien.entrepriseVo" [disabled]="true"
+                                    [filter]="true" [options]="entreprises" [showClear]="true"
+                                    filterMatchMode="contains" id="4"
+                                    optionLabel="libelle"
+                                    placeholder="Entreprise">
+                        </p-dropdown>
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="5">Identifiant</label>
+                        <input [(ngModel)]="selectedTechnicien.identifiant" [(ngModel)]="selectedTechnicien.identifiant" [disabled]="true" autofocus
+                               class="p-mb-2 p-mr-2" id="5"
+                               pInputText placeholder="Identifiant"
+                               type="text">
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="6">Mot passe</label>
+                        <input [(ngModel)]="selectedTechnicien.motPasse" [(ngModel)]="selectedTechnicien.motPasse" [disabled]="true" autofocus
+                               class="p-mb-2 p-mr-2" id="6"
+                               pInputText placeholder="Mot passe"
+                               type="text">
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="7">Adresse ont</label>
+                        <textarea [(ngModel)]="selectedTechnicien.adresseOnt" [disabled]="true" cols="30" id="7" pInputTextarea
+                                  placeholder="Adresse ont" rows="5"
+                        ></textarea>
+                    </div>
+
+                    <div class="p-field align-inputswitch p-col-12  p-md-3">
+                        <div class="label-inputswitch">
+                            <label for="8">Credentials non expired</label>
+                        </div>
+                        <div class="input-switch">
+                            <p-inputSwitch [(ngModel)]="selectedTechnicien.credentialsNonExpired" [disabled]="true"
+                                           id="8"></p-inputSwitch>
+                        </div>
+                    </div>
+
+
+                    <div class="p-field align-inputswitch p-col-12  p-md-3">
+                        <div class="label-inputswitch">
+                            <label for="9">Enabled</label>
+                        </div>
+                        <div class="input-switch">
+                            <p-inputSwitch [(ngModel)]="selectedTechnicien.enabled" [disabled]="true"
+                                           id="9"></p-inputSwitch>
+                        </div>
+                    </div>
+
+
+                    <div class="p-field align-inputswitch p-col-12  p-md-3">
+                        <div class="label-inputswitch">
+                            <label for="10">Account non expired</label>
+                        </div>
+                        <div class="input-switch">
+                            <p-inputSwitch [(ngModel)]="selectedTechnicien.accountNonExpired" [disabled]="true"
+                                           id="10"></p-inputSwitch>
+                        </div>
+                    </div>
+
+
+                    <div class="p-field align-inputswitch p-col-12  p-md-3">
+                        <div class="label-inputswitch">
+                            <label for="11">Account non locked</label>
+                        </div>
+                        <div class="input-switch">
+                            <p-inputSwitch [(ngModel)]="selectedTechnicien.accountNonLocked" [disabled]="true"
+                                           id="11"></p-inputSwitch>
+                        </div>
+                    </div>
+
+
+                    <div class="p-field align-inputswitch p-col-12  p-md-3">
+                        <div class="label-inputswitch">
+                            <label for="12">Password changed</label>
+                        </div>
+                        <div class="input-switch">
+                            <p-inputSwitch [(ngModel)]="selectedTechnicien.passwordChanged" [disabled]="true"
+                                           id="12"></p-inputSwitch>
+                        </div>
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="13">Created at</label>
+                        <p-calendar [(ngModel)]="selectedTechnicien.createdAt" [disabled]="true" [showSeconds]="false" [showTime]="true"
+                                    dateFormat="{{dateFormat}}" id="13"
+                                    placeholder="Created at"></p-calendar>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="14">Updated at</label>
+                        <p-calendar [(ngModel)]="selectedTechnicien.updatedAt" [disabled]="true" [showSeconds]="false" [showTime]="true"
+                                    dateFormat="{{dateFormat}}" id="14"
+                                    placeholder="Updated at"></p-calendar>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="15">Username</label>
+                        <input [(ngModel)]="selectedTechnicien.username" [(ngModel)]="selectedTechnicien.username" [disabled]="true" autofocus
+                               class="p-mb-2 p-mr-2" id="15"
+                               pInputText placeholder="Username"
+                               type="text">
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="16">Password</label>
+                        <input [(ngModel)]="selectedTechnicien.password" [(ngModel)]="selectedTechnicien.password" [disabled]="true" autofocus
+                               class="p-mb-2 p-mr-2" id="16"
+                               pInputText placeholder="Password"
+                               type="text">
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="17">Prenom</label>
+                        <input [(ngModel)]="selectedTechnicien.prenom" [(ngModel)]="selectedTechnicien.prenom" [disabled]="true" autofocus
+                               class="p-mb-2 p-mr-2" id="17"
+                               pInputText placeholder="Prenom"
+                               type="text">
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="18">Nom</label>
+                        <input [(ngModel)]="selectedTechnicien.nom" [(ngModel)]="selectedTechnicien.nom" [disabled]="true" autofocus
+                               class="p-mb-2 p-mr-2" id="18"
+                               pInputText placeholder="Nom"
+                               type="text">
+                    </div>
+
+
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <div class="p-grid">
+            <div>
+                <button (click)="hideViewDialog()" class="p-button-text" icon="pi pi-times" label="Annuler"
+                        pButton pRipple></button>
+            </div>
+        </div>
+    </ng-template>
+
+    <app-entreprise-create-admin></app-entreprise-create-admin>
+
+
+</p-dialog>
+
+
+

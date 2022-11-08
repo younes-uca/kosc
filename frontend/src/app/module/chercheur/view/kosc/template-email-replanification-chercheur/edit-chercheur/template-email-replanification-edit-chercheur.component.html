@@ -1,0 +1,63 @@
+<p-dialog [(visible)]="editTemplateEmailReplanificationDialog" [draggable]="false"
+          [maximizable]="true" [modal]="true"
+          [resizable]="false" [style]="{width: '70vw'}" header="Template email replanification" styleClass="p-fluid">
+
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Template email replanification">
+                <div class="p-grid">
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="1">Libelle<span style="color: red;">*</span></label>
+                        <input [(ngModel)]="selectedTemplateEmailReplanification.libelle" [ngClass]="{'ng-invalid ng-dirty' : !validTemplateEmailReplanificationLibelle}" class="p-mb-2 p-mr-2"
+                               id="1"
+                               pInputText placeholder="Libelle"
+                               type="text"/>
+                        <small *ngIf='!validTemplateEmailReplanificationLibelle' class='p-error'>Libelle est
+                            obligatoire.</small>
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="2">Objet<span style="color: red;">*</span></label>
+                        <input [(ngModel)]="selectedTemplateEmailReplanification.objet" [ngClass]="{'ng-invalid ng-dirty' : !validTemplateEmailReplanificationObjet}" class="p-mb-2 p-mr-2"
+                               id="2"
+                               pInputText placeholder="Objet"
+                               type="text"/>
+                        <small *ngIf='!validTemplateEmailReplanificationObjet' class='p-error'>Objet est
+                            obligatoire.</small>
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="3">Corps<span style="color: red;">*</span></label>
+                        <textarea [(ngModel)]="selectedTemplateEmailReplanification.corps" [ngClass]="{'ng-invalid ng-dirty' : !validTemplateEmailReplanificationCorps}" cols="30" id="3"
+                                  pInputTextarea placeholder="Corps"
+                                  rows="5"></textarea>
+                        <small *ngIf='!validTemplateEmailReplanificationCorps' class='p-error'>Corps est
+                            obligatoire.</small>
+                    </div>
+
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <div class="p-grid">
+            <div>
+                <button (click)="hideEditDialog()" class="p-button-text" icon="pi pi-times" label="Annuler"
+                        pButton pRipple></button>
+            </div>
+            <div>
+                <button (click)="edit()" icon="pi pi-check" label="Valider" pButton pRipple
+                        style="margin:10px"></button>
+            </div>
+        </div>
+    </ng-template>
+
+
+</p-dialog>

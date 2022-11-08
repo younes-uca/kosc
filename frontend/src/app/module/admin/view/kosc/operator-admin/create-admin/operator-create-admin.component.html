@@ -1,0 +1,52 @@
+<p-dialog [(visible)]="createOperatorDialog" [draggable]="false"
+          [maximizable]="true" [modal]="true"
+          [resizable]="false" [style]="{width: '70vw'}" header="Operator" styleClass="p-fluid">
+
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Operator">
+                <div class="p-grid">
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="1">Reference<span style="color: red;">*</span></label>
+                        <input [(ngModel)]="selectedOperator.reference" [ngClass]="{'ng-invalid ng-dirty' : !validOperatorReference}" class="p-mb-2 p-mr-2"
+                               id="1"
+                               pInputText placeholder="Reference"
+                               type="text"/>
+                        <small *ngIf='!validOperatorReference' class='p-error'>Reference est obligatoire.</small>
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="2">Libelle<span style="color: red;">*</span></label>
+                        <input [(ngModel)]="selectedOperator.libelle" [ngClass]="{'ng-invalid ng-dirty' : !validOperatorLibelle}" class="p-mb-2 p-mr-2"
+                               id="2"
+                               pInputText placeholder="Libelle"
+                               type="text"/>
+                        <small *ngIf='!validOperatorLibelle' class='p-error'>Libelle est obligatoire.</small>
+                    </div>
+
+
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <div class="p-grid">
+            <div>
+                <button (click)="hideCreateDialog()" class="p-button-text" icon="pi pi-times" label="Annuler"
+                        pButton pRipple></button>
+            </div>
+            <div>
+                <button (click)="save()" icon="pi pi-check" label="Valider" pButton pRipple
+                        style="margin:10px"></button>
+            </div>
+        </div>
+    </ng-template>
+
+
+</p-dialog>

@@ -1,0 +1,191 @@
+<div class="p-grid">
+    <div class="p-col-12">
+        <p-toast></p-toast>
+        <div class="card">
+            <p-toolbar styleClass="p-mb-4">
+                <ng-template pTemplate="left">
+                    <button (click)="openCreateArretTravail('arretTravail')" class="p-button-success p-mr-2 p-mb-2" icon="pi pi-plus" label="Nouveau" pButton
+                            pRipple></button>
+
+
+                    <button (click)="this.findByCriteriaShow = !this.findByCriteriaShow" class="p-button-success p-mr-2 p-mb-2" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}"
+                            label="Chercher"
+                            pButton
+                            pRipple></button>
+                </ng-template>
+                <ng-template pTemplate="right">
+                    <div class="flex">
+                        <p-splitButton [model]="excelPdfButons" icon="pi pi-download" label="Exporter"
+                                       styleClass="p-button-help"></p-splitButton>
+                    </div>
+                </ng-template>
+
+            </p-toolbar>
+            <p-toolbar *ngIf="findByCriteriaShow">
+
+                <div class="align-form-search">
+                            <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                <p-dropdown [(ngModel)]="searchArretTravail.technicienVo" [filter]="true"
+                                            [options]="techniciens"
+                                            [showClear]="true" id="1" optionLabel="identifiant"
+                                            placeholder="Technicien">
+                                </p-dropdown>
+                            </span>
+
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                            <p-calendar
+                                    [(ngModel)]="searchArretTravail.dateDebutMin" class="p-mr-2"
+                                    dateFormat="dd-MM-yy"
+                                    id="2-1"></p-calendar>
+                            <label for="2-1">Date debut Min</label>
+                        </span>
+
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                            <p-calendar
+                                    [(ngModel)]="searchArretTravail.dateDebutMax" class="p-mr-2"
+                                    dateFormat="dd-MM-yy"
+                                    id="2-2"></p-calendar>
+                            <label for="2-2">Date debut Max</label>
+                        </span>
+
+
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                            <p-calendar
+                                    [(ngModel)]="searchArretTravail.dateFinMin" class="p-mr-2"
+                                    dateFormat="dd-MM-yy"
+                                    id="3-1"></p-calendar>
+                            <label for="3-1">Date fin Min</label>
+                        </span>
+
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                            <p-calendar
+                                    [(ngModel)]="searchArretTravail.dateFinMax" class="p-mr-2"
+                                    dateFormat="dd-MM-yy"
+                                    id="3-2"></p-calendar>
+                            <label for="3-2">Date fin Max</label>
+                        </span>
+
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                <p-dropdown [(ngModel)]="searchArretTravail.raisonArretTravailVo"
+                                            [filter]="true"
+                                            [options]="raisonArretTravails"
+                                            [showClear]="true" id="4" optionLabel="libelle"
+                                            placeholder="Raison arret travail">
+                                </p-dropdown>
+                            </span>
+                </div>
+
+                <div class="align-search-button">
+                    <button (click)="searchRequest()" class="p-button-info p-mr-2" icon="pi pi-sort-amount-down" label="Valider"
+                            pButton pRipple></button>
+                </div>
+            </p-toolbar>
+
+
+            <p-table #dt [(selection)]="selectedArretTravail" [columns]="cols" [globalFilterFields]="['technicienVoidentifiant', 'dateDebut', 'dateFin', 'raisonArretTravailVolibelle']" [paginator]="true"
+                     [rowHover]="true"
+                     [rowsPerPageOptions]="[8,25,50]"
+                     [rows]="8" [showCurrentPageReport]="true" [value]="arretTravails"
+                     currentPageReportTemplate="Les éléments de {first} à {last} sur {totalRecords} "
+                     dataKey="id" styleClass="p-datatable-customers">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+                        <h5 class="p-m-0">Liste des arret travails</h5>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input (input)="dt.filterGlobal($event.target.value, 'contains')" pInputText placeholder="Chercher..."
+                                   type="text"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+
+
+                        <th pSortableColumn="technicien">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Technicien</span>
+                                <p-sortIcon field="technicien"></p-sortIcon>
+                            </div>
+                        </th>
+
+
+                        <th pSortableColumn="dateDebut">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Date debut</span>
+                                <p-sortIcon field="dateDebut"></p-sortIcon>
+                            </div>
+                        </th>
+
+
+                        <th pSortableColumn="dateFin">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Date fin</span>
+                                <p-sortIcon field="dateFin"></p-sortIcon>
+                            </div>
+                        </th>
+
+
+                        <th pSortableColumn="raisonArretTravail">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Raison arret travail</span>
+                                <p-sortIcon field="raisonArretTravail"></p-sortIcon>
+                            </div>
+                        </th>
+
+
+                        <th>Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template let-arretTravail pTemplate="body">
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="arretTravail"></p-tableCheckbox>
+                        </td>
+
+                        <td>{{arretTravail.technicienVo?.identifiant}}</td>
+
+
+                        <td>{{arretTravail.dateDebut | date :'dd/MM/yyyy HH:mm' }}</td>
+
+
+                        <td>{{arretTravail.dateFin | date :'dd/MM/yyyy HH:mm' }}</td>
+
+
+                        <td>{{arretTravail.raisonArretTravailVo?.libelle}}</td>
+
+
+                        <td>
+                            <button (click)="editArretTravail(arretTravail)" class="p-button-rounded p-button-success p-mr-2" icon="pi pi-pencil"
+                                    pButton
+                                    pRipple></button>
+                            <button (click)="viewArretTravail(arretTravail)" class="p-button-rounded p-button-info p-mr-2" icon="pi pi-list" pButton
+                                    pRipple></button>
+                            <button (click)="deleteArretTravail(arretTravail)" class="p-button-rounded p-button-danger p-mr-2" icon="pi pi-trash" pButton
+                                    pRipple></button>
+
+                            <button (click)="duplicateArretTravail(arretTravail)" class="p-button-rounded p-button-raised p-button-warning" icon="pi pi-copy"
+                                    pButton
+                                    pRipple></button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        En totale
+                        il {{arretTravails ? arretTravails.length == 1 ? 'y a' : 'y a' : 'y a' }} {{arretTravails ? arretTravails.length : 0 }} {{arretTravails ? arretTravails.length == 1 ? 'arret travail' : 'arret travails' : 0 }}
+                        .
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <app-arret-travail-create-chercheur></app-arret-travail-create-chercheur>
+        <app-arret-travail-edit-chercheur></app-arret-travail-edit-chercheur>
+        <app-arret-travail-view-chercheur></app-arret-travail-view-chercheur>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+<p-dialog [(visible)]="viewArretTravailDialog" [modal]="true"
+          [style]="{width: '70vw'}" header=""
+          styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="">
+                <div class="p-grid">
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="1">Technicien</label>
+                        <p-dropdown [(ngModel)]="selectedArretTravail.technicienVo" [disabled]="true"
+                                    [filter]="true" [options]="techniciens" [showClear]="true"
+                                    filterMatchMode="contains" id="1"
+                                    optionLabel="identifiant"
+                                    placeholder="Technicien">
+                        </p-dropdown>
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="2">Date debut</label>
+                        <p-calendar [(ngModel)]="selectedArretTravail.dateDebut" [disabled]="true" [showSeconds]="false" [showTime]="true"
+                                    dateFormat="{{dateFormat}}" id="2"
+                                    placeholder="Date debut"></p-calendar>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="3">Date fin</label>
+                        <p-calendar [(ngModel)]="selectedArretTravail.dateFin" [disabled]="true" [showSeconds]="false" [showTime]="true"
+                                    dateFormat="{{dateFormat}}" id="3"
+                                    placeholder="Date fin"></p-calendar>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="4">Raison arret travail</label>
+                        <p-dropdown [(ngModel)]="selectedArretTravail.raisonArretTravailVo"
+                                    [disabled]="true"
+                                    [filter]="true" [options]="raisonArretTravails" [showClear]="true"
+                                    filterMatchMode="contains" id="4"
+                                    optionLabel="libelle"
+                                    placeholder="Raison arret travail">
+                        </p-dropdown>
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="5">Comment</label>
+                        <textarea [(ngModel)]="selectedArretTravail.comment" [disabled]="true" cols="30" id="5" pInputTextarea
+                                  placeholder="Comment" rows="5"
+                        ></textarea>
+                    </div>
+
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <div class="p-grid">
+            <div>
+                <button (click)="hideViewDialog()" class="p-button-text" icon="pi pi-times" label="Annuler"
+                        pButton pRipple></button>
+            </div>
+        </div>
+    </ng-template>
+
+    <app-technicien-create-admin></app-technicien-create-admin>
+    <app-raison-arret-travail-create-admin></app-raison-arret-travail-create-admin>
+
+
+</p-dialog>
+
+
+

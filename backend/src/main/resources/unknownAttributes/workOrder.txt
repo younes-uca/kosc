@@ -1,0 +1,32 @@
+=========unknown attributes:: work order=========
+
+* supplier
+* work_order_type
+* supplier
+* supplier_service_code
+* customer_operator
+* product_code
+* product_label
+* provider_product
+* slid
+* kosc_splitter_position
+* kosc_contact_first_name
+* kosc_contact_last_name
+* kosc_contact_phone
+* kosc_contact_cellphone
+* kosc_contact_email_1
+* kosc_contact_email_2
+* kosc_contact_email_3
+* kosc_comments
+* otp_ref
+* operator_comment
+
+***************Empty attributes*********
+
+
+* first_name
+* last_name
+* intervention_start_datetime
+* intervention_end_datetime
+* gtr
+* category
