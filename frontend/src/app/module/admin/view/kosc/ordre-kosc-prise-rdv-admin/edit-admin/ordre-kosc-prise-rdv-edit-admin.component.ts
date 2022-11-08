@@ -85,6 +85,15 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
     _validOrdreKoscReferenceWorkOrder = true;
+    _validOrdreKoscDateAppel = true;
+
+    get validOrdreKoscDateAppel(): boolean {
+        return this._validOrdreKoscDateAppel;
+    }
+
+    set validOrdreKoscDateAppel(value: boolean) {
+        this._validOrdreKoscDateAppel = value;
+    }
 
     get validOrdreKoscReferenceWorkOrder(): boolean {
         return this._validOrdreKoscReferenceWorkOrder;
@@ -642,6 +651,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         this.templateSuiviService.findAll().subscribe((data) => this.templateSuivis = data);
     }
 
+
     public edit() {
         this.submitted = true;
         this.validateForm();
@@ -836,6 +846,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     private validateForm(): void {
         this.errorMessages = new Array<string>();
         this.validateOrdreKoscReferenceWorkOrder();
+        this.validateOrdreKoscDateAppel();
 
     }
 
@@ -845,6 +856,16 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.validOrdreKoscReferenceWorkOrder = false;
         } else {
             this.validOrdreKoscReferenceWorkOrder = true;
+        }
+    }
+    private validateOrdreKoscDateAppel() {
+        if(this.selectedOrdreKosc.datePremierAppel != null && this.selectedOrdreKosc.dateDeuxiemeAppel){
+            if(this.selectedOrdreKosc.datePremierAppel.getDate() >= this.selectedOrdreKosc.dateDeuxiemeAppel.getDate() || this.selectedOrdreKosc.dateTroisiemeAppel < this.selectedOrdreKosc.dateDeuxiemeAppel ){
+                this.errorMessages.push('Date de deuxieme appel non valide');
+                this.validOrdreKoscDateAppel = false;
+            } else {
+                this.validOrdreKoscDateAppel = true;
+            }
         }
     }
 

@@ -111,7 +111,6 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
 
     ) {
 
-        // this.dateRdvs = [{name: '24h'}, {name: '48h'}, {name: '72h'}];
 
     }
 
@@ -136,16 +135,20 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/')
     }
 
-    public add24(){
+    public afficher24(){
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = 24;
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = 48;
     }
-    public add48(){
+    public afficher48(){
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = 48;
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = 72;
     }
-    public add72(){
+    public afficher72(){
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = 72;
+        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = null;
+    }
+    public afficherAll(){
+        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = null;
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = null;
     }
 
@@ -527,17 +530,22 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         this.dateButons = [
             {
                 label: '24h', icon: 'pi pi-check', command: () => {
-                    this.add24();
+                    this.afficher24();
                 }
             }, {
                 label: '48h', icon: 'pi pi-check', command: () => {
-                    this.add48();
+                    this.afficher48();
                 }
             }, {
                 label: '72h', icon: 'pi pi-check', command: () => {
-                    this.add72();
+                    this.afficher72();
 
-                }
+                },
+            }, {
+                label: 'Tous', icon: 'pi pi-check', command: () => {
+                    this.afficherAll();
+
+                },
             }
         ];
     }
