@@ -56,7 +56,6 @@ public class JourFerieAdminServiceImpl extends AbstractServiceImpl<JourFerie> im
 
     @Override
     public JourFerie save(JourFerie jourFerie) {
-
         return jourFerieDao.save(jourFerie);
 
     }
