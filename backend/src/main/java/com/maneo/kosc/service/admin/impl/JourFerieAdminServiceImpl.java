@@ -80,6 +80,14 @@ public class JourFerieAdminServiceImpl extends AbstractServiceImpl<JourFerie> im
         return 1;
     }
 
+
+
+    @Override
+    public JourFerie findByIdWithAssociatedList(Long id) {
+        return findById(id);
+    }
+
+
     public List<JourFerie> findByCriteria(JourFerieVo jourFerieVo) {
 
         String query = "SELECT o FROM JourFerie o where 1=1 ";

@@ -23,7 +23,6 @@ public class JourFerie {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date dateFin;
-    @Column(length = 500)
     private String libelle;
 
 

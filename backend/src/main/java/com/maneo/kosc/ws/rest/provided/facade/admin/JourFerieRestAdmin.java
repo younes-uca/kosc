@@ -3,6 +3,7 @@ package com.maneo.kosc.ws.rest.provided.facade.admin;
 import com.maneo.kosc.bean.JourFerie;
 import com.maneo.kosc.service.admin.facade.JourFerieAdminService;
 import com.maneo.kosc.ws.rest.provided.converter.JourFerieConverter;
+import com.maneo.kosc.ws.rest.provided.vo.ArretTravailVo;
 import com.maneo.kosc.ws.rest.provided.vo.JourFerieVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -71,6 +72,10 @@ public class JourFerieRestAdmin {
         return jourFerieService.deleteById(id);
     }
 
-
+    @ApiOperation("Finds a arretTravail with associated lists by id")
+    @GetMapping("/detail/id/{id}")
+    public JourFerieVo findByIdWithAssociatedList(@PathVariable Long id) {
+        return jourFerieConverter.toVo(jourFerieService.findByIdWithAssociatedList(id));
+    }
 
 }
