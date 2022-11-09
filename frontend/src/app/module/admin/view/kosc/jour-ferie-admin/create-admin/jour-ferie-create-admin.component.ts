@@ -37,6 +37,8 @@ export class JourFerieCreateAdminComponent implements OnInit {
         this.validateForm();
         if (this.errorMessages.length === 0) {
             this.saveWithShowOption(false);
+            console.log(this.selectedJourFerie.dateDebut);
+            console.log(this.selectedJourFerie.dateFin);
         } else {
             this.messageService.add({
                 severity: 'error',

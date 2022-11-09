@@ -118,7 +118,6 @@ export class JourFerieService {
     public save(): Observable<JourFerieVo> {
         return this.http.post<JourFerieVo>(this.API, {
             ...this.selectedJourFerie,
-            dateFin: moment(this.selectedJourFerie.dateFin).format('YYYY-MM-DD')
         });
     }
 
