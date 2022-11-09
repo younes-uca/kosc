@@ -107,6 +107,7 @@ import {OrdreKoscPriseRdvAdminComponent} from "./ordre-kosc-prise-rdv-admin/ordr
 import {
     DefaultTemplateConfigurationAdminComponent
 } from "./default-template-configuration-admin/default-template-configuration-admin.component";
+import {JourFerieAdminComponent} from "./jour-ferie-admin/jour-ferie-admin.component";
 
 
 @NgModule({
@@ -294,6 +295,17 @@ import {
                                 {
                                     path: 'list',
                                     component: ArretTravailAdminComponent,
+                                    canActivate: [AuthGuard]
+                                }
+                            ]
+                        },
+                        {
+
+                            path: 'jour-ferie',
+                            children: [
+                                {
+                                    path: 'list',
+                                    component: JourFerieAdminComponent,
                                     canActivate: [AuthGuard]
                                 }
                             ]

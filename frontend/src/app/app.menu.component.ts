@@ -242,6 +242,11 @@ export class AppMenuComponent implements OnInit {
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/admin/kosc/operator/list']
                         },
+                        {
+                            label: 'Liste Jours Fériés',
+                            icon: 'pi pi-fw pi-plus-circle',
+                            routerLink: ['/app/admin/kosc/jour-ferie/list']
+                        },
                     ]
                 },
             ]
