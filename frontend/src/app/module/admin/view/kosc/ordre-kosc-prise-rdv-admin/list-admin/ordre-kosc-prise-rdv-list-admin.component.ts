@@ -271,6 +271,7 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         this.ordreKoscService.findByCriteriaPriseRdv(this.searchOrdreKosc).subscribe(ordreKoscs => {
             this.ordreKoscsPriseRdv = ordreKoscs;
         }, error => console.log(error));
+
     }
 
 
@@ -561,8 +562,11 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
             // },
             {
                 label: 'XLS', icon: 'pi pi-file-excel', command: () => {
+                    this.afficher24();
+                    this.searchRequestPriseRdv();
                     this.prepareColumnExport();
                     this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName);
+
                 }
             },
             // {

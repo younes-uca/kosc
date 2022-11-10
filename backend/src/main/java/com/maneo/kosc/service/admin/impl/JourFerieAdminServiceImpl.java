@@ -97,7 +97,9 @@ public class JourFerieAdminServiceImpl extends AbstractServiceImpl<JourFerie> im
         query += SearchUtil.addConstraint("o", "libelle", "LIKE", jourFerieVo.getLibelle());
         query += SearchUtil.addConstraintMinMaxDate("o", "dateDebut", jourFerieVo.getDateDebutMin(), jourFerieVo.getDateDebutMax());
         query += SearchUtil.addConstraintMinMaxDate("o", "dateFin", jourFerieVo.getDateFinMin(), jourFerieVo.getDateFinMax());
-        
+
+
+        query += "ORDER BY o.dateDebut DESC";
 
         return entityManager.createQuery(query).getResultList();
     }
