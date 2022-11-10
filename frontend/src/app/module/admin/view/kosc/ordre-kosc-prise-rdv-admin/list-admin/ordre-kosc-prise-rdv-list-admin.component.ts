@@ -42,6 +42,7 @@ import {
     DefaultTemplateConfigurationService
 } from "../../../../../../controller/service/DefaultTemplateConfiguration.service";
 import {DateUtils} from "../../../../../../utils/DateUtils";
+import {PromiseType} from "protractor/built/plugins";
 
 
 @Component({
@@ -267,12 +268,26 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
     }
 
 
-    public searchRequestPriseRdv() {
-        this.ordreKoscService.findByCriteriaPriseRdv(this.searchOrdreKosc).subscribe(ordreKoscs => {
-            this.ordreKoscsPriseRdv = ordreKoscs;
+    public async searchRequestPriseRdv() {
+
+        this.ordreKoscService.findByCriteriaPriseRdv(this.searchOrdreKosc).subscribe(ordreKoscs =>  {
+            this.ordreKoscsPriseRdv =ordreKoscs;
         }, error => console.log(error));
 
+        return this.ordreKoscsPriseRdv;
     }
+
+    public async searchRequestPriseRdv2() {
+        console.log("done")
+         this.ordreKoscService.findByCriteriaPriseRdv(this.searchOrdreKosc).subscribe(ordreKoscs => {
+            console.log(ordreKoscs)
+            this.ordreKoscsPriseRdv = ordreKoscs;
+            console.log(this.ordreKoscsPriseRdv)
+        }, error => console.log(error));
+
+        return this.ordreKoscsPriseRdv;
+    }
+
 
 
     public async editOrdreKosc(ordreKosc: OrdreKoscVo) {
@@ -561,14 +576,33 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
             //     }
             // },
             {
-                label: 'XLS', icon: 'pi pi-file-excel', command: () => {
+                label: 'Export Kizeo 24', icon: 'pi pi-file-excel', command: () => {
                     this.afficher24();
-                    this.searchRequestPriseRdv();
-                    this.prepareColumnExport();
-                    this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName);
+                    this.searchRequestPriseRdv().then(value =>{
+                        this.prepareColumnExport();
+                        this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName)})
 
                 }
             },
+            {
+                label: 'Export Kizeo 48', icon: 'pi pi-file-excel', command: () => {
+                    this.afficher48();
+                    this.searchRequestPriseRdv2().then(value =>{
+                    this.prepareColumnExport();
+                    this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName)})
+
+                }
+            },
+            {
+                label: 'Export Kizeo 72', icon: 'pi pi-file-excel', command: () => {
+                    this.afficher72();
+                    this.searchRequestPriseRdv2().then(value =>{
+                        this.prepareColumnExport();
+                        this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName)})
+
+                }
+            },
+
             // {
             //     label: 'PDF', icon: 'pi pi-file-pdf', command: () => {
             //         this.prepareColumnExport();

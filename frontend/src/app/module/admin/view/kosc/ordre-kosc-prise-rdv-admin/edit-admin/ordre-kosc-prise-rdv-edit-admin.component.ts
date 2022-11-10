@@ -311,10 +311,8 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
     public findAppropriateTechnicien(rdv:Date,codeDepartement:string){
-        console.log(rdv);
         this.technicienService.findAppropriateTechnicien(rdv, codeDepartement).subscribe(data =>{
             this.appropriateTechniciens=data;
-            console.log(data);
         })
     }
     _submitted = false;
