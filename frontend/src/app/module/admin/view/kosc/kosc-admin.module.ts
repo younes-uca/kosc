@@ -360,6 +360,11 @@ import {RippleModule} from "primeng/ripple";
 import { StatisticKoscAdminComponent } from './statistic-kosc-admin/statistic-kosc-admin.component';
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {BlockUIModule} from "primeng/blockui";
+import {JourFerieCreateAdminComponent} from "./jour-ferie-admin/create-admin/jour-ferie-create-admin.component";
+import {JourFerieListAdminComponent} from "./jour-ferie-admin/list-admin/jour-ferie-list-admin.component";
+import {JourFerieViewAdminComponent} from "./jour-ferie-admin/view-admin/jour-ferie-view-admin.component";
+import {JourFerieEditAdminComponent} from "./jour-ferie-admin/edit-admin/jour-ferie-edit-admin.component";
+import {JourFerieAdminComponent} from "./jour-ferie-admin/jour-ferie-admin.component";
 
 
 
@@ -436,6 +441,11 @@ import {BlockUIModule} from "primeng/blockui";
         ArretTravailViewAdminComponent,
         ArretTravailEditAdminComponent,
         ArretTravailAdminComponent,
+        JourFerieCreateAdminComponent,
+        JourFerieListAdminComponent,
+        JourFerieViewAdminComponent,
+        JourFerieEditAdminComponent,
+        JourFerieAdminComponent,
         DepartementCreateAdminComponent,
         DepartementListAdminComponent,
         DepartementViewAdminComponent,
@@ -618,6 +628,11 @@ import {BlockUIModule} from "primeng/blockui";
         ArretTravailViewAdminComponent,
         ArretTravailEditAdminComponent,
         ArretTravailAdminComponent,
+        JourFerieCreateAdminComponent,
+        JourFerieListAdminComponent,
+        JourFerieViewAdminComponent,
+        JourFerieEditAdminComponent,
+        JourFerieAdminComponent,
         DepartementCreateAdminComponent,
         DepartementListAdminComponent,
         DepartementViewAdminComponent,

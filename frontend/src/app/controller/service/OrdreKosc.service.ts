@@ -8,6 +8,7 @@ import {environment} from 'src/environments/environment';
 
 import {OrdreKoscVo} from '../model/OrdreKosc.model';
 import {StatisticVo} from "../model/Statistic.model";
+import {EtatDemandeKoscVo} from "../model/EtatDemandeKosc.model";
 
 
 @Injectable({
@@ -37,6 +38,7 @@ export class OrdreKoscService {
     private _ordreKoscsSuiviRdv: Array<OrdreKoscVo>;
     private _ordreKoscsSuiviCdd: Array<OrdreKoscVo>;
     private _searchOrdreKoscSuiviRdv:OrdreKoscVo;
+    private _searchordreKosc: Array<OrdreKoscVo>;
 
 
     constructor(private http: HttpClient, private roleService: RoleService) {
@@ -46,7 +48,16 @@ export class OrdreKoscService {
         });
     }
 
+    public deleteIfEtatNotIn(etats: Array<EtatDemandeKoscVo>, ordreKoscs: Array<OrdreKoscVo>, ordreKosc: OrdreKoscVo){
+        if (ordreKoscs != null) {
+            var indice = etats.findIndex(e => e.code === ordreKosc.etatDemandeKoscVo.code);
+            if (indice == -1){
+                var indiceOrdreKosc = ordreKoscs.findIndex(e => e.id == ordreKosc.id);
+                ordreKoscs.splice(indiceOrdreKosc, 1);
+            }
 
+        }
+    }
 
     public calculerStatistic(ordreKosc: OrdreKoscVo) : Observable<Array<StatisticVo>>{
         return this.http.get<Array<StatisticVo>>(this.API + 'calculerStatistic/submissionDateMin/' + this.searchOrdreKosc.submissionDateMin +'/submissionDateMax/' + this.searchOrdreKosc.submissionDateMax);

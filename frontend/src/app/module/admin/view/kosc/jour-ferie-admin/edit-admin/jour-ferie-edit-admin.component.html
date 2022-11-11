@@ -1,0 +1,65 @@
+<p-dialog [(visible)]="editJourFerieDialog" [draggable]="false"
+          [maximizable]="true" [modal]="true"
+          [resizable]="false" [style]="{width: '70vw'}" header="Jour férié" styleClass="p-fluid">
+
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Arret travail">
+                <div class="p-grid">
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="5">Libelle</label>
+                        <input id="5" class="p-mb-2 p-mr-2" pInputText
+                                  placeholder="Libelle" [(ngModel)]="selectedJourFerie.libelle"
+                        />
+
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="2">Date debut<span style="color: red;">*</span></label>
+                        <p-calendar id="2" [showTime]="true" [showSeconds]="false"
+                                    placeholder="Date debut" [(ngModel)]="selectedJourFerie.dateDebut"
+                                    dateFormat="{{dateFormat}}"
+                                    [ngClass]="{'ng-invalid ng-dirty' : !validJourFerieDateDebut}">
+                        </p-calendar>
+                        <small class='p-error' *ngIf='!validJourFerieDateDebut'>DateDebut est obligatoire.</small>
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="3">Date fin<span style="color: red;">*</span></label>
+                        <p-calendar [(ngModel)]="selectedJourFerie.dateFin"
+                                    [ngClass]="{'ng-invalid ng-dirty' : !validJourFerieDateFin}" [showSeconds]="false"
+                                    [showTime]="true" dateFormat="{{dateFormat}}"
+                                    id="3"
+                                    placeholder="Date fin">
+                        </p-calendar>
+                        <small *ngIf='!validJourFerieDateFin' class='p-error'>DateFin est obligatoire.</small>
+                    </div>
+
+
+
+                </div>
+
+
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <div class="p-grid">
+            <div>
+                <button (click)="hideEditDialog()" class="p-button-text" icon="pi pi-times" label="Annuler"
+                        pButton pRipple></button>
+            </div>
+            <div>
+                <button (click)="edit()" icon="pi pi-check" label="Valider" pButton pRipple
+                        style="margin:10px"></button>
+            </div>
+        </div>
+    </ng-template>
+
+</p-dialog>

@@ -3282,7 +3282,7 @@
                         <td *ngIf="isErdvAndReferenceEmpty(ordreKosc) "
                             [hidden]="!isErdvAndReferenceEmpty(ordreKosc)">
                             <p-badge
-                                    value=" {{ordreKosc.reference}}" severity="danger">
+                                    value=" {{ordreKosc.reference}}" severity="info">
                             </p-badge>
 
                         </td>
@@ -3293,7 +3293,7 @@
                         <td *ngIf="isErdvAndReferencWorkOrdereEmpty(ordreKosc) "
                             [hidden]="!isErdvAndReferencWorkOrdereEmpty(ordreKosc)">
                             <p-badge
-                                    value=" {{ordreKosc.referenceWorkOrder}}" severity="danger">
+                                    value=" {{ordreKosc.referenceWorkOrder}}" severity="info">
                             </p-badge>
 
                         </td>
@@ -3316,7 +3316,7 @@
 
                         <td>   <span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.departementVo?.libelle}}</span></td>
                         <td>
-                            <button pButton type="button" (click)="showEndCustumorTab(ordreKosc)" label="{{ordreKosc.endCustumorFirstName}} {{ordreKosc.endCustumorLastName}}" class="p-button-link"></button>
+                            <button pButton type="button" (click)="showEndCustumorTab(ordreKosc)" label="{{ordreKosc.endCustumorFirstName}} {{ordreKosc.endCustumorLastName}}" class="p-button-link" [style]="stylefyConfort(ordreKosc)"></button>
                     </td>
 
 

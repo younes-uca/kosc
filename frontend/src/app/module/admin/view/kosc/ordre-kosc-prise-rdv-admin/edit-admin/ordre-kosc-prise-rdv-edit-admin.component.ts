@@ -63,7 +63,258 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     ) {
 
     }
+// methods
+    ngOnInit(): void {
 
+        this.selectedOperator = new OperatorVo();
+        this.operatorService.findAll().subscribe((data) => this.operators = data);
+        this.selectedDepartement = new DepartementVo();
+        this.departementService.findAll().subscribe((data) => this.departements = data);
+        this.selectedTechnicien = new TechnicienVo();
+        this.technicienService.findAll().subscribe((data) => this.techniciens = data);
+        this.selectedTemplateEmailClientInjoinable = new TemplateEmailClientInjoinableVo();
+        this.templateEmailClientInjoinableService.findAll().subscribe((data) => this.templateEmailClientInjoinables = data);
+        this.selectedTemplateEmailClientInjoinableKosc = new TemplateEmailClientInjoinableKoscVo();
+        this.templateEmailClientInjoinableKoscService.findAll().subscribe((data) => this.templateEmailClientInjoinableKoscs = data);
+        this.selectedTemplateEmailPlanification = new TemplateEmailPlanificationVo();
+        this.templateEmailPlanificationService.findAll().subscribe((data) => this.templateEmailPlanifications = data);
+        this.selectedTemplateEmailReplanification = new TemplateEmailReplanificationVo();
+        this.templateEmailReplanificationService.findAll().subscribe((data) => this.templateEmailReplanifications = data);
+        this.selectedTemplateEmailReport = new TemplateEmailReportVo();
+        this.templateEmailReportService.findAll().subscribe((data) => this.templateEmailReports = data);
+        this.selectedEtatDemandeKosc = new EtatDemandeKoscVo();
+        this.etatDemandeKoscService.findAll().subscribe((data) => this.etatDemandeKoscs = data);
+        this.selectedTemplateEmailCloture = new TemplateEmailClotureVo();
+        this.templateEmailClotureService.findAll().subscribe((data) => this.templateEmailClotures = data);
+        this.selectedTemplateSuivi = new TemplateSuiviVo();
+        this.templateSuiviService.findAll().subscribe((data) => this.templateSuivis = data);
+    }
+
+
+
+    public edit() {
+        this.submitted = true;
+        this.validateForm();
+        if (this.errorMessages.length === 0) {
+            this.editWithShowOption(false);
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
+    }
+
+    public editWithShowOption(showList: boolean) {
+        this.ordreKoscService.edit().subscribe(ordreKosc => {
+            const myIndex = this.ordreKoscs.findIndex(e => e.id === this.selectedOrdreKosc.id);
+            this.ordreKoscs[myIndex] = ordreKosc;
+            this.ordreKoscService.deleteIfEtatNotIn(this.searchOrdreKosc.etatDemandeKoscVos, this.ordreKoscs, ordreKosc);
+            this.editOrdreKoscDialog = false;
+            this.submitted = false;
+            this.selectedOrdreKosc = new OrdreKoscVo();
+
+
+        }, error => {
+            console.log(error);
+        });
+
+    }
+    sendMailPlanificationEmail() {
+        this.ordreKoscService.sendMailPlanificationEmail().subscribe(data => {
+                if (data != null) {
+
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: 'Email envoyé avec succès'
+                    });
+                } else if (data.envoyeConfirmationClient === false) {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Erreurs', detail: 'échec d\'envoi'
+                    });
+
+                }
+            }
+        );
+    }
+
+//openPopup
+    public async openCreateTemplateEmailPlanification(templateEmailPlanification: string) {
+        const isPermistted = await this.roleService.isPermitted('TemplateEmailPlanification', 'edit');
+        if (isPermistted) {
+            this.selectedTemplateEmailPlanification = new TemplateEmailPlanificationVo();
+            this.createTemplateEmailPlanificationDialog = true;
+        } else {
+            this.messageService.add({
+                severity: 'error', summary: 'erreur', detail: 'problème de permission'
+            });
+        }
+    }
+
+    public async openCreateTemplateEmailClientInjoinable(templateEmailClientInjoinable: string) {
+        const isPermistted = await this.roleService.isPermitted('TemplateEmailClientInjoinable', 'edit');
+        if (isPermistted) {
+            this.selectedTemplateEmailClientInjoinable = new TemplateEmailClientInjoinableVo();
+            this.createTemplateEmailClientInjoinableDialog = true;
+        } else {
+            this.messageService.add({
+                severity: 'error', summary: 'erreur', detail: 'problème de permission'
+            });
+        }
+    }
+
+    public async openCreateTemplateEmailCloture(templateEmailCloture: string) {
+        const isPermistted = await this.roleService.isPermitted('TemplateEmailCloture', 'edit');
+        if (isPermistted) {
+            this.selectedTemplateEmailCloture = new TemplateEmailClotureVo();
+            this.createTemplateEmailClotureDialog = true;
+        } else {
+            this.messageService.add({
+                severity: 'error', summary: 'erreur', detail: 'problème de permission'
+            });
+        }
+    }
+
+    public async openCreateTemplateEmailReport(templateEmailReport: string) {
+        const isPermistted = await this.roleService.isPermitted('TemplateEmailReport', 'edit');
+        if (isPermistted) {
+            this.selectedTemplateEmailReport = new TemplateEmailReportVo();
+            this.createTemplateEmailReportDialog = true;
+        } else {
+            this.messageService.add({
+                severity: 'error', summary: 'erreur', detail: 'problème de permission'
+            });
+        }
+    }
+
+    public async openCreateDepartement(departement: string) {
+        const isPermistted = await this.roleService.isPermitted('Departement', 'edit');
+        if (isPermistted) {
+            this.selectedDepartement = new DepartementVo();
+            this.createDepartementDialog = true;
+        } else {
+            this.messageService.add({
+                severity: 'error', summary: 'erreur', detail: 'problème de permission'
+            });
+        }
+    }
+
+    public async openCreateTemplateEmailReplanification(templateEmailReplanification: string) {
+        const isPermistted = await this.roleService.isPermitted('TemplateEmailReplanification', 'edit');
+        if (isPermistted) {
+            this.selectedTemplateEmailReplanification = new TemplateEmailReplanificationVo();
+            this.createTemplateEmailReplanificationDialog = true;
+        } else {
+            this.messageService.add({
+                severity: 'error', summary: 'erreur', detail: 'problème de permission'
+            });
+        }
+    }
+
+    public async openCreateTemplateEmailClientInjoinableKosc(templateEmailClientInjoinableKosc: string) {
+        const isPermistted = await this.roleService.isPermitted('TemplateEmailClientInjoinableKosc', 'edit');
+        if (isPermistted) {
+            this.selectedTemplateEmailClientInjoinableKosc = new TemplateEmailClientInjoinableKoscVo();
+            this.createTemplateEmailClientInjoinableKoscDialog = true;
+        } else {
+            this.messageService.add({
+                severity: 'error', summary: 'erreur', detail: 'problème de permission'
+            });
+        }
+    }
+
+    public async openCreateEtatDemandeKosc(etatDemandeKosc: string) {
+        const isPermistted = await this.roleService.isPermitted('EtatDemandeKosc', 'edit');
+        if (isPermistted) {
+            this.selectedEtatDemandeKosc = new EtatDemandeKoscVo();
+            this.createEtatDemandeKoscDialog = true;
+        } else {
+            this.messageService.add({
+                severity: 'error', summary: 'erreur', detail: 'problème de permission'
+            });
+        }
+    }
+
+    public async openCreateTemplateSuivi(templateSuivi: string) {
+        const isPermistted = await this.roleService.isPermitted('TemplateSuivi', 'edit');
+        if (isPermistted) {
+            this.selectedTemplateSuivi = new TemplateSuiviVo();
+            this.createTemplateSuiviDialog = true;
+        } else {
+            this.messageService.add({
+                severity: 'error', summary: 'erreur', detail: 'problème de permission'
+            });
+        }
+    }
+
+    public async openCreateTechnicien(technicien: string) {
+        const isPermistted = await this.roleService.isPermitted('Technicien', 'edit');
+        if (isPermistted) {
+            this.selectedTechnicien = new TechnicienVo();
+            this.createTechnicienDialog = true;
+        } else {
+            this.messageService.add({
+                severity: 'error', summary: 'erreur', detail: 'problème de permission'
+            });
+        }
+    }
+
+    public async openCreateOperator(operator: string) {
+        const isPermistted = await this.roleService.isPermitted('Operator', 'edit');
+        if (isPermistted) {
+            this.selectedOperator = new OperatorVo();
+            this.createOperatorDialog = true;
+        } else {
+            this.messageService.add({
+                severity: 'error', summary: 'erreur', detail: 'problème de permission'
+            });
+        }
+    }
+
+    hideEditDialog() {
+        this.editOrdreKoscDialog = false;
+        this.setValidation(true);
+    }
+
+    private setValidation(value: boolean) {
+        this.validOrdreKoscReferenceWorkOrder = value;
+    }
+
+//validation methods
+    private validateForm(): void {
+        this.errorMessages = new Array<string>();
+        this.validateOrdreKoscReferenceWorkOrder();
+        this.validateOrdreKoscDateAppel();
+
+    }
+
+    private validateOrdreKoscReferenceWorkOrder() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.referenceWorkOrder)) {
+            this.errorMessages.push('Reference work order non valide');
+            this.validOrdreKoscReferenceWorkOrder = false;
+        } else {
+            this.validOrdreKoscReferenceWorkOrder = true;
+        }
+    }
+    private validateOrdreKoscDateAppel() {
+        if(this.selectedOrdreKosc.datePremierAppel != null && this.selectedOrdreKosc.dateDeuxiemeAppel){
+            if(this.selectedOrdreKosc.datePremierAppel.getDate() >= this.selectedOrdreKosc.dateDeuxiemeAppel.getDate() || this.selectedOrdreKosc.dateTroisiemeAppel < this.selectedOrdreKosc.dateDeuxiemeAppel ){
+                this.errorMessages.push('Date de deuxieme appel non valide');
+                this.validOrdreKoscDateAppel = false;
+            } else {
+                this.validOrdreKoscDateAppel = true;
+            }
+        }
+    }
+
+    public findAppropriateTechnicien(rdv:Date,codeDepartement:string){
+        this.technicienService.findAppropriateTechnicien(rdv, codeDepartement).subscribe(data =>{
+            this.appropriateTechniciens=data;
+        })
+    }
     _submitted = false;
 
     get submitted(): boolean {
@@ -85,6 +336,15 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
     _validOrdreKoscReferenceWorkOrder = true;
+    _validOrdreKoscDateAppel = true;
+
+    get validOrdreKoscDateAppel(): boolean {
+        return this._validOrdreKoscDateAppel;
+    }
+
+    set validOrdreKoscDateAppel(value: boolean) {
+        this._validOrdreKoscDateAppel = value;
+    }
 
     get validOrdreKoscReferenceWorkOrder(): boolean {
         return this._validOrdreKoscReferenceWorkOrder;
@@ -324,6 +584,14 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     set ordreKoscs(value: Array<OrdreKoscVo>) {
         this.ordreKoscService.ordreKoscsPriseRdv = value;
+    }
+
+    get searchOrdreKosc(): OrdreKoscVo {
+        return this.ordreKoscService.searchOrdreKosc;
+    }
+
+    set searchordreKosc(value: OrdreKoscVo) {
+        this.ordreKoscService.searchOrdreKosc = value;
     }
 
     get selectedOrdreKosc(): OrdreKoscVo {
@@ -615,245 +883,6 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         return environment.dateFormatEdit;
     }
 
-// methods
-    ngOnInit(): void {
 
-        this.selectedOperator = new OperatorVo();
-        this.operatorService.findAll().subscribe((data) => this.operators = data);
-        this.selectedDepartement = new DepartementVo();
-        this.departementService.findAll().subscribe((data) => this.departements = data);
-        this.selectedTechnicien = new TechnicienVo();
-        this.technicienService.findAll().subscribe((data) => this.techniciens = data);
-        this.selectedTemplateEmailClientInjoinable = new TemplateEmailClientInjoinableVo();
-        this.templateEmailClientInjoinableService.findAll().subscribe((data) => this.templateEmailClientInjoinables = data);
-        this.selectedTemplateEmailClientInjoinableKosc = new TemplateEmailClientInjoinableKoscVo();
-        this.templateEmailClientInjoinableKoscService.findAll().subscribe((data) => this.templateEmailClientInjoinableKoscs = data);
-        this.selectedTemplateEmailPlanification = new TemplateEmailPlanificationVo();
-        this.templateEmailPlanificationService.findAll().subscribe((data) => this.templateEmailPlanifications = data);
-        this.selectedTemplateEmailReplanification = new TemplateEmailReplanificationVo();
-        this.templateEmailReplanificationService.findAll().subscribe((data) => this.templateEmailReplanifications = data);
-        this.selectedTemplateEmailReport = new TemplateEmailReportVo();
-        this.templateEmailReportService.findAll().subscribe((data) => this.templateEmailReports = data);
-        this.selectedEtatDemandeKosc = new EtatDemandeKoscVo();
-        this.etatDemandeKoscService.findAll().subscribe((data) => this.etatDemandeKoscs = data);
-        this.selectedTemplateEmailCloture = new TemplateEmailClotureVo();
-        this.templateEmailClotureService.findAll().subscribe((data) => this.templateEmailClotures = data);
-        this.selectedTemplateSuivi = new TemplateSuiviVo();
-        this.templateSuiviService.findAll().subscribe((data) => this.templateSuivis = data);
-    }
-
-    public edit() {
-        this.submitted = true;
-        this.validateForm();
-        if (this.errorMessages.length === 0) {
-            this.editWithShowOption(false);
-        } else {
-            this.messageService.add({
-                severity: 'error',
-                summary: 'Erreurs',
-                detail: 'Merci de corrigé les erreurs sur le formulaire'
-            });
-        }
-    }
-
-    public editWithShowOption(showList: boolean) {
-        this.ordreKoscService.edit().subscribe(ordreKosc => {
-            const myIndex = this.ordreKoscs.findIndex(e => e.id === this.selectedOrdreKosc.id);
-            this.ordreKoscs[myIndex] = ordreKosc;
-            this.editOrdreKoscDialog = false;
-            this.submitted = false;
-            this.selectedOrdreKosc = new OrdreKoscVo();
-
-
-        }, error => {
-            console.log(error);
-        });
-
-    }
-    sendMailPlanificationEmail() {
-        this.ordreKoscService.sendMailPlanificationEmail().subscribe(data => {
-                if (data != null) {
-
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                } else if (data.envoyeConfirmationClient === false) {
-                    this.messageService.add({
-                        severity: 'error',
-                        summary: 'Erreurs', detail: 'échec d\'envoi'
-                    });
-
-                }
-            }
-        );
-    }
-
-//openPopup
-    public async openCreateTemplateEmailPlanification(templateEmailPlanification: string) {
-        const isPermistted = await this.roleService.isPermitted('TemplateEmailPlanification', 'edit');
-        if (isPermistted) {
-            this.selectedTemplateEmailPlanification = new TemplateEmailPlanificationVo();
-            this.createTemplateEmailPlanificationDialog = true;
-        } else {
-            this.messageService.add({
-                severity: 'error', summary: 'erreur', detail: 'problème de permission'
-            });
-        }
-    }
-
-    public async openCreateTemplateEmailClientInjoinable(templateEmailClientInjoinable: string) {
-        const isPermistted = await this.roleService.isPermitted('TemplateEmailClientInjoinable', 'edit');
-        if (isPermistted) {
-            this.selectedTemplateEmailClientInjoinable = new TemplateEmailClientInjoinableVo();
-            this.createTemplateEmailClientInjoinableDialog = true;
-        } else {
-            this.messageService.add({
-                severity: 'error', summary: 'erreur', detail: 'problème de permission'
-            });
-        }
-    }
-
-    public async openCreateTemplateEmailCloture(templateEmailCloture: string) {
-        const isPermistted = await this.roleService.isPermitted('TemplateEmailCloture', 'edit');
-        if (isPermistted) {
-            this.selectedTemplateEmailCloture = new TemplateEmailClotureVo();
-            this.createTemplateEmailClotureDialog = true;
-        } else {
-            this.messageService.add({
-                severity: 'error', summary: 'erreur', detail: 'problème de permission'
-            });
-        }
-    }
-
-    public async openCreateTemplateEmailReport(templateEmailReport: string) {
-        const isPermistted = await this.roleService.isPermitted('TemplateEmailReport', 'edit');
-        if (isPermistted) {
-            this.selectedTemplateEmailReport = new TemplateEmailReportVo();
-            this.createTemplateEmailReportDialog = true;
-        } else {
-            this.messageService.add({
-                severity: 'error', summary: 'erreur', detail: 'problème de permission'
-            });
-        }
-    }
-
-    public async openCreateDepartement(departement: string) {
-        const isPermistted = await this.roleService.isPermitted('Departement', 'edit');
-        if (isPermistted) {
-            this.selectedDepartement = new DepartementVo();
-            this.createDepartementDialog = true;
-        } else {
-            this.messageService.add({
-                severity: 'error', summary: 'erreur', detail: 'problème de permission'
-            });
-        }
-    }
-
-    public async openCreateTemplateEmailReplanification(templateEmailReplanification: string) {
-        const isPermistted = await this.roleService.isPermitted('TemplateEmailReplanification', 'edit');
-        if (isPermistted) {
-            this.selectedTemplateEmailReplanification = new TemplateEmailReplanificationVo();
-            this.createTemplateEmailReplanificationDialog = true;
-        } else {
-            this.messageService.add({
-                severity: 'error', summary: 'erreur', detail: 'problème de permission'
-            });
-        }
-    }
-
-    public async openCreateTemplateEmailClientInjoinableKosc(templateEmailClientInjoinableKosc: string) {
-        const isPermistted = await this.roleService.isPermitted('TemplateEmailClientInjoinableKosc', 'edit');
-        if (isPermistted) {
-            this.selectedTemplateEmailClientInjoinableKosc = new TemplateEmailClientInjoinableKoscVo();
-            this.createTemplateEmailClientInjoinableKoscDialog = true;
-        } else {
-            this.messageService.add({
-                severity: 'error', summary: 'erreur', detail: 'problème de permission'
-            });
-        }
-    }
-
-    public async openCreateEtatDemandeKosc(etatDemandeKosc: string) {
-        const isPermistted = await this.roleService.isPermitted('EtatDemandeKosc', 'edit');
-        if (isPermistted) {
-            this.selectedEtatDemandeKosc = new EtatDemandeKoscVo();
-            this.createEtatDemandeKoscDialog = true;
-        } else {
-            this.messageService.add({
-                severity: 'error', summary: 'erreur', detail: 'problème de permission'
-            });
-        }
-    }
-
-    public async openCreateTemplateSuivi(templateSuivi: string) {
-        const isPermistted = await this.roleService.isPermitted('TemplateSuivi', 'edit');
-        if (isPermistted) {
-            this.selectedTemplateSuivi = new TemplateSuiviVo();
-            this.createTemplateSuiviDialog = true;
-        } else {
-            this.messageService.add({
-                severity: 'error', summary: 'erreur', detail: 'problème de permission'
-            });
-        }
-    }
-
-    public async openCreateTechnicien(technicien: string) {
-        const isPermistted = await this.roleService.isPermitted('Technicien', 'edit');
-        if (isPermistted) {
-            this.selectedTechnicien = new TechnicienVo();
-            this.createTechnicienDialog = true;
-        } else {
-            this.messageService.add({
-                severity: 'error', summary: 'erreur', detail: 'problème de permission'
-            });
-        }
-    }
-
-    public async openCreateOperator(operator: string) {
-        const isPermistted = await this.roleService.isPermitted('Operator', 'edit');
-        if (isPermistted) {
-            this.selectedOperator = new OperatorVo();
-            this.createOperatorDialog = true;
-        } else {
-            this.messageService.add({
-                severity: 'error', summary: 'erreur', detail: 'problème de permission'
-            });
-        }
-    }
-
-    hideEditDialog() {
-        this.editOrdreKoscDialog = false;
-        this.setValidation(true);
-    }
-
-    private setValidation(value: boolean) {
-        this.validOrdreKoscReferenceWorkOrder = value;
-    }
-
-//validation methods
-    private validateForm(): void {
-        this.errorMessages = new Array<string>();
-        this.validateOrdreKoscReferenceWorkOrder();
-
-    }
-
-    private validateOrdreKoscReferenceWorkOrder() {
-        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.referenceWorkOrder)) {
-            this.errorMessages.push('Reference work order non valide');
-            this.validOrdreKoscReferenceWorkOrder = false;
-        } else {
-            this.validOrdreKoscReferenceWorkOrder = true;
-        }
-    }
-
-    public findAppropriateTechnicien(rdv:Date,codeDepartement:string){
-        console.log(rdv);
-        this.technicienService.findAppropriateTechnicien(rdv, codeDepartement).subscribe(data =>{
-            this.appropriateTechniciens=data;
-        console.log(data);
-        })
-    }
 
 }

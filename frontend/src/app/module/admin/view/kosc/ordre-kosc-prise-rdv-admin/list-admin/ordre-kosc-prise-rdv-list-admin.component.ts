@@ -42,6 +42,7 @@ import {
     DefaultTemplateConfigurationService
 } from "../../../../../../controller/service/DefaultTemplateConfiguration.service";
 import {DateUtils} from "../../../../../../utils/DateUtils";
+import {PromiseType} from "protractor/built/plugins";
 
 
 @Component({
@@ -111,7 +112,6 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
 
     ) {
 
-        // this.dateRdvs = [{name: '24h'}, {name: '48h'}, {name: '72h'}];
 
     }
 
@@ -136,16 +136,20 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/')
     }
 
-    public add24(){
+    public afficher24(){
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = 24;
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = 48;
     }
-    public add48(){
+    public afficher48(){
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = 48;
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = 72;
     }
-    public add72(){
+    public afficher72(){
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = 72;
+        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = null;
+    }
+    public afficherAll(){
+        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = null;
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = null;
     }
 
@@ -264,11 +268,26 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
     }
 
 
-    public searchRequestPriseRdv() {
-        this.ordreKoscService.findByCriteriaPriseRdv(this.searchOrdreKosc).subscribe(ordreKoscs => {
-            this.ordreKoscsPriseRdv = ordreKoscs;
+    public async searchRequestPriseRdv() {
+
+        this.ordreKoscService.findByCriteriaPriseRdv(this.searchOrdreKosc).subscribe(ordreKoscs =>  {
+            this.ordreKoscsPriseRdv =ordreKoscs;
         }, error => console.log(error));
+
+        return this.ordreKoscsPriseRdv;
     }
+
+    public async searchRequestPriseRdv2() {
+        console.log("done")
+         this.ordreKoscService.findByCriteriaPriseRdv(this.searchOrdreKosc).subscribe(ordreKoscs => {
+            console.log(ordreKoscs)
+            this.ordreKoscsPriseRdv = ordreKoscs;
+            console.log(this.ordreKoscsPriseRdv)
+        }, error => console.log(error));
+
+        return this.ordreKoscsPriseRdv;
+    }
+
 
 
     public async editOrdreKosc(ordreKosc: OrdreKoscVo) {
@@ -527,17 +546,22 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         this.dateButons = [
             {
                 label: '24h', icon: 'pi pi-check', command: () => {
-                    this.add24();
+                    this.afficher24();
                 }
             }, {
                 label: '48h', icon: 'pi pi-check', command: () => {
-                    this.add48();
+                    this.afficher48();
                 }
             }, {
                 label: '72h', icon: 'pi pi-check', command: () => {
-                    this.add72();
+                    this.afficher72();
 
-                }
+                },
+            }, {
+                label: 'Tous', icon: 'pi pi-check', command: () => {
+                    this.afficherAll();
+
+                },
             }
         ];
     }
@@ -552,11 +576,33 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
             //     }
             // },
             {
-                label: 'XLS', icon: 'pi pi-file-excel', command: () => {
-                    this.prepareColumnExport();
-                    this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName);
+                label: 'Export Kizeo 24', icon: 'pi pi-file-excel', command: () => {
+                    this.afficher24();
+                    this.searchRequestPriseRdv().then(value =>{
+                        this.prepareColumnExport();
+                        this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName)})
+
                 }
             },
+            {
+                label: 'Export Kizeo 48', icon: 'pi pi-file-excel', command: () => {
+                    this.afficher48();
+                    this.searchRequestPriseRdv2().then(value =>{
+                    this.prepareColumnExport();
+                    this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName)})
+
+                }
+            },
+            {
+                label: 'Export Kizeo 72', icon: 'pi pi-file-excel', command: () => {
+                    this.afficher72();
+                    this.searchRequestPriseRdv2().then(value =>{
+                        this.prepareColumnExport();
+                        this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName)})
+
+                }
+            },
+
             // {
             //     label: 'PDF', icon: 'pi pi-file-pdf', command: () => {
             //         this.prepareColumnExport();

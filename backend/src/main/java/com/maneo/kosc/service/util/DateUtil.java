@@ -4,10 +4,13 @@ package com.maneo.kosc.service.util;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoField;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DateUtil {
@@ -157,4 +160,45 @@ public class DateUtil {
         return elapsedHours;
 
     }
+
+//    public static long calculerDifference(Date startDate, Date endDate){
+//
+//
+//        //milliseconds
+//        long different =  startDate.getTime() - endDate.getTime();
+//
+//        long secondsInMilli = 1000;
+//        long minutesInMilli = secondsInMilli * 60;
+//        long hoursInMilli = minutesInMilli * 60;
+//        long daysInMilli = hoursInMilli * 24;
+//
+//        long elapsedDays;
+//        long elapsedHours ;
+//
+//
+//
+//
+//        for (Date date = endDate; date.before(startDate); LocalDateTime.from(date.toInstant()).plusDays(1))  {
+//            boolean cd = isWeekEnd(endDate);
+//            if( cd == false ){
+//                elapsedDays = different / daysInMilli;
+//                different = (different % daysInMilli);
+
+//                elapsedHours = elapsedDays * 24 + different / hoursInMilli;
+//            } else {
+//            }
+//
+//        }
+//        return elapsedHours;
+//    }
+
+    public static boolean isWeekEnd(final Date date)
+    {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+
+        int day = cal.get(Calendar.DAY_OF_WEEK);
+        return day == Calendar.SUNDAY || day == Calendar.SATURDAY;
+    }
 }
+
