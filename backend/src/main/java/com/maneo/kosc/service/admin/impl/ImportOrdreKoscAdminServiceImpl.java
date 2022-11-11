@@ -8,7 +8,6 @@ import com.maneo.kosc.service.util.ListUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
 import java.util.*;
 
 //import static jdk.internal.org.jline.utils.Colors.s;
@@ -32,7 +31,7 @@ public class ImportOrdreKoscAdminServiceImpl implements ImportOrdreKoscAdminServ
 
     @Override
     public List<OrdreKosc> importAll(List<OrdreKosc> ordreKoscs) {
-        List<OrdreKosc> result=new ArrayList<>();
+        List<OrdreKosc> result = new ArrayList<>();
         List<OrdreKosc> resultKosc = new ArrayList<>();
         List<OrdreKosc> resultFtl = new ArrayList<>();
         List<OrdreKosc> resultErdv = new ArrayList<>();
@@ -43,7 +42,7 @@ public class ImportOrdreKoscAdminServiceImpl implements ImportOrdreKoscAdminServ
                 resultKosc.add(ordreKosc);
             } else if (isErdv(ordreKosc)) {
                 resultErdv.add(ordreKosc);
-            }else{
+            } else {
                 result.add(ordreKosc);
             }
         }
@@ -52,7 +51,6 @@ public class ImportOrdreKoscAdminServiceImpl implements ImportOrdreKoscAdminServ
         result.addAll(importerFtel(resultFtl));
         return result;
     }
-
 
 
     private boolean isErdv(OrdreKosc ordreKosc) {
@@ -68,27 +66,57 @@ public class ImportOrdreKoscAdminServiceImpl implements ImportOrdreKoscAdminServ
         return ordreKosc.getType() != null && ordreKosc.getType().equals("ftl");
     }
 
+    @Override
+    public List<OrdreKosc> importerDataBase(List<OrdreKosc> ordreKoscs) {
+        List<OrdreKosc> list = new ArrayList<>();
+        for (OrdreKosc ordreKosc : ordreKoscs) {
+            prepareSave(ordreKosc);
+            OrdreKosc foundedOrdreKosc = ordreKoscDao.findByReferenceWorkOrderAndEtat(ordreKosc.getReferenceWorkOrder());
+//            if (!foundedOrdreKosc.isEmpty()) {}
+//                for (OrdreKosc foundedOrdreKoscs : foundedOrdreKosc) {}
+                    if (foundedOrdreKosc == null) {
+                        // findOrSave operator departement and technicien
+                        findOrSaveDepartement(ordreKosc);
+                        findOrSaveOperator(ordreKosc);
+                        findOrSaveTechnicien(ordreKosc);
+                        ordreKosc.setEtatDemandeKosc(etatDemandeKoscService.findByCode(ordreKosc.getEtatDemandeKosc().getCode()));
+                        if (ordreKosc.getProductLabel() != null && ordreKosc.getProductLabel().toUpperCase().contains("CONFORT")) {
+                            ordreKosc.setConfort(true);
+                        } else {
+                            ordreKosc.setConfort(false);
+                        }
+                        ordreKosc.setErdv(false);
+                        ordreKoscDao.save(ordreKosc);
+                    } else {
+                        list.add(foundedOrdreKosc);
+                    }
+        }
+        return list;
+    }
+
     private List<OrdreKosc> importerWorkOrder(List<OrdreKosc> ordreKoscs) {
         List<OrdreKosc> list = new ArrayList<>();
         for (OrdreKosc ordreKosc : ordreKoscs) {
             prepareSave(ordreKosc);
-            OrdreKosc foundedOrdreKosc = ordreKoscDao.findByReferenceWorkOrder(ordreKosc.getReferenceWorkOrder());
-            if (foundedOrdreKosc == null) {
-                // findOrSave operator departement and technicien
-                findOrSaveDepartement(ordreKosc);
-                findOrSaveOperator(ordreKosc);
-                findOrSaveTechnicien(ordreKosc);
-                ordreKosc.setEtatDemandeKosc(etatDemandeKoscService.findByCode(ordreKosc.getEtatDemandeKosc().getCode()));
-                if ( ordreKosc.getProductLabel() != null && ordreKosc.getProductLabel().toUpperCase().contains("CONFORT")){
-                    ordreKosc.setConfort(true);
-                }else {
-                    ordreKosc.setConfort(false);
-                }
-                ordreKosc.setErdv(false);
-                ordreKoscDao.save(ordreKosc);
-            } else {
-                list.add(foundedOrdreKosc);
-            }
+            OrdreKosc foundedOrdreKosc = ordreKoscDao.findByReferenceWorkOrderAndEtat(ordreKosc.getReferenceWorkOrder());
+//            if (!foundedOrdreKosc.isEmpty()) {}
+//                for (OrdreKosc foundedOrdreKoscs : foundedOrdreKosc) {}
+                    if (foundedOrdreKosc == null) {
+                        // findOrSave operator departement and technicien
+                        findOrSaveDepartement(ordreKosc);
+                        findOrSaveOperator(ordreKosc);
+                        findOrSaveTechnicien(ordreKosc);
+                        ordreKosc.setEtatDemandeKosc(etatDemandeKoscService.findByCode(ordreKosc.getEtatDemandeKosc().getCode()));
+                        if (ordreKosc.getProductLabel() != null && ordreKosc.getProductLabel().toUpperCase().contains("CONFORT")) {
+                            ordreKosc.setConfort(true);
+                        } else {
+                            ordreKosc.setConfort(false);
+                        }
+                        ordreKosc.setErdv(false);
+                        ordreKoscDao.save(ordreKosc);
+                    } else {
+                        list.add(foundedOrdreKosc);
+                    }
         }
         return list;
     }
@@ -191,24 +219,21 @@ public class ImportOrdreKoscAdminServiceImpl implements ImportOrdreKoscAdminServ
         if (ordreKoscs != null) {
             for (OrdreKosc ordreKosc : ordreKoscs) {
                 prepareSave(ordreKosc);
-                OrdreKosc foundedOrdreKosc = findByReference(ordreKosc.getReference());
-                if (foundedOrdreKosc == null) {
-                    // findOrSave operator departement and technicien
-                    ordreKosc.setEtatDemandeKosc(etatDemandeKoscService.findByCode(ordreKosc.getEtatDemandeKosc().getCode()));
-                    ordreKosc.setErdv(true);
-                    ordreKoscDao.save(ordreKosc);
-                } else {
-                    resultat.add(ordreKosc);
-                }
+                OrdreKosc foundedOrdreKosc = ordreKoscDao.findByReferenceWorkOrderAndEtat(ordreKosc.getReference());
+//                if (!foundedOrdreKosc.isEmpty()) {}
+//                    for (OrdreKosc foundedOrdreKoscs : foundedOrdreKosc) {}
+                        if (foundedOrdreKosc == null) {
+                            // findOrSave operator departement and technicien
+                            ordreKosc.setEtatDemandeKosc(etatDemandeKoscService.findByCode(ordreKosc.getEtatDemandeKosc().getCode()));
+                            ordreKosc.setErdv(true);
+                            ordreKoscDao.save(ordreKosc);
+                        } else {
+                            resultat.add(ordreKosc);
+                        }
             }
         }
         return resultat;
     }
-
-    private OrdreKosc findByReference(String reference) {
-        return ordreKoscDao.findByReference(reference);
-    }
-
 
 
     private void findOperator(OrdreKosc ordreKosc) {
@@ -239,39 +264,41 @@ public class ImportOrdreKoscAdminServiceImpl implements ImportOrdreKoscAdminServ
     }
 
     private void findOrSaveOperator(OrdreKosc ordreKosc) {
-        if(ordreKosc.getOperator()!=null ){
-        Operator loadedOperator = operatorService.findByIdOrReference(ordreKosc.getOperator());
-        if (loadedOperator == null) {
-            ordreKosc.setOperator(operatorService.save(ordreKosc.getOperator()));
-        } else {
-            ordreKosc.setOperator(loadedOperator);
-        } }
+        if (ordreKosc.getOperator() != null) {
+            Operator loadedOperator = operatorService.findByIdOrReference(ordreKosc.getOperator());
+            if (loadedOperator == null) {
+                ordreKosc.setOperator(operatorService.save(ordreKosc.getOperator()));
+            } else {
+                ordreKosc.setOperator(loadedOperator);
+            }
+        }
     }
 
     private void findOrSaveDepartement(OrdreKosc ordreKosc) {
-        if(ordreKosc.getDepartement()!=null){
-        Departement loadedDepartement = departementService.findByIdOrCode(ordreKosc.getDepartement());
-        if (loadedDepartement == null) {
-            ordreKosc.getDepartement().setLibelle(ordreKosc.getDepartement().getCode());
-            loadedDepartement=departementService.save(ordreKosc.getDepartement());
-            ordreKosc.setDepartement(loadedDepartement);
-        } else {
-            ordreKosc.setDepartement(loadedDepartement);
+        if (ordreKosc.getDepartement() != null) {
+            Departement loadedDepartement = departementService.findByIdOrCode(ordreKosc.getDepartement());
+            if (loadedDepartement == null) {
+                ordreKosc.getDepartement().setLibelle(ordreKosc.getDepartement().getCode());
+                loadedDepartement = departementService.save(ordreKosc.getDepartement());
+                ordreKosc.setDepartement(loadedDepartement);
+            } else {
+                ordreKosc.setDepartement(loadedDepartement);
+            }
         }
-    }
     }
 
     private void findOrSaveTechnicien(OrdreKosc ordreKosc) {
-        if(ordreKosc.getTechnicien()!=null){
-        Technicien loadedTechnicien = technicienService.findByIdOrIdentifiant(ordreKosc.getTechnicien());
-        if (loadedTechnicien == null) {
-            loadedTechnicien=technicienService.save(ordreKosc.getTechnicien());
-            ordreKosc.setTechnicien(loadedTechnicien);
-        } else {
-            ordreKosc.setTechnicien(loadedTechnicien);
+        if (ordreKosc.getTechnicien() != null) {
+            Technicien loadedTechnicien = technicienService.findByIdOrIdentifiant(ordreKosc.getTechnicien());
+            if (loadedTechnicien == null) {
+                loadedTechnicien = technicienService.save(ordreKosc.getTechnicien());
+                ordreKosc.setTechnicien(loadedTechnicien);
+            } else {
+                ordreKosc.setTechnicien(loadedTechnicien);
+            }
         }
     }
-    }
+
     private void findOrSaveEtatDemande(OrdreKosc ordreKosc) {
         EtatDemandeKosc loadedEtatDemande = etatDemandeKoscService.findByIdOrCode(ordreKosc.getEtatDemandeKosc());
         if (loadedEtatDemande == null) {
@@ -316,13 +343,13 @@ public class ImportOrdreKoscAdminServiceImpl implements ImportOrdreKoscAdminServ
     }
 
     private void initDateDernierAppel(OrdreKosc ordreKosc) {
-        if(ordreKosc.getDateTroisiemeAppel()!=null){
+        if (ordreKosc.getDateTroisiemeAppel() != null) {
             ordreKosc.setDateDernierAppel(ordreKosc.getDateTroisiemeAppel());
             ordreKosc.setNumeroDernierAppel(3L);
-        }else if(ordreKosc.getDateDeuxiemeAppel()!=null){
+        } else if (ordreKosc.getDateDeuxiemeAppel() != null) {
             ordreKosc.setDateDernierAppel(ordreKosc.getDateDeuxiemeAppel());
             ordreKosc.setNumeroDernierAppel(2L);
-        }else if(ordreKosc.getDatePremierAppel()!=null){
+        } else if (ordreKosc.getDatePremierAppel() != null) {
             ordreKosc.setDateDernierAppel(ordreKosc.getDatePremierAppel());
             ordreKosc.setNumeroDernierAppel(1L);
         }

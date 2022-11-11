@@ -29,17 +29,17 @@
                              <br><br> -->
 
                         <button type="button" class="btn-rex p-mr-2 p-mb-2" style="background-color: #0f97c7">
-                            <i class="pi pi-upload"></i>&nbsp;Importer All
+                            <i class="pi pi-upload"></i>&nbsp;&nbsp;Importer
                             <input type="file" multiple class="file-input"
                                    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                                    (change)="importAll($event)" #fileUpload>
                         </button>
-<!--                        <button type="button" class="btn-rex p-mr-2 p-mb-2" style="background-color: #2e2e33">-->
-<!--                            <i class="pi pi-plus"></i>&nbsp;Importer Kosc-->
-<!--                            <input type="file" multiple class="file-input"-->
-<!--                                   accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"-->
-<!--                                   (change)="readWorkOder($event)" #fileUpload>-->
-<!--                        </button>-->
+                        <button type="button" class="btn-rex p-mr-2 p-mb-2" style="background-color: #2e2e33">
+                            <i class="pi pi-plus"></i>&nbsp;&nbsp;Importer DataBase
+                            <input type="file" multiple class="file-input"
+                                   accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                   (change)="importerDataBase($event)" #fileUpload>
+                        </button>
 
                         <p-dialog [(visible)]="showSpinner" [showHeader]="false" [resizable]="false" [modal]="true"
 

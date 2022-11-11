@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ImportOrdreKoscAdminService {
     List<OrdreKosc> importAll(List<OrdreKosc> ordreKoscs);
+
+    List<OrdreKosc> importerDataBase(List<OrdreKosc> ordreKoscs);
 }
