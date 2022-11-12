@@ -141,12 +141,12 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = 48;
     }
     public afficher48(){
-        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = 48;
+        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = 24;
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = 72;
     }
     public afficher72(){
-        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = 72;
-        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = null;
+        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = 24;
+        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = 96;
     }
     public afficherAll(){
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = null;
@@ -268,10 +268,10 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
     }
 
 
-    public async searchRequestPriseRdv() {
+    public  searchRequestPriseRdv() {
 
         this.ordreKoscService.findByCriteriaPriseRdv(this.searchOrdreKosc).subscribe(ordreKoscs =>  {
-            this.ordreKoscsPriseRdv =ordreKoscs;
+            this.ordreKoscsPriseRdv = ordreKoscs;
         }, error => console.log(error));
 
         return this.ordreKoscsPriseRdv;
@@ -566,7 +566,10 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         ];
     }
 
-
+private async exporter(){
+    this.prepareColumnExport();
+    this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName);
+}
     initExport(): void {
         this.excelPdfButons = [
             // {
@@ -576,29 +579,31 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
             //     }
             // },
             {
-                label: 'Export Kizeo 24', icon: 'pi pi-file-excel', command: () => {
+                label: 'Export Kizeo 24', icon: 'pi pi-file-excel', command: async () => {
                     this.afficher24();
-                    this.searchRequestPriseRdv().then(value =>{
-                        this.prepareColumnExport();
-                        this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName)})
-
+                    this.searchRequestPriseRdv();
+                   // await this.exporter();
                 }
             },
             {
                 label: 'Export Kizeo 48', icon: 'pi pi-file-excel', command: () => {
                     this.afficher48();
-                    this.searchRequestPriseRdv2().then(value =>{
-                    this.prepareColumnExport();
-                    this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName)})
+                    this.searchRequestPriseRdv();
+                        console.log(this.ordreKoscsPriseRdv);
+                    //this.prepareColumnExport();
+                    //this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName) })
+
 
                 }
             },
             {
                 label: 'Export Kizeo 72', icon: 'pi pi-file-excel', command: () => {
                     this.afficher72();
-                    this.searchRequestPriseRdv2().then(value =>{
-                        this.prepareColumnExport();
-                        this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName)})
+                    this.searchRequestPriseRdv();
+                        console.log(this.ordreKoscsPriseRdv);
+                       // this.prepareColumnExport();
+                       // this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName) })
+
 
                 }
             },
