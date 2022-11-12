@@ -206,6 +206,10 @@ export class OrdreKoscListAdminComponent implements OnInit {
     this.searchRequest();
      }
 
+    importerDataBase(event:any){
+        this.ordreKoscExcelService.importerDataBase(event);
+    }
+
     showBasicDialog() {
         this.display = true;
     }

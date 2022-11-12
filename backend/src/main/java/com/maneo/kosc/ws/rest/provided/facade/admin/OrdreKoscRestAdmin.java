@@ -224,6 +224,14 @@ public class OrdreKoscRestAdmin {
         return ordreKoscConverter.toVo(ordreKoscs);
     }
 
+    @ApiOperation("import the dataBase file")
+    @PostMapping("/import-data-base")
+    public List<OrdreKoscVo> importerDataBase(@RequestBody List<OrdreKoscVo> ordreKoscVos) {
+        List<OrdreKosc> ordreKoscs = ordreKoscConverter.toItem(ordreKoscVos);
+        ordreKoscs = importOrdreKoscAdminService.importerDataBase(ordreKoscs);
+        return ordreKoscConverter.toVo(ordreKoscs);
+    }
+
     @ApiOperation("upload the pdf file")
     @PostMapping("/upload")
   /*  public static String uploadFile(MultipartFile file) throws IOException {

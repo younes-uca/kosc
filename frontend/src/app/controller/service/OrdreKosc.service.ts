@@ -195,6 +195,11 @@ export class OrdreKoscService {
     public importerWordOrder(ordreKoscs: Array<OrdreKoscVo>): Observable<Array<OrdreKoscVo>> {
         return this.http.post<Array<OrdreKoscVo>>(this.API + 'import-work-order', ordreKoscs);
     }
+
+    public importerDataBase(ordreKoscs: Array<OrdreKoscVo>): Observable<Array<OrdreKoscVo>> {
+        return this.http.post<Array<OrdreKoscVo>>(this.API + 'import-data-base', ordreKoscs);
+    }
+
     public findByCriteriaSuiviRdv(ordreKosc: OrdreKoscVo): Observable<Array<OrdreKoscVo>> {
         return this.http.post<Array<OrdreKoscVo>>(this.API + 'search-suivi-rdv', ordreKosc);
     }
