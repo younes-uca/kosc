@@ -5,7 +5,8 @@
             <p-toolbar styleClass="p-mb-4">
                 <ng-template pTemplate="left">
 
-                    <button (click)="this.findByCriteriaShow = !this.findByCriteriaShow" class="p-button-success p-mr-2 p-mb-2" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}"
+                    <button (click)="this.findByCriteriaShow = !this.findByCriteriaShow" class="p-button-success p-mr-2 p-mb-2"
+                            icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}"
                             label="Chercher"
                             pButton
                             pRipple></button>
@@ -15,28 +16,27 @@
                         <p-splitButton [model]="excelPdfButons" icon="pi pi-download" label="Exporter"
                                        styleClass="p-button-help"></p-splitButton>
                     </div>
-
                 </ng-template>
 
             </p-toolbar>
             <p-toolbar *ngIf="findByCriteriaShow">
 
                 <div class="align-form-search">
-                    <!--                                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
-                    <!--                                    <input class="p-mr-2" pInputText id="1"-->
-                    <!--                                           type="text" [(ngModel)]="searchOrdreKosc.reference">-->
-                    <!--                                    <label for="1">Order Reference</label>-->
-                    <!--                                </span>-->
-                    <!--                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
-                    <!--                                    <input class="p-mr-2" pInputText id="2"-->
-                    <!--                                           type="text" [(ngModel)]="searchOrdreKosc.referenceWorkOrder">-->
-                    <!--                                    <label for="2">Reference work order</label>-->
-                    <!--                                </span>-->
-                    <!--    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input [(ngModel)]="searchOrdreKosc.reference" class="p-mr-2" id="1"
+                                           pInputText type="text">
+                                    <label for="1">Order Reference</label>
+                                </span>
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input [(ngModel)]="searchOrdreKosc.referenceWorkOrder" class="p-mr-2" id="2"
+                                           pInputText type="text">
+                                    <label for="2">Reference work order</label>
+                                </span>
+                        <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
                                         <input class="p-mr-2" pInputText id="3"
                                                type="text" [(ngModel)]="searchOrdreKosc.codeDecharge">
                                         <label for="3">Code decharge</label>
-                                    </span>-->
+                                    </span>
                     <!--                                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
                     <!--                                    <input class="p-mr-2" pInputText id="4"-->
                     <!--                                           type="text"  [(ngModel)]="searchOrdreKosc.supplierService">-->
@@ -139,14 +139,14 @@
                     <!--                                           type="text"  [(ngModel)]="searchOrdreKosc.endCustumorContactEmail">-->
                     <!--                                    <label for="21">End custumor contact email</label>-->
                     <!--                                </span>-->
-                    <!--  <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                      <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
                                  <p-dropdown [options]="operators" [(ngModel)]="searchOrdreKosc.operatorVo"
                                              id="22"
                                              [filter]="true" [showClear]="true" placeholder="Operator"
                                              optionLabel="libelle">
                                  </p-dropdown>
                              </span>
-                     <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                     <!--<span class=" p-float-label p-mr-3 align-search-items p-mt-4">
                                      <input class="p-mr-2" pInputText id="23"
                                             type="text" [(ngModel)]="searchOrdreKosc.company">
                                      <label for="23">Company</label>
@@ -225,21 +225,21 @@
                     <!--                        </span>-->
 
 
-                    <!--                        <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
-                    <!--                            <p-calendar-->
-                    <!--                                    class="p-mr-2" [(ngModel)]="searchOrdreKosc.datePriseRdvMin"-->
-                    <!--                                    id="29-1"-->
-                    <!--                                    dateFormat="dd-MM-yy"></p-calendar>-->
-                    <!--                            <label for="29-1">Date prise rdv Min</label>-->
-                    <!--                        </span>-->
+                                            <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                                <p-calendar
+                                                        class="p-mr-2" [(ngModel)]="searchOrdreKosc.datePriseRdvMin"
+                                                        id="29-1"
+                                                        dateFormat="dd-MM-yy"></p-calendar>
+                                                <label for="29-1">Date prise rdv Min</label>
+                                            </span>
 
-                    <!--                         <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
-                    <!--                            <p-calendar-->
-                    <!--                                    class="p-mr-2" [(ngModel)]="searchOrdreKosc.datePriseRdvMax"-->
-                    <!--                                    id="29-2"-->
-                    <!--                                    dateFormat="dd-MM-yy"></p-calendar>-->
-                    <!--                            <label for="29-2">Date prise rdv Max</label>-->
-                    <!--                        </span>-->
+                                             <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                                <p-calendar
+                                                        class="p-mr-2" [(ngModel)]="searchOrdreKosc.datePriseRdvMax"
+                                                        id="29-2"
+                                                        dateFormat="dd-MM-yy"></p-calendar>
+                                                <label for="29-2">Date prise rdv Max</label>
+                                            </span>
 
 
                     <!--                        <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
@@ -609,7 +609,7 @@
                     <!--                                           type="text"  [(ngModel)]="searchOrdreKosc.connecteurPriseCouleur4">-->
                     <!--                                    <label for="96">Connecteur prise couleur4</label>-->
                     <!--                                </span>-->
-                    <!--    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                        <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
                                  <p-dropdown [options]="departements" [(ngModel)]="searchOrdreKosc.departementVo"
                                              id="98"
                                              [filter]="true" [showClear]="true" placeholder="Departement"
@@ -622,37 +622,23 @@
                                              [filter]="true" [showClear]="true" placeholder="Technicien"
                                              optionLabel="identifiant">
                                  </p-dropdown>
-                             </span>-->
+                             </span>
 
-                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                     <!--<span class=" p-float-label p-mr-3 align-search-items p-mt-4">
                              <p-calendar
-                                     [(ngModel)]="searchOrdreKosc.dateEnvoiCri" class="p-mr-2"
-                                     dateFormat="dd-MM-yy"
-                                     id="100-3"></p-calendar>
-                             <label for="100-1">Date envoi cri</label>
-                         </span>
-                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
-                             <p-calendar
-                                     [(ngModel)]="searchOrdreKosc.dateEnvoiCriMin" class="p-mr-2"
-                                     dateFormat="dd-MM-yy"
-                                     id="100-1"></p-calendar>
+                                     class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateEnvoiCriMin"
+                                     id="100-1"
+                                     dateFormat="dd-MM-yy"></p-calendar>
                              <label for="100-1">Date envoi cri Min</label>
                          </span>
 
-                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                     <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
                              <p-calendar
-                                     [(ngModel)]="searchOrdreKosc.dateEnvoiCriMax" class="p-mr-2"
-                                     dateFormat="dd-MM-yy"
-                                     id="100-2"></p-calendar>
+                                     class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateEnvoiCriMax"
+                                     id="100-2"
+                                     dateFormat="dd-MM-yy"></p-calendar>
                              <label for="100-2">Date envoi cri Max</label>
-                         </span>
-                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
-
-                    <p-multiSelect [options]="etatDemandeKoscs"
-                                   [(ngModel)]="searchOrdreKosc.etatDemandeKoscVos"
-                                   defaultLabel="Etat demande kosc"
-                                   optionLabel="libelle" [virtualScroll]="false" ></p-multiSelect>
-                              </span>
+                         </span>-->
 
                     <!--                                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
                     <!--                                    <input class="p-mr-2" pInputText id="101"-->
@@ -718,13 +704,13 @@
                     <!--                                </p-dropdown>-->
                     <!--                            </span>-->
 
-                    <!--                                            <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
-                    <!--                                                <p-calendar-->
-                    <!--                                                        class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateInterventionTechniqueDebutMin"-->
-                    <!--                                                        id="114-1"-->
-                    <!--                                                        dateFormat="dd-MM-yy"></p-calendar>-->
-                    <!--                                                <label for="114-1">Date intervention technique debut Min</label>-->
-                    <!--                                            </span>-->
+                    <!--                        <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
+                    <!--                            <p-calendar-->
+                    <!--                                    class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateInterventionTechniqueDebutMin"-->
+                    <!--                                    id="114-1"-->
+                    <!--                                    dateFormat="dd-MM-yy"></p-calendar>-->
+                    <!--                            <label for="114-1">Date intervention technique debut Min</label>-->
+                    <!--                        </span>-->
 
                     <!--                         <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
                     <!--                            <p-calendar-->
@@ -926,13 +912,19 @@
                     <!--                            <label for="140-2">Date envoi report Max</label>-->
                     <!--                        </span>-->
 
-                    <!--                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
-                    <!--                                <p-dropdown [options]="etatDemandeKoscs" [(ngModel)]="searchOrdreKosc.etatDemandeKoscVo"-->
-                    <!--                                            id="144"-->
-                    <!--                                            [filter]="true" [showClear]="true" placeholder="Etat demande kosc"-->
-                    <!--                                            optionLabel="libelle">-->
-                    <!--                                </p-dropdown>-->
-                    <!--                            </span>-->
+
+
+<!--                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
+<!--                                <p-dropdown [(ngModel)]="searchOrdreKosc.etatDemandeKoscVo" [filter]="true"-->
+<!--                                            [options]="etatDemandeKoscs"-->
+<!--                                            [showClear]="true" id="144" optionLabel="libelle"-->
+<!--                                            placeholder="Etat demande kosc">-->
+<!--                                </p-dropdown>-->
+<!--                            </span>-->
+
+
+
+
                     <!--                            <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
                     <!--                                <p-dropdown [options]="templateEmailClotures" [(ngModel)]="searchOrdreKosc.templateEmailClotureVo"-->
                     <!--                                        id="145"-->
@@ -992,26 +984,35 @@
                     <!--                                    </p-dropdown>-->
                     <!--                                </span>-->
 
-                    <!--                        <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
-                    <!--                            <p-calendar-->
-                    <!--                                    class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateEnvoiSuiviMin"-->
-                    <!--                                    id="155-1"-->
-                    <!--                                    dateFormat="dd-MM-yy"></p-calendar>-->
-                    <!--                            <label for="155-1">Date envoi suivi Min</label>-->
-                    <!--                        </span>-->
+                                            <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                                <p-calendar
+                                                        class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateEnvoiSuiviMin"
+                                                        id="155-1"
+                                                        dateFormat="dd-MM-yy"></p-calendar>
+                                                <label for="155-1">Date envoi suivi Min</label>
+                                            </span>
 
-                    <!--                         <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
-                    <!--                            <p-calendar-->
-                    <!--                                    class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateEnvoiSuiviMax"-->
-                    <!--                                    id="155-2"-->
-                    <!--                                    dateFormat="dd-MM-yy"></p-calendar>-->
-                    <!--                            <label for="155-2">Date envoi suivi Max</label>-->
-                    <!--                        </span>-->
+                                             <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                                <p-calendar
+                                                        class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateEnvoiSuiviMax"
+                                                        id="155-2"
+                                                        dateFormat="dd-MM-yy"></p-calendar>
+                                                <label for="155-2">Date envoi suivi Max</label>
+                                            </span>
+
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+
+                    <p-multiSelect [options]="etatDemandeKoscs"
+                                   [(ngModel)]="searchOrdreKosc.etatDemandeKoscVos"
+                                   defaultLabel="Etat demande kosc"
+                                   optionLabel="libelle" [virtualScroll]="false" ></p-multiSelect>
+                              </span>
+
 
                 </div>
 
                 <div class="align-search-button">
-                    <button (click)="searchRequestSuiviRdv()" class="p-button-info p-mr-2" icon="pi pi-sort-amount-down" label="Valider"
+                    <button (click)="searchRequest()" class="p-button-info p-mr-2" icon="pi pi-sort-amount-down" label="Valider"
                             pButton pRipple></button>
                 </div>
 
@@ -2399,6 +2400,13 @@
                         -->
 
 
+                        <th pSortableColumn="etatDemandeKosc">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Etat</span>
+                                <p-sortIcon field="etatDemandeKosc"></p-sortIcon>
+                            </div>
+                        </th>
+
 
                         <!--
                         <th pSortableColumn="templateEmailCloture">
@@ -2489,16 +2497,6 @@
                                 <p-sortIcon field="dateEnvoiSuivi"></p-sortIcon>
                             </div>
                         </th>
-
-
-
-                        <th pSortableColumn="etatDemandeKosc">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>Etat</span>
-                                <p-sortIcon field="etatDemandeKosc"></p-sortIcon>
-                            </div>
-                        </th>
-
 
 
                         <th>Actions</th>
@@ -2883,8 +2881,9 @@
                         <!--                        <td>{{ordreKosc.technicienVo?.identifiant}}</td>-->
 
 
-                        <!--                           <td>{{ordreKosc.dateEnvoiCri | date :'dd/MM/yyyy HH:mm' }}</td>-->
-
+                        <!--
+                           <td>{{ordreKosc.dateEnvoiCri | date :'dd/MM/yyyy HH:mm' }}</td>
+                        -->
 
                         <!--
                             <td>{{ordreKosc.pboReel}}</td>
@@ -3034,6 +3033,7 @@
                            <td>{{ordreKosc.dateEnvoiReport | date :'dd/MM/yyyy HH:mm' }}</td>
                         -->
 
+                        <td>{{ordreKosc.etatDemandeKoscVo?.libelle}}</td>
 
                         <!--
                            <td>{{ordreKosc.templateEmailClotureVo?.libelle}}</td>
@@ -3075,24 +3075,6 @@
                         <td>{{ordreKosc.dateEnvoiSuivi | date :'dd/MM/yyyy HH:mm' }}</td>
 
 
-                        <td *ngIf="isEtatNotEmpty(ordreKosc)"
-                            [hidden]="!isEtatNotEmpty(ordreKosc)">
-
-                            <p-badge
-                                    value=" {{ordreKosc.etatDemandeKoscVo?.libelle}}"
-                                    severity="{{ordreKosc.etatDemandeKoscVo?.style}}">
-                            </p-badge>
-
-                        </td>
-
-                        <td *ngIf="!isEtatNotEmpty(ordreKosc)"
-                            [hidden]="isEtatNotEmpty(ordreKosc)">
-
-                            {{ordreKosc.etatDemandeKoscVo?.libelle}}
-
-                        </td>
-
-
                         <td>
                             <button (click)="editOrdreKosc(ordreKosc)" class="p-button-rounded p-button-success p-mr-2" icon="pi pi-pencil"
                                     pButton
@@ -3116,8 +3098,8 @@
             </p-table>
         </div>
 
-        <app-ordre-kosc-suivi-edit-admin></app-ordre-kosc-suivi-edit-admin>
-        <app-ordre-kosc-suivi-view-admin></app-ordre-kosc-suivi-view-admin>
+        <app-ordre-kosc-suivi-historique-edit-admin></app-ordre-kosc-suivi-historique-edit-admin>
+        <app-ordre-kosc-suivi-historique-view-admin></app-ordre-kosc-suivi-historique-view-admin>
         <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
     </div>
 </div>

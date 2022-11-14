@@ -10,4 +10,6 @@ public interface OrdreKoscSuiviCddAdminService {
 
     public List<OrdreKosc> findByCriteriaSuiviCdd(OrdreKoscVo ordreKoscVo);
 
+    public List<OrdreKosc> findByCriteriaSuiviCdd2(OrdreKoscVo ordreKoscVo);
+
 }

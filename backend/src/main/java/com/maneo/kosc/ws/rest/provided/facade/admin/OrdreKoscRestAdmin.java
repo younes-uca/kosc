@@ -183,9 +183,15 @@ public class OrdreKoscRestAdmin {
     @ApiOperation("Search ordreKosc suivi historique by a specific criteria")
     @PostMapping("/search-suivi-cdd")
     public List<OrdreKoscVo> findByCriteriaSuiviCdd(@RequestBody OrdreKoscVo ordreKoscVo) {
-        return ordreKoscConverter.toVo(ordreKoscSuiviCddAdminService.findByCriteriaSuiviCdd(ordreKoscVo));
+        List<OrdreKoscVo> ordreKoscVos = ordreKoscConverter.toVo(ordreKoscSuiviCddAdminService.findByCriteriaSuiviCdd(ordreKoscVo));
+        return ordreKoscVos;
     }
-
+    @ApiOperation("Search ordreKosc suivi historique by a specific criteria")
+    @PostMapping("/search-suivi-historique-cdd")
+    public List<OrdreKoscVo> findByCriteriaSuiviCdd2(@RequestBody OrdreKoscVo ordreKoscVo) {
+        List<OrdreKoscVo> ordreKoscVos = ordreKoscConverter.toVo(ordreKoscSuiviCddAdminService.findByCriteriaSuiviCdd2(ordreKoscVo));
+        return ordreKoscVos;
+    }
 
     @ApiOperation("Search ordreKosc suivi by a specific criteria")
     @PostMapping("/search/suivi")

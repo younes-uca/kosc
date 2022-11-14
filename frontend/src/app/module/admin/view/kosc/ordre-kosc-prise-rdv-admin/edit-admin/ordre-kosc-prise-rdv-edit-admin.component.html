@@ -69,11 +69,13 @@
 
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="30">Date rdv</label>
+                        <label for="30">Date rdv<span style="color: red;">*</span></label>
                         <p-calendar  dateFormat="{{dateFormat}}" [(ngModel)]="selectedOrdreKosc.dateRdv" [showSeconds]="false" [showTime]="true"
                                     id="30"
                                     placeholder="Date rdv">
                         </p-calendar>
+                        <small *ngIf='!validDateRdv' class='p-error'>Libelle est
+                            obligatoire.</small>
 
                     </div>
 

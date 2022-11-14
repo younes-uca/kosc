@@ -31,6 +31,7 @@ export class OrdreKoscService {
 
     private _indexEdit = 0;
     private _searchOrdreKosc: OrdreKoscVo;
+    private _searchOrdreKoscSuiviCdd: OrdreKoscVo;
 
     private _ordreKoscs: Array<OrdreKoscVo>;
 
@@ -38,7 +39,7 @@ export class OrdreKoscService {
     private _ordreKoscsSuiviRdv: Array<OrdreKoscVo>;
     private _ordreKoscsSuiviCdd: Array<OrdreKoscVo>;
     private _searchOrdreKoscSuiviRdv:OrdreKoscVo;
-    private _searchordreKosc: Array<OrdreKoscVo>;
+
 
 
     constructor(private http: HttpClient, private roleService: RoleService) {
@@ -177,6 +178,10 @@ export class OrdreKoscService {
 
     public findByCriteriaSuiviCdd(ordreKosc: OrdreKoscVo): Observable<Array<OrdreKoscVo>> {
         return this.http.post<Array<OrdreKoscVo>>(this.API + 'search-suivi-cdd', ordreKosc);
+    }
+
+    public findByCriteriaSuiviCdd2(ordreKosc: OrdreKoscVo): Observable<Array<OrdreKoscVo>> {
+        return this.http.post<Array<OrdreKoscVo>>(this.API + 'search-suivi-historique-cdd', ordreKosc);
     }
 
 
@@ -339,6 +344,19 @@ export class OrdreKoscService {
     set searchOrdreKosc(value: OrdreKoscVo) {
         this._searchOrdreKosc = value;
     }
+
+    get searchOrdreKoscSuiviCdd(): OrdreKoscVo {
+        if (this._searchOrdreKoscSuiviCdd == null) {
+            this._searchOrdreKoscSuiviCdd = new OrdreKoscVo();
+        }
+        return this._searchOrdreKoscSuiviCdd;
+    }
+
+    set searchOrdreKoscSuiviCdd(value: OrdreKoscVo) {
+        this._searchOrdreKoscSuiviCdd = value;
+    }
+
+
     get searchOrdreKoscSuiviRdv(): OrdreKoscVo {
         if (this._searchOrdreKoscSuiviRdv == null) {
             this._searchOrdreKoscSuiviRdv = new OrdreKoscVo();

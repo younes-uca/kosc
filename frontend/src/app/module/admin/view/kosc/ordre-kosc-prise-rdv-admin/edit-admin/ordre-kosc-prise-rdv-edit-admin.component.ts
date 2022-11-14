@@ -42,6 +42,7 @@ import {DateUtils} from "../../../../../../utils/DateUtils";
     styleUrls: ['./ordre-kosc-prise-rdv-edit-admin.component.css']
 })
 export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
+
     public appropriateTechniciens:Array<TechnicienVo>;
 
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService
@@ -286,8 +287,9 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 //validation methods
     private validateForm(): void {
         this.errorMessages = new Array<string>();
-        this.validateOrdreKoscReferenceWorkOrder();
-        this.validateOrdreKoscDateAppel();
+        this.validateOrdreKoscDateRdv();
+        /* this.validateOrdreKoscReferenceWorkOrder();
+        this.validateOrdreKoscDateAppel();*/
 
     }
 
@@ -299,6 +301,16 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.validOrdreKoscReferenceWorkOrder = true;
         }
     }
+
+    private validateOrdreKoscDateRdv() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.dateRdv)) {
+            this.errorMessages.push('Date non valide ');
+            this.validDateRdv = false;
+        } else {
+            this.validDateRdv = true;
+        }
+    }
+
     private validateOrdreKoscDateAppel() {
         if(this.selectedOrdreKosc.datePremierAppel != null && this.selectedOrdreKosc.dateDeuxiemeAppel){
             if(this.selectedOrdreKosc.datePremierAppel.getDate() >= this.selectedOrdreKosc.dateDeuxiemeAppel.getDate() || this.selectedOrdreKosc.dateTroisiemeAppel < this.selectedOrdreKosc.dateDeuxiemeAppel ){
@@ -569,6 +581,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
     _validTemplateSuiviLibelle = true;
+    private _validDateRdv = true;
 
     get validTemplateSuiviLibelle(): boolean {
         return this._validTemplateSuiviLibelle;
@@ -883,6 +896,12 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         return environment.dateFormatEdit;
     }
 
+    get validDateRdv():boolean {
+        return this._validDateRdv;
+    }
 
+    set validDateRdv(value: boolean) {
+        this._validDateRdv = value;
+    }
 
 }

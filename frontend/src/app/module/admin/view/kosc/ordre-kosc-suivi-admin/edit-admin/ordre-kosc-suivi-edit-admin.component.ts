@@ -222,6 +222,14 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
         this._validTemplateEmailPlanificationLibelle = value;
     }
 
+    get searchOrdreKosc(): OrdreKoscVo {
+        return this.ordreKoscService.searchOrdreKoscSuiviRdv;
+    }
+
+    set searchordreKosc(value: OrdreKoscVo) {
+        this.ordreKoscService.searchOrdreKosc = value;
+    }
+
     // getters and setters
 
     _validTemplateEmailReplanificationCode = true;
@@ -325,11 +333,11 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
     }
 
     get ordreKoscs(): Array<OrdreKoscVo> {
-        return this.ordreKoscService.ordreKoscs;
+        return this.ordreKoscService.ordreKoscsSuiviRdv;
     }
 
     set ordreKoscs(value: Array<OrdreKoscVo>) {
-        this.ordreKoscService.ordreKoscs = value;
+        this.ordreKoscService.ordreKoscsSuiviRdv = value;
     }
 
     get selectedOrdreKosc(): OrdreKoscVo {
@@ -715,10 +723,10 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
         this.ordreKoscService.edit().subscribe(ordreKosc => {
             const myIndex = this.ordreKoscs.findIndex(e => e.id === this.selectedOrdreKosc.id);
             this.ordreKoscs[myIndex] = ordreKosc;
+            this.ordreKoscService.deleteIfEtatNotIn(this.searchOrdreKosc.etatDemandeKoscVos, this.ordreKoscs, ordreKosc);
             this.editOrdreKoscDialog = false;
             this.submitted = false;
             this.selectedOrdreKosc = new OrdreKoscVo();
-
 
         }, error => {
             console.log(error);
@@ -894,7 +902,7 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
 // validation methods
     private validateForm(): void {
         this.errorMessages = new Array<string>();
-        this.validateOrdreKoscReferenceWorkOrder();
+        //this.validateOrdreKoscReferenceWorkOrder();
 
     }
 

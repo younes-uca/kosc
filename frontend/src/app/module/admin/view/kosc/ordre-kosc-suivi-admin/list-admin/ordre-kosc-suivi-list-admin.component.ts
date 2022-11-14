@@ -146,11 +146,11 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
 //
 
     get searchOrdreKosc(): OrdreKoscVo {
-        return this.ordreKoscService.searchOrdreKosc;
+        return this.ordreKoscService.searchOrdreKoscSuiviRdv;
     }
 
     set searchOrdreKosc(value: OrdreKoscVo) {
-        this.ordreKoscService.searchOrdreKosc = value;
+        this.ordreKoscService.searchOrdreKoscSuiviRdv = value;
     }
 
     get searchOrdreKoscSuiviRdv(): OrdreKoscVo {
@@ -997,8 +997,8 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
         ];
     }
     public searchRequestSuiviRdv() {
-        console.log(" this.searchOrdreKosc :"+this.searchOrdreKoscSuiviRdv.etatDemandeKoscVos);
-        this.ordreKoscService.findByCriteriaSuiviRdv(this.searchOrdreKoscSuiviRdv).subscribe(ordreKoscs => {
+        console.log(" this.searchOrdreKosc :"+this.searchOrdreKosc.etatDemandeKoscVos);
+        this.ordreKoscService.findByCriteriaSuiviRdv(this.searchOrdreKosc).subscribe(ordreKoscs => {
             this.ordreKoscs = ordreKoscs;
 
         }, error => console.log(error));
@@ -1009,8 +1009,8 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
         isPermistted ? this.etatDemandeKoscService.findAll().subscribe(etatDemandeKoscs =>{
                 this.etatDemandeKoscs = etatDemandeKoscs;
-                this.searchOrdreKoscSuiviRdv.etatDemandeKoscVos = this.etatDemandeKoscs.filter(e => etatNonDesire.indexOf(e.code) != -1);
-                console.log( this.searchOrdreKoscSuiviRdv.etatDemandeKoscVos);
+                this.searchOrdreKosc.etatDemandeKoscVos = this.etatDemandeKoscs.filter(e => etatNonDesire.indexOf(e.code) != -1);
+                console.log( this.searchOrdreKosc.etatDemandeKoscVos);
             }, error => console.log(error))
             : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
 

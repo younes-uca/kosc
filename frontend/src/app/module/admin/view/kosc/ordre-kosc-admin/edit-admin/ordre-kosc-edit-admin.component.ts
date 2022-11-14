@@ -592,6 +592,15 @@ export class OrdreKoscEditAdminComponent implements OnInit {
     //     this.templateEmailKoscService.createTemplateEmailKoscDialog = value;
     // }
 
+
+    get searchOrdreKosc(): OrdreKoscVo {
+        return this.ordreKoscService.searchOrdreKosc;
+    }
+
+    set searchordreKosc(value: OrdreKoscVo) {
+        this.ordreKoscService.searchOrdreKosc = value;
+    }
+
     set createTemplateEmailClientInjoinableDialog(value: boolean) {
         this.templateEmailClientInjoinableService.createTemplateEmailClientInjoinableDialog = value;
     }
@@ -905,6 +914,7 @@ export class OrdreKoscEditAdminComponent implements OnInit {
         this.ordreKoscService.edit().subscribe(ordreKosc => {
             const myIndex = this.ordreKoscs.findIndex(e => e.id === this.selectedOrdreKosc.id);
             this.ordreKoscs[myIndex] = ordreKosc;
+            this.ordreKoscService.deleteIfEtatNotIn(this.searchOrdreKosc.etatDemandeKoscVos, this.ordreKoscs, ordreKosc);
             this.editOrdreKoscDialog = false;
             this.submitted = false;
             this.selectedOrdreKosc = new OrdreKoscVo();

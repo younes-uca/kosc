@@ -61,6 +61,51 @@ public class OrdreKoscSuiviCddAdminServiceImpl implements OrdreKoscSuiviCddAdmin
             query+= " AND o.etatDemandeKosc.id IN ("+convertId(ordreKoscVo.getEtatDemandeKoscVos())+")";
         }
 
+        query += " AND o.codeDecharge is NULL";
+
+        query += " ORDER BY o.nbrHeureDateSubmissionAndNow DESC, o.submissionDate ASC";
+
+
+        List<OrdreKosc> resultList = entityManager.createQuery(query).getResultList();
+
+        return resultList;
+    }
+
+    public List<OrdreKosc> findByCriteriaSuiviCdd2(OrdreKoscVo ordreKoscVo) {
+
+
+        String query = "SELECT o FROM OrdreKosc o where 1=1";
+
+        query += SearchUtil.addConstraint("o", "reference", "LIKE", ordreKoscVo.getReference());
+        query += SearchUtil.addConstraint("o", "referenceWorkOrder", "LIKE", ordreKoscVo.getReferenceWorkOrder());
+        query += SearchUtil.addConstraintDate("o", "datePriseRdv", "=", ordreKoscVo.getDatePriseRdv());
+
+        query += SearchUtil.addConstraintMinMaxDate("o", "datePriseRdv", ordreKoscVo.getDatePriseRdvMin(), ordreKoscVo.getDatePriseRdvMax());
+        query += SearchUtil.addConstraintMinMaxDate("o", "dateEnvoiSuivi", ordreKoscVo.getDateEnvoiSuiviMin(), ordreKoscVo.getDateEnvoiSuiviMax());
+
+        if (ordreKoscVo.getOperatorVo() != null) {
+            query += SearchUtil.addConstraint("o", "operator.id", "=", ordreKoscVo.getOperatorVo().getId());
+            query += SearchUtil.addConstraint("o", "operator.reference", "LIKE", ordreKoscVo.getOperatorVo().getReference());
+        }
+
+        if (ordreKoscVo.getDepartementVo() != null) {
+            query += SearchUtil.addConstraint("o", "departement.id", "=", ordreKoscVo.getDepartementVo().getId());
+            query += SearchUtil.addConstraint("o", "departement.code", "LIKE", ordreKoscVo.getDepartementVo().getCode());
+        }
+
+        if (ordreKoscVo.getTechnicienVo() != null) {
+            query += SearchUtil.addConstraint("o", "technicien.id", "=", ordreKoscVo.getTechnicienVo().getId());
+            query += SearchUtil.addConstraint("o", "technicien.identifiant", "LIKE", ordreKoscVo.getTechnicienVo().getIdentifiant());
+        }
+
+        if (ordreKoscVo.getCodeDecharge() != null) {
+            query += SearchUtil.addConstraint("o", "codeDecharge", "LIKE", ordreKoscVo.getCodeDecharge());
+        }
+
+        if (ordreKoscVo.getEtatDemandeKoscVos() != null){
+            query+= " AND o.etatDemandeKosc.id IN ("+convertId(ordreKoscVo.getEtatDemandeKoscVos())+")";
+        }
+
         query += " AND o.codeDecharge is NOT NULL";
 
         query += " ORDER BY o.nbrHeureDateSubmissionAndNow DESC, o.submissionDate ASC";
@@ -70,6 +115,7 @@ public class OrdreKoscSuiviCddAdminServiceImpl implements OrdreKoscSuiviCddAdmin
 
         return resultList;
     }
+
 
     private String convertId(List<EtatDemandeKoscVo> etatDemandeKoscVos) {
         String res="";

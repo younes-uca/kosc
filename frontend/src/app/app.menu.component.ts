@@ -93,7 +93,7 @@ export class AppMenuComponent implements OnInit {
                         routerLink: ['/app/admin/kosc/ordre-kosc-suivi/list']
                     },
                     {
-                        label: 'Suivi historique kosc ordre',
+                        label: 'Suivi Cdd',
                         icon: 'pi pi-fw pi-plus-circle',
                         routerLink: ['/app/admin/kosc/ordre-kosc-suivi-historique/list']
                     }

@@ -277,16 +277,6 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         return this.ordreKoscsPriseRdv;
     }
 
-    public async searchRequestPriseRdv2() {
-        console.log("done")
-         this.ordreKoscService.findByCriteriaPriseRdv(this.searchOrdreKosc).subscribe(ordreKoscs => {
-            console.log(ordreKoscs)
-            this.ordreKoscsPriseRdv = ordreKoscs;
-            console.log(this.ordreKoscsPriseRdv)
-        }, error => console.log(error));
-
-        return this.ordreKoscsPriseRdv;
-    }
 
 
 
