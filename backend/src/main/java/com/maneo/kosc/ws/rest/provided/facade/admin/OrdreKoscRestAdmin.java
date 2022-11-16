@@ -51,7 +51,7 @@ public class OrdreKoscRestAdmin {
     @Autowired
     private OrdreKoscPriseRdvAdminService ordreKoscPriseRdvService;
     @Autowired
-    private OrdreKoscSuiviCddAdminService ordreKoscSuiviCddAdminService;
+    private OrdreKoscCddAdminService ordreKoscCddAdminService;
 
     @Autowired
     private ImportOrdreKoscAdminService importOrdreKoscAdminService;
@@ -62,6 +62,8 @@ public class OrdreKoscRestAdmin {
     private OrdreKoscConverter ordreKoscConverter;
     @Autowired
     private OrdreKoscSuivRdvAdminService ordreKoscSuiviRdvService;
+    @Autowired
+    private OrdreKoscSuiviCddAdminService ordreKoscSuiviCddAdminService;
 
     @GetMapping("/calculerStatistic/submissionDateMin/{submissionDateMin}/submissionDateMax/{submissionDateMax}")
     public List<StatisticResultVo> calculerStatistic(@PathVariable Date submissionDateMin, @PathVariable Date submissionDateMax) {
@@ -182,14 +184,14 @@ public class OrdreKoscRestAdmin {
 
     @ApiOperation("Search ordreKosc suivi historique by a specific criteria")
     @PostMapping("/search-suivi-cdd")
-    public List<OrdreKoscVo> findByCriteriaSuiviCdd(@RequestBody OrdreKoscVo ordreKoscVo) {
-        List<OrdreKoscVo> ordreKoscVos = ordreKoscConverter.toVo(ordreKoscSuiviCddAdminService.findByCriteriaSuiviCdd(ordreKoscVo));
+    public List<OrdreKoscVo> findByCriteriaCdd(@RequestBody OrdreKoscVo ordreKoscVo) {
+        List<OrdreKoscVo> ordreKoscVos = ordreKoscConverter.toVo(ordreKoscCddAdminService.findByCriteriaCdd(ordreKoscVo));
         return ordreKoscVos;
     }
     @ApiOperation("Search ordreKosc suivi historique by a specific criteria")
     @PostMapping("/search-suivi-historique-cdd")
-    public List<OrdreKoscVo> findByCriteriaSuiviCdd2(@RequestBody OrdreKoscVo ordreKoscVo) {
-        List<OrdreKoscVo> ordreKoscVos = ordreKoscConverter.toVo(ordreKoscSuiviCddAdminService.findByCriteriaSuiviCdd2(ordreKoscVo));
+    public List<OrdreKoscVo> findByCriteriaSuiviCdd(@RequestBody OrdreKoscVo ordreKoscVo) {
+        List<OrdreKoscVo> ordreKoscVos = ordreKoscConverter.toVo(ordreKoscSuiviCddAdminService.findByCriteriaSuiviCdd(ordreKoscVo));
         return ordreKoscVos;
     }
 

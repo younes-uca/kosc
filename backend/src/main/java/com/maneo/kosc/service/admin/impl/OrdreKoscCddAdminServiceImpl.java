@@ -2,7 +2,7 @@ package com.maneo.kosc.service.admin.impl;
 
 import com.maneo.kosc.bean.OrdreKosc;
 import com.maneo.kosc.dao.OrdreKoscDao;
-import com.maneo.kosc.service.admin.facade.OrdreKoscSuiviCddAdminService;
+import com.maneo.kosc.service.admin.facade.OrdreKoscCddAdminService;
 import com.maneo.kosc.service.util.SearchUtil;
 import com.maneo.kosc.ws.rest.provided.vo.EtatDemandeKoscVo;
 import com.maneo.kosc.ws.rest.provided.vo.OrdreKoscVo;
@@ -15,7 +15,7 @@ import java.util.List;
 //import static jdk.internal.org.jline.utils.Colors.s;
 
 @Service
-public class OrdreKoscSuiviCddAdminServiceImpl implements OrdreKoscSuiviCddAdminService {
+public class OrdreKoscCddAdminServiceImpl implements OrdreKoscCddAdminService {
 
 
     @Autowired
@@ -25,7 +25,7 @@ public class OrdreKoscSuiviCddAdminServiceImpl implements OrdreKoscSuiviCddAdmin
 
 
 
-    public List<OrdreKosc> findByCriteriaSuiviCdd(OrdreKoscVo ordreKoscVo) {
+    public List<OrdreKosc> findByCriteriaCdd(OrdreKoscVo ordreKoscVo) {
 
 
         String query = "SELECT o FROM OrdreKosc o where 1=1";
@@ -60,7 +60,7 @@ public class OrdreKoscSuiviCddAdminServiceImpl implements OrdreKoscSuiviCddAdmin
             query+= " AND o.etatDemandeKosc.id IN ("+convertId(ordreKoscVo.getEtatDemandeKoscVos())+")";
         }
 
-        query += " AND o.codeDecharge is NOT NULL";
+        query += " AND o.codeDecharge is NULL";
 
         query += " ORDER BY o.nbrHeureDateSubmissionAndNow DESC, o.submissionDate ASC";
 
@@ -69,6 +69,8 @@ public class OrdreKoscSuiviCddAdminServiceImpl implements OrdreKoscSuiviCddAdmin
 
         return resultList;
     }
+
+
 
 
     private String convertId(List<EtatDemandeKoscVo> etatDemandeKoscVos) {
