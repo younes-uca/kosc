@@ -36,11 +36,11 @@ import {TemplateEmailPlanificationVo} from 'src/app/controller/model/TemplateEma
 import {TemplateEmailPlanificationService} from 'src/app/controller/service/TemplateEmailPlanification.service';
 
 @Component({
-    selector: 'app-ordre-kosc-suivi-historique-edit-admin',
-    templateUrl: './ordre-kosc-suivi-historique-edit-admin.component.html',
-    styleUrls: ['./ordre-kosc-suivi-historique-edit-admin.component.css']
+    selector: 'app-ordre-kosc-suivi-cdd-edit-admin',
+    templateUrl: './ordre-kosc-suivi-cdd-edit-admin.component.html',
+    styleUrls: ['./ordre-kosc-suivi-cdd-edit-admin.component.css']
 })
-export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
+export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
 
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService
         , private stringUtilService: StringUtilService

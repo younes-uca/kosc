@@ -365,12 +365,26 @@ import {JourFerieListAdminComponent} from "./jour-ferie-admin/list-admin/jour-fe
 import {JourFerieViewAdminComponent} from "./jour-ferie-admin/view-admin/jour-ferie-view-admin.component";
 import {JourFerieEditAdminComponent} from "./jour-ferie-admin/edit-admin/jour-ferie-edit-admin.component";
 import {JourFerieAdminComponent} from "./jour-ferie-admin/jour-ferie-admin.component";
+import {OrdreKoscSuiviCddAdminComponent} from "./ordre-kosc-suivi-cdd-admin/ordre-kosc-suivi-cdd-admin.component";
+import {
+    OrdreKoscSuiviCddListAdminComponent
+} from "./ordre-kosc-suivi-cdd-admin/list-admin/ordre-kosc-suivi-cdd-list-admin.component";
+import {
+    OrdreKoscSuiviCddEditAdminComponent
+} from "./ordre-kosc-suivi-cdd-admin/edit-admin/ordre-kosc-suivi-cdd-edit-admin.component";
+import {
+    OrdreKoscSuiviCddViewAdminComponent
+} from "./ordre-kosc-suivi-cdd-admin/view-admin/ordre-kosc-suivi-cdd-view-admin.component";
 
 
 
 
 @NgModule({
     declarations: [
+        OrdreKoscSuiviCddViewAdminComponent,
+        OrdreKoscSuiviCddEditAdminComponent,
+        OrdreKoscSuiviCddListAdminComponent,
+        OrdreKoscSuiviCddAdminComponent,
         CauseKoOkCreateAdminComponent,
         CauseKoOkListAdminComponent,
         CauseKoOkViewAdminComponent,

@@ -243,7 +243,7 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
     }
     generateDischargeCode() {
         console.log(this.ordreKoscs);
-        this.ordreKoscService.genererCodeDecharge(this.ordreKoscs).subscribe(ordreKoscs => {
+        this.ordreKoscService.genererCodeDecharge().subscribe(ordreKoscs => {
                 this.ordreKoscs = ordreKoscs;
             }, error => console.log(error)
         );

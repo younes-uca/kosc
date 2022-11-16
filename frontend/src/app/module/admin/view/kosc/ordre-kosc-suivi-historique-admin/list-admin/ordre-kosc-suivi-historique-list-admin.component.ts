@@ -998,4 +998,24 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         ];
     }
 
+    public generateCodeDecharge() {
+        if(this.ordreKoscs != null){
+            this.ordreKoscService.genererCodeDecharge().subscribe(ordreKoscs =>{
+                this.ordreKoscs=ordreKoscs;
+                }
+            );
+        }
+    }
+    /*private updateListe(){
+        this.ordreKoscs=this.ordreKoscs.filter(e => e.codeDecharge == null);
+        console.log("after update :"+ this.ordreKoscs);
+    }*/
+    isEtatNotEmpty(ordreKoscVo : OrdreKoscVo){
+
+        if (ordreKoscVo.etatDemandeKoscVo !== null ){
+            return true;
+        }else {
+            return false;
+        }
+    }
 }

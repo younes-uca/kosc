@@ -4,7 +4,6 @@
         <div class="card">
             <p-toolbar styleClass="p-mb-4">
                 <ng-template pTemplate="left">
-
                     <button (click)="this.findByCriteriaShow = !this.findByCriteriaShow" class="p-button-success p-mr-2 p-mb-2"
                             icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}"
                             label="Chercher"
@@ -12,10 +11,11 @@
                             pRipple></button>
                 </ng-template>
                 <ng-template pTemplate="right">
-                    <div class="flex">
                         <p-splitButton [model]="excelPdfButons" icon="pi pi-download" label="Exporter"
                                        styleClass="p-button-help"></p-splitButton>
-                    </div>
+
+                        <p-button  icon="pi pi-success" label="Generer Code Decharge"
+                                   (onClick)="generateCodeDecharge()" styleClass="p-button-info" style="margin-left: 5px"></p-button>
                 </ng-template>
 
             </p-toolbar>
@@ -3033,7 +3033,15 @@
                            <td>{{ordreKosc.dateEnvoiReport | date :'dd/MM/yyyy HH:mm' }}</td>
                         -->
 
-                        <td>{{ordreKosc.etatDemandeKoscVo?.libelle}}</td>
+                        <td *ngIf="isEtatNotEmpty(ordreKosc)"
+                            [hidden]="!isEtatNotEmpty(ordreKosc)">
+
+                            <p-badge
+                                    value=" {{ordreKosc.etatDemandeKoscVo?.libelle}}"
+                                    severity="{{ordreKosc.etatDemandeKoscVo?.style}}">
+                            </p-badge>
+
+                        </td>
 
                         <!--
                            <td>{{ordreKosc.templateEmailClotureVo?.libelle}}</td>

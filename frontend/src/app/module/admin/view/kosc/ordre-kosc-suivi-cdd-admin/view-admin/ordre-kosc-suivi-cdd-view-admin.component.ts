@@ -33,11 +33,11 @@ import {TemplateEmailClientInjoinableVo} from 'src/app/controller/model/Template
 import {TemplateEmailClientInjoinableService} from 'src/app/controller/service/TemplateEmailClientInjoinable.service';
 
 @Component({
-    selector: 'app-ordre-kosc-suivi-historique-view-admin',
-    templateUrl: './ordre-kosc-suivi-historique-view-admin.component.html',
-    styleUrls: ['./ordre-kosc-suivi-historique-view-admin.component.css']
+    selector: 'app-ordre-kosc-suivi-cdd-view-admin',
+    templateUrl: './ordre-kosc-suivi-cdd-view-admin.component.html',
+    styleUrls: ['./ordre-kosc-suivi-cdd-view-admin.component.css']
 })
-export class OrdreKoscSuiviHistoriqueViewAdminComponent implements OnInit {
+export class OrdreKoscSuiviCddViewAdminComponent implements OnInit {
 
 
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService

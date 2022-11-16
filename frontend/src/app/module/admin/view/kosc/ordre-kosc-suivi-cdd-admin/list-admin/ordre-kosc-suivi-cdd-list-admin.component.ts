@@ -40,11 +40,12 @@ import {
 } from "../../../../../../controller/service/TemplateEmailClientInjoinableKosc.service";
 
 @Component({
-    selector: 'app-ordre-kosc-suivi-historique-list-admin',
-    templateUrl: './ordre-kosc-suivi-historique-list-admin.component.html',
-    styleUrls: ['./ordre-kosc-suivi-historique-list-admin.component.css']
+    selector: 'app-ordre-kosc-suivi-cdd-list-admin',
+    templateUrl: './ordre-kosc-suivi-cdd-list-admin.component.html',
+    styleUrls: ['./ordre-kosc-suivi-cdd-list-admin.component.css']
 })
-export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
+
+export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
     // declarations
     findByCriteriaShow = false;
     cols: any[] = [];
@@ -998,4 +999,12 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         ];
     }
 
+    isEtatNotEmpty(ordreKoscVo : OrdreKoscVo){
+
+        if (ordreKoscVo.etatDemandeKoscVo != null ){
+            return true;
+        }else {
+            return false;
+        }
+    }
 }
