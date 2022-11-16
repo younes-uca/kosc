@@ -2510,13 +2510,30 @@
                             <p-tableCheckbox [value]="ordreKosc"></p-tableCheckbox>
                         </td>
 
-                        <td>{{ordreKosc.reference}}</td>
+                        <td *ngIf="isErdvAndReferenceEmpty(ordreKosc) "
+                            [hidden]="!isErdvAndReferenceEmpty(ordreKosc)">
+                            <p-badge
+                                    value=" {{ordreKosc.reference}}" severity="info">
+                            </p-badge>
+
+                        </td>
+                        <td *ngIf="!isErdvAndReferenceEmpty(ordreKosc) "
+                            [hidden]="isErdvAndReferenceEmpty(ordreKosc) "> {{ordreKosc.reference}}
+                        </td>
+
+                        <td *ngIf="isErdvAndReferencWorkOrdereEmpty(ordreKosc) "
+                            [hidden]="!isErdvAndReferencWorkOrdereEmpty(ordreKosc)">
+                            <p-badge
+                                    value=" {{ordreKosc.referenceWorkOrder}}" severity="info">
+                            </p-badge>
+
+                        </td>
+                        <td *ngIf="!isErdvAndReferencWorkOrdereEmpty(ordreKosc) "
+                            [hidden]="isErdvAndReferencWorkOrdereEmpty(ordreKosc)"> {{ordreKosc.referenceWorkOrder}}
+                        </td>
 
 
-                        <td>{{ordreKosc.referenceWorkOrder}}</td>
-
-
-                        <td>{{ordreKosc.codeDecharge}}</td>
+                        <td><span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.codeDecharge}}</span></td>
 
 
                         <!--                        <td>{{ordreKosc.supplierService}}</td>-->
@@ -2590,7 +2607,7 @@
                         -->
 
 
-                        <td>{{ordreKosc.operatorVo?.libelle}}</td>
+                        <td><span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.operatorVo?.libelle}}</span></td>
 
 
                         <!--
@@ -2615,7 +2632,7 @@
                         -->
 
 
-                        <td>{{ordreKosc.datePriseRdv | date :'dd/MM/yyyy HH:mm' }}</td>
+                        <td><span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.datePriseRdv | date :'dd/MM/yyyy HH:mm' }}</span></td>
 
 
                         <!--
@@ -3072,7 +3089,7 @@
                         -->
 
 
-                        <td>{{ordreKosc.dateEnvoiSuivi | date :'dd/MM/yyyy HH:mm' }}</td>
+                        <td><span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.dateEnvoiSuivi | date :'dd/MM/yyyy HH:mm' }}</span></td>
 
 
                         <td *ngIf="isEtatNotEmpty(ordreKosc)"

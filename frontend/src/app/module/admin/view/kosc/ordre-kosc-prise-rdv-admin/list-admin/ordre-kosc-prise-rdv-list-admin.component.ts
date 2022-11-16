@@ -1092,8 +1092,25 @@ private async exporter(){
             {field: 'dateEnvoiSuivi', header: 'Date envoi suivi'},
         ];
     }
+    stylefyConfort(ordreKosc: OrdreKoscVo): string {
+        return ordreKosc.confort?'color:red;':'color:black;';
 
+    }
 
+    isErdvAndReferenceEmpty(ordreKoscVo : OrdreKoscVo){
+        if (ordreKoscVo.erdv == true && ordreKoscVo.reference != null){
+            return true;
+        }else {
+            return false;
+        }
+    }
+    isErdvAndReferencWorkOrdereEmpty(ordreKoscVo : OrdreKoscVo){
+        if (ordreKoscVo.erdv == true && ordreKoscVo.referenceWorkOrder != null){
+            return true;
+        }else {
+            return false;
+        }
+    }
 
 
     get ordreKoscsPriseRdv(): Array<OrdreKoscVo> {

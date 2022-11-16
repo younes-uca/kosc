@@ -91,6 +91,10 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         , private templateSuiviService: TemplateSuiviService
     ) {
     }
+    stylefyConfort(ordreKosc: OrdreKoscVo): string {
+        return ordreKosc.confort?'color:red;':'color:black;';
+
+    }
 
     public async loadEtatDemandeKoscExcept(etatNonDesire : Array<String>) {
         await this.roleService.findAll();
@@ -996,6 +1000,20 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
             {field: 'envoyeSuivi', header: 'Envoye suivi'},
             {field: 'dateEnvoiSuivi', header: 'Date envoi suivi'},
         ];
+    }
+    isErdvAndReferenceEmpty(ordreKoscVo : OrdreKoscVo){
+        if (ordreKoscVo.erdv == true && ordreKoscVo.reference != null){
+            return true;
+        }else {
+            return false;
+        }
+    }
+    isErdvAndReferencWorkOrdereEmpty(ordreKoscVo : OrdreKoscVo){
+        if (ordreKoscVo.erdv == true && ordreKoscVo.referenceWorkOrder != null){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     public generateCodeDecharge() {

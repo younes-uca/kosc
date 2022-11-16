@@ -232,6 +232,24 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
     }
 
     // methods
+    stylefyConfort(ordreKosc: OrdreKoscVo): string {
+        return ordreKosc.confort?'color:red;':'color:black;';
+
+    }
+    isErdvAndReferenceEmpty(ordreKoscVo : OrdreKoscVo){
+        if (ordreKoscVo.erdv == true && ordreKoscVo.reference != null){
+            return true;
+        }else {
+            return false;
+        }
+    }
+    isErdvAndReferencWorkOrdereEmpty(ordreKoscVo : OrdreKoscVo){
+        if (ordreKoscVo.erdv == true && ordreKoscVo.referenceWorkOrder != null){
+            return true;
+        }else {
+            return false;
+        }
+    }
 
     isEtatNotEmpty(ordreKoscVo : OrdreKoscVo){
 
