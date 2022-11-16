@@ -133,7 +133,7 @@ public class OrdreKoscRestAdmin {
 
 
     @ApiOperation("Generate discharge code")
-    @PutMapping("/generate")
+    @PutMapping("/generate/")
     public List<OrdreKoscVo> genererCodeDecharge(@RequestBody List<OrdreKoscVo> ordreKoscVos) {
         List<OrdreKosc> ordreKoscs = ordreKoscConverter.toItem(ordreKoscVos);
         ordreKoscService.genererCodeDecharge(ordreKoscs);
