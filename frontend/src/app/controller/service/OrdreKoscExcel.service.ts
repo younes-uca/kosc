@@ -57,6 +57,7 @@ export class OrdreKoscExcelService {
             let koscOrdresWork = new Array<OrdreKoscVo>();
             for (let i = 0; i < data.length; i++) {
                 let myOrdreKoscWork = this.constructDataBase(data, i);
+                myOrdreKoscWork.type ='kosc';
                 koscOrdresWork.push(myOrdreKoscWork);
             }
             console.log(koscOrdresWork);
