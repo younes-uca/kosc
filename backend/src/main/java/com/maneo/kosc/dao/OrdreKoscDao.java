@@ -134,6 +134,6 @@ public interface OrdreKoscDao extends JpaRepository<OrdreKosc, Long> {
     OrdreKosc findByReferenceCommandePriseInterneOC(String referencePrise);
 
 
-    @Query("SELECT item FROM OrdreKosc item WHERE item.referenceWorkOrder = :referenceWorkOrder AND item.etatDemandeKosc.code NOT IN ('ok','ko')")
+    @Query("SELECT item FROM OrdreKosc item WHERE item.referenceWorkOrder = :referenceWorkOrder AND item.etatDemandeKosc.code NOT IN ('initialisation-wo')")
     OrdreKosc findByReferenceWorkOrderAndEtat(String referenceWorkOrder);
 }
