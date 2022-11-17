@@ -69,9 +69,12 @@ import {OrdreKoscExcelService} from "../../../../../../controller/service/OrdreK
     styleUrls: ['./ordre-kosc-list-admin.component.css']
 })
 export class OrdreKoscListAdminComponent implements OnInit {
+    get findByCriteriaShow(): boolean {
+        return this._findByCriteriaShow;
+    }
     // declarations
     showSpinner = false;
-    findByCriteriaShow = false;
+    private _findByCriteriaShow = false;
     cols: any[] = [];
     excelPdfButons: MenuItem[];
     excelImportButons: MenuItem[];

@@ -110,11 +110,89 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         , private templateSuiviService: TemplateSuiviService
         , private defaultTemplateConfigurationService: DefaultTemplateConfigurationService
 
-    ) {
+    ) {}
 
+    display1 = false;
+
+    showDialog1() {
+        this.display1 = true;
+        this.isShown = false;
+        this.isShown1 = false;
+    }
+    isShown: boolean = false;
+
+    toggleShow() {
+        this.isShown = ! this.isShown;
+        this.isShown1 =  false;
 
     }
 
+    isShown1: boolean = false;
+
+    toggleShow2() {
+        this.isShown1 = ! this.isShown1;
+        this.isShown =  false;
+    }
+
+    public edit() {
+        this.submitted = true;
+        this.validateForm();
+        this.display1 = false;
+        if (this.errorMessages.length === 0) {
+            this.editWithShowOption(false);
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
+    }
+
+    hideEditDialog() {
+        this.display1 = false;
+        this.setValidation(true);
+    }
+    private setValidation(value: boolean) {
+        this.validOrdreKoscReferenceWorkOrder = value;
+    }
+
+    private validateForm(): void {
+        this.errorMessages = new Array<string>();
+        this.validateOrdreKoscDateAppel();
+
+    }
+
+    public editWithShowOption(showList: boolean) {
+        this.ordreKoscService.edit().subscribe(ordreKosc => {
+            const myIndex = this.ordreKoscs.findIndex(e => e.id === this.selectedOrdreKosc.id);
+            this.ordreKoscs[myIndex] = ordreKosc;
+            this.ordreKoscService.deleteIfEtatNotIn(this.searchOrdreKosc.etatDemandeKoscVos, this.ordreKoscs, ordreKosc);
+            this.editOrdreKoscDialog = false;
+            this.submitted = false;
+            this.selectedOrdreKosc = new OrdreKoscVo();
+
+
+        }, error => {
+            console.log(error);
+        });
+
+    }
+    private validateOrdreKoscDateAppel() {
+        if(this.selectedOrdreKosc.datePremierAppel != null && this.selectedOrdreKosc.dateDeuxiemeAppel){
+            if(this.selectedOrdreKosc.datePremierAppel.getDate() >= this.selectedOrdreKosc.dateDeuxiemeAppel.getDate() || this.selectedOrdreKosc.dateTroisiemeAppel < this.selectedOrdreKosc.dateDeuxiemeAppel ){
+                this.errorMessages.push('Date de deuxieme appel non valide');
+                this.validOrdreKoscDateAppel = false;
+            } else {
+                this.validOrdreKoscDateAppel = true;
+            }
+        }
+    }
+    activeState: boolean[] = [true, false, false];
+
+    toggle(index: number) {
+        this.activeState[index] = !this.activeState[index];
+    }
     public plusDay(day: number){
         const today = new Date()
 
@@ -177,6 +255,7 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
     }
 
     ngOnInit(): void {
+
         this.defaultTemplateConfigurationService.findDefaultTemplateConfiguration().subscribe((data) =>
             this.selectedDefaultTemplateConfiguration = data,
         );
@@ -1172,6 +1251,9 @@ private async exporter(){
     get dateFormat() {
         return environment.dateFormatList;
     }
+    get dateFormat2() {
+        return environment.dateFormatEdit;
+    }
     get selectedDefaultTemplateConfiguration(): DefaultTemplateConfigurationVo {
 
         return this.defaultTemplateConfigurationService.selectedDefaultTemplateConfiguration;
@@ -1179,6 +1261,63 @@ private async exporter(){
 
     set selectedDefaultTemplateConfiguration(value: DefaultTemplateConfigurationVo) {
         this.defaultTemplateConfigurationService.selectedDefaultTemplateConfiguration = value;
+    }
+
+    private _errorMessages = new Array<string>();
+
+    get errorMessages(): string[] {
+        return this._errorMessages;
+    }
+
+    set errorMessages(value: string[]) {
+        this._errorMessages = value;
+    }
+
+    _submitted = false;
+
+    get submitted(): boolean {
+        return this._submitted;
+    }
+
+    set submitted(value: boolean) {
+        this._submitted = value;
+    }
+
+    get ordreKoscs(): Array<OrdreKoscVo> {
+        return this.ordreKoscService.ordreKoscsPriseRdv;
+    }
+
+    set ordreKoscs(value: Array<OrdreKoscVo>) {
+        this.ordreKoscService.ordreKoscsPriseRdv = value;
+    }
+
+    _validOrdreKoscReferenceWorkOrder = true;
+
+    get validOrdreKoscReferenceWorkOrder(): boolean {
+        return this._validOrdreKoscReferenceWorkOrder;
+    }
+
+    set validOrdreKoscReferenceWorkOrder(value: boolean) {
+        this._validOrdreKoscReferenceWorkOrder = value;
+    }
+
+
+    get indexEdit(): number {
+        return this.ordreKoscService.indexEdit;
+    }
+
+    set indexEdit(value: number) {
+        this.ordreKoscService.indexEdit = value;
+    }
+
+    _validOrdreKoscDateAppel = true;
+
+    get validOrdreKoscDateAppel(): boolean {
+        return this._validOrdreKoscDateAppel;
+    }
+
+    set validOrdreKoscDateAppel(value: boolean) {
+        this._validOrdreKoscDateAppel = value;
     }
 
 
