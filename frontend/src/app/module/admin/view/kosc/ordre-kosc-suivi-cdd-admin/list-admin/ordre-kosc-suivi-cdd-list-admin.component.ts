@@ -12,6 +12,7 @@ import {DepartementService} from 'src/app/controller/service/Departement.service
 import {TechnicienService} from 'src/app/controller/service/Technicien.service';
 
 import {TemplateEmailClientInjoinableService} from 'src/app/controller/service/TemplateEmailClientInjoinable.service';
+
 import {TemplateEmailPlanificationService} from 'src/app/controller/service/TemplateEmailPlanification.service';
 import {TemplateEmailReplanificationService} from 'src/app/controller/service/TemplateEmailReplanification.service';
 import {TemplateEmailReportService} from 'src/app/controller/service/TemplateEmailReport.service';
@@ -37,25 +38,18 @@ import {ExportService} from 'src/app/controller/service/Export.service';
 import {
     TemplateEmailClientInjoinableKoscService
 } from "../../../../../../controller/service/TemplateEmailClientInjoinableKosc.service";
-import {DefaultTemplateConfigurationVo} from "../../../../../../controller/model/DefaultTemplateConfiguration.model";
-import {
-    DefaultTemplateConfigurationService
-} from "../../../../../../controller/service/DefaultTemplateConfiguration.service";
-import {DateUtils} from "../../../../../../utils/DateUtils";
-import {PromiseType} from "protractor/built/plugins";
-
 
 @Component({
-    selector: 'app-ordre-kosc-prise-rdv-list-admin',
-    templateUrl: './ordre-kosc-prise-rdv-list-admin.component.html',
-    styleUrls: ['./ordre-kosc-prise-rdv-list-admin.component.css']
+    selector: 'app-ordre-kosc-suivi-cdd-list-admin',
+    templateUrl: './ordre-kosc-suivi-cdd-list-admin.component.html',
+    styleUrls: ['./ordre-kosc-suivi-cdd-list-admin.component.css']
 })
-export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
+
+export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
     // declarations
     findByCriteriaShow = false;
     cols: any[] = [];
     excelPdfButons: MenuItem[];
-    dateButons: MenuItem[];
     exportData: any[] = [];
     criteriaData: any[] = [];
     fileName = 'OrdreKosc';
@@ -73,7 +67,6 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
     operators: Array<OperatorVo>;
     departements: Array<DepartementVo>;
     techniciens: Array<TechnicienVo>;
-    dateRdvs: any[];
 
     templateEmailClientInjoinables: Array<TemplateEmailClientInjoinableVo>;
     templateEmailClientInjoinableKoscs: Array<TemplateEmailClientInjoinableKoscVo>;
@@ -84,19 +77,8 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
     templateEmailClotures: Array<TemplateEmailClotureVo>;
     templateSuivis: Array<TemplateSuiviVo>;
 
-   private objetPlanificationDefault : string = eval(this.selectedDefaultTemplateConfiguration.templateEmailPlanificationVo.objet);
 
-    private corpsPlanificationDefault   : string =   eval(this.selectedDefaultTemplateConfiguration.templateEmailPlanificationVo.corps);
-
-
-    constructor(private datePipe: DatePipe
-                , private ordreKoscService: OrdreKoscService
-                , private messageService: MessageService
-                , private confirmationService: ConfirmationService
-                , private roleService: RoleService
-                , private router: Router
-                , private authService: AuthService
-                , private exportService: ExportService
+    constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
         , private operatorService: OperatorService
         , private departementService: DepartementService
         , private technicienService: TechnicienService
@@ -108,99 +90,120 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         , private etatDemandeKoscService: EtatDemandeKoscService
         , private templateEmailClotureService: TemplateEmailClotureService
         , private templateSuiviService: TemplateSuiviService
-        , private defaultTemplateConfigurationService: DefaultTemplateConfigurationService
-
     ) {
-
-
     }
 
-    public plusDay(day: number){
-        const today = new Date()
+    public async loadEtatDemandeKoscExcept(etatNonDesire : Array<String>) {
+        await this.roleService.findAll();
+        const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
+        isPermistted ? this.etatDemandeKoscService.findAll().subscribe(etatDemandeKoscs =>{
+                this.etatDemandeKoscs = etatDemandeKoscs;
+                this.searchOrdreKosc.etatDemandeKoscVos = this.etatDemandeKoscs.filter(e => etatNonDesire.indexOf(e.code) == -1);
+                // console.log( this.searchOrdreKosc.etatDemandeKoscVos);
+            }, error => console.log(error))
+            : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
 
-        let resultat =  new Date()
-        resultat.setDate(today.getDate() + day);
-        return resultat;
-    }
-    public moinDay(day: number){
-        const today = new Date()
-
-        let resultat =  new Date()
-        resultat.setDate(today.getDate() - day);
-        return resultat;
     }
 
-     public convertDate(inputFormat) {
-        function pad(s) { return (s < 10) ? '0' + s : s; }
-        var d = new Date(inputFormat)
-        return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/')
+    public searchRequestSuiviCdd() {
+        console.log(this.searchOrdreKosc.etatDemandeKoscVos);
+        this.ordreKoscService.findByCriteriaSuiviCdd2(this.searchOrdreKosc).subscribe(ordreKoscs => {
+            this.ordreKoscs = ordreKoscs;
+            console.log(ordreKoscs);
+            // this.searchOrdreKosc = new OrdreKoscVo();
+        }, error => console.log(error));
     }
 
-    public afficher24(){
-        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = 24;
-        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = 48;
-    }
-    public afficher48(){
-        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = 24;
-        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = 72;
-    }
-    public afficher72(){
-        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = 24;
-        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = 96;
-    }
-    public afficherAll(){
-        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = null;
-        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = null;
+    public async loadEtatDemandeKoscIncluding(etatNonDesire : Array<String>) {
+        await this.roleService.findAll();
+        const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
+        isPermistted ? this.etatDemandeKoscService.findAll().subscribe(etatDemandeKoscs =>{
+                this.etatDemandeKoscs = etatDemandeKoscs;
+                this.searchOrdreKosc.etatDemandeKoscVos = this.etatDemandeKoscs.filter(e => etatNonDesire.indexOf(e.code) != -1);
+                console.log( this.searchOrdreKosc.etatDemandeKoscVos);
+                // console.log( this.searchOrdreKosc.etatDemandeKoscVos);
+            }, error => console.log(error))
+            : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
+
     }
 
-    isDateSubmisson72(ordreKoscVo : OrdreKoscVo){
-        if (ordreKoscVo.nbrHeureDateSubmissionAndNow > 48 && ordreKoscVo.nbrHeureDateSubmissionAndNow <= 72 && (ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION WO' || ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION ERDV')){
-            return true;
-        }else {
-            return false;
-        }
+
+    get ordreKoscs(): Array<OrdreKoscVo> {
+        return this.ordreKoscService.ordreKoscsSuiviCdd;
     }
 
-    isDateSubmisson48(ordreKoscVo : OrdreKoscVo){
-        if (ordreKoscVo.nbrHeureDateSubmissionAndNow > 24 && ordreKoscVo.nbrHeureDateSubmissionAndNow <= 48 && (ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION WO' || ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION ERDV')){
-            return true;
-        }else {
-            return false;
-        }
+    set ordreKoscs(value: Array<OrdreKoscVo>) {
+        this.ordreKoscService.ordreKoscsSuiviCdd = value;
     }
-    isDateSubmisson24(ordreKoscVo : OrdreKoscVo){
-        if (ordreKoscVo.nbrHeureDateSubmissionAndNow <= 24 && (ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION WO' || ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION ERDV')){
-            return true;
-        }else {
-            return false;
-        }
+
+    get ordreKoscSelections(): Array<OrdreKoscVo> {
+        return this.ordreKoscService.ordreKoscSelections;
+    }
+
+    set ordreKoscSelections(value: Array<OrdreKoscVo>) {
+        this.ordreKoscService.ordreKoscSelections = value;
+    }
+
+    get selectedOrdreKosc(): OrdreKoscVo {
+        return this.ordreKoscService.selectedOrdreKosc;
+    }
+
+    set selectedOrdreKosc(value: OrdreKoscVo) {
+        this.ordreKoscService.selectedOrdreKosc = value;
+    }
+
+    get createOrdreKoscDialog(): boolean {
+        return this.ordreKoscService.createOrdreKoscDialog;
+    }
+
+    set createOrdreKoscDialog(value: boolean) {
+        this.ordreKoscService.createOrdreKoscDialog = value;
+    }
+
+    get editOrdreKoscDialog(): boolean {
+        return this.ordreKoscService.editOrdreKoscDialog;
+    }
+
+    set editOrdreKoscDialog(value: boolean) {
+        this.ordreKoscService.editOrdreKoscDialog = value;
+    }
+
+    get viewOrdreKoscDialog(): boolean {
+        return this.ordreKoscService.viewOrdreKoscDialog;
+    }
+
+    set viewOrdreKoscDialog(value: boolean) {
+        this.ordreKoscService.viewOrdreKoscDialog = value;
+    }
+
+    get searchOrdreKosc(): OrdreKoscVo {
+        return this.ordreKoscService.searchOrdreKoscSuiviCdd;
+    }
+
+    set searchOrdreKosc(value: OrdreKoscVo) {
+        this.ordreKoscService.searchOrdreKoscSuiviCdd = value;
+    }
+
+    get dateFormat() {
+        return environment.dateFormatList;
+    }
+
+    ngAfterViewInit(): void {
+        this.searchRequestSuiviCdd();
     }
 
     ngOnInit(): void {
-        this.defaultTemplateConfigurationService.findDefaultTemplateConfiguration().subscribe((data) =>
-            this.selectedDefaultTemplateConfiguration = data,
-        );
-
-
-
-        this.loadEtatDemandeKoscIncluding(['initialisation-wo', 'initialisation-erdv']);
-        // this.etatDemandeKoscService.loadEtatDemandeKoscExcept(['ko','ok'], this.searchOrdreKosc);
-
-
-        // this.loadOrdreKoscs();
+        this.loadEtatDemandeKoscIncluding(['ok', 'ko']);
         this.initExport();
-        this.initFilter();
         this.initCol();
         this.loadOperator();
         this.loadDepartement();
         this.loadTechnicien();
-
         this.loadTemplateEmailClientInjoinable();
         this.loadTemplateEmailClientInjoinableKosc();
         this.loadTemplateEmailPlanification();
         this.loadTemplateEmailReplanification();
         this.loadTemplateEmailReport();
-        // this.loadEtatDemandeKosc();
         this.loadTemplateEmailCloture();
         this.loadTemplateSuivi();
         this.yesOrNoEnvoiMailClient = [{label: 'EnvoiMailClient', value: null}, {label: 'Oui', value: 1}, {
@@ -247,76 +250,52 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
             label: 'Non',
             value: 0
         }];
-
-        this.searchRequestPriseRdv();
     }
 
     // methods
-    isEtatNotEmpty(ordreKoscVo : OrdreKoscVo){
-
-        if (ordreKoscVo.etatDemandeKoscVo !== null ){
-            return true;
-        }else {
-            return false;
-        }
-    }
     public async loadOrdreKoscs() {
         await this.roleService.findAll();
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
-        isPermistted ? this.ordreKoscService.findAll().subscribe(ordreKoscs => this.ordreKoscsPriseRdv = ordreKoscs, error => console.log(error))
+        isPermistted ? this.ordreKoscService.findAll().subscribe(ordreKoscs => this.ordreKoscs = ordreKoscs, error => console.log(error))
             : this.messageService.add({severity: 'error', summary: 'erreur', detail: 'problème d\'autorisation'});
     }
 
+    public searchRequest() {
+        this.ordreKoscService.findByCriteria(this.searchOrdreKosc).subscribe(ordreKoscs => {
 
-    public  searchRequestPriseRdv() {
-
-        this.ordreKoscService.findByCriteriaPriseRdv(this.searchOrdreKosc).subscribe(ordreKoscs =>  {
-            this.ordreKoscsPriseRdv = ordreKoscs;
+            this.ordreKoscs = ordreKoscs;
+            // this.searchOrdreKosc = new OrdreKoscVo();
         }, error => console.log(error));
-
-        return this.ordreKoscsPriseRdv;
     }
-
-
-
 
     public async editOrdreKosc(ordreKosc: OrdreKoscVo) {
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'edit');
         if (isPermistted) {
-             this.ordreKoscService.findByIdWithAssociatedList(ordreKosc).subscribe(res => {
+            this.ordreKoscService.findByIdWithAssociatedList(ordreKosc).subscribe(res => {
                 this.selectedOrdreKosc = res;
-                this.selectedOrdreKosc.dateDebutTraitement = DateUtils.toDate(ordreKosc.dateDebutTraitement);
-                this.selectedOrdreKosc.submissionDate = DateUtils.toDate(ordreKosc.submissionDate);
-                this.selectedOrdreKosc.datePremierAppel = DateUtils.toDate(ordreKosc.datePremierAppel);
-                this.selectedOrdreKosc.dateDeuxiemeAppel = DateUtils.toDate(ordreKosc.dateDeuxiemeAppel);
-                this.selectedOrdreKosc.dateTroisiemeAppel = DateUtils.toDate(ordreKosc.dateTroisiemeAppel);
-                this.selectedOrdreKosc.datePriseRdv = DateUtils.toDate(ordreKosc.datePriseRdv);
-                this.selectedOrdreKosc.dateRdv = DateUtils.toDate(ordreKosc.dateRdv);
-                this.selectedOrdreKosc.dateAppelReplanification = DateUtils.toDate(ordreKosc.dateAppelReplanification);
-                this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
-                this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
+                this.selectedOrdreKosc.dateDebutTraitement = new Date(ordreKosc.dateDebutTraitement);
+                this.selectedOrdreKosc.submissionDate = new Date(ordreKosc.submissionDate);
+                this.selectedOrdreKosc.datePremierAppel = new Date(ordreKosc.datePremierAppel);
+                this.selectedOrdreKosc.dateDeuxiemeAppel = new Date(ordreKosc.dateDeuxiemeAppel);
+                this.selectedOrdreKosc.dateTroisiemeAppel = new Date(ordreKosc.dateTroisiemeAppel);
+                this.selectedOrdreKosc.datePriseRdv = new Date(ordreKosc.datePriseRdv);
+                this.selectedOrdreKosc.dateRdv = new Date(ordreKosc.dateRdv);
+                this.selectedOrdreKosc.dateAppelReplanification = new Date(ordreKosc.dateAppelReplanification);
+                this.selectedOrdreKosc.dateInterventionTechniqueDebut = new Date(ordreKosc.dateInterventionTechniqueDebut);
+                this.selectedOrdreKosc.dateInterventionTechniqueFin = new Date(ordreKosc.dateInterventionTechniqueFin);
                 this.selectedOrdreKosc.dateOuverture = new Date(ordreKosc.dateOuverture);
                 this.selectedOrdreKosc.dateEnvoiCri = new Date(ordreKosc.dateEnvoiCri);
-                this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
-                this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
+                this.selectedOrdreKosc.dateInterventionTechniqueDebut = new Date(ordreKosc.dateInterventionTechniqueDebut);
+                this.selectedOrdreKosc.dateInterventionTechniqueFin = new Date(ordreKosc.dateInterventionTechniqueFin);
 
-                this.selectedOrdreKosc.dateEnvoiPlanification = DateUtils.toDate(ordreKosc.dateEnvoiPlanification);
-                this.selectedOrdreKosc.dateEnvoiReplanification = DateUtils.toDate(ordreKosc.dateEnvoiReplanification);
-                this.selectedOrdreKosc.dateEnvoiReport = DateUtils.toDate(ordreKosc.dateEnvoiReport);
-                this.selectedOrdreKosc.dateEnvoiCloture = DateUtils.toDate(ordreKosc.dateEnvoiCloture);
-                this.selectedOrdreKosc.dateEnvoiSuivi = DateUtils.toDate(ordreKosc.dateEnvoiSuivi);
-
-
+                this.selectedOrdreKosc.dateEnvoiPlanification = new Date(ordreKosc.dateEnvoiPlanification);
+                this.selectedOrdreKosc.dateEnvoiReplanification = new Date(ordreKosc.dateEnvoiReplanification);
+                this.selectedOrdreKosc.dateEnvoiReport = new Date(ordreKosc.dateEnvoiReport);
+                this.selectedOrdreKosc.dateEnvoiCloture = new Date(ordreKosc.dateEnvoiCloture);
+                this.selectedOrdreKosc.dateEnvoiSuivi = new Date(ordreKosc.dateEnvoiSuivi);
 
                 this.editOrdreKoscDialog = true;
-                 this.selectedOrdreKosc.fromPlanification  = this.selectedDefaultTemplateConfiguration.emailManeo;
-                 this.selectedOrdreKosc.toPlanification  = this.selectedOrdreKosc.endCustumorContactEmail;
-                 this.selectedOrdreKosc.objetPlanification = this.objetPlanificationDefault;
-                 this.selectedOrdreKosc.corpsPlanification = this.corpsPlanificationDefault;
-
             });
-
-
         } else {
             this.messageService.add({
                 severity: 'error', summary: 'Erreur', detail: 'Probléme de permission'
@@ -325,36 +304,31 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
 
     }
 
-
-    nbrHeureDateSubmissionAndNowSeverityStyle(ordreKosc: OrdreKoscVo) {
-        return  ordreKosc.nbrHeureDateSubmissionAndNow>=72?'danger': ordreKosc.nbrHeureDateSubmissionAndNow>=48? 'warning' : 'success';
-
-    }
-
     public async viewOrdreKosc(ordreKosc: OrdreKoscVo) {
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'view');
         if (isPermistted) {
             this.ordreKoscService.findByIdWithAssociatedList(ordreKosc).subscribe(res => {
                 this.selectedOrdreKosc = res;
-                this.selectedOrdreKosc.dateDebutTraitement = DateUtils.toDate(ordreKosc.dateDebutTraitement);
-                this.selectedOrdreKosc.submissionDate = DateUtils.toDate(ordreKosc.submissionDate);
-                this.selectedOrdreKosc.datePremierAppel = DateUtils.toDate(ordreKosc.datePremierAppel);
-                this.selectedOrdreKosc.dateDeuxiemeAppel = DateUtils.toDate(ordreKosc.dateDeuxiemeAppel);
-                this.selectedOrdreKosc.dateTroisiemeAppel = DateUtils.toDate(ordreKosc.dateTroisiemeAppel);
-                this.selectedOrdreKosc.datePriseRdv = DateUtils.toDate(ordreKosc.datePriseRdv);
-                this.selectedOrdreKosc.dateRdv = DateUtils.toDate(ordreKosc.dateRdv);
-                this.selectedOrdreKosc.dateAppelReplanification = DateUtils.toDate(ordreKosc.dateAppelReplanification);
-                this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
-                this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
-                this.selectedOrdreKosc.dateOuverture = DateUtils.toDate(ordreKosc.dateOuverture);
-                this.selectedOrdreKosc.dateEnvoiCri = DateUtils.toDate(ordreKosc.dateEnvoiCri);
-                this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
-                this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
-                this.selectedOrdreKosc.dateEnvoiPlanification = DateUtils.toDate(ordreKosc.dateEnvoiPlanification);
-                this.selectedOrdreKosc.dateEnvoiReplanification = DateUtils.toDate(ordreKosc.dateEnvoiReplanification);
-                this.selectedOrdreKosc.dateEnvoiReport = DateUtils.toDate(ordreKosc.dateEnvoiReport);
-                this.selectedOrdreKosc.dateEnvoiCloture = DateUtils.toDate(ordreKosc.dateEnvoiCloture);
-                this.selectedOrdreKosc.dateEnvoiSuivi = DateUtils.toDate(ordreKosc.dateEnvoiSuivi);
+                this.selectedOrdreKosc.dateDebutTraitement = new Date(ordreKosc.dateDebutTraitement);
+                this.selectedOrdreKosc.submissionDate = new Date(ordreKosc.submissionDate);
+                this.selectedOrdreKosc.datePremierAppel = new Date(ordreKosc.datePremierAppel);
+                this.selectedOrdreKosc.dateDeuxiemeAppel = new Date(ordreKosc.dateDeuxiemeAppel);
+                this.selectedOrdreKosc.dateTroisiemeAppel = new Date(ordreKosc.dateTroisiemeAppel);
+                this.selectedOrdreKosc.datePriseRdv = new Date(ordreKosc.datePriseRdv);
+                this.selectedOrdreKosc.dateRdv = new Date(ordreKosc.dateRdv);
+                this.selectedOrdreKosc.dateAppelReplanification = new Date(ordreKosc.dateAppelReplanification);
+                this.selectedOrdreKosc.dateInterventionTechniqueDebut = new Date(ordreKosc.dateInterventionTechniqueDebut);
+                this.selectedOrdreKosc.dateInterventionTechniqueFin = new Date(ordreKosc.dateInterventionTechniqueFin);
+                this.selectedOrdreKosc.dateOuverture = new Date(ordreKosc.dateOuverture);
+                this.selectedOrdreKosc.dateEnvoiCri = new Date(ordreKosc.dateEnvoiCri);
+                this.selectedOrdreKosc.dateInterventionTechniqueDebut = new Date(ordreKosc.dateInterventionTechniqueDebut);
+                this.selectedOrdreKosc.dateInterventionTechniqueFin = new Date(ordreKosc.dateInterventionTechniqueFin);
+                this.selectedOrdreKosc.dateEnvoiPlanification = new Date(ordreKosc.dateEnvoiPlanification);
+                this.selectedOrdreKosc.dateEnvoiReplanification = new Date(ordreKosc.dateEnvoiReplanification);
+                this.selectedOrdreKosc.dateEnvoiReport = new Date(ordreKosc.dateEnvoiReport);
+                this.selectedOrdreKosc.dateEnvoiCloture = new Date(ordreKosc.dateEnvoiCloture);
+                this.selectedOrdreKosc.dateEnvoiSuivi = new Date(ordreKosc.dateEnvoiSuivi);
+
                 this.viewOrdreKoscDialog = true;
             });
         } else {
@@ -388,8 +362,8 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
                 accept: () => {
                     this.ordreKoscService.delete(ordreKosc).subscribe(status => {
                         if (status > 0) {
-                            const position = this.ordreKoscsPriseRdv.indexOf(ordreKosc);
-                            position > -1 ? this.ordreKoscsPriseRdv.splice(position, 1) : false;
+                            const position = this.ordreKoscs.indexOf(ordreKosc);
+                            position > -1 ? this.ordreKoscs.splice(position, 1) : false;
                             this.messageService.add({
                                 severity: 'success',
                                 summary: 'Succès',
@@ -417,7 +391,6 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
     }
 
     // getters and setters
-
 
     public async loadDepartement() {
         await this.roleService.findAll();
@@ -482,17 +455,6 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
             : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
 
     }
-    public async loadEtatDemandeKoscIncluding(etatNonDesire : Array<String>) {
-        await this.roleService.findAll();
-        const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
-        isPermistted ? this.etatDemandeKoscService.findAll().subscribe(etatDemandeKoscs =>{
-                this.etatDemandeKoscs = etatDemandeKoscs;
-                this.searchOrdreKosc.etatDemandeKoscVos = this.etatDemandeKoscs.filter(e => etatNonDesire.indexOf(e.code) != -1);
-                // console.log( this.searchOrdreKosc.etatDemandeKoscVos);
-            }, error => console.log(error))
-            : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
-
-    }
 
     public async loadTemplateEmailCloture() {
         await this.roleService.findAll();
@@ -525,90 +487,36 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
 
     }
 
-
-
     initDuplicateOrdreKosc(res: OrdreKoscVo) {
 
 
     }
 
-    initFilter(): void {
-        this.dateButons = [
+    initExport(): void {
+        this.excelPdfButons = [
             {
-                label: '24h', icon: 'pi pi-check', command: () => {
-                    this.afficher24();
+                label: 'CSV', icon: 'pi pi-file', command: () => {
+                    this.prepareColumnExport();
+                    this.exportService.exporterCSV(this.criteriaData, this.exportData, this.fileName);
                 }
-            }, {
-                label: '48h', icon: 'pi pi-check', command: () => {
-                    this.afficher48();
+            },
+            {
+                label: 'XLS', icon: 'pi pi-file-excel', command: () => {
+                    this.prepareColumnExport();
+                    this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName);
                 }
-            }, {
-                label: '72h', icon: 'pi pi-check', command: () => {
-                    this.afficher72();
-
-                },
-            }, {
-                label: 'Tous', icon: 'pi pi-check', command: () => {
-                    this.afficherAll();
-
-                },
+            },
+            {
+                label: 'PDF', icon: 'pi pi-file-pdf', command: () => {
+                    this.prepareColumnExport();
+                    this.exportService.exporterPdf(this.criteriaData, this.exportData, this.fileName);
+                }
             }
         ];
     }
 
-private async exporter(){
-    this.prepareColumnExport();
-    this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName);
-}
-    initExport(): void {
-        this.excelPdfButons = [
-            // {
-            //     label: 'CSV', icon: 'pi pi-file', command: () => {
-            //         this.prepareColumnExport();
-            //         this.exportService.exporterCSV(this.criteriaData, this.exportData, this.fileName);
-            //     }
-            // },
-            {
-                label: 'Export Kizeo 24', icon: 'pi pi-file-excel', command: async () => {
-                    this.afficher24();
-                    this.searchRequestPriseRdv();
-                   // await this.exporter();
-                }
-            },
-            {
-                label: 'Export Kizeo 48', icon: 'pi pi-file-excel', command: () => {
-                    this.afficher48();
-                    this.searchRequestPriseRdv();
-                        console.log(this.ordreKoscsPriseRdv);
-                    //this.prepareColumnExport();
-                    //this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName) })
-
-
-                }
-            },
-            {
-                label: 'Export Kizeo 72', icon: 'pi pi-file-excel', command: () => {
-                    this.afficher72();
-                    this.searchRequestPriseRdv();
-                        console.log(this.ordreKoscsPriseRdv);
-                       // this.prepareColumnExport();
-                       // this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName) })
-
-
-                }
-            },
-
-            // {
-            //     label: 'PDF', icon: 'pi pi-file-pdf', command: () => {
-            //         this.prepareColumnExport();
-            //         this.exportService.exporterPdf(this.criteriaData, this.exportData, this.fileName);
-            //     }
-            // }
-        ];
-    }
-
     prepareColumnExport(): void {
-        this.exportData = this.ordreKoscsPriseRdv.map(e => {
+        this.exportData = this.ordreKoscs.map(e => {
             return {
                 'Reference': e.reference,
                 'Reference work order': e.referenceWorkOrder,
@@ -638,8 +546,6 @@ private async exporter(){
                 'Date premier appel': this.datePipe.transform(e.datePremierAppel, 'dd/MM/yyyy hh:mm'),
                 'Date deuxieme appel': this.datePipe.transform(e.dateDeuxiemeAppel, 'dd/MM/yyyy hh:mm'),
                 'Date troisieme appel': this.datePipe.transform(e.dateTroisiemeAppel, 'dd/MM/yyyy hh:mm'),
-                'Date dernier appel': this.datePipe.transform(e.dateDernierAppel, 'dd/MM/yyyy hh:mm'),
-                'Numero dernier appel': e.numeroDernierAppel,
                 'Date prise rdv': this.datePipe.transform(e.datePriseRdv, 'dd/MM/yyyy hh:mm'),
                 'Date rdv': this.datePipe.transform(e.dateRdv, 'dd/MM/yyyy hh:mm'),
                 'Date appel replanification': this.datePipe.transform(e.dateAppelReplanification, 'dd/MM/yyyy hh:mm'),
@@ -1092,6 +998,7 @@ private async exporter(){
             {field: 'dateEnvoiSuivi', header: 'Date envoi suivi'},
         ];
     }
+
     stylefyConfort(ordreKosc: OrdreKoscVo): string {
         return ordreKosc.confort?'color:red;':'color:black;';
 
@@ -1112,74 +1019,12 @@ private async exporter(){
         }
     }
 
+    isEtatNotEmpty(ordreKoscVo : OrdreKoscVo){
 
-    get ordreKoscsPriseRdv(): Array<OrdreKoscVo> {
-        return this.ordreKoscService.ordreKoscsPriseRdv;
+        if (ordreKoscVo.etatDemandeKoscVo != null ){
+            return true;
+        }else {
+            return false;
+        }
     }
-
-    set ordreKoscsPriseRdv(value: Array<OrdreKoscVo>) {
-        this.ordreKoscService.ordreKoscsPriseRdv = value;
-    }
-
-    get ordreKoscSelections(): Array<OrdreKoscVo> {
-        return this.ordreKoscService.ordreKoscSelections;
-    }
-
-    set ordreKoscSelections(value: Array<OrdreKoscVo>) {
-        this.ordreKoscService.ordreKoscSelections = value;
-    }
-
-    get selectedOrdreKosc(): OrdreKoscVo {
-        return this.ordreKoscService.selectedOrdreKosc;
-    }
-
-    set selectedOrdreKosc(value: OrdreKoscVo) {
-        this.ordreKoscService.selectedOrdreKosc = value;
-    }
-
-    get createOrdreKoscDialog(): boolean {
-        return this.ordreKoscService.createOrdreKoscDialog;
-    }
-
-    set createOrdreKoscDialog(value: boolean) {
-        this.ordreKoscService.createOrdreKoscDialog = value;
-    }
-
-    get editOrdreKoscDialog(): boolean {
-        return this.ordreKoscService.editOrdreKoscDialog;
-    }
-
-    set editOrdreKoscDialog(value: boolean) {
-        this.ordreKoscService.editOrdreKoscDialog = value;
-    }
-
-    get viewOrdreKoscDialog(): boolean {
-        return this.ordreKoscService.viewOrdreKoscDialog;
-    }
-
-    set viewOrdreKoscDialog(value: boolean) {
-        this.ordreKoscService.viewOrdreKoscDialog = value;
-    }
-
-    get searchOrdreKosc(): OrdreKoscVo {
-        return this.ordreKoscService.searchOrdreKosc;
-    }
-
-    set searchOrdreKosc(value: OrdreKoscVo) {
-        this.ordreKoscService.searchOrdreKosc = value;
-    }
-
-    get dateFormat() {
-        return environment.dateFormatList;
-    }
-    get selectedDefaultTemplateConfiguration(): DefaultTemplateConfigurationVo {
-
-        return this.defaultTemplateConfigurationService.selectedDefaultTemplateConfiguration;
-    }
-
-    set selectedDefaultTemplateConfiguration(value: DefaultTemplateConfigurationVo) {
-        this.defaultTemplateConfigurationService.selectedDefaultTemplateConfiguration = value;
-    }
-
-
 }

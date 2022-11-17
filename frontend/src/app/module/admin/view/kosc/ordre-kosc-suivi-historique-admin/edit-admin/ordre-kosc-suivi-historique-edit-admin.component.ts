@@ -208,6 +208,15 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
 
 // getters and setters
 
+    get searchOrdreKosc(): OrdreKoscVo {
+        return this.ordreKoscService.searchOrdreKoscSuiviCdd;
+    }
+
+    set searchordreKosc(value: OrdreKoscVo) {
+        this.ordreKoscService.searchOrdreKoscSuiviCdd = value;
+    }
+
+
     get validTemplateEmailPlanificationLibelle(): boolean {
         return this._validTemplateEmailPlanificationLibelle;
     }
@@ -317,7 +326,7 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
     }
 
     get ordreKoscs(): Array<OrdreKoscVo> {
-        return this.ordreKoscService.ordreKoscs;
+        return this.ordreKoscService.ordreKoscsSuiviCdd;
     }
 
     set ordreKoscs(value: Array<OrdreKoscVo>) {
@@ -659,10 +668,11 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
         this.ordreKoscService.edit().subscribe(ordreKosc => {
             const myIndex = this.ordreKoscs.findIndex(e => e.id === this.selectedOrdreKosc.id);
             this.ordreKoscs[myIndex] = ordreKosc;
+            this.ordreKoscService.deleteIfEtatNotIn(this.searchOrdreKosc.etatDemandeKoscVos, this.ordreKoscs, ordreKosc);
+            this.updateListe();
             this.editOrdreKoscDialog = false;
             this.submitted = false;
             this.selectedOrdreKosc = new OrdreKoscVo();
-
 
         }, error => {
             console.log(error);
@@ -818,7 +828,10 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
         this.validateOrdreKoscReferenceWorkOrder();
 
     }
-
+    private updateListe(){
+        this.ordreKoscs=this.ordreKoscs.filter(e => e.codeDecharge != null);
+        console.log("after update :"+ this.ordreKoscs);
+    }
     private validateOrdreKoscReferenceWorkOrder() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.referenceWorkOrder)) {
             this.errorMessages.push('Reference work order non valide');

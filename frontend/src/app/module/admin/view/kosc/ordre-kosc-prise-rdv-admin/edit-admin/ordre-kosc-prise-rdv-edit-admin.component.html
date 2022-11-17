@@ -4,10 +4,7 @@
 
 
     <ng-template pTemplate="content">
-
-
-        <p-tabView>
-
+        <p-tabView [(activeIndex)]="indexEdit">
             <p-tabPanel header="Prise rendez-vous">
                 <div class="p-grid">
 
@@ -42,19 +39,19 @@
 
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="31">Date dernier appel</label>
+                        <label for="50">Date dernier appel</label>
                         <p-calendar [(ngModel)]="selectedOrdreKosc.dateDernierAppel" [showSeconds]="false"
                                     [showTime]="true"
                                     dateFormat="{{dateFormat}}"
-                                    id="31"
+                                    id="50"
                                     placeholder="Date dernier appel">
                         </p-calendar>
 
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="127">Numero dernier appel</label>
+                        <label for="62">Numero dernier appel</label>
                         <input [(ngModel)]="selectedOrdreKosc.numeroDernierAppel" [disabled]="false"
-                               class="p-mb-2 p-mr-2" id="127"
+                               class="p-mb-2 p-mr-2" id="61"
                                pInputText
                                placeholder="Numero dernier appel" type="text"
                         />
@@ -69,30 +66,33 @@
 
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="30">Date rdv</label>
-                        <p-calendar  dateFormat="{{dateFormat}}" [(ngModel)]="selectedOrdreKosc.dateRdv" [showSeconds]="false" [showTime]="true"
+                        <label for="30">Date rdv<span style="color: red;">*</span></label>
+                        <p-calendar dateFormat="{{dateFormat}}" [(ngModel)]="selectedOrdreKosc.dateRdv"
+                                    [showSeconds]="false" [showTime]="true"
                                     id="30"
                                     placeholder="Date rdv">
                         </p-calendar>
+                        <small *ngIf='!validDateRdv' class='p-error'>Libelle est
+                            obligatoire.</small>
 
                     </div>
 
                     <div class="p-field p-col-11 p-md-3">
-                        <label for="144">Etat demande kosc</label>
+                        <label for="51">Etat demande kosc</label>
                         <p-dropdown [(ngModel)]="selectedOrdreKosc.etatDemandeKoscVo"
                                     [filter]="true"
                                     [options]="etatDemandeKoscs" [showClear]="true" filterMatchMode="contains"
-                                    id="144"
+                                    id="51"
                                     optionLabel="libelle"
                                     placeholder="Etat demande kosc">
                         </p-dropdown>
                     </div>
 
                     <div class="p-field p-col-11 p-md-3">
-                        <label for="98">Departement</label>
+                        <label for="32">Departement</label>
                         <p-dropdown [(ngModel)]="selectedOrdreKosc.departementVo" [filter]="true"
                                     [options]="departements" [showClear]="true" filterMatchMode="contains"
-                                    id="98"
+                                    id="32"
                                     optionLabel="libelle"
                                     placeholder="Departement">
                         </p-dropdown>
@@ -101,11 +101,11 @@
 
 
                     <div class="p-field p-col-11 p-md-3">
-                        <label for="99">Technicien</label>
+                        <label for="33">Technicien</label>
                         <p-dropdown [(ngModel)]="selectedOrdreKosc.technicienVo" [filter]="true"
                                     (onClick)="findAppropriateTechnicien(selectedOrdreKosc.dateRdv,selectedOrdreKosc.departementVo?.code)"
                                     [options]="appropriateTechniciens" [showClear]="true" filterMatchMode="contains"
-                                    id="99"
+                                    id="33"
                                     optionLabel="identifiant"
                                     placeholder="Technicien">
                         </p-dropdown>
@@ -114,8 +114,8 @@
 
 
                     <div class="p-field p-col-12 p-md-6">
-                        <label for="142">Commentaire client</label>
-                        <textarea [(ngModel)]="selectedOrdreKosc.commentaireClient" cols="30" id="142" pInputTextarea
+                        <label for="34">Commentaire client</label>
+                        <textarea [(ngModel)]="selectedOrdreKosc.commentaireClient" cols="30" id="34" pInputTextarea
                                   placeholder="Commentaire client"
                                   rows="10"
                         ></textarea>
@@ -123,8 +123,8 @@
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
-                        <label for="141">Commentaire technicien</label>
-                        <textarea [(ngModel)]="selectedOrdreKosc.commentaireTechnicien" cols="30" id="141"
+                        <label for="35">Commentaire technicien</label>
+                        <textarea [(ngModel)]="selectedOrdreKosc.commentaireTechnicien" cols="30" id="35"
                                   pInputTextarea
                                   placeholder="Commentaire technicien"
                                   rows="10"
@@ -132,10 +132,10 @@
 
                     </div>
                     <div class="p-field p-col-12 p-md-6">
-                        <label for="123">From<span style="color: red;"></span></label>
+                        <label for="36">From<span style="color: red;"></span></label>
                         <input [(ngModel)]="selectedOrdreKosc.fromPlanification"
                                class="p-mb-2 p-mr-2"
-                               id="123"
+                               id="36"
                                pInputText placeholder="From"
                                type="text"/>
                         <!--                                <small *ngIf='!validOrdreKoscFromPlanification' class='p-error'>From est-->
@@ -144,28 +144,28 @@
 
 
                     <div class="p-field p-col-12 p-md-6">
-                        <label for="124">To<span style="color: red;"></span></label>
+                        <label for="37">To<span style="color: red;"></span></label>
                         <input [(ngModel)]="selectedOrdreKosc.toPlanification"
                                class="p-mb-2 p-mr-2"
-                               id="124"
+                               id="37"
                                pInputText placeholder="To"
                                type="text"/>
                         <!--                                <small *ngIf='!validOrdreKoscToPlanification' class='p-error'>To est-->
                         <!--                                    obligatoire.</small>-->
                     </div>
 
-                        <div class="p-field p-col-12 p-md-6">
-                            <label for="127">Objet</label>
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="38">Objet</label>
 
-                        <input [(ngModel)]="selectedOrdreKosc.objetPlanification" class="p-mb-2 p-mr-2" id="127"
+                        <input [(ngModel)]="selectedOrdreKosc.objetPlanification" class="p-mb-2 p-mr-2" id="38"
                                pInputText
                                placeholder="Objet" type="text"
                         />
 
                     </div>
                     <div class="p-field p-col-12 p-md-6">
-                        <label for="128">Corps</label>
-                        <textarea [(ngModel)]="selectedOrdreKosc.corpsPlanification" cols="30" id="128" pInputTextarea
+                        <label for="52">Corps</label>
+                        <textarea [(ngModel)]="selectedOrdreKosc.corpsPlanification" cols="30" id="52" pInputTextarea
                                   placeholder="Corps"
                                   rows="10"
                         ></textarea>
@@ -217,12 +217,271 @@
                     </div>
 
                     <div class="p-field p-col-11 p-md-3">
-                        <label for="98">Departement</label>
+                        <label for="10">Departement</label>
                         <p-dropdown [(ngModel)]="selectedOrdreKosc.departementVo" [filter]="true"
                                     [options]="departements" [showClear]="true" filterMatchMode="contains"
-                                    id="98"
+                                    id="10"
                                     optionLabel="libelle"
                                     placeholder="Departement">
+                        </p-dropdown>
+
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="53">street name</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorStreetName" class="p-mb-2 p-mr-2" id="53"
+                               pInputText
+                               placeholder="street name" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="54">street number</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorStreetNumber" class="p-mb-2 p-mr-2" id="54"
+                               pInputText
+                               placeholder="street number" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="55">city</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorCity" class="p-mb-2 p-mr-2" id="55"
+                               pInputText
+                               placeholder="city" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="56">building</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorBuilding" class="p-mb-2 p-mr-2" id="56"
+                               pInputText
+                               placeholder="building" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="57">stairs</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorStairs" class="p-mb-2 p-mr-2" id="57"
+                               pInputText
+                               placeholder="stairs" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="58">floor</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorFloor" class="p-mb-2 p-mr-2" id="58"
+                               pInputText
+                               placeholder="floor" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="17">contact first name</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorContactFirstName" class="p-mb-2 p-mr-2" id="17"
+                               pInputText
+                               placeholder="contact first name" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="18">contact last name</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorContactLastName" class="p-mb-2 p-mr-2" id="18"
+                               pInputText
+                               placeholder="contact last name" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="19">contact phone</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorContactPhone" class="p-mb-2 p-mr-2" id="19"
+                               pInputText
+                               placeholder="contact phone" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="20">contact cell phone</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorContactCellPhone" class="p-mb-2 p-mr-2" id="20"
+                               pInputText
+                               placeholder="contact cell phone" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="21">contact email</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorContactEmail" class="p-mb-2 p-mr-2" id="21"
+                               pInputText
+                               placeholder="contact email" type="text"
+                        />
+
+                    </div>
+
+
+                </div>
+            </p-tabPanel>
+
+            <p-tabPanel header="Information">
+                <div class="p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="1">Reference</label>
+                        <input [(ngModel)]="selectedOrdreKosc.reference" class="p-mb-2 p-mr-2" id="1"
+                               pInputText
+                               placeholder="Reference" type="text"/>
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="2">Reference work order</label>
+                        <input [(ngModel)]="selectedOrdreKosc.referenceWorkOrder"
+                               class="p-mb-2 p-mr-2" id="2"
+                               pInputText placeholder="Reference work order"
+                               type="text"/>
+                        <small *ngIf='!validOrdreKoscReferenceWorkOrder' class='p-error'>ReferenceWorkOrder est
+                            obligatoire.</small>
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="25">Submission date</label>
+                        <p-calendar [(ngModel)]="selectedOrdreKosc.submissionDate" [disabled]="true"
+                                    [showSeconds]="false" [showTime]="true"
+                                    dateFormat="{{dateFormat}}" id="25"
+                                    placeholder="Submission date">
+                        </p-calendar>
+
+                    </div>
+
+                    <div class="p-field p-col-11 p-md-3">
+                        <label for="62">Etat demande kosc</label>
+                        <p-dropdown [(ngModel)]="selectedOrdreKosc.etatDemandeKoscVo"
+                                    [filter]="true"
+                                    [options]="etatDemandeKoscs" [showClear]="true" filterMatchMode="contains"
+                                    id="62"
+                                    optionLabel="libelle"
+                                    placeholder="Etat demande kosc">
+                        </p-dropdown>
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="40">Date premier appel</label>
+                        <p-calendar [(ngModel)]="selectedOrdreKosc.datePremierAppel" [showSeconds]="false"
+                                    [showTime]="true"
+                                    dateFormat="{{dateFormat}}"
+                                    id="40"
+                                    placeholder="Date premier appel">
+                        </p-calendar>
+
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="41">Date deuxieme appel</label>
+                        <p-calendar [(ngModel)]="selectedOrdreKosc.dateDeuxiemeAppel" [showSeconds]="false"
+                                    [showTime]="true"
+                                    dateFormat="{{dateFormat}}"
+                                    id="41"
+                                    placeholder="Date deuxieme appel">
+                        </p-calendar>
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="42">Date troisieme appel</label>
+                        <p-calendar [(ngModel)]="selectedOrdreKosc.dateTroisiemeAppel" [showSeconds]="false"
+                                    [showTime]="true"
+                                    dateFormat="{{dateFormat}}"
+                                    id="42"
+                                    placeholder="Date troisieme appel">
+                        </p-calendar>
+
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="43">Date prise rdv</label>
+                        <p-calendar [(ngModel)]="selectedOrdreKosc.datePriseRdv" [showSeconds]="false" [showTime]="true"
+                                    dateFormat="{{dateFormat}}" id="43"
+                                    placeholder="Date prise rdv">
+                        </p-calendar>
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="44">Date rdv</label>
+                        <p-calendar [(ngModel)]="selectedOrdreKosc.dateRdv" [showSeconds]="false" [showTime]="true"
+                                    dateFormat="{{dateFormat}}" id="44"
+                                    placeholder="Date rdv">
+                        </p-calendar>
+
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="45">Date appel replanification</label>
+                        <p-calendar [(ngModel)]="selectedOrdreKosc.dateAppelReplanification" [showSeconds]="false"
+                                    [showTime]="true"
+                                    dateFormat="{{dateFormat}}"
+                                    id="45"
+                                    placeholder="Date appel replanification">
+                        </p-calendar>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="46">Type racordement</label>
+                        <input [(ngModel)]="selectedOrdreKosc.typeRacordementPboPto" [disabled]="true"
+                               class="p-mb-2 p-mr-2" id="46"
+                               pInputText
+                               placeholder="Type racordement" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-11 p-md-3">
+                        <label for="47">Operator</label>
+                        <p-dropdown [(ngModel)]="selectedOrdreKosc.operatorVo" [disabled]="true"
+                                    [filter]="true" [options]="operators" [showClear]="true"
+                                    filterMatchMode="contains" id="47"
+                                    optionLabel="libelle"
+                                    placeholder="Operator">
+                        </p-dropdown>
+
+                    </div>
+
+                    <div class="p-field p-col-11 p-md-3">
+                        <label for="98">Departement</label>
+                        <p-dropdown [(ngModel)]="selectedOrdreKosc.departementVo" [disabled]="false"
+                                    [filter]="true" [options]="departements" [showClear]="true"
+                                    filterMatchMode="contains" id="98"
+                                    optionLabel="libelle"
+                                    placeholder="Departement">
+                        </p-dropdown>
+                    </div>
+
+                    <div class="p-field p-col-11 p-md-3">
+                        <label for="99">Technicien</label>
+                        <p-dropdown [(ngModel)]="selectedOrdreKosc.technicienVo" [filter]="true"
+                                    [options]="techniciens" [showClear]="true" filterMatchMode="contains"
+                                    id="99"
+                                    optionLabel="identifiant"
+                                    placeholder="Technicien">
+                        </p-dropdown>
+
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="143">Commentaire Kosc</label>
+                        <textarea [(ngModel)]="selectedOrdreKosc.comment" cols="30" id="143" pInputTextarea
+                                  placeholder="Commentaire Kosc (add it to yaml)"
+                                  rows="5"
+                        ></textarea>
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="142">Commentaire client</label>
+                        <textarea [(ngModel)]="selectedOrdreKosc.commentaireClient" cols="30" id="142" pInputTextarea
+                                  placeholder="Commentaire client"
+                                  rows="5"
+                        ></textarea>
+
+                    </div>
+                    <div class="p-field p-col-11 p-md-2">
+                        <label for="201">Cause ko ok</label>
+                        <p-dropdown [(ngModel)]="selectedOrdreKosc.causeKoOkVo" [filter]="true"
+                                    [options]="causeKoOks" [showClear]="true" filterMatchMode="contains"
+                                    id="201"
+                                    optionLabel="libelle"
+                                    placeholder="Cause ko ok">
                         </p-dropdown>
 
                     </div>
@@ -274,52 +533,590 @@
                                pInputText
                                placeholder="floor" type="text"
                         />
-
                     </div>
+
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="17">contact first name</label>
-                        <input [(ngModel)]="selectedOrdreKosc.endCustumorContactFirstName" class="p-mb-2 p-mr-2" id="17"
-                               pInputText
-                               placeholder="contact first name" type="text"
-                        />
+                        <label for="114">Date intervention technique debut</label>
+                        <p-calendar id="114" [showTime]="true" [showSeconds]="false"
+                                    placeholder="Date intervention technique debut"
+                                    [(ngModel)]="selectedOrdreKosc.dateInterventionTechniqueDebut"
+                                    dateFormat="{{dateFormat}}">
+                        </p-calendar>
 
                     </div>
-                    <div class="p-field p-col-12 p-md-3">
-                        <label for="18">contact last name</label>
-                        <input [(ngModel)]="selectedOrdreKosc.endCustumorContactLastName" class="p-mb-2 p-mr-2" id="18"
-                               pInputText
-                               placeholder="contact last name" type="text"
-                        />
+                    <div class="p-field align-inputswitch p-col-12  p-md-3">
+                        <div class="label-inputswitch">
+                            <label for="59">Erdv</label>
+                        </div>
+                        <div class="input-switch">
+                            <p-inputSwitch [(ngModel)]="selectedOrdreKosc.erdv" id="59"
+                            >
+                            </p-inputSwitch>
 
+                        </div>
                     </div>
-                    <div class="p-field p-col-12 p-md-3">
-                        <label for="19">contact phone</label>
-                        <input [(ngModel)]="selectedOrdreKosc.endCustumorContactPhone" class="p-mb-2 p-mr-2" id="19"
-                               pInputText
-                               placeholder="contact phone" type="text"
-                        />
+                    <div class="p-field align-inputswitch p-col-12  p-md-3">
+                        <div class="label-inputswitch">
+                            <label for="60">Confort</label>
+                        </div>
+                        <div class="input-switch">
+                            <p-inputSwitch [(ngModel)]="selectedOrdreKosc.confort" id="60"
+                            >
+                            </p-inputSwitch>
 
+                        </div>
                     </div>
-                    <div class="p-field p-col-12 p-md-3">
-                        <label for="20">contact cell phone</label>
-                        <input [(ngModel)]="selectedOrdreKosc.endCustumorContactCellPhone" class="p-mb-2 p-mr-2" id="20"
-                               pInputText
-                               placeholder="contact cell phone" type="text"
-                        />
-
-                    </div>
-                    <div class="p-field p-col-12 p-md-3">
-                        <label for="21">contact email</label>
-                        <input [(ngModel)]="selectedOrdreKosc.endCustumorContactEmail" class="p-mb-2 p-mr-2" id="21"
-                               pInputText
-                               placeholder="contact email" type="text"
-                        />
-
-                    </div>
-
-
                 </div>
             </p-tabPanel>
+            <p-tabPanel header="Emailing">
+                <p-blockUI [blocked]="blocked"></p-blockUI>
+
+
+                <p-tabView [(activeIndex)]="emailIndex">
+
+                    <p-tabPanel header="Confirmation client">
+
+                        <div class="p-grid">
+
+                            <div class="p-field p-col-12 p-md-6">
+                                <label for="153">From<span style="color: red;">*</span></label>
+                                <input [(ngModel)]="selectedOrdreKosc.fromConfirmationClient"
+                                       [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromConfirmationClient}"
+                                       class="p-mb-2 p-mr-2"
+                                       id="153"
+                                       pInputText placeholder="From"
+                                       type="text"/>
+                                <small *ngIf='!validOrdreKoscFromConfirmationClient' class='p-error'>From est
+                                    obligatoire.</small>
+                            </div>
+
+
+                            <div class="p-field p-col-12 p-md-6">
+                                <label for="154">To<span style="color: red;">*</span></label>
+                                <input [(ngModel)]="selectedOrdreKosc.toConfirmationClient"
+                                       [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToConfirmationClient}"
+                                       class="p-mb-2 p-mr-2"
+                                       id="154"
+                                       pInputText placeholder="To"
+                                       type="text"/>
+                                <small *ngIf='!validOrdreKoscToConfirmationClient' class='p-error'>To est
+                                    obligatoire.</small>
+                            </div>
+                            <div class="p-field p-col-12 p-md-6">
+                                <label for="151">Objet<span style="color: red;">*</span></label>
+                                <input [(ngModel)]="selectedOrdreKosc.objetConfirmationClient"
+                                       [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscObjetConfirmationClient}"
+                                       class="p-mb-2 p-mr-2"
+                                       id="151"
+                                       pInputText placeholder="Objet"
+                                       type="text"/>
+                                <small *ngIf='!validOrdreKoscObjetConfirmationClient' class='p-error'>Objet est
+                                    obligatoire.</small>
+                            </div>
+
+
+                            <div class="p-field p-col-12 p-md-6">
+                                <label for="152">Corps<span style="color: red;">*</span></label>
+                                <textarea [(ngModel)]="selectedOrdreKosc.corpsConfirmationClient"
+                                          [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscCorpsConfirmationClient}"
+                                          cols="30" id="152"
+                                          pInputTextarea
+                                          placeholder="Corps"
+                                          rows="5"></textarea>
+                                <small *ngIf='!validOrdreKoscCorpsConfirmationClient' class='p-error'>Corps est
+                                    obligatoire.</small>
+                            </div>
+                            <div class="p-field p-col-12 p-md-4">
+                                <button (click)="sendConfirmationEmailToClient()" class="p-button-help"
+                                        icon="pi pi-send" label="Envoyer" pButton
+                                        type="button"></button>
+                            </div>
+                            <div class="p-field p-col-12 p-md-4">
+                                <p-progressSpinner *ngIf="showSpinner" [style]="{width: '50px', height: '50px'}"
+                                                   styleClass="custom-spinner" strokeWidth="8" fill="#EEEEEE"
+                                                   animationDuration=".5s"></p-progressSpinner>
+
+
+                            </div>
+
+
+                        </div>
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Mail Planification">
+
+                        <div class="p-grid">
+                            <div class="p-field p-col-12 p-md-6">
+                                <label for="123">From<span style="color: red;">*</span></label>
+                                <input [(ngModel)]="selectedOrdreKosc.fromPlanification"
+                                       [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromPlanification}"
+                                       class="p-mb-2 p-mr-2"
+                                       id="123"
+                                       pInputText placeholder="From"
+                                       type="text"/>
+                                <!--                                <small *ngIf='!validOrdreKoscFromPlanification' class='p-error'>From est-->
+                                <!--                                    obligatoire.</small>-->
+                            </div>
+
+
+                            <div class="p-field p-col-12 p-md-6">
+                                <label for="124">To<span style="color: red;"></span></label>
+                                <input [(ngModel)]="selectedOrdreKosc.toPlanification"
+                                       [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToPlanification}"
+                                       class="p-mb-2 p-mr-2"
+                                       id="124"
+                                       pInputText placeholder="To"
+                                       type="text"/>
+                                <!--                                <small *ngIf='!validOrdreKoscToPlanification' class='p-error'>To est-->
+                                <!--                                    obligatoire.</small>-->
+                            </div>
+
+                            <div class="p-field p-col-12 p-md-6">
+                                <label for="127">Objet</label>
+                                <input [(ngModel)]="selectedOrdreKosc.objetPlanification" class="p-mb-2 p-mr-2" id="127"
+                                       pInputText
+                                       placeholder="Objet" type="text"
+                                />
+
+                            </div>
+                            <div class="p-field p-col-12 p-md-6">
+                                <label for="128">Corps</label>
+                                <textarea [(ngModel)]="selectedOrdreKosc.corpsPlanification" cols="30" id="128"
+                                          pInputTextarea
+                                          placeholder="Corps"
+                                          rows="10"
+                                ></textarea>
+
+                            </div>
+                            <div class="p-field p-col-12 p-md-4">
+                                <button (click)="sendMailPlanificationEmail()" class="p-button-help" icon="pi pi-send"
+                                        label="Envoyer" pButton
+                                        type="button"></button>
+
+                            </div>
+                            <div class="p-field p-col-12 p-md-4">
+                                <p-progressSpinner *ngIf="showSpinner" [style]="{width: '50px', height: '50px'}"
+                                                   styleClass="custom-spinner" strokeWidth="8" fill="#EEEEEE"
+                                                   animationDuration=".5s"></p-progressSpinner>
+
+                            </div>
+                        </div>
+
+                    </p-tabPanel>
+
+
+                    <p-tabPanel header="Mail Replanification">
+                        <div class="p-grid">
+                            <p-tabView>
+                                <p-tabPanel header="Report">
+                                    <div class="p-grid">
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="129">From<span style="color: red;"></span></label>
+                                            <input [(ngModel)]="selectedOrdreKosc.fromReport"
+                                                   [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromReport}"
+                                                   class="p-mb-2 p-mr-2"
+                                                   id="129"
+                                                   pInputText placeholder="From"
+                                                   type="text"/>
+                                            <small *ngIf='!validOrdreKoscFromReport' class='p-error'>From est
+                                                obligatoire.</small>
+                                        </div>
+
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="130">To<span style="color: red;"></span></label>
+                                            <input [(ngModel)]="selectedOrdreKosc.toReport"
+                                                   [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToReport}"
+                                                   class="p-mb-2 p-mr-2"
+                                                   id="130"
+                                                   pInputText placeholder="To"
+                                                   type="text"/>
+                                            <small *ngIf='!validOrdreKoscToReport' class='p-error'>To est
+                                                obligatoire.</small>
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="137">Objet</label>
+                                            <input [(ngModel)]="selectedOrdreKosc.objetReport" class="p-mb-2 p-mr-2"
+                                                   id="137"
+                                                   pInputText
+                                                   placeholder="Objet report" type="text"
+                                            />
+
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="63">Corps report</label>
+                                            <textarea [(ngModel)]="selectedOrdreKosc.corpsReport" cols="30" id="63"
+                                                      pInputTextarea
+                                                      placeholder="Corps report"
+                                                      rows="6"
+                                            ></textarea>
+
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <button (click)="sendMailReplanificationReport()" class="p-button-help"
+                                                    icon="pi pi-send" label="Envoyer"
+                                                    pButton
+                                                    type="button"></button>
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <p-progressSpinner *ngIf="showSpinner"
+                                                               [style]="{width: '50px', height: '50px'}"
+                                                               styleClass="custom-spinner" strokeWidth="8"
+                                                               fill="#EEEEEE"
+                                                               animationDuration=".5s"></p-progressSpinner>
+
+
+                                        </div>
+                                    </div>
+                                </p-tabPanel>
+                                <p-tabPanel header="Replanification">
+                                    <div class="p-grid">
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="65">From<span style="color: red;"></span></label>
+                                            <input [(ngModel)]="selectedOrdreKosc.fromReplanification"
+                                                   [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromReplanification}"
+                                                   class="p-mb-2 p-mr-2"
+                                                   id="65"
+                                                   pInputText placeholder="From"
+                                                   type="text"/>
+                                            <small *ngIf='!validOrdreKoscFromReplanification' class='p-error'>From est
+                                                obligatoire.</small>
+                                        </div>
+
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="64">To<span style="color: red;"></span></label>
+                                            <input [(ngModel)]="selectedOrdreKosc.toReplanification"
+                                                   [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToReplanification}"
+                                                   class="p-mb-2 p-mr-2"
+                                                   id="64"
+                                                   pInputText placeholder="To"
+                                                   type="text"/>
+                                            <small *ngIf='!validOrdreKoscToReplanification' class='p-error'>To est
+                                                obligatoire.</small>
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="132">Objet</label>
+                                            <input [(ngModel)]="selectedOrdreKosc.objetReplanification"
+                                                   class="p-mb-2 p-mr-2" id="132"
+                                                   pInputText
+                                                   placeholder="Objet replanification" type="text"
+                                            />
+
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="133">Corps</label>
+                                            <textarea [(ngModel)]="selectedOrdreKosc.corpsReplanification" cols="30"
+                                                      id="133" pInputTextarea
+                                                      placeholder="Corps replanification"
+                                                      rows="6"
+                                            ></textarea>
+
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <button (click)="sendMailReplanification()" class="p-button-help"
+                                                    icon="pi pi-send" label="Envoyer"
+                                                    pButton
+                                                    type="button"></button>
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <p-progressSpinner *ngIf="showSpinner"
+                                                               [style]="{width: '50px', height: '50px'}"
+                                                               styleClass="custom-spinner" strokeWidth="8"
+                                                               fill="#EEEEEE"
+                                                               animationDuration=".5s"></p-progressSpinner>
+
+
+                                        </div>
+                                    </div>
+                                </p-tabPanel>
+                            </p-tabView>
+                        </div>
+
+
+                    </p-tabPanel>
+                    <p-tabPanel header="Client injoinable">
+
+                        <div class="p-grid">
+                            <p-tabView>
+                                <p-tabPanel header="Client">
+                                    <div class="p-grid">
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="176">From<span style="color: red;">*</span></label>
+                                            <input [(ngModel)]="selectedOrdreKosc.fromClientInjoinable"
+                                                   [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromClientInjoinable}"
+                                                   class="p-mb-2 p-mr-2"
+                                                   id="176"
+                                                   pInputText placeholder="From"
+                                                   type="text"/>
+                                            <small *ngIf='!validOrdreKoscFromClientInjoinable' class='p-error'>From est
+                                                obligatoire.</small>
+                                        </div>
+
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="177">To<span style="color: red;">*</span></label>
+                                            <input [(ngModel)]="selectedOrdreKosc.toClientInjoinable"
+                                                   [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToClientInjoinable}"
+                                                   class="p-mb-2 p-mr-2"
+                                                   id="177"
+                                                   pInputText placeholder="To"
+                                                   type="text"/>
+                                            <small *ngIf='!validOrdreKoscToClientInjoinable' class='p-error'>To est
+                                                obligatoire.</small>
+                                        </div>
+
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="117">Objet</label>
+                                            <input [(ngModel)]="selectedOrdreKosc.objetClientInjoinable"
+                                                   class="p-mb-2 p-mr-2" id="117"
+                                                   pInputText
+                                                   placeholder="Objet client" type="text"
+                                            />
+
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="118">Corps</label>
+                                            <textarea [(ngModel)]="selectedOrdreKosc.corpsClientInjoinable" cols="30"
+                                                      id="118" pInputTextarea
+                                                      placeholder="Corps client"
+                                                      rows="7"
+                                            ></textarea>
+
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <button (click)="sendClientInjoignableEmailToClient()" class="p-button-help"
+                                                    icon="pi pi-send"
+                                                    label="Envoyer mail au client"
+                                                    pButton
+                                                    type="button"></button>
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <p-progressSpinner *ngIf="showSpinner"
+                                                               [style]="{width: '50px', height: '50px'}"
+                                                               styleClass="custom-spinner" strokeWidth="8"
+                                                               fill="#EEEEEE"
+                                                               animationDuration=".5s"></p-progressSpinner>
+
+
+                                        </div>
+
+                                    </div>
+                                </p-tabPanel>
+
+                                <p-tabPanel header="Kosc">
+                                    <div class="p-grid">
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="183">From<span style="color: red;">*</span></label>
+                                            <input [(ngModel)]="selectedOrdreKosc.fromClientInjoinableKosc"
+                                                   [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromClientInjoinableKosc}"
+                                                   class="p-mb-2 p-mr-2"
+                                                   id="183"
+                                                   pInputText placeholder="From"
+                                                   type="text"/>
+                                            <small *ngIf='!validOrdreKoscFromClientInjoinableKosc' class='p-error'>From
+                                                est obligatoire.</small>
+                                        </div>
+
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="184">To<span style="color: red;">*</span></label>
+                                            <input [(ngModel)]="selectedOrdreKosc.toClientInjoinableKosc"
+                                                   [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToClientInjoinableKosc}"
+                                                   class="p-mb-2 p-mr-2"
+                                                   id="184"
+                                                   pInputText placeholder="To"
+                                                   type="text"/>
+                                            <small *ngIf='!validOrdreKoscToClientInjoinableKosc' class='p-error'>To est
+                                                obligatoire.</small>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="181">Objet<span style="color: red;">*</span></label>
+                                            <input [(ngModel)]="selectedOrdreKosc.objetClientInjoinableKosc"
+                                                   [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscObjetClientInjoinableKosc}"
+                                                   class="p-mb-2 p-mr-2"
+                                                   id="181"
+                                                   pInputText placeholder="Objet"
+                                                   type="text"/>
+                                            <small *ngIf='!validOrdreKoscObjetClientInjoinableKosc' class='p-error'>Objet
+                                                est obligatoire.</small>
+                                        </div>
+
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="182">Corps<span style="color: red;">*</span></label>
+                                            <textarea [(ngModel)]="selectedOrdreKosc.corpsClientInjoinableKosc"
+                                                      [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscCorpsClientInjoinableKosc}"
+                                                      cols="30" id="182"
+                                                      pInputTextarea
+                                                      placeholder="Corps"
+                                                      rows="5"></textarea>
+                                            <small *ngIf='!validOrdreKoscCorpsClientInjoinableKosc' class='p-error'>Corps
+                                                est obligatoire.</small>
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <button (click)="sendClientInjoignableEmailToKosc()" class="p-button-help"
+                                                    icon="pi pi-send"
+                                                    label="Envoyer mail à Kosc"
+                                                    pButton
+                                                    type="button"></button>
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <p-progressSpinner *ngIf="showSpinner"
+                                                               [style]="{width: '50px', height: '50px'}"
+                                                               styleClass="custom-spinner" strokeWidth="8"
+                                                               fill="#EEEEEE"
+                                                               animationDuration=".5s"></p-progressSpinner>
+
+
+                                        </div>
+
+                                    </div>
+                                </p-tabPanel>
+                            </p-tabView>
+                        </div>
+
+                    </p-tabPanel>
+
+
+                    <p-tabPanel header="Mauvais contact">
+
+                        <div class="p-grid">
+                            <div class="p-field p-col-12 p-md-6">
+                                <label for="146">From<span style="color: red;">*</span></label>
+                                <input [(ngModel)]="selectedOrdreKosc.fromMauvaisContact"
+                                       [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromMauvaisContact}"
+                                       class="p-mb-2 p-mr-2"
+                                       id="146"
+                                       pInputText placeholder="From"
+                                       type="text"/>
+                                <small *ngIf='!validOrdreKoscFromMauvaisContact' class='p-error'>From est
+                                    obligatoire.</small>
+                            </div>
+
+
+                            <div class="p-field p-col-12 p-md-6">
+                                <label for="147">To<span style="color: red;">*</span></label>
+                                <input [(ngModel)]="selectedOrdreKosc.toMauvaisContact"
+                                       [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToMauvaisContact}"
+                                       class="p-mb-2 p-mr-2"
+                                       id="147"
+                                       pInputText placeholder="To"
+                                       type="text"/>
+                                <small *ngIf='!validOrdreKoscToMauvaisContact' class='p-error'>To est
+                                    obligatoire.</small>
+                            </div>
+                            <div class="p-field p-col-12 p-md-6">
+                                <label for="144">Objet<span style="color: red;">*</span></label>
+                                <input [(ngModel)]="selectedOrdreKosc.objetMauvaisContact"
+                                       [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscObjetMauvaisContact}"
+                                       class="p-mb-2 p-mr-2"
+                                       id="144"
+                                       pInputText placeholder="Objet"
+                                       type="text"/>
+                                <small *ngIf='!validOrdreKoscObjetMauvaisContact' class='p-error'>Objet est
+                                    obligatoire.</small>
+                            </div>
+
+
+                            <div class="p-field p-col-12 p-md-6">
+                                <label for="145">Corps<span style="color: red;">*</span></label>
+                                <textarea [(ngModel)]="selectedOrdreKosc.corpsMauvaisContact"
+                                          [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscCorpsMauvaisContact}"
+                                          cols="30" id="145"
+                                          pInputTextarea
+                                          placeholder="Corps"
+                                          rows="5"></textarea>
+                                <small *ngIf='!validOrdreKoscCorpsMauvaisContact' class='p-error'>Corps est
+                                    obligatoire.</small>
+                            </div>
+                            <div class="p-field p-col-12 p-md-4">
+                                <button (click)="sendMauvaisContactEmail()" class="p-button-help" icon="pi pi-send"
+                                        label="Envoyer" pButton
+                                        type="button"></button>
+                            </div>
+                            <div class="p-field p-col-12 p-md-4">
+                                <p-progressSpinner *ngIf="showSpinner" [style]="{width: '50px', height: '50px'}"
+                                                   styleClass="custom-spinner" strokeWidth="8" fill="#EEEEEE"
+                                                   animationDuration=".5s"></p-progressSpinner>
+                            </div>
+                        </div>
+
+
+                    </p-tabPanel>
+                    <p-tabPanel header="Refus client">
+
+                        <div class="p-grid">
+                            <div class="p-field p-col-12 p-md-6">
+                                <label for="139">From<span style="color: red;">*</span></label>
+                                <input [(ngModel)]="selectedOrdreKosc.fromRefus"
+                                       [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromRefus}"
+                                       class="p-mb-2 p-mr-2"
+                                       id="139"
+                                       pInputText placeholder="From"
+                                       type="text"/>
+                                <small *ngIf='!validOrdreKoscFromRefus' class='p-error'>From est
+                                    obligatoire.</small>
+                            </div>
+
+
+                            <div class="p-field p-col-12 p-md-6">
+                                <label for="140">To<span style="color: red;">*</span></label>
+                                <input [(ngModel)]="selectedOrdreKosc.toRefus"
+                                       [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToRefus}"
+                                       class="p-mb-2 p-mr-2"
+                                       id="140"
+                                       pInputText placeholder="To"
+                                       type="text"/>
+                                <small *ngIf='!validOrdreKoscToRefus' class='p-error'>To est obligatoire.</small>
+                            </div>
+                            <div class="p-field p-col-12 p-md-6">
+                                <label for="137">Objet<span style="color: red;">*</span></label>
+                                <input [(ngModel)]="selectedOrdreKosc.objetRefus"
+                                       [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscObjetRefus}"
+                                       class="p-mb-2 p-mr-2"
+                                       id="136"
+                                       pInputText placeholder="Objet refus"
+                                       type="text"/>
+                                <small *ngIf='!validOrdreKoscObjetRefus' class='p-error'>Objet est obligatoire.</small>
+                            </div>
+
+
+                            <div class="p-field p-col-12 p-md-6">
+                                <label for="138">Corps<span style="color: red;">*</span></label>
+                                <textarea [(ngModel)]="selectedOrdreKosc.corpsRefus"
+                                          [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscCorpsRefus}" cols="30"
+                                          id="138"
+                                          pInputTextarea placeholder="Corps"
+                                          rows="5"></textarea>
+                                <small *ngIf='!validOrdreKoscCorpsRefus' class='p-error'>Corps est obligatoire.</small>
+                            </div>
+
+
+                            <div class="p-field p-col-12 p-md-4">
+                                <button (click)="sendRefusClientEmail()" class="p-button-help" icon="pi pi-send"
+                                        label="Envoyer" pButton
+                                        type="button"></button>
+                            </div>
+                            <div class="p-field p-col-12 p-md-4">
+                                <p-progressSpinner *ngIf="showSpinner" [style]="{width: '50px', height: '50px'}"
+                                                   styleClass="custom-spinner" strokeWidth="8" fill="#EEEEEE"
+                                                   animationDuration=".5s"></p-progressSpinner>
+
+
+                            </div>
+                        </div>
+
+
+                    </p-tabPanel>
+
+                </p-tabView>
+            </p-tabPanel>
+
 
         </p-tabView>
 
@@ -335,6 +1132,64 @@
                 <button (click)="edit()" icon="pi pi-check" label="Valider" pButton pRipple
                         style="margin:10px"></button>
             </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <div class="p-grid">
+            <div style="margin:5px">
+                <button pButton pRipple label="Annuler" icon="pi pi-times"
+                        class="p-button-text" (click)="hideEditDialog()"></button>
+            </div>
+            <div>
+                <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:5px"
+                        (click)="edit()"></button>
+            </div>
+            <div style="margin:5px">
+                <p-splitButton label="Confirmation" icon="pi pi-thumbs-up" styleClass="p-button-success"
+                               [model]="palinificationModel"></p-splitButton>
+            </div>
+
+
+            <div style="margin:5px">
+                <button pButton pRipple label="Mail Replanification" icon="pi pi-undo" class="p-button-warning"
+                        (click)="goToMailReplanification()"></button>
+            </div>
+
+
+            <div style="margin:5px">
+                <p-splitButton label="Probleme client" icon="pi pi-users" styleClass="p-button-danger"
+                               [model]="problemeClientModel"></p-splitButton>
+            </div>
+
+            <div style="margin:5px">
+                <button type="button" class="btn-rex p-mr-2 p-mb-2">
+                    <i class="pi pi-plus"></i>&nbsp;Browse
+                    <input type="file" class="file-input" accept="application/pdf,application/vnd.ms-excel"
+                           (change)="onFileSelected($event.target.files)" #fileUpload>
+                </button>
+            </div>
+
+            <!--    <a
+                        style="cursor:pointer"
+                        (click)="onDownloadFile()">
+                    <a class="alert-success float-right">Download</a>
+                </a> -->
+
+            <!--  <div style="margin:5px" *ngIf="filenames?.length > 0" class="js-upload-finished">
+                  <h3>Processed files</h3>
+                  <div *ngFor="let filename of filenames" class="list-group">
+                      <a (click)="onDownloadFile(filename)" class="list-group-item list-group-item-success" style="cursor: pointer;">
+                          {{ filename }}
+                          <a class="alert-success float-right">Download</a>
+                      </a><br>
+                  </div>
+              </div>-->
+
+            <div style="margin:5px">
+                <button pButton pRipple label="Download" class="p-button"
+                        (click)="onDownloadFile(fileName)"></button>
+            </div>
+
         </div>
     </ng-template>
 

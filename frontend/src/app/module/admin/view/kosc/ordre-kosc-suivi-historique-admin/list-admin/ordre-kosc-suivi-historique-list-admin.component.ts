@@ -91,6 +91,10 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         , private templateSuiviService: TemplateSuiviService
     ) {
     }
+    stylefyConfort(ordreKosc: OrdreKoscVo): string {
+        return ordreKosc.confort?'color:red;':'color:black;';
+
+    }
 
     public async loadEtatDemandeKoscExcept(etatNonDesire : Array<String>) {
         await this.roleService.findAll();
@@ -105,9 +109,10 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
     }
 
     public searchRequestSuiviCdd() {
+        console.log(this.searchOrdreKosc.etatDemandeKoscVos);
         this.ordreKoscService.findByCriteriaSuiviCdd(this.searchOrdreKosc).subscribe(ordreKoscs => {
-
             this.ordreKoscs = ordreKoscs;
+            console.log(ordreKoscs);
             // this.searchOrdreKosc = new OrdreKoscVo();
         }, error => console.log(error));
     }
@@ -118,6 +123,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         isPermistted ? this.etatDemandeKoscService.findAll().subscribe(etatDemandeKoscs =>{
                 this.etatDemandeKoscs = etatDemandeKoscs;
                 this.searchOrdreKosc.etatDemandeKoscVos = this.etatDemandeKoscs.filter(e => etatNonDesire.indexOf(e.code) != -1);
+                console.log( this.searchOrdreKosc.etatDemandeKoscVos);
                 // console.log( this.searchOrdreKosc.etatDemandeKoscVos);
             }, error => console.log(error))
             : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
@@ -174,15 +180,19 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
     }
 
     get searchOrdreKosc(): OrdreKoscVo {
-        return this.ordreKoscService.searchOrdreKosc;
+        return this.ordreKoscService.searchOrdreKoscSuiviCdd;
     }
 
     set searchOrdreKosc(value: OrdreKoscVo) {
-        this.ordreKoscService.searchOrdreKosc = value;
+        this.ordreKoscService.searchOrdreKoscSuiviCdd = value;
     }
 
     get dateFormat() {
         return environment.dateFormatList;
+    }
+
+    ngAfterViewInit(): void {
+        this.searchRequestSuiviCdd();
     }
 
     ngOnInit(): void {
@@ -192,13 +202,11 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         this.loadOperator();
         this.loadDepartement();
         this.loadTechnicien();
-
         this.loadTemplateEmailClientInjoinable();
         this.loadTemplateEmailClientInjoinableKosc();
         this.loadTemplateEmailPlanification();
         this.loadTemplateEmailReplanification();
         this.loadTemplateEmailReport();
-        this.loadEtatDemandeKosc();
         this.loadTemplateEmailCloture();
         this.loadTemplateSuivi();
         this.yesOrNoEnvoiMailClient = [{label: 'EnvoiMailClient', value: null}, {label: 'Oui', value: 1}, {
@@ -245,7 +253,6 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
             label: 'Non',
             value: 0
         }];
-        this.searchRequestSuiviCdd();
     }
 
     // methods
@@ -994,5 +1001,39 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
             {field: 'dateEnvoiSuivi', header: 'Date envoi suivi'},
         ];
     }
+    isErdvAndReferenceEmpty(ordreKoscVo : OrdreKoscVo){
+        if (ordreKoscVo.erdv == true && ordreKoscVo.reference != null){
+            return true;
+        }else {
+            return false;
+        }
+    }
+    isErdvAndReferencWorkOrdereEmpty(ordreKoscVo : OrdreKoscVo){
+        if (ordreKoscVo.erdv == true && ordreKoscVo.referenceWorkOrder != null){
+            return true;
+        }else {
+            return false;
+        }
+    }
 
+    public generateCodeDecharge() {
+        if(this.ordreKoscs != null){
+            this.ordreKoscService.genererCodeDecharge().subscribe(ordreKoscs =>{
+                this.ordreKoscs=ordreKoscs;
+                }
+            );
+        }
+    }
+    /*private updateListe(){
+        this.ordreKoscs=this.ordreKoscs.filter(e => e.codeDecharge == null);
+        console.log("after update :"+ this.ordreKoscs);
+    }*/
+    isEtatNotEmpty(ordreKoscVo : OrdreKoscVo){
+
+        if (ordreKoscVo.etatDemandeKoscVo !== null ){
+            return true;
+        }else {
+            return false;
+        }
+    }
 }

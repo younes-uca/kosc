@@ -225,6 +225,7 @@ export class OrdreKoscListAdminComponent implements OnInit {
 
 
     ngOnInit(): void {
+        this.loadEtatDemandeKoscIncluding(['initialisation-wo', 'initialisation-erdv']);
         this.initExport();
         this.initImport();
         this.initCol();
@@ -241,7 +242,6 @@ export class OrdreKoscListAdminComponent implements OnInit {
         this.loadTemplateEmailFtl();
         this.loadTemplateEmailClientInjoinable();
         this.loadTemplateEmailClientInjoinableKosc();
-        this.loadEtatDemandeKoscIncluding(['initialisation-wo', 'initialisation-erdv']);
         this.loadTemplateEmailCloture();
         this.loadTemplateSuivi();
         this.loadCauseKoOk();

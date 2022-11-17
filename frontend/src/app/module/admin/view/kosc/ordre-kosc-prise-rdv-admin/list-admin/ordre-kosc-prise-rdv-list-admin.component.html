@@ -17,7 +17,17 @@
                         <p-splitButton [model]="excelPdfButons" icon="pi pi-download" label="Exporter"
                                        styleClass="p-button-help"></p-splitButton>
                     </div>
+
+                    <div class="flex">
+                        <button  pButton (click)="exporter()" class="btn-rex p-mr-2 p-mb-1" icon="pi pi-download" label="Exporter Kizeo"
+                                      style="background-color: #0f97c7;margin:2px"></button>
+                    </div>
+
                 </ng-template>
+
+               <!-- <ng-template pTemplate="center">
+
+                </ng-template>-->
 
             </p-toolbar>
             <p-toolbar *ngIf="findByCriteriaShow">
@@ -244,31 +254,48 @@
 
 
 
-                        <td>{{ordreKosc.reference}}</td>
+                        <td *ngIf="isErdvAndReferenceEmpty(ordreKosc) "
+                            [hidden]="!isErdvAndReferenceEmpty(ordreKosc)">
+                            <p-badge
+                                    value=" {{ordreKosc.reference}}" severity="info">
+                            </p-badge>
 
+                        </td>
+                        <td *ngIf="!isErdvAndReferenceEmpty(ordreKosc) "
+                            [hidden]="isErdvAndReferenceEmpty(ordreKosc) "> {{ordreKosc.reference}}
+                        </td>
 
-                   <td>{{ordreKosc.referenceWorkOrder}}</td>
+                        <td *ngIf="isErdvAndReferencWorkOrdereEmpty(ordreKosc) "
+                            [hidden]="!isErdvAndReferencWorkOrdereEmpty(ordreKosc)">
+                            <p-badge
+                                    value=" {{ordreKosc.referenceWorkOrder}}" severity="info">
+                            </p-badge>
+
+                        </td>
+                        <td *ngIf="!isErdvAndReferencWorkOrdereEmpty(ordreKosc) "
+                            [hidden]="isErdvAndReferencWorkOrdereEmpty(ordreKosc)"> {{ordreKosc.referenceWorkOrder}}
+                        </td>
 
 
                     <td>
-                        {{ordreKosc.submissionDate | date :'dd/MM/yyyy' }}
+                        <span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.submissionDate | date :'dd/MM/yyyy' }}</span>
                         <p-badge
                                 value=" ({{ordreKosc.nbrHeureDateSubmissionAndNow}}h)" severity="{{nbrHeureDateSubmissionAndNowSeverityStyle(ordreKosc)}}">
                         </p-badge>
                     </td>
 
-                        <td>{{ordreKosc.dateDernierAppel | date :'dd/MM/yyyy HH:mm' }} ({{ordreKosc.numeroDernierAppel}})</td>
+                        <td><span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.dateDernierAppel | date :'dd/MM/yyyy HH:mm' }} ({{ordreKosc.numeroDernierAppel}})</span></td>
 <!--                        <td>{{ordreKosc.numeroDernierAppel}}</td>-->
 
 
-                        <td>{{ordreKosc.datePriseRdv | date :'dd/MM/yyyy HH:mm' }}</td>
+                        <td><span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.datePriseRdv | date :'dd/MM/yyyy HH:mm' }}</span></td>
 
-                        <td>{{ordreKosc.dateRdv | date :'dd/MM/yyyy HH:mm' }}</td>
+                        <td> <span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.dateRdv | date :'dd/MM/yyyy HH:mm' }}</span></td>
 
-                        <td>{{ordreKosc.technicienVo?.identifiant}}</td>
+                        <td><span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.technicienVo?.identifiant}}</span></td>
 
 
-                        <td>{{ordreKosc.departementVo?.libelle}}</td>
+                        <td><span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.departementVo?.libelle}}</span></td>
 
                         <td *ngIf="isEtatNotEmpty(ordreKosc)"
                             [hidden]="!isEtatNotEmpty(ordreKosc)">

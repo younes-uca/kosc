@@ -2,13 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {OrdreKoscService} from 'src/app/controller/service/OrdreKosc.service';
 import {OrdreKoscVo} from 'src/app/controller/model/OrdreKosc.model';
 import {RoleService} from 'src/app/controller/service/role.service';
-import {MessageService} from 'primeng/api';
+import {MenuItem, MessageService} from 'primeng/api';
 import {Router} from '@angular/router';
 import {environment} from 'src/environments/environment';
 import {DatePipe} from '@angular/common';
 import {StringUtilService} from 'src/app/controller/service/StringUtil.service';
+import {SourceReplanificationService} from '../../../../../../controller/service/SourceReplanification.service';
 
-
+import FileSaver from 'file-saver';
 import {TemplateEmailClotureVo} from 'src/app/controller/model/TemplateEmailCloture.model';
 import {TemplateEmailClotureService} from 'src/app/controller/service/TemplateEmailCloture.service';
 import {TemplateEmailReportVo} from 'src/app/controller/model/TemplateEmailReport.model';
@@ -35,6 +36,14 @@ import {
 import {TemplateEmailPlanificationVo} from 'src/app/controller/model/TemplateEmailPlanification.model';
 import {TemplateEmailPlanificationService} from 'src/app/controller/service/TemplateEmailPlanification.service';
 import {DateUtils} from "../../../../../../utils/DateUtils";
+import {CauseKoOkVo} from "../../../../../../controller/model/CauseKoOk.model";
+import {CauseKoOkService} from "../../../../../../controller/service/CauseKoOk.service";
+import {HttpErrorResponse, HttpEvent, HttpEventType} from "@angular/common/http";
+import {DefaultTemplateConfigurationVo} from "../../../../../../controller/model/DefaultTemplateConfiguration.model";
+import {
+    DefaultTemplateConfigurationService
+} from "../../../../../../controller/service/DefaultTemplateConfiguration.service";
+import {SourceReplanificationVo} from "../../../../../../controller/model/SourceReplanification.model";
 
 @Component({
     selector: 'app-ordre-kosc-prise-rdv-edit-admin',
@@ -42,6 +51,16 @@ import {DateUtils} from "../../../../../../utils/DateUtils";
     styleUrls: ['./ordre-kosc-prise-rdv-edit-admin.component.css']
 })
 export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
+
+    private causKoOks = ['client-injoignable', 'refus-client', 'mauvais-contact'];
+    private etats = ['ko', 'initialisation', 'confirmation-client', 'planification'];
+    showSpinner = false;
+    blocked = false;
+    filenames: string[] = [];
+    fileStatus = {status: '', requestType: '', percent: 0};
+    fileToUpload: File | null = null;
+    fileName = '';
+
     public appropriateTechniciens:Array<TechnicienVo>;
 
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService
@@ -60,11 +79,25 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         , private departementService: DepartementService
         , private templateEmailClientInjoinableKoscService: TemplateEmailClientInjoinableKoscService
         , private templateEmailPlanificationService: TemplateEmailPlanificationService
+        , private causeKoOkService: CauseKoOkService
+        , private defaultTemplateConfigurationService: DefaultTemplateConfigurationService,
+          private sourceReplanificationService: SourceReplanificationService
     ) {
 
     }
 // methods
     ngOnInit(): void {
+
+
+        this.selectedCauseKoOk = new CauseKoOkVo();
+        this.defaultTemplateConfigurationService.findDefaultTemplateConfiguration().subscribe((data) =>
+            this.selectedDefaultTemplateConfiguration = data,
+        )
+
+        this.causeKoOkService.findAll().subscribe((data) => this.causeKoOks = data);
+        this.initPalinificationModel();
+        this.initProblemeClientModel();
+        this.initSources();
 
         this.selectedOperator = new OperatorVo();
         this.operatorService.findAll().subscribe((data) => this.operators = data);
@@ -91,6 +124,101 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
 
+    initPalinificationModel(): void {
+        this.palinificationModel = [
+            {label: 'ConfirmationClient', icon: 'pi pi-file', command: () => this.changeEtat(this.etats[2])},
+            {label: 'Mail Planification', icon: 'pi pi-file-excel', command: () => this.changeEtat(this.etats[3])},
+        ];
+    }
+
+    private changeEtat(myEtat: string) {
+        this.selectedOrdreKosc.etatDemandeKoscVo = this.findEtatDemandeByCode(myEtat);
+        if (myEtat === this.etats[2]) {
+            this.indexEdit = 3;
+            this.emailIndex = 0;
+            this.selectedOrdreKosc.fromConfirmationClient = this.selectedDefaultTemplateConfiguration.emailManeo;
+            this.selectedOrdreKosc.toConfirmationClient = this.selectedOrdreKosc.endCustumorContactEmail;
+            this.selectedOrdreKosc.objetConfirmationClient = eval(this.selectedDefaultTemplateConfiguration.templateEmailConfirmationClientVo.objet);
+            this.selectedOrdreKosc.corpsConfirmationClient = eval(this.selectedDefaultTemplateConfiguration.templateEmailConfirmationClientVo.corps);
+
+        } else if (myEtat === this.etats[3]) {
+            this.indexEdit = 3;
+            this.emailIndex = 1;
+            this.selectedOrdreKosc.fromPlanification = this.selectedDefaultTemplateConfiguration.emailManeo;
+            this.selectedOrdreKosc.toPlanification = this.selectedDefaultTemplateConfiguration.emailKosc;
+            this.selectedOrdreKosc.objetPlanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailPlanificationVo.objet);
+            this.selectedOrdreKosc.corpsPlanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailPlanificationVo.corps);
+        }
+    }
+
+    private initProblemeClientModel() {
+        this.problemeClientModel = [
+            {
+                label: 'Client injoinable',
+                icon: 'pi pi-file',
+                command: () => this.selectTab(this.etats[0], this.causKoOks[0])
+            },
+            {
+                label: 'Refus Client',
+                icon: 'pi pi-file',
+                command: () => this.selectTab(this.etats[0], this.causKoOks[1])
+            },
+            {
+                label: 'Mauvais contact',
+                icon: 'pi pi-file-excel',
+                command: () => this.selectTab(this.etats[0], this.causKoOks[2])
+            },
+        ];
+    }
+
+    private initSources() {
+        let v1 = new SourceReplanificationVo();
+        let v2 = new SourceReplanificationVo();
+        v1.id = 1;
+        v1.libelle = 'Client';
+        v1.code = 'client';
+        v2.id = 1;
+        v2.libelle = 'Kosc';
+        v2.code = 'kosc';
+        this.sourceReplanifications.push(v1);
+        this.sourceReplanifications.push(v2);
+    }
+
+
+    private selectTab(myEtat: string, myCause: string) {
+
+        this.selectedOrdreKosc.etatDemandeKoscVo = this.findEtatDemandeByCode(myEtat);
+        this.selectedOrdreKosc.causeKoOkVo = this.findByEtatDemandeCause(myCause);
+
+
+        if (myCause === this.causKoOks[0]) {
+            this.indexEdit = 3;
+            this.emailIndex = 3;
+            this.selectedOrdreKosc.fromClientInjoinable = this.selectedDefaultTemplateConfiguration.emailManeo;
+            this.selectedOrdreKosc.toClientInjoinable = this.selectedOrdreKosc.endCustumorContactEmail;
+            this.selectedOrdreKosc.objetClientInjoinable = eval(this.selectedDefaultTemplateConfiguration.templateEmailClientInjoinableVo.objet);
+            this.selectedOrdreKosc.corpsClientInjoinable = eval(this.selectedDefaultTemplateConfiguration.templateEmailClientInjoinableVo.corps);
+
+            this.selectedOrdreKosc.fromClientInjoinableKosc = this.selectedDefaultTemplateConfiguration.emailManeo;
+            this.selectedOrdreKosc.toClientInjoinableKosc = this.selectedDefaultTemplateConfiguration.emailKosc;
+            this.selectedOrdreKosc.objetClientInjoinableKosc = eval(this.selectedDefaultTemplateConfiguration.templateEmailClientInjoinableKoscVo.objet);
+            this.selectedOrdreKosc.corpsClientInjoinableKosc = eval(this.selectedDefaultTemplateConfiguration.templateEmailClientInjoinableKoscVo.corps);
+        } else if (myCause === this.causKoOks[1]) {
+            this.indexEdit = 3;
+            this.emailIndex = 5;
+            this.selectedOrdreKosc.fromRefus = this.selectedDefaultTemplateConfiguration.emailManeo;
+            this.selectedOrdreKosc.toRefus = this.selectedOrdreKosc.endCustumorContactEmail;
+            this.selectedOrdreKosc.objetRefus = eval(this.selectedDefaultTemplateConfiguration.templateEmailRefusVo.objet);
+            this.selectedOrdreKosc.corpsRefus = eval(this.selectedDefaultTemplateConfiguration.templateEmailRefusVo.corps);
+        } else if (myCause === this.causKoOks[2]) {
+            this.indexEdit = 3;
+            this.emailIndex = 4;
+            this.selectedOrdreKosc.fromMauvaisContact = this.selectedDefaultTemplateConfiguration.emailManeo;
+            this.selectedOrdreKosc.toMauvaisContact = this.selectedDefaultTemplateConfiguration.emailKosc;
+            this.selectedOrdreKosc.objetMauvaisContact = eval(this.selectedDefaultTemplateConfiguration.templateEmailMauvaisContactVo.objet);
+            this.selectedOrdreKosc.corpsMauvaisContact = eval(this.selectedDefaultTemplateConfiguration.templateEmailMauvaisContactVo.corps);
+        }
+    }
 
     public edit() {
         this.submitted = true;
@@ -141,6 +269,194 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         );
     }
 
+    sendMailReplanificationReport() {
+        this.showSpinner = true;
+        this.blocked = true;
+        this.ordreKoscService.sendMailReplanificationReport().subscribe(data => {
+                if (data.envoyeReport == true) {
+
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: 'Email envoyé avec succès'
+                    });
+                    this.editOrdreKoscDialog = false;
+                } else {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Erreurs', detail: 'échec d\'envoi'
+                    });
+
+                }
+                this.showSpinner = false;
+                this.blocked = false;
+            }
+        );
+    }
+    sendMauvaisContactEmail() {
+        this.showSpinner = true;
+        this.blocked = true;
+        this.ordreKoscService.sendMauvaisContactEmail().subscribe(data => {
+                if (data.envoyeMauvaisContact == true) {
+
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: 'Email envoyé avec succès'
+                    });
+                    this.editOrdreKoscDialog = false;
+                } else {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Erreurs', detail: 'échec d\'envoi'
+                    });
+                }
+                this.showSpinner = false;
+                this.blocked = false;
+            }
+        );
+    }
+
+    sendRefusClientEmail() {
+        this.showSpinner = true;
+        this.blocked = true;
+        this.ordreKoscService.sendRefusClientEmail().subscribe(data => {
+                if (data.envoyeRefus == true) {
+
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: 'Email envoyé avec succès'
+                    });
+                    this.editOrdreKoscDialog = false;
+                } else {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Erreurs', detail: 'échec d\'envoi'
+                    });
+
+                }
+                this.showSpinner = false;
+                this.blocked = false;
+            }
+        );
+    }
+
+    sendMailReplanification() {
+        this.showSpinner = true;
+        this.blocked = true;
+        this.ordreKoscService.sendMailReplanification().subscribe(data => {
+                if (data.envoyeReplanification == true) {
+
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: 'Email envoyé avec succès'
+                    });
+                    this.editOrdreKoscDialog = false;
+                } else if (data.envoyeConfirmationClient === false) {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Erreurs', detail: 'échec d\'envoi'
+                    });
+                }
+                this.showSpinner = false;
+                this.blocked = false;
+            }
+        );
+    }
+
+    onDownloadFile(fileName: string): void {
+        this.ordreKoscService.download(fileName).subscribe(
+            event => {
+                console.log(event);
+                this.resportProgress(event);
+            },
+            (error: HttpErrorResponse) => {
+                console.log(error);
+            }
+        );
+    }
+
+    private resportProgress(httpEvent: HttpEvent<string[] | Blob>): void {
+        switch (httpEvent.type) {
+            case HttpEventType.UploadProgress:
+                this.updateStatus(httpEvent.loaded, httpEvent.total!, 'Uploading... ');
+                break;
+            case HttpEventType.DownloadProgress:
+                this.updateStatus(httpEvent.loaded, httpEvent.total!, 'Downloading... ');
+                break;
+            case HttpEventType.ResponseHeader:
+                console.log('Header returned', httpEvent);
+                break;
+            case HttpEventType.Response:
+                if (httpEvent.body instanceof Array) {
+                    this.fileStatus.status = 'done';
+                    for (const filename of httpEvent.body) {
+                        this.filenames.unshift(filename);
+                        //this.fileName;
+                    }
+                } else {
+                    FileSaver.saveAs(new File([httpEvent.body!], httpEvent.headers.get('File-Name')!,
+                        {type: `${httpEvent.headers.get('Content-Type')};charset=utf-8`}));
+                    // saveAs(new Blob([httpEvent.body!],
+                    //   { type: `${httpEvent.headers.get('Content-Type')};charset=utf-8`}),
+                    //    httpEvent.headers.get('File-Name'));
+                }
+                this.fileStatus.status = 'done';
+                break;
+            default:
+                console.log(httpEvent);
+                break;
+
+        }
+    }
+
+    private updateStatus(loaded: number, total: number, requestType: string): void {
+        this.fileStatus.status = 'progress';
+        this.fileStatus.requestType = requestType;
+        this.fileStatus.percent = Math.round(100 * loaded / total);
+    }
+
+    onFileSelected(files: FileList) {
+        this.fileToUpload = files.item(0);
+        this.fileName = this.fileToUpload.name
+        console.log(this.fileToUpload);
+        this.ordreKoscService.uploadFile(this.fileToUpload).subscribe(
+            response => console.log('Success! ', response),
+            error => console.error('Error: ', error)
+        );
+    }
+
+
+    goToMailReplanification() {
+        this.indexEdit = 3;
+        this.emailIndex = 2;
+        this.selectedOrdreKosc.etatDemandeKoscVo = this.findEtatDemandeByCode(this.etats[0]);
+        this.selectedOrdreKosc.fromReport = this.selectedDefaultTemplateConfiguration.emailManeo;
+        this.selectedOrdreKosc.toReport = this.selectedDefaultTemplateConfiguration.emailKosc;
+        this.selectedOrdreKosc.objetReport = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportVo.objet);
+        this.selectedOrdreKosc.corpsReport = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportVo.corps);
+
+
+        this.selectedOrdreKosc.fromReplanification = this.selectedDefaultTemplateConfiguration.emailManeo;
+        this.selectedOrdreKosc.toReplanification = this.selectedDefaultTemplateConfiguration.emailKosc;
+        this.selectedOrdreKosc.objetReplanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailReplanificationVo.objet);
+        this.selectedOrdreKosc.corpsReplanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailReplanificationVo.corps);
+
+
+    }
+
+    public findEtatDemandeByCode(code: string) {
+        let res = this.etatDemandeKoscService.findByCode(code, this.etatDemandeKoscs);
+        // console.log(' ha l code  ' + code + ' ha res ' + res.code);
+        return res;
+    }
+
+    public findByEtatDemandeCause(cause: string) {
+        return this.causeKoOkService.findByCause(cause, this.causeKoOks);
+
+    }
 //openPopup
     public async openCreateTemplateEmailPlanification(templateEmailPlanification: string) {
         const isPermistted = await this.roleService.isPermitted('TemplateEmailPlanification', 'edit');
@@ -286,8 +602,9 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 //validation methods
     private validateForm(): void {
         this.errorMessages = new Array<string>();
-        this.validateOrdreKoscReferenceWorkOrder();
-        this.validateOrdreKoscDateAppel();
+        this.validateOrdreKoscDateRdv();
+        /* this.validateOrdreKoscReferenceWorkOrder();
+        this.validateOrdreKoscDateAppel();*/
 
     }
 
@@ -299,6 +616,16 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.validOrdreKoscReferenceWorkOrder = true;
         }
     }
+
+    private validateOrdreKoscDateRdv() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.dateRdv)) {
+            this.errorMessages.push('Date non valide ');
+            this.validDateRdv = false;
+        } else {
+            this.validDateRdv = true;
+        }
+    }
+
     private validateOrdreKoscDateAppel() {
         if(this.selectedOrdreKosc.datePremierAppel != null && this.selectedOrdreKosc.dateDeuxiemeAppel){
             if(this.selectedOrdreKosc.datePremierAppel.getDate() >= this.selectedOrdreKosc.dateDeuxiemeAppel.getDate() || this.selectedOrdreKosc.dateTroisiemeAppel < this.selectedOrdreKosc.dateDeuxiemeAppel ){
@@ -569,6 +896,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
     _validTemplateSuiviLibelle = true;
+    private _validDateRdv = true;
 
     get validTemplateSuiviLibelle(): boolean {
         return this._validTemplateSuiviLibelle;
@@ -883,6 +1211,91 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         return environment.dateFormatEdit;
     }
 
+    get validDateRdv():boolean {
+        return this._validDateRdv;
+    }
+
+    set validDateRdv(value: boolean) {
+        this._validDateRdv = value;
+    }
 
 
+    get causeKoOks(): Array<CauseKoOkVo> {
+        return this.causeKoOkService.causeKoOks;
+    }
+
+    set causeKoOks(value: Array<CauseKoOkVo>) {
+        this.causeKoOkService.causeKoOks = value;
+    }
+
+    get indexEdit(): number {
+        return this.ordreKoscService.indexEdit;
+    }
+
+    set indexEdit(value: number) {
+        this.ordreKoscService.indexEdit = value;
+    }
+    private _emailIndex = 0;
+
+    get emailIndex(): number {
+        return this._emailIndex;
+    }
+
+    set emailIndex(value: number) {
+        this._emailIndex = value;
+    }
+
+    private _problemeClientModel: MenuItem[];
+
+    get problemeClientModel(): MenuItem[] {
+        return this._problemeClientModel;
+    }
+
+    set problemeClientModel(value: MenuItem[]) {
+        this._problemeClientModel = value;
+    }
+
+    get selectedDefaultTemplateConfiguration(): DefaultTemplateConfigurationVo {
+
+        return this.defaultTemplateConfigurationService.selectedDefaultTemplateConfiguration;
+    }
+
+    set selectedDefaultTemplateConfiguration(value: DefaultTemplateConfigurationVo) {
+        this.defaultTemplateConfigurationService.selectedDefaultTemplateConfiguration = value;
+    }
+
+    private _palinificationModel: MenuItem[];
+
+    get palinificationModel(): MenuItem[] {
+        return this._palinificationModel;
+    }
+
+    set palinificationModel(value: MenuItem[]) {
+        this._palinificationModel = value;
+    }
+
+
+    get selectedCauseKoOk(): CauseKoOkVo {
+        return this.causeKoOkService.selectedCauseKoOk;
+    }
+
+    set selectedCauseKoOk(value: CauseKoOkVo) {
+        this.causeKoOkService.selectedCauseKoOk = value;
+    }
+
+    get selectedSourceReplanification(): SourceReplanificationVo {
+        return this.sourceReplanificationService.selectedSourceReplanification;
+    }
+
+    set selectedSourceReplanification(value: SourceReplanificationVo) {
+        this.sourceReplanificationService.selectedSourceReplanification = value;
+    }
+
+    get sourceReplanifications(): Array<SourceReplanificationVo> {
+        return this.sourceReplanificationService.sourceReplanifications;
+    }
+
+    set sourceReplanifications(value: Array<SourceReplanificationVo>) {
+        this.sourceReplanificationService.sourceReplanifications = value;
+    }
 }

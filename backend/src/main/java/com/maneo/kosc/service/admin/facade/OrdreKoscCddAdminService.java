@@ -5,10 +5,10 @@ import com.maneo.kosc.ws.rest.provided.vo.OrdreKoscVo;
 
 import java.util.List;
 
-public interface OrdreKoscSuiviCddAdminService {
+public interface OrdreKoscCddAdminService {
 
 
+    public List<OrdreKosc> findByCriteriaCdd(OrdreKoscVo ordreKoscVo);
 
-    public List<OrdreKosc> findByCriteriaSuiviCdd(OrdreKoscVo ordreKoscVo);
 
 }
