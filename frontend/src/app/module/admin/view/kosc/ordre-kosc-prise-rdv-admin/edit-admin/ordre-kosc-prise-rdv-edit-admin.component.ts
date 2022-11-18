@@ -249,31 +249,87 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         });
 
     }
-    sendMailPlanificationEmail() {
-        this.ordreKoscService.sendMailPlanificationEmail().subscribe(data => {
-                if (data != null) {
+    sendConfirmationEmailToClient() {
+        this.showSpinner = true;
+        this.blocked = true;
+
+        this.ordreKoscService.sendConfirmationEmailToClient().subscribe(data => {
+                if (data.envoyeConfirmationClient == true) {
 
                     this.messageService.add({
                         severity: 'success',
                         summary: 'Success',
                         detail: 'Email envoyé avec succès'
                     });
-                } else if (data.envoyeConfirmationClient === false) {
+                    this.editOrdreKoscDialog = false;
+                } else {
                     this.messageService.add({
                         severity: 'error',
                         summary: 'Erreurs', detail: 'échec d\'envoi'
                     });
 
                 }
+                this.showSpinner = false;
+                this.blocked = false;
+            }
+        );
+
+    }
+    sendMailPlanificationEmail() {
+        this.showSpinner = true;
+        this.blocked = true;
+        this.ordreKoscService.sendMailPlanificationEmail().subscribe(data => {
+                if (data.envoyePlanification == true) {
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: 'Email envoyé avec succès'
+                    });
+                    this.editOrdreKoscDialog = false;
+                } else {
+                    this.messageService.add({
+                            severity: 'error',
+                            summary: 'Erreurs', detail: 'échec d\'envoi'
+                        }
+                    );
+                }
+                this.showSpinner = false;
+                this.blocked = false;
             }
         );
     }
 
-    sendMailReplanificationReport() {
+    sendClientInjoignableEmailToClient() {
         this.showSpinner = true;
         this.blocked = true;
-        this.ordreKoscService.sendMailReplanificationReport().subscribe(data => {
-                if (data.envoyeReport == true) {
+        this.ordreKoscService.sendClientInjoignableEmailToClient().subscribe(data => {
+                if (data.envoyeClientInjoinable == true) {
+
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: 'Email envoyé avec succès'
+                    });
+                    this.editOrdreKoscDialog = false;
+                } else {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Erreurs', detail: 'échec d\'envoi'
+                    });
+
+                }
+                this.showSpinner = false;
+                this.blocked = false;
+            }
+        );
+
+    }
+
+    sendClientInjoignableEmailToKosc() {
+        this.showSpinner = true;
+        this.blocked = true;
+        this.ordreKoscService.sendClientInjoignableEmailToKosc().subscribe(data => {
+                if (data.envoyeClientInjoinableKosc == true) {
 
                     this.messageService.add({
                         severity: 'success',
@@ -293,6 +349,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             }
         );
     }
+
     sendMauvaisContactEmail() {
         this.showSpinner = true;
         this.blocked = true;
@@ -342,6 +399,31 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         );
     }
 
+    sendMailReplanificationReport() {
+        this.showSpinner = true;
+        this.blocked = true;
+        this.ordreKoscService.sendMailReplanificationReport().subscribe(data => {
+                if (data.envoyeReport == true) {
+
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: 'Email envoyé avec succès'
+                    });
+                    this.editOrdreKoscDialog = false;
+                } else {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Erreurs', detail: 'échec d\'envoi'
+                    });
+
+                }
+                this.showSpinner = false;
+                this.blocked = false;
+            }
+        );
+    }
+
     sendMailReplanification() {
         this.showSpinner = true;
         this.blocked = true;
@@ -354,7 +436,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
                         detail: 'Email envoyé avec succès'
                     });
                     this.editOrdreKoscDialog = false;
-                } else if (data.envoyeConfirmationClient === false) {
+                } else  {
                     this.messageService.add({
                         severity: 'error',
                         summary: 'Erreurs', detail: 'échec d\'envoi'
@@ -365,6 +447,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             }
         );
     }
+
 
     onDownloadFile(fileName: string): void {
         this.ordreKoscService.download(fileName).subscribe(
