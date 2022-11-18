@@ -197,6 +197,12 @@ export class OrdreKoscVo {
     public toClientInjoinable: string;
     public envoyeClientInjoinable: null | boolean;
     public dateEnvoiClientInjoinable: Date;
+    public objetAutre: string;
+    public corpsAutre: string;
+    public fromAutre: string;
+    public toAutre: string;
+    public envoyeAutre: null | boolean;
+    public dateEnvoiAutre: Date;
     public objetClientInjoinableKosc: string;
     public corpsClientInjoinableKosc: string;
     public fromClientInjoinableKosc: string;
