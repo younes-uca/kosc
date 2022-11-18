@@ -31,7 +31,7 @@ export class OrdreKoscExcelService {
     }
 
     public importerDataBase(event: any) {
-        this.showSpinner = true;
+        // this.showSpinner = true;
 
         console.log(event.target.files);
         /* wire up file reader */
@@ -91,7 +91,7 @@ export class OrdreKoscExcelService {
                 }
             );
         }
-        this.showSpinner = false;
+        // this.showSpinner = false;
 
     }
 
