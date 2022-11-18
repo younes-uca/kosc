@@ -52,7 +52,7 @@ import {SourceReplanificationVo} from "../../../../../../controller/model/Source
 })
 export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
-    private causKoOks = ['client-injoignable', 'refus-client', 'mauvais-contact'];
+    private causKoOks = ['client-injoignable', 'refus-client', 'mauvais-contact', 'autre'];
     private etats = ['ko', 'initialisation', 'confirmation-client', 'planification'];
     showSpinner = false;
     blocked = false;
@@ -168,6 +168,11 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
                 icon: 'pi pi-file-excel',
                 command: () => this.selectTab(this.etats[0], this.causKoOks[2])
             },
+            {
+                label: 'Autre',
+                icon: 'pi pi-file-excel',
+                command: () => this.selectTab(this.etats[0], this.causKoOks[3])
+            },
         ];
     }
 
@@ -217,6 +222,11 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.toMauvaisContact = this.selectedDefaultTemplateConfiguration.emailKosc;
             this.selectedOrdreKosc.objetMauvaisContact = eval(this.selectedDefaultTemplateConfiguration.templateEmailMauvaisContactVo.objet);
             this.selectedOrdreKosc.corpsMauvaisContact = eval(this.selectedDefaultTemplateConfiguration.templateEmailMauvaisContactVo.corps);
+        }else if (myCause === this.causKoOks[3]) {
+            this.indexEdit = 3;
+            this.emailIndex = 6;
+            this.selectedOrdreKosc.fromAutre = this.selectedDefaultTemplateConfiguration.emailManeo;
+            this.selectedOrdreKosc.toAutre = this.selectedDefaultTemplateConfiguration.emailKosc;
         }
     }
 
@@ -381,6 +391,31 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         this.blocked = true;
         this.ordreKoscService.sendRefusClientEmail().subscribe(data => {
                 if (data.envoyeRefus == true) {
+
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: 'Email envoyé avec succès'
+                    });
+                    this.editOrdreKoscDialog = false;
+                } else {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Erreurs', detail: 'échec d\'envoi'
+                    });
+
+                }
+                this.showSpinner = false;
+                this.blocked = false;
+            }
+        );
+    }
+
+    sendAutreEmail() {
+        this.showSpinner = true;
+        this.blocked = true;
+        this.ordreKoscService.sendAutreEmail().subscribe(data => {
+                if (data.envoyeAutre == true) {
 
                     this.messageService.add({
                         severity: 'success',

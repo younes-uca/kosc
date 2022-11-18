@@ -134,7 +134,7 @@ export class OrdreKoscService {
         return this.http.post<OrdreKoscVo>(this.API + 'send/refus/client', {...this.selectedOrdreKosc});
     }
 
-    public sendAutreEmail(): Observable<OrdreKoscVo> {debugger
+    public sendAutreEmail(): Observable<OrdreKoscVo> {
         return this.http.post<OrdreKoscVo>(this.API + 'send/autre', {...this.selectedOrdreKosc});
     }
 

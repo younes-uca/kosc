@@ -264,6 +264,8 @@ export class OrdreKoscVo {
     public dateInterventionTechniqueFinMin: string;
     public dateEnvoiClientInjoinableMax: string;
     public dateEnvoiClientInjoinableMin: string;
+    public dateEnvoiAutreMax: string;
+    public dateEnvoiAutreMin: string;
     public dateEnvoiClientInjoinableKoscMax: string;
     public dateEnvoiClientInjoinableKoscMin: string;
     public dateEnvoiClotureMax: string;
