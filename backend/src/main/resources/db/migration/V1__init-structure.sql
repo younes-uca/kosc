@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 18 nov. 2022 à 17:28
+-- Généré le : mer. 02 nov. 2022 à 05:59
 -- Version du serveur : 10.4.24-MariaDB
 -- Version de PHP : 8.1.6
 
@@ -212,17 +212,6 @@ CREATE TABLE `etat_demande_kosc` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `hibernate_sequence`
---
-
-CREATE TABLE `hibernate_sequence` (
-    `next_val` bigint(20) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
-
---
 -- Structure de la table `etat_demande_kosc_seq`
 --
 
@@ -232,26 +221,11 @@ CREATE TABLE `etat_demande_kosc_seq` (
 
 -- --------------------------------------------------------
 
-
-
 --
--- Structure de la table `jour_ferie`
+-- Structure de la table `hibernate_sequence`
 --
 
-CREATE TABLE `jour_ferie` (
-  `id` bigint(20) NOT NULL,
-  `date_debut` date DEFAULT NULL,
-  `date_fin` date DEFAULT NULL,
-  `libelle` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `jour_ferie_seq`
---
-
-CREATE TABLE `jour_ferie_seq` (
+CREATE TABLE `hibernate_sequence` (
   `next_val` bigint(20) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
@@ -498,16 +472,7 @@ CREATE TABLE `ordre_kosc` (
   `product_label` text DEFAULT NULL,
   `reference_commande_prise_interneoc` text DEFAULT NULL,
   `erdv` tinyint(1) DEFAULT 0,
-  `confort` tinyint(1) DEFAULT 0,
-  `corps_autre` text DEFAULT NULL,
-  `date_dernier_appel` date DEFAULT NULL,
-  `date_envoi_autre` date DEFAULT NULL,
-  `envoye_autre` tinyint(1) DEFAULT 0,
-  `from_autre` text DEFAULT NULL,
-  `nbr_heure_date_submission_and_now` bigint(20) DEFAULT NULL,
-  `numero_dernier_appel` bigint(20) DEFAULT NULL,
-  `objet_autre` text DEFAULT NULL,
-  `to_autre` text DEFAULT NULL
+  `confort` tinyint(1) DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -1036,14 +1001,6 @@ ALTER TABLE `entreprise`
 -- Index pour la table `etat_demande_kosc`
 --
 ALTER TABLE `etat_demande_kosc`
-  ADD PRIMARY KEY (`id`);
-
-
-
---
--- Index pour la table `jour_ferie`
---
-ALTER TABLE `jour_ferie`
   ADD PRIMARY KEY (`id`);
 
 --
