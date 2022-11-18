@@ -92,8 +92,8 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
         query += SearchUtil.addConstraintDate("o", "dateRdv", "=", ordreKoscVo.getDateRdv());
         query += SearchUtil.addConstraintMinMaxDate("o", "dateRdv", ordreKoscVo.getDateRdvMin(), ordreKoscVo.getDateRdvMax());
 
-        if (ordreKoscVo.getEtatDemandeKoscVos() != null) {
-            query += " AND o.etatDemandeKosc.id IN (" + convertId(ordreKoscVo.getEtatDemandeKoscVos()) + ")";
+        if (ListUtil.isNotEmpty(ordreKoscVo.getEtatDemandeKoscVos())) {
+            query += " AND o.etatDemandeKosc.id IN (" + etatDemandeKoscService.convertId(ordreKoscVo.getEtatDemandeKoscVos()) + ")";
         }
 
         query+= " ORDER BY  o.submissionDate DESC";
@@ -528,6 +528,8 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
         if (foundedOrdreKosc == null) return null;
         else {
             initDateDernierAppel(ordreKosc);
+            EtatDemandeKosc etatDemandeKosc = etatDemandeKoscService.findByCode(ordreKosc.getEtatDemandeKosc().getCode());
+            ordreKosc.setEtatDemandeKosc(etatDemandeKosc);
             return ordreKoscDao.save(ordreKosc);
         }
     }
@@ -915,8 +917,8 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
             query += SearchUtil.addConstraint("o", "etatDemandeKosc.code", "LIKE", ordreKoscVo.getEtatDemandeKoscVo().getCode());
         }*/
 
-        if (ordreKoscVo.getEtatDemandeKoscVos() != null){
-            query+= " AND o.etatDemandeKosc.id IN ("+convertId(ordreKoscVo.getEtatDemandeKoscVos())+")";
+        if (ListUtil.isNotEmpty(ordreKoscVo.getEtatDemandeKoscVos())){
+            query+= " AND o.etatDemandeKosc.id IN ("+etatDemandeKoscService.convertId(ordreKoscVo.getEtatDemandeKoscVos())+")";
         }
 
 
@@ -947,14 +949,6 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
     }
 
 
-
-    private String convertId(List<EtatDemandeKoscVo> etatDemandeKoscVos) {
-        String res="";
-        for(EtatDemandeKoscVo etatDemandeKoscVo: etatDemandeKoscVos){
-            res+="'"+etatDemandeKoscVo.getId()+"' ,";
-        }
-        return  res.substring(0,res.length()-2);
-    }
 
     private void findOperator(OrdreKosc ordreKosc) {
         Operator loadedOperator = operatorService.findByIdOrReference(ordreKosc.getOperator());
