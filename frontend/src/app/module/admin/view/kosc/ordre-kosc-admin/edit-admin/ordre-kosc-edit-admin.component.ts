@@ -1216,7 +1216,7 @@ export class OrdreKoscEditAdminComponent implements OnInit {
                         detail: 'Email envoyé avec succès'
                     });
                     this.editOrdreKoscDialog = false;
-                } else if (data.envoyeConfirmationClient === false) {
+                } else {
                     this.messageService.add({
                         severity: 'error',
                         summary: 'Erreurs', detail: 'échec d\'envoi'

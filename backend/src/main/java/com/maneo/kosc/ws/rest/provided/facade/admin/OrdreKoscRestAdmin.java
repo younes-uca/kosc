@@ -1,7 +1,22 @@
 package com.maneo.kosc.ws.rest.provided.facade.admin;
 
 
+import com.maneo.kosc.bean.OrdreKosc;
 import com.maneo.kosc.service.admin.facade.*;
+import com.maneo.kosc.ws.rest.provided.converter.OrdreKoscConverter;
+import com.maneo.kosc.ws.rest.provided.vo.OrdreKoscVo;
+import com.maneo.kosc.ws.rest.provided.vo.StatisticResultVo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,33 +25,10 @@ import java.nio.file.Path;
 import java.util.Date;
 import java.util.List;
 
-
-import com.maneo.kosc.ws.rest.provided.vo.StatisticResultVo;
-
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-
+import static java.nio.file.Files.copy;
+import static java.nio.file.Paths.get;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import static org.springframework.http.HttpHeaders.CONTENT_DISPOSITION;
-
-
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import com.maneo.kosc.bean.OrdreKosc;
-import com.maneo.kosc.ws.rest.provided.converter.OrdreKoscConverter;
-import com.maneo.kosc.ws.rest.provided.vo.OrdreKoscVo;
-import org.springframework.web.multipart.MultipartFile;
-
-import static java.nio.file.Paths.get;
-import static java.nio.file.Files.copy;
 
 
 @Api("Manages ordreKosc services")
@@ -175,6 +167,7 @@ public class OrdreKoscRestAdmin {
     public List<OrdreKoscVo> findByCriteria(@RequestBody OrdreKoscVo ordreKoscVo) {
         return ordreKoscConverter.toVo(ordreKoscService.findByCriteria(ordreKoscVo));
     }
+
     @ApiOperation("Search ordreKosc by a specific criteria")
     @PostMapping("/search-order-kosc-import")
     public List<OrdreKoscVo> findByCriteriaOrderKoscImport(@RequestBody OrdreKoscVo ordreKoscVo) {
@@ -195,6 +188,7 @@ public class OrdreKoscRestAdmin {
         List<OrdreKoscVo> ordreKoscVos = ordreKoscConverter.toVo(ordreKoscCddAdminService.findByCriteriaCdd(ordreKoscVo));
         return ordreKoscVos;
     }
+
     @ApiOperation("Search ordreKosc suivi historique by a specific criteria")
     @PostMapping("/search-suivi-historique-cdd")
     public List<OrdreKoscVo> findByCriteriaSuiviCdd(@RequestBody OrdreKoscVo ordreKoscVo) {
@@ -594,6 +588,7 @@ public class OrdreKoscRestAdmin {
     public List<OrdreKoscVo> findByCriteriaSuiviRdv(@RequestBody OrdreKoscVo ordreKoscVo) {
         List<OrdreKosc> criteriaSuiviRdv = ordreKoscSuiviRdvService.findByCriteriaSuiviRdv(ordreKoscVo);
         return ordreKoscConverter.toVo(criteriaSuiviRdv);
-}
+    }
+
 
 }

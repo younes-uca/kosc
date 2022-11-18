@@ -3,29 +3,23 @@ package com.maneo.kosc.service.admin.impl;
 import com.maneo.kosc.bean.*;
 import com.maneo.kosc.dao.OrdreKoscDao;
 import com.maneo.kosc.service.admin.facade.*;
-import com.maneo.kosc.service.core.impl.AbstractServiceImpl;
 import com.maneo.kosc.service.util.DateUtil;
 import com.maneo.kosc.service.util.ListUtil;
 import com.maneo.kosc.service.util.SearchUtil;
-import com.maneo.kosc.service.util.StringUtil;
 import com.maneo.kosc.ws.rest.provided.vo.EtatDemandeKoscVo;
 import com.maneo.kosc.ws.rest.provided.vo.OrdreKoscVo;
-import com.maneo.kosc.ws.rest.provided.vo.StatisticResultVo;
-import com.maneo.kosc.ws.rest.provided.vo.StatisticVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
 
 //import static jdk.internal.org.jline.utils.Colors.s;
 
 @Service
 public class OrdreKoscPriseRdvAdminServiceImpl implements OrdreKoscPriseRdvAdminService {
-
+    @Autowired
+    private EtatDemandeKoscAdminService etatDemandeKoscService;
 
     @Autowired
     private OrdreKoscDao ordreKoscDao;
@@ -72,8 +66,8 @@ public class OrdreKoscPriseRdvAdminServiceImpl implements OrdreKoscPriseRdvAdmin
             query += SearchUtil.addConstraint("o", "technicien.identifiant", "LIKE", ordreKoscVo.getTechnicienVo().getIdentifiant());
         }
 
-        if (ordreKoscVo.getEtatDemandeKoscVos() != null){
-            query+= " AND o.etatDemandeKosc.id IN ("+convertId(ordreKoscVo.getEtatDemandeKoscVos())+")";
+        if (ListUtil.isNotEmpty(ordreKoscVo.getEtatDemandeKoscVos())){
+            query+= " AND o.etatDemandeKosc.id IN ("+etatDemandeKoscService.convertId(ordreKoscVo.getEtatDemandeKoscVos())+")";
         }
 
         query += " ORDER BY o.nbrHeureDateSubmissionAndNow DESC, o.submissionDate ASC";
@@ -85,13 +79,7 @@ public class OrdreKoscPriseRdvAdminServiceImpl implements OrdreKoscPriseRdvAdmin
         return resultList;
     }
 
-    private String convertId(List<EtatDemandeKoscVo> etatDemandeKoscVos) {
-        String res="";
-        for(EtatDemandeKoscVo etatDemandeKoscVo: etatDemandeKoscVos){
-            res+="'"+etatDemandeKoscVo.getId()+"' ,";
-        }
-        return  res.substring(0,res.length()-2);
-    }
+
 
 
     public List<OrdreKosc> findDemain(){
@@ -125,6 +113,37 @@ public class OrdreKoscPriseRdvAdminServiceImpl implements OrdreKoscPriseRdvAdmin
                 ordreKoscDao.save(ordreKosc);
             }
         }
+    }
+
+    @Override
+    public OrdreKosc findByReferenceWorkOrder(String referenceWorkOrder) {
+        if (referenceWorkOrder == null) return null;
+        return ordreKoscDao.findByReferenceWorkOrder(referenceWorkOrder);
+    }
+
+    @Override
+    public OrdreKosc updateNonJoignable(OrdreKosc ordreKosc) {
+        OrdreKosc foundedOrdreKosc = findByReferenceWorkOrder(ordreKosc.getReferenceWorkOrder());
+        foundedOrdreKosc.getEtatDemandeKosc().setCode("report-demande-client-cl-j");
+        return ordreKoscDao.save(foundedOrdreKosc);
+    }
+
+    @Override
+    public OrdreKosc updateMauvaisContact(OrdreKosc ordreKosc) {
+        ordreKosc.getEtatDemandeKosc().setCode("mauvais-contact");
+        return ordreKoscDao.save(ordreKosc);
+    }
+
+    @Override
+    public OrdreKosc updateClientRefus(OrdreKosc ordreKosc) {
+        ordreKosc.getEtatDemandeKosc().setCode("refus-client");
+        return ordreKoscDao.save(ordreKosc);
+    }
+
+    @Override
+    public OrdreKosc updateAutre(OrdreKosc ordreKosc) {
+        ordreKosc.getEtatDemandeKosc().setCode("autre");
+        return ordreKoscDao.save(ordreKosc);
     }
 
 }
