@@ -249,6 +249,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         });
 
     }
+
     sendConfirmationEmailToClient() {
         this.showSpinner = true;
         this.blocked = true;
@@ -275,6 +276,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         );
 
     }
+
     sendMailPlanificationEmail() {
         this.showSpinner = true;
         this.blocked = true;
