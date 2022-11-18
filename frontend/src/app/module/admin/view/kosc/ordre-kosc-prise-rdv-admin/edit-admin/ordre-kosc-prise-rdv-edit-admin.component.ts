@@ -249,6 +249,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         });
 
     }
+
     sendMailPlanificationEmail() {
         this.ordreKoscService.sendMailPlanificationEmail().subscribe(data => {
                 if (data != null) {

@@ -84,19 +84,19 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
     templateEmailClotures: Array<TemplateEmailClotureVo>;
     templateSuivis: Array<TemplateSuiviVo>;
 
-   private objetPlanificationDefault : string = eval(this.selectedDefaultTemplateConfiguration.templateEmailPlanificationVo.objet);
+    private objetPlanificationDefault: string = eval(this.selectedDefaultTemplateConfiguration.templateEmailPlanificationVo.objet);
 
-    private corpsPlanificationDefault   : string =   eval(this.selectedDefaultTemplateConfiguration.templateEmailPlanificationVo.corps);
+    private corpsPlanificationDefault: string = eval(this.selectedDefaultTemplateConfiguration.templateEmailPlanificationVo.corps);
 
 
     constructor(private datePipe: DatePipe
-                , private ordreKoscService: OrdreKoscService
-                , private messageService: MessageService
-                , private confirmationService: ConfirmationService
-                , private roleService: RoleService
-                , private router: Router
-                , private authService: AuthService
-                , private exportService: ExportService
+        , private ordreKoscService: OrdreKoscService
+        , private messageService: MessageService
+        , private confirmationService: ConfirmationService
+        , private roleService: RoleService
+        , private router: Router
+        , private authService: AuthService
+        , private exportService: ExportService
         , private operatorService: OperatorService
         , private departementService: DepartementService
         , private technicienService: TechnicienService
@@ -109,29 +109,32 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         , private templateEmailClotureService: TemplateEmailClotureService
         , private templateSuiviService: TemplateSuiviService
         , private defaultTemplateConfigurationService: DefaultTemplateConfigurationService
-
-    ) {}
+    ) {
+    }
 
     display1 = false;
 
-    showDialog1() {
+    showPriseRdvDialog(ordreKosc: OrdreKoscVo) {
+        this.selectedOrdreKosc = ordreKosc;
         this.display1 = true;
         this.isShown = false;
         this.isShown1 = false;
+
     }
+
     isShown: boolean = false;
 
     toggleShow() {
-        this.isShown = ! this.isShown;
-        this.isShown1 =  false;
+        this.isShown = !this.isShown;
+        this.isShown1 = false;
 
     }
 
     isShown1: boolean = false;
 
     toggleShow2() {
-        this.isShown1 = ! this.isShown1;
-        this.isShown =  false;
+        this.isShown1 = !this.isShown1;
+        this.isShown = false;
     }
 
     public edit() {
@@ -153,6 +156,7 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         this.display1 = false;
         this.setValidation(true);
     }
+
     private setValidation(value: boolean) {
         this.validOrdreKoscReferenceWorkOrder = value;
     }
@@ -178,9 +182,27 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         });
 
     }
+
+    public editEtat(codeEtat: string){
+        console.log(this.selectedOrdreKosc.etatDemandeKoscVo);
+        this.selectedOrdreKosc.etatDemandeKoscVo.code = codeEtat;
+        this.editWithShowOption(false);
+        this.display1 = false;
+
+    }
+
+    public editClientInjoignable() {
+        this.ordreKoscService.updateNonJoignable().subscribe(ordreKosc => {
+                const myIndex = this.ordreKoscs.findIndex(e => e.id === this.selectedOrdreKosc.id);
+                this.ordreKoscs[myIndex] = ordreKosc;
+                this.display1 = false;
+            }
+        );
+    }
+
     private validateOrdreKoscDateAppel() {
-        if(this.selectedOrdreKosc.datePremierAppel != null && this.selectedOrdreKosc.dateDeuxiemeAppel){
-            if(this.selectedOrdreKosc.datePremierAppel.getDate() >= this.selectedOrdreKosc.dateDeuxiemeAppel.getDate() || this.selectedOrdreKosc.dateTroisiemeAppel < this.selectedOrdreKosc.dateDeuxiemeAppel ){
+        if (this.selectedOrdreKosc.datePremierAppel != null && this.selectedOrdreKosc.dateDeuxiemeAppel) {
+            if (this.selectedOrdreKosc.datePremierAppel.getDate() >= this.selectedOrdreKosc.dateDeuxiemeAppel.getDate() || this.selectedOrdreKosc.dateTroisiemeAppel < this.selectedOrdreKosc.dateDeuxiemeAppel) {
                 this.errorMessages.push('Date de deuxieme appel non valide');
                 this.validOrdreKoscDateAppel = false;
             } else {
@@ -188,68 +210,78 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
             }
         }
     }
+
     activeState: boolean[] = [true, false, false];
 
     toggle(index: number) {
         this.activeState[index] = !this.activeState[index];
     }
-    public plusDay(day: number){
+
+    public plusDay(day: number) {
         const today = new Date()
 
-        let resultat =  new Date()
+        let resultat = new Date()
         resultat.setDate(today.getDate() + day);
         return resultat;
     }
-    public moinDay(day: number){
+
+    public moinDay(day: number) {
         const today = new Date()
 
-        let resultat =  new Date()
+        let resultat = new Date()
         resultat.setDate(today.getDate() - day);
         return resultat;
     }
 
-     public convertDate(inputFormat) {
-        function pad(s) { return (s < 10) ? '0' + s : s; }
+    public convertDate(inputFormat) {
+        function pad(s) {
+            return (s < 10) ? '0' + s : s;
+        }
+
         var d = new Date(inputFormat)
-        return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/')
+        return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/')
     }
 
-    public afficher24(){
+    public afficher24() {
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = 24;
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = 48;
     }
-    public afficher48(){
+
+    public afficher48() {
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = 24;
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = 72;
     }
-    public afficher72(){
+
+    public afficher72() {
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = 24;
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = 96;
     }
-    public afficherAll(){
+
+    public afficherAll() {
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = null;
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = null;
     }
 
-    isDateSubmisson72(ordreKoscVo : OrdreKoscVo){
-        if (ordreKoscVo.nbrHeureDateSubmissionAndNow > 48 && ordreKoscVo.nbrHeureDateSubmissionAndNow <= 72 && (ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION WO' || ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION ERDV')){
+    isDateSubmisson72(ordreKoscVo: OrdreKoscVo) {
+        if (ordreKoscVo.nbrHeureDateSubmissionAndNow > 48 && ordreKoscVo.nbrHeureDateSubmissionAndNow <= 72 && (ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION WO' || ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION ERDV')) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
 
-    isDateSubmisson48(ordreKoscVo : OrdreKoscVo){
-        if (ordreKoscVo.nbrHeureDateSubmissionAndNow > 24 && ordreKoscVo.nbrHeureDateSubmissionAndNow <= 48 && (ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION WO' || ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION ERDV')){
+    isDateSubmisson48(ordreKoscVo: OrdreKoscVo) {
+        if (ordreKoscVo.nbrHeureDateSubmissionAndNow > 24 && ordreKoscVo.nbrHeureDateSubmissionAndNow <= 48 && (ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION WO' || ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION ERDV')) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
-    isDateSubmisson24(ordreKoscVo : OrdreKoscVo){
-        if (ordreKoscVo.nbrHeureDateSubmissionAndNow <= 24 && (ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION WO' || ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION ERDV')){
+
+    isDateSubmisson24(ordreKoscVo: OrdreKoscVo) {
+        if (ordreKoscVo.nbrHeureDateSubmissionAndNow <= 24 && (ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION WO' || ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION ERDV')) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
@@ -259,7 +291,6 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         this.defaultTemplateConfigurationService.findDefaultTemplateConfiguration().subscribe((data) =>
             this.selectedDefaultTemplateConfiguration = data,
         );
-
 
 
         this.loadEtatDemandeKoscIncluding(['initialisation-wo', 'initialisation-erdv']);
@@ -331,14 +362,15 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
     }
 
     // methods
-    isEtatNotEmpty(ordreKoscVo : OrdreKoscVo){
+    isEtatNotEmpty(ordreKoscVo: OrdreKoscVo) {
 
-        if (ordreKoscVo.etatDemandeKoscVo !== null ){
+        if (ordreKoscVo.etatDemandeKoscVo !== null) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
+
     public async loadOrdreKoscs() {
         await this.roleService.findAll();
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
@@ -347,9 +379,9 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
     }
 
 
-    public  searchRequestPriseRdv() {
+    public searchRequestPriseRdv() {
 
-        this.ordreKoscService.findByCriteriaPriseRdv(this.searchOrdreKosc).subscribe(ordreKoscs =>  {
+        this.ordreKoscService.findByCriteriaPriseRdv(this.searchOrdreKosc).subscribe(ordreKoscs => {
             this.ordreKoscsPriseRdv = ordreKoscs;
         }, error => console.log(error));
 
@@ -357,12 +389,10 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
     }
 
 
-
-
     public async editOrdreKosc(ordreKosc: OrdreKoscVo) {
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'edit');
         if (isPermistted) {
-             this.ordreKoscService.findByIdWithAssociatedList(ordreKosc).subscribe(res => {
+            this.ordreKoscService.findByIdWithAssociatedList(ordreKosc).subscribe(res => {
                 this.selectedOrdreKosc = res;
                 this.selectedOrdreKosc.dateDebutTraitement = DateUtils.toDate(ordreKosc.dateDebutTraitement);
                 this.selectedOrdreKosc.submissionDate = DateUtils.toDate(ordreKosc.submissionDate);
@@ -386,12 +416,11 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
                 this.selectedOrdreKosc.dateEnvoiSuivi = DateUtils.toDate(ordreKosc.dateEnvoiSuivi);
 
 
-
                 this.editOrdreKoscDialog = true;
-                 this.selectedOrdreKosc.fromPlanification  = this.selectedDefaultTemplateConfiguration.emailManeo;
-                 this.selectedOrdreKosc.toPlanification  = this.selectedOrdreKosc.endCustumorContactEmail;
-                 this.selectedOrdreKosc.objetPlanification = this.objetPlanificationDefault;
-                 this.selectedOrdreKosc.corpsPlanification = this.corpsPlanificationDefault;
+                this.selectedOrdreKosc.fromPlanification = this.selectedDefaultTemplateConfiguration.emailManeo;
+                this.selectedOrdreKosc.toPlanification = this.selectedOrdreKosc.endCustumorContactEmail;
+                this.selectedOrdreKosc.objetPlanification = this.objetPlanificationDefault;
+                this.selectedOrdreKosc.corpsPlanification = this.corpsPlanificationDefault;
 
             });
 
@@ -406,7 +435,7 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
 
 
     nbrHeureDateSubmissionAndNowSeverityStyle(ordreKosc: OrdreKoscVo) {
-        return  ordreKosc.nbrHeureDateSubmissionAndNow>=72?'danger': ordreKosc.nbrHeureDateSubmissionAndNow>=48? 'warning' : 'success';
+        return ordreKosc.nbrHeureDateSubmissionAndNow >= 72 ? 'danger' : ordreKosc.nbrHeureDateSubmissionAndNow >= 48 ? 'warning' : 'success';
 
     }
 
@@ -561,10 +590,11 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
             : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
 
     }
-    public async loadEtatDemandeKoscIncluding(etatNonDesire : Array<String>) {
+
+    public async loadEtatDemandeKoscIncluding(etatNonDesire: Array<String>) {
         await this.roleService.findAll();
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
-        isPermistted ? this.etatDemandeKoscService.findAll().subscribe(etatDemandeKoscs =>{
+        isPermistted ? this.etatDemandeKoscService.findAll().subscribe(etatDemandeKoscs => {
                 this.etatDemandeKoscs = etatDemandeKoscs;
                 this.searchOrdreKosc.etatDemandeKoscVos = this.etatDemandeKoscs.filter(e => etatNonDesire.indexOf(e.code) != -1);
                 // console.log( this.searchOrdreKosc.etatDemandeKoscVos);
@@ -605,7 +635,6 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
     }
 
 
-
     initDuplicateOrdreKosc(res: OrdreKoscVo) {
 
 
@@ -635,10 +664,11 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         ];
     }
 
-private async exporter(){
-    this.prepareColumnExport();
-    this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName);
-}
+    private async exporter() {
+        this.prepareColumnExport();
+        this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName);
+    }
+
     initExport(): void {
         this.excelPdfButons = [
             // {
@@ -651,14 +681,14 @@ private async exporter(){
                 label: 'Export Kizeo 24', icon: 'pi pi-file-excel', command: async () => {
                     this.afficher24();
                     this.searchRequestPriseRdv();
-                   // await this.exporter();
+                    // await this.exporter();
                 }
             },
             {
                 label: 'Export Kizeo 48', icon: 'pi pi-file-excel', command: () => {
                     this.afficher48();
                     this.searchRequestPriseRdv();
-                        console.log(this.ordreKoscsPriseRdv);
+                    console.log(this.ordreKoscsPriseRdv);
                     //this.prepareColumnExport();
                     //this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName) })
 
@@ -669,9 +699,9 @@ private async exporter(){
                 label: 'Export Kizeo 72', icon: 'pi pi-file-excel', command: () => {
                     this.afficher72();
                     this.searchRequestPriseRdv();
-                        console.log(this.ordreKoscsPriseRdv);
-                       // this.prepareColumnExport();
-                       // this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName) })
+                    console.log(this.ordreKoscsPriseRdv);
+                    // this.prepareColumnExport();
+                    // this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName) })
 
 
                 }
@@ -1171,22 +1201,24 @@ private async exporter(){
             {field: 'dateEnvoiSuivi', header: 'Date envoi suivi'},
         ];
     }
+
     stylefyConfort(ordreKosc: OrdreKoscVo): string {
-        return ordreKosc.confort?'color:red;':'color:black;';
+        return ordreKosc.confort ? 'color:red;' : 'color:black;';
 
     }
 
-    isErdvAndReferenceEmpty(ordreKoscVo : OrdreKoscVo){
-        if (ordreKoscVo.erdv == true && ordreKoscVo.reference != null){
+    isErdvAndReferenceEmpty(ordreKoscVo: OrdreKoscVo) {
+        if (ordreKoscVo.erdv == true && ordreKoscVo.reference != null) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
-    isErdvAndReferencWorkOrdereEmpty(ordreKoscVo : OrdreKoscVo){
-        if (ordreKoscVo.erdv == true && ordreKoscVo.referenceWorkOrder != null){
+
+    isErdvAndReferencWorkOrdereEmpty(ordreKoscVo: OrdreKoscVo) {
+        if (ordreKoscVo.erdv == true && ordreKoscVo.referenceWorkOrder != null) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
@@ -1251,9 +1283,11 @@ private async exporter(){
     get dateFormat() {
         return environment.dateFormatList;
     }
+
     get dateFormat2() {
         return environment.dateFormatEdit;
     }
+
     get selectedDefaultTemplateConfiguration(): DefaultTemplateConfigurationVo {
 
         return this.defaultTemplateConfigurationService.selectedDefaultTemplateConfiguration;

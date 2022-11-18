@@ -156,6 +156,10 @@ export class OrdreKoscService {
         });
     }
 
+    public updateNonJoignable(): Observable<OrdreKoscVo> {
+        return this.http.put<OrdreKoscVo>(this.API + 'non-joignable', this.selectedOrdreKosc);
+    }
+
     delete(ordreKosc: OrdreKoscVo) {
         return this.http.delete<number>(this.API + 'id/' + ordreKosc.id);
     }
