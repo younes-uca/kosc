@@ -35,6 +35,7 @@ import {TechnicienVo} from 'src/app/controller/model/Technicien.model';
 import {ConfirmationService, MenuItem, MessageService} from 'primeng/api';
 import {AuthService} from 'src/app/controller/service/Auth.service';
 import {ExportService} from 'src/app/controller/service/Export.service';
+import {error} from "protractor";
 
 @Component({
     selector: 'app-ordre-kosc-suivi-list-admin',
@@ -162,8 +163,6 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
     }
 
 
-
-
     get dateFormat() {
         return environment.dateFormatList;
     }
@@ -233,32 +232,35 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
 
     // methods
     stylefyConfort(ordreKosc: OrdreKoscVo): string {
-        return ordreKosc.confort?'color:red;':'color:black;';
+        return ordreKosc.confort ? 'color:red;' : 'color:black;';
 
     }
-    isErdvAndReferenceEmpty(ordreKoscVo : OrdreKoscVo){
-        if (ordreKoscVo.erdv == true && ordreKoscVo.reference != null){
+
+    isErdvAndReferenceEmpty(ordreKoscVo: OrdreKoscVo) {
+        if (ordreKoscVo.erdv == true && ordreKoscVo.reference != null) {
             return true;
-        }else {
-            return false;
-        }
-    }
-    isErdvAndReferencWorkOrdereEmpty(ordreKoscVo : OrdreKoscVo){
-        if (ordreKoscVo.erdv == true && ordreKoscVo.referenceWorkOrder != null){
-            return true;
-        }else {
+        } else {
             return false;
         }
     }
 
-    isEtatNotEmpty(ordreKoscVo : OrdreKoscVo){
-
-        if (ordreKoscVo.etatDemandeKoscVo !== null ){
+    isErdvAndReferencWorkOrdereEmpty(ordreKoscVo: OrdreKoscVo) {
+        if (ordreKoscVo.erdv == true && ordreKoscVo.referenceWorkOrder != null) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
+
+    isEtatNotEmpty(ordreKoscVo: OrdreKoscVo) {
+
+        if (ordreKoscVo.etatDemandeKoscVo !== null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     generateDischargeCode() {
         console.log(this.ordreKoscs);
         this.ordreKoscService.genererCodeDecharge().subscribe(ordreKoscs => {
@@ -411,8 +413,6 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
     // getters and setters
 
 
-
-
     public async loadDepartement() {
         await this.roleService.findAll();
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
@@ -469,7 +469,6 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
             : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
 
     }
-
 
 
     public async loadTemplateEmailCloture() {
@@ -1014,24 +1013,43 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
             {field: 'dateEnvoiSuivi', header: 'Date envoi suivi'},
         ];
     }
+
     public searchRequestSuiviRdv() {
-        console.log(" this.searchOrdreKosc :"+this.searchOrdreKosc.etatDemandeKoscVos);
+        console.log(" this.searchOrdreKosc :" + this.searchOrdreKosc.etatDemandeKoscVos);
         this.ordreKoscService.findByCriteriaSuiviRdv(this.searchOrdreKosc).subscribe(ordreKoscs => {
             this.ordreKoscs = ordreKoscs;
 
         }, error => console.log(error));
     }
 
-    public async loadEtatDemandeKoscIncluding(etatNonDesire : Array<String>) {
+    public async loadEtatDemandeKoscIncluding(etatNonDesire: Array<String>) {
         await this.roleService.findAll();
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
-        isPermistted ? this.etatDemandeKoscService.findAll().subscribe(etatDemandeKoscs =>{
+        isPermistted ? this.etatDemandeKoscService.findAll().subscribe(etatDemandeKoscs => {
                 this.etatDemandeKoscs = etatDemandeKoscs;
                 this.searchOrdreKosc.etatDemandeKoscVos = this.etatDemandeKoscs.filter(e => etatNonDesire.indexOf(e.code) != -1);
-                console.log( this.searchOrdreKosc.etatDemandeKoscVos);
+                console.log(this.searchOrdreKosc.etatDemandeKoscVos);
             }, error => console.log(error))
             : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
 
     }
 
+    async etatToOkOrKo(ordreKosc: OrdreKoscVo, etat: string) {
+         (await this.ordreKoscService.findByIdWithAssociatedList2(ordreKosc)).subscribe(res => {
+            this.selectedOrdreKosc = res;
+            this.selectedOrdreKosc.etatDemandeKoscVo.code = etat;
+            console.log(this.selectedOrdreKosc)
+             this.updateEtat();
+        }, error => console.log(error))
+
+    }
+
+    updateEtat() {
+        this.ordreKoscService.updateEtat().subscribe(result => {
+            console.log(result)
+            let index = this.ordreKoscs.findIndex(e => e.id == result.id)
+            this.ordreKoscs[index] = result;
+        })
+
+    }
 }
