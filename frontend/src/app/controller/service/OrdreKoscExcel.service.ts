@@ -21,15 +21,13 @@ export class OrdreKoscExcelService {
     constructor(private ordreKoscService: OrdreKoscService, private messageService: MessageService) {
     }
 
-    public importAll(event: any): Observable<any>{
-        return  new Observable<any>(sub => {
-            this.readDataObservable(event).subscribe(
-                next => {
-                    sub.next(this.importAllExc(next));
-                }
-            );
-        })
-
+    public importAll(event: any) {
+        this.readDataObservable(event).subscribe(
+            next => {
+                console.log("haaa next  ==> "+next)
+                this.importAllExc(next);
+            }
+        );
     }
 
     public importerDataBase(event: any):Observable<any> {
@@ -161,35 +159,31 @@ export class OrdreKoscExcelService {
         });
     }
 
-    private importAllExc(koscOrdrers: OrdreKoscVo[]):Observable<any> {
-        return new Observable(sub => {
-            this.ordreKoscService.importerAll(koscOrdrers).subscribe(
-                response => {
-                    if (response.length == 0) {
-                        sub.next();
-                        this.messageService.add({
-                            severity: 'success',
-                            summary: 'Succès',
-                            detail: 'Kosc Order importé avec Succès',
-                            life: 3000
-                        });
-                    } else {
-                        sub.error();
-                        this.ordreKoscService.ordreKoscs = response;
-                        let message = this.constructMessage(response);
-                        this.messageService.add({
-                            severity: 'error',
-                            summary: 'erreur',
-                            detail: ''+message
-                        });
-                    }
-                },
-                error => {
-                    this.messageService.add({severity: 'error', summary: 'erreur', detail: 'problème d\'importation'});
+    private importAllExc(koscOrdrers: OrdreKoscVo[]) {
+        console.log("readAll haaaa koscOrdrers =========== " + koscOrdrers);
+        this.ordreKoscService.importerAll(koscOrdrers).subscribe(
+            response => {
+                if (response.length == 0) {
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Succès',
+                        detail: 'Kosc Order importé avec Succès',
+                        life: 3000
+                    });
+                } else {
+                    this.ordreKoscService.ordreKoscs = response;
+                    let message = this.constructMessage(response);
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'erreur',
+                        detail: ''+message
+                    });
                 }
-            );
-        })
-
+            },
+            error => {
+                this.messageService.add({severity: 'error', summary: 'erreur', detail: 'problème d\'importation'});
+            }
+        );
     }
 
     private readExcel(event: any) {
