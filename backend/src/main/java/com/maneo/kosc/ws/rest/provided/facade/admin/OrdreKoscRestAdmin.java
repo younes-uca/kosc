@@ -104,6 +104,13 @@ public class OrdreKoscRestAdmin {
         return ordreKoscConverter.toVo(ordreKosc);
     }
 
+    @PostMapping("/send/autre")
+    public OrdreKoscVo sendAutreEmail(@RequestBody OrdreKoscVo ordreKoscVo) {
+        OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
+        emailingOrderKoscAdminService.sendAutreEmail(ordreKosc);
+        return ordreKoscConverter.toVo(ordreKosc);
+    }
+
     @PostMapping("/send/mail/replanification/report")
     public OrdreKoscVo sendMailReplanificationReport(@RequestBody OrdreKoscVo ordreKoscVo) {
         OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);

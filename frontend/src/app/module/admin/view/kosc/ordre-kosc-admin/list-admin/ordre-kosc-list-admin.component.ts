@@ -72,6 +72,10 @@ export class OrdreKoscListAdminComponent implements OnInit {
     get findByCriteriaShow(): boolean {
         return this._findByCriteriaShow;
     }
+    set findByCriteriaShow(value: boolean) {
+        this._findByCriteriaShow = value;
+    }
+
     // declarations
     showSpinner = false;
     private _findByCriteriaShow = false;
@@ -205,12 +209,24 @@ export class OrdreKoscListAdminComponent implements OnInit {
     }
 
      importAll(event: any) {
+         this.showSpinner = true;
     this.ordreKoscExcelService.importAll(event);
     this.searchRequest();
+         this.showSpinner = false;
      }
 
     importerDataBase(event:any){
-        this.ordreKoscExcelService.importerDataBase(event);
+        this.showSpinner = true;
+        this.ordreKoscExcelService.importerDataBase(event).subscribe({
+            next: () => {
+                this.showSpinner = false;
+
+
+            },
+            error: () => {
+                this.showSpinner = false;
+            }
+        });
     }
 
     showBasicDialog() {

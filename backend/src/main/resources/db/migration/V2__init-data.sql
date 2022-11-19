@@ -68,7 +68,7 @@ INSERT INTO `chercheur` (`id`, `account_non_expired`, `account_non_locked`, `cre
 --
 
 INSERT INTO `default_template_configuration` (`id`, `email_kosc`, `email_maneo`, `enabled`, `template_email_client_injoinable`, `template_email_client_injoinable_kosc`, `template_email_cloture`, `template_email_confirmation_client`, `template_email_cri`, `template_email_ftl`, `template_email_mauvais_contact`, `template_email_planification`, `template_email_refus`, `template_email_replanification`, `template_email_report`, `template_suivi`) VALUES
-    (10000, 'kosc@gmail.com', 'maneo.ingenierie@gmail.com', 0, 10000, 10000, NULL, 10000, NULL, NULL, 10000, 10000, 10000, 10000, 10000, NULL);
+    (10000, 'kosc@gmail.com', 'maneo.ingenierie@gmail.com', 0, 10001, 10000, NULL, 10000, NULL, NULL, 10000, 10001, 10000, 10000, 10000, NULL);
 
 --
 -- DÃ©chargement des donnÃ©es de la table `default_template_configuration_seq`
@@ -658,7 +658,9 @@ INSERT INTO `technicien` (`id`, `account_non_expired`, `account_non_locked`, `cr
 --
 
 INSERT INTO `template_email_client_injoinable` (`id`, `corps`, `libelle`, `objet`) VALUES
-    (10000, '` date debut de  traitement : \\n${this.datePipe.transform( this.selectedOrdreKosc.dateDebutTraitement, \'dd/MM/yyyy hh:mm\')}\\n end custumor first name :\\n${this.selectedOrdreKosc.endCustumorFirstName}`', 'client injoignable', '` Bonjour ${this.selectedOrdreKosc.endCustumorName}`');
+    (10000, '` date debut de  traitement : \\n${this.datePipe.transform( this.selectedOrdreKosc.dateDebutTraitement, \'dd/MM/yyyy hh:mm\')}\\n end custumor first name :\\n${this.selectedOrdreKosc.endCustumorFirstName}`', 'client injoignable', '` Bonjour ${this.selectedOrdreKosc.endCustumorName}`'),
+    (10001, '`Bonjour,\\n\\nNous avons tenté de vous joindre à plusieurs reprises mais sans succès au numéro : \'${this.selectedOrdreKosc.endCustumorContactPhone}\'/\'${this.selectedOrdreKosc.endCustumorContactCellPhone}\'\\n\\nMerci de revenir vers nous par mail et de nous recontacter au  {Téléphone de l\'utilisateur}  pour planifier un rendez-vous.\\n\\nBien Cordialement\\n{Nom d\'utilisateur}\\nc.a@maneoreseaux.com\\n{Téléphone de l\'utilisateur}`', 'Client Injoignable email', '`${this.selectedOrdreKosc.reference}_${this.selectedOrdreKosc.referenceWorkOrder}_${this.selectedOrdreKosc.endCustumorContactLastName}&${this.selectedOrdreKosc.endCustumorContactFirstName}`');
+
 
 --
 -- DÃ©chargement des donnÃ©es de la table `template_email_client_injoinable_kosc`
@@ -742,7 +744,9 @@ INSERT INTO `template_email_mauvais_contact_seq` (`next_val`) VALUES
 --
 
 INSERT INTO `template_email_planification` (`id`, `corps`, `libelle`, `objet`) VALUES
-    (10000, '` date Prise Rdv :\\n${ this.datePipe.transform( this.selectedOrdreKosc.datePriseRdv, \'dd/MM/yyyy hh:mm\')}\\n \nend Custumor Contact Last Name : \\n${this.selectedOrdreKosc.endCustumorContactLastName}`', 'planification', '` Bonjour ${ this.selectedOrdreKosc.endCustumorName}`');
+    (10000, '` date Prise Rdv :\\n${ this.datePipe.transform( this.selectedOrdreKosc.datePriseRdv, \'dd/MM/yyyy hh:mm\')}\\n \nend Custumor Contact Last Name : \\n${this.selectedOrdreKosc.endCustumorContactLastName}`', 'planification', '` Bonjour ${ this.selectedOrdreKosc.endCustumorName}`'),
+    (10001, '`Bonjour,\\n\\nVeuillez trouver ci-dessous les éléments  prise de RDV concernant L’OT en objet\\n\\nREFERENCE DOSSIER : ${this.selectedOrdreKosc.referenceWorkOrder}\\nREFERENCE DE L\'INTERVENTION : ${this.selectedOrdreKosc.reference}\\nOPERATEUR EX : ${this.selectedOrdreKosc.operatorVo?.libelle}\\nSTATUT DE CLOTURE CLIENT : SO\\nSTATUT RDV : RDV RACCO PRIS\\nDATE RDV : ${this.datePipe.transform(this.selectedOrdreKosc.dateInterventionTechniqueDebut)}\\nHEURE RDV : {creneau de RDV}\\nPTO EXISTANTE SUR SITE SELON CLIENT :\\nType D \'INTERVENTION PLANIFIEE : ${this.selectedOrdreKosc.supplierServiceCode}\\nREMARQUE DU CONTACT SITE À RACCORDER OU CA :  ${this.selectedOrdreKosc.commentaireClient}\\n\\nBien Cordialement\\n{Nom d\'utilisateur}\\nc.a@maneoreseaux.com\\n{Téléphone de l\'utilisateur}`', 'Planification email', '`${this.selectedOrdreKosc.reference}_${this.selectedOrdreKosc.referenceWorkOrder}_${this.selectedOrdreKosc.operatorVo?.libelle}_${this.selectedOrdreKosc.endCustumorContactLastName}`');
+
 
 --
 -- DÃ©chargement des donnÃ©es de la table `template_email_planification_seq`

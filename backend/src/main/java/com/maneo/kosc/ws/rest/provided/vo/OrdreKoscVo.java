@@ -187,6 +187,12 @@ public class OrdreKoscVo {
     private String toClientInjoinable;
     private Boolean envoyeClientInjoinable;
     private String dateEnvoiClientInjoinable;
+    private String objetAutre;
+    private String corpsAutre;
+    private String fromAutre;
+    private String toAutre;
+    private Boolean envoyeAutre;
+    private String dateEnvoiAutre;
     private String objetClientInjoinableKosc;
     private String corpsClientInjoinableKosc;
     private String fromClientInjoinableKosc;
@@ -248,6 +254,8 @@ public class OrdreKoscVo {
     private String dateInterventionTechniqueFinMin;
     private String dateEnvoiClientInjoinableMax;
     private String dateEnvoiClientInjoinableMin;
+    private String dateEnvoiAutreMax;
+    private String dateEnvoiAutreMin;
     private String dateEnvoiClientInjoinableKoscMax;
     private String dateEnvoiClientInjoinableKoscMin;
     private String dateEnvoiClotureMax;
@@ -2182,6 +2190,70 @@ public class OrdreKoscVo {
 
     public void setDateEnvoiClientInjoinableKoscMin(String dateEnvoiClientInjoinableKoscMin) {
         this.dateEnvoiClientInjoinableKoscMin = dateEnvoiClientInjoinableKoscMin;
+    }
+
+    public String getObjetAutre() {
+        return objetAutre;
+    }
+
+    public void setObjetAutre(String objetAutre) {
+        this.objetAutre = objetAutre;
+    }
+
+    public String getCorpsAutre() {
+        return corpsAutre;
+    }
+
+    public void setCorpsAutre(String corpsAutre) {
+        this.corpsAutre = corpsAutre;
+    }
+
+    public String getFromAutre() {
+        return fromAutre;
+    }
+
+    public void setFromAutre(String fromAutre) {
+        this.fromAutre = fromAutre;
+    }
+
+    public String getToAutre() {
+        return toAutre;
+    }
+
+    public void setToAutre(String toAutre) {
+        this.toAutre = toAutre;
+    }
+
+    public Boolean getEnvoyeAutre() {
+        return envoyeAutre;
+    }
+
+    public void setEnvoyeAutre(Boolean envoyeAutre) {
+        this.envoyeAutre = envoyeAutre;
+    }
+
+    public String getDateEnvoiAutre() {
+        return dateEnvoiAutre;
+    }
+
+    public void setDateEnvoiAutre(String dateEnvoiAutre) {
+        this.dateEnvoiAutre = dateEnvoiAutre;
+    }
+
+    public String getDateEnvoiAutreMax() {
+        return dateEnvoiAutreMax;
+    }
+
+    public void setDateEnvoiAutreMax(String dateEnvoiAutreMax) {
+        this.dateEnvoiAutreMax = dateEnvoiAutreMax;
+    }
+
+    public String getDateEnvoiAutreMin() {
+        return dateEnvoiAutreMin;
+    }
+
+    public void setDateEnvoiAutreMin(String dateEnvoiAutreMin) {
+        this.dateEnvoiAutreMin = dateEnvoiAutreMin;
     }
 
     public String getDateEnvoiClotureMax() {
