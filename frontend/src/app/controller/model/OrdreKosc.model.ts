@@ -197,6 +197,12 @@ export class OrdreKoscVo {
     public toClientInjoinable: string;
     public envoyeClientInjoinable: null | boolean;
     public dateEnvoiClientInjoinable: Date;
+    public objetAutre: string;
+    public corpsAutre: string;
+    public fromAutre: string;
+    public toAutre: string;
+    public envoyeAutre: null | boolean;
+    public dateEnvoiAutre: Date;
     public objetClientInjoinableKosc: string;
     public corpsClientInjoinableKosc: string;
     public fromClientInjoinableKosc: string;
@@ -258,6 +264,8 @@ export class OrdreKoscVo {
     public dateInterventionTechniqueFinMin: string;
     public dateEnvoiClientInjoinableMax: string;
     public dateEnvoiClientInjoinableMin: string;
+    public dateEnvoiAutreMax: string;
+    public dateEnvoiAutreMin: string;
     public dateEnvoiClientInjoinableKoscMax: string;
     public dateEnvoiClientInjoinableKoscMin: string;
     public dateEnvoiClotureMax: string;

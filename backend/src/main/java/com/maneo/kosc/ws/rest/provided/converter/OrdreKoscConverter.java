@@ -429,6 +429,20 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
                 item.setEnvoyeClientInjoinable(vo.getEnvoyeClientInjoinable());
             if (StringUtil.isNotEmpty(vo.getDateEnvoiClientInjoinable()))
                 item.setDateEnvoiClientInjoinable(DateUtil.parse(vo.getDateEnvoiClientInjoinable()));
+
+            if (StringUtil.isNotEmpty(vo.getObjetAutre()))
+                item.setObjetAutre(vo.getObjetAutre());
+            if (StringUtil.isNotEmpty(vo.getCorpsAutre()))
+                item.setCorpsAutre(vo.getCorpsAutre());
+            if (StringUtil.isNotEmpty(vo.getFromAutre()))
+                item.setFromAutre(vo.getFromAutre());
+            if (StringUtil.isNotEmpty(vo.getToAutre()))
+                item.setToAutre(vo.getToAutre());
+            if (vo.getEnvoyeAutre() != null)
+                item.setEnvoyeAutre(vo.getEnvoyeAutre());
+            if (StringUtil.isNotEmpty(vo.getDateEnvoiAutre()))
+                item.setDateEnvoiAutre(DateUtil.parse(vo.getDateEnvoiAutre()));
+
             if (StringUtil.isNotEmpty(vo.getObjetClientInjoinableKosc()))
                 item.setObjetClientInjoinableKosc(vo.getObjetClientInjoinableKosc());
             if (StringUtil.isNotEmpty(vo.getCorpsClientInjoinableKosc()))
@@ -510,7 +524,7 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
             if (vo.getSourceReplanificationVo() != null && this.sourceReplanification)
                 item.setSourceReplanification(sourceReplanificationConverter.toItem(vo.getSourceReplanificationVo()));
             if (StringUtil.isNotEmpty(vo.getDateDernierAppel()))
-                item.setDateDernierAppel(DateUtil.parse(vo.getDateDernierAppel()));
+                item.setDateDernierAppel(DateUtil.parseTimestampUniversalFormat(vo.getDateDernierAppel()));
             if (StringUtil.isNotEmpty(vo.getNumeroDernierAppel()))
                 item.setNumeroDernierAppel(NumberUtil.toLong(vo.getNumeroDernierAppel()));
 
@@ -998,6 +1012,7 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
                 vo.setDateInterventionTechniqueDebut(DateUtil.formateDate(item.getDateInterventionTechniqueDebut()));
             if (item.getDateInterventionTechniqueFin() != null)
                 vo.setDateInterventionTechniqueFin(DateUtil.formateDate(item.getDateInterventionTechniqueFin()));
+
             if (StringUtil.isNotEmpty(item.getObjetClientInjoinable()))
                 vo.setObjetClientInjoinable(item.getObjetClientInjoinable());
 
@@ -1014,6 +1029,27 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
                 vo.setEnvoyeClientInjoinable(item.getEnvoyeClientInjoinable());
             if (item.getDateEnvoiClientInjoinable() != null)
                 vo.setDateEnvoiClientInjoinable(DateUtil.formateDate(item.getDateEnvoiClientInjoinable()));
+
+
+            if (StringUtil.isNotEmpty(item.getObjetAutre()))
+                vo.setObjetAutre(item.getObjetAutre());
+
+            if (StringUtil.isNotEmpty(item.getCorpsAutre()))
+                vo.setCorpsAutre(item.getCorpsAutre());
+
+            if (StringUtil.isNotEmpty(item.getFromAutre()))
+                vo.setFromAutre(item.getFromAutre());
+
+            if (StringUtil.isNotEmpty(item.getToAutre()))
+                vo.setToAutre(item.getToAutre());
+
+            if (item.getEnvoyeAutre() != null)
+                vo.setEnvoyeAutre(item.getEnvoyeAutre());
+
+            if (item.getDateEnvoiAutre() != null)
+                vo.setDateEnvoiAutre(DateUtil.formateDate(item.getDateEnvoiAutre()));
+
+
             if (StringUtil.isNotEmpty(item.getObjetClientInjoinableKosc()))
                 vo.setObjetClientInjoinableKosc(item.getObjetClientInjoinableKosc());
 

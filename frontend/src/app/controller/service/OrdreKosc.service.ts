@@ -131,8 +131,11 @@ export class OrdreKoscService {
     }
 
     public sendRefusClientEmail(): Observable<OrdreKoscVo> {
-
         return this.http.post<OrdreKoscVo>(this.API + 'send/refus/client', {...this.selectedOrdreKosc});
+    }
+
+    public sendAutreEmail(): Observable<OrdreKoscVo> {
+        return this.http.post<OrdreKoscVo>(this.API + 'send/autre', {...this.selectedOrdreKosc});
     }
 
     public sendMailReplanificationReport(): Observable<OrdreKoscVo> {
@@ -154,6 +157,10 @@ export class OrdreKoscService {
             ...this.selectedOrdreKosc,
             dateEnvoiSuivi: moment(this.selectedOrdreKosc.dateEnvoiSuivi).format('YYYY-MM-DD')
         });
+    }
+
+    public updateNonJoignable(): Observable<OrdreKoscVo> {
+        return this.http.put<OrdreKoscVo>(this.API + 'non-joignable', this.selectedOrdreKosc);
     }
 
     delete(ordreKosc: OrdreKoscVo) {
@@ -377,7 +384,4 @@ export class OrdreKoscService {
     set searchOrdreKoscSuiviRdv(value: OrdreKoscVo) {
         this._searchOrdreKoscSuiviRdv = value;
     }
-
-
-
 }

@@ -13,6 +13,8 @@ public interface EmailingOrderKoscAdminService {
 
     void sendRefusClientEmail(OrdreKosc ordreKosc);
 
+    void sendAutreEmail(OrdreKosc ordreKosc);
+
     void sendMauvaisContactEmail(OrdreKosc ordreKosc);
 
     void sendMailReplanificationReport(OrdreKosc ordreKosc);

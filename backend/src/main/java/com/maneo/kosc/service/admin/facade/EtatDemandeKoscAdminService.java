@@ -46,5 +46,5 @@ public interface EtatDemandeKoscAdminService extends AbstractService<EtatDemande
     int deleteByCode(String code);
 
 
-
+    String convertId(List<EtatDemandeKoscVo> etatDemandeKoscVos);
 }

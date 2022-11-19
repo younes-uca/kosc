@@ -536,6 +536,23 @@ public class OrdreKosc {
     private Date dateEnvoiClientInjoinable;
     @Lob
     @Column(columnDefinition = "TEXT")
+    private String objetAutre;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String corpsAutre;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String fromAutre;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String toAutre;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean envoyeAutre = false;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date dateEnvoiAutre;
+    @Lob
+    @Column(columnDefinition = "TEXT")
     private String objetClientInjoinableKosc;
     @Lob
     @Column(columnDefinition = "TEXT")
@@ -2411,6 +2428,54 @@ public class OrdreKosc {
 
     public void setNbrHeureDateSubmissionAndNow(Long nbrHeureDateSubmissionAndNow) {
         this.nbrHeureDateSubmissionAndNow = nbrHeureDateSubmissionAndNow;
+    }
+
+    public String getObjetAutre() {
+        return objetAutre;
+    }
+
+    public void setObjetAutre(String objetAutre) {
+        this.objetAutre = objetAutre;
+    }
+
+    public String getCorpsAutre() {
+        return corpsAutre;
+    }
+
+    public void setCorpsAutre(String corpsAutre) {
+        this.corpsAutre = corpsAutre;
+    }
+
+    public String getFromAutre() {
+        return fromAutre;
+    }
+
+    public void setFromAutre(String fromAutre) {
+        this.fromAutre = fromAutre;
+    }
+
+    public String getToAutre() {
+        return toAutre;
+    }
+
+    public void setToAutre(String toAutre) {
+        this.toAutre = toAutre;
+    }
+
+    public Boolean getEnvoyeAutre() {
+        return envoyeAutre;
+    }
+
+    public void setEnvoyeAutre(Boolean envoyeAutre) {
+        this.envoyeAutre = envoyeAutre;
+    }
+
+    public Date getDateEnvoiAutre() {
+        return dateEnvoiAutre;
+    }
+
+    public void setDateEnvoiAutre(Date dateEnvoiAutre) {
+        this.dateEnvoiAutre = dateEnvoiAutre;
     }
 }
 

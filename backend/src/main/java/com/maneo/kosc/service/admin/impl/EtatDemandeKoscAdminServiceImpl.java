@@ -82,6 +82,17 @@ public class EtatDemandeKoscAdminServiceImpl extends AbstractServiceImpl<EtatDem
         return res;
     }
 
+    @Override
+    public String convertId(List<EtatDemandeKoscVo> etatDemandeKoscVos) {
+        String res="";
+        if(ListUtil.isEmpty(etatDemandeKoscVos)){
+            return res;
+        }
+        for(EtatDemandeKoscVo etatDemandeKoscVo: etatDemandeKoscVos){
+            res+="'"+etatDemandeKoscVo.getId()+"' ,";
+        }
+        return  res.substring(0,res.length()-2);
+    }
 
     @Override
     public EtatDemandeKosc update(EtatDemandeKosc etatDemandeKosc) {

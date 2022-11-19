@@ -144,6 +144,28 @@ public class EmailingOrderKoscAdminServiceImpl  implements EmailingOrderKoscAdmi
     }
 
     @Override
+    public void sendAutreEmail(OrdreKosc ordreKosc) {
+        LocalDate todaysDate = LocalDate.now();
+        try {
+            EmailDetails emailDetails = new EmailDetails();
+            emailDetails.setFrom(ordreKosc.getFromAutre());
+            emailDetails.setTo(ordreKosc.getToAutre());
+            emailDetails.setObjet(ordreKosc.getObjetAutre());
+            emailDetails.setCorps(ordreKosc.getCorpsAutre());
+            emailSenderAdminService.sendEmail(emailDetails);
+            ordreKosc.setEnvoyeAutre(true);
+            ordreKosc.setDateEnvoiAutre(DateUtil.toDate(todaysDate));
+            ordreKoscDao.save(ordreKosc);
+
+        } catch (Exception exception) {
+            OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
+            ordreKosc.setEnvoyeAutre(false);
+            ordreKosc.setDateEnvoiAutre(null);
+            ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
+        }
+    }
+
+    @Override
     public void sendMauvaisContactEmail(OrdreKosc ordreKosc) {
         LocalDate todaysDate = LocalDate.now();
         try {

@@ -30,67 +30,73 @@ export class OrdreKoscExcelService {
         );
     }
 
-    public importerDataBase(event: any) {
-        this.showSpinner = true;
+    public importerDataBase(event: any):Observable<any> {
+        // this.showSpinner = true;
 
-        console.log(event.target.files);
-        /* wire up file reader */
-        const target: DataTransfer = <DataTransfer>(event.target);
-        if (target.files.length !== 1) {
-            throw new Error('Cannot use multiple files');
-        }
-        const reader: FileReader = new FileReader();
-        reader.readAsBinaryString(target.files[0]);
-        reader.onload = (e: any) => {
-            /* create workbook */
-            const binarystr: string = e.target.result;
-            const wb: XLSX.WorkBook = XLSX.read(binarystr, {type: 'binary'});
-
-            /* selected the first sheet */
-            const wsname: string = wb.SheetNames[0];
-            const ws: XLSX.WorkSheet = wb.Sheets[wsname];
-
-            /* save data */
-            const data = XLSX.utils.sheet_to_json(ws); // to get 2d array pass 2nd parameter as object {header: 1}
-            console.log(data); // Data will be logged in array format containing objects
-
-            let koscOrdresWork = new Array<OrdreKoscVo>();
-            for (let i = 0; i < data.length; i++) {
-                let myOrdreKoscWork = this.constructDataBase(data, i);
-                koscOrdresWork.push(myOrdreKoscWork);
+        return new Observable(sub => {
+            console.log(event.target.files);
+            /* wire up file reader */
+            const target: DataTransfer = <DataTransfer>(event.target);
+            if (target.files.length !== 1) {
+                throw new Error('Cannot use multiple files');
             }
-            console.log(koscOrdresWork);
-            this.ordreKoscService.ordreKoscs = koscOrdresWork;
+            const reader: FileReader = new FileReader();
+            reader.readAsBinaryString(target.files[0]);
+            reader.onload = (e: any) => {
+                /* create workbook */
+                const binarystr: string = e.target.result;
+                const wb: XLSX.WorkBook = XLSX.read(binarystr, {type: 'binary'});
 
-            this.ordreKoscService.importerDataBase(this.ordreKoscService.ordreKoscs).subscribe(
-                response => {
-                    if (response.length == 0) {
-                        this.messageService.add({
-                            severity: 'success',
-                            summary: 'Succès',
-                            detail: 'La Base De Données importé avec Succès',
-                            life: 3000
-                        });
-                        this.ordreKoscService.searchOrdreKosc.referenceWorkOrder = koscOrdresWork[0].referenceWorkOrder;
-                        // this.searchRequest();
-                    } else {
+                /* selected the first sheet */
+                const wsname: string = wb.SheetNames[0];
+                const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+                /* save data */
+                const data = XLSX.utils.sheet_to_json(ws); // to get 2d array pass 2nd parameter as object {header: 1}
+                console.log(data); // Data will be logged in array format containing objects
+
+                let koscOrdresWork = new Array<OrdreKoscVo>();
+                for (let i = 0; i < data.length; i++) {
+                    let myOrdreKoscWork = this.constructDataBase(data, i);
+                    myOrdreKoscWork.type ='kosc';
+                    koscOrdresWork.push(myOrdreKoscWork);
+                }
+                console.log(koscOrdresWork);
+                this.ordreKoscService.ordreKoscs = koscOrdresWork;
+
+                this.ordreKoscService.importerDataBase(this.ordreKoscService.ordreKoscs).subscribe(
+                    response => {
+                        if (response.length == 0) {
+                            sub.next();
+                            this.messageService.add({
+                                severity: 'success',
+                                summary: 'Succès',
+                                detail: 'La Base De Données importé avec Succès',
+                                life: 3000
+                            });
+                            this.ordreKoscService.searchOrdreKosc.referenceWorkOrder = koscOrdresWork[0].referenceWorkOrder;
+                            // this.searchRequest();
+                        } else {
+                            sub.error();
+
+                            this.messageService.add({
+                                severity: 'error',
+                                summary: 'erreur',
+                                detail: 'problème d\'importation : reference existe déjà'
+                            });
+                        }
+                    },
+                    error => {
                         this.messageService.add({
                             severity: 'error',
                             summary: 'erreur',
-                            detail: 'problème d\'importation : reference existe déjà'
+                            detail: 'problème d\'importation'
                         });
                     }
-                },
-                error => {
-                    this.messageService.add({
-                        severity: 'error',
-                        summary: 'erreur',
-                        detail: 'problème d\'importation'
-                    });
-                }
-            );
-        }
-        this.showSpinner = false;
+                );
+            }
+        })
+
 
     }
 
@@ -770,135 +776,135 @@ export class OrdreKoscExcelService {
     }
 
     private constructDataBase(data: any, i: number) {
-        let myOrdreKoscWork = new OrdreKoscVo();
+        let myOrdreKoscData = new OrdreKoscVo();
         // myOrdreKoscWork.etatDemandeKoscVo = new EtatDemandeKoscVo();
-        if (myOrdreKoscWork.etatDemandeKoscVo == null){
-            myOrdreKoscWork.etatDemandeKoscVo = new EtatDemandeKoscVo();
+        if (myOrdreKoscData.etatDemandeKoscVo == null){
+            myOrdreKoscData.etatDemandeKoscVo = new EtatDemandeKoscVo();
         }
         //save technicien
-        if( myOrdreKoscWork.technicienVo==null){
-            myOrdreKoscWork.technicienVo=new TechnicienVo();
+        if( myOrdreKoscData.technicienVo==null){
+            myOrdreKoscData.technicienVo=new TechnicienVo();
         }
-        myOrdreKoscWork.technicienVo.identifiant=data[i]['tech_reference'];
-        console.log( "indentifiant:"+ myOrdreKoscWork.technicienVo.identifiant);
+        myOrdreKoscData.technicienVo.identifiant=data[i]['tech_reference'];
+        console.log( "indentifiant:"+ myOrdreKoscData.technicienVo.identifiant);
 
         //save Operateur
-        if( myOrdreKoscWork.operatorVo==null){
-            myOrdreKoscWork.operatorVo=new OperatorVo();
+        if( myOrdreKoscData.operatorVo==null){
+            myOrdreKoscData.operatorVo=new OperatorVo();
         }
-        myOrdreKoscWork.operatorVo.reference=data[i]['opt_reference'];
+        myOrdreKoscData.operatorVo.reference=data[i]['opt_reference'];
 
-        if (myOrdreKoscWork.departementVo == null){
-            myOrdreKoscWork.departementVo = new DepartementVo();
+        if (myOrdreKoscData.departementVo == null){
+            myOrdreKoscData.departementVo = new DepartementVo();
         }
-        myOrdreKoscWork.departementVo.code = data[i]['zip_code']; //////zip code
+        myOrdreKoscData.departementVo.code = data[i]['zip_code']; //////zip code
 
-        myOrdreKoscWork.etatDemandeKoscVo.code = data[i]['EtatCrCommandePrise'];
+        myOrdreKoscData.etatDemandeKoscVo.code = 'initialisation-wo';
 
-        myOrdreKoscWork.reference = data[i]['kosc_order_ref'];
-        myOrdreKoscWork.referenceWorkOrder = data[i]['work_order_ref'];
-        myOrdreKoscWork.workOrderType = data[i]['work_order_type'];
-        myOrdreKoscWork.supplierServiceCode = data[i]['supplier_service_code'];
-        console.log(myOrdreKoscWork.submissionDate);
-        myOrdreKoscWork.submissionDate =this.convertDate(data[i]['submission_date']);
-        console.log(myOrdreKoscWork.submissionDate);
-        myOrdreKoscWork.productCode = data[i]['product_code'];
-        myOrdreKoscWork.productLabel = data[i]['product_label'];
-        myOrdreKoscWork.provider = data[i]['provider'];
-        myOrdreKoscWork.providerProduct = data[i]['provider_product'];
-        myOrdreKoscWork.providerFileType = data[i]['provider_file_type'];
-        myOrdreKoscWork.existingOtp = data[i]['existing_otp'];
-        myOrdreKoscWork.profile = data[i]['profile'];
-        myOrdreKoscWork.company = data[i]['company_name'];
-        myOrdreKoscWork.endCustumorSiret = data[i]['siret'];
-        myOrdreKoscWork.endCustumorFirstName = data[i]['first_name'];
-        myOrdreKoscWork.endCustumorLastName = data[i]['last_name'];
-        myOrdreKoscWork.endCustumorStreetNumber = data[i]['street_number'];
-        myOrdreKoscWork.endCustumorStreetName = data[i]['street_name'];
-        myOrdreKoscWork.endCustumorCity = data[i]['city'];
-        myOrdreKoscWork.endCustumorBuilding = data[i]['building_name'];
-        myOrdreKoscWork.endCustumorStairs = data[i]['stairs'];
-        myOrdreKoscWork.endCustumorFloor = data[i]['floor'];
-        myOrdreKoscWork.endCustumorContactFirstName = data[i]['end_customer_contact_first_name'];
-        myOrdreKoscWork.endCustumorContactLastName = data[i]['end_customer_contact_last_name'];
-        myOrdreKoscWork.endCustumorContactPhone = data[i]['end_customer_contact_phone'];
-        myOrdreKoscWork.endCustumorContactCellPhone = data[i]['end_customer_contact_cellphone'];
-        myOrdreKoscWork.endCustumorContactEmail = data[i]['end_customer_contact_email'];
-        myOrdreKoscWork.providerSlId = data[i]['provider_slid'];
-        myOrdreKoscWork.referenceCommandePriseInterneOC = data[i]['ReferenceCommandePriseInterneOC'];
-        myOrdreKoscWork.referencePrise = data[i]['ReferencePrise'];
-        myOrdreKoscWork.referencePrestationPrise = data[i]['ReferencePrestationPrise'];
-        myOrdreKoscWork.commantaireCloture = data[i]['Commentaire']; ////////?????
-        myOrdreKoscWork.referencePm = data[i]['Reference Pm'];
-        myOrdreKoscWork.referencePmTechnique = data[i]['ReferencePmTechnique'];
-        myOrdreKoscWork.localisationPm = data[i]['LocalisationPm'];
-        myOrdreKoscWork.referencePbo = data[i]['ReferencePBO'];
-        myOrdreKoscWork.localisationPbo = data[i]['LocalisationPBO'];
-        myOrdreKoscWork.coordonnePboY = data[i]['CoordonneePBOY'];
-        myOrdreKoscWork.hauteurPbo = data[i]['HauteurPBO'];
-        myOrdreKoscWork.typeMaterielPbo = data[i]['TypeMaterielPBO'];
-        myOrdreKoscWork.typePbo = data[i]['TypePBO'];
-        myOrdreKoscWork.conditionSyndics = data[i]['ConditionsSyndic'];
-        myOrdreKoscWork.typeRacordementPboPto = data[i]['TypeRaccoPBPTO'];
-        myOrdreKoscWork.autreInfosPboPto = data[i]['AutresInfosPBOPTO'];
-        myOrdreKoscWork.codeAccesImmeuble = data[i]['CodeAccesImmeuble'];
-        myOrdreKoscWork.contacteImmeuble = data[i]['ContactsImmeuble'];
-        myOrdreKoscWork.pmaAccessible = data[i]['Pmaccessible'];
-        myOrdreKoscWork.infoObtentionCle = data[i]['InfoObtentionCle'];
-        myOrdreKoscWork.localeIpm = data[i]['CodeLocalPM'];
-        myOrdreKoscWork.contactsSyndic = data[i]['ContactsSyndic'];
-        myOrdreKoscWork.oc1 = data[i]['OC 1'];
-        myOrdreKoscWork.nomModulePm1 = data[i]['NomModulePm NÂ°1'];
-        myOrdreKoscWork.positionModulePm1 = data[i]['PositionModulePm NÂ°1'];
-        myOrdreKoscWork.referenceCableModulePm1 = data[i]['ReferenceCableModulePm NÂ°1'];
-        myOrdreKoscWork.informationFibreModulePm1 = data[i]['InformationFibreModulePm NÂ°1'];
-        myOrdreKoscWork.referenceCablePbo1 = data[i]['ReferenceCablePBO NÂ°1'];
-        myOrdreKoscWork.informationTubePbo1 = data[i]['InformationTubePBO NÂ°1'];
-        myOrdreKoscWork.informationFibrePbo1 = data[i]['InformationFibrePBO NÂ°1'];
-        myOrdreKoscWork.connecteurPriseNumero1 = data[i]['ConnecteurPriseNumero NÂ°1'];
-        myOrdreKoscWork.connecteurPriseCouleur1 = data[i]['ConnecteurPriseCouleur NÂ°1'];
-        myOrdreKoscWork.oc2 = data[i]['OC 2'];
-        myOrdreKoscWork.nomModulePm2 = data[i]['NomModulePm NÂ°2'];
-        myOrdreKoscWork.positionModulePm2 = data[i]['PositionModulePm NÂ°2'];
-        myOrdreKoscWork.referenceCableModulePm2 = data[i]['ReferenceCableModulePm NÂ°2'];
-        myOrdreKoscWork.informationFibreModulePm2 = data[i]['InformationFibreModulePm NÂ°2'];
-        myOrdreKoscWork.referenceCablePbo2 = data[i]['ReferenceCablePBO NÂ°2'];
-        myOrdreKoscWork.informationTubePbo2 = data[i]['InformationTubePBO NÂ°2'];
-        myOrdreKoscWork.informationFibrePbo2 = data[i]['InformationFibrePBO NÂ°2'];
-        myOrdreKoscWork.connecteurPriseNumero2 = data[i]['ConnecteurPriseNumero NÂ°2'];
-        myOrdreKoscWork.connecteurPriseCouleur2 = data[i]['ConnecteurPriseCouleur NÂ°2'];
-        myOrdreKoscWork.oc3 = data[i]['OC 3'];
-        myOrdreKoscWork.nomModulePm3 = data[i]['NomModulePm NÂ°3'];
-        myOrdreKoscWork.positionModulePm3 = data[i]['PositionModulePm NÂ°3'];
-        myOrdreKoscWork.referenceCableModulePm3 = data[i]['ReferenceCableModulePm NÂ°3'];
-        myOrdreKoscWork.informationFibreModulePm3 = data[i]['InformationFibreModulePm NÂ°3'];
-        myOrdreKoscWork.referenceCablePbo3 = data[i]['ReferenceCablePBO NÂ°3'];
-        myOrdreKoscWork.informationTubePbo3 = data[i]['InformationTubePBO NÂ°3'];
-        myOrdreKoscWork.informationFibrePbo3 = data[i]['InformationFibrePBO NÂ°3'];
-        myOrdreKoscWork.connecteurPriseNumero3 = data[i]['ConnecteurPriseNumero NÂ°3'];
-        myOrdreKoscWork.connecteurPriseCouleur3 = data[i]['ConnecteurPriseCouleur NÂ°3'];
-        myOrdreKoscWork.oc4 = data[i]['OC 4'];
-        myOrdreKoscWork.nomModulePm4 = data[i]['NomModulePm NÂ°4'];
-        myOrdreKoscWork.positionModulePm4 = data[i]['PositionModulePm NÂ°4'];
-        myOrdreKoscWork.referenceCableModulePm4 = data[i]['ReferenceCableModulePm NÂ°4'];
-        myOrdreKoscWork.informationFibreModulePm4 = data[i]['InformationFibreModulePm NÂ°4'];
-        myOrdreKoscWork.referenceCablePbo4 = data[i]['ReferenceCablePBO NÂ°4'];
-        myOrdreKoscWork.informationTubePbo4 = data[i]['InformationTubePBO NÂ°4'];
-        myOrdreKoscWork.informationFibrePbo4 = data[i]['InformationFibrePBO NÂ°4'];
-        myOrdreKoscWork.connecteurPriseNumero4 = data[i]['ConnecteurPriseNumero NÂ°4'];
-        myOrdreKoscWork.connecteurPriseCouleur4 = data[i]['ConnecteurPriseCouleur NÂ°4'];
-        myOrdreKoscWork.reserve1 = data[i]['Reserve1'];
-        myOrdreKoscWork.reserve2 = data[i]['Reserve2'];
-        myOrdreKoscWork.reserve3 = data[i]['Reserve3'];
-        myOrdreKoscWork.reserve4 = data[i]['Reserve4'];
-        myOrdreKoscWork.racordementLong = this.convertBoleen(data[i]['RaccordementLong']);
-        myOrdreKoscWork.datePremierAppel = this.convertDate(data[i]['1 er appel ']);
-        myOrdreKoscWork.dateDeuxiemeAppel = this.convertDate(data[i]['2 eme appel ']);
-        myOrdreKoscWork.dateTroisiemeAppel = this.convertDate(data[i]['3 eme appel ']);
-        myOrdreKoscWork.dateAppelReplanification = this.convertDate(data[i]['Re Planification']);
-        myOrdreKoscWork.dateInterventionTechniqueDebut = this.convertDate(data[i]['Date intervention Technicien']);
+        myOrdreKoscData.reference = data[i]['kosc_order_ref'];
+        myOrdreKoscData.referenceWorkOrder = data[i]['work_order_ref'];
+        myOrdreKoscData.workOrderType = data[i]['work_order_type'];
+        myOrdreKoscData.supplierServiceCode = data[i]['supplier_service_code'];
+        console.log(myOrdreKoscData.submissionDate);
+        myOrdreKoscData.submissionDate =this.convertDate(data[i]['submission_date']);
+        console.log(myOrdreKoscData.submissionDate);
+        myOrdreKoscData.productCode = data[i]['product_code'];
+        myOrdreKoscData.productLabel = data[i]['product_label'];
+        myOrdreKoscData.provider = data[i]['provider'];
+        myOrdreKoscData.providerProduct = data[i]['provider_product'];
+        myOrdreKoscData.providerFileType = data[i]['provider_file_type'];
+        myOrdreKoscData.existingOtp = data[i]['existing_otp'];
+        myOrdreKoscData.profile = data[i]['profile'];
+        myOrdreKoscData.company = data[i]['company_name'];
+        myOrdreKoscData.endCustumorSiret = data[i]['siret'];
+        myOrdreKoscData.endCustumorFirstName = data[i]['first_name'];
+        myOrdreKoscData.endCustumorLastName = data[i]['last_name'];
+        myOrdreKoscData.endCustumorStreetNumber = data[i]['street_number'];
+        myOrdreKoscData.endCustumorStreetName = data[i]['street_name'];
+        myOrdreKoscData.endCustumorCity = data[i]['city'];
+        myOrdreKoscData.endCustumorBuilding = data[i]['building_name'];
+        myOrdreKoscData.endCustumorStairs = data[i]['stairs'];
+        myOrdreKoscData.endCustumorFloor = data[i]['floor'];
+        myOrdreKoscData.endCustumorContactFirstName = data[i]['end_customer_contact_first_name'];
+        myOrdreKoscData.endCustumorContactLastName = data[i]['end_customer_contact_last_name'];
+        myOrdreKoscData.endCustumorContactPhone = data[i]['end_customer_contact_phone'];
+        myOrdreKoscData.endCustumorContactCellPhone = data[i]['end_customer_contact_cellphone'];
+        myOrdreKoscData.endCustumorContactEmail = data[i]['end_customer_contact_email'];
+        myOrdreKoscData.providerSlId = data[i]['provider_slid'];
+        myOrdreKoscData.referenceCommandePriseInterneOC = data[i]['ReferenceCommandePriseInterneOC'];
+        myOrdreKoscData.referencePrise = data[i]['ReferencePrise'];
+        myOrdreKoscData.referencePrestationPrise = data[i]['ReferencePrestationPrise'];
+        myOrdreKoscData.commantaireCloture = data[i]['Commentaire']; ////////?????
+        myOrdreKoscData.referencePm = data[i]['Reference Pm'];
+        myOrdreKoscData.referencePmTechnique = data[i]['ReferencePmTechnique'];
+        myOrdreKoscData.localisationPm = data[i]['LocalisationPm'];
+        myOrdreKoscData.referencePbo = data[i]['ReferencePBO'];
+        myOrdreKoscData.localisationPbo = data[i]['LocalisationPBO'];
+        myOrdreKoscData.coordonnePboY = data[i]['CoordonneePBOY'];
+        myOrdreKoscData.hauteurPbo = data[i]['HauteurPBO'];
+        myOrdreKoscData.typeMaterielPbo = data[i]['TypeMaterielPBO'];
+        myOrdreKoscData.typePbo = data[i]['TypePBO'];
+        myOrdreKoscData.conditionSyndics = data[i]['ConditionsSyndic'];
+        myOrdreKoscData.typeRacordementPboPto = data[i]['TypeRaccoPBPTO'];
+        myOrdreKoscData.autreInfosPboPto = data[i]['AutresInfosPBOPTO'];
+        myOrdreKoscData.codeAccesImmeuble = data[i]['CodeAccesImmeuble'];
+        myOrdreKoscData.contacteImmeuble = data[i]['ContactsImmeuble'];
+        myOrdreKoscData.pmaAccessible = data[i]['Pmaccessible'];
+        myOrdreKoscData.infoObtentionCle = data[i]['InfoObtentionCle'];
+        myOrdreKoscData.localeIpm = data[i]['CodeLocalPM'];
+        myOrdreKoscData.contactsSyndic = data[i]['ContactsSyndic'];
+        myOrdreKoscData.oc1 = data[i]['OC 1'];
+        myOrdreKoscData.nomModulePm1 = data[i]['NomModulePm NÂ°1'];
+        myOrdreKoscData.positionModulePm1 = data[i]['PositionModulePm NÂ°1'];
+        myOrdreKoscData.referenceCableModulePm1 = data[i]['ReferenceCableModulePm NÂ°1'];
+        myOrdreKoscData.informationFibreModulePm1 = data[i]['InformationFibreModulePm NÂ°1'];
+        myOrdreKoscData.referenceCablePbo1 = data[i]['ReferenceCablePBO NÂ°1'];
+        myOrdreKoscData.informationTubePbo1 = data[i]['InformationTubePBO NÂ°1'];
+        myOrdreKoscData.informationFibrePbo1 = data[i]['InformationFibrePBO NÂ°1'];
+        myOrdreKoscData.connecteurPriseNumero1 = data[i]['ConnecteurPriseNumero NÂ°1'];
+        myOrdreKoscData.connecteurPriseCouleur1 = data[i]['ConnecteurPriseCouleur NÂ°1'];
+        myOrdreKoscData.oc2 = data[i]['OC 2'];
+        myOrdreKoscData.nomModulePm2 = data[i]['NomModulePm NÂ°2'];
+        myOrdreKoscData.positionModulePm2 = data[i]['PositionModulePm NÂ°2'];
+        myOrdreKoscData.referenceCableModulePm2 = data[i]['ReferenceCableModulePm NÂ°2'];
+        myOrdreKoscData.informationFibreModulePm2 = data[i]['InformationFibreModulePm NÂ°2'];
+        myOrdreKoscData.referenceCablePbo2 = data[i]['ReferenceCablePBO NÂ°2'];
+        myOrdreKoscData.informationTubePbo2 = data[i]['InformationTubePBO NÂ°2'];
+        myOrdreKoscData.informationFibrePbo2 = data[i]['InformationFibrePBO NÂ°2'];
+        myOrdreKoscData.connecteurPriseNumero2 = data[i]['ConnecteurPriseNumero NÂ°2'];
+        myOrdreKoscData.connecteurPriseCouleur2 = data[i]['ConnecteurPriseCouleur NÂ°2'];
+        myOrdreKoscData.oc3 = data[i]['OC 3'];
+        myOrdreKoscData.nomModulePm3 = data[i]['NomModulePm NÂ°3'];
+        myOrdreKoscData.positionModulePm3 = data[i]['PositionModulePm NÂ°3'];
+        myOrdreKoscData.referenceCableModulePm3 = data[i]['ReferenceCableModulePm NÂ°3'];
+        myOrdreKoscData.informationFibreModulePm3 = data[i]['InformationFibreModulePm NÂ°3'];
+        myOrdreKoscData.referenceCablePbo3 = data[i]['ReferenceCablePBO NÂ°3'];
+        myOrdreKoscData.informationTubePbo3 = data[i]['InformationTubePBO NÂ°3'];
+        myOrdreKoscData.informationFibrePbo3 = data[i]['InformationFibrePBO NÂ°3'];
+        myOrdreKoscData.connecteurPriseNumero3 = data[i]['ConnecteurPriseNumero NÂ°3'];
+        myOrdreKoscData.connecteurPriseCouleur3 = data[i]['ConnecteurPriseCouleur NÂ°3'];
+        myOrdreKoscData.oc4 = data[i]['OC 4'];
+        myOrdreKoscData.nomModulePm4 = data[i]['NomModulePm NÂ°4'];
+        myOrdreKoscData.positionModulePm4 = data[i]['PositionModulePm NÂ°4'];
+        myOrdreKoscData.referenceCableModulePm4 = data[i]['ReferenceCableModulePm NÂ°4'];
+        myOrdreKoscData.informationFibreModulePm4 = data[i]['InformationFibreModulePm NÂ°4'];
+        myOrdreKoscData.referenceCablePbo4 = data[i]['ReferenceCablePBO NÂ°4'];
+        myOrdreKoscData.informationTubePbo4 = data[i]['InformationTubePBO NÂ°4'];
+        myOrdreKoscData.informationFibrePbo4 = data[i]['InformationFibrePBO NÂ°4'];
+        myOrdreKoscData.connecteurPriseNumero4 = data[i]['ConnecteurPriseNumero NÂ°4'];
+        myOrdreKoscData.connecteurPriseCouleur4 = data[i]['ConnecteurPriseCouleur NÂ°4'];
+        myOrdreKoscData.reserve1 = data[i]['Reserve1'];
+        myOrdreKoscData.reserve2 = data[i]['Reserve2'];
+        myOrdreKoscData.reserve3 = data[i]['Reserve3'];
+        myOrdreKoscData.reserve4 = data[i]['Reserve4'];
+        myOrdreKoscData.racordementLong = this.convertBoleen(data[i]['RaccordementLong']);
+        myOrdreKoscData.datePremierAppel = this.convertDate(data[i]['1 er appel ']);
+        myOrdreKoscData.dateDeuxiemeAppel = this.convertDate(data[i]['2 eme appel ']);
+        myOrdreKoscData.dateTroisiemeAppel = this.convertDate(data[i]['3 eme appel ']);
+        myOrdreKoscData.dateAppelReplanification = this.convertDate(data[i]['Re Planification']);
+        myOrdreKoscData.dateInterventionTechniqueDebut = this.convertDate(data[i]['Date intervention Technicien']);
 
-        return myOrdreKoscWork;
+        return myOrdreKoscData;
     }
 
     private isFtl(data: any) {
