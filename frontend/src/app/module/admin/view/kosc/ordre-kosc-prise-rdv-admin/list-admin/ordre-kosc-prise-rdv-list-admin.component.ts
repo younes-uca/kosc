@@ -84,9 +84,6 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
     templateEmailClotures: Array<TemplateEmailClotureVo>;
     templateSuivis: Array<TemplateSuiviVo>;
 
-    private objetPlanificationDefault: string = eval(this.selectedDefaultTemplateConfiguration.templateEmailPlanificationVo.objet);
-
-    private corpsPlanificationDefault: string = eval(this.selectedDefaultTemplateConfiguration.templateEmailPlanificationVo.corps);
 
 
     constructor(private datePipe: DatePipe
@@ -315,10 +312,6 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
 
     ngOnInit(): void {
 
-        this.defaultTemplateConfigurationService.findDefaultTemplateConfiguration().subscribe((data) =>
-            this.selectedDefaultTemplateConfiguration = data,
-        );
-
 
         this.loadEtatDemandeKoscIncluding(['initialisation-wo', 'initialisation-erdv']);
         // this.etatDemandeKoscService.loadEtatDemandeKoscExcept(['ko','ok'], this.searchOrdreKosc);
@@ -444,10 +437,6 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
 
 
                 this.editOrdreKoscDialog = true;
-                this.selectedOrdreKosc.fromPlanification = this.selectedDefaultTemplateConfiguration.emailManeo;
-                this.selectedOrdreKosc.toPlanification = this.selectedOrdreKosc.endCustumorContactEmail;
-                this.selectedOrdreKosc.objetPlanification = this.objetPlanificationDefault;
-                this.selectedOrdreKosc.corpsPlanification = this.corpsPlanificationDefault;
 
             });
 
