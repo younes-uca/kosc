@@ -21,77 +21,84 @@ export class OrdreKoscExcelService {
     constructor(private ordreKoscService: OrdreKoscService, private messageService: MessageService) {
     }
 
-    public importAll(event: any) {
-        this.readDataObservable(event).subscribe(
-            next => {
-                console.log("haaa next  ==> "+next)
-                this.importAllExc(next);
-            }
-        );
+    public importAll(event: any): Observable<any>{
+        return  new Observable<any>(sub => {
+            this.readDataObservable(event).subscribe(
+                next => {
+                    sub.next(this.importAllExc(next));
+                }
+            );
+        })
+
     }
 
-    public importerDataBase(event: any) {
+    public importerDataBase(event: any):Observable<any> {
         // this.showSpinner = true;
 
-        console.log(event.target.files);
-        /* wire up file reader */
-        const target: DataTransfer = <DataTransfer>(event.target);
-        if (target.files.length !== 1) {
-            throw new Error('Cannot use multiple files');
-        }
-        const reader: FileReader = new FileReader();
-        reader.readAsBinaryString(target.files[0]);
-        reader.onload = (e: any) => {
-            /* create workbook */
-            const binarystr: string = e.target.result;
-            const wb: XLSX.WorkBook = XLSX.read(binarystr, {type: 'binary'});
-
-            /* selected the first sheet */
-            const wsname: string = wb.SheetNames[0];
-            const ws: XLSX.WorkSheet = wb.Sheets[wsname];
-
-            /* save data */
-            const data = XLSX.utils.sheet_to_json(ws); // to get 2d array pass 2nd parameter as object {header: 1}
-            console.log(data); // Data will be logged in array format containing objects
-
-            let koscOrdresWork = new Array<OrdreKoscVo>();
-            for (let i = 0; i < data.length; i++) {
-                let myOrdreKoscWork = this.constructDataBase(data, i);
-                myOrdreKoscWork.type ='kosc';
-                koscOrdresWork.push(myOrdreKoscWork);
+        return new Observable(sub => {
+            console.log(event.target.files);
+            /* wire up file reader */
+            const target: DataTransfer = <DataTransfer>(event.target);
+            if (target.files.length !== 1) {
+                throw new Error('Cannot use multiple files');
             }
-            console.log(koscOrdresWork);
-            this.ordreKoscService.ordreKoscs = koscOrdresWork;
+            const reader: FileReader = new FileReader();
+            reader.readAsBinaryString(target.files[0]);
+            reader.onload = (e: any) => {
+                /* create workbook */
+                const binarystr: string = e.target.result;
+                const wb: XLSX.WorkBook = XLSX.read(binarystr, {type: 'binary'});
 
-            this.ordreKoscService.importerDataBase(this.ordreKoscService.ordreKoscs).subscribe(
-                response => {
-                    if (response.length == 0) {
-                        this.messageService.add({
-                            severity: 'success',
-                            summary: 'Succès',
-                            detail: 'La Base De Données importé avec Succès',
-                            life: 3000
-                        });
-                        this.ordreKoscService.searchOrdreKosc.referenceWorkOrder = koscOrdresWork[0].referenceWorkOrder;
-                        // this.searchRequest();
-                    } else {
+                /* selected the first sheet */
+                const wsname: string = wb.SheetNames[0];
+                const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+                /* save data */
+                const data = XLSX.utils.sheet_to_json(ws); // to get 2d array pass 2nd parameter as object {header: 1}
+                console.log(data); // Data will be logged in array format containing objects
+
+                let koscOrdresWork = new Array<OrdreKoscVo>();
+                for (let i = 0; i < data.length; i++) {
+                    let myOrdreKoscWork = this.constructDataBase(data, i);
+                    myOrdreKoscWork.type ='kosc';
+                    koscOrdresWork.push(myOrdreKoscWork);
+                }
+                console.log(koscOrdresWork);
+                this.ordreKoscService.ordreKoscs = koscOrdresWork;
+
+                this.ordreKoscService.importerDataBase(this.ordreKoscService.ordreKoscs).subscribe(
+                    response => {
+                        if (response.length == 0) {
+                            sub.next();
+                            this.messageService.add({
+                                severity: 'success',
+                                summary: 'Succès',
+                                detail: 'La Base De Données importé avec Succès',
+                                life: 3000
+                            });
+                            this.ordreKoscService.searchOrdreKosc.referenceWorkOrder = koscOrdresWork[0].referenceWorkOrder;
+                            // this.searchRequest();
+                        } else {
+                            sub.error();
+
+                            this.messageService.add({
+                                severity: 'error',
+                                summary: 'erreur',
+                                detail: 'problème d\'importation : reference existe déjà'
+                            });
+                        }
+                    },
+                    error => {
                         this.messageService.add({
                             severity: 'error',
                             summary: 'erreur',
-                            detail: 'problème d\'importation : reference existe déjà'
+                            detail: 'problème d\'importation'
                         });
                     }
-                },
-                error => {
-                    this.messageService.add({
-                        severity: 'error',
-                        summary: 'erreur',
-                        detail: 'problème d\'importation'
-                    });
-                }
-            );
-        }
-        // this.showSpinner = false;
+                );
+            }
+        })
+
 
     }
 
@@ -154,31 +161,35 @@ export class OrdreKoscExcelService {
         });
     }
 
-    private importAllExc(koscOrdrers: OrdreKoscVo[]) {
-        console.log("readAll haaaa koscOrdrers =========== " + koscOrdrers);
-        this.ordreKoscService.importerAll(koscOrdrers).subscribe(
-            response => {
-                if (response.length == 0) {
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Succès',
-                        detail: 'Kosc Order importé avec Succès',
-                        life: 3000
-                    });
-                } else {
-                    this.ordreKoscService.ordreKoscs = response;
-                    let message = this.constructMessage(response);
-                    this.messageService.add({
-                        severity: 'error',
-                        summary: 'erreur',
-                        detail: ''+message
-                    });
+    private importAllExc(koscOrdrers: OrdreKoscVo[]):Observable<any> {
+        return new Observable(sub => {
+            this.ordreKoscService.importerAll(koscOrdrers).subscribe(
+                response => {
+                    if (response.length == 0) {
+                        sub.next();
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Succès',
+                            detail: 'Kosc Order importé avec Succès',
+                            life: 3000
+                        });
+                    } else {
+                        sub.error();
+                        this.ordreKoscService.ordreKoscs = response;
+                        let message = this.constructMessage(response);
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'erreur',
+                            detail: ''+message
+                        });
+                    }
+                },
+                error => {
+                    this.messageService.add({severity: 'error', summary: 'erreur', detail: 'problème d\'importation'});
                 }
-            },
-            error => {
-                this.messageService.add({severity: 'error', summary: 'erreur', detail: 'problème d\'importation'});
-            }
-        );
+            );
+        })
+
     }
 
     private readExcel(event: any) {
