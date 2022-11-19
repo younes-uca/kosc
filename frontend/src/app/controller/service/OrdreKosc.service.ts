@@ -373,7 +373,4 @@ export class OrdreKoscService {
     set searchOrdreKoscSuiviRdv(value: OrdreKoscVo) {
         this._searchOrdreKoscSuiviRdv = value;
     }
-
-
-
 }

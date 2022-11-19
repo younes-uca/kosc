@@ -603,7 +603,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 //validation methods
     private validateForm(): void {
         this.errorMessages = new Array<string>();
-        this.validateOrdreKoscDateRdv();
+        // this.validateOrdreKoscDateRdv();
         /* this.validateOrdreKoscReferenceWorkOrder();*/
         this.validateOrdreKoscDateAppel();
 

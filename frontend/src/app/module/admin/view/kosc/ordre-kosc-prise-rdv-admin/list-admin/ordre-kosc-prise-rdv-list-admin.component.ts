@@ -112,11 +112,13 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
     ) {
     }
 
-    display1 = false;
+
+
+    displayPriseRdv = false;
 
     showPriseRdvDialog(ordreKosc: OrdreKoscVo) {
         this.selectedOrdreKosc = ordreKosc;
-        this.display1 = true;
+        this.displayPriseRdv = true;
         this.isShown = false;
         this.isShown1 = false;
 
@@ -132,7 +134,7 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
 
     isShown1: boolean = false;
 
-    toggleShow2() {
+    toggleShowOui() {
         this.isShown1 = !this.isShown1;
         this.isShown = false;
     }
@@ -140,9 +142,10 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
     public edit() {
         this.submitted = true;
         this.validateForm();
-        this.display1 = false;
+        this.displayPriseRdv = false;
         if (this.errorMessages.length === 0) {
             this.editWithShowOption(false);
+
         } else {
             this.messageService.add({
                 severity: 'error',
@@ -153,7 +156,7 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
     }
 
     hideEditDialog() {
-        this.display1 = false;
+        this.displayPriseRdv = false;
         this.setValidation(true);
     }
 
@@ -187,15 +190,39 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         console.log(this.selectedOrdreKosc.etatDemandeKoscVo);
         this.selectedOrdreKosc.etatDemandeKoscVo.code = codeEtat;
         this.editWithShowOption(false);
-        this.display1 = false;
+        this.displayPriseRdv = false;
 
     }
+
+    public editPasEncore(){
+        let date: Date = new Date();
+        if(this.selectedOrdreKosc.datePremierAppel == null){
+            this.selectedOrdreKosc.datePremierAppel = date;
+        }else if(this.selectedOrdreKosc.dateDeuxiemeAppel == null && this.selectedOrdreKosc.datePremierAppel != null){
+            this.selectedOrdreKosc.dateDeuxiemeAppel == date;
+        }else if(this.selectedOrdreKosc.dateTroisiemeAppel == null){
+            this.selectedOrdreKosc.dateTroisiemeAppel == date;
+        }
+        this.editWithShowOption(false);
+        this.displayPriseRdv = false;
+
+    }
+
+    public editOui(codeEtat: string){
+        console.log(this.selectedOrdreKosc.dateRdv);
+        console.log(this.selectedOrdreKosc.datePriseRdv);
+        this.selectedOrdreKosc.datePriseRdv = new Date();
+        this.selectedOrdreKosc.etatDemandeKoscVo.code = codeEtat;
+        this.editWithShowOption(false);
+        this.displayPriseRdv = false;
+    }
+
 
     public editClientInjoignable() {
         this.ordreKoscService.updateNonJoignable().subscribe(ordreKosc => {
                 const myIndex = this.ordreKoscs.findIndex(e => e.id === this.selectedOrdreKosc.id);
                 this.ordreKoscs[myIndex] = ordreKosc;
-                this.display1 = false;
+                this.displayPriseRdv = false;
             }
         );
     }
@@ -1284,9 +1311,11 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         return environment.dateFormatList;
     }
 
-    get dateFormat2() {
+    get dateFormatOui() {
         return environment.dateFormatEdit;
     }
+
+
 
     get selectedDefaultTemplateConfiguration(): DefaultTemplateConfigurationVo {
 
