@@ -72,6 +72,10 @@ export class OrdreKoscListAdminComponent implements OnInit {
     get findByCriteriaShow(): boolean {
         return this._findByCriteriaShow;
     }
+    set findByCriteriaShow(value: boolean) {
+        this._findByCriteriaShow = value;
+    }
+
     // declarations
     showSpinner = false;
     private _findByCriteriaShow = false;
