@@ -141,7 +141,13 @@ public class OrdreKoscRestAdmin {
         ordreKoscService.genererCodeDecharge(ordreKoscs);
         return ordreKoscConverter.toVo(ordreKoscs);
     }
-
+    @ApiOperation("Update etat to ko or ok")
+    @PutMapping("/update-etat/")
+    public OrdreKoscVo updateEtat(@RequestBody OrdreKoscVo ordreKoscVo) {
+        OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
+        OrdreKoscVo ordreKoscVo1 = ordreKoscConverter.toVo(ordreKoscSuiviRdvService.updateEtat(ordreKosc));
+        return ordreKoscVo1;
+    }
 
     @ApiOperation("Updates the specified  ordreKosc")
     @PutMapping("/")
