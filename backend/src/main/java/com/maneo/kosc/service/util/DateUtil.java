@@ -77,6 +77,17 @@ public class DateUtil {
         }
     }
 
+    public static Date parseTimestamp(String date, String pattern) {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+            Date parsedDate = dateFormat.parse(date);
+            Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+            return timestamp;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public static java.sql.Date convertFormUtilToSql(java.util.Date date) {
         if (date != null) {
             return new java.sql.Date(date.getTime());

@@ -22,16 +22,32 @@
             <p-toolbar *ngIf="findByCriteriaShow">
 
                 <div class="align-form-search">
-                                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                               <!-- <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
                                     <input [(ngModel)]="searchOrdreKosc.reference" class="p-mr-2" id="1"
                                            pInputText type="text">
                                     <label for="1">Order Reference</label>
-                                </span>
-                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                </span>-->
+                    <!--<span class=" p-float-label p-mr-3 align-search-items p-mt-4">
                                     <input [(ngModel)]="searchOrdreKosc.referenceWorkOrder" class="p-mr-2" id="2"
                                            pInputText type="text">
                                     <label for="2">Reference work order</label>
-                                </span>
+                                </span>-->
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                                <p-calendar
+                                                        class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateEnvoiCriMin"
+                                                        id="29-1"
+                                                        dateFormat="dd-MM-yy"></p-calendar>
+                                                <label for="29-1">Date Envoi Cri Min</label>
+                                            </span>
+
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                                <p-calendar
+                                                        class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateEnvoiCriMax"
+                                                        id="29-2"
+                                                        dateFormat="dd-MM-yy"></p-calendar>
+                                                <label for="29-2">Date Envoi Cri Max</label>
+                                            </span>
+
                         <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
                                         <input class="p-mr-2" pInputText id="3"
                                                type="text" [(ngModel)]="searchOrdreKosc.codeDecharge">
@@ -139,18 +155,18 @@
                     <!--                                           type="text"  [(ngModel)]="searchOrdreKosc.endCustumorContactEmail">-->
                     <!--                                    <label for="21">End custumor contact email</label>-->
                     <!--                                </span>-->
-                      <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
-                                 <p-dropdown [options]="operators" [(ngModel)]="searchOrdreKosc.operatorVo"
-                                             id="22"
-                                             [filter]="true" [showClear]="true" placeholder="Operator"
-                                             optionLabel="libelle">
-                                 </p-dropdown>
-                             </span>
-                     <!--<span class=" p-float-label p-mr-3 align-search-items p-mt-4">
-                                     <input class="p-mr-2" pInputText id="23"
-                                            type="text" [(ngModel)]="searchOrdreKosc.company">
-                                     <label for="23">Company</label>
-                                 </span>>-->
+                    <!--<span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                               <p-dropdown [options]="operators" [(ngModel)]="searchOrdreKosc.operatorVo"
+                                           id="22"
+                                           [filter]="true" [showClear]="true" placeholder="Operator"
+                                           optionLabel="libelle">
+                               </p-dropdown>
+                           </span>-->
+                   <!--<span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                   <input class="p-mr-2" pInputText id="23"
+                                          type="text" [(ngModel)]="searchOrdreKosc.company">
+                                   <label for="23">Company</label>
+                               </span>>-->
                     <!--                                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
                     <!--                                    <input class="p-mr-2" pInputText id="24"-->
                     <!--                                           type="text"  [(ngModel)]="searchOrdreKosc.referenDossier">-->
@@ -227,18 +243,18 @@
 
                                             <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
                                                 <p-calendar
-                                                        class="p-mr-2" [(ngModel)]="searchOrdreKosc.datePriseRdvMin"
+                                                        class="p-mr-2" [(ngModel)]="searchOrdreKosc.nbrHeureDateSubmissionAndNowMin"
                                                         id="29-1"
                                                         dateFormat="dd-MM-yy"></p-calendar>
-                                                <label for="29-1">Date prise rdv Min</label>
+                                                <label for="29-1">Date Submission Min</label>
                                             </span>
 
                                              <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
                                                 <p-calendar
-                                                        class="p-mr-2" [(ngModel)]="searchOrdreKosc.datePriseRdvMax"
+                                                        class="p-mr-2" [(ngModel)]="searchOrdreKosc.nbrHeureDateSubmissionAndNowMax"
                                                         id="29-2"
                                                         dateFormat="dd-MM-yy"></p-calendar>
-                                                <label for="29-2">Date prise rdv Max</label>
+                                                <label for="29-2">Date Submission Max</label>
                                             </span>
 
 
@@ -609,36 +625,36 @@
                     <!--                                           type="text"  [(ngModel)]="searchOrdreKosc.connecteurPriseCouleur4">-->
                     <!--                                    <label for="96">Connecteur prise couleur4</label>-->
                     <!--                                </span>-->
-                        <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
-                                 <p-dropdown [options]="departements" [(ngModel)]="searchOrdreKosc.departementVo"
-                                             id="98"
-                                             [filter]="true" [showClear]="true" placeholder="Departement"
-                                             optionLabel="libelle">
-                                 </p-dropdown>
-                             </span>
-                     <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
-                                 <p-dropdown [options]="techniciens" [(ngModel)]="searchOrdreKosc.technicienVo"
-                                             id="99"
-                                             [filter]="true" [showClear]="true" placeholder="Technicien"
-                                             optionLabel="identifiant">
-                                 </p-dropdown>
-                             </span>
-
-                     <!--<span class=" p-float-label p-mr-3 align-search-items p-mt-4">
-                             <p-calendar
-                                     class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateEnvoiCriMin"
-                                     id="100-1"
-                                     dateFormat="dd-MM-yy"></p-calendar>
-                             <label for="100-1">Date envoi cri Min</label>
+                    <!--<span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                             <p-dropdown [options]="departements" [(ngModel)]="searchOrdreKosc.departementVo"
+                                         id="98"
+                                         [filter]="true" [showClear]="true" placeholder="Departement"
+                                         optionLabel="libelle">
+                             </p-dropdown>
                          </span>
-
-                     <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
-                             <p-calendar
-                                     class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateEnvoiCriMax"
-                                     id="100-2"
-                                     dateFormat="dd-MM-yy"></p-calendar>
-                             <label for="100-2">Date envoi cri Max</label>
+                 <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                             <p-dropdown [options]="techniciens" [(ngModel)]="searchOrdreKosc.technicienVo"
+                                         id="99"
+                                         [filter]="true" [showClear]="true" placeholder="Technicien"
+                                         optionLabel="identifiant">
+                             </p-dropdown>
                          </span>-->
+
+                 <!--<span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                         <p-calendar
+                                 class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateEnvoiCriMin"
+                                 id="100-1"
+                                 dateFormat="dd-MM-yy"></p-calendar>
+                         <label for="100-1">Date envoi cri Min</label>
+                     </span>
+
+                 <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                         <p-calendar
+                                 class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateEnvoiCriMax"
+                                 id="100-2"
+                                 dateFormat="dd-MM-yy"></p-calendar>
+                         <label for="100-2">Date envoi cri Max</label>
+                     </span>-->
 
                     <!--                                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
                     <!--                                    <input class="p-mr-2" pInputText id="101"-->
@@ -984,95 +1000,95 @@
                     <!--                                    </p-dropdown>-->
                     <!--                                </span>-->
 
-                                            <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
-                                                <p-calendar
-                                                        class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateEnvoiSuiviMin"
-                                                        id="155-1"
-                                                        dateFormat="dd-MM-yy"></p-calendar>
-                                                <label for="155-1">Date envoi suivi Min</label>
-                                            </span>
+                    <!--<span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                        <p-calendar
+                                class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateEnvoiSuiviMin"
+                                id="155-1"
+                                dateFormat="dd-MM-yy"></p-calendar>
+                        <label for="155-1">Date envoi suivi Min</label>
+                    </span>
 
-                                             <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
-                                                <p-calendar
-                                                        class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateEnvoiSuiviMax"
-                                                        id="155-2"
-                                                        dateFormat="dd-MM-yy"></p-calendar>
-                                                <label for="155-2">Date envoi suivi Max</label>
-                                            </span>
+                     <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                        <p-calendar
+                                class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateEnvoiSuiviMax"
+                                id="155-2"
+                                dateFormat="dd-MM-yy"></p-calendar>
+                        <label for="155-2">Date envoi suivi Max</label>
+                    </span>-->
 
-                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+<span class=" p-float-label p-mr-3 align-search-items p-mt-4">
 
-                    <p-multiSelect [options]="etatDemandeKoscs"
-                                   [(ngModel)]="searchOrdreKosc.etatDemandeKoscVos"
-                                   defaultLabel="Etat demande kosc"
-                                   optionLabel="libelle" [virtualScroll]="false" ></p-multiSelect>
-                              </span>
-
-
-                </div>
-
-                <div class="align-search-button">
-                    <button (click)="searchRequest()" class="p-button-info p-mr-2" icon="pi pi-sort-amount-down" label="Valider"
-                            pButton pRipple></button>
-                </div>
-
-            </p-toolbar>
+<p-multiSelect [options]="etatDemandeKoscs"
+           [(ngModel)]="searchOrdreKosc.etatDemandeKoscVos"
+           defaultLabel="Etat demande kosc"
+           optionLabel="libelle" [virtualScroll]="false" ></p-multiSelect>
+      </span>
 
 
-            <p-table #dt [(selection)]="selectedOrdreKosc" [columns]="cols" [globalFilterFields]="['reference', 'referenceWorkOrder', 'codeDecharge', 'supplierService', 'dateDebutTraitement', 'endCustumorName', 'endCustumorSiret', 'endCustumorFirstName', 'endCustumorLastName', 'endCustumorZipcode', 'endCustumorStreetName', 'endCustumorStreetNumber', 'endCustumorCity', 'endCustumorBuilding', 'endCustumorStairs', 'endCustumorFloor', 'endCustumorContactFirstName', 'endCustumorContactLastName', 'endCustumorContactPhone', 'endCustumorContactCellPhone', 'endCustumorContactEmail', 'operatorVolibelle', 'company', 'referenDossier', 'submissionDate', 'datePremierAppel', 'dateDeuxiemeAppel', 'dateTroisiemeAppel', 'datePriseRdv', 'dateRdv', 'dateAppelReplanification', 'dateInterventionTechnique', 'dateOuverture', 'envoiMailClient', 'envoiMailKosc', 'coordonnePboY', 'hauteurPbo', 'typeMaterielPbo', 'typePbo', 'conditionSyndics', 'typeRacordementPboPto', 'codeAccesImmeuble', 'contacteImmeuble', 'pmaAccessible', 'infoObtentionCle', 'localeIpm', 'contactsSyndic', 'racordementLong', 'oc1', 'nomModulePm1', 'positionModulePm1', 'referenceCableModulePm1', 'referenceTubeModulePm1', 'informationFibreModulePm1', 'referenceCablePbo1', 'informationTubePbo1', 'informationFibrePbo1', 'connecteurPriseNumero1', 'connecteurPriseCouleur1', 'oc2', 'nomModulePm2', 'positionModulePm2', 'referenceCableModulePm2', 'referenceTubeModulePm2', 'informationFibreModulePm2', 'referenceCablePbo2', 'informationTubePbo2', 'informationFibrePbo2', 'connecteurPriseNumero2', 'connecteurPriseCouleur2', 'oc3', 'nomModulePm3', 'positionModulePm3', 'referenceCableModulePm3', 'referenceTubeModulePm3', 'informationFibreModulePm3', 'referenceCablePbo3', 'informationTubePbo3', 'informationFibrePbo3', 'connecteurPriseNumero3', 'connecteurPriseCouleur3', 'oc4', 'nomModulePm4', 'positionModulePm4', 'referenceCableModulePm4', 'referenceTubeModulePm4', 'informationFibreModulePm4', 'referenceCablePbo4', 'informationTubePbo4', 'informationFibrePbo4', 'connecteurPriseNumero4', 'connecteurPriseCouleur4', 'departementVolibelle', 'technicienVoidentifiant', 'dateEnvoiCri', 'pboReel', 'numeroSerieOnt', 'workOrderType', 'product', 'provider', 'providerFileType', 'spliter', 'existingOtp', 'profile', 'providerSlId', 'referencePrestationPrise', 'clientVoid', 'dateInterventionTechniqueDebut', 'dateInterventionTechniqueFin', 'templateEmailClientInjoinableVolibelle', 'objetClient', 'envoyeClient', 'dateEnvoiClient', 'templateEmailKoscVolibelle', 'objetKosc', 'envoyeKosc', 'dateEnvoiKosc', 'templateEmailPlanificationVolibelle', 'objetPlanification', 'envoyePlanification', 'dateEnvoiPlanification', 'templateEmailReplanificationVolibelle', 'objetReplanification', 'envoyeReplanification', 'dateEnvoiReplanification', 'templateEmailReportVolibelle', 'objetReport', 'envoyeReport', 'dateEnvoiReport', 'etatDemandeKoscVolibelle', 'templateEmailClotureVolibelle', 'objetCloture', 'envoyeCloture', 'dateEnvoiCloture', 'emailCloturePieceJoints', 'templateSuiviVolibelle', 'objetSuivi', 'envoyeSuivi', 'dateEnvoiSuivi']" [paginator]="true"
-                     [rowHover]="true"
-                     [rowsPerPageOptions]="[8,25,50]"
-                     [rows]="8" [showCurrentPageReport]="true" [value]="ordreKoscs"
-                     currentPageReportTemplate="Les éléments de {first} à {last} sur {totalRecords} "
-                     dataKey="id" styleClass="p-datatable-customers">
-                <ng-template pTemplate="caption">
-                    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
-                        <h5 class="p-m-0">Liste des ordre koscs</h5>
-                        <span class="p-input-icon-left">
-                            <i class="pi pi-search"></i>
-                            <input (input)="dt.filterGlobal($event.target.value, 'contains')" pInputText placeholder="Chercher..."
-                                   type="text"/>
-                        </span>
-                    </div>
-                </ng-template>
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th style="width: 3rem">
-                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                        </th>
+</div>
+
+<div class="align-search-button">
+<button (click)="searchRequest()" class="p-button-info p-mr-2" icon="pi pi-sort-amount-down" label="Valider"
+    pButton pRipple></button>
+</div>
+
+</p-toolbar>
 
 
-                        <th pSortableColumn="reference">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>O</span>
-                                <p-sortIcon field="reference"></p-sortIcon>
-                                <p-columnFilter class="ml-auto" display="menu" field="ordreKosc.reference"
-                                                type="text"></p-columnFilter>
-                            </div>
-                        </th>
+<p-table #dt [(selection)]="selectedOrdreKosc" [columns]="cols" [globalFilterFields]="['reference', 'referenceWorkOrder', 'codeDecharge', 'supplierService', 'dateDebutTraitement', 'endCustumorName', 'endCustumorSiret', 'endCustumorFirstName', 'endCustumorLastName', 'endCustumorZipcode', 'endCustumorStreetName', 'endCustumorStreetNumber', 'endCustumorCity', 'endCustumorBuilding', 'endCustumorStairs', 'endCustumorFloor', 'endCustumorContactFirstName', 'endCustumorContactLastName', 'endCustumorContactPhone', 'endCustumorContactCellPhone', 'endCustumorContactEmail', 'operatorVolibelle', 'company', 'referenDossier', 'submissionDate', 'datePremierAppel', 'dateDeuxiemeAppel', 'dateTroisiemeAppel', 'datePriseRdv', 'dateRdv', 'dateAppelReplanification', 'dateInterventionTechnique', 'dateOuverture', 'envoiMailClient', 'envoiMailKosc', 'coordonnePboY', 'hauteurPbo', 'typeMaterielPbo', 'typePbo', 'conditionSyndics', 'typeRacordementPboPto', 'codeAccesImmeuble', 'contacteImmeuble', 'pmaAccessible', 'infoObtentionCle', 'localeIpm', 'contactsSyndic', 'racordementLong', 'oc1', 'nomModulePm1', 'positionModulePm1', 'referenceCableModulePm1', 'referenceTubeModulePm1', 'informationFibreModulePm1', 'referenceCablePbo1', 'informationTubePbo1', 'informationFibrePbo1', 'connecteurPriseNumero1', 'connecteurPriseCouleur1', 'oc2', 'nomModulePm2', 'positionModulePm2', 'referenceCableModulePm2', 'referenceTubeModulePm2', 'informationFibreModulePm2', 'referenceCablePbo2', 'informationTubePbo2', 'informationFibrePbo2', 'connecteurPriseNumero2', 'connecteurPriseCouleur2', 'oc3', 'nomModulePm3', 'positionModulePm3', 'referenceCableModulePm3', 'referenceTubeModulePm3', 'informationFibreModulePm3', 'referenceCablePbo3', 'informationTubePbo3', 'informationFibrePbo3', 'connecteurPriseNumero3', 'connecteurPriseCouleur3', 'oc4', 'nomModulePm4', 'positionModulePm4', 'referenceCableModulePm4', 'referenceTubeModulePm4', 'informationFibreModulePm4', 'referenceCablePbo4', 'informationTubePbo4', 'informationFibrePbo4', 'connecteurPriseNumero4', 'connecteurPriseCouleur4', 'departementVolibelle', 'technicienVoidentifiant', 'dateEnvoiCri', 'pboReel', 'numeroSerieOnt', 'workOrderType', 'product', 'provider', 'providerFileType', 'spliter', 'existingOtp', 'profile', 'providerSlId', 'referencePrestationPrise', 'clientVoid', 'dateInterventionTechniqueDebut', 'dateInterventionTechniqueFin', 'templateEmailClientInjoinableVolibelle', 'objetClient', 'envoyeClient', 'dateEnvoiClient', 'templateEmailKoscVolibelle', 'objetKosc', 'envoyeKosc', 'dateEnvoiKosc', 'templateEmailPlanificationVolibelle', 'objetPlanification', 'envoyePlanification', 'dateEnvoiPlanification', 'templateEmailReplanificationVolibelle', 'objetReplanification', 'envoyeReplanification', 'dateEnvoiReplanification', 'templateEmailReportVolibelle', 'objetReport', 'envoyeReport', 'dateEnvoiReport', 'etatDemandeKoscVolibelle', 'templateEmailClotureVolibelle', 'objetCloture', 'envoyeCloture', 'dateEnvoiCloture', 'emailCloturePieceJoints', 'templateSuiviVolibelle', 'objetSuivi', 'envoyeSuivi', 'dateEnvoiSuivi']" [paginator]="true"
+[rowHover]="true"
+[rowsPerPageOptions]="[8,25,50]"
+[rows]="8" [showCurrentPageReport]="true" [value]="ordreKoscs"
+currentPageReportTemplate="Les éléments de {first} à {last} sur {totalRecords} "
+dataKey="id" styleClass="p-datatable-customers">
+<ng-template pTemplate="caption">
+<div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+<h5 class="p-m-0">Liste des ordre koscs</h5>
+<span class="p-input-icon-left">
+    <i class="pi pi-search"></i>
+    <input (input)="dt.filterGlobal($event.target.value, 'contains')" pInputText placeholder="Chercher..."
+           type="text"/>
+</span>
+</div>
+</ng-template>
+<ng-template pTemplate="header">
+<tr>
+<th style="width: 3rem">
+    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+</th>
 
 
-                        <th pSortableColumn="referenceWorkOrder">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>WO</span>
-                                <p-sortIcon field="referenceWorkOrder"></p-sortIcon>
-                                <p-columnFilter class="ml-auto" display="menu" field="ordreKosc.referenceWorkOrder"
-                                                type="text"></p-columnFilter>
-                            </div>
-                        </th>
+<th pSortableColumn="reference">
+    <div class="p-d-flex p-jc-between p-ai-center">
+        <span>O</span>
+        <p-sortIcon field="reference"></p-sortIcon>
+        <p-columnFilter class="ml-auto" display="menu" field="ordreKosc.reference"
+                        type="text"></p-columnFilter>
+    </div>
+</th>
 
 
-                        <th pSortableColumn="codeDecharge">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>Code decharge</span>
-                                <p-sortIcon field="codeDecharge"></p-sortIcon>
-                                <p-columnFilter class="ml-auto" display="menu" field="ordreKosc.codeDecharge"
-                                                type="text"></p-columnFilter>
-                            </div>
-                        </th>
+<th pSortableColumn="referenceWorkOrder">
+    <div class="p-d-flex p-jc-between p-ai-center">
+        <span>WO</span>
+        <p-sortIcon field="referenceWorkOrder"></p-sortIcon>
+        <p-columnFilter class="ml-auto" display="menu" field="ordreKosc.referenceWorkOrder"
+                        type="text"></p-columnFilter>
+    </div>
+</th>
 
 
-                        <!--                        <th pSortableColumn="supplierService">-->
+<th pSortableColumn="codeDecharge">
+    <div class="p-d-flex p-jc-between p-ai-center">
+        <span>Code decharge</span>
+        <p-sortIcon field="codeDecharge"></p-sortIcon>
+        <p-columnFilter class="ml-auto" display="menu" field="ordreKosc.codeDecharge"
+                        type="text"></p-columnFilter>
+    </div>
+</th>
+
+
+<!--                        <th pSortableColumn="supplierService">-->
                         <!--                            <div class="p-d-flex p-jc-between p-ai-center">-->
                         <!--                                <span>Supplier service</span>-->
                         <!--                                <p-sortIcon field="supplierService"></p-sortIcon>-->

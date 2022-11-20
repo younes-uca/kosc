@@ -1,6 +1,9 @@
 package com.maneo.kosc.service.admin.impl;
 
+import com.maneo.kosc.bean.EtatDemandeKosc;
 import com.maneo.kosc.bean.OrdreKosc;
+import com.maneo.kosc.dao.EtatDemandeKoscDao;
+import com.maneo.kosc.dao.OrdreKoscDao;
 import com.maneo.kosc.service.admin.facade.OrdreKoscSuivRdvAdminService;
 import com.maneo.kosc.service.util.SearchUtil;
 import com.maneo.kosc.ws.rest.provided.vo.EtatDemandeKoscVo;
@@ -17,7 +20,10 @@ public class OrdreKoscSuiviRdvAdminServiceImpl implements OrdreKoscSuivRdvAdminS
 
     @Autowired
     private EntityManager entityManager;
-
+    @Autowired
+    EtatDemandeKoscDao etatDemandeKoscDao;
+    @Autowired
+    OrdreKoscDao ordreKoscDao;
 
     public List<OrdreKosc> findByCriteriaSuiviRdv(OrdreKoscVo ordreKoscVo) {
 
@@ -66,7 +72,14 @@ public class OrdreKoscSuiviRdvAdminServiceImpl implements OrdreKoscSuivRdvAdminS
         return entityManager.createQuery(query).getResultList();
     }
 
-        private String convertId(List<EtatDemandeKoscVo> etatDemandeKoscVos) {
+    @Override
+    public OrdreKosc updateEtat(OrdreKosc ordreKosc) {
+        if(ordreKosc.getEtatDemandeKosc()!=null)
+        ordreKosc.setEtatDemandeKosc(etatDemandeKoscDao.findByCode(ordreKosc.getEtatDemandeKosc().getCode()));
+        return ordreKoscDao.save(ordreKosc);
+    }
+
+    private String convertId(List<EtatDemandeKoscVo> etatDemandeKoscVos) {
             String res="";
             for(EtatDemandeKoscVo etatDemandeKoscVo: etatDemandeKoscVos){
                 res+="'"+etatDemandeKoscVo.getId()+"' ,";

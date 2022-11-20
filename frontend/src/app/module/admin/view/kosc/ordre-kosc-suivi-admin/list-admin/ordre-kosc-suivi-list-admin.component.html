@@ -3117,9 +3117,13 @@
                             <button (click)="viewOrdreKosc(ordreKosc)" class="p-button-rounded p-button-info p-mr-2" icon="pi pi-list" pButton
                                     pRipple></button>
 
-                            <button (click)="duplicateOrdreKosc(ordreKosc)" class="p-button-rounded p-button-raised p-button-warning" icon="pi pi-copy"
-                                    pButton
+                            <button (click)="etatToOkOrKo(ordreKosc,'ok') " class="p-button-raised p-button-success" label="ok"
+                                    pButton style="margin:2px"
                                     pRipple></button>
+                            <button (click)="etatToOkOrKo(ordreKosc,'ko')" class="p-button-raised p-button-danger" label="ko"
+                                    pButton style="margin:2px"
+                                    pRipple></button>
+
                         </td>
                     </tr>
                 </ng-template>

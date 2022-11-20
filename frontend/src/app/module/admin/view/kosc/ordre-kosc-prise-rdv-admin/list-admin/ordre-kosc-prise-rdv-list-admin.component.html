@@ -324,18 +324,18 @@
 
 
                         <td>
-                            <p-dialog [(visible)]="display1" [style]="{width: '40vw'}" [draggable]="false" [modal]="true">
+                            <p-dialog [(visible)]="displayPriseRdv" [style]="{width: '40vw'}" [draggable]="false" [modal]="true">
                                 <ng-template pTemplate="content">
                                     <p-tabView>
                                         <div>
                                             Est-ce que le client a pris un rendez-vous ?
                                         </div>
                                         <div class="p-mt-3  float">
-                                            <button class=" p-button-info p-mr-2" pButton pRipple label="Oui"></button>
+                                            <button class=" p-button-info p-mr-2" pButton pRipple label="Oui" (click)="toggleShowOui()"></button>
                                             <button class=" p-button-info p-mr-2" pButton pRipple label="Non"
                                                     (click)="toggleShow()"></button>
-                                            <button class=" p-button-info p-mr-2" pButton pRipple label="Pas encore !"
-                                                    (click)="toggleShow2()"></button>
+                                            <button class=" p-button-info p-mr-2" pButton pRipple label="Pas encore !" (click)="editPasEncore()"
+                                                    ></button>
                                         </div>
                                     </p-tabView>
                                 </ng-template>
@@ -354,42 +354,21 @@
                                                         label="Autre raison.." (click)="editEtat('autre')"></button>
                                             </div>
                                         </div>
-                                        <div *ngIf="isShown1" class="row p-mt-3" id="divshow1">
-                                            <div class="p-grid">
+                                        <div *ngIf="isShown1" class=" p-mt-3" id="divshow1">
+                                            <div class="">
 
-                                                <div class="p-field p-col-4 ">
-                                                    <label for="26" class="">Date premier appel</label>
-                                                    <p-calendar [(ngModel)]="selectedOrdreKosc.datePremierAppel"
+                                                <div class="p-field p-md-4">
+                                                    <label for="26" class="">Date rendez-vous</label>
+                                                    <p-calendar [(ngModel)]="selectedOrdreKosc.dateRdv"
                                                                 [showSeconds]="false"
                                                                 [showTime]="true"
-                                                                dateFormat="{{dateFormat2}}"
-                                                                id="26"
-                                                                placeholder="Date premier appel">
+                                                                dateFormat="{{dateFormatOui}}"
+                                                                id="26" class="p-mb-2 p-mr-2"
+                                                                placeholder="Date rdv">
                                                     </p-calendar>
 
                                                 </div>
-                                                <div class="p-field p-col-4 ">
-                                                    <label for="27">Date deuxieme appel</label>
-                                                    <p-calendar [(ngModel)]="selectedOrdreKosc.dateDeuxiemeAppel"
-                                                                [showSeconds]="false"
-                                                                [showTime]="true"
-                                                                dateFormat="{{dateFormat2}}"
-                                                                id="27"
-                                                                placeholder="Date deuxieme appel">
-                                                    </p-calendar>
 
-                                                </div>
-                                                <div class="p-field p-col-4 ">
-                                                    <label for="28">Date troisieme appel</label>
-                                                    <p-calendar [(ngModel)]="selectedOrdreKosc.dateTroisiemeAppel"
-                                                                [showSeconds]="false"
-                                                                [showTime]="true"
-                                                                dateFormat="{{dateFormat2}}"
-                                                                id="28"
-                                                                placeholder="Date troisieme appel">
-                                                    </p-calendar>
-
-                                                </div>
                                             </div>
                                             <div class="p-grid">
                                                 <div>
@@ -398,7 +377,7 @@
                                                             pButton pRipple></button>
                                                 </div>
                                                 <div>
-                                                    <button (click)="edit()" icon="pi pi-check" label="Valider" pButton
+                                                    <button (click)="editOui('planification')" icon="pi pi-check" label="Valider" pButton
                                                             pRipple
                                                             style="margin:10px"></button>
                                                 </div>

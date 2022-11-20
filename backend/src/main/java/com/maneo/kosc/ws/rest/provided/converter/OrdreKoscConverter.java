@@ -524,7 +524,7 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
             if (vo.getSourceReplanificationVo() != null && this.sourceReplanification)
                 item.setSourceReplanification(sourceReplanificationConverter.toItem(vo.getSourceReplanificationVo()));
             if (StringUtil.isNotEmpty(vo.getDateDernierAppel()))
-                item.setDateDernierAppel(DateUtil.parse(vo.getDateDernierAppel()));
+                item.setDateDernierAppel(DateUtil.parseTimestampUniversalFormat(vo.getDateDernierAppel()));
             if (StringUtil.isNotEmpty(vo.getNumeroDernierAppel()))
                 item.setNumeroDernierAppel(NumberUtil.toLong(vo.getNumeroDernierAppel()));
 
