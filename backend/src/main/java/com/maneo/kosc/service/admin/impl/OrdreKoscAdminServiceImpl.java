@@ -114,15 +114,19 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
         LocalDate todaysDate = LocalDate.now();
         if (ordreKoscs != null) {
             for (OrdreKosc ordreKosc : ordreKoscs) {
-                if (ordreKosc.getEtatDemandeKosc() != null && Objects.equals(ordreKosc.getEtatDemandeKosc().getCode(), "ok") && ordreKosc.getCodeDecharge() == null) {
+                if (ordreKosc.getEtatDemandeKosc() != null ) {
+                    if(Objects.equals(ordreKosc.getEtatDemandeKosc().getCode(), "ko")){
+                        ordreKosc.setDateEnvoiCri(DateUtil.toDate(todaysDate));
+                    }
+                    else if(Objects.equals(ordreKosc.getEtatDemandeKosc().getCode(), "ok") && ordreKosc.getCodeDecharge() == null){
                     ordreKosc.setCodeDecharge(DateUtil.now() + "-" + ordreKosc.getId());
-                    ordreKosc.setDateEnvoiSuivi(DateUtil.toDate(todaysDate));
+                    ordreKosc.setDateEnvoiCri(DateUtil.toDate(todaysDate));
+                    }
                     update(ordreKosc);
                 }
             }
             update(ordreKoscs);
         }
-
 
         return ordreKoscs;
     }

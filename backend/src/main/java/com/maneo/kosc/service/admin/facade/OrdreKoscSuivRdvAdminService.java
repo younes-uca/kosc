@@ -12,6 +12,6 @@ public interface OrdreKoscSuivRdvAdminService {
 
 
     List<OrdreKosc> findByCriteriaSuiviRdv(OrdreKoscVo ordreKoscVo);
-
+    OrdreKosc updateEtat (OrdreKosc ordreKoscVo);
 
 }

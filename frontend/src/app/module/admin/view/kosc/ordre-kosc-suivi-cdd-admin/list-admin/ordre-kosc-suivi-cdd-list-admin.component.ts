@@ -38,6 +38,7 @@ import {ExportService} from 'src/app/controller/service/Export.service';
 import {
     TemplateEmailClientInjoinableKoscService
 } from "../../../../../../controller/service/TemplateEmailClientInjoinableKosc.service";
+import {Calendar} from "primeng/calendar";
 
 @Component({
     selector: 'app-ordre-kosc-suivi-cdd-list-admin',
@@ -76,7 +77,7 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
     etatDemandeKoscs: Array<EtatDemandeKoscVo>;
     templateEmailClotures: Array<TemplateEmailClotureVo>;
     templateSuivis: Array<TemplateSuiviVo>;
-
+    entryDate: Calendar;
 
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
         , private operatorService: OperatorService
@@ -194,6 +195,7 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
 
     ngOnInit(): void {
         this.loadEtatDemandeKoscIncluding(['ok', 'ko']);
+        //this.setCriMinAndMax();
         this.initExport();
         this.initCol();
         this.loadOperator();
@@ -253,6 +255,12 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
     }
 
     // methods
+    erdvAndConfort(ordreKoscVo : OrdreKoscVo){
+        if( this.isErdvAndReferencWorkOrdereEmpty && ordreKoscVo.confort)
+            return true
+        else
+            return false
+    }
     public async loadOrdreKoscs() {
         await this.roleService.findAll();
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
@@ -1026,5 +1034,10 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
         }else {
             return false;
         }
+    }
+    setCriMinAndMax(){
+        let today =new Date();
+        this.searchOrdreKosc.dateEnvoiCriMin = today.toLocaleDateString();
+        this.searchOrdreKosc.dateEnvoiCriMax = today.toLocaleDateString();
     }
 }

@@ -254,26 +254,35 @@
                         </td>
 
 
-                        <td *ngIf="isErdvAndReferenceEmpty(ordreKosc) "
+                        <td *ngIf="isErdvAndReferenceEmpty(ordreKosc) && !erdvAndConfort(ordreKosc) "
                             [hidden]="!isErdvAndReferenceEmpty(ordreKosc)">
                             <p-badge
                                     value=" {{ordreKosc.reference}}" severity="info">
                             </p-badge>
 
                         </td>
+                        <td *ngIf="erdvAndConfort(ordreKosc)"
+                        ><span style=" background-color: #0288D1; color: #D32F2F; padding: 3px 3px;font-size: 0.9em ;font-weight:500;text-align: center; border-radius: 5px;margin-right: 2px">
+                            {{ordreKosc.reference}}</span>
+                        </td>
+
                         <td *ngIf="!isErdvAndReferenceEmpty(ordreKosc) "
                             [hidden]="isErdvAndReferenceEmpty(ordreKosc) "> {{ordreKosc.reference}}
                         </td>
 
-                        <td *ngIf="isErdvAndReferencWorkOrdereEmpty(ordreKosc) "
-                            [hidden]="!isErdvAndReferencWorkOrdereEmpty(ordreKosc)">
+                        <td *ngIf="isErdvAndReferencWorkOrdereEmpty(ordreKosc) && !erdvAndConfort(ordreKosc)"
+                            [hidden]="!isErdvAndReferencWorkOrdereEmpty(ordreKosc) ">
                             <p-badge
                                     value=" {{ordreKosc.referenceWorkOrder}}" severity="info">
                             </p-badge>
 
                         </td>
-                        <td *ngIf="!isErdvAndReferencWorkOrdereEmpty(ordreKosc) "
-                            [hidden]="isErdvAndReferencWorkOrdereEmpty(ordreKosc)"> {{ordreKosc.referenceWorkOrder}}
+                        <td *ngIf="!isErdvAndReferencWorkOrdereEmpty(ordreKosc)"
+                            [hidden]="isErdvAndReferencWorkOrdereEmpty(ordreKosc) "> {{ordreKosc.referenceWorkOrder}}
+                        </td>
+                        <td *ngIf="erdvAndConfort(ordreKosc)"
+                        ><span style=" background-color: #0288D1; color: #D32F2F; padding: 3px 3px;font-size: 0.9em ;font-weight:500;text-align: center; border-radius: 5px;margin-right: 2px">
+                            {{ordreKosc.referenceWorkOrder}}</span>
                         </td>
 
 

@@ -171,6 +171,13 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
 
     }
 
+    erdvAndConfort(ordreKoscVo : OrdreKoscVo){
+        if( this.isErdvAndReferencWorkOrdereEmpty && ordreKoscVo.confort)
+            return true
+        else
+            return false
+    }
+
     public editWithShowOption(showList: boolean) {
         this.ordreKoscService.edit().subscribe(ordreKosc => {
             const myIndex = this.ordreKoscs.findIndex(e => e.id === this.selectedOrdreKosc.id);

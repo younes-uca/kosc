@@ -171,6 +171,10 @@ export class OrdreKoscService {
         return this.http.put<OrdreKoscVo>(this.API, this.selectedOrdreKosc);
     }
 
+    public  updateEtat(): Observable<OrdreKoscVo> {
+        return this.http.put<OrdreKoscVo>(this.API+"update-etat/", this.selectedOrdreKosc);
+    }
+
     public findByCriteria(ordreKosc: OrdreKoscVo): Observable<Array<OrdreKoscVo>> {
         // console.log(ordreKosc);
         return this.http.post<Array<OrdreKoscVo>>(this.API + 'search', ordreKosc);
@@ -198,7 +202,11 @@ export class OrdreKoscService {
         return this.http.post<Array<OrdreKoscVo>>(this.API + 'search/suivi', ordreKosc);
     }
 
-    public findByIdWithAssociatedList(ordreKosc: OrdreKoscVo): Observable<OrdreKoscVo> {
+    public  findByIdWithAssociatedList (ordreKosc: OrdreKoscVo): Observable<OrdreKoscVo> {
+        return this.http.get<OrdreKoscVo>(this.API + 'detail/id/' + ordreKosc.id);
+    }
+
+    public async findByIdWithAssociatedList2 (ordreKosc: OrdreKoscVo): Promise<Observable<OrdreKoscVo>> {
         return this.http.get<OrdreKoscVo>(this.API + 'detail/id/' + ordreKosc.id);
     }
 

@@ -1325,6 +1325,12 @@ export class OrdreKoscListAdminComponent implements OnInit {
         return ordreKosc.confort?'color:red;':'color:black;';
 
     }
+    erdvAndConfort(ordreKoscVo : OrdreKoscVo){
+        if( this.isErdvAndReferencWorkOrdereEmpty && ordreKoscVo.confort)
+            return true
+        else
+            return false
+    }
 
     get ordreKoscs(): Array<OrdreKoscVo> {
         return this.ordreKoscService.ordreKoscs;
