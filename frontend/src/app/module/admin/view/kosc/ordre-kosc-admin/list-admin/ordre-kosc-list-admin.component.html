@@ -3291,7 +3291,7 @@
                             {{ordreKosc.reference}}</span>
                         </td>
 
-                        <td *ngIf="!isErdvAndReferenceEmpty(ordreKosc) "
+                        <td *ngIf="!isErdvAndReferenceEmpty(ordreKosc) && !erdvAndConfort(ordreKosc)"
                             [hidden]="isErdvAndReferenceEmpty(ordreKosc) "> {{ordreKosc.reference}}
                         </td>
 
@@ -3302,7 +3302,7 @@
                             </p-badge>
 
                         </td>
-                        <td *ngIf="!isErdvAndReferencWorkOrdereEmpty(ordreKosc)"
+                        <td *ngIf="!isErdvAndReferencWorkOrdereEmpty(ordreKosc) && !erdvAndConfort(ordreKosc)"
                             [hidden]="isErdvAndReferencWorkOrdereEmpty(ordreKosc) "> {{ordreKosc.referenceWorkOrder}}
                         </td>
                         <td *ngIf="erdvAndConfort(ordreKosc)"

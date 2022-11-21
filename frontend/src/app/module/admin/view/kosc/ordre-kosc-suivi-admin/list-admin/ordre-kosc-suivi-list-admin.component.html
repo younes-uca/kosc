@@ -2522,7 +2522,7 @@
                             {{ordreKosc.reference}}</span>
                         </td>
 
-                        <td *ngIf="!isErdvAndReferenceEmpty(ordreKosc) "
+                        <td *ngIf="!isErdvAndReferenceEmpty(ordreKosc) && !erdvAndConfort(ordreKosc)"
                             [hidden]="isErdvAndReferenceEmpty(ordreKosc) "> {{ordreKosc.reference}}
                         </td>
 
@@ -2533,7 +2533,7 @@
                             </p-badge>
 
                         </td>
-                        <td *ngIf="!isErdvAndReferencWorkOrdereEmpty(ordreKosc)"
+                        <td *ngIf="!isErdvAndReferencWorkOrdereEmpty(ordreKosc) && !erdvAndConfort(ordreKosc)"
                             [hidden]="isErdvAndReferencWorkOrdereEmpty(ordreKosc) "> {{ordreKosc.referenceWorkOrder}}
                         </td>
                         <td *ngIf="erdvAndConfort(ordreKosc)"
@@ -3126,10 +3126,10 @@
                             <button (click)="viewOrdreKosc(ordreKosc)" class="p-button-rounded p-button-info p-mr-2" icon="pi pi-list" pButton
                                     pRipple></button>
 
-                            <button (click)="etatToOkOrKo(ordreKosc,'ok') " class="p-button-raised p-button-success" label="ok"
+                            <button  (click)="UpdateEtatToOkOrKo(ordreKosc,'ok') " class=" p-button-rounded p-button-raised p-button-success p-mr-2" icon="pi pi-check"
                                     pButton style="margin:2px"
                                     pRipple></button>
-                            <button (click)="etatToOkOrKo(ordreKosc,'ko')" class="p-button-raised p-button-danger" label="ko"
+                            <button  (click)="UpdateEtatToOkOrKo(ordreKosc,'ko')" class="p-button-rounded p-button-raised p-button-danger p-mr-2" icon="pi pi-ban"
                                     pButton style="margin:2px"
                                     pRipple></button>
 

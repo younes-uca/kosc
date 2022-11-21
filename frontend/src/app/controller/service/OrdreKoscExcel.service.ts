@@ -800,6 +800,7 @@ export class OrdreKoscExcelService {
         myOrdreKoscData.departementVo.code = data[i]['zip_code']; //////zip code
 
         myOrdreKoscData.etatDemandeKoscVo.code = 'initialisation-wo';
+        myOrdreKoscData.etatDemandeKoscVo.libelle = 'initialisation-wo';
 
         myOrdreKoscData.reference = data[i]['kosc_order_ref'];
         myOrdreKoscData.referenceWorkOrder = data[i]['work_order_ref'];

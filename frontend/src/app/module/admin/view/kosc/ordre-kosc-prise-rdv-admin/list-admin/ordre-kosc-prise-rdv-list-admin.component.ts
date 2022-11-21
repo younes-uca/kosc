@@ -255,12 +255,12 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
     private validateForm(): void {
         this.errorMessages = new Array<string>();
         this.validateOrdreKoscDateAppel();
-
     }
 
     erdvAndConfort(ordreKoscVo : OrdreKoscVo){
-        if( this.isErdvAndReferencWorkOrdereEmpty && ordreKoscVo.confort)
+        if( ordreKoscVo.erdv == true && ordreKoscVo.confort == true){
             return true
+        }
         else
             return false
     }
