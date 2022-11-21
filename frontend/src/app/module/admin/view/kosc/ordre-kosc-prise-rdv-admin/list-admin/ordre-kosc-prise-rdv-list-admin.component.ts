@@ -114,6 +114,10 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
     displayPriseRdv = false;
 
     showPriseRdvDialog(ordreKosc: OrdreKoscVo) {
+        this.selectedOrdreKosc.datePremierAppel = DateUtils.toDate(ordreKosc.datePremierAppel);
+        this.selectedOrdreKosc.dateDeuxiemeAppel = DateUtils.toDate(ordreKosc.dateDeuxiemeAppel);
+        this.selectedOrdreKosc.dateTroisiemeAppel = DateUtils.toDate(ordreKosc.dateTroisiemeAppel);
+        this.selectedOrdreKosc.dateRdv = DateUtils.toDate(ordreKosc.dateRdv);
         this.selectedOrdreKosc = ordreKosc;
         this.displayPriseRdv = true;
         this.isShown = false;
@@ -191,7 +195,7 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
 
     }
 
-    public editPasEncore(){
+    public editPasEncore(ordreKosc: OrdreKoscVo){
         let date: Date = new Date();
         if(this.selectedOrdreKosc.datePremierAppel == null){
             this.selectedOrdreKosc.datePremierAppel = date;
@@ -202,7 +206,6 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         }
         this.editWithShowOption(false);
         this.displayPriseRdv = false;
-
     }
 
     public editOui(codeEtat: string){
