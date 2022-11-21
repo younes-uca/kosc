@@ -41,17 +41,16 @@
                                    (change)="importerDataBase($event)" #fileUpload>
                         </button>
 
-                        <p-dialog [(visible)]="showSpinner" [showHeader]="false" [resizable]="false" [modal]="true"
+<!--                        <p-dialog [(visible)]="showSpinner" [showHeader]="false" [resizable]="false" [modal]="true" [focusOnShow]="false">-->
 
-                                  [focusOnShow]="false">
-
-                            <p-progressSpinner *ngIf="showSpinner"
-                                               [style]="{width: '50px', height: '50px' }"
+                        <div  *ngIf="showSpinner" class="my-spinner">
+                            <p-progressSpinner
+                                               [style]="{width: '60px', height: '60px' }"
                                                styleClass="custom-spinner" strokeWidth="8" fill="#EEEEEE"
                                                animationDuration=".5s"></p-progressSpinner>
+                        </div>
 
-
-                        </p-dialog>
+<!--                        </p-dialog>-->
 
 
                         <!--  <ng-template pTemplate="footer">
@@ -67,7 +66,8 @@
 <!--                        <button type="button" class="btn-rex p-mr-2 p-mb-2" style="background-color: #b73106">-->
 <!--                            <i class="pi pi-plus"></i>&nbsp;Importer E-Rdv-->
 <!--                            <input type="file" class="file-input"-->
-<!--                                   accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"-->
+<!--                                   accept=".csv, app
+lication/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"-->
 <!--                                   (change)="readERdv($event)" #fileUpload>-->
 <!--                        </button>-->
                         <!-- <p-button label="Importer Ftel" icon="pi pi-plus" styleClass="p-button-help p-mr-2 p-mb-2" (onClick)="readFtel($event)" ></p-button> -->

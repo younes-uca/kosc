@@ -121,6 +121,7 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
                 this.selectedOrdreKosc.datePremierAppel = DateUtils.toDate(ordreKosc.datePremierAppel);
                 this.selectedOrdreKosc.dateDeuxiemeAppel = DateUtils.toDate(ordreKosc.dateDeuxiemeAppel);
                 this.selectedOrdreKosc.dateTroisiemeAppel = DateUtils.toDate(ordreKosc.dateTroisiemeAppel);
+                this.selectedOrdreKosc.dateDernierAppel = DateUtils.toDate(ordreKosc.dateDernierAppel);
                 this.selectedOrdreKosc.datePriseRdv = DateUtils.toDate(ordreKosc.datePriseRdv);
                 this.selectedOrdreKosc.dateRdv = DateUtils.toDate(ordreKosc.dateRdv);
                 this.selectedOrdreKosc.dateAppelReplanification = DateUtils.toDate(ordreKosc.dateAppelReplanification);
@@ -166,9 +167,15 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         if(this.selectedOrdreKosc.datePremierAppel == null){
             this.selectedOrdreKosc.datePremierAppel = date;
         }else if(this.selectedOrdreKosc.dateDeuxiemeAppel == null){
-            this.selectedOrdreKosc.dateDeuxiemeAppel = date;
+            if (this.selectedOrdreKosc.datePremierAppel == date) {
+                this.selectedOrdreKosc.dateDeuxiemeAppel = date;
+            }else{
+                this.messageService.add({severity: 'error', summary: 'erreur', detail: 'le premier appel et le deusieme appel ne peuvent pas etre dans le meme jour'});
+            }
         }else if(this.selectedOrdreKosc.dateTroisiemeAppel == null){
-            this.selectedOrdreKosc.dateTroisiemeAppel = date;
+            if(date < this.selectedOrdreKosc.dateDeuxiemeAppel){
+                this.selectedOrdreKosc.dateTroisiemeAppel = date;
+            }
         }
         this.editWithShowOption(false);
         this.displayPriseRdv = false;
@@ -472,6 +479,7 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
                 this.selectedOrdreKosc.dateEnvoiCri = new Date(ordreKosc.dateEnvoiCri);
                 this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
                 this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
+                this.selectedOrdreKosc.dateDernierAppel = DateUtils.toDate(ordreKosc.dateDernierAppel);
 
                 this.selectedOrdreKosc.dateEnvoiPlanification = DateUtils.toDate(ordreKosc.dateEnvoiPlanification);
                 this.selectedOrdreKosc.dateEnvoiReplanification = DateUtils.toDate(ordreKosc.dateEnvoiReplanification);
@@ -510,6 +518,7 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
                 this.selectedOrdreKosc.dateDeuxiemeAppel = DateUtils.toDate(ordreKosc.dateDeuxiemeAppel);
                 this.selectedOrdreKosc.dateTroisiemeAppel = DateUtils.toDate(ordreKosc.dateTroisiemeAppel);
                 this.selectedOrdreKosc.datePriseRdv = DateUtils.toDate(ordreKosc.datePriseRdv);
+                this.selectedOrdreKosc.dateDernierAppel = DateUtils.toDate(ordreKosc.dateDernierAppel);
                 this.selectedOrdreKosc.dateRdv = DateUtils.toDate(ordreKosc.dateRdv);
                 this.selectedOrdreKosc.dateAppelReplanification = DateUtils.toDate(ordreKosc.dateAppelReplanification);
                 this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
