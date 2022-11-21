@@ -1014,6 +1014,13 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
         ];
     }
 
+    erdvAndConfort(ordreKoscVo : OrdreKoscVo){
+        if( this.isErdvAndReferencWorkOrdereEmpty && ordreKoscVo.confort)
+            return true
+        else
+            return false
+    }
+
     public searchRequestSuiviRdv() {
         console.log(" this.searchOrdreKosc :" + this.searchOrdreKosc.etatDemandeKoscVos);
         this.ordreKoscService.findByCriteriaSuiviRdv(this.searchOrdreKosc).subscribe(ordreKoscs => {

@@ -109,7 +109,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
     }
 
     public searchRequestSuiviCdd() {
-        console.log(this.searchOrdreKosc.etatDemandeKoscVos);
+        console.log(this.searchOrdreKosc.dateEnvoiCriMin);
         this.ordreKoscService.findByCriteriaSuiviCdd(this.searchOrdreKosc).subscribe(ordreKoscs => {
             this.ordreKoscs = ordreKoscs;
             console.log(ordreKoscs);
@@ -265,7 +265,6 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
 
     public searchRequest() {
         this.ordreKoscService.findByCriteria(this.searchOrdreKosc).subscribe(ordreKoscs => {
-
             this.ordreKoscs = ordreKoscs;
             // this.searchOrdreKosc = new OrdreKoscVo();
         }, error => console.log(error));
@@ -394,6 +393,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
     }
 
     // getters and setters
+
 
     public async loadDepartement() {
         await this.roleService.findAll();
@@ -1014,6 +1014,17 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         }else {
             return false;
         }
+    }
+    erdvAndConfort(ordreKoscVo : OrdreKoscVo){
+        if( this.isErdvAndReferencWorkOrdereEmpty && ordreKoscVo.confort)
+            return true
+        else
+            return false
+    }
+    setCriMinAndMax(){
+     let today =new Date();
+        this.searchOrdreKosc.dateEnvoiCriMin = today.toLocaleDateString();
+        this.searchOrdreKosc.dateEnvoiCriMax = today.toLocaleDateString();
     }
 
     public generateCodeDecharge() {

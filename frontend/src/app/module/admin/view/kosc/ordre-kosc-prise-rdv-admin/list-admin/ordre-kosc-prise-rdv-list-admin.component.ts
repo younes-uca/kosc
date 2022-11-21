@@ -109,77 +109,48 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
     ) {
     }
 
-
-
     displayPriseRdv = false;
 
-    showPriseRdvDialog(ordreKosc: OrdreKoscVo) {
-        this.selectedOrdreKosc = ordreKosc;
-        this.displayPriseRdv = true;
-        this.isShown = false;
-        this.isShown1 = false;
+    async showPriseRdvDialog(ordreKosc: OrdreKoscVo) {
+        const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'edit');
+        if (isPermistted) {
+            this.ordreKoscService.findByIdWithAssociatedList(ordreKosc).subscribe(res => {
+                this.selectedOrdreKosc = res;
+                this.selectedOrdreKosc.dateDebutTraitement = DateUtils.toDate(ordreKosc.dateDebutTraitement);
+                this.selectedOrdreKosc.submissionDate = DateUtils.toDate(ordreKosc.submissionDate);
+                this.selectedOrdreKosc.datePremierAppel = DateUtils.toDate(ordreKosc.datePremierAppel);
+                this.selectedOrdreKosc.dateDeuxiemeAppel = DateUtils.toDate(ordreKosc.dateDeuxiemeAppel);
+                this.selectedOrdreKosc.dateTroisiemeAppel = DateUtils.toDate(ordreKosc.dateTroisiemeAppel);
+                this.selectedOrdreKosc.dateDernierAppel = DateUtils.toDate(ordreKosc.dateDernierAppel);
+                this.selectedOrdreKosc.datePriseRdv = DateUtils.toDate(ordreKosc.datePriseRdv);
+                this.selectedOrdreKosc.dateRdv = DateUtils.toDate(ordreKosc.dateRdv);
+                this.selectedOrdreKosc.dateAppelReplanification = DateUtils.toDate(ordreKosc.dateAppelReplanification);
+                this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
+                this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
+                this.selectedOrdreKosc.dateOuverture = new Date(ordreKosc.dateOuverture);
+                this.selectedOrdreKosc.dateEnvoiCri = new Date(ordreKosc.dateEnvoiCri);
+                this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
+                this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
 
-    }
+                this.selectedOrdreKosc.dateEnvoiPlanification = DateUtils.toDate(ordreKosc.dateEnvoiPlanification);
+                this.selectedOrdreKosc.dateEnvoiReplanification = DateUtils.toDate(ordreKosc.dateEnvoiReplanification);
+                this.selectedOrdreKosc.dateEnvoiReport = DateUtils.toDate(ordreKosc.dateEnvoiReport);
+                this.selectedOrdreKosc.dateEnvoiCloture = DateUtils.toDate(ordreKosc.dateEnvoiCloture);
+                this.selectedOrdreKosc.dateEnvoiSuivi = DateUtils.toDate(ordreKosc.dateEnvoiSuivi);
 
-    isShown: boolean = false;
 
-    toggleShow() {
-        this.isShown = !this.isShown;
-        this.isShown1 = false;
+                this.displayPriseRdv = true;
+                this.isShown = false;
+                this.isShown1 = false;
+            });
 
-    }
-
-    isShown1: boolean = false;
-
-    toggleShowOui() {
-        this.isShown1 = !this.isShown1;
-        this.isShown = false;
-    }
-
-    public edit() {
-        this.submitted = true;
-        this.validateForm();
-        this.displayPriseRdv = false;
-        if (this.errorMessages.length === 0) {
-            this.editWithShowOption(false);
 
         } else {
             this.messageService.add({
-                severity: 'error',
-                summary: 'Erreurs',
-                detail: 'Merci de corrigé les erreurs sur le formulaire'
+                severity: 'error', summary: 'Erreur', detail: 'Probléme de permission'
             });
         }
-    }
 
-    hideEditDialog() {
-        this.displayPriseRdv = false;
-        this.setValidation(true);
-    }
-
-    private setValidation(value: boolean) {
-        this.validOrdreKoscReferenceWorkOrder = value;
-    }
-
-    private validateForm(): void {
-        this.errorMessages = new Array<string>();
-        this.validateOrdreKoscDateAppel();
-
-    }
-
-    public editWithShowOption(showList: boolean) {
-        this.ordreKoscService.edit().subscribe(ordreKosc => {
-            const myIndex = this.ordreKoscs.findIndex(e => e.id === this.selectedOrdreKosc.id);
-            this.ordreKoscs[myIndex] = ordreKosc;
-            this.ordreKoscService.deleteIfEtatNotIn(this.searchOrdreKosc.etatDemandeKoscVos, this.ordreKoscs, ordreKosc);
-            this.editOrdreKoscDialog = false;
-            this.submitted = false;
-            this.selectedOrdreKosc = new OrdreKoscVo();
-
-
-        }, error => {
-            console.log(error);
-        });
 
     }
 
@@ -191,18 +162,23 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
 
     }
 
-    public editPasEncore(){
+    public editPasEncore(ordreKosc: OrdreKoscVo){
         let date: Date = new Date();
         if(this.selectedOrdreKosc.datePremierAppel == null){
             this.selectedOrdreKosc.datePremierAppel = date;
-        }else if(this.selectedOrdreKosc.dateDeuxiemeAppel == null && this.selectedOrdreKosc.datePremierAppel != null){
-            this.selectedOrdreKosc.dateDeuxiemeAppel == date;
+        }else if(this.selectedOrdreKosc.dateDeuxiemeAppel == null){
+            if (this.selectedOrdreKosc.datePremierAppel == date) {
+                this.selectedOrdreKosc.dateDeuxiemeAppel = date;
+            }else{
+                this.messageService.add({severity: 'error', summary: 'erreur', detail: 'le premier appel et le deusieme appel ne peuvent pas etre dans le meme jour'});
+            }
         }else if(this.selectedOrdreKosc.dateTroisiemeAppel == null){
-            this.selectedOrdreKosc.dateTroisiemeAppel == date;
+            if(date < this.selectedOrdreKosc.dateDeuxiemeAppel){
+                this.selectedOrdreKosc.dateTroisiemeAppel = date;
+            }
         }
         this.editWithShowOption(false);
         this.displayPriseRdv = false;
-
     }
 
     public editOui(codeEtat: string){
@@ -223,6 +199,81 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
             }
         );
     }
+
+
+
+    isShown: boolean = false;
+
+    toggleShow() {
+        this.isShown = !this.isShown;
+        this.isShown1 = false;
+
+    }
+
+    isShown1: boolean = false;
+
+    toggleShowOui() {
+        this.isShown1 = !this.isShown1;
+        this.isShown = false;
+    }
+
+
+    public edit() {
+        this.submitted = true;
+        this.validateForm();
+        this.displayPriseRdv = false;
+        if (this.errorMessages.length === 0) {
+            this.editWithShowOption(false);
+
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
+    }
+
+    public editWithShowOption(showList: boolean) {
+        this.ordreKoscService.edit().subscribe(ordreKosc => {
+            const myIndex = this.ordreKoscs.findIndex(e => e.id === this.selectedOrdreKosc.id);
+            this.ordreKoscs[myIndex] = ordreKosc;
+            this.ordreKoscService.deleteIfEtatNotIn(this.searchOrdreKosc.etatDemandeKoscVos, this.ordreKoscs, ordreKosc);
+            this.editOrdreKoscDialog = false;
+            this.submitted = false;
+            this.selectedOrdreKosc = new OrdreKoscVo();
+
+
+        }, error => {
+            console.log(error);
+        });
+
+    }
+
+    hideEditDialog() {
+        this.displayPriseRdv = false;
+        this.setValidation(true);
+    }
+
+    private setValidation(value: boolean) {
+        this.validOrdreKoscReferenceWorkOrder = value;
+    }
+
+    private validateForm(): void {
+        this.errorMessages = new Array<string>();
+        this.validateOrdreKoscDateAppel();
+
+    }
+
+    erdvAndConfort(ordreKoscVo : OrdreKoscVo){
+        if( this.isErdvAndReferencWorkOrdereEmpty && ordreKoscVo.confort)
+            return true
+        else
+            return false
+    }
+
+
+
 
     private validateOrdreKoscDateAppel() {
         if (this.selectedOrdreKosc.datePremierAppel != null && this.selectedOrdreKosc.dateDeuxiemeAppel) {
@@ -428,6 +479,7 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
                 this.selectedOrdreKosc.dateEnvoiCri = new Date(ordreKosc.dateEnvoiCri);
                 this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
                 this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
+                this.selectedOrdreKosc.dateDernierAppel = DateUtils.toDate(ordreKosc.dateDernierAppel);
 
                 this.selectedOrdreKosc.dateEnvoiPlanification = DateUtils.toDate(ordreKosc.dateEnvoiPlanification);
                 this.selectedOrdreKosc.dateEnvoiReplanification = DateUtils.toDate(ordreKosc.dateEnvoiReplanification);
@@ -466,6 +518,7 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
                 this.selectedOrdreKosc.dateDeuxiemeAppel = DateUtils.toDate(ordreKosc.dateDeuxiemeAppel);
                 this.selectedOrdreKosc.dateTroisiemeAppel = DateUtils.toDate(ordreKosc.dateTroisiemeAppel);
                 this.selectedOrdreKosc.datePriseRdv = DateUtils.toDate(ordreKosc.datePriseRdv);
+                this.selectedOrdreKosc.dateDernierAppel = DateUtils.toDate(ordreKosc.dateDernierAppel);
                 this.selectedOrdreKosc.dateRdv = DateUtils.toDate(ordreKosc.dateRdv);
                 this.selectedOrdreKosc.dateAppelReplanification = DateUtils.toDate(ordreKosc.dateAppelReplanification);
                 this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);

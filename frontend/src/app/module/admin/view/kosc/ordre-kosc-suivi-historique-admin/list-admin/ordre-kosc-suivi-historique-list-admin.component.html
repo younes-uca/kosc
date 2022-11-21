@@ -4,29 +4,31 @@
         <div class="card">
             <p-toolbar styleClass="p-mb-4">
                 <ng-template pTemplate="left">
-                    <button (click)="this.findByCriteriaShow = !this.findByCriteriaShow" class="p-button-success p-mr-2 p-mb-2"
+                    <button (click)="this.findByCriteriaShow = !this.findByCriteriaShow"
+                            class="p-button-success p-mr-2 p-mb-2"
                             icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}"
                             label="Chercher"
                             pButton
                             pRipple></button>
                 </ng-template>
                 <ng-template pTemplate="right">
-                        <p-splitButton [model]="excelPdfButons" icon="pi pi-download" label="Exporter"
-                                       styleClass="p-button-help"></p-splitButton>
+                    <p-splitButton [model]="excelPdfButons" icon="pi pi-download" label="Exporter"
+                                   styleClass="p-button-help"></p-splitButton>
 
-                        <p-button  icon="pi pi-success" label="Generer Code Decharge"
-                                   (onClick)="generateCodeDecharge()" styleClass="p-button-info" style="margin-left: 5px"></p-button>
+                    <p-button icon="pi pi-success" label="Generer Code Decharge"
+                              (onClick)="generateCodeDecharge()" styleClass="p-button-info"
+                              style="margin-left: 5px"></p-button>
                 </ng-template>
 
             </p-toolbar>
             <p-toolbar *ngIf="findByCriteriaShow">
 
                 <div class="align-form-search">
-                               <!-- <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
-                                    <input [(ngModel)]="searchOrdreKosc.reference" class="p-mr-2" id="1"
-                                           pInputText type="text">
-                                    <label for="1">Order Reference</label>
-                                </span>-->
+                    <!-- <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                         <input [(ngModel)]="searchOrdreKosc.reference" class="p-mr-2" id="1"
+                                pInputText type="text">
+                         <label for="1">Order Reference</label>
+                     </span>-->
                     <!--<span class=" p-float-label p-mr-3 align-search-items p-mt-4">
                                     <input [(ngModel)]="searchOrdreKosc.referenceWorkOrder" class="p-mr-2" id="2"
                                            pInputText type="text">
@@ -48,7 +50,7 @@
                                                 <label for="29-2">Date Envoi Cri Max</label>
                                             </span>
 
-                        <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
                                         <input class="p-mr-2" pInputText id="3"
                                                type="text" [(ngModel)]="searchOrdreKosc.codeDecharge">
                                         <label for="3">Code decharge</label>
@@ -162,11 +164,11 @@
                                            optionLabel="libelle">
                                </p-dropdown>
                            </span>-->
-                   <!--<span class=" p-float-label p-mr-3 align-search-items p-mt-4">
-                                   <input class="p-mr-2" pInputText id="23"
-                                          type="text" [(ngModel)]="searchOrdreKosc.company">
-                                   <label for="23">Company</label>
-                               </span>>-->
+                    <!--<span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input class="p-mr-2" pInputText id="23"
+                                           type="text" [(ngModel)]="searchOrdreKosc.company">
+                                    <label for="23">Company</label>
+                                </span>>-->
                     <!--                                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
                     <!--                                    <input class="p-mr-2" pInputText id="24"-->
                     <!--                                           type="text"  [(ngModel)]="searchOrdreKosc.referenDossier">-->
@@ -241,17 +243,19 @@
                     <!--                        </span>-->
 
 
-                                            <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
                                                 <p-calendar
-                                                        class="p-mr-2" [(ngModel)]="searchOrdreKosc.nbrHeureDateSubmissionAndNowMin"
+                                                        class="p-mr-2"
+                                                        [(ngModel)]="searchOrdreKosc.nbrHeureDateSubmissionAndNowMin"
                                                         id="29-1"
                                                         dateFormat="dd-MM-yy"></p-calendar>
                                                 <label for="29-1">Date Submission Min</label>
                                             </span>
 
-                                             <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
                                                 <p-calendar
-                                                        class="p-mr-2" [(ngModel)]="searchOrdreKosc.nbrHeureDateSubmissionAndNowMax"
+                                                        class="p-mr-2"
+                                                        [(ngModel)]="searchOrdreKosc.nbrHeureDateSubmissionAndNowMax"
                                                         id="29-2"
                                                         dateFormat="dd-MM-yy"></p-calendar>
                                                 <label for="29-2">Date Submission Max</label>
@@ -640,21 +644,21 @@
                              </p-dropdown>
                          </span>-->
 
-                 <!--<span class=" p-float-label p-mr-3 align-search-items p-mt-4">
-                         <p-calendar
-                                 class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateEnvoiCriMin"
-                                 id="100-1"
-                                 dateFormat="dd-MM-yy"></p-calendar>
-                         <label for="100-1">Date envoi cri Min</label>
-                     </span>
+                    <!--<span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                            <p-calendar
+                                    class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateEnvoiCriMin"
+                                    id="100-1"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="100-1">Date envoi cri Min</label>
+                        </span>
 
-                 <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
-                         <p-calendar
-                                 class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateEnvoiCriMax"
-                                 id="100-2"
-                                 dateFormat="dd-MM-yy"></p-calendar>
-                         <label for="100-2">Date envoi cri Max</label>
-                     </span>-->
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                            <p-calendar
+                                    class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateEnvoiCriMax"
+                                    id="100-2"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="100-2">Date envoi cri Max</label>
+                        </span>-->
 
                     <!--                                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
                     <!--                                    <input class="p-mr-2" pInputText id="101"-->
@@ -929,16 +933,13 @@
                     <!--                        </span>-->
 
 
-
-<!--                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
-<!--                                <p-dropdown [(ngModel)]="searchOrdreKosc.etatDemandeKoscVo" [filter]="true"-->
-<!--                                            [options]="etatDemandeKoscs"-->
-<!--                                            [showClear]="true" id="144" optionLabel="libelle"-->
-<!--                                            placeholder="Etat demande kosc">-->
-<!--                                </p-dropdown>-->
-<!--                            </span>-->
-
-
+                    <!--                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
+                    <!--                                <p-dropdown [(ngModel)]="searchOrdreKosc.etatDemandeKoscVo" [filter]="true"-->
+                    <!--                                            [options]="etatDemandeKoscs"-->
+                    <!--                                            [showClear]="true" id="144" optionLabel="libelle"-->
+                    <!--                                            placeholder="Etat demande kosc">-->
+                    <!--                                </p-dropdown>-->
+                    <!--                            </span>-->
 
 
                     <!--                            <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
@@ -1016,79 +1017,82 @@
                         <label for="155-2">Date envoi suivi Max</label>
                     </span>-->
 
-<span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
 
 <p-multiSelect [options]="etatDemandeKoscs"
-           [(ngModel)]="searchOrdreKosc.etatDemandeKoscVos"
-           defaultLabel="Etat demande kosc"
-           optionLabel="libelle" [virtualScroll]="false" ></p-multiSelect>
+               [(ngModel)]="searchOrdreKosc.etatDemandeKoscVos"
+               defaultLabel="Etat demande kosc"
+               optionLabel="libelle" [virtualScroll]="false"></p-multiSelect>
       </span>
 
 
-</div>
+                </div>
 
-<div class="align-search-button">
-<button (click)="searchRequest()" class="p-button-info p-mr-2" icon="pi pi-sort-amount-down" label="Valider"
-    pButton pRipple></button>
-</div>
+                <div class="align-search-button">
+                    <button (click)="searchRequest()" class="p-button-info p-mr-2" icon="pi pi-sort-amount-down"
+                            label="Valider"
+                            pButton pRipple></button>
+                </div>
 
-</p-toolbar>
+            </p-toolbar>
 
 
-<p-table #dt [(selection)]="selectedOrdreKosc" [columns]="cols" [globalFilterFields]="['reference', 'referenceWorkOrder', 'codeDecharge', 'supplierService', 'dateDebutTraitement', 'endCustumorName', 'endCustumorSiret', 'endCustumorFirstName', 'endCustumorLastName', 'endCustumorZipcode', 'endCustumorStreetName', 'endCustumorStreetNumber', 'endCustumorCity', 'endCustumorBuilding', 'endCustumorStairs', 'endCustumorFloor', 'endCustumorContactFirstName', 'endCustumorContactLastName', 'endCustumorContactPhone', 'endCustumorContactCellPhone', 'endCustumorContactEmail', 'operatorVolibelle', 'company', 'referenDossier', 'submissionDate', 'datePremierAppel', 'dateDeuxiemeAppel', 'dateTroisiemeAppel', 'datePriseRdv', 'dateRdv', 'dateAppelReplanification', 'dateInterventionTechnique', 'dateOuverture', 'envoiMailClient', 'envoiMailKosc', 'coordonnePboY', 'hauteurPbo', 'typeMaterielPbo', 'typePbo', 'conditionSyndics', 'typeRacordementPboPto', 'codeAccesImmeuble', 'contacteImmeuble', 'pmaAccessible', 'infoObtentionCle', 'localeIpm', 'contactsSyndic', 'racordementLong', 'oc1', 'nomModulePm1', 'positionModulePm1', 'referenceCableModulePm1', 'referenceTubeModulePm1', 'informationFibreModulePm1', 'referenceCablePbo1', 'informationTubePbo1', 'informationFibrePbo1', 'connecteurPriseNumero1', 'connecteurPriseCouleur1', 'oc2', 'nomModulePm2', 'positionModulePm2', 'referenceCableModulePm2', 'referenceTubeModulePm2', 'informationFibreModulePm2', 'referenceCablePbo2', 'informationTubePbo2', 'informationFibrePbo2', 'connecteurPriseNumero2', 'connecteurPriseCouleur2', 'oc3', 'nomModulePm3', 'positionModulePm3', 'referenceCableModulePm3', 'referenceTubeModulePm3', 'informationFibreModulePm3', 'referenceCablePbo3', 'informationTubePbo3', 'informationFibrePbo3', 'connecteurPriseNumero3', 'connecteurPriseCouleur3', 'oc4', 'nomModulePm4', 'positionModulePm4', 'referenceCableModulePm4', 'referenceTubeModulePm4', 'informationFibreModulePm4', 'referenceCablePbo4', 'informationTubePbo4', 'informationFibrePbo4', 'connecteurPriseNumero4', 'connecteurPriseCouleur4', 'departementVolibelle', 'technicienVoidentifiant', 'dateEnvoiCri', 'pboReel', 'numeroSerieOnt', 'workOrderType', 'product', 'provider', 'providerFileType', 'spliter', 'existingOtp', 'profile', 'providerSlId', 'referencePrestationPrise', 'clientVoid', 'dateInterventionTechniqueDebut', 'dateInterventionTechniqueFin', 'templateEmailClientInjoinableVolibelle', 'objetClient', 'envoyeClient', 'dateEnvoiClient', 'templateEmailKoscVolibelle', 'objetKosc', 'envoyeKosc', 'dateEnvoiKosc', 'templateEmailPlanificationVolibelle', 'objetPlanification', 'envoyePlanification', 'dateEnvoiPlanification', 'templateEmailReplanificationVolibelle', 'objetReplanification', 'envoyeReplanification', 'dateEnvoiReplanification', 'templateEmailReportVolibelle', 'objetReport', 'envoyeReport', 'dateEnvoiReport', 'etatDemandeKoscVolibelle', 'templateEmailClotureVolibelle', 'objetCloture', 'envoyeCloture', 'dateEnvoiCloture', 'emailCloturePieceJoints', 'templateSuiviVolibelle', 'objetSuivi', 'envoyeSuivi', 'dateEnvoiSuivi']" [paginator]="true"
-[rowHover]="true"
-[rowsPerPageOptions]="[8,25,50]"
-[rows]="8" [showCurrentPageReport]="true" [value]="ordreKoscs"
-currentPageReportTemplate="Les éléments de {first} à {last} sur {totalRecords} "
-dataKey="id" styleClass="p-datatable-customers">
-<ng-template pTemplate="caption">
-<div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
-<h5 class="p-m-0">Liste des ordre koscs</h5>
-<span class="p-input-icon-left">
+            <p-table #dt [(selection)]="selectedOrdreKosc" [columns]="cols"
+                     [globalFilterFields]="['reference', 'referenceWorkOrder', 'codeDecharge', 'supplierService', 'dateDebutTraitement', 'endCustumorName', 'endCustumorSiret', 'endCustumorFirstName', 'endCustumorLastName', 'endCustumorZipcode', 'endCustumorStreetName', 'endCustumorStreetNumber', 'endCustumorCity', 'endCustumorBuilding', 'endCustumorStairs', 'endCustumorFloor', 'endCustumorContactFirstName', 'endCustumorContactLastName', 'endCustumorContactPhone', 'endCustumorContactCellPhone', 'endCustumorContactEmail', 'operatorVolibelle', 'company', 'referenDossier', 'submissionDate', 'datePremierAppel', 'dateDeuxiemeAppel', 'dateTroisiemeAppel', 'datePriseRdv', 'dateRdv', 'dateAppelReplanification', 'dateInterventionTechnique', 'dateOuverture', 'envoiMailClient', 'envoiMailKosc', 'coordonnePboY', 'hauteurPbo', 'typeMaterielPbo', 'typePbo', 'conditionSyndics', 'typeRacordementPboPto', 'codeAccesImmeuble', 'contacteImmeuble', 'pmaAccessible', 'infoObtentionCle', 'localeIpm', 'contactsSyndic', 'racordementLong', 'oc1', 'nomModulePm1', 'positionModulePm1', 'referenceCableModulePm1', 'referenceTubeModulePm1', 'informationFibreModulePm1', 'referenceCablePbo1', 'informationTubePbo1', 'informationFibrePbo1', 'connecteurPriseNumero1', 'connecteurPriseCouleur1', 'oc2', 'nomModulePm2', 'positionModulePm2', 'referenceCableModulePm2', 'referenceTubeModulePm2', 'informationFibreModulePm2', 'referenceCablePbo2', 'informationTubePbo2', 'informationFibrePbo2', 'connecteurPriseNumero2', 'connecteurPriseCouleur2', 'oc3', 'nomModulePm3', 'positionModulePm3', 'referenceCableModulePm3', 'referenceTubeModulePm3', 'informationFibreModulePm3', 'referenceCablePbo3', 'informationTubePbo3', 'informationFibrePbo3', 'connecteurPriseNumero3', 'connecteurPriseCouleur3', 'oc4', 'nomModulePm4', 'positionModulePm4', 'referenceCableModulePm4', 'referenceTubeModulePm4', 'informationFibreModulePm4', 'referenceCablePbo4', 'informationTubePbo4', 'informationFibrePbo4', 'connecteurPriseNumero4', 'connecteurPriseCouleur4', 'departementVolibelle', 'technicienVoidentifiant', 'dateEnvoiCri', 'pboReel', 'numeroSerieOnt', 'workOrderType', 'product', 'provider', 'providerFileType', 'spliter', 'existingOtp', 'profile', 'providerSlId', 'referencePrestationPrise', 'clientVoid', 'dateInterventionTechniqueDebut', 'dateInterventionTechniqueFin', 'templateEmailClientInjoinableVolibelle', 'objetClient', 'envoyeClient', 'dateEnvoiClient', 'templateEmailKoscVolibelle', 'objetKosc', 'envoyeKosc', 'dateEnvoiKosc', 'templateEmailPlanificationVolibelle', 'objetPlanification', 'envoyePlanification', 'dateEnvoiPlanification', 'templateEmailReplanificationVolibelle', 'objetReplanification', 'envoyeReplanification', 'dateEnvoiReplanification', 'templateEmailReportVolibelle', 'objetReport', 'envoyeReport', 'dateEnvoiReport', 'etatDemandeKoscVolibelle', 'templateEmailClotureVolibelle', 'objetCloture', 'envoyeCloture', 'dateEnvoiCloture', 'emailCloturePieceJoints', 'templateSuiviVolibelle', 'objetSuivi', 'envoyeSuivi', 'dateEnvoiSuivi']"
+                     [paginator]="true"
+                     [rowHover]="true"
+                     [rowsPerPageOptions]="[8,25,50]"
+                     [rows]="8" [showCurrentPageReport]="true" [value]="ordreKoscs"
+                     currentPageReportTemplate="Les éléments de {first} à {last} sur {totalRecords} "
+                     dataKey="id" styleClass="p-datatable-customers">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+                        <h5 class="p-m-0">Liste des ordre koscs</h5>
+                        <span class="p-input-icon-left">
     <i class="pi pi-search"></i>
     <input (input)="dt.filterGlobal($event.target.value, 'contains')" pInputText placeholder="Chercher..."
            type="text"/>
 </span>
-</div>
-</ng-template>
-<ng-template pTemplate="header">
-<tr>
-<th style="width: 3rem">
-    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-</th>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
 
 
-<th pSortableColumn="reference">
-    <div class="p-d-flex p-jc-between p-ai-center">
-        <span>O</span>
-        <p-sortIcon field="reference"></p-sortIcon>
-        <p-columnFilter class="ml-auto" display="menu" field="ordreKosc.reference"
-                        type="text"></p-columnFilter>
-    </div>
-</th>
+                        <th pSortableColumn="reference">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>O</span>
+                                <p-sortIcon field="reference"></p-sortIcon>
+                                <p-columnFilter class="ml-auto" display="menu" field="ordreKosc.reference"
+                                                type="text"></p-columnFilter>
+                            </div>
+                        </th>
 
 
-<th pSortableColumn="referenceWorkOrder">
-    <div class="p-d-flex p-jc-between p-ai-center">
-        <span>WO</span>
-        <p-sortIcon field="referenceWorkOrder"></p-sortIcon>
-        <p-columnFilter class="ml-auto" display="menu" field="ordreKosc.referenceWorkOrder"
-                        type="text"></p-columnFilter>
-    </div>
-</th>
+                        <th pSortableColumn="referenceWorkOrder">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>WO</span>
+                                <p-sortIcon field="referenceWorkOrder"></p-sortIcon>
+                                <p-columnFilter class="ml-auto" display="menu" field="ordreKosc.referenceWorkOrder"
+                                                type="text"></p-columnFilter>
+                            </div>
+                        </th>
 
 
-<th pSortableColumn="codeDecharge">
-    <div class="p-d-flex p-jc-between p-ai-center">
-        <span>Code decharge</span>
-        <p-sortIcon field="codeDecharge"></p-sortIcon>
-        <p-columnFilter class="ml-auto" display="menu" field="ordreKosc.codeDecharge"
-                        type="text"></p-columnFilter>
-    </div>
-</th>
+                        <th pSortableColumn="codeDecharge">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Code decharge</span>
+                                <p-sortIcon field="codeDecharge"></p-sortIcon>
+                                <p-columnFilter class="ml-auto" display="menu" field="ordreKosc.codeDecharge"
+                                                type="text"></p-columnFilter>
+                            </div>
+                        </th>
 
 
-<!--                        <th pSortableColumn="supplierService">-->
+                        <!--                        <th pSortableColumn="supplierService">-->
                         <!--                            <div class="p-d-flex p-jc-between p-ai-center">-->
                         <!--                                <span>Supplier service</span>-->
                         <!--                                <p-sortIcon field="supplierService"></p-sortIcon>-->
@@ -2509,7 +2513,7 @@ dataKey="id" styleClass="p-datatable-customers">
 
                         <th pSortableColumn="dateEnvoiSuivi">
                             <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>Date suivi</span>
+                                <span>Date Envoi Cri</span>
                                 <p-sortIcon field="dateEnvoiSuivi"></p-sortIcon>
                             </div>
                         </th>
@@ -2524,26 +2528,35 @@ dataKey="id" styleClass="p-datatable-customers">
                             <p-tableCheckbox [value]="ordreKosc"></p-tableCheckbox>
                         </td>
 
-                        <td *ngIf="isErdvAndReferenceEmpty(ordreKosc) "
+                        <td *ngIf="isErdvAndReferenceEmpty(ordreKosc) && !erdvAndConfort(ordreKosc) "
                             [hidden]="!isErdvAndReferenceEmpty(ordreKosc)">
                             <p-badge
                                     value=" {{ordreKosc.reference}}" severity="info">
                             </p-badge>
 
                         </td>
+                        <td *ngIf="erdvAndConfort(ordreKosc)"
+                        ><span style=" background-color: #0288D1; color: #D32F2F; padding: 3px 3px;font-size: 0.9em ;font-weight:500;text-align: center; border-radius: 5px;margin-right: 2px">
+                            {{ordreKosc.reference}}</span>
+                        </td>
+
                         <td *ngIf="!isErdvAndReferenceEmpty(ordreKosc) "
                             [hidden]="isErdvAndReferenceEmpty(ordreKosc) "> {{ordreKosc.reference}}
                         </td>
 
-                        <td *ngIf="isErdvAndReferencWorkOrdereEmpty(ordreKosc) "
-                            [hidden]="!isErdvAndReferencWorkOrdereEmpty(ordreKosc)">
+                        <td *ngIf="isErdvAndReferencWorkOrdereEmpty(ordreKosc) && !erdvAndConfort(ordreKosc)"
+                            [hidden]="!isErdvAndReferencWorkOrdereEmpty(ordreKosc) ">
                             <p-badge
                                     value=" {{ordreKosc.referenceWorkOrder}}" severity="info">
                             </p-badge>
 
                         </td>
-                        <td *ngIf="!isErdvAndReferencWorkOrdereEmpty(ordreKosc) "
-                            [hidden]="isErdvAndReferencWorkOrdereEmpty(ordreKosc)"> {{ordreKosc.referenceWorkOrder}}
+                        <td *ngIf="!isErdvAndReferencWorkOrdereEmpty(ordreKosc)"
+                            [hidden]="isErdvAndReferencWorkOrdereEmpty(ordreKosc) "> {{ordreKosc.referenceWorkOrder}}
+                        </td>
+                        <td *ngIf="erdvAndConfort(ordreKosc)"
+                        ><span style=" background-color: #0288D1; color: #D32F2F; padding: 3px 3px;font-size: 0.9em ;font-weight:500;text-align: center; border-radius: 5px;margin-right: 2px">
+                            {{ordreKosc.referenceWorkOrder}}</span>
                         </td>
 
 
@@ -2646,7 +2659,9 @@ dataKey="id" styleClass="p-datatable-customers">
                         -->
 
 
-                        <td><span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.datePriseRdv | date :'dd/MM/yyyy HH:mm' }}</span></td>
+                        <td><span
+                                [style]="stylefyConfort(ordreKosc)">{{ordreKosc.datePriseRdv | date :'dd/MM/yyyy HH:mm' }}</span>
+                        </td>
 
 
                         <!--
@@ -3113,17 +3128,22 @@ dataKey="id" styleClass="p-datatable-customers">
                         -->
 
 
-                        <td><span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.dateEnvoiSuivi | date :'dd/MM/yyyy HH:mm' }}</span></td>
+                        <td><span
+                                [style]="stylefyConfort(ordreKosc)">{{ordreKosc.dateEnvoiCri | date :'dd/MM/yyyy HH:mm' }}</span>
+                        </td>
 
 
                         <td>
-                            <button (click)="editOrdreKosc(ordreKosc)" class="p-button-rounded p-button-success p-mr-2" icon="pi pi-pencil"
+                            <button (click)="editOrdreKosc(ordreKosc)" class="p-button-rounded p-button-success p-mr-2"
+                                    icon="pi pi-pencil"
                                     pButton
                                     pRipple></button>
-                            <button (click)="viewOrdreKosc(ordreKosc)" class="p-button-rounded p-button-info p-mr-2" icon="pi pi-list" pButton
+                            <button (click)="viewOrdreKosc(ordreKosc)" class="p-button-rounded p-button-info p-mr-2"
+                                    icon="pi pi-list" pButton
                                     pRipple></button>
 
-                            <button (click)="duplicateOrdreKosc(ordreKosc)" class="p-button-rounded p-button-raised p-button-warning" icon="pi pi-copy"
+                            <button (click)="duplicateOrdreKosc(ordreKosc)"
+                                    class="p-button-rounded p-button-raised p-button-warning" icon="pi pi-copy"
                                     pButton
                                     pRipple></button>
                         </td>
