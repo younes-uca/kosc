@@ -801,6 +801,7 @@ export class OrdreKoscExcelService {
 
         myOrdreKoscData.etatDemandeKoscVo.code = 'initialisation-wo';
         myOrdreKoscData.etatDemandeKoscVo.libelle = 'initialisation-wo';
+        myOrdreKoscData.etatDemandeKoscVo.style = 'warning';
 
         myOrdreKoscData.reference = data[i]['kosc_order_ref'];
         myOrdreKoscData.referenceWorkOrder = data[i]['work_order_ref'];

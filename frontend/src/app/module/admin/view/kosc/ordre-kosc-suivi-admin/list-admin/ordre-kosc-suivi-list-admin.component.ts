@@ -1045,8 +1045,12 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
    this.selectedOrdreKosc=ordreKosc;
       this.ordreKoscService.updateEtat().subscribe(result => {
           this.ordreKoscs=this.ordreKoscs.filter(e => e.etatDemandeKoscVo.code =='planification')
+          if(codeEtat=='ok')
               this.messageService.add({severity: 'success', summary: codeEtat, detail:'OrdreKosc with reference ' +result.reference + ' updated to '+ codeEtat});
-      }
+          else if( codeEtat=='ko')
+              this.messageService.add({severity: 'error', summary: codeEtat, detail:'OrdreKosc with reference ' +result.reference + ' updated to '+ codeEtat});
+
+          }
       )
     }
 
