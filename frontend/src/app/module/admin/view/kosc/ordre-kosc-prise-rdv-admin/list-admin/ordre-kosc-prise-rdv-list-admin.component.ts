@@ -109,21 +109,91 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
     ) {
     }
 
-
-
     displayPriseRdv = false;
 
-    showPriseRdvDialog(ordreKosc: OrdreKoscVo) {
-        this.selectedOrdreKosc.datePremierAppel = DateUtils.toDate(ordreKosc.datePremierAppel);
-        this.selectedOrdreKosc.dateDeuxiemeAppel = DateUtils.toDate(ordreKosc.dateDeuxiemeAppel);
-        this.selectedOrdreKosc.dateTroisiemeAppel = DateUtils.toDate(ordreKosc.dateTroisiemeAppel);
-        this.selectedOrdreKosc.dateRdv = DateUtils.toDate(ordreKosc.dateRdv);
-        this.selectedOrdreKosc = ordreKosc;
-        this.displayPriseRdv = true;
-        this.isShown = false;
-        this.isShown1 = false;
+    async showPriseRdvDialog(ordreKosc: OrdreKoscVo) {
+        const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'edit');
+        if (isPermistted) {
+            this.ordreKoscService.findByIdWithAssociatedList(ordreKosc).subscribe(res => {
+                this.selectedOrdreKosc = res;
+                this.selectedOrdreKosc.dateDebutTraitement = DateUtils.toDate(ordreKosc.dateDebutTraitement);
+                this.selectedOrdreKosc.submissionDate = DateUtils.toDate(ordreKosc.submissionDate);
+                this.selectedOrdreKosc.datePremierAppel = DateUtils.toDate(ordreKosc.datePremierAppel);
+                this.selectedOrdreKosc.dateDeuxiemeAppel = DateUtils.toDate(ordreKosc.dateDeuxiemeAppel);
+                this.selectedOrdreKosc.dateTroisiemeAppel = DateUtils.toDate(ordreKosc.dateTroisiemeAppel);
+                this.selectedOrdreKosc.datePriseRdv = DateUtils.toDate(ordreKosc.datePriseRdv);
+                this.selectedOrdreKosc.dateRdv = DateUtils.toDate(ordreKosc.dateRdv);
+                this.selectedOrdreKosc.dateAppelReplanification = DateUtils.toDate(ordreKosc.dateAppelReplanification);
+                this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
+                this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
+                this.selectedOrdreKosc.dateOuverture = new Date(ordreKosc.dateOuverture);
+                this.selectedOrdreKosc.dateEnvoiCri = new Date(ordreKosc.dateEnvoiCri);
+                this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
+                this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
+
+                this.selectedOrdreKosc.dateEnvoiPlanification = DateUtils.toDate(ordreKosc.dateEnvoiPlanification);
+                this.selectedOrdreKosc.dateEnvoiReplanification = DateUtils.toDate(ordreKosc.dateEnvoiReplanification);
+                this.selectedOrdreKosc.dateEnvoiReport = DateUtils.toDate(ordreKosc.dateEnvoiReport);
+                this.selectedOrdreKosc.dateEnvoiCloture = DateUtils.toDate(ordreKosc.dateEnvoiCloture);
+                this.selectedOrdreKosc.dateEnvoiSuivi = DateUtils.toDate(ordreKosc.dateEnvoiSuivi);
+
+
+                this.displayPriseRdv = true;
+                this.isShown = false;
+                this.isShown1 = false;
+            });
+
+
+        } else {
+            this.messageService.add({
+                severity: 'error', summary: 'Erreur', detail: 'Probléme de permission'
+            });
+        }
+
 
     }
+
+    public editEtat(codeEtat: string){
+        console.log(this.selectedOrdreKosc.etatDemandeKoscVo);
+        this.selectedOrdreKosc.etatDemandeKoscVo.code = codeEtat;
+        this.editWithShowOption(false);
+        this.displayPriseRdv = false;
+
+    }
+
+    public editPasEncore(ordreKosc: OrdreKoscVo){
+        let date: Date = new Date();
+        if(this.selectedOrdreKosc.datePremierAppel == null){
+            this.selectedOrdreKosc.datePremierAppel = date;
+        }else if(this.selectedOrdreKosc.dateDeuxiemeAppel == null){
+            this.selectedOrdreKosc.dateDeuxiemeAppel = date;
+        }else if(this.selectedOrdreKosc.dateTroisiemeAppel == null){
+            this.selectedOrdreKosc.dateTroisiemeAppel = date;
+        }
+        this.editWithShowOption(false);
+        this.displayPriseRdv = false;
+    }
+
+    public editOui(codeEtat: string){
+        console.log(this.selectedOrdreKosc.dateRdv);
+        console.log(this.selectedOrdreKosc.datePriseRdv);
+        this.selectedOrdreKosc.datePriseRdv = new Date();
+        this.selectedOrdreKosc.etatDemandeKoscVo.code = codeEtat;
+        this.editWithShowOption(false);
+        this.displayPriseRdv = false;
+    }
+
+
+    public editClientInjoignable() {
+        this.ordreKoscService.updateNonJoignable().subscribe(ordreKosc => {
+                const myIndex = this.ordreKoscs.findIndex(e => e.id === this.selectedOrdreKosc.id);
+                this.ordreKoscs[myIndex] = ordreKosc;
+                this.displayPriseRdv = false;
+            }
+        );
+    }
+
+
 
     isShown: boolean = false;
 
@@ -140,6 +210,7 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         this.isShown = false;
     }
 
+
     public edit() {
         this.submitted = true;
         this.validateForm();
@@ -154,6 +225,22 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
                 detail: 'Merci de corrigé les erreurs sur le formulaire'
             });
         }
+    }
+
+    public editWithShowOption(showList: boolean) {
+        this.ordreKoscService.edit().subscribe(ordreKosc => {
+            const myIndex = this.ordreKoscs.findIndex(e => e.id === this.selectedOrdreKosc.id);
+            this.ordreKoscs[myIndex] = ordreKosc;
+            this.ordreKoscService.deleteIfEtatNotIn(this.searchOrdreKosc.etatDemandeKoscVos, this.ordreKoscs, ordreKosc);
+            this.editOrdreKoscDialog = false;
+            this.submitted = false;
+            this.selectedOrdreKosc = new OrdreKoscVo();
+
+
+        }, error => {
+            console.log(error);
+        });
+
     }
 
     hideEditDialog() {
@@ -178,61 +265,8 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
             return false
     }
 
-    public editWithShowOption(showList: boolean) {
-        this.ordreKoscService.edit().subscribe(ordreKosc => {
-            const myIndex = this.ordreKoscs.findIndex(e => e.id === this.selectedOrdreKosc.id);
-            this.ordreKoscs[myIndex] = ordreKosc;
-            this.ordreKoscService.deleteIfEtatNotIn(this.searchOrdreKosc.etatDemandeKoscVos, this.ordreKoscs, ordreKosc);
-            this.editOrdreKoscDialog = false;
-            this.submitted = false;
-            this.selectedOrdreKosc = new OrdreKoscVo();
 
 
-        }, error => {
-            console.log(error);
-        });
-
-    }
-
-    public editEtat(codeEtat: string){
-        console.log(this.selectedOrdreKosc.etatDemandeKoscVo);
-        this.selectedOrdreKosc.etatDemandeKoscVo.code = codeEtat;
-        this.editWithShowOption(false);
-        this.displayPriseRdv = false;
-
-    }
-
-    public editPasEncore(ordreKosc: OrdreKoscVo){
-        let date: Date = new Date();
-        if(this.selectedOrdreKosc.datePremierAppel == null){
-            this.selectedOrdreKosc.datePremierAppel = date;
-        }else if(this.selectedOrdreKosc.dateDeuxiemeAppel == null && this.selectedOrdreKosc.datePremierAppel != null){
-            this.selectedOrdreKosc.dateDeuxiemeAppel == date;
-        }else if(this.selectedOrdreKosc.dateTroisiemeAppel == null){
-            this.selectedOrdreKosc.dateTroisiemeAppel == date;
-        }
-        this.editWithShowOption(false);
-        this.displayPriseRdv = false;
-    }
-
-    public editOui(codeEtat: string){
-        console.log(this.selectedOrdreKosc.dateRdv);
-        console.log(this.selectedOrdreKosc.datePriseRdv);
-        this.selectedOrdreKosc.datePriseRdv = new Date();
-        this.selectedOrdreKosc.etatDemandeKoscVo.code = codeEtat;
-        this.editWithShowOption(false);
-        this.displayPriseRdv = false;
-    }
-
-
-    public editClientInjoignable() {
-        this.ordreKoscService.updateNonJoignable().subscribe(ordreKosc => {
-                const myIndex = this.ordreKoscs.findIndex(e => e.id === this.selectedOrdreKosc.id);
-                this.ordreKoscs[myIndex] = ordreKosc;
-                this.displayPriseRdv = false;
-            }
-        );
-    }
 
     private validateOrdreKoscDateAppel() {
         if (this.selectedOrdreKosc.datePremierAppel != null && this.selectedOrdreKosc.dateDeuxiemeAppel) {
