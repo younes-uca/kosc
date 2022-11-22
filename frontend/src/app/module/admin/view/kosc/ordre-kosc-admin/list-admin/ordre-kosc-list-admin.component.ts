@@ -125,6 +125,9 @@ export class OrdreKoscListAdminComponent implements OnInit {
     arrayBuffer: any;
     display: boolean = false;
 
+    items: MenuItem[];
+
+    home: MenuItem;
 
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
         , private operatorService: OperatorService
@@ -243,6 +246,13 @@ export class OrdreKoscListAdminComponent implements OnInit {
 
 
     ngOnInit(): void {
+
+        this.items = [
+            {label: 'Ordre Kosc', routerLink: '/app/admin/kosc/ordre-kosc/list'},
+
+        ];
+
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
         this.loadEtatDemandeKoscIncluding(['initialisation-wo', 'initialisation-erdv']);
         this.initExport();
         this.initImport();

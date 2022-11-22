@@ -25,6 +25,9 @@ export class OperatorListAdminComponent implements OnInit {
     criteriaData: any[] = [];
     fileName = 'Operator';
 
+    items: MenuItem[];
+
+    home: MenuItem;
 
     constructor(private datePipe: DatePipe, private operatorService: OperatorService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
     ) {
@@ -96,6 +99,13 @@ export class OperatorListAdminComponent implements OnInit {
         this.loadOperators();
         this.initExport();
         this.initCol();
+
+        this.items = [
+            {label: 'Op\érateurs', routerLink: '/app/admin/kosc/operator/list'},
+
+        ];
+
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
     }
 
     // methods

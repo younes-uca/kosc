@@ -25,7 +25,9 @@ export class TemplateEmailFtlListAdminComponent implements OnInit {
     criteriaData: any[] = [];
     fileName = 'TemplateEmailFtl';
 
+    items: MenuItem[];
 
+    home: MenuItem;
     constructor(private datePipe: DatePipe, private templateEmailFtlService: TemplateEmailFtlService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
     ) {
     }
@@ -96,6 +98,13 @@ export class TemplateEmailFtlListAdminComponent implements OnInit {
         this.loadTemplateEmailFtls();
         this.initExport();
         this.initCol();
+
+        this.items = [
+            {label: 'Email FTL', routerLink: '/app/admin/kosc/template-email-ftl/list'},
+
+        ];
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
+
     }
 
     // methods

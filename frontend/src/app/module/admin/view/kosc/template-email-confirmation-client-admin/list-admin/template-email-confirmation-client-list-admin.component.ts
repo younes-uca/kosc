@@ -27,7 +27,9 @@ export class TemplateEmailConfirmationClientListAdminComponent implements OnInit
     criteriaData: any[] = [];
     fileName = 'TemplateEmailConfirmationClient';
 
+    items: MenuItem[];
 
+    home: MenuItem;
     constructor(private datePipe: DatePipe, private templateEmailConfirmationClientService: TemplateEmailConfirmationClientService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
     ) {
     }
@@ -98,6 +100,13 @@ export class TemplateEmailConfirmationClientListAdminComponent implements OnInit
         this.loadTemplateEmailConfirmationClients();
         this.initExport();
         this.initCol();
+
+        this.items = [
+            {label: 'Email Confirmation Client', routerLink: '/app/admin/kosc/template-email-confirmation-client/list'},
+
+        ];
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
+
     }
 
     // methods

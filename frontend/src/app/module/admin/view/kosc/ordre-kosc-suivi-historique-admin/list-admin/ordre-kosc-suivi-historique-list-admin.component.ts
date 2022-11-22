@@ -76,6 +76,9 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
     templateEmailClotures: Array<TemplateEmailClotureVo>;
     templateSuivis: Array<TemplateSuiviVo>;
 
+    items: MenuItem[];
+
+    home: MenuItem;
 
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
         , private operatorService: OperatorService
@@ -196,6 +199,13 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
     }
 
     ngOnInit(): void {
+
+        this.items = [
+            {label: 'Suivi Historique', routerLink: '/app/admin/kosc/ordre-kosc-suivi-historique/list'},
+
+        ];
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
+
         this.loadEtatDemandeKoscIncluding(['ok', 'ko']);
         this.initExport();
         this.initCol();

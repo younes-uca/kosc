@@ -25,7 +25,9 @@ export class TemplateEmailReportListAdminComponent implements OnInit {
     criteriaData: any[] = [];
     fileName = 'TemplateEmailReport';
 
+    items: MenuItem[];
 
+    home: MenuItem;
     constructor(private datePipe: DatePipe, private templateEmailReportService: TemplateEmailReportService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
     ) {
     }
@@ -96,6 +98,13 @@ export class TemplateEmailReportListAdminComponent implements OnInit {
         this.loadTemplateEmailReports();
         this.initExport();
         this.initCol();
+
+        this.items = [
+            {label: 'Email Report', routerLink: '/app/admin/kosc/template-email-report/list'},
+
+        ];
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
+
     }
 
     // methods

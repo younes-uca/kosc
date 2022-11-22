@@ -67,6 +67,9 @@ export class DefaultTemplateConfigurationListAdminComponent implements OnInit {
     templateEmailMauvaisContacts: Array<TemplateEmailMauvaisContactVo>;
     templateEmailCris: Array<TemplateEmailCriVo>;
 
+    items: MenuItem[];
+
+    home: MenuItem;
 
     constructor(private datePipe: DatePipe, private defaultTemplateConfigurationService: DefaultTemplateConfigurationService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
         , private templateEmailFtlService: TemplateEmailFtlService
@@ -161,6 +164,13 @@ export class DefaultTemplateConfigurationListAdminComponent implements OnInit {
         this.loadTemplateEmailMauvaisContact();
         this.loadTemplateEmailCri();
         this.yesOrNoEnabled = [{label: 'Enabled', value: null}, {label: 'Oui', value: 1}, {label: 'Non', value: 0}];
+
+        this.items = [
+            {label: 'Default Template Configuration', routerLink: '/app/admin/kosc/default-template-configuration/list'},
+
+        ];
+
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
     }
 
     // methods

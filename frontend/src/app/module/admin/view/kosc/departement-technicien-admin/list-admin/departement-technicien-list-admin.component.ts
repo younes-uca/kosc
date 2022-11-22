@@ -37,6 +37,10 @@ export class DepartementTechnicienListAdminComponent implements OnInit {
     res: Array<ArretTravailVo>;
 
 
+    items: MenuItem[];
+
+    home: MenuItem;
+
     constructor(private datePipe: DatePipe, private departementTechnicienService: DepartementTechnicienService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
         , private technicienService: TechnicienService
         , private departementService: DepartementService
@@ -122,6 +126,12 @@ export class DepartementTechnicienListAdminComponent implements OnInit {
         this.loadDepartement();
         this.arretTravailService.findAll().subscribe((data) => this.arretTravails = data);
 
+        this.items = [
+            {label: 'D\épartement Technicien', routerLink: '/app/admin/kosc/departement-technicien/list'},
+
+        ];
+
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
     }
 
     // methods

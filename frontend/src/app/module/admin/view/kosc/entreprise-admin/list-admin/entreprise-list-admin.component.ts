@@ -25,6 +25,10 @@ export class EntrepriseListAdminComponent implements OnInit {
     criteriaData: any[] = [];
     fileName = 'Entreprise';
 
+    items: MenuItem[];
+
+    home: MenuItem;
+
 
     constructor(private datePipe: DatePipe, private entrepriseService: EntrepriseService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
     ) {
@@ -96,6 +100,13 @@ export class EntrepriseListAdminComponent implements OnInit {
         this.loadEntreprises();
         this.initExport();
         this.initCol();
+
+        this.items = [
+            {label: 'Entreprise', routerLink: '/app/admin/kosc/entreprise/list'},
+
+        ];
+
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
     }
 
     // methods
