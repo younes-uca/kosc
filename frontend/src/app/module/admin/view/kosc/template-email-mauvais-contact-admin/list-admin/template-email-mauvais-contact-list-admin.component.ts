@@ -25,7 +25,9 @@ export class TemplateEmailMauvaisContactListAdminComponent implements OnInit {
     criteriaData: any[] = [];
     fileName = 'TemplateEmailMauvaisContact';
 
+    items: MenuItem[];
 
+    home: MenuItem;
     constructor(private datePipe: DatePipe, private templateEmailMauvaisContactService: TemplateEmailMauvaisContactService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
     ) {
     }
@@ -96,6 +98,13 @@ export class TemplateEmailMauvaisContactListAdminComponent implements OnInit {
         this.loadTemplateEmailMauvaisContacts();
         this.initExport();
         this.initCol();
+
+        this.items = [
+            {label: 'Email Mauvais Contact', routerLink: '/app/admin/kosc/template-email-mauvais-contact/list'},
+
+        ];
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
+
     }
 
     // methods

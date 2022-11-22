@@ -25,7 +25,9 @@ export class TemplateEmailCriListAdminComponent implements OnInit {
     criteriaData: any[] = [];
     fileName = 'TemplateEmailCri';
 
+    items: MenuItem[];
 
+    home: MenuItem;
     constructor(private datePipe: DatePipe, private templateEmailCriService: TemplateEmailCriService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
     ) {
     }
@@ -96,6 +98,13 @@ export class TemplateEmailCriListAdminComponent implements OnInit {
         this.loadTemplateEmailCris();
         this.initExport();
         this.initCol();
+
+        this.items = [
+            {label: 'Email CRI', routerLink: '/app/admin/kosc/template-email-cri/list'},
+
+        ];
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
+
     }
 
     // methods

@@ -25,7 +25,9 @@ export class TemplateEmailClientInjoinableListAdminComponent implements OnInit {
     criteriaData: any[] = [];
     fileName = 'TemplateEmailClientInjoinable';
 
+    items: MenuItem[];
 
+    home: MenuItem;
     constructor(private datePipe: DatePipe, private templateEmailClientInjoinableService: TemplateEmailClientInjoinableService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
     ) {
     }
@@ -96,6 +98,13 @@ export class TemplateEmailClientInjoinableListAdminComponent implements OnInit {
         this.loadTemplateEmailClientInjoinables();
         this.initExport();
         this.initCol();
+
+        this.items = [
+            {label: 'Email Client Injoignable', routerLink: '/app/admin/kosc/template-email-client-injoinable/list'},
+
+        ];
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
+
     }
 
     // methods

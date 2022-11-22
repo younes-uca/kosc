@@ -25,6 +25,9 @@ export class TemplateEmailClotureListAdminComponent implements OnInit {
     criteriaData: any[] = [];
     fileName = 'TemplateEmailCloture';
 
+    items: MenuItem[];
+
+    home: MenuItem;
 
     constructor(private datePipe: DatePipe, private templateEmailClotureService: TemplateEmailClotureService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
     ) {
@@ -96,6 +99,13 @@ export class TemplateEmailClotureListAdminComponent implements OnInit {
         this.loadTemplateEmailClotures();
         this.initExport();
         this.initCol();
+
+        this.items = [
+            {label: 'Email Cloture', routerLink: '/app/admin/kosc/template-email-cloture/list'},
+
+        ];
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
+
     }
 
     // methods

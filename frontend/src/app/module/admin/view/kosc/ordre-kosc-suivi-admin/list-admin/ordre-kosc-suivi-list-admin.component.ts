@@ -75,6 +75,9 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
     templateSuivis: Array<TemplateSuiviVo>;
     private ordreKoscsSuiviRdv: Array<OrdreKoscVo>;
 
+    items: MenuItem[];
+
+    home: MenuItem;
 
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
         , private operatorService: OperatorService
@@ -168,6 +171,12 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
     }
 
     ngOnInit(): void {
+
+        this.items = [
+            {label: 'Suivi Rendez-vous', routerLink: '/app/admin/kosc/ordre-kosc-suivi/list'},
+
+        ];
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
 
         //this.searchOrdreKosc.dateEnvoiCri = new Date();
         this.loadEtatDemandeKoscIncluding(['planification']);

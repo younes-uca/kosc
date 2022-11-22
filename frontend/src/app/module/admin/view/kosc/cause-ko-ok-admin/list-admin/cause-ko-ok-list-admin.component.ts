@@ -25,6 +25,9 @@ export class CauseKoOkListAdminComponent implements OnInit {
     criteriaData: any[] = [];
     fileName = 'CauseKoOk';
 
+    items: MenuItem[];
+
+    home: MenuItem;
 
     constructor(private datePipe: DatePipe, private causeKoOkService: CauseKoOkService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
     ) {
@@ -96,6 +99,13 @@ export class CauseKoOkListAdminComponent implements OnInit {
         this.loadCauseKoOks();
         this.initExport();
         this.initCol();
+
+        this.items = [
+            {label: 'Cause Ko Ok', routerLink: '/app/admin/kosc/cause-ko-ok/list'},
+
+        ];
+
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
     }
 
     // methods

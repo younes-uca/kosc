@@ -25,6 +25,10 @@ export class RegionListAdminComponent implements OnInit {
     criteriaData: any[] = [];
     fileName = 'Region';
 
+    items: MenuItem[];
+
+    home: MenuItem;
+
 
     constructor(private datePipe: DatePipe, private regionService: RegionService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
     ) {
@@ -96,6 +100,13 @@ export class RegionListAdminComponent implements OnInit {
         this.loadRegions();
         this.initExport();
         this.initCol();
+
+        this.items = [
+            {label: 'R\égion', routerLink: '/app/admin/kosc/region/list'},
+
+        ];
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
+
     }
 
     // methods

@@ -34,6 +34,9 @@ export class TechnicienListAdminComponent implements OnInit {
     yesOrNoPasswordChanged: any[] = [];
     entreprises: Array<EntrepriseVo>;
 
+    items: MenuItem[];
+
+    home: MenuItem;
 
     constructor(private datePipe: DatePipe, private technicienService: TechnicienService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
         , private entrepriseService: EntrepriseService
@@ -103,6 +106,12 @@ export class TechnicienListAdminComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.items = [
+            {label: 'T\échniciens', routerLink: '/app/admin/kosc/technicien/list'},
+
+        ];
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
+
         this.loadTechniciens();
         this.initExport();
         this.initCol();

@@ -25,7 +25,9 @@ export class RaisonArretTravailListAdminComponent implements OnInit {
     criteriaData: any[] = [];
     fileName = 'RaisonArretTravail';
 
+    items: MenuItem[];
 
+    home: MenuItem;
     constructor(private datePipe: DatePipe, private raisonArretTravailService: RaisonArretTravailService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
     ) {
     }
@@ -96,6 +98,13 @@ export class RaisonArretTravailListAdminComponent implements OnInit {
         this.loadRaisonArretTravails();
         this.initExport();
         this.initCol();
+
+        this.items = [
+            {label: 'Raisons Arr\êt Travaol', routerLink: '/app/admin/kosc/raison-arret-travail/list'},
+
+        ];
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
+
     }
 
     // methods
