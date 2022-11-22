@@ -724,7 +724,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         this.errorMessages = new Array<string>();
         // this.validateOrdreKoscDateRdv();
         /* this.validateOrdreKoscReferenceWorkOrder();*/
-        this.validateOrdreKoscDateAppel();
+        //this.validateOrdreKoscDateAppel();
 
     }
 

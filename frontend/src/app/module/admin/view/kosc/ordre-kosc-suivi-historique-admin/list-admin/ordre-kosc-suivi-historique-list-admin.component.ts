@@ -1016,7 +1016,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         }
     }
     erdvAndConfort(ordreKoscVo : OrdreKoscVo){
-        if( this.isErdvAndReferencWorkOrdereEmpty && ordreKoscVo.confort)
+        if( ordreKoscVo.erdv == true && ordreKoscVo.confort)
             return true
         else
             return false

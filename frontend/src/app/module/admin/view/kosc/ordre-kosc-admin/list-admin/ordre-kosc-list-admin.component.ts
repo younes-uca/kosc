@@ -221,7 +221,6 @@ export class OrdreKoscListAdminComponent implements OnInit {
             next: () => {
                 this.showSpinner = false;
 
-
             },
             error: () => {
                 this.showSpinner = false;
@@ -1326,8 +1325,9 @@ export class OrdreKoscListAdminComponent implements OnInit {
 
     }
     erdvAndConfort(ordreKoscVo : OrdreKoscVo){
-        if( this.isErdvAndReferencWorkOrdereEmpty && ordreKoscVo.confort)
-            return true
+        if( ordreKoscVo.erdv == true && ordreKoscVo.confort){
+            return true;
+        }
         else
             return false
     }

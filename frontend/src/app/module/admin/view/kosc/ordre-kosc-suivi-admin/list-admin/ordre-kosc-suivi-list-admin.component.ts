@@ -1015,7 +1015,7 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
     }
 
     erdvAndConfort(ordreKoscVo : OrdreKoscVo){
-        if( this.isErdvAndReferencWorkOrdereEmpty && ordreKoscVo.confort)
+        if( ordreKoscVo.erdv == true && ordreKoscVo.confort)
             return true
         else
             return false
@@ -1029,34 +1029,31 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
         }, error => console.log(error));
     }
 
+
     public async loadEtatDemandeKoscIncluding(etatNonDesire: Array<String>) {
         await this.roleService.findAll();
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
         isPermistted ? this.etatDemandeKoscService.findAll().subscribe(etatDemandeKoscs => {
                 this.etatDemandeKoscs = etatDemandeKoscs;
                 this.searchOrdreKosc.etatDemandeKoscVos = this.etatDemandeKoscs.filter(e => etatNonDesire.indexOf(e.code) != -1);
-                console.log(this.searchOrdreKosc.etatDemandeKoscVos);
             }, error => console.log(error))
             : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
-
     }
 
-    async etatToOkOrKo(ordreKosc: OrdreKoscVo, etat: string) {
-         (await this.ordreKoscService.findByIdWithAssociatedList2(ordreKosc)).subscribe(res => {
-            this.selectedOrdreKosc = res;
-            this.selectedOrdreKosc.etatDemandeKoscVo.code = etat;
-            console.log(this.selectedOrdreKosc)
-             this.updateEtat();
-        }, error => console.log(error))
+  UpdateEtatToOkOrKo(ordreKosc: OrdreKoscVo, codeEtat: string) {
+   ordreKosc.etatDemandeKoscVo.code=codeEtat;
+   this.selectedOrdreKosc=ordreKosc;
+      this.ordreKoscService.updateEtat().subscribe(result => {
+          this.ordreKoscs=this.ordreKoscs.filter(e => e.etatDemandeKoscVo.code =='planification')
+          if(codeEtat=='ok')
+              this.messageService.add({severity: 'success', summary: codeEtat, detail:'OrdreKosc with reference ' +result.reference + ' updated to '+ codeEtat});
+          else if( codeEtat=='ko')
+              this.messageService.add({severity: 'error', summary: codeEtat, detail:'OrdreKosc with reference ' +result.reference + ' updated to '+ codeEtat});
 
+          }
+      )
     }
 
-    updateEtat() {
-        this.ordreKoscService.updateEtat().subscribe(result => {
-            console.log(result)
-            let index = this.ordreKoscs.findIndex(e => e.id == result.id)
-            this.ordreKoscs[index] = result;
-        })
 
-    }
+
 }

@@ -256,7 +256,7 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
 
     // methods
     erdvAndConfort(ordreKoscVo : OrdreKoscVo){
-        if( this.isErdvAndReferencWorkOrdereEmpty && ordreKoscVo.confort)
+        if( ordreKoscVo.erdv == true && ordreKoscVo.confort)
             return true
         else
             return false
