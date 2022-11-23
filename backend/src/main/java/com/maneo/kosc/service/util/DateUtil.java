@@ -57,7 +57,9 @@ public class DateUtil {
     }
     public static Date parseTimestampUniversalFormat(String date) {
         try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSS");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+            date=date.replace("T"," ");
+            date=date.replace("Z","");
             Date parsedDate = dateFormat.parse(date);
             Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
             return timestamp;
