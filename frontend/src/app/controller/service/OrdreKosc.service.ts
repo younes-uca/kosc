@@ -168,6 +168,8 @@ export class OrdreKoscService {
     }
 
     public edit(): Observable<OrdreKoscVo> {
+        //this.selectedOrdreKosc.datePriseRdv= new Date(moment(this.selectedOrdreKosc.datePriseRdv).format('yyyy-MM-dd hh:mm:ss.SSS'));
+        console.log(this.selectedOrdreKosc.datePriseRdv)
         return this.http.put<OrdreKoscVo>(this.API, this.selectedOrdreKosc);
     }
 

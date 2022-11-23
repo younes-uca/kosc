@@ -665,8 +665,9 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
     }
 
     public editWithShowOption(showList: boolean) {
+        console.log(this.selectedOrdreKosc.datePriseRdv)
         this.ordreKoscService.edit().subscribe(ordreKosc => {
-            console.log('date backend :'+ordreKosc.dateEnvoiCri)
+            console.log('date backend :'+ordreKosc.datePriseRdv)
             const myIndex = this.ordreKoscs.findIndex(e => e.id === this.selectedOrdreKosc.id);
             this.ordreKoscs[myIndex] = ordreKosc;
             this.ordreKoscService.deleteIfEtatNotIn(this.searchOrdreKosc.etatDemandeKoscVos, this.ordreKoscs, ordreKosc);
