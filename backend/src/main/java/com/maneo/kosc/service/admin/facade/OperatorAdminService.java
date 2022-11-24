@@ -47,4 +47,6 @@ public interface OperatorAdminService extends AbstractService<Operator, Long, Op
 
     @Override
     Operator save(Operator entity);
+
+    Operator findByLibelle(String libelle);
 }

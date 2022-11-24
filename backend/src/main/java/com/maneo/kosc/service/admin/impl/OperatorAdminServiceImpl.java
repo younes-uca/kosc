@@ -109,6 +109,11 @@ public class OperatorAdminServiceImpl extends AbstractServiceImpl<Operator> impl
     }
 
     @Override
+    public Operator findByLibelle(String libelle) {
+        return operatorDao.findByLibelle(libelle);
+    }
+
+    @Override
     public List<Operator> save(List<Operator> operators) {
         List<Operator> list = new ArrayList<>();
         for (Operator operator : operators) {

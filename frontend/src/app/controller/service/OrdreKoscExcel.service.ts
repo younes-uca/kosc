@@ -782,17 +782,21 @@ export class OrdreKoscExcelService {
             myOrdreKoscData.etatDemandeKoscVo = new EtatDemandeKoscVo();
         }
         //save technicien
-        if( myOrdreKoscData.technicienVo==null){
-            myOrdreKoscData.technicienVo=new TechnicienVo();
-        }
-        myOrdreKoscData.technicienVo.identifiant=data[i]['tech_reference'];
-        console.log( "indentifiant:"+ myOrdreKoscData.technicienVo.identifiant);
+        // if( myOrdreKoscData.technicienVo==null){
+        //     myOrdreKoscData.technicienVo=new TechnicienVo();
+        // }
+        // myOrdreKoscData.technicienVo.identifiant=data[i]['tech_reference'];
+        // console.log( "indentifiant:"+ myOrdreKoscData.technicienVo.identifiant);
 
         //save Operateur
         if( myOrdreKoscData.operatorVo==null){
             myOrdreKoscData.operatorVo=new OperatorVo();
         }
-        myOrdreKoscData.operatorVo.reference=data[i]['opt_reference'];
+        myOrdreKoscData.operatorVo.libelle=data[i]['customer_operator'];/////////////////pas sure !!
+        myOrdreKoscData.operatorVo.reference=data[i]['customer_operator'];/////////////////pas sure !!
+        if (myOrdreKoscData.operatorVo.libelle == null || myOrdreKoscData.operatorVo.libelle == '' ) {
+            myOrdreKoscData.operatorVo = null;
+        }
 
         if (myOrdreKoscData.departementVo == null){
             myOrdreKoscData.departementVo = new DepartementVo();

@@ -72,8 +72,6 @@ public class ImportOrdreKoscAdminServiceImpl implements ImportOrdreKoscAdminServ
         for (OrdreKosc ordreKosc : ordreKoscs) {
             prepareSave(ordreKosc);
             OrdreKosc foundedOrdreKosc = ordreKoscDao.findByReferenceWorkOrderAndEtat(ordreKosc.getReferenceWorkOrder());
-//            if (!foundedOrdreKosc.isEmpty()) {}
-//                for (OrdreKosc foundedOrdreKoscs : foundedOrdreKosc) {}
                     if (foundedOrdreKosc == null) {
                         // findOrSave operator departement and technicien
                         findOrSaveDepartement(ordreKosc);
@@ -265,7 +263,7 @@ public class ImportOrdreKoscAdminServiceImpl implements ImportOrdreKoscAdminServ
 
     private void findOrSaveOperator(OrdreKosc ordreKosc) {
         if (ordreKosc.getOperator() != null) {
-            Operator loadedOperator = operatorService.findByIdOrReference(ordreKosc.getOperator());
+            Operator loadedOperator = operatorService.findByLibelle(ordreKosc.getOperator().getLibelle());
             if (loadedOperator == null) {
                 ordreKosc.setOperator(operatorService.save(ordreKosc.getOperator()));
             } else {
@@ -299,48 +297,8 @@ public class ImportOrdreKoscAdminServiceImpl implements ImportOrdreKoscAdminServ
         }
     }
 
-    private void findOrSaveEtatDemande(OrdreKosc ordreKosc) {
-        EtatDemandeKosc loadedEtatDemande = etatDemandeKoscService.findByIdOrCode(ordreKosc.getEtatDemandeKosc());
-        if (loadedEtatDemande == null) {
-            ordreKosc.setEtatDemandeKosc(etatDemandeKoscService.save(ordreKosc.getEtatDemandeKosc()));
-        } else {
-            ordreKosc.setEtatDemandeKosc(loadedEtatDemande);
-        }
-    }
 
 
-    private void update(List<OrdreKosc> ordreKoscs) {
-        if (ListUtil.isNotEmpty(ordreKoscs)) {
-            ordreKoscs.forEach(e -> ordreKoscDao.save(e));
-        }
-    }
-
-    private void createOperator(OrdreKosc ordreKosc) {
-        Operator loadedOperator = operatorService.findByIdOrReference(ordreKosc.getOperator());
-
-        if (loadedOperator == null) {
-            loadedOperator = operatorService.save(new Operator());
-        }
-        ordreKosc.setOperator(loadedOperator);
-    }
-
-    private void createDepartement(OrdreKosc ordreKosc) {
-        Departement loadedDepartement = departementService.findByIdOrCode(ordreKosc.getDepartement());
-
-        if (loadedDepartement == null) {
-            loadedDepartement = departementService.save(new Departement());
-        }
-        ordreKosc.setDepartement(loadedDepartement);
-    }
-
-    private void createTechnicien(OrdreKosc ordreKosc) {
-        Technicien loadedTechnicien = technicienService.findByIdOrIdentifiant(ordreKosc.getTechnicien());
-
-        if (loadedTechnicien == null) {
-            loadedTechnicien = technicienService.save(new Technicien());
-        }
-        ordreKosc.setTechnicien(loadedTechnicien);
-    }
 
     private void initDateDernierAppel(OrdreKosc ordreKosc) {
         if (ordreKosc.getDateTroisiemeAppel() != null) {
@@ -355,14 +313,6 @@ public class ImportOrdreKoscAdminServiceImpl implements ImportOrdreKoscAdminServ
         }
     }
 
-    private OrdreKosc update(OrdreKosc ordreKosc) {
-        OrdreKosc foundedOrdreKosc = ordreKoscDao.findById(ordreKosc.getId()).get();
-        if (foundedOrdreKosc == null) return null;
-        else {
-            initDateDernierAppel(ordreKosc);
-            return ordreKoscDao.save(ordreKosc);
-        }
-    }
 
     private void prepareSave(OrdreKosc ordreKosc) {
         if (ordreKosc.getRacordementLong() == null)
