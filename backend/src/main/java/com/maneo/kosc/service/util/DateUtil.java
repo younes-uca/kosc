@@ -79,6 +79,20 @@ public class DateUtil {
         }
     }
 
+    public static Timestamp parseTimestampDate(String date) {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+            Date parsedDate = dateFormat.parse(date);
+            Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+            return timestamp;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+
+
+
     public static Date parseTimestamp(String date, String pattern) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
