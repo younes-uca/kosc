@@ -75,6 +75,9 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
     templateSuivis: Array<TemplateSuiviVo>;
     private ordreKoscsSuiviRdv: Array<OrdreKoscVo>;
 
+    items: MenuItem[];
+
+    home: MenuItem;
 
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
         , private operatorService: OperatorService
@@ -168,6 +171,12 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
     }
 
     ngOnInit(): void {
+
+        this.items = [
+            {label: 'Suivi Rendez-vous', routerLink: '/app/admin/kosc/ordre-kosc-suivi/list'},
+
+        ];
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
 
         //this.searchOrdreKosc.dateEnvoiCri = new Date();
         this.loadEtatDemandeKoscIncluding(['planification']);
@@ -1044,7 +1053,8 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
    ordreKosc.etatDemandeKoscVo.code=codeEtat;
    this.selectedOrdreKosc=ordreKosc;
       this.ordreKoscService.updateEtat().subscribe(result => {
-          this.ordreKoscs=this.ordreKoscs.filter(e => e.etatDemandeKoscVo.code =='planification')
+          const position = this.ordreKoscs.indexOf(ordreKosc);
+          position > -1 ? this.ordreKoscs.splice(position, 1) : false;
           if(codeEtat=='ok')
               this.messageService.add({severity: 'success', summary: codeEtat, detail:'OrdreKosc with reference ' +result.reference + ' updated to '+ codeEtat});
           else if( codeEtat=='ko')

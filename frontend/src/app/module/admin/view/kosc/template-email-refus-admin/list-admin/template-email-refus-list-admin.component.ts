@@ -24,7 +24,9 @@ export class TemplateEmailRefusListAdminComponent implements OnInit {
     exportData: any[] = [];
     criteriaData: any[] = [];
     fileName = 'TemplateEmailRefus';
+    items: MenuItem[];
 
+    home: MenuItem;
 
     constructor(private datePipe: DatePipe, private templateEmailRefusService: TemplateEmailRefusService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
     ) {
@@ -96,6 +98,13 @@ export class TemplateEmailRefusListAdminComponent implements OnInit {
         this.loadTemplateEmailRefuss();
         this.initExport();
         this.initCol();
+
+        this.items = [
+            {label: 'Email Refus', routerLink: '/app/admin/kosc/template-email-refus/list'},
+
+        ];
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
+
     }
 
     // methods

@@ -32,7 +32,9 @@ export class ArretTravailListAdminComponent implements OnInit {
     techniciens: Array<TechnicienVo>;
     raisonArretTravails: Array<RaisonArretTravailVo>;
 
+    items: MenuItem[];
 
+    home: MenuItem;
     constructor(private datePipe: DatePipe, private arretTravailService: ArretTravailService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
         , private technicienService: TechnicienService
         , private raisonArretTravailService: RaisonArretTravailService
@@ -107,6 +109,13 @@ export class ArretTravailListAdminComponent implements OnInit {
         this.initCol();
         this.loadTechnicien();
         this.loadRaisonArretTravail();
+
+        this.items = [
+            {label: 'Arr\êt Travail', routerLink: '/app/admin/kosc/arret-travail/list'},
+
+        ];
+
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
     }
 
     // methods

@@ -75,6 +75,10 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
     techniciens: Array<TechnicienVo>;
     dateRdvs: any[];
 
+    items: MenuItem[];
+
+    home: MenuItem;
+
     templateEmailClientInjoinables: Array<TemplateEmailClientInjoinableVo>;
     templateEmailClientInjoinableKoscs: Array<TemplateEmailClientInjoinableKoscVo>;
     templateEmailPlanifications: Array<TemplateEmailPlanificationVo>;
@@ -107,6 +111,82 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         , private templateSuiviService: TemplateSuiviService
         , private defaultTemplateConfigurationService: DefaultTemplateConfigurationService
     ) {
+    }
+
+    ngOnInit(): void {
+
+        this.items = [
+            {label: 'Prise Rendez-vous', routerLink: '/app/admin/kosc/ordre-kosc-prise-rdv/list'},
+
+        ];
+
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
+
+        this.loadEtatDemandeKoscIncluding(['initialisation-wo', 'initialisation-erdv']);
+
+
+        // this.loadOrdreKoscs();
+        this.initExport();
+        this.initFilter();
+        this.initCol();
+        this.loadOperator();
+        this.loadDepartement();
+        this.loadTechnicien();
+
+        this.loadTemplateEmailClientInjoinable();
+        this.loadTemplateEmailClientInjoinableKosc();
+        this.loadTemplateEmailPlanification();
+        this.loadTemplateEmailReplanification();
+        this.loadTemplateEmailReport();
+        // this.loadEtatDemandeKosc();
+        this.loadTemplateEmailCloture();
+        this.loadTemplateSuivi();
+        this.yesOrNoEnvoiMailClient = [{label: 'EnvoiMailClient', value: null}, {label: 'Oui', value: 1}, {
+            label: 'Non',
+            value: 0
+        }];
+        this.yesOrNoEnvoiMailKosc = [{label: 'EnvoiMailKosc', value: null}, {label: 'Oui', value: 1}, {
+            label: 'Non',
+            value: 0
+        }];
+        this.yesOrNoRacordementLong = [{label: 'RacordementLong', value: null}, {label: 'Oui', value: 1}, {
+            label: 'Non',
+            value: 0
+        }];
+        this.yesOrNoExistingOtp = [{label: 'ExistingOtp', value: null}, {label: 'Oui', value: 1}, {
+            label: 'Non',
+            value: 0
+        }];
+        this.yesOrNoEnvoyeClient = [{label: 'EnvoyeClient', value: null}, {label: 'Oui', value: 1}, {
+            label: 'Non',
+            value: 0
+        }];
+        this.yesOrNoEnvoyeKosc = [{label: 'EnvoyeKosc', value: null}, {label: 'Oui', value: 1}, {
+            label: 'Non',
+            value: 0
+        }];
+        this.yesOrNoEnvoyePlanification = [{label: 'EnvoyePlanification', value: null}, {
+            label: 'Oui',
+            value: 1
+        }, {label: 'Non', value: 0}];
+        this.yesOrNoEnvoyeReplanification = [{label: 'EnvoyeReplanification', value: null}, {
+            label: 'Oui',
+            value: 1
+        }, {label: 'Non', value: 0}];
+        this.yesOrNoEnvoyeReport = [{label: 'EnvoyeReport', value: null}, {label: 'Oui', value: 1}, {
+            label: 'Non',
+            value: 0
+        }];
+        this.yesOrNoEnvoyeCloture = [{label: 'EnvoyeCloture', value: null}, {label: 'Oui', value: 1}, {
+            label: 'Non',
+            value: 0
+        }];
+        this.yesOrNoEnvoyeSuivi = [{label: 'EnvoyeSuivi', value: null}, {label: 'Oui', value: 1}, {
+            label: 'Non',
+            value: 0
+        }];
+
+        this.searchRequestPriseRdv();
     }
 
     displayPriseRdv = false;
@@ -155,8 +235,9 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
     }
 
     public editEtat(codeEtat: string){
-        console.log(this.selectedOrdreKosc.etatDemandeKoscVo);
-        this.selectedOrdreKosc.etatDemandeKoscVo.code = codeEtat;
+        let myEtatDemandeKoscVo = this.etatDemandeKoscs.find(e => e.code = codeEtat);
+        this.selectedOrdreKosc.etatDemandeKoscVo = myEtatDemandeKoscVo;
+        this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'Le changement est fait avec succes'});
         this.editWithShowOption(false);
         this.displayPriseRdv = false;
 
@@ -166,26 +247,31 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         let date: Date = new Date();
         if(this.selectedOrdreKosc.datePremierAppel == null){
             this.selectedOrdreKosc.datePremierAppel = date;
+            this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'Le changement est fait avec succes'});
         }else if(this.selectedOrdreKosc.dateDeuxiemeAppel == null){
-            if (this.selectedOrdreKosc.datePremierAppel == date) {
+            if (this.selectedOrdreKosc.datePremierAppel <= date) {
                 this.selectedOrdreKosc.dateDeuxiemeAppel = date;
+                this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'Le changement est fait avec succes'});
             }else{
-                this.messageService.add({severity: 'error', summary: 'erreur', detail: 'le premier appel et le deusieme appel ne peuvent pas etre dans le meme jour'});
+                this.messageService.add({severity: 'info', summary: 'Remarque', detail: 'Vous avez d\éj\à appel\é ce client aujourd\'hui'});
             }
         }else if(this.selectedOrdreKosc.dateTroisiemeAppel == null){
-            if(date < this.selectedOrdreKosc.dateDeuxiemeAppel){
+            if(this.selectedOrdreKosc.dateDeuxiemeAppel <= date){
                 this.selectedOrdreKosc.dateTroisiemeAppel = date;
+                this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'Le changement est fait avec succes'});
             }
+        }else{
+            this.messageService.add({severity: 'info', summary: 'Remarque', detail: 'Le troisi\ème appel est d\éj\à fait !'});
         }
         this.editWithShowOption(false);
         this.displayPriseRdv = false;
     }
 
     public editOui(codeEtat: string){
-        console.log(this.selectedOrdreKosc.dateRdv);
-        console.log(this.selectedOrdreKosc.datePriseRdv);
+        let myEtatDemandeKoscVo = this.etatDemandeKoscs.find(e => e.code = codeEtat);
         this.selectedOrdreKosc.datePriseRdv = new Date();
-        this.selectedOrdreKosc.etatDemandeKoscVo.code = codeEtat;
+        this.selectedOrdreKosc.etatDemandeKoscVo = myEtatDemandeKoscVo;
+        this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'Le changement est fait avec succes'});
         this.editWithShowOption(false);
         this.displayPriseRdv = false;
     }
@@ -361,76 +447,6 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         }
     }
 
-    ngOnInit(): void {
-
-
-        this.loadEtatDemandeKoscIncluding(['initialisation-wo', 'initialisation-erdv']);
-        // this.etatDemandeKoscService.loadEtatDemandeKoscExcept(['ko','ok'], this.searchOrdreKosc);
-
-
-        // this.loadOrdreKoscs();
-        this.initExport();
-        this.initFilter();
-        this.initCol();
-        this.loadOperator();
-        this.loadDepartement();
-        this.loadTechnicien();
-
-        this.loadTemplateEmailClientInjoinable();
-        this.loadTemplateEmailClientInjoinableKosc();
-        this.loadTemplateEmailPlanification();
-        this.loadTemplateEmailReplanification();
-        this.loadTemplateEmailReport();
-        // this.loadEtatDemandeKosc();
-        this.loadTemplateEmailCloture();
-        this.loadTemplateSuivi();
-        this.yesOrNoEnvoiMailClient = [{label: 'EnvoiMailClient', value: null}, {label: 'Oui', value: 1}, {
-            label: 'Non',
-            value: 0
-        }];
-        this.yesOrNoEnvoiMailKosc = [{label: 'EnvoiMailKosc', value: null}, {label: 'Oui', value: 1}, {
-            label: 'Non',
-            value: 0
-        }];
-        this.yesOrNoRacordementLong = [{label: 'RacordementLong', value: null}, {label: 'Oui', value: 1}, {
-            label: 'Non',
-            value: 0
-        }];
-        this.yesOrNoExistingOtp = [{label: 'ExistingOtp', value: null}, {label: 'Oui', value: 1}, {
-            label: 'Non',
-            value: 0
-        }];
-        this.yesOrNoEnvoyeClient = [{label: 'EnvoyeClient', value: null}, {label: 'Oui', value: 1}, {
-            label: 'Non',
-            value: 0
-        }];
-        this.yesOrNoEnvoyeKosc = [{label: 'EnvoyeKosc', value: null}, {label: 'Oui', value: 1}, {
-            label: 'Non',
-            value: 0
-        }];
-        this.yesOrNoEnvoyePlanification = [{label: 'EnvoyePlanification', value: null}, {
-            label: 'Oui',
-            value: 1
-        }, {label: 'Non', value: 0}];
-        this.yesOrNoEnvoyeReplanification = [{label: 'EnvoyeReplanification', value: null}, {
-            label: 'Oui',
-            value: 1
-        }, {label: 'Non', value: 0}];
-        this.yesOrNoEnvoyeReport = [{label: 'EnvoyeReport', value: null}, {label: 'Oui', value: 1}, {
-            label: 'Non',
-            value: 0
-        }];
-        this.yesOrNoEnvoyeCloture = [{label: 'EnvoyeCloture', value: null}, {label: 'Oui', value: 1}, {
-            label: 'Non',
-            value: 0
-        }];
-        this.yesOrNoEnvoyeSuivi = [{label: 'EnvoyeSuivi', value: null}, {label: 'Oui', value: 1}, {
-            label: 'Non',
-            value: 0
-        }];
-
-        this.searchRequestPriseRdv();
-    }
 
     // methods
     isEtatNotEmpty(ordreKoscVo: OrdreKoscVo) {

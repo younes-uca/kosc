@@ -26,6 +26,9 @@ export class JourFerieListAdminComponent implements OnInit {
     criteriaData: any[] = [];
     fileName = 'JourFerie';
 
+    items: MenuItem[];
+
+    home: MenuItem;
 
 
     constructor(private datePipe: DatePipe, private jourFerieService: JourFerieService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
@@ -99,6 +102,13 @@ export class JourFerieListAdminComponent implements OnInit {
         this.loadJourFeries();
         this.initExport();
         this.initCol();
+
+        this.items = [
+            {label: 'Jour F\éri\é', routerLink: '/app/admin/kosc/jour-ferie/list'},
+
+        ];
+
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
 
     }
 

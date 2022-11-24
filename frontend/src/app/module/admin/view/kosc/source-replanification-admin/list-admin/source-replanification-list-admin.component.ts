@@ -25,6 +25,9 @@ export class SourceReplanificationListAdminComponent implements OnInit {
     criteriaData: any[] = [];
     fileName = 'SourceReplanification';
 
+    items: MenuItem[];
+
+    home: MenuItem;
 
     constructor(private datePipe: DatePipe, private sourceReplanificationService: SourceReplanificationService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
     ) {
@@ -96,6 +99,13 @@ export class SourceReplanificationListAdminComponent implements OnInit {
         this.loadSourceReplanifications();
         this.initExport();
         this.initCol();
+
+        this.items = [
+            {label: 'Source Replanification', routerLink: '/app/admin/kosc/source-replanification/list'},
+
+        ];
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
+
     }
 
     // methods

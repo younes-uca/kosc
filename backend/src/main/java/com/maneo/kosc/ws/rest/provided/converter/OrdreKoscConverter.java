@@ -400,7 +400,7 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
             if (vo.getEnvoyeCri() != null)
                 item.setEnvoyeCri(vo.getEnvoyeCri());
             if (StringUtil.isNotEmpty(vo.getDateEnvoiCri()))
-                item.setDateEnvoiCri(DateUtil.parse(vo.getDateEnvoiCri()));
+                item.setDateEnvoiCri(DateUtil.parseTime(vo.getDateEnvoiCri()));
             if (StringUtil.isNotEmpty(vo.getObjetFtl()))
                 item.setObjetFtl(vo.getObjetFtl());
             if (StringUtil.isNotEmpty(vo.getCorpsFtl()))

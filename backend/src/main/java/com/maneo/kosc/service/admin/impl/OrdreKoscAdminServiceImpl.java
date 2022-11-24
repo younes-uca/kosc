@@ -115,7 +115,7 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
         if (ordreKoscs != null) {
             for (OrdreKosc ordreKosc : ordreKoscs) {
                 if (ordreKosc.getEtatDemandeKosc() != null ) {
-                    if(Objects.equals(ordreKosc.getEtatDemandeKosc().getCode(), "ko")){
+                    if(Objects.equals(ordreKosc.getEtatDemandeKosc().getCode(), "ko") && ordreKosc.getDateEnvoiCri() == null){
                         ordreKosc.setDateEnvoiCri(DateUtil.toDate(todaysDate));
                     }
                     else if(Objects.equals(ordreKosc.getEtatDemandeKosc().getCode(), "ok") && ordreKosc.getCodeDecharge() == null){

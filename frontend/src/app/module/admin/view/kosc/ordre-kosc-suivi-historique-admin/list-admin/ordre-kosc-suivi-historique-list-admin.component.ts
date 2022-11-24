@@ -76,6 +76,9 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
     templateEmailClotures: Array<TemplateEmailClotureVo>;
     templateSuivis: Array<TemplateSuiviVo>;
 
+    items: MenuItem[];
+
+    home: MenuItem;
 
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
         , private operatorService: OperatorService
@@ -196,6 +199,13 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
     }
 
     ngOnInit(): void {
+
+        this.items = [
+            {label: 'Suivi Historique', routerLink: '/app/admin/kosc/ordre-kosc-suivi-historique/list'},
+
+        ];
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
+
         this.loadEtatDemandeKoscIncluding(['ok', 'ko']);
         this.initExport();
         this.initCol();
@@ -274,6 +284,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'edit');
         if (isPermistted) {
             this.ordreKoscService.findByIdWithAssociatedList(ordreKosc).subscribe(res => {
+
                 this.selectedOrdreKosc = res;
                 this.selectedOrdreKosc.dateDebutTraitement = new Date(ordreKosc.dateDebutTraitement);
                 this.selectedOrdreKosc.submissionDate = new Date(ordreKosc.submissionDate);
@@ -289,13 +300,11 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
                 this.selectedOrdreKosc.dateEnvoiCri = new Date(ordreKosc.dateEnvoiCri);
                 this.selectedOrdreKosc.dateInterventionTechniqueDebut = new Date(ordreKosc.dateInterventionTechniqueDebut);
                 this.selectedOrdreKosc.dateInterventionTechniqueFin = new Date(ordreKosc.dateInterventionTechniqueFin);
-
                 this.selectedOrdreKosc.dateEnvoiPlanification = new Date(ordreKosc.dateEnvoiPlanification);
                 this.selectedOrdreKosc.dateEnvoiReplanification = new Date(ordreKosc.dateEnvoiReplanification);
                 this.selectedOrdreKosc.dateEnvoiReport = new Date(ordreKosc.dateEnvoiReport);
                 this.selectedOrdreKosc.dateEnvoiCloture = new Date(ordreKosc.dateEnvoiCloture);
                 this.selectedOrdreKosc.dateEnvoiSuivi = new Date(ordreKosc.dateEnvoiSuivi);
-
                 this.editOrdreKoscDialog = true;
             });
         } else {

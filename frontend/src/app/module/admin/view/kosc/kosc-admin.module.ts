@@ -375,6 +375,7 @@ import {
 import {
     OrdreKoscSuiviCddViewAdminComponent
 } from "./ordre-kosc-suivi-cdd-admin/view-admin/ordre-kosc-suivi-cdd-view-admin.component";
+import {BreadcrumbModule} from "primeng/breadcrumb";
 
 
 
@@ -569,6 +570,7 @@ import {
         RippleModule,
         ProgressSpinnerModule,
         BlockUIModule,
+        BreadcrumbModule,
 
     ],
     exports: [

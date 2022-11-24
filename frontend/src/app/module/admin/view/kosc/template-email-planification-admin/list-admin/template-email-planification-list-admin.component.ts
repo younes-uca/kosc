@@ -25,6 +25,9 @@ export class TemplateEmailPlanificationListAdminComponent implements OnInit {
     criteriaData: any[] = [];
     fileName = 'TemplateEmailPlanification';
 
+    items: MenuItem[];
+
+    home: MenuItem;
 
     constructor(private datePipe: DatePipe, private templateEmailPlanificationService: TemplateEmailPlanificationService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
     ) {
@@ -96,6 +99,13 @@ export class TemplateEmailPlanificationListAdminComponent implements OnInit {
         this.loadTemplateEmailPlanifications();
         this.initExport();
         this.initCol();
+
+        this.items = [
+            {label: 'Email Planification', routerLink: '/app/admin/kosc/template-email-planification/list'},
+
+        ];
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
+
     }
 
     // methods

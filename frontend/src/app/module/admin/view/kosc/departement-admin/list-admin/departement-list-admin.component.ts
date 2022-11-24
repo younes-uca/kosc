@@ -29,6 +29,9 @@ export class DepartementListAdminComponent implements OnInit {
     fileName = 'Departement';
     regions: Array<RegionVo>;
 
+    items: MenuItem[];
+
+    home: MenuItem;
 
     constructor(private datePipe: DatePipe, private departementService: DepartementService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
         , private regionService: RegionService
@@ -102,6 +105,12 @@ export class DepartementListAdminComponent implements OnInit {
         this.initExport();
         this.initCol();
         this.loadRegion();
+        this.items = [
+            {label: 'D\épartements', routerLink: '/app/admin/kosc/departement/list'},
+
+        ];
+
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
     }
 
     // methods

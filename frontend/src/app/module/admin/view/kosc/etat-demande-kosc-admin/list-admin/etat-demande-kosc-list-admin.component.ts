@@ -25,6 +25,9 @@ export class EtatDemandeKoscListAdminComponent implements OnInit {
     criteriaData: any[] = [];
     fileName = 'EtatDemandeKosc';
 
+    items: MenuItem[];
+
+    home: MenuItem;
 
     constructor(private datePipe: DatePipe, private etatDemandeKoscService: EtatDemandeKoscService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
     ) {
@@ -96,6 +99,13 @@ export class EtatDemandeKoscListAdminComponent implements OnInit {
         this.loadEtatDemandeKoscs();
         this.initExport();
         this.initCol();
+
+        this.items = [
+            {label: 'Etats Demande Kosc', routerLink: '/app/admin/kosc/etat-demande-kosc/list'},
+
+        ];
+
+        this.home = {icon: 'pi pi-home', routerLink: '/'};
     }
 
     // methods

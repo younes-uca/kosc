@@ -138,7 +138,8 @@ public class OrdreKoscRestAdmin {
     public List<OrdreKoscVo> genererCodeDecharge(@RequestBody List<OrdreKoscVo> ordreKoscVos) {
         List<OrdreKosc> ordreKoscs = ordreKoscConverter.toItem(ordreKoscVos);
         ordreKoscService.genererCodeDecharge(ordreKoscs);
-        return ordreKoscConverter.toVo(ordreKoscs);
+        List<OrdreKoscVo> ordreKoscVos1 = ordreKoscConverter.toVo(ordreKoscs);
+        return ordreKoscVos1;
     }
     @ApiOperation("Update etat to ko or ok")
     @PutMapping("/update-etat/")

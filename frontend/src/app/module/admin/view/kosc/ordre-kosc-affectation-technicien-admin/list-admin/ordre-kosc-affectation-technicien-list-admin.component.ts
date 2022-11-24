@@ -74,6 +74,9 @@ export class OrdreKoscAffectationTechnicienListAdminComponent implements OnInit 
     templateEmailClotures: Array<TemplateEmailClotureVo>;
     templateSuivis: Array<TemplateSuiviVo>;
 
+    items: MenuItem[];
+
+    home: MenuItem;
 
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
         , private operatorService: OperatorService
@@ -151,6 +154,11 @@ export class OrdreKoscAffectationTechnicienListAdminComponent implements OnInit 
     }
 
     ngOnInit(): void {
+
+        this.items = [
+            {label: 'Affectation Technicien', routerLink: '/app/admin/kosc/ordre-kosc-affectation-technicien/list'},
+
+        ];
         this.loadOrdreKoscs();
         this.initExport();
         this.initCol();
