@@ -41,3 +41,8 @@ img.flag {
 .float{
     float: right;
 }
+
+
+.float-left{
+    float: left;
+}

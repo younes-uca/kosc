@@ -15,7 +15,7 @@
                 </ng-template>
                 <ng-template pTemplate="right">
                     <div class="flex">
-                        <p-splitButton [model]="excelPdfButons" icon="pi pi-download" label="Exporter"
+                        <p-splitButton [model]="excelPdfButons"  label="Choix Kizeo"
                                        styleClass="p-button-help"></p-splitButton>
                     </div>
 
@@ -268,7 +268,8 @@
                         </td>
 
                         <td *ngIf="!isErdvAndReferenceEmpty(ordreKosc) && !erdvAndConfort(ordreKosc)"
-                            [hidden]="isErdvAndReferenceEmpty(ordreKosc) "> <span [style]="stylefyConfort(ordreKosc)"> {{ordreKosc.reference}}</span>
+                            [hidden]="isErdvAndReferenceEmpty(ordreKosc) "><span
+                                [style]="stylefyConfort(ordreKosc)"> {{ordreKosc.reference}}</span>
                         </td>
 
                         <td *ngIf="isErdvAndReferencWorkOrdereEmpty(ordreKosc) && !erdvAndConfort(ordreKosc)"
@@ -279,7 +280,8 @@
 
                         </td>
                         <td *ngIf="!isErdvAndReferencWorkOrdereEmpty(ordreKosc) && !erdvAndConfort(ordreKosc)"
-                            [hidden]="isErdvAndReferencWorkOrdereEmpty(ordreKosc) "> <span [style]="stylefyConfort(ordreKosc)"> {{ordreKosc.referenceWorkOrder}}</span>
+                            [hidden]="isErdvAndReferencWorkOrdereEmpty(ordreKosc) "><span
+                                [style]="stylefyConfort(ordreKosc)"> {{ordreKosc.referenceWorkOrder}}</span>
                         </td>
                         <td *ngIf="erdvAndConfort(ordreKosc)"
                         ><span style=" background-color: #0288D1; color: #D32F2F; padding: 3px 3px;font-size: 0.9em ;font-weight:500;text-align: center; border-radius: 5px;margin-right: 2px">
@@ -334,18 +336,24 @@
 
 
                         <td>
-                            <p-dialog [(visible)]="displayPriseRdv" [style]="{width: '40vw'}" [draggable]="false" [modal]="true">
+                            <p-dialog [(visible)]="displayPriseRdv" [style]="{width: '40vw'}" [draggable]="false"
+                                      [modal]="true">
+                                <ng-template pTemplate="header">
+                                    <h3>Remarque</h3>
+                                </ng-template>
                                 <ng-template pTemplate="content">
                                     <p-tabView>
                                         <div>
                                             Est-ce que le client a pris un rendez-vous ?
                                         </div>
                                         <div class="p-mt-3  float">
-                                            <button class=" p-button-info p-mr-2" pButton pRipple label="Oui" (click)="toggleShowOui()"></button>
+                                            <button class=" p-button-info p-mr-2" pButton pRipple label="Oui"
+                                                    (click)="toggleShowOui()"></button>
                                             <button class=" p-button-info p-mr-2" pButton pRipple label="Non"
                                                     (click)="toggleShow()"></button>
-                                            <button class=" p-button-info p-mr-2" pButton pRipple label="Pas encore !" (click)="editPasEncore(ordreKosc)"
-                                                    ></button>
+                                            <button class=" p-button-info p-mr-2" pButton pRipple label="Pas encore !"
+                                                    (click)="editPasEncore(ordreKosc)"
+                                            ></button>
                                         </div>
                                     </p-tabView>
                                 </ng-template>
@@ -355,52 +363,52 @@
                                         <div *ngIf="isShown" class="row container-fluid" id="divshow">
                                             <div class="p-d-flex p-ai-center p-mt-5">
                                                 <button class=" p-button-info p-mr-3" pButton pRipple
-                                                        label="Client injoignable" (click)="editEtat('report-demande-client-cl-j')"></button>
+                                                        label="Client injoignable"
+                                                        (click)="editEtat('report-demande-client-cl-j')"></button>
                                                 <button class=" p-button-warning p-mr-3" pButton pRipple
-                                                        label="Mauvais contact" (click)="editEtat('mauvais-contact')"></button>
+                                                        label="Mauvais contact"
+                                                        (click)="editEtat('mauvais-contact')"></button>
                                                 <button class=" p-button-danger p-mr-3" pButton pRipple
-                                                        label="Client refuse" (click)="editEtat('refus-client')"></button>
+                                                        label="Client refuse"
+                                                        (click)="editEtat('refus-client')"></button>
                                                 <button class=" p-button-success p-mr-3" pButton pRipple
                                                         label="Autre raison.." (click)="editEtat('autre')"></button>
                                             </div>
                                         </div>
-                                        <div *ngIf="isShown1" class=" p-mt-3" id="divshow1">
-                                            <div class="">
+                                        <div *ngIf="isShown1" class="p-mt-3" id="divshow1">
 
-                                                <div class="p-field p-md-4">
-                                                    <label for="26" class="">Date rendez-vous</label>
-                                                    <p-calendar [(ngModel)]="selectedOrdreKosc.dateRdv"
-                                                                [showSeconds]="false"
-                                                                [showTime]="true"
-                                                                dateFormat="{{dateFormatOui}}"
-                                                                id="26" class="p-mb-2 p-mr-2"
-                                                                placeholder="Date rdv">
-                                                    </p-calendar>
-
-                                                </div>
+                                            <div class="p-field float-left">
+                                                <label for="26" class="p-mr-2">Date rendez-vous</label>
+                                                <p-calendar [(ngModel)]="selectedOrdreKosc.dateRdv"
+                                                            [showSeconds]="false"
+                                                            [showTime]="true"
+                                                            dateFormat="{{dateFormatOui}}"
+                                                            id="26"
+                                                            placeholder="Date rdv">
+                                                </p-calendar>
 
                                             </div>
-                                            <div class="p-grid">
+
+                                            <div class="p-grid float p-mt-4">
                                                 <div>
-                                                    <button (click)="hideEditDialog()" class="p-button-text"
+                                                    <button (click)="hideEditDialog()" class="p-button-outlined"
                                                             icon="pi pi-times" label="Annuler"
-                                                            pButton pRipple></button>
+                                                            pButton pRipple style="margin:10px"></button>
                                                 </div>
                                                 <div>
-                                                    <button (click)="editOui('planification')" icon="pi pi-check" label="Valider" pButton
+                                                    <button (click)="editOui('planification')" icon="pi pi-check"
+                                                            label="Valider" pButton
                                                             pRipple
                                                             style="margin:10px"></button>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div *ngIf="displayTroisieme" class=" p-mt-3" id="displayTroisieme">
-                                            <span>Le troisième appel est déjà rempli !</span>
-                                        </div>
                                     </p-tabView>
                                 </ng-template>
 
                             </p-dialog>
-                            <button (click)="showPriseRdvDialog(ordreKosc)" class="p-button-rounded p-button-danger p-mr-1"
+                            <button (click)="showPriseRdvDialog(ordreKosc)"
+                                    class="p-button-rounded p-button-danger p-mr-1"
                                     icon="pi pi-phone"
                                     pButton
                                     pRipple></button>
