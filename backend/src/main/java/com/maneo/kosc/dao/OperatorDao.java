@@ -23,4 +23,5 @@ public interface OperatorDao extends JpaRepository<Operator, Long> {
     int deleteByReference(String reference);
 
 
+    Operator findByLibelle(String libelle);
 }
