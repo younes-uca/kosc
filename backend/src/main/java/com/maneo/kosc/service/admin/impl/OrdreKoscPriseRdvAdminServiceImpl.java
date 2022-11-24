@@ -6,7 +6,6 @@ import com.maneo.kosc.service.admin.facade.*;
 import com.maneo.kosc.service.util.DateUtil;
 import com.maneo.kosc.service.util.ListUtil;
 import com.maneo.kosc.service.util.SearchUtil;
-import com.maneo.kosc.ws.rest.provided.vo.EtatDemandeKoscVo;
 import com.maneo.kosc.ws.rest.provided.vo.OrdreKoscVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +22,8 @@ public class OrdreKoscPriseRdvAdminServiceImpl implements OrdreKoscPriseRdvAdmin
 
     @Autowired
     private OrdreKoscDao ordreKoscDao;
+    @Autowired
+    private JourFerieAdminService jourFerieAdminService;
     @Autowired
     private EntityManager entityManager;
 
@@ -108,8 +109,12 @@ public class OrdreKoscPriseRdvAdminServiceImpl implements OrdreKoscPriseRdvAdmin
     private void calculerDifferenceDateSubmission(List<OrdreKosc> ordreKoscs){
         if(ordreKoscs != null){
             for (OrdreKosc ordreKosc : ordreKoscs) {
-                long res = DateUtil.calculerDifference(ordreKosc.getSubmissionDate());
-                ordreKosc.setNbrHeureDateSubmissionAndNow(res);
+                Date now = new Date();
+                Long totalJourWithoutWeekEnd = DateUtil.totalJourWithoutWeekEnd(ordreKosc.getSubmissionDate(), now);
+                Long jourFierie = jourFerieAdminService.calcNombreJourTotal(ordreKosc.getSubmissionDate() , now);
+                System.out.println("totalJourWithoutWeekEnd = " + totalJourWithoutWeekEnd+"  jourFierie = " + jourFierie);
+                long res = DateUtil.calculerDifferenceHeure(ordreKosc.getSubmissionDate());
+                ordreKosc.setNbrHeureDateSubmissionAndNow((totalJourWithoutWeekEnd -jourFierie)*24);
                 ordreKoscDao.save(ordreKosc);
             }
         }

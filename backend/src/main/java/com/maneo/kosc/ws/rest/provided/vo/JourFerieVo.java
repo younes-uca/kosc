@@ -1,5 +1,7 @@
 package com.maneo.kosc.ws.rest.provided.vo;
 
+import java.util.Date;
+
 public class JourFerieVo {
 
     private String id;
@@ -13,10 +15,43 @@ public class JourFerieVo {
     private String dateFinMax;
     private String dateFinMin;
 
+    private Date dateDemarrageEffectiveMin;
+    private Date dateDemarrageEffectiveMax;
+    private Long nbrJour;
+
+    public Date getDateDemarrageEffectiveMin() {
+        return dateDemarrageEffectiveMin;
+    }
+
+    public void setDateDemarrageEffectiveMin(Date dateDemarrageEffectiveMin) {
+        this.dateDemarrageEffectiveMin = dateDemarrageEffectiveMin;
+    }
+
+    public Date getDateDemarrageEffectiveMax() {
+        return dateDemarrageEffectiveMax;
+    }
+
+    public void setDateDemarrageEffectiveMax(Date dateDemarrageEffectiveMax) {
+        this.dateDemarrageEffectiveMax = dateDemarrageEffectiveMax;
+    }
+
+    public Long getNbrJour() {
+        return nbrJour;
+    }
+
+    public void setNbrJour(Long nbrJour) {
+        this.nbrJour = nbrJour;
+    }
 
     public JourFerieVo() {
-        super();
     }
+
+    public JourFerieVo(Date dateDemarrageEffectiveMin, Date dateDemarrageEffectiveMax, Long nbrJour) {
+        this.dateDemarrageEffectiveMin = dateDemarrageEffectiveMin;
+        this.dateDemarrageEffectiveMax = dateDemarrageEffectiveMax;
+        this.nbrJour = nbrJour;
+    }
+
 
     public String getId() {
         return this.id;
