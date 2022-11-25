@@ -109,12 +109,6 @@ public class TemplateEmailMauvaisContactAdminServiceImpl extends AbstractService
     }
 
     @Override
-    public List<TemplateEmailMauvaisContact> findSuiviByCriteria(TemplateEmailMauvaisContactVo vo) {
-        return null;
-    }
-
-
-    @Override
     @Transactional
     public void delete(List<TemplateEmailMauvaisContact> templateEmailMauvaisContacts) {
         if (ListUtil.isNotEmpty(templateEmailMauvaisContacts)) {

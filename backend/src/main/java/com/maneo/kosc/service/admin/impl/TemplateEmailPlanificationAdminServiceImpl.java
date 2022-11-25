@@ -107,11 +107,6 @@ public class TemplateEmailPlanificationAdminServiceImpl extends AbstractServiceI
         return entityManager.createQuery(query).getResultList();
     }
 
-    @Override
-    public List<TemplateEmailPlanification> findSuiviByCriteria(TemplateEmailPlanificationVo vo) {
-        return null;
-    }
-
 
     @Override
     @Transactional

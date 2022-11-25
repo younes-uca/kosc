@@ -336,10 +336,6 @@ public class DefaultTemplateConfigurationAdminServiceImpl extends AbstractServic
         return entityManager.createQuery(query).getResultList();
     }
 
-    @Override
-    public List<DefaultTemplateConfiguration> findSuiviByCriteria(DefaultTemplateConfigurationVo vo) {
-        return null;
-    }
 
     private void findTemplateEmailFtl(DefaultTemplateConfiguration defaultTemplateConfiguration) {
         TemplateEmailFtl loadedTemplateEmailFtl = null;

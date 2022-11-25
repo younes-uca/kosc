@@ -172,11 +172,6 @@ public Departement save2 (Departement departement){
         return entityManager.createQuery(query).getResultList();
     }
 
-    @Override
-    public List<Departement> findSuiviByCriteria(DepartementVo vo) {
-        return null;
-    }
-
     private void findRegion(Departement departement) {
         if (departement.getRegion() != null) {
             Region loadedRegion = regionService.findByIdOrCode(departement.getRegion());

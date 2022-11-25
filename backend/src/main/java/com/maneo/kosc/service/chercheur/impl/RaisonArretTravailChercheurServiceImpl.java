@@ -141,12 +141,6 @@ public class RaisonArretTravailChercheurServiceImpl extends AbstractServiceImpl<
     }
 
     @Override
-    public List<RaisonArretTravail> findSuiviByCriteria(RaisonArretTravailVo vo) {
-        return null;
-    }
-
-
-    @Override
     @Transactional
     public void delete(List<RaisonArretTravail> raisonArretTravails) {
         if (ListUtil.isNotEmpty(raisonArretTravails)) {

@@ -173,11 +173,6 @@ public class DepartementChercheurServiceImpl extends AbstractServiceImpl<Departe
         return entityManager.createQuery(query).getResultList();
     }
 
-    @Override
-    public List<Departement> findSuiviByCriteria(DepartementVo vo) {
-        return null;
-    }
-
     private void findRegion(Departement departement) {
         Region loadedRegion = regionService.findByIdOrCode(departement.getRegion());
 

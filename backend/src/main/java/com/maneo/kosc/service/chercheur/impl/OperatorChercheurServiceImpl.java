@@ -139,11 +139,6 @@ public class OperatorChercheurServiceImpl extends AbstractServiceImpl<Operator> 
         return entityManager.createQuery(query).getResultList();
     }
 
-    @Override
-    public List<Operator> findSuiviByCriteria(OperatorVo vo) {
-        return null;
-    }
-
 
     @Override
     @Transactional

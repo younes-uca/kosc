@@ -108,12 +108,6 @@ public class TemplateEmailConfirmationClientAdminServiceImpl extends AbstractSer
     }
 
     @Override
-    public List<TemplateEmailConfirmationClient> findSuiviByCriteria(TemplateEmailConfirmationClientVo vo) {
-        return null;
-    }
-
-
-    @Override
     @Transactional
     public void delete(List<TemplateEmailConfirmationClient> templateEmailConfirmationClients) {
         if (ListUtil.isNotEmpty(templateEmailConfirmationClients)) {

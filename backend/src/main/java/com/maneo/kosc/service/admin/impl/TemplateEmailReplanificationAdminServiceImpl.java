@@ -108,12 +108,6 @@ public class TemplateEmailReplanificationAdminServiceImpl extends AbstractServic
     }
 
     @Override
-    public List<TemplateEmailReplanification> findSuiviByCriteria(TemplateEmailReplanificationVo vo) {
-        return null;
-    }
-
-
-    @Override
     @Transactional
     public void delete(List<TemplateEmailReplanification> templateEmailReplanifications) {
         if (ListUtil.isNotEmpty(templateEmailReplanifications)) {

@@ -140,12 +140,6 @@ public class CauseKoOkAdminServiceImpl extends AbstractServiceImpl<CauseKoOk> im
     }
 
     @Override
-    public List<CauseKoOk> findSuiviByCriteria(CauseKoOkVo vo) {
-        return null;
-    }
-
-
-    @Override
     @Transactional
     public void delete(List<CauseKoOk> causeKoOks) {
         if (ListUtil.isNotEmpty(causeKoOks)) {

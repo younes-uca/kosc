@@ -169,4 +169,5 @@ public interface OrdreKoscAdminService extends AbstractService<OrdreKosc, Long, 
     List<OrdreKosc> findByCriteriaOrderKoscImport(OrdreKoscVo ordreKoscVo);
 
 
+    List<OrdreKosc> findSuiviByCriteria(OrdreKoscVo ordreKoscVo);
 }

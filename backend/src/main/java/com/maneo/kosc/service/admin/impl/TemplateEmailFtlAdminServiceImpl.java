@@ -109,11 +109,6 @@ public class TemplateEmailFtlAdminServiceImpl extends AbstractServiceImpl<Templa
         return entityManager.createQuery(query).getResultList();
     }
 
-    @Override
-    public List<TemplateEmailFtl> findSuiviByCriteria(TemplateEmailFtlVo vo) {
-        return null;
-    }
-
 
     @Override
     @Transactional

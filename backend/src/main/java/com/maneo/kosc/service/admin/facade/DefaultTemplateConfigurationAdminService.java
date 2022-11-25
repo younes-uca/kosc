@@ -1,19 +1,21 @@
 package com.maneo.kosc.service.admin.facade;
 
-import com.maneo.kosc.bean.DefaultTemplateConfiguration;
-import com.maneo.kosc.service.core.facade.AbstractService;
-import com.maneo.kosc.ws.rest.provided.vo.DefaultTemplateConfigurationVo;
-
 import java.util.List;
+import com.maneo.kosc.bean.DefaultTemplateConfiguration;
+import com.maneo.kosc.ws.rest.provided.vo.DefaultTemplateConfigurationVo;
+import com.maneo.kosc.service.core.facade.AbstractService;
 
-public interface DefaultTemplateConfigurationAdminService extends AbstractService<DefaultTemplateConfiguration, Long, DefaultTemplateConfigurationVo> {
+public interface DefaultTemplateConfigurationAdminService extends AbstractService<DefaultTemplateConfiguration,Long,DefaultTemplateConfigurationVo>{
 
 
-    /**
-     * delete DefaultTemplateConfiguration from database
-     *
-     * @param id - id of DefaultTemplateConfiguration to be deleted
-     */
+
+
+
+/**
+    * delete DefaultTemplateConfiguration from database
+    * @param id - id of DefaultTemplateConfiguration to be deleted
+    *
+    */
     int deleteById(Long id);
 
 
@@ -66,6 +68,8 @@ public interface DefaultTemplateConfigurationAdminService extends AbstractServic
     List<DefaultTemplateConfiguration> findByTemplateEmailCriId(Long id);
 
     int deleteByTemplateEmailCriId(Long id);
+
+
 
 
 }
