@@ -83,20 +83,21 @@ export class TemplateEmailReportDemandeManeoClientJoignableRefusListAdminCompone
     
 
 
-   public async viewTemplateEmailReportDemandeManeoClientJoignableRefus(templateEmailReportDemandeManeoClientJoignableRefus: TemplateEmailReportDemandeManeoClientJoignableRefusVo){
-        const isPermistted = await this.roleService.isPermitted('TemplateEmailReportDemandeManeoClientJoignableRefus', 'view');
-        if(isPermistted){
+   public async viewTemplateEmailReportDemandeManeoClientJoignableRefus(templateEmailReportDemandeManeoClientJoignableRefus: TemplateEmailReportDemandeManeoClientJoignableRefusVo) {
+       const isPermistted = await this.roleService.isPermitted('TemplateEmailReportDemandeManeoClientJoignableRefus', 'view');
+       if (isPermistted) {
            this.templateEmailReportDemandeManeoClientJoignableRefusService.findByIdWithAssociatedList(templateEmailReportDemandeManeoClientJoignableRefus).subscribe(res => {
-           this.selectedTemplateEmailReportDemandeManeoClientJoignableRefus = res;
+               this.selectedTemplateEmailReportDemandeManeoClientJoignableRefus = res;
 
-            this.viewTemplateEmailReportDemandeManeoClientJoignableRefusDialog = true;
-          });
-             this.messageService.add({
-                severity: 'error', summary: 'erreur', detail: 'problème d\'autorisation'
-            });
+               this.viewTemplateEmailReportDemandeManeoClientJoignableRefusDialog = true;
+           });
+           this.messageService.add({
+               severity: 'error', summary: 'erreur', detail: 'problème d\'autorisation'
+           });
 
-        
-    }
+
+       }
+   }
     
     public async openCreateTemplateEmailReportDemandeManeoClientJoignableRefus(pojo: string) {
         const isPermistted = await this.roleService.isPermitted(pojo, 'add');
