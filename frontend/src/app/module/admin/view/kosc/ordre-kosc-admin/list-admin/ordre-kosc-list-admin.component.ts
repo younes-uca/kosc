@@ -727,7 +727,7 @@ export class OrdreKoscListAdminComponent implements OnInit {
                 'Operator': e.operatorVo?.libelle,
                 'Company': e.company,
                 'Referen dossier': e.referenDossier,
-                'Submission date': this.datePipe.transform(e.submissionDate, 'dd/MM/yyyy hh:mm'),
+                'Submission date': this.datePipe.transform(e.submissionDate, 'yyyy-MM-dd hh:mm:ss.SSS'), //dd/MM/yyyy hh:mm
                 'Coordonne pbo y': e.coordonnePboY,
                 'Hauteur pbo': e.hauteurPbo,
                 'Type materiel pbo': e.typeMaterielPbo,
