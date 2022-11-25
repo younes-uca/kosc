@@ -200,6 +200,32 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-plus-circle',
                         routerLink: ['/app/admin/kosc/template-email-report/list']
                     },
+
+                    {
+                        label: 'Liste template email report demande maneo client joignable accepte',
+                        icon: 'pi pi-fw pi-plus-circle',
+                        routerLink: ['/app/admin/kosc/template-email-report-demande-maneo-client-joignable-accepte/list']
+                    },
+                    {
+                        label: 'Liste template email report demande maneo client injoignable',
+                        icon: 'pi pi-fw pi-plus-circle',
+                        routerLink: ['/app/admin/kosc/template-email-report-demande-maneo-client-injoignable/list']
+                    },
+                    {
+                        label: 'Liste template email report demande client client injoignable',
+                        icon: 'pi pi-fw pi-plus-circle',
+                        routerLink: ['/app/admin/kosc/template-email-report-demande-client-client-injoignable/list']
+                    },
+                    {
+                        label: 'Liste template email report demande maneo client joignable refus',
+                        icon: 'pi pi-fw pi-plus-circle',
+                        routerLink: ['/app/admin/kosc/template-email-report-demande-maneo-client-joignable-refus/list']
+                    },
+                    {
+                        label: 'Liste template email report demande client client joignable',
+                        icon: 'pi pi-fw pi-plus-circle',
+                        routerLink: ['/app/admin/kosc/template-email-report-demande-client-client-joignable/list']
+                    },
                     {
                         label: 'Liste template suivi',
                         icon: 'pi pi-fw pi-plus-circle',

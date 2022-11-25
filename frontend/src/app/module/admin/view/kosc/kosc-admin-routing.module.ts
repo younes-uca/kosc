@@ -109,6 +109,18 @@ import {
 } from "./default-template-configuration-admin/default-template-configuration-admin.component";
 import {JourFerieAdminComponent} from "./jour-ferie-admin/jour-ferie-admin.component";
 import {OrdreKoscSuiviCddAdminComponent} from "./ordre-kosc-suivi-cdd-admin/ordre-kosc-suivi-cdd-admin.component";
+import {
+    TemplateEmailReportDemandeClientClientJoignableListAdminComponent
+} from "./template-email-report-demande-client-client-joignable-admin/list-admin/template-email-report-demande-client-client-joignable-list-admin.component";
+import {
+    TemplateEmailReportDemandeManeoClientJoignableRefusListAdminComponent
+} from "./template-email-report-demande-maneo-client-joignable-refus-admin/list-admin/template-email-report-demande-maneo-client-joignable-refus-list-admin.component";
+import {
+    TemplateEmailReportDemandeClientClientInjoignableListAdminComponent
+} from "./template-email-report-demande-client-client-injoignable-admin/list-admin/template-email-report-demande-client-client-injoignable-list-admin.component";
+import {
+    TemplateEmailReportDemandeManeoClientInjoignableListAdminComponent
+} from "./template-email-report-demande-maneo-client-injoignable-admin/list-admin/template-email-report-demande-maneo-client-injoignable-list-admin.component";
 
 
 @NgModule({
@@ -499,7 +511,55 @@ import {OrdreKoscSuiviCddAdminComponent} from "./ordre-kosc-suivi-cdd-admin/ordr
                                     canActivate: [AuthGuard]
                                 }
                             ]
-                        }
+                        },
+
+                        {
+
+                            path: 'template-email-report-demande-client-client-joignable',
+                            children: [
+                                {
+                                    path: 'list',
+                                    component: TemplateEmailReportDemandeClientClientJoignableListAdminComponent ,
+                                    canActivate: [AuthGuard]
+                                }
+                            ]
+                        },
+
+                        {
+
+                            path: 'template-email-report-demande-maneo-client-joignable-refus',
+                            children: [
+                                {
+                                    path: 'list',
+                                    component: TemplateEmailReportDemandeManeoClientJoignableRefusListAdminComponent ,
+                                    canActivate: [AuthGuard]
+                                }
+                            ]
+                        },
+                        {
+
+                            path: 'template-email-report-demande-client-client-injoignable',
+                            children: [
+                                {
+                                    path: 'list',
+                                    component: TemplateEmailReportDemandeClientClientInjoignableListAdminComponent ,
+                                    canActivate: [AuthGuard]
+                                }
+                            ]
+                        },
+
+                        {
+
+                            path: 'template-email-report-demande-maneo-client-injoignable',
+                            children: [
+                                {
+                                    path: 'list',
+                                    component: TemplateEmailReportDemandeManeoClientInjoignableListAdminComponent ,
+                                    canActivate: [AuthGuard]
+                                }
+                            ]
+                        },
+
 
                     ]
                 },
