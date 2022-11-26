@@ -1,6 +1,7 @@
 package com.maneo.kosc.service.util;
 
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -71,6 +72,8 @@ public class DateUtil {
     public static Date parseTimestamp(String date) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+            date=date.replace("T"," ");
+            date=date.replace("Z","");
             Date parsedDate = dateFormat.parse(date);
             Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
             return timestamp;
@@ -79,11 +82,13 @@ public class DateUtil {
         }
     }
 
-    public static Timestamp parseTimestampDate(String date) {
+    public static Time parseTimestampDate(String date) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+            //date=date.replace("T"," ");
+           // date=date.replace("Z","");
             Date parsedDate = dateFormat.parse(date);
-            Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+            Time timestamp = new java.sql.Time(parsedDate.getTime());
             return timestamp;
         } catch (Exception e) {
             return null;
