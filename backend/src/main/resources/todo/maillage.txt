@@ -1,0 +1,11 @@
+========= attributes:: maiilage.excel=========
+dans le fichier maiilage.xsl Ces colonnes ne sont pas utilisées dans le code:
+kosc_contact_first_name
+kosc_contact_last_name
+kosc_contact_phone
+kosc_contact_cellphone
+kosc_contact_email_1
+kosc_contact_email_2
+kosc_contact_email_3
+kosc_comments
+est ce qu'on va l'utiliser comme les coordonnes de technicien ??

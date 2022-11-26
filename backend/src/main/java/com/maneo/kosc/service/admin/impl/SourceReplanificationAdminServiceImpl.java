@@ -140,12 +140,6 @@ public class SourceReplanificationAdminServiceImpl extends AbstractServiceImpl<S
     }
 
     @Override
-    public List<SourceReplanification> findSuiviByCriteria(SourceReplanificationVo vo) {
-        return null;
-    }
-
-
-    @Override
     @Transactional
     public void delete(List<SourceReplanification> sourceReplanifications) {
         if (ListUtil.isNotEmpty(sourceReplanifications)) {

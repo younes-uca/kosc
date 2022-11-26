@@ -4,6 +4,7 @@ import com.maneo.kosc.bean.JourFerie;
 import com.maneo.kosc.dao.JourFerieDao;
 import com.maneo.kosc.service.admin.facade.JourFerieAdminService;
 import com.maneo.kosc.service.core.impl.AbstractServiceImpl;
+import com.maneo.kosc.service.util.DateUtil;
 import com.maneo.kosc.service.util.ListUtil;
 import com.maneo.kosc.service.util.SearchUtil;
 import com.maneo.kosc.ws.rest.provided.vo.JourFerieVo;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,6 +24,42 @@ public class JourFerieAdminServiceImpl extends AbstractServiceImpl<JourFerie> im
     private JourFerieDao jourFerieDao;
     @Autowired
     private EntityManager entityManager;
+
+
+
+    @Override
+    public Long calcNombreJourTotal(Date dateDebut, Date dateFin) {
+        List<JourFerieVo> res = findByDateMinAndMax(dateDebut, dateFin);
+        System.out.println("res = " + res);
+        Long sum = 0L;
+        for (JourFerieVo jourFerieVo : res) {
+            sum += jourFerieVo.getNbrJour();
+        }
+        System.out.println("sum = " + sum);
+        return sum;
+    }
+
+    private List<JourFerieVo> findByDateMinAndMax(Date dateDebut, Date dateFin) {
+        List<JourFerie> calendrierJourFerieses = findAll();
+        List<JourFerieVo> res = new ArrayList();
+        if (calendrierJourFerieses != null) {
+            for (JourFerie jf : calendrierJourFerieses) {
+                if (jf.getDateFin().getTime() < dateFin.getTime() || jf.getDateDebut().getTime() > dateDebut.getTime()) {
+                    Date dateMax = jf.getDateFin();
+                    Date dateMin = jf.getDateDebut();
+                    if (jf.getDateDebut().getTime() < dateDebut.getTime()) {
+                        dateMin = dateDebut;
+                    }
+                    if (dateFin.getTime() < jf.getDateFin().getTime()) {
+                        dateMax = dateFin;
+                    }
+                    JourFerieVo jfv = new JourFerieVo(jf.getDateDebut(), jf.getDateFin(), DateUtil.diffDays(dateMin, dateMax));
+                    res.add(jfv);
+                }
+            }
+        }
+        return res;
+    }
 
     @Override
     public List<JourFerie> findAll() {

@@ -108,12 +108,6 @@ public class TemplateEmailFtlChercheurServiceImpl extends AbstractServiceImpl<Te
     }
 
     @Override
-    public List<TemplateEmailFtl> findSuiviByCriteria(TemplateEmailFtlVo vo) {
-        return null;
-    }
-
-
-    @Override
     @Transactional
     public void delete(List<TemplateEmailFtl> templateEmailFtls) {
         if (ListUtil.isNotEmpty(templateEmailFtls)) {

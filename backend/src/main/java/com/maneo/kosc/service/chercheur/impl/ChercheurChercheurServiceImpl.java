@@ -171,12 +171,6 @@ public class ChercheurChercheurServiceImpl extends AbstractServiceImpl<Chercheur
     }
 
     @Override
-    public List<Chercheur> findSuiviByCriteria(ChercheurVo vo) {
-        return null;
-    }
-
-
-    @Override
     @Transactional
     public void delete(List<Chercheur> chercheurs) {
         if (ListUtil.isNotEmpty(chercheurs)) {

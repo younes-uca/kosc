@@ -138,13 +138,6 @@ public class EtatDemandeKoscChercheurServiceImpl extends AbstractServiceImpl<Eta
         query += SearchUtil.addConstraint("o", "libelle", "LIKE", etatDemandeKoscVo.getLibelle());
         return entityManager.createQuery(query).getResultList();
     }
-
-    @Override
-    public List<EtatDemandeKosc> findSuiviByCriteria(EtatDemandeKoscVo vo) {
-        return null;
-    }
-
-
     @Override
     @Transactional
     public void delete(List<EtatDemandeKosc> etatDemandeKoscs) {

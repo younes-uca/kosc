@@ -1,19 +1,22 @@
 package com.maneo.kosc.dao;
 
-import com.maneo.kosc.bean.DefaultTemplateConfiguration;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
+import org.springframework.data.jpa.repository.Query;
+
+import com.maneo.kosc.bean.DefaultTemplateConfiguration;
 
 
 @Repository
-public interface DefaultTemplateConfigurationDao extends JpaRepository<DefaultTemplateConfiguration, Long> {
+public interface DefaultTemplateConfigurationDao extends JpaRepository<DefaultTemplateConfiguration,Long> {
 
 
-    @Query("SELECT item FROM DefaultTemplateConfiguration item ")
-    List<DefaultTemplateConfiguration> findAll();
+
+@Query("SELECT item FROM DefaultTemplateConfiguration item ")
+List<DefaultTemplateConfiguration> findAll();
+
+
 
 
     List<DefaultTemplateConfiguration> findByTemplateEmailFtlId(Long id);
@@ -63,6 +66,27 @@ public interface DefaultTemplateConfigurationDao extends JpaRepository<DefaultTe
     List<DefaultTemplateConfiguration> findByTemplateEmailCriId(Long id);
 
     int deleteByTemplateEmailCriId(Long id);
+
+    List<DefaultTemplateConfiguration> findByTemplateEmailReportDemandeManeoClientInjoignableId(Long id);
+
+    int deleteByTemplateEmailReportDemandeManeoClientInjoignableId(Long id);
+
+    List<DefaultTemplateConfiguration> findByTemplateEmailReportDemandeManeoClientJoignableAccepteId(Long id);
+
+    int deleteByTemplateEmailReportDemandeManeoClientJoignableAccepteId(Long id);
+
+    List<DefaultTemplateConfiguration> findByTemplateEmailReportDemandeManeoClientJoignableRefusId(Long id);
+
+    int deleteByTemplateEmailReportDemandeManeoClientJoignableRefusId(Long id);
+
+    List<DefaultTemplateConfiguration> findByTemplateEmailReportDemandeClientClientJoignableId(Long id);
+
+    int deleteByTemplateEmailReportDemandeClientClientJoignableId(Long id);
+
+    List<DefaultTemplateConfiguration> findByTemplateEmailReportDemandeClientClientInjoignableId(Long id);
+
+    int deleteByTemplateEmailReportDemandeClientClientInjoignableId(Long id);
+
 
 
 }

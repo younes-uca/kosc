@@ -139,11 +139,6 @@ public class RegionChercheurServiceImpl extends AbstractServiceImpl<Region> impl
         return entityManager.createQuery(query).getResultList();
     }
 
-    @Override
-    public List<Region> findSuiviByCriteria(RegionVo vo) {
-        return null;
-    }
-
 
     @Override
     @Transactional

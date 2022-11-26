@@ -150,12 +150,6 @@ public class EtatDemandeKoscAdminServiceImpl extends AbstractServiceImpl<EtatDem
     }
 
     @Override
-    public List<EtatDemandeKosc> findSuiviByCriteria(EtatDemandeKoscVo vo) {
-        return null;
-    }
-
-
-    @Override
     @Transactional
     public void delete(List<EtatDemandeKosc> etatDemandeKoscs) {
         if (ListUtil.isNotEmpty(etatDemandeKoscs)) {

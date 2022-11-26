@@ -3,16 +3,13 @@ package com.maneo.kosc.service.util;
 
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoField;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class DateUtil {
 
@@ -162,16 +159,16 @@ public class DateUtil {
         return result;
     }
 
-    public static long calculerDifference(Date date){
+    public static long calculerDifferenceHeure(Date date){
         if(date == null){
             return 0L;
         }
-        return calculerDifference(new Date(), date);
+        return calculerDifferenceHeure(date, new Date());
     }
-    public static long calculerDifference(Date startDate, Date endDate){
+    public static long calculerDifferenceHeure(Date startDate, Date endDate){
 
         //milliseconds
-        long different =  startDate.getTime() - endDate.getTime();
+        long different =  endDate.getTime() - startDate.getTime();
 
         long secondsInMilli = 1000;
         long minutesInMilli = secondsInMilli * 60;
@@ -224,13 +221,67 @@ public class DateUtil {
 //        return elapsedHours;
 //    }
 
-    public static boolean isWeekEnd(final Date date)
-    {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
 
-        int day = cal.get(Calendar.DAY_OF_WEEK);
-        return day == Calendar.SUNDAY || day == Calendar.SATURDAY;
+    public static boolean isWeekEnd(LocalDate ld) {
+        DayOfWeek d = ld.getDayOfWeek();
+        return d == DayOfWeek.SATURDAY || d == DayOfWeek.SUNDAY;
+    }
+
+
+
+    public static LocalDate convert(Date dateToConvert) {
+        return dateToConvert.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+    }
+
+    public static Date convert(LocalDate localDate) {
+        return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+    }
+    public static int diff(Date firstDate, Date secondDate) {
+        long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
+        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        return (int) diff;
+    }
+
+    public static Long diffDays(Date firstDate, Date secondDate) {
+        Long diff = totalJourWithoutWeekEnd(firstDate, secondDate);
+        return diff;
+    }
+
+    public static Long totalJourWithoutWeekEnd(Date dateMin, Date dateMax) {
+        return totalJourWithoutWeekEnd(convert(dateMin), convert(dateMax));
+    }
+
+    public static Long totalJourWithoutWeekEnd(LocalDate dateMin, LocalDate dateMax) {
+        Long i = 0L;
+        for (LocalDate date = dateMin; date.compareTo(dateMax) <= 0; date = date.plusDays(1)) {
+            if (!isWeekEnd(date)) {
+                i++;
+            }
+        }
+        return i;
+    }
+
+    public static Long totalWeekEnd(Date dateMin, Date dateMax) {
+        return totalWeekEnd(convert(dateMin), convert(dateMax));
+    }
+
+    public static Date minusOneDay(Date date) {
+        LocalDate localDate = convert(date);
+        LocalDate minusDays = localDate.minusDays(1);
+        return convert(minusDays);
+    }
+
+    public static Long totalWeekEnd(LocalDate dateMin, LocalDate dateMax) {
+        Long i = 0L;
+        for (LocalDate date = dateMin; date.compareTo(dateMax) <= 0; date = date.plusDays(1)) {
+            if (isWeekEnd(date)) {
+                i++;
+            }
+        }
+        return i;
     }
 }
 

@@ -108,12 +108,6 @@ public class TemplateEmailRefusAdminServiceImpl extends AbstractServiceImpl<Temp
     }
 
     @Override
-    public List<TemplateEmailRefus> findSuiviByCriteria(TemplateEmailRefusVo vo) {
-        return null;
-    }
-
-
-    @Override
     @Transactional
     public void delete(List<TemplateEmailRefus> templateEmailRefuss) {
         if (ListUtil.isNotEmpty(templateEmailRefuss)) {

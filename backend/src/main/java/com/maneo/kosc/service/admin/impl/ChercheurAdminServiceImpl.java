@@ -169,11 +169,6 @@ public class ChercheurAdminServiceImpl extends AbstractServiceImpl<Chercheur> im
         return entityManager.createQuery(query).getResultList();
     }
 
-    @Override
-    public List<Chercheur> findSuiviByCriteria(ChercheurVo vo) {
-        return null;
-    }
-
 
     @Override
     @Transactional

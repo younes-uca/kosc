@@ -208,10 +208,6 @@ public class TechnicienChercheurServiceImpl extends AbstractServiceImpl<Technici
         return entityManager.createQuery(query).getResultList();
     }
 
-    @Override
-    public List<Technicien> findSuiviByCriteria(TechnicienVo vo) {
-        return null;
-    }
 
     private void findEntreprise(Technicien technicien) {
         Entreprise loadedEntreprise = entrepriseService.findByIdOrCode(technicien.getEntreprise());

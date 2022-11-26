@@ -108,10 +108,6 @@ public class TemplateEmailRefusChercheurServiceImpl extends AbstractServiceImpl<
         return entityManager.createQuery(query).getResultList();
     }
 
-    @Override
-    public List<TemplateEmailRefus> findSuiviByCriteria(TemplateEmailRefusVo vo) {
-        return null;
-    }
 
 
     @Override

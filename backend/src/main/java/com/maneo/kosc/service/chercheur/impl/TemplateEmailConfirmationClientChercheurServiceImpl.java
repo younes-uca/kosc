@@ -107,11 +107,6 @@ public class TemplateEmailConfirmationClientChercheurServiceImpl extends Abstrac
         return entityManager.createQuery(query).getResultList();
     }
 
-    @Override
-    public List<TemplateEmailConfirmationClient> findSuiviByCriteria(TemplateEmailConfirmationClientVo vo) {
-        return null;
-    }
-
 
     @Override
     @Transactional

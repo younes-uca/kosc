@@ -1,7 +1,9 @@
 package com.maneo.kosc.bean;
 
-import javax.persistence.*;
 import java.util.Objects;
+
+
+import javax.persistence.*;
 
 
 @Entity
@@ -18,8 +20,7 @@ public class DefaultTemplateConfiguration {
     private String emailKosc;
     @Column(length = 500)
     private String emailManeo;
-    @Column(columnDefinition = "boolean default false")
-    private Boolean enabled = false;
+    private Boolean enabled;
 
     @ManyToOne
     private TemplateEmailFtl templateEmailFtl;
@@ -45,6 +46,16 @@ public class DefaultTemplateConfiguration {
     private TemplateEmailMauvaisContact templateEmailMauvaisContact;
     @ManyToOne
     private TemplateEmailCri templateEmailCri;
+    @ManyToOne
+    private TemplateEmailReportDemandeManeoClientInjoignable templateEmailReportDemandeManeoClientInjoignable;
+    @ManyToOne
+    private TemplateEmailReportDemandeManeoClientJoignableAccepte templateEmailReportDemandeManeoClientJoignableAccepte;
+    @ManyToOne
+    private TemplateEmailReportDemandeManeoClientJoignableRefus templateEmailReportDemandeManeoClientJoignableRefus;
+    @ManyToOne
+    private TemplateEmailReportDemandeClientClientJoignable templateEmailReportDemandeClientClientJoignable;
+    @ManyToOne
+    private TemplateEmailReportDemandeClientClientInjoignable templateEmailReportDemandeClientClientInjoignable;
 
 
     public DefaultTemplateConfiguration() {
@@ -172,11 +183,51 @@ public class DefaultTemplateConfiguration {
         this.templateEmailCri = templateEmailCri;
     }
 
-    public boolean getEnabled() {
-        return this.enabled;
+    public TemplateEmailReportDemandeManeoClientInjoignable getTemplateEmailReportDemandeManeoClientInjoignable() {
+        return this.templateEmailReportDemandeManeoClientInjoignable;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setTemplateEmailReportDemandeManeoClientInjoignable(TemplateEmailReportDemandeManeoClientInjoignable templateEmailReportDemandeManeoClientInjoignable) {
+        this.templateEmailReportDemandeManeoClientInjoignable = templateEmailReportDemandeManeoClientInjoignable;
+    }
+
+    public TemplateEmailReportDemandeManeoClientJoignableAccepte getTemplateEmailReportDemandeManeoClientJoignableAccepte() {
+        return this.templateEmailReportDemandeManeoClientJoignableAccepte;
+    }
+
+    public void setTemplateEmailReportDemandeManeoClientJoignableAccepte(TemplateEmailReportDemandeManeoClientJoignableAccepte templateEmailReportDemandeManeoClientJoignableAccepte) {
+        this.templateEmailReportDemandeManeoClientJoignableAccepte = templateEmailReportDemandeManeoClientJoignableAccepte;
+    }
+
+    public TemplateEmailReportDemandeManeoClientJoignableRefus getTemplateEmailReportDemandeManeoClientJoignableRefus() {
+        return this.templateEmailReportDemandeManeoClientJoignableRefus;
+    }
+
+    public void setTemplateEmailReportDemandeManeoClientJoignableRefus(TemplateEmailReportDemandeManeoClientJoignableRefus templateEmailReportDemandeManeoClientJoignableRefus) {
+        this.templateEmailReportDemandeManeoClientJoignableRefus = templateEmailReportDemandeManeoClientJoignableRefus;
+    }
+
+    public TemplateEmailReportDemandeClientClientJoignable getTemplateEmailReportDemandeClientClientJoignable() {
+        return this.templateEmailReportDemandeClientClientJoignable;
+    }
+
+    public void setTemplateEmailReportDemandeClientClientJoignable(TemplateEmailReportDemandeClientClientJoignable templateEmailReportDemandeClientClientJoignable) {
+        this.templateEmailReportDemandeClientClientJoignable = templateEmailReportDemandeClientClientJoignable;
+    }
+
+    public TemplateEmailReportDemandeClientClientInjoignable getTemplateEmailReportDemandeClientClientInjoignable() {
+        return this.templateEmailReportDemandeClientClientInjoignable;
+    }
+
+    public void setTemplateEmailReportDemandeClientClientInjoignable(TemplateEmailReportDemandeClientClientInjoignable templateEmailReportDemandeClientClientInjoignable) {
+        this.templateEmailReportDemandeClientClientInjoignable = templateEmailReportDemandeClientClientInjoignable;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
 

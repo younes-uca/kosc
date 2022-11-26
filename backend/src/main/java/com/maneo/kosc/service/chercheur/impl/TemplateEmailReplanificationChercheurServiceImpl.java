@@ -107,11 +107,6 @@ public class TemplateEmailReplanificationChercheurServiceImpl extends AbstractSe
         return entityManager.createQuery(query).getResultList();
     }
 
-    @Override
-    public List<TemplateEmailReplanification> findSuiviByCriteria(TemplateEmailReplanificationVo vo) {
-        return null;
-    }
-
 
     @Override
     @Transactional
