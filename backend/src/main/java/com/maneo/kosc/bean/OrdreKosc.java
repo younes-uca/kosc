@@ -1,7 +1,5 @@
 package com.maneo.kosc.bean;
 
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
@@ -358,11 +356,11 @@ public class OrdreKosc {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date dateTroisiemeAppel;
-    //@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss.SSS")
-
-    private Time datePriseRdv;
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss.SSS")
-    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date datePriseRdv;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date dateRdv;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -1619,11 +1617,11 @@ public class OrdreKosc {
         this.dateTroisiemeAppel = dateTroisiemeAppel;
     }
 
-    public Time getDatePriseRdv() {
+    public Date getDatePriseRdv() {
         return this.datePriseRdv;
     }
 
-    public void setDatePriseRdv(Time datePriseRdv) {
+    public void setDatePriseRdv(Date datePriseRdv) {
         this.datePriseRdv = datePriseRdv;
     }
 
