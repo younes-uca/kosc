@@ -528,14 +528,15 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
 
     @Override
     public OrdreKosc update(OrdreKosc ordreKosc) {
-        OrdreKosc foundedOrdreKosc = findById(ordreKosc.getId());
-        if (foundedOrdreKosc == null) return null;
-        else {
-            initDateDernierAppel(ordreKosc);
-            EtatDemandeKosc etatDemandeKosc = etatDemandeKoscService.findByCode(ordreKosc.getEtatDemandeKosc().getCode());
-            ordreKosc.setEtatDemandeKosc(etatDemandeKosc);
-            return ordreKoscDao.save(ordreKosc);
-        }
+
+            OrdreKosc foundedOrdreKosc = findById(ordreKosc.getId());
+            if (foundedOrdreKosc == null) return null;
+            else {
+                initDateDernierAppel(ordreKosc);
+                EtatDemandeKosc etatDemandeKosc = etatDemandeKoscService.findByCode(ordreKosc.getEtatDemandeKosc().getCode());
+                ordreKosc.setEtatDemandeKosc(etatDemandeKosc);
+                return ordreKoscDao.save(ordreKosc);
+            }
     }
 
     private void prepareSave(OrdreKosc ordreKosc) {
