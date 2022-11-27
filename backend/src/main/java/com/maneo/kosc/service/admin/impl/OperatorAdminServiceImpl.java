@@ -146,12 +146,6 @@ public class OperatorAdminServiceImpl extends AbstractServiceImpl<Operator> impl
     }
 
     @Override
-    public List<Operator> findSuiviByCriteria(OperatorVo vo) {
-        return null;
-    }
-
-
-    @Override
     @Transactional
     public void delete(List<Operator> operators) {
         if (ListUtil.isNotEmpty(operators)) {

@@ -1,0 +1,62 @@
+        <p-dialog [(visible)]="editTemplateEmailReportDemandeClientClientInjoignableDialog" [style]="{width: '70vw'}"
+                header="Template email report demande client client injoignable" [modal]="true"
+                styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+
+
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="Template email report demande client client injoignable">
+                        <div class="p-grid">
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="1">Libelle<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Libelle"
+                                                   id="1" [(ngModel)]="selectedTemplateEmailReportDemandeClientClientInjoignable.libelle"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validTemplateEmailReportDemandeClientClientInjoignableLibelle}"  />
+                                            <small class='p-error' *ngIf='!validTemplateEmailReportDemandeClientClientInjoignableLibelle'>Libelle est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="2">Objet<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Objet"
+                                                   id="2" [(ngModel)]="selectedTemplateEmailReportDemandeClientClientInjoignable.objet"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validTemplateEmailReportDemandeClientClientInjoignableObjet}"  />
+                                            <small class='p-error' *ngIf='!validTemplateEmailReportDemandeClientClientInjoignableObjet'>Objet est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="3">Corps<span style="color: red;">*</span></label>
+                                            <textarea id="3" pInputTextarea rows="5" cols="30"
+                                                      placeholder="Corps"  [(ngModel)]="selectedTemplateEmailReportDemandeClientClientInjoignable.corps"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validTemplateEmailReportDemandeClientClientInjoignableCorps}"  ></textarea>
+                                            <small class='p-error' *ngIf='!validTemplateEmailReportDemandeClientClientInjoignableCorps'>Corps est obligatoire.</small>
+                                        </div>
+
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="p-grid">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times"
+                                    class="p-button-text" (click)="hideEditDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="edit()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+
+
+    </p-dialog>

@@ -108,12 +108,6 @@ public class TemplateEmailClotureAdminServiceImpl extends AbstractServiceImpl<Te
     }
 
     @Override
-    public List<TemplateEmailCloture> findSuiviByCriteria(TemplateEmailClotureVo vo) {
-        return null;
-    }
-
-
-    @Override
     @Transactional
     public void delete(List<TemplateEmailCloture> templateEmailClotures) {
         if (ListUtil.isNotEmpty(templateEmailClotures)) {

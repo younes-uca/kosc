@@ -90,12 +90,6 @@ public interface AbstractService<T, I, V> {
      */
     List<T> findByCriteria(V vo);
 
-    /**
-     * search suivi for T in by some criteria
-     *
-     * @return the searhed list T
-     */
-    List<T> findSuiviByCriteria(V vo);
 
     /**
      * delete  list of T

@@ -1,12 +1,13 @@
 package com.maneo.kosc.service.core.impl;
 
+import com.maneo.kosc.bean.DefaultTemplateConfiguration;
 import com.maneo.kosc.service.util.ListUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class AbstractServiceImpl<T> {
+public abstract class AbstractServiceImpl<T> {
 
     public List<List<T>> getToBeSavedAndToBeDeleted(List<T> oldList, List<T> newList) {
         List<List<T>> result = new ArrayList<>();
@@ -49,4 +50,5 @@ public class AbstractServiceImpl<T> {
             }
         }
     }
+
 }

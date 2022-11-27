@@ -107,11 +107,6 @@ public class TemplateEmailClientInjoinableKoscChercheurServiceImpl extends Abstr
         return entityManager.createQuery(query).getResultList();
     }
 
-    @Override
-    public List<TemplateEmailClientInjoinableKosc> findSuiviByCriteria(TemplateEmailClientInjoinableKoscVo vo) {
-        return null;
-    }
-
 
     @Override
     @Transactional

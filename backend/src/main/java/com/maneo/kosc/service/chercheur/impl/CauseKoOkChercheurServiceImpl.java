@@ -140,10 +140,6 @@ public class CauseKoOkChercheurServiceImpl extends AbstractServiceImpl<CauseKoOk
         return entityManager.createQuery(query).getResultList();
     }
 
-    @Override
-    public List<CauseKoOk> findSuiviByCriteria(CauseKoOkVo vo) {
-        return null;
-    }
 
 
     @Override

@@ -329,11 +329,6 @@ public class DefaultTemplateConfigurationChercheurServiceImpl extends AbstractSe
         return entityManager.createQuery(query).getResultList();
     }
 
-    @Override
-    public List<DefaultTemplateConfiguration> findSuiviByCriteria(DefaultTemplateConfigurationVo vo) {
-        return null;
-    }
-
     private void findTemplateEmailFtl(DefaultTemplateConfiguration defaultTemplateConfiguration) {
         TemplateEmailFtl loadedTemplateEmailFtl = null;
         if (defaultTemplateConfiguration.getTemplateEmailFtl() != null && defaultTemplateConfiguration.getTemplateEmailFtl().getId() != null)

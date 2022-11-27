@@ -102,6 +102,11 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
         return entityManager.createQuery(query).getResultList();
     }
 
+    @Override
+    public List<OrdreKosc> findSuiviByCriteria(OrdreKoscVo ordreKoscVo) {
+        return new ArrayList<OrdreKosc>();
+    }
+
 
     @Override
     public List<OrdreKosc> findSuivi() {
@@ -947,13 +952,6 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
 
         return entityManager.createQuery(query).getResultList();
     }
-
-    @Override
-    public List<OrdreKosc> findSuiviByCriteria(OrdreKoscVo vo) {
-        return null;
-    }
-
-
 
     private void findOperator(OrdreKosc ordreKosc) {
         Operator loadedOperator = operatorService.findByIdOrReference(ordreKosc.getOperator());

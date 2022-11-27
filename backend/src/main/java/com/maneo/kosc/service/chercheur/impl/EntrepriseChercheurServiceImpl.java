@@ -141,12 +141,6 @@ public class EntrepriseChercheurServiceImpl extends AbstractServiceImpl<Entrepri
     }
 
     @Override
-    public List<Entreprise> findSuiviByCriteria(EntrepriseVo vo) {
-        return null;
-    }
-
-
-    @Override
     @Transactional
     public void delete(List<Entreprise> entreprises) {
         if (ListUtil.isNotEmpty(entreprises)) {

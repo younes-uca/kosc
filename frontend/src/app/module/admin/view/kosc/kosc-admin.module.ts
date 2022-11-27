@@ -376,6 +376,66 @@ import {
     OrdreKoscSuiviCddViewAdminComponent
 } from "./ordre-kosc-suivi-cdd-admin/view-admin/ordre-kosc-suivi-cdd-view-admin.component";
 import {BreadcrumbModule} from "primeng/breadcrumb";
+import {
+    TemplateEmailReportDemandeManeoClientJoignableAccepteEditAdminComponent
+} from "./template-email-report-demande-maneo-client-joignable-accepte-admin/edit-admin/template-email-report-demande-maneo-client-joignable-accepte-edit-admin.component";
+import {
+    TemplateEmailReportDemandeManeoClientJoignableAccepteViewAdminComponent
+} from "./template-email-report-demande-maneo-client-joignable-accepte-admin/view-admin/template-email-report-demande-maneo-client-joignable-accepte-view-admin.component";
+import {
+    TemplateEmailReportDemandeClientClientInjoignableListAdminComponent
+} from "./template-email-report-demande-client-client-injoignable-admin/list-admin/template-email-report-demande-client-client-injoignable-list-admin.component";
+import {
+    TemplateEmailReportDemandeManeoClientInjoignableListAdminComponent
+} from "./template-email-report-demande-maneo-client-injoignable-admin/list-admin/template-email-report-demande-maneo-client-injoignable-list-admin.component";
+import {
+    TemplateEmailReportDemandeClientClientInjoignableEditAdminComponent
+} from "./template-email-report-demande-client-client-injoignable-admin/edit-admin/template-email-report-demande-client-client-injoignable-edit-admin.component";
+import {
+    TemplateEmailReportDemandeManeoClientInjoignableCreateAdminComponent
+} from "./template-email-report-demande-maneo-client-injoignable-admin/create-admin/template-email-report-demande-maneo-client-injoignable-create-admin.component";
+import {
+    TemplateEmailReportDemandeManeoClientInjoignableViewAdminComponent
+} from "./template-email-report-demande-maneo-client-injoignable-admin/view-admin/template-email-report-demande-maneo-client-injoignable-view-admin.component";
+import {
+    TemplateEmailReportDemandeManeoClientInjoignableEditAdminComponent
+} from "./template-email-report-demande-maneo-client-injoignable-admin/edit-admin/template-email-report-demande-maneo-client-injoignable-edit-admin.component";
+import {
+    TemplateEmailReportDemandeManeoClientJoignableAccepteCreateAdminComponent
+} from "./template-email-report-demande-maneo-client-joignable-accepte-admin/create-admin/template-email-report-demande-maneo-client-joignable-accepte-create-admin.component";
+import {
+    TemplateEmailReportDemandeManeoClientJoignableAccepteListAdminComponent
+} from "./template-email-report-demande-maneo-client-joignable-accepte-admin/list-admin/template-email-report-demande-maneo-client-joignable-accepte-list-admin.component";
+import {
+    TemplateEmailReportDemandeManeoClientJoignableRefusCreateAdminComponent
+} from "./template-email-report-demande-maneo-client-joignable-refus-admin/create-admin/template-email-report-demande-maneo-client-joignable-refus-create-admin.component";
+import {
+    TemplateEmailReportDemandeManeoClientJoignableRefusListAdminComponent
+} from "./template-email-report-demande-maneo-client-joignable-refus-admin/list-admin/template-email-report-demande-maneo-client-joignable-refus-list-admin.component";
+import {
+    TemplateEmailReportDemandeManeoClientJoignableRefusViewAdminComponent
+} from "./template-email-report-demande-maneo-client-joignable-refus-admin/view-admin/template-email-report-demande-maneo-client-joignable-refus-view-admin.component";
+import {
+    TemplateEmailReportDemandeManeoClientJoignableRefusEditAdminComponent
+} from "./template-email-report-demande-maneo-client-joignable-refus-admin/edit-admin/template-email-report-demande-maneo-client-joignable-refus-edit-admin.component";
+import {
+    TemplateEmailReportDemandeClientClientInjoignableCreateAdminComponent
+} from "./template-email-report-demande-client-client-injoignable-admin/create-admin/template-email-report-demande-client-client-injoignable-create-admin.component";
+import {
+    TemplateEmailReportDemandeClientClientJoignableEditAdminComponent
+} from "./template-email-report-demande-client-client-joignable-admin/edit-admin/template-email-report-demande-client-client-joignable-edit-admin.component";
+import {
+    TemplateEmailReportDemandeClientClientJoignableViewAdminComponent
+} from "./template-email-report-demande-client-client-joignable-admin/view-admin/template-email-report-demande-client-client-joignable-view-admin.component";
+import {
+    TemplateEmailReportDemandeClientClientJoignableCreateAdminComponent
+} from "./template-email-report-demande-client-client-joignable-admin/create-admin/template-email-report-demande-client-client-joignable-create-admin.component";
+import {
+    TemplateEmailReportDemandeClientClientInjoignableViewAdminComponent
+} from "./template-email-report-demande-client-client-injoignable-admin/view-admin/template-email-report-demande-client-client-injoignable-view-admin.component";
+import {
+    TemplateEmailReportDemandeClientClientJoignableListAdminComponent
+} from "./template-email-report-demande-client-client-joignable-admin/list-admin/template-email-report-demande-client-client-joignable-list-admin.component";
 
 
 
@@ -451,6 +511,34 @@ import {BreadcrumbModule} from "primeng/breadcrumb";
         TemplateEmailPlanificationViewAdminComponent,
         TemplateEmailPlanificationEditAdminComponent,
         TemplateEmailPlanificationAdminComponent,
+
+
+        TemplateEmailReportDemandeManeoClientJoignableRefusCreateAdminComponent,
+        TemplateEmailReportDemandeManeoClientJoignableRefusListAdminComponent,
+        TemplateEmailReportDemandeManeoClientJoignableRefusViewAdminComponent,
+        TemplateEmailReportDemandeManeoClientJoignableRefusEditAdminComponent,
+
+        TemplateEmailReportDemandeClientClientJoignableCreateAdminComponent,
+        TemplateEmailReportDemandeClientClientJoignableListAdminComponent,
+        TemplateEmailReportDemandeClientClientJoignableViewAdminComponent,
+        TemplateEmailReportDemandeClientClientJoignableEditAdminComponent,
+
+        TemplateEmailReportDemandeClientClientInjoignableCreateAdminComponent,
+        TemplateEmailReportDemandeClientClientInjoignableListAdminComponent,
+        TemplateEmailReportDemandeClientClientInjoignableViewAdminComponent,
+        TemplateEmailReportDemandeClientClientInjoignableEditAdminComponent,
+
+        TemplateEmailReportDemandeManeoClientInjoignableCreateAdminComponent,
+        TemplateEmailReportDemandeManeoClientInjoignableListAdminComponent,
+        TemplateEmailReportDemandeManeoClientInjoignableViewAdminComponent,
+        TemplateEmailReportDemandeManeoClientInjoignableEditAdminComponent,
+
+        TemplateEmailReportDemandeManeoClientJoignableAccepteCreateAdminComponent,
+        TemplateEmailReportDemandeManeoClientJoignableAccepteListAdminComponent,
+        TemplateEmailReportDemandeManeoClientJoignableAccepteViewAdminComponent,
+        TemplateEmailReportDemandeManeoClientJoignableAccepteEditAdminComponent,
+
+
         ArretTravailCreateAdminComponent,
         ArretTravailListAdminComponent,
         ArretTravailViewAdminComponent,
@@ -669,6 +757,33 @@ import {BreadcrumbModule} from "primeng/breadcrumb";
         TemplateSuiviViewAdminComponent,
         TemplateSuiviEditAdminComponent,
         TemplateSuiviAdminComponent,
+
+
+        TemplateEmailReportDemandeManeoClientJoignableRefusCreateAdminComponent,
+        TemplateEmailReportDemandeManeoClientJoignableRefusListAdminComponent,
+        TemplateEmailReportDemandeManeoClientJoignableRefusViewAdminComponent,
+        TemplateEmailReportDemandeManeoClientJoignableRefusEditAdminComponent,
+
+        TemplateEmailReportDemandeClientClientJoignableCreateAdminComponent,
+        TemplateEmailReportDemandeClientClientJoignableListAdminComponent,
+        TemplateEmailReportDemandeClientClientJoignableViewAdminComponent,
+        TemplateEmailReportDemandeClientClientJoignableEditAdminComponent,
+
+        TemplateEmailReportDemandeClientClientInjoignableCreateAdminComponent,
+        TemplateEmailReportDemandeClientClientInjoignableListAdminComponent,
+        TemplateEmailReportDemandeClientClientInjoignableViewAdminComponent,
+        TemplateEmailReportDemandeClientClientInjoignableEditAdminComponent,
+
+        TemplateEmailReportDemandeManeoClientInjoignableCreateAdminComponent,
+        TemplateEmailReportDemandeManeoClientInjoignableListAdminComponent,
+        TemplateEmailReportDemandeManeoClientInjoignableViewAdminComponent,
+        TemplateEmailReportDemandeManeoClientInjoignableEditAdminComponent,
+
+        TemplateEmailReportDemandeManeoClientJoignableAccepteCreateAdminComponent,
+        TemplateEmailReportDemandeManeoClientJoignableAccepteListAdminComponent,
+        TemplateEmailReportDemandeManeoClientJoignableAccepteViewAdminComponent,
+        TemplateEmailReportDemandeManeoClientJoignableAccepteEditAdminComponent,
+
         DepartementTechnicienCreateAdminComponent,
         DepartementTechnicienListAdminComponent,
         DepartementTechnicienViewAdminComponent,

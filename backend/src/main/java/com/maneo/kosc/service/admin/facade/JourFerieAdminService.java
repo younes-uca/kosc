@@ -4,10 +4,13 @@ import com.maneo.kosc.bean.JourFerie;
 import com.maneo.kosc.ws.rest.provided.vo.JourFerieVo;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 public interface JourFerieAdminService {
 
+
+    Long calcNombreJourTotal(Date dateDebut, Date dateFin);
 
     List<JourFerie> findAll();
 

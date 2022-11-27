@@ -140,11 +140,6 @@ public class EntrepriseAdminServiceImpl extends AbstractServiceImpl<Entreprise> 
         return entityManager.createQuery(query).getResultList();
     }
 
-    @Override
-    public List<Entreprise> findSuiviByCriteria(EntrepriseVo vo) {
-        return null;
-    }
-
 
     @Override
     @Transactional

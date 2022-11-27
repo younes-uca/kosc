@@ -108,12 +108,6 @@ public class TemplateEmailClientInjoinableAdminServiceImpl extends AbstractServi
     }
 
     @Override
-    public List<TemplateEmailClientInjoinable> findSuiviByCriteria(TemplateEmailClientInjoinableVo vo) {
-        return null;
-    }
-
-
-    @Override
     @Transactional
     public void delete(List<TemplateEmailClientInjoinable> templateEmailClientInjoinables) {
         if (ListUtil.isNotEmpty(templateEmailClientInjoinables)) {

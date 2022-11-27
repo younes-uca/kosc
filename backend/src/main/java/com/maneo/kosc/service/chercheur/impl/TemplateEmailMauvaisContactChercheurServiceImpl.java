@@ -107,11 +107,6 @@ public class TemplateEmailMauvaisContactChercheurServiceImpl extends AbstractSer
         return entityManager.createQuery(query).getResultList();
     }
 
-    @Override
-    public List<TemplateEmailMauvaisContact> findSuiviByCriteria(TemplateEmailMauvaisContactVo vo) {
-        return null;
-    }
-
 
     @Override
     @Transactional

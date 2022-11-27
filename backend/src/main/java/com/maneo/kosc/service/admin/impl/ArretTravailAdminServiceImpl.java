@@ -184,11 +184,6 @@ public class ArretTravailAdminServiceImpl extends AbstractServiceImpl<ArretTrava
         return entityManager.createQuery(query).getResultList();
     }
 
-    @Override
-    public List<ArretTravail> findSuiviByCriteria(ArretTravailVo vo) {
-        return null;
-    }
-
     private void findTechnicien(ArretTravail arretTravail) {
         Technicien loadedTechnicien = technicienService.findByIdOrIdentifiant(arretTravail.getTechnicien());
 

@@ -108,12 +108,6 @@ public class TemplateEmailPlanificationChercheurServiceImpl extends AbstractServ
     }
 
     @Override
-    public List<TemplateEmailPlanification> findSuiviByCriteria(TemplateEmailPlanificationVo vo) {
-        return null;
-    }
-
-
-    @Override
     @Transactional
     public void delete(List<TemplateEmailPlanification> templateEmailPlanifications) {
         if (ListUtil.isNotEmpty(templateEmailPlanifications)) {

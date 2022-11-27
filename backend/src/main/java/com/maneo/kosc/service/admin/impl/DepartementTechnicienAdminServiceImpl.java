@@ -196,11 +196,6 @@ public class DepartementTechnicienAdminServiceImpl extends AbstractServiceImpl<D
         return resultList;
     }
 
-    @Override
-    public List<DepartementTechnicien> findSuiviByCriteria(DepartementTechnicienVo vo) {
-        return null;
-    }
-
     private void findTechnicien(DepartementTechnicien departementTechnicien) {
         Technicien loadedTechnicien = technicienService.findByIdOrIdentifiant(departementTechnicien.getTechnicien());
 

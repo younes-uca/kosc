@@ -108,11 +108,6 @@ public class TemplateSuiviChercheurServiceImpl extends AbstractServiceImpl<Templ
         return entityManager.createQuery(query).getResultList();
     }
 
-    @Override
-    public List<TemplateSuivi> findSuiviByCriteria(TemplateSuiviVo vo) {
-        return null;
-    }
-
 
     @Override
     @Transactional

@@ -1058,7 +1058,7 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
           if(codeEtat=='ok')
               this.messageService.add({severity: 'success', summary: codeEtat, detail:'OrdreKosc with reference ' +result.reference + ' updated to '+ codeEtat});
           else if( codeEtat=='ko')
-              this.messageService.add({severity: 'error', summary: codeEtat, detail:'OrdreKosc with reference ' +result.reference + ' updated to '+ codeEtat});
+              this.messageService.add({severity: 'success', summary: codeEtat, detail:'OrdreKosc with reference ' +result.reference + ' updated to '+ codeEtat});
 
           }
       )

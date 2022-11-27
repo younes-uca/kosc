@@ -107,11 +107,6 @@ public class TemplateEmailClotureChercheurServiceImpl extends AbstractServiceImp
         return entityManager.createQuery(query).getResultList();
     }
 
-    @Override
-    public List<TemplateEmailCloture> findSuiviByCriteria(TemplateEmailClotureVo vo) {
-        return null;
-    }
-
 
     @Override
     @Transactional

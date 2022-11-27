@@ -108,12 +108,6 @@ public class TemplateEmailCriAdminServiceImpl extends AbstractServiceImpl<Templa
     }
 
     @Override
-    public List<TemplateEmailCri> findSuiviByCriteria(TemplateEmailCriVo vo) {
-        return null;
-    }
-
-
-    @Override
     @Transactional
     public void delete(List<TemplateEmailCri> templateEmailCris) {
         if (ListUtil.isNotEmpty(templateEmailCris)) {
