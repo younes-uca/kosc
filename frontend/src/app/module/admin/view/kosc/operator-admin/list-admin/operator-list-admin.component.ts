@@ -251,8 +251,8 @@ export class OperatorListAdminComponent implements OnInit {
         });
 
         this.criteriaData = [{
-            'Reference': this.searchOperator.reference ? this.searchOperator.reference : environment.emptyForExport,
-            'Libelle': this.searchOperator.libelle ? this.searchOperator.libelle : environment.emptyForExport,
+            // 'Reference': this.searchOperator.reference ? this.searchOperator.reference : environment.emptyForExport,
+            // 'Libelle': this.searchOperator.libelle ? this.searchOperator.libelle : environment.emptyForExport,
         }];
 
     }
