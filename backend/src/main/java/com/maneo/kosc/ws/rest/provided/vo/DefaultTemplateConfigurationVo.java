@@ -1,6 +1,8 @@
 package com.maneo.kosc.ws.rest.provided.vo;
 
 
+
+
 public class DefaultTemplateConfigurationVo {
 
     private String id;
@@ -21,6 +23,16 @@ public class DefaultTemplateConfigurationVo {
     private TemplateEmailConfirmationClientVo templateEmailConfirmationClientVo;
     private TemplateEmailMauvaisContactVo templateEmailMauvaisContactVo;
     private TemplateEmailCriVo templateEmailCriVo;
+
+    private TemplateEmailReportDemandeManeoClientInjoignableVo templateEmailReportDemandeManeoClientInjoignableVo;
+
+    private TemplateEmailReportDemandeManeoClientJoignableAccepteVo templateEmailReportDemandeManeoClientJoignableAccepteVo;
+
+    private TemplateEmailReportDemandeManeoClientJoignableRefusVo templateEmailReportDemandeManeoClientJoignableRefusVo;
+
+    private TemplateEmailReportDemandeClientClientJoignableVo templateEmailReportDemandeClientClientJoignableVo;
+
+    private TemplateEmailReportDemandeClientClientInjoignableVo templateEmailReportDemandeClientClientInjoignableVo;
 
 
     public DefaultTemplateConfigurationVo() {
@@ -156,5 +168,43 @@ public class DefaultTemplateConfigurationVo {
         this.templateEmailCriVo = templateEmailCriVo;
     }
 
+    public TemplateEmailReportDemandeManeoClientInjoignableVo getTemplateEmailReportDemandeManeoClientInjoignableVo() {
+        return templateEmailReportDemandeManeoClientInjoignableVo;
+    }
 
+    public void setTemplateEmailReportDemandeManeoClientInjoignableVo(TemplateEmailReportDemandeManeoClientInjoignableVo templateEmailReportDemandeManeoClientInjoignableVo) {
+        this.templateEmailReportDemandeManeoClientInjoignableVo = templateEmailReportDemandeManeoClientInjoignableVo;
+    }
+
+    public TemplateEmailReportDemandeManeoClientJoignableAccepteVo getTemplateEmailReportDemandeManeoClientJoignableAccepteVo() {
+        return templateEmailReportDemandeManeoClientJoignableAccepteVo;
+    }
+
+    public void setTemplateEmailReportDemandeManeoClientJoignableAccepteVo(TemplateEmailReportDemandeManeoClientJoignableAccepteVo templateEmailReportDemandeManeoClientJoignableAccepteVo) {
+        this.templateEmailReportDemandeManeoClientJoignableAccepteVo = templateEmailReportDemandeManeoClientJoignableAccepteVo;
+    }
+
+    public TemplateEmailReportDemandeManeoClientJoignableRefusVo getTemplateEmailReportDemandeManeoClientJoignableRefusVo() {
+        return templateEmailReportDemandeManeoClientJoignableRefusVo;
+    }
+
+    public void setTemplateEmailReportDemandeManeoClientJoignableRefusVo(TemplateEmailReportDemandeManeoClientJoignableRefusVo templateEmailReportDemandeManeoClientJoignableRefusVo) {
+        this.templateEmailReportDemandeManeoClientJoignableRefusVo = templateEmailReportDemandeManeoClientJoignableRefusVo;
+    }
+
+    public TemplateEmailReportDemandeClientClientJoignableVo getTemplateEmailReportDemandeClientClientJoignableVo() {
+        return templateEmailReportDemandeClientClientJoignableVo;
+    }
+
+    public void setTemplateEmailReportDemandeClientClientJoignableVo(TemplateEmailReportDemandeClientClientJoignableVo templateEmailReportDemandeClientClientJoignableVo) {
+        this.templateEmailReportDemandeClientClientJoignableVo = templateEmailReportDemandeClientClientJoignableVo;
+    }
+
+    public TemplateEmailReportDemandeClientClientInjoignableVo getTemplateEmailReportDemandeClientClientInjoignableVo() {
+        return templateEmailReportDemandeClientClientInjoignableVo;
+    }
+
+    public void setTemplateEmailReportDemandeClientClientInjoignableVo(TemplateEmailReportDemandeClientClientInjoignableVo templateEmailReportDemandeClientClientInjoignableVo) {
+        this.templateEmailReportDemandeClientClientInjoignableVo = templateEmailReportDemandeClientClientInjoignableVo;
+    }
 }
