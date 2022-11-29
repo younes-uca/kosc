@@ -39,6 +39,21 @@ import {TemplateEmailCriVo} from 'src/app/controller/model/TemplateEmailCri.mode
 import {ConfirmationService, MenuItem, MessageService} from 'primeng/api';
 import {AuthService} from 'src/app/controller/service/Auth.service';
 import {ExportService} from 'src/app/controller/service/Export.service';
+import {
+    TemplateEmailReportDemandeManeoClientInjoignableService
+} from "../../../../../../controller/service/TemplateEmailReportDemandeManeoClientInjoignable.service";
+import {
+    TemplateEmailReportDemandeManeoClientJoignableAccepteService
+} from "../../../../../../controller/service/TemplateEmailReportDemandeManeoClientJoignableAccepte.service";
+import {
+    TemplateEmailReportDemandeManeoClientJoignableRefusService
+} from "../../../../../../controller/service/TemplateEmailReportDemandeManeoClientJoignableRefus.service";
+import {
+    TemplateEmailReportDemandeClientClientInjoignableService
+} from "../../../../../../controller/service/TemplateEmailReportDemandeClientClientInjoignable.service";
+import {
+    TemplateEmailReportDemandeClientClientJoignableService
+} from "../../../../../../controller/service/TemplateEmailReportDemandeClientClientJoignable.service";
 
 @Component({
     selector: 'app-default-template-configuration-list-admin',
@@ -84,6 +99,12 @@ export class DefaultTemplateConfigurationListAdminComponent implements OnInit {
         , private templateEmailConfirmationClientService: TemplateEmailConfirmationClientService
         , private templateEmailMauvaisContactService: TemplateEmailMauvaisContactService
         , private templateEmailCriService: TemplateEmailCriService
+        , private templateEmailReportDemandeManeoClientInjoignableService: TemplateEmailReportDemandeManeoClientInjoignableService
+        , private templateEmailReportDemandeManeoClientJoignableAccepteService: TemplateEmailReportDemandeManeoClientJoignableAccepteService
+        , private templateEmailReportDemandeManeoClientJoignableRefusService: TemplateEmailReportDemandeManeoClientJoignableRefusService
+        , private templateEmailReportDemandeClientClientInjoignableService: TemplateEmailReportDemandeClientClientInjoignableService
+        , private templateEmailReportDemandeClientClientJoignableService: TemplateEmailReportDemandeClientClientJoignableService
+
     ) {
     }
 
