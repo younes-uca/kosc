@@ -766,16 +766,15 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
                 label: 'Export Kizeo 24', icon: 'pi pi-file-excel', command: async () => {
                     this.afficher24();
                     this.searchRequestPriseRdv();
-                    // await this.exporter();
+                   // await this.exporter();
                 }
             },
             {
-                label: 'Export Kizeo 48', icon: 'pi pi-file-excel', command: () => {
+                label: 'Export Kizeo 48', icon: 'pi pi-file-excel', command: async () => {
                     this.afficher48();
                     this.searchRequestPriseRdv();
-                    console.log(this.ordreKoscsPriseRdv);
-                    //this.prepareColumnExport();
-                    //this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName) })
+                   // console.log(this.ordreKoscsPriseRdv);
+                   // await this.exporter();
 
 
                 }
@@ -785,8 +784,7 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
                     this.afficher72();
                     this.searchRequestPriseRdv();
                     console.log(this.ordreKoscsPriseRdv);
-                    // this.prepareColumnExport();
-                    // this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName) })
+                    // await this.exporter();
 
 
                 }
