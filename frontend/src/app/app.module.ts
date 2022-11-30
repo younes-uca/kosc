@@ -53,7 +53,7 @@ import {ProductService} from './demo/service/productservice';
 import {IconService} from './demo/service/iconservice';
 
 import {AccessDeniedComponent} from './auth/access-denied/access-denied.component';
-import {UserListComponent} from './module/user-list/user-list.component';
+
 import {UserService} from './controller/service/user.service';
 import {RoleService} from './controller/service/role.service';
 import {HomeComponent} from './demo/view/home/home.component';
@@ -134,7 +134,6 @@ import {DialogModule} from "primeng/dialog";
         AppNotfoundComponent,
         AppErrorComponent,
         AppAccessdeniedComponent,
-        UserListComponent,
         HomeComponent
     ],
     providers: [

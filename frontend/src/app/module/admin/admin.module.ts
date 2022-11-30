@@ -32,12 +32,15 @@ import {SplitButtonModule} from 'primeng/splitbutton';
 import {MessageModule} from 'primeng/message';
 import {MessagesModule} from 'primeng/messages';
 import {SwitchChercheurAdminComponent} from './view/switch_chercheur/switch-chercheur-admin.component';
+import {UserListComponent} from "./user-list/user-list.component";
+import {FileUploadModule} from "primeng/fileupload";
 
 @NgModule({
     declarations: [
         LoginAdminComponent,
         RegisterAdminComponent,
         SwitchChercheurAdminComponent,
+        UserListComponent
     ],
     imports: [
         CommonModule,
@@ -67,6 +70,7 @@ import {SwitchChercheurAdminComponent} from './view/switch_chercheur/switch-cher
         MultiSelectModule,
         KoscAdminModule,
         KoscAdminRoutingModule,
+        FileUploadModule,
     ],
     exports: [
         LoginAdminComponent,

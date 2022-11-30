@@ -238,20 +238,11 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/')
     }
 
-    public afficher24() {
-        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = 24;
-        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = 48;
+    public searchBetweenHour(nbrHeureMin:number, nbrHeureMax:number) {
+        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = nbrHeureMin;
+        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = nbrHeureMax;
     }
 
-    public afficher48() {
-        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = 24;
-        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = 72;
-    }
-
-    public afficher72() {
-        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = 24;
-        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = 96;
-    }
 
     public afficherAll() {
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = null;
@@ -564,15 +555,15 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         this.dateButons = [
             {
                 label: '24h', icon: 'pi pi-check', command: () => {
-                    this.afficher24();
+                    this.searchBetweenHour(24,48);
                 }
             }, {
                 label: '48h', icon: 'pi pi-check', command: () => {
-                    this.afficher48();
+                    this.searchBetweenHour(24,72);
                 }
             }, {
                 label: '72h', icon: 'pi pi-check', command: () => {
-                    this.afficher72();
+                    this.searchBetweenHour(24,96);
 
                 },
             }, {
@@ -599,29 +590,27 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
             // },
             {
                 label: 'Export Kizeo 24', icon: 'pi pi-file-excel', command: async () => {
-                    this.afficher24();
+                    this.searchBetweenHour(24,48);
                     this.searchRequestPriseRdv();
-                    // await this.exporter();
+                   // await this.exporter();
                 }
             },
             {
-                label: 'Export Kizeo 48', icon: 'pi pi-file-excel', command: () => {
-                    this.afficher48();
+                label: 'Export Kizeo 48', icon: 'pi pi-file-excel', command: async () => {
+                    this.searchBetweenHour(24,72);
                     this.searchRequestPriseRdv();
-                    console.log(this.ordreKoscsPriseRdv);
-                    //this.prepareColumnExport();
-                    //this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName) })
+                   // console.log(this.ordreKoscsPriseRdv);
+                   // await this.exporter();
 
 
                 }
             },
             {
                 label: 'Export Kizeo 72', icon: 'pi pi-file-excel', command: () => {
-                    this.afficher72();
+                    this.searchBetweenHour(24,96);
                     this.searchRequestPriseRdv();
                     console.log(this.ordreKoscsPriseRdv);
-                    // this.prepareColumnExport();
-                    // this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName) })
+                    // await this.exporter();
 
 
                 }
