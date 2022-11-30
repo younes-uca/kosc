@@ -124,6 +124,87 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
 
+    displayPriseRdv = false;
+
+    async showPriseRdvDialog() {
+
+                this.displayPriseRdv = true;
+                this.isShown = false;
+                this.isShown1 = false;
+
+    }
+
+    public editEtat(codeEtat: string){
+        let myEtatDemandeKoscVo = this.etatDemandeKoscs.find(e => e.code = codeEtat);
+        this.selectedOrdreKosc.etatDemandeKoscVo = myEtatDemandeKoscVo;
+        this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'Le changement est fait avec succes'});
+        this.editWithShowOption(false);
+        this.displayPriseRdv = false;
+
+    }
+
+    public editPasEncore(ordreKosc: OrdreKoscVo){
+        let date: Date = new Date();
+        if(this.selectedOrdreKosc.datePremierAppel == null){
+            this.selectedOrdreKosc.datePremierAppel = date;
+            this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'Le changement est fait avec succes'});
+        }else if(this.selectedOrdreKosc.dateDeuxiemeAppel == null){
+            if (this.selectedOrdreKosc.datePremierAppel >= date) {
+                this.messageService.add({severity: 'info', summary: 'Remarque', detail: 'Vous avez d\éj\à appel\é ce client aujourd\'hui'});
+            }else{
+                this.selectedOrdreKosc.dateDeuxiemeAppel = date;
+                this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'Le changement est fait avec succes'});
+            }
+        }else if(this.selectedOrdreKosc.dateTroisiemeAppel == null){
+            if(this.selectedOrdreKosc.dateDeuxiemeAppel <= date){
+                this.selectedOrdreKosc.dateTroisiemeAppel = date;
+                this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'Le changement est fait avec succes'});
+            }
+        }else{
+            this.messageService.add({severity: 'info', summary: 'Remarque', detail: 'Le troisi\ème appel est d\éj\à fait !'});
+        }
+        // this.editWithShowOption(false);
+        this.displayPriseRdv = false;
+    }
+
+    public editOui(codeEtat: string){
+        let myEtatDemandeKoscVo = this.etatDemandeKoscs.find(e => e.code = codeEtat);
+        this.selectedOrdreKosc.datePriseRdv = new Date();
+        this.selectedOrdreKosc.etatDemandeKoscVo = myEtatDemandeKoscVo;
+        this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'Le changement est fait avec succes'});
+        this.editWithShowOption(false);
+        this.displayPriseRdv = false;
+    }
+
+
+    public editClientInjoignable() {
+        this.ordreKoscService.updateNonJoignable().subscribe(ordreKosc => {
+                const myIndex = this.ordreKoscs.findIndex(e => e.id === this.selectedOrdreKosc.id);
+                this.ordreKoscs[myIndex] = ordreKosc;
+                this.displayPriseRdv = false;
+            }
+        );
+    }
+
+
+
+    isShown: boolean = false;
+
+    toggleShow() {
+        this.isShown = !this.isShown;
+        this.isShown1 = false;
+
+    }
+
+    isShown1: boolean = false;
+
+    toggleShowOui() {
+        this.isShown1 = !this.isShown1;
+        this.isShown = false;
+    }
+
+
+
     initPalinificationModel(): void {
         this.palinificationModel = [
             {label: 'ConfirmationClient', icon: 'pi pi-file', command: () => this.changeEtat(this.etats[2])},
@@ -724,7 +805,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         this.errorMessages = new Array<string>();
         // this.validateOrdreKoscDateRdv();
         /* this.validateOrdreKoscReferenceWorkOrder();*/
-        //this.validateOrdreKoscDateAppel();
+        this.validateOrdreKoscDateAppel();
 
     }
 
@@ -1326,6 +1407,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     get dateFormat() {
         return environment.dateFormatEdit;
     }
+
 
     get dateFormatColumn() {
         return environment.dateFormatEdit;
