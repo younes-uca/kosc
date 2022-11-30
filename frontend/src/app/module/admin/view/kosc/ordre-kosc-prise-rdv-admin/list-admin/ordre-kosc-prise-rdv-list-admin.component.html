@@ -297,9 +297,11 @@
                             </p-badge>
                         </td>
 
-                        <td><span
+                        <td>
+                            <span *ngIf="ordreKosc.dateDernierAppel"
                                 [style]="stylefyConfort(ordreKosc)">{{ordreKosc.dateDernierAppel | date :'dd/MM/yyyy HH:mm' }}
-                            ({{ordreKosc.numeroDernierAppel}})</span></td>
+                            ({{ordreKosc.numeroDernierAppel}})</span>
+                        </td>
                         <!--                        <td>{{ordreKosc.numeroDernierAppel}}</td>-->
 
 
