@@ -124,7 +124,7 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
                         ordreKosc.setDateEnvoiCri(DateUtil.toDate(todaysDate));
                     }
                     else if(Objects.equals(ordreKosc.getEtatDemandeKosc().getCode(), "ok") && ordreKosc.getCodeDecharge() == null){
-                    ordreKosc.setCodeDecharge(DateUtil.now() + "-" + ordreKosc.getId());
+                    ordreKosc.setCodeDecharge("D"+DateUtil.formateDate("yyMMdd",DateUtil.toDate(todaysDate)) + "-MN" + ordreKosc.getId());
                     ordreKosc.setDateEnvoiCri(DateUtil.toDate(todaysDate));
                     }
                     update(ordreKosc);
