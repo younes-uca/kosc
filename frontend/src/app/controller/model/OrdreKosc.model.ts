@@ -297,4 +297,39 @@ export class OrdreKoscVo {
     public nbrHeureDateSubmissionAndNowMin: number;
     public nbrHeureDateSubmissionAndNowMax: number;
 
+    public objetReportDemandeManeoClientInjoignable: string;
+    public corpsReportDemandeManeoClientInjoignable: string;
+    public fromReportDemandeManeoClientInjoignable: string;
+    public toReportDemandeManeoClientInjoignable: string;
+    public envoyeReportDemandeManeoClientInjoignable: null | boolean;
+    public dateReportDemandeManeoClientInjoignable: Date;
+
+    public objetReportDemandeManeoClientJoignableAccepte: string;
+    public corpsReportDemandeManeoClientJoignableAccepte: string;
+    public fromReportDemandeManeoClientJoignableAccepte: string;
+    public toReportDemandeManeoClientJoignableAccepte: string;
+    public envoyeReportDemandeManeoClientJoignableAccepte: null | boolean;
+    public dateReportDemandeManeoClientJoignableAccepte: Date;
+
+    public objetReportDemandeManeoClientJoignableRefus: string;
+    public corpsReportDemandeManeoClientJoignableRefus: string;
+    public fromReportDemandeManeoClientJoignableRefus: string;
+    public toReportDemandeManeoClientJoignableRefus: string;
+    public envoyeReportDemandeManeoClientJoignableRefus: null | boolean;
+    public dateReportDemandeManeoClientJoignableRefus: Date;
+
+    public objetReportDemandeClientClientInjoignable: string;
+    public corpsReportDemandeClientClientInjoignable: string;
+    public fromReportDemandeClientClientInjoignable: string;
+    public toReportDemandeClientClientInjoignable: string;
+    public envoyeReportDemandeClientClientInjoignable: null | boolean;
+    public dateReportDemandeClientClientInjoignable: Date;
+
+    public objetReportDemandeClientClientJoignable: string;
+    public corpsReportDemandeClientClientJoignable: string;
+    public fromReportDemandeClientClientJoignable: string;
+    public toReportDemandeClientClientJoignable: string;
+    public envoyeReportDemandeClientClientJoignable: null | boolean;
+    public dateReportDemandeClientClientJoignable: Date;
+
 }

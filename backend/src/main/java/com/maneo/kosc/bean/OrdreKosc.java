@@ -618,6 +618,108 @@ public class OrdreKosc {
     @Transient
     private String type;
 
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String objetReportDemandeManeoClientInjoignable;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String corpsReportDemandeManeoClientInjoignable;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String fromReportDemandeManeoClientInjoignable;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private  String toReportDemandeManeoClientInjoignable;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean envoyeReportDemandeManeoClientInjoignable = false;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date dateReportDemandeManeoClientInjoignable;
+
+
+
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String objetReportDemandeManeoClientJoignableAccepte;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private  String corpsReportDemandeManeoClientJoignableAccepte;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String fromReportDemandeManeoClientJoignableAccepte;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String toReportDemandeManeoClientJoignableAccepte;
+    @Column(columnDefinition = "boolean default false")
+
+    private Boolean envoyeReportDemandeManeoClientJoignableAccepte = false;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date dateReportDemandeManeoClientJoignableAccepte;
+
+
+
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String objetReportDemandeManeoClientJoignableRefus;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String corpsReportDemandeManeoClientJoignableRefus;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String fromReportDemandeManeoClientJoignableRefus;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private  String toReportDemandeManeoClientJoignableRefus;
+    @Column(columnDefinition = "boolean default false")
+
+    private Boolean envoyeReportDemandeManeoClientJoignableRefus = false;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private  Date dateReportDemandeManeoClientJoignableRefus;
+
+
+
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String objetReportDemandeClientClientInjoignable;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String corpsReportDemandeClientClientInjoignable;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String fromReportDemandeClientClientInjoignable;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String toReportDemandeClientClientInjoignable;
+    @Column(columnDefinition = "boolean default false")
+
+    private Boolean envoyeReportDemandeClientClientInjoignable = false;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date dateReportDemandeClientClientInjoignable;
+
+
+
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String objetReportDemandeClientClientJoignable;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String corpsReportDemandeClientClientJoignable;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String fromReportDemandeClientClientJoignable;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String toReportDemandeClientClientJoignable;
+    @Column(columnDefinition = "boolean default false")
+
+    private Boolean envoyeReportDemandeClientClientJoignable = false ;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date dateReportDemandeClientClientJoignable;
+
 
     @ManyToOne
     private Operator operator;
@@ -2476,6 +2578,246 @@ public class OrdreKosc {
 
     public void setDateEnvoiAutre(Date dateEnvoiAutre) {
         this.dateEnvoiAutre = dateEnvoiAutre;
+    }
+
+    public String getObjetReportDemandeManeoClientInjoignable() {
+        return objetReportDemandeManeoClientInjoignable;
+    }
+
+    public void setObjetReportDemandeManeoClientInjoignable(String objetReportDemandeManeoClientInjoignable) {
+        this.objetReportDemandeManeoClientInjoignable = objetReportDemandeManeoClientInjoignable;
+    }
+
+    public String getCorpsReportDemandeManeoClientInjoignable() {
+        return corpsReportDemandeManeoClientInjoignable;
+    }
+
+    public void setCorpsReportDemandeManeoClientInjoignable(String corpsReportDemandeManeoClientInjoignable) {
+        this.corpsReportDemandeManeoClientInjoignable = corpsReportDemandeManeoClientInjoignable;
+    }
+
+    public String getFromReportDemandeManeoClientInjoignable() {
+        return fromReportDemandeManeoClientInjoignable;
+    }
+
+    public void setFromReportDemandeManeoClientInjoignable(String fromReportDemandeManeoClientInjoignable) {
+        this.fromReportDemandeManeoClientInjoignable = fromReportDemandeManeoClientInjoignable;
+    }
+
+    public String getToReportDemandeManeoClientInjoignable() {
+        return toReportDemandeManeoClientInjoignable;
+    }
+
+    public void setToReportDemandeManeoClientInjoignable(String toReportDemandeManeoClientInjoignable) {
+        this.toReportDemandeManeoClientInjoignable = toReportDemandeManeoClientInjoignable;
+    }
+
+    public Boolean getEnvoyeReportDemandeManeoClientInjoignable() {
+        return envoyeReportDemandeManeoClientInjoignable;
+    }
+
+    public void setEnvoyeReportDemandeManeoClientInjoignable(Boolean envoyeReportDemandeManeoClientInjoignable) {
+        this.envoyeReportDemandeManeoClientInjoignable = envoyeReportDemandeManeoClientInjoignable;
+    }
+
+    public Date getDateReportDemandeManeoClientInjoignable() {
+        return dateReportDemandeManeoClientInjoignable;
+    }
+
+    public void setDateReportDemandeManeoClientInjoignable(Date dateReportDemandeManeoClientInjoignable) {
+        this.dateReportDemandeManeoClientInjoignable = dateReportDemandeManeoClientInjoignable;
+    }
+
+    public String getObjetReportDemandeManeoClientJoignableAccepte() {
+        return objetReportDemandeManeoClientJoignableAccepte;
+    }
+
+    public void setObjetReportDemandeManeoClientJoignableAccepte(String objetReportDemandeManeoClientJoignableAccepte) {
+        this.objetReportDemandeManeoClientJoignableAccepte = objetReportDemandeManeoClientJoignableAccepte;
+    }
+
+    public String getCorpsReportDemandeManeoClientJoignableAccepte() {
+        return corpsReportDemandeManeoClientJoignableAccepte;
+    }
+
+    public void setCorpsReportDemandeManeoClientJoignableAccepte(String corpsReportDemandeManeoClientJoignableAccepte) {
+        this.corpsReportDemandeManeoClientJoignableAccepte = corpsReportDemandeManeoClientJoignableAccepte;
+    }
+
+    public String getFromReportDemandeManeoClientJoignableAccepte() {
+        return fromReportDemandeManeoClientJoignableAccepte;
+    }
+
+    public void setFromReportDemandeManeoClientJoignableAccepte(String fromReportDemandeManeoClientJoignableAccepte) {
+        this.fromReportDemandeManeoClientJoignableAccepte = fromReportDemandeManeoClientJoignableAccepte;
+    }
+
+    public String getToReportDemandeManeoClientJoignableAccepte() {
+        return toReportDemandeManeoClientJoignableAccepte;
+    }
+
+    public void setToReportDemandeManeoClientJoignableAccepte(String toReportDemandeManeoClientJoignableAccepte) {
+        this.toReportDemandeManeoClientJoignableAccepte = toReportDemandeManeoClientJoignableAccepte;
+    }
+
+    public Boolean getEnvoyeReportDemandeManeoClientJoignableAccepte() {
+        return envoyeReportDemandeManeoClientJoignableAccepte;
+    }
+
+    public void setEnvoyeReportDemandeManeoClientJoignableAccepte(Boolean envoyeReportDemandeManeoClientJoignableAccepte) {
+        this.envoyeReportDemandeManeoClientJoignableAccepte = envoyeReportDemandeManeoClientJoignableAccepte;
+    }
+
+    public Date getDateReportDemandeManeoClientJoignableAccepte() {
+        return dateReportDemandeManeoClientJoignableAccepte;
+    }
+
+    public void setDateReportDemandeManeoClientJoignableAccepte(Date dateReportDemandeManeoClientJoignableAccepte) {
+        this.dateReportDemandeManeoClientJoignableAccepte = dateReportDemandeManeoClientJoignableAccepte;
+    }
+
+    public String getObjetReportDemandeManeoClientJoignableRefus() {
+        return objetReportDemandeManeoClientJoignableRefus;
+    }
+
+    public void setObjetReportDemandeManeoClientJoignableRefus(String objetReportDemandeManeoClientJoignableRefus) {
+        this.objetReportDemandeManeoClientJoignableRefus = objetReportDemandeManeoClientJoignableRefus;
+    }
+
+    public String getCorpsReportDemandeManeoClientJoignableRefus() {
+        return corpsReportDemandeManeoClientJoignableRefus;
+    }
+
+    public void setCorpsReportDemandeManeoClientJoignableRefus(String corpsReportDemandeManeoClientJoignableRefus) {
+        this.corpsReportDemandeManeoClientJoignableRefus = corpsReportDemandeManeoClientJoignableRefus;
+    }
+
+    public String getFromReportDemandeManeoClientJoignableRefus() {
+        return fromReportDemandeManeoClientJoignableRefus;
+    }
+
+    public void setFromReportDemandeManeoClientJoignableRefus(String fromReportDemandeManeoClientJoignableRefus) {
+        this.fromReportDemandeManeoClientJoignableRefus = fromReportDemandeManeoClientJoignableRefus;
+    }
+
+    public String getToReportDemandeManeoClientJoignableRefus() {
+        return toReportDemandeManeoClientJoignableRefus;
+    }
+
+    public void setToReportDemandeManeoClientJoignableRefus(String toReportDemandeManeoClientJoignableRefus) {
+        this.toReportDemandeManeoClientJoignableRefus = toReportDemandeManeoClientJoignableRefus;
+    }
+
+    public Boolean getEnvoyeReportDemandeManeoClientJoignableRefus() {
+        return envoyeReportDemandeManeoClientJoignableRefus;
+    }
+
+    public void setEnvoyeReportDemandeManeoClientJoignableRefus(Boolean envoyeReportDemandeManeoClientJoignableRefus) {
+        this.envoyeReportDemandeManeoClientJoignableRefus = envoyeReportDemandeManeoClientJoignableRefus;
+    }
+
+    public Date getDateReportDemandeManeoClientJoignableRefus() {
+        return dateReportDemandeManeoClientJoignableRefus;
+    }
+
+    public void setDateReportDemandeManeoClientJoignableRefus(Date dateReportDemandeManeoClientJoignableRefus) {
+        this.dateReportDemandeManeoClientJoignableRefus = dateReportDemandeManeoClientJoignableRefus;
+    }
+
+    public String getObjetReportDemandeClientClientInjoignable() {
+        return objetReportDemandeClientClientInjoignable;
+    }
+
+    public void setObjetReportDemandeClientClientInjoignable(String objetReportDemandeClientClientInjoignable) {
+        this.objetReportDemandeClientClientInjoignable = objetReportDemandeClientClientInjoignable;
+    }
+
+    public String getCorpsReportDemandeClientClientInjoignable() {
+        return corpsReportDemandeClientClientInjoignable;
+    }
+
+    public void setCorpsReportDemandeClientClientInjoignable(String corpsReportDemandeClientClientInjoignable) {
+        this.corpsReportDemandeClientClientInjoignable = corpsReportDemandeClientClientInjoignable;
+    }
+
+    public String getFromReportDemandeClientClientInjoignable() {
+        return fromReportDemandeClientClientInjoignable;
+    }
+
+    public void setFromReportDemandeClientClientInjoignable(String fromReportDemandeClientClientInjoignable) {
+        this.fromReportDemandeClientClientInjoignable = fromReportDemandeClientClientInjoignable;
+    }
+
+    public String getToReportDemandeClientClientInjoignable() {
+        return toReportDemandeClientClientInjoignable;
+    }
+
+    public void setToReportDemandeClientClientInjoignable(String toReportDemandeClientClientInjoignable) {
+        this.toReportDemandeClientClientInjoignable = toReportDemandeClientClientInjoignable;
+    }
+
+    public Boolean getEnvoyeReportDemandeClientClientInjoignable() {
+        return envoyeReportDemandeClientClientInjoignable;
+    }
+
+    public void setEnvoyeReportDemandeClientClientInjoignable(Boolean envoyeReportDemandeClientClientInjoignable) {
+        this.envoyeReportDemandeClientClientInjoignable = envoyeReportDemandeClientClientInjoignable;
+    }
+
+    public Date getDateReportDemandeClientClientInjoignable() {
+        return dateReportDemandeClientClientInjoignable;
+    }
+
+    public void setDateReportDemandeClientClientInjoignable(Date dateReportDemandeClientClientInjoignable) {
+        this.dateReportDemandeClientClientInjoignable = dateReportDemandeClientClientInjoignable;
+    }
+
+    public String getObjetReportDemandeClientClientJoignable() {
+        return objetReportDemandeClientClientJoignable;
+    }
+
+    public void setObjetReportDemandeClientClientJoignable(String objetReportDemandeClientClientJoignable) {
+        this.objetReportDemandeClientClientJoignable = objetReportDemandeClientClientJoignable;
+    }
+
+    public String getCorpsReportDemandeClientClientJoignable() {
+        return corpsReportDemandeClientClientJoignable;
+    }
+
+    public void setCorpsReportDemandeClientClientJoignable(String corpsReportDemandeClientClientJoignable) {
+        this.corpsReportDemandeClientClientJoignable = corpsReportDemandeClientClientJoignable;
+    }
+
+    public String getFromReportDemandeClientClientJoignable() {
+        return fromReportDemandeClientClientJoignable;
+    }
+
+    public void setFromReportDemandeClientClientJoignable(String fromReportDemandeClientClientJoignable) {
+        this.fromReportDemandeClientClientJoignable = fromReportDemandeClientClientJoignable;
+    }
+
+    public String getToReportDemandeClientClientJoignable() {
+        return toReportDemandeClientClientJoignable;
+    }
+
+    public void setToReportDemandeClientClientJoignable(String toReportDemandeClientClientJoignable) {
+        this.toReportDemandeClientClientJoignable = toReportDemandeClientClientJoignable;
+    }
+
+    public Boolean getEnvoyeReportDemandeClientClientJoignable() {
+        return envoyeReportDemandeClientClientJoignable;
+    }
+
+    public void setEnvoyeReportDemandeClientClientJoignable(Boolean envoyeReportDemandeClientClientJoignable) {
+        this.envoyeReportDemandeClientClientJoignable = envoyeReportDemandeClientClientJoignable;
+    }
+
+    public Date getDateReportDemandeClientClientJoignable() {
+        return dateReportDemandeClientClientJoignable;
+    }
+
+    public void setDateReportDemandeClientClientJoignable(Date dateReportDemandeClientClientJoignable) {
+        this.dateReportDemandeClientClientJoignable = dateReportDemandeClientClientJoignable;
     }
 }
 
