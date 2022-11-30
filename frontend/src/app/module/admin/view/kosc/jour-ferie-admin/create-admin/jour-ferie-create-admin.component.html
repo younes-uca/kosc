@@ -17,7 +17,7 @@
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="2">Date debut<span style="color: red;">*</span></label>
-                        <p-calendar id="2" [showTime]="true" [showSeconds]="false"
+                        <p-calendar id="2" [showTime]="false" [showSeconds]="false"
                                     placeholder="Date debut" [(ngModel)]="selectedJourFerie.dateDebut"
                                     dateFormat="{{dateFormat}}"
                                     [ngClass]="{'ng-invalid ng-dirty' : !validJourFerieDateDebut}">
@@ -30,7 +30,7 @@
                         <label for="3">Date fin<span style="color: red;">*</span></label>
                         <p-calendar [(ngModel)]="selectedJourFerie.dateFin"
                                     [ngClass]="{'ng-invalid ng-dirty' : !validJourFerieDateFin}" [showSeconds]="false"
-                                    [showTime]="true" dateFormat="{{dateFormat}}"
+                                    [showTime]="false" dateFormat="{{dateFormat}}"
                                     id="3"
                                     placeholder="Date fin">
                         </p-calendar>

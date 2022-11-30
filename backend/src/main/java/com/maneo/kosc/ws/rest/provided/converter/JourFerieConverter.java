@@ -22,9 +22,9 @@ public class JourFerieConverter extends AbstractConverter<JourFerie, JourFerieVo
             if (StringUtil.isNotEmpty(vo.getId()))
                 item.setId(NumberUtil.toLong(vo.getId()));
             if (StringUtil.isNotEmpty(vo.getDateDebut()))
-                item.setDateDebut(DateUtil.parseTimestampUniversalFormat(vo.getDateDebut()));
+                item.setDateDebut(DateUtil.parseTime(vo.getDateDebut()));
             if (StringUtil.isNotEmpty(vo.getDateFin()))
-                item.setDateFin(DateUtil.parseTimestampUniversalFormat(vo.getDateFin()));
+                item.setDateFin(DateUtil.parseTime(vo.getDateFin()));
             if (StringUtil.isNotEmpty(vo.getLibelle()))
                 item.setLibelle(vo.getLibelle());
            
