@@ -167,15 +167,76 @@
                                     placeholder="Template email cri">
                         </p-dropdown>
                     </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="15">Template email report demande maneo client injoignable</label>
+                        <p-dropdown [(ngModel)]="selectedDefaultTemplateConfiguration.templateEmailReportDemandeManeoClientInjoignableVo"
+                                    [disabled]="true"
+                                    [filter]="true"
+                                    [options]="templateEmailReportDemandeManeoClientInjoignables" [showClear]="true" filterMatchMode="contains"
+                                    id="15"
+                                    optionLabel="libelle"
+                                    placeholder="Template email report demande maneo client injoignable">
+                        </p-dropdown>
+
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="16">Template email report demande maneo client joignable accepte</label>
+                        <p-dropdown [(ngModel)]="selectedDefaultTemplateConfiguration.templateEmailReportDemandeManeoClientJoignableAccepteVo"
+                                    [disabled]="true"
+                                    [filter]="true"
+                                    [options]="templateEmailReportDemandeManeoClientJoignableAcceptes" [showClear]="true" filterMatchMode="contains"
+                                    id="16"
+                                    optionLabel="libelle"
+                                    placeholder="Template email report demande maneo client joignable accepte">
+                        </p-dropdown>
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="17">Template email report demande maneo client joignable refus</label>
+                        <p-dropdown [(ngModel)]="selectedDefaultTemplateConfiguration.templateEmailReportDemandeManeoClientJoignableRefusVo"
+                                    [disabled]="true"
+                                    [filter]="true"
+                                    [options]="templateEmailReportDemandeManeoClientJoignableRefuss" [showClear]="true" filterMatchMode="contains"
+                                    id="17"
+                                    optionLabel="libelle"
+                                    placeholder="Template email report demande maneo client joignable refus">
+                        </p-dropdown>
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="18">Template email report demande client client injoignable</label>
+                        <p-dropdown [(ngModel)]="selectedDefaultTemplateConfiguration.templateEmailReportDemandeClientClientInjoignableVo"
+                                    [disabled]="true"
+                                    [filter]="true"
+                                    [options]="templateEmailReportDemandeClientClientInjoignables" [showClear]="true" filterMatchMode="contains"
+                                    id="18"
+                                    optionLabel="libelle"
+                                    placeholder="Template email report demande client client injoignable">
+                        </p-dropdown>
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="19">Template email report demande client client joignable</label>
+                        <p-dropdown [(ngModel)]="selectedDefaultTemplateConfiguration.templateEmailReportDemandeClientClientJoignableVo"
+                                    [disabled]="true"
+                                    [filter]="true"
+                                    [options]="templateEmailReportDemandeClientClientJoignables" [showClear]="true" filterMatchMode="contains"
+                                    id="19"
+                                    optionLabel="libelle"
+                                    placeholder="Template email report demande client client joignable">
+                        </p-dropdown>
+
+                    </div>
 
 
                     <div class="p-field align-inputswitch p-col-12  p-md-3">
                         <div class="label-inputswitch">
-                            <label for="15">Enabled</label>
+                            <label for="20">Enabled</label>
                         </div>
                         <div class="input-switch">
                             <p-inputSwitch [(ngModel)]="selectedDefaultTemplateConfiguration.enabled" [disabled]="true"
-                                           id="15"></p-inputSwitch>
+                                           id="20"></p-inputSwitch>
                         </div>
                     </div>
 
