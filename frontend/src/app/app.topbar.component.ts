@@ -5,6 +5,7 @@ import {User} from './controller/model/User.model';
 import {AuthService} from './controller/service/Auth.service';
 import {ChercheurVo} from './controller/model/Chercheur.model';
 import {ChercheurService} from './controller/service/Chercheur.service';
+import {Router, RouterLink} from "@angular/router";
 
 @Component({
     selector: 'app-topbar',
@@ -14,7 +15,7 @@ export class AppTopBarComponent {
 
     roleAdmin = false;
 
-    constructor(public app: AppComponent, public appMain: AppMainComponent, private authService: AuthService, private chercheurService: ChercheurService) {
+    constructor(public app: AppComponent, public appMain: AppMainComponent, private authService: AuthService, private chercheurService: ChercheurService,private router:Router) {
     }
 
     get switchChercheurDialog(): boolean {
@@ -51,5 +52,9 @@ export class AppTopBarComponent {
 
     logout() {
         this.authService.logout();
+    }
+
+    ManageUsers(){
+        this.router.navigate(['admin/user']);
     }
 }

@@ -2,18 +2,24 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {User} from '../model/User.model';
 import {environment} from '../../../environments/environment';
+import {RoleService} from "./role.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
+
     // declarations
-    readonly API = environment.apiUrl;
-
-    constructor(private http: HttpClient) {
-    }
-
+    API = environment.apiUrl+"users/";
+    private role$: any;
     private _users: User[] = [];
+
+    constructor(private http: HttpClient,private roleService:RoleService) {
+        this.role$ = this.roleService.role$;
+        this.role$.subscribe(role => {
+            this.API = environment.apiUrl + role.toLowerCase() + '/users/';
+        });
+    }
 
     // getters and setters
     get users(): User[] {
@@ -74,7 +80,7 @@ export class UserService {
     }
 
     save(user: User) {
-        this.http.post<User>(this.API + "save", user).subscribe(user => {
+        this.http.post<User>(this.API +"save", user).subscribe(user => {
             this._users = [...this._users, user];
         }, (error: HttpErrorResponse) => {
             console.log(error.error)
