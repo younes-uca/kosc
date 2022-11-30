@@ -190,11 +190,9 @@ public class DateUtil {
 
     }
 
-//    public static long calculerDifference(Date startDate, Date endDate){
+//    public static long calculerDifference(LocalDate startDate, LocalDate endDate){
 //
-//
-//        //milliseconds
-//        long different =  startDate.getTime() - endDate.getTime();
+//        long different =  endDate.now() - startDate.now();
 //
 //        long secondsInMilli = 1000;
 //        long minutesInMilli = secondsInMilli * 60;
@@ -207,12 +205,12 @@ public class DateUtil {
 //
 //
 //
-//        for (Date date = endDate; date.before(startDate); LocalDateTime.from(date.toInstant()).plusDays(1))  {
+//        for (LocalDate date = startDate; date.compareTo(endDate) <= 0; date = date.plusDays(1)  {
 //            boolean cd = isWeekEnd(endDate);
-//            if( cd == false ){
+//            if( !isWeekEnd(endDate) ){
 //                elapsedDays = different / daysInMilli;
 //                different = (different % daysInMilli);
-
+//
 //                elapsedHours = elapsedDays * 24 + different / hoursInMilli;
 //            } else {
 //            }
@@ -230,15 +228,18 @@ public class DateUtil {
 
 
     public static LocalDate convert(Date dateToConvert) {
-        return dateToConvert.toInstant()
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate();
+        String pattern = "dd/MM/yyyy";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+
+        String dateAsString = formateDate(pattern, dateToConvert);
+        LocalDate localDate = LocalDate.parse(dateAsString, formatter);
+        return localDate;
     }
 
     public static Date convert(LocalDate localDate) {
         return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-
     }
+
     public static int diff(Date firstDate, Date secondDate) {
         long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
         long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
