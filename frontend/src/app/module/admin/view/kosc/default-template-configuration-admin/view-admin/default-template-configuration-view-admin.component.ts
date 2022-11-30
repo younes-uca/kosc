@@ -34,6 +34,36 @@ import {TemplateEmailClientInjoinableVo} from 'src/app/controller/model/Template
 import {TemplateEmailClientInjoinableService} from 'src/app/controller/service/TemplateEmailClientInjoinable.service';
 import {TemplateEmailCriVo} from 'src/app/controller/model/TemplateEmailCri.model';
 import {TemplateEmailCriService} from 'src/app/controller/service/TemplateEmailCri.service';
+import {
+    TemplateEmailReportDemandeManeoClientInjoignableVo
+} from "../../../../../../controller/model/TemplateEmailReportDemandeManeoClientInjoignable.model";
+import {
+    TemplateEmailReportDemandeManeoClientJoignableAccepteVo
+} from "../../../../../../controller/model/TemplateEmailReportDemandeManeoClientJoignableAccepte.model";
+import {
+    TemplateEmailReportDemandeManeoClientJoignableRefusVo
+} from "../../../../../../controller/model/TemplateEmailReportDemandeManeoClientJoignableRefus.model";
+import {
+    TemplateEmailReportDemandeClientClientInjoignableVo
+} from "../../../../../../controller/model/TemplateEmailReportDemandeClientClientInjoignable.model";
+import {
+    TemplateEmailReportDemandeClientClientJoignableVo
+} from "../../../../../../controller/model/TemplateEmailReportDemandeClientClientJoignable.model";
+import {
+    TemplateEmailReportDemandeManeoClientInjoignableService
+} from "../../../../../../controller/service/TemplateEmailReportDemandeManeoClientInjoignable.service";
+import {
+    TemplateEmailReportDemandeManeoClientJoignableAccepteService
+} from "../../../../../../controller/service/TemplateEmailReportDemandeManeoClientJoignableAccepte.service";
+import {
+    TemplateEmailReportDemandeManeoClientJoignableRefusService
+} from "../../../../../../controller/service/TemplateEmailReportDemandeManeoClientJoignableRefus.service";
+import {
+    TemplateEmailReportDemandeClientClientInjoignableService
+} from "../../../../../../controller/service/TemplateEmailReportDemandeClientClientInjoignable.service";
+import {
+    TemplateEmailReportDemandeClientClientJoignableService
+} from "../../../../../../controller/service/TemplateEmailReportDemandeClientClientJoignable.service";
 
 @Component({
     selector: 'app-default-template-configuration-view-admin',
@@ -59,6 +89,12 @@ export class DefaultTemplateConfigurationViewAdminComponent implements OnInit {
         , private templateEmailMauvaisContactService: TemplateEmailMauvaisContactService
         , private templateEmailClientInjoinableService: TemplateEmailClientInjoinableService
         , private templateEmailCriService: TemplateEmailCriService
+        , private templateEmailReportDemandeManeoClientInjoignableService: TemplateEmailReportDemandeManeoClientInjoignableService
+        , private templateEmailReportDemandeManeoClientJoignableAccepteService: TemplateEmailReportDemandeManeoClientJoignableAccepteService
+        , private templateEmailReportDemandeManeoClientJoignableRefusService: TemplateEmailReportDemandeManeoClientJoignableRefusService
+        , private templateEmailReportDemandeClientClientInjoignableService: TemplateEmailReportDemandeClientClientInjoignableService
+        , private templateEmailReportDemandeClientClientJoignableService: TemplateEmailReportDemandeClientClientJoignableService
+
     ) {
     }
 
@@ -376,6 +412,122 @@ export class DefaultTemplateConfigurationViewAdminComponent implements OnInit {
     set editTemplateEmailClientInjoinableKoscDialog(value: boolean) {
         this.templateEmailClientInjoinableKoscService.editTemplateEmailClientInjoinableKoscDialog = value;
     }
+    get templateEmailReportDemandeClientClientInjoignables(): Array<TemplateEmailReportDemandeClientClientInjoignableVo> {
+        return this.templateEmailReportDemandeClientClientInjoignableService.templateEmailReportDemandeClientClientInjoignables;
+    }
+
+    set templateEmailReportDemandeClientClientInjoignables(value: Array<TemplateEmailReportDemandeClientClientInjoignableVo>) {
+        this.templateEmailReportDemandeClientClientInjoignableService.templateEmailReportDemandeClientClientInjoignables = value;
+    }
+
+    get selectedTemplateEmailReportDemandeClientClientInjoignable(): TemplateEmailReportDemandeClientClientInjoignableVo {
+
+        return this.templateEmailReportDemandeClientClientInjoignableService.selectedTemplateEmailReportDemandeClientClientInjoignable;
+    }
+
+    set selectedTemplateEmailReportDemandeClientClientInjoignable(value: TemplateEmailReportDemandeClientClientInjoignableVo) {
+        this.templateEmailReportDemandeClientClientInjoignableService.selectedTemplateEmailReportDemandeClientClientInjoignable = value;
+    }
+    get editTemplateEmailReportDemandeClientClientInjoignableDialog(): boolean {
+        return this.templateEmailReportDemandeClientClientInjoignableService.createTemplateEmailReportDemandeClientClientInjoignableDialog;
+    }
+
+    set editTemplateEmailReportDemandeClientClientInjoignableDialog(value: boolean) {
+        this.templateEmailReportDemandeClientClientInjoignableService.createTemplateEmailReportDemandeClientClientInjoignableDialog = value;
+    }
+    get templateEmailReportDemandeClientClientJoignables(): Array<TemplateEmailReportDemandeClientClientJoignableVo> {
+        return this.templateEmailReportDemandeClientClientJoignableService.templateEmailReportDemandeClientClientJoignables;
+    }
+
+    set templateEmailReportDemandeClientClientJoignables(value: Array<TemplateEmailReportDemandeClientClientJoignableVo>) {
+        this.templateEmailReportDemandeClientClientJoignableService.templateEmailReportDemandeClientClientJoignables = value;
+    }
+
+    get selectedTemplateEmailReportDemandeClientClientJoignable(): TemplateEmailReportDemandeClientClientJoignableVo {
+        return this.templateEmailReportDemandeClientClientJoignableService.selectedTemplateEmailReportDemandeClientClientJoignable;
+    }
+
+    set selectedTemplateEmailReportDemandeClientClientJoignable(value: TemplateEmailReportDemandeClientClientJoignableVo) {
+        this.templateEmailReportDemandeClientClientJoignableService.selectedTemplateEmailReportDemandeClientClientJoignable = value;
+    }
+
+    get editTemplateEmailReportDemandeClientClientJoignableDialog(): boolean {
+        return this.templateEmailReportDemandeClientClientJoignableService.createTemplateEmailReportDemandeClientClientJoignableDialog;
+    }
+
+    set editTemplateEmailReportDemandeClientClientJoignableDialog(value: boolean) {
+        this.templateEmailReportDemandeClientClientJoignableService.createTemplateEmailReportDemandeClientClientJoignableDialog = value;
+    }
+    get templateEmailReportDemandeManeoClientInjoignables(): Array<TemplateEmailReportDemandeManeoClientInjoignableVo> {
+        return this.templateEmailReportDemandeManeoClientInjoignableService.templateEmailReportDemandeManeoClientInjoignables;
+    }
+
+    set templateEmailReportDemandeManeoClientInjoignables(value: Array<TemplateEmailReportDemandeManeoClientInjoignableVo>) {
+        this.templateEmailReportDemandeManeoClientInjoignableService.templateEmailReportDemandeManeoClientInjoignables = value;
+    }
+
+    get selectedTemplateEmailReportDemandeManeoClientInjoignable(): TemplateEmailReportDemandeManeoClientInjoignableVo {
+        return this.templateEmailReportDemandeManeoClientInjoignableService.selectedTemplateEmailReportDemandeManeoClientInjoignable;
+    }
+
+    set selectedTemplateEmailReportDemandeManeoClientInjoignable(value: TemplateEmailReportDemandeManeoClientInjoignableVo) {
+        this.templateEmailReportDemandeManeoClientInjoignableService.selectedTemplateEmailReportDemandeManeoClientInjoignable = value;
+    }
+    get editTemplateEmailReportDemandeManeoClientInjoignableDialog(): boolean {
+        return this.templateEmailReportDemandeManeoClientInjoignableService.createTemplateEmailReportDemandeManeoClientInjoignableDialog;
+    }
+
+    set editTemplateEmailReportDemandeManeoClientInjoignableDialog(value: boolean) {
+        this.templateEmailReportDemandeManeoClientInjoignableService.createTemplateEmailReportDemandeManeoClientInjoignableDialog = value;
+    }
+
+    get templateEmailReportDemandeManeoClientJoignableAcceptes(): Array<TemplateEmailReportDemandeManeoClientJoignableAccepteVo> {
+
+        return this.templateEmailReportDemandeManeoClientJoignableAccepteService.templateEmailReportDemandeManeoClientJoignableAcceptes;
+    }
+
+    set templateEmailReportDemandeManeoClientJoignableAcceptes(value: Array<TemplateEmailReportDemandeManeoClientJoignableAccepteVo>) {
+        this.templateEmailReportDemandeManeoClientJoignableAccepteService.templateEmailReportDemandeManeoClientJoignableAcceptes = value;
+    }
+
+    get selectedTemplateEmailReportDemandeManeoClientJoignableAccepte(): TemplateEmailReportDemandeManeoClientJoignableAccepteVo {
+        return this.templateEmailReportDemandeManeoClientJoignableAccepteService.selectedTemplateEmailReportDemandeManeoClientJoignableAccepte;
+    }
+
+    set selectedTemplateEmailReportDemandeManeoClientJoignableAccepte(value: TemplateEmailReportDemandeManeoClientJoignableAccepteVo) {
+        this.templateEmailReportDemandeManeoClientJoignableAccepteService.selectedTemplateEmailReportDemandeManeoClientJoignableAccepte = value;
+    }
+    get editTemplateEmailReportDemandeManeoClientJoignableAccepteDialog(): boolean {
+        return this.templateEmailReportDemandeManeoClientJoignableAccepteService.createTemplateEmailReportDemandeManeoClientJoignableAccepteDialog;
+    }
+
+    set editTemplateEmailReportDemandeManeoClientJoignableAccepteDialog(value: boolean) {
+        this.templateEmailReportDemandeManeoClientJoignableAccepteService.createTemplateEmailReportDemandeManeoClientJoignableAccepteDialog = value;
+    }
+    get templateEmailReportDemandeManeoClientJoignableRefuss(): Array<TemplateEmailReportDemandeManeoClientJoignableRefusVo> {
+        return this.templateEmailReportDemandeManeoClientJoignableRefusService.templateEmailReportDemandeManeoClientJoignableRefuss;
+    }
+
+    set templateEmailReportDemandeManeoClientJoignableRefuss(value: Array<TemplateEmailReportDemandeManeoClientJoignableRefusVo>) {
+        this.templateEmailReportDemandeManeoClientJoignableRefusService.templateEmailReportDemandeManeoClientJoignableRefuss = value;
+    }
+
+    get selectedTemplateEmailReportDemandeManeoClientJoignableRefus(): TemplateEmailReportDemandeManeoClientJoignableRefusVo {
+        return this.templateEmailReportDemandeManeoClientJoignableRefusService.selectedTemplateEmailReportDemandeManeoClientJoignableRefus;
+    }
+
+    set selectedTemplateEmailReportDemandeManeoClientJoignableRefus(value: TemplateEmailReportDemandeManeoClientJoignableRefusVo) {
+        this.templateEmailReportDemandeManeoClientJoignableRefusService.selectedTemplateEmailReportDemandeManeoClientJoignableRefus = value;
+    }
+
+    get editTemplateEmailReportDemandeManeoClientJoignableRefusDialog(): boolean {
+        return this.templateEmailReportDemandeManeoClientJoignableRefusService.createTemplateEmailReportDemandeManeoClientJoignableRefusDialog;
+    }
+
+    set editTemplateEmailReportDemandeManeoClientJoignableRefusDialog(value: boolean) {
+        this.templateEmailReportDemandeManeoClientJoignableRefusService.createTemplateEmailReportDemandeManeoClientJoignableRefusDialog = value;
+    }
+
 
     get dateFormat() {
         return environment.dateFormatView;
@@ -411,6 +563,21 @@ export class DefaultTemplateConfigurationViewAdminComponent implements OnInit {
         this.templateEmailMauvaisContactService.findAll().subscribe((data) => this.templateEmailMauvaisContacts = data);
         this.selectedTemplateEmailCri = new TemplateEmailCriVo();
         this.templateEmailCriService.findAll().subscribe((data) => this.templateEmailCris = data);
+        this.selectedTemplateEmailReportDemandeManeoClientInjoignable = new TemplateEmailReportDemandeManeoClientInjoignableVo();
+        this.templateEmailReportDemandeManeoClientInjoignableService.findAll().subscribe((data) => this.templateEmailReportDemandeManeoClientInjoignables = data);
+
+        this.selectedTemplateEmailReportDemandeManeoClientJoignableAccepte = new TemplateEmailReportDemandeManeoClientJoignableAccepteVo();
+        this.templateEmailReportDemandeManeoClientJoignableAccepteService.findAll().subscribe((data) => this.templateEmailReportDemandeManeoClientJoignableAcceptes = data);
+
+        this.selectedTemplateEmailReportDemandeManeoClientJoignableRefus = new TemplateEmailReportDemandeManeoClientJoignableRefusVo();
+        this.templateEmailReportDemandeManeoClientJoignableRefusService.findAll().subscribe((data) => this.templateEmailReportDemandeManeoClientJoignableRefuss = data);
+
+        this.selectedTemplateEmailReportDemandeClientClientInjoignable = new TemplateEmailReportDemandeClientClientInjoignableVo();
+        this.templateEmailReportDemandeClientClientInjoignableService.findAll().subscribe((data) => this.templateEmailReportDemandeClientClientInjoignables = data);
+
+        this.selectedTemplateEmailReportDemandeClientClientJoignable = new TemplateEmailReportDemandeClientClientJoignableVo();
+        this.templateEmailReportDemandeClientClientJoignableService.findAll().subscribe((data) => this.templateEmailReportDemandeClientClientJoignables = data);
+
     }
 
     hideViewDialog() {

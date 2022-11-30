@@ -1,11 +1,13 @@
 package com.maneo.kosc.ws.rest.provided.converter;
 
-import com.maneo.kosc.bean.DefaultTemplateConfiguration;
+import com.maneo.kosc.bean.*;
 import com.maneo.kosc.service.util.NumberUtil;
 import com.maneo.kosc.service.util.StringUtil;
 import com.maneo.kosc.ws.rest.provided.vo.DefaultTemplateConfigurationVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.persistence.ManyToOne;
 
 @Component
 public class DefaultTemplateConfigurationConverter extends AbstractConverter<DefaultTemplateConfiguration, DefaultTemplateConfigurationVo> {
@@ -34,6 +36,21 @@ public class DefaultTemplateConfigurationConverter extends AbstractConverter<Def
     private TemplateEmailClientInjoinableConverter templateEmailClientInjoinableConverter;
     @Autowired
     private TemplateEmailCriConverter templateEmailCriConverter;
+
+    @Autowired
+    private TemplateEmailReportDemandeManeoClientInjoignableConverter templateEmailReportDemandeManeoClientInjoignableConverter;
+
+    @Autowired
+    private TemplateEmailReportDemandeManeoClientJoignableAccepteConverter templateEmailReportDemandeManeoClientJoignableAccepteConverter;
+
+    @Autowired
+    private TemplateEmailReportDemandeManeoClientJoignableRefusConverter templateEmailReportDemandeManeoClientJoignableRefusConverter;
+
+    @Autowired
+    private TemplateEmailReportDemandeClientClientJoignableConverter templateEmailReportDemandeClientClientJoignableConverter;
+
+    @Autowired
+    private TemplateEmailReportDemandeClientClientInjoignableConverter templateEmailReportDemandeClientClientInjoignableConverter;
     private Boolean templateEmailFtl;
     private Boolean templateEmailCloture;
     private Boolean templateSuivi;
@@ -46,6 +63,17 @@ public class DefaultTemplateConfigurationConverter extends AbstractConverter<Def
     private Boolean templateEmailConfirmationClient;
     private Boolean templateEmailMauvaisContact;
     private Boolean templateEmailCri;
+
+    private Boolean templateEmailReportDemandeManeoClientInjoignable;
+
+    private Boolean templateEmailReportDemandeManeoClientJoignableAccepte;
+
+    private Boolean templateEmailReportDemandeManeoClientJoignableRefus;
+
+    private Boolean templateEmailReportDemandeClientClientJoignable;
+
+    private Boolean templateEmailReportDemandeClientClientInjoignable;
+
 
     public DefaultTemplateConfigurationConverter() {
         init(true);
@@ -89,6 +117,22 @@ public class DefaultTemplateConfigurationConverter extends AbstractConverter<Def
                 item.setTemplateEmailMauvaisContact(templateEmailMauvaisContactConverter.toItem(vo.getTemplateEmailMauvaisContactVo()));
             if (vo.getTemplateEmailCriVo() != null && this.templateEmailCri)
                 item.setTemplateEmailCri(templateEmailCriConverter.toItem(vo.getTemplateEmailCriVo()));
+
+            if (vo.getTemplateEmailReportDemandeManeoClientInjoignableVo() != null && this.templateEmailReportDemandeManeoClientInjoignable)
+                item.setTemplateEmailReportDemandeManeoClientInjoignable(templateEmailReportDemandeManeoClientInjoignableConverter.toItem(vo.getTemplateEmailReportDemandeManeoClientInjoignableVo()));
+
+            if (vo.getTemplateEmailReportDemandeManeoClientJoignableAccepteVo() != null && this.templateEmailReportDemandeManeoClientJoignableAccepte)
+                item.setTemplateEmailReportDemandeManeoClientJoignableAccepte(templateEmailReportDemandeManeoClientJoignableAccepteConverter.toItem(vo.getTemplateEmailReportDemandeManeoClientJoignableAccepteVo()));
+
+            if (vo.getTemplateEmailReportDemandeManeoClientJoignableRefusVo() != null && this.templateEmailReportDemandeManeoClientJoignableRefus)
+                item.setTemplateEmailReportDemandeManeoClientJoignableRefus(templateEmailReportDemandeManeoClientJoignableRefusConverter.toItem(vo.getTemplateEmailReportDemandeManeoClientJoignableRefusVo()));
+
+            if (vo.getTemplateEmailReportDemandeClientClientJoignableVo() != null && this.templateEmailReportDemandeClientClientJoignable)
+                item.setTemplateEmailReportDemandeClientClientJoignable(templateEmailReportDemandeClientClientJoignableConverter.toItem(vo.getTemplateEmailReportDemandeClientClientJoignableVo()));
+
+            if (vo.getTemplateEmailReportDemandeClientClientInjoignableVo() != null && this.templateEmailReportDemandeClientClientInjoignable)
+                item.setTemplateEmailReportDemandeClientClientInjoignable(templateEmailReportDemandeClientClientInjoignableConverter.toItem(vo.getTemplateEmailReportDemandeClientClientInjoignableVo()));
+
 
 
             return item;
@@ -148,6 +192,26 @@ public class DefaultTemplateConfigurationConverter extends AbstractConverter<Def
                 vo.setTemplateEmailCriVo(templateEmailCriConverter.toVo(item.getTemplateEmailCri()));
             }
 
+            if (item.getTemplateEmailReportDemandeManeoClientInjoignable() != null && this.templateEmailReportDemandeManeoClientInjoignable) {
+                vo.setTemplateEmailReportDemandeManeoClientInjoignableVo(templateEmailReportDemandeManeoClientInjoignableConverter.toVo(item.getTemplateEmailReportDemandeManeoClientInjoignable()));
+            }
+
+            if (item.getTemplateEmailReportDemandeManeoClientJoignableAccepte() != null && this.templateEmailReportDemandeManeoClientJoignableAccepte) {
+                vo.setTemplateEmailReportDemandeManeoClientJoignableAccepteVo(templateEmailReportDemandeManeoClientJoignableAccepteConverter.toVo(item.getTemplateEmailReportDemandeManeoClientJoignableAccepte()));
+            }
+
+            if (item.getTemplateEmailReportDemandeManeoClientJoignableRefus() != null && this.templateEmailReportDemandeManeoClientJoignableRefus) {
+                vo.setTemplateEmailReportDemandeManeoClientJoignableRefusVo(templateEmailReportDemandeManeoClientJoignableRefusConverter.toVo(item.getTemplateEmailReportDemandeManeoClientJoignableRefus()));
+            }
+
+            if (item.getTemplateEmailReportDemandeClientClientInjoignable() != null && this.templateEmailReportDemandeClientClientInjoignable) {
+                vo.setTemplateEmailReportDemandeClientClientInjoignableVo(templateEmailReportDemandeClientClientInjoignableConverter.toVo(item.getTemplateEmailReportDemandeClientClientInjoignable()));
+            }
+
+            if (item.getTemplateEmailReportDemandeClientClientJoignable() != null && this.templateEmailReportDemandeClientClientJoignable) {
+                vo.setTemplateEmailReportDemandeClientClientJoignableVo(templateEmailReportDemandeClientClientJoignableConverter.toVo(item.getTemplateEmailReportDemandeClientClientJoignable()));
+            }
+
             return vo;
         }
     }
@@ -165,6 +229,11 @@ public class DefaultTemplateConfigurationConverter extends AbstractConverter<Def
         templateEmailConfirmationClient = value;
         templateEmailMauvaisContact = value;
         templateEmailCri = value;
+        templateEmailReportDemandeManeoClientInjoignable = value;
+        templateEmailReportDemandeManeoClientJoignableAccepte = value;
+        templateEmailReportDemandeManeoClientJoignableRefus = value;
+        templateEmailReportDemandeClientClientInjoignable = value;
+        templateEmailReportDemandeClientClientJoignable = value;
     }
 
 
@@ -264,6 +333,46 @@ public class DefaultTemplateConfigurationConverter extends AbstractConverter<Def
         this.templateEmailCriConverter = templateEmailCriConverter;
     }
 
+    public TemplateEmailReportDemandeManeoClientInjoignableConverter getTemplateEmailReportDemandeManeoClientInjoignableConverter() {
+        return templateEmailReportDemandeManeoClientInjoignableConverter;
+    }
+
+    public void setTemplateEmailReportDemandeManeoClientInjoignableConverter(TemplateEmailReportDemandeManeoClientInjoignableConverter templateEmailReportDemandeManeoClientInjoignableConverter) {
+        this.templateEmailReportDemandeManeoClientInjoignableConverter = templateEmailReportDemandeManeoClientInjoignableConverter;
+    }
+
+    public TemplateEmailReportDemandeManeoClientJoignableAccepteConverter getTemplateEmailReportDemandeManeoClientJoignableAccepteConverter() {
+        return templateEmailReportDemandeManeoClientJoignableAccepteConverter;
+    }
+
+    public void setTemplateEmailReportDemandeManeoClientJoignableAccepteConverter(TemplateEmailReportDemandeManeoClientJoignableAccepteConverter templateEmailReportDemandeManeoClientJoignableAccepteConverter) {
+        this.templateEmailReportDemandeManeoClientJoignableAccepteConverter = templateEmailReportDemandeManeoClientJoignableAccepteConverter;
+    }
+
+    public TemplateEmailReportDemandeManeoClientJoignableRefusConverter getTemplateEmailReportDemandeManeoClientJoignableRefusConverter() {
+        return templateEmailReportDemandeManeoClientJoignableRefusConverter;
+    }
+
+    public void setTemplateEmailReportDemandeManeoClientJoignableRefusConverter(TemplateEmailReportDemandeManeoClientJoignableRefusConverter templateEmailReportDemandeManeoClientJoignableRefusConverter) {
+        this.templateEmailReportDemandeManeoClientJoignableRefusConverter = templateEmailReportDemandeManeoClientJoignableRefusConverter;
+    }
+
+    public TemplateEmailReportDemandeClientClientJoignableConverter getTemplateEmailReportDemandeClientClientJoignableConverter() {
+        return templateEmailReportDemandeClientClientJoignableConverter;
+    }
+
+    public void setTemplateEmailReportDemandeClientClientJoignableConverter(TemplateEmailReportDemandeClientClientJoignableConverter templateEmailReportDemandeClientClientJoignableConverter) {
+        this.templateEmailReportDemandeClientClientJoignableConverter = templateEmailReportDemandeClientClientJoignableConverter;
+    }
+
+    public TemplateEmailReportDemandeClientClientInjoignableConverter getTemplateEmailReportDemandeClientClientInjoignableConverter() {
+        return templateEmailReportDemandeClientClientInjoignableConverter;
+    }
+
+    public void setTemplateEmailReportDemandeClientClientInjoignableConverter(TemplateEmailReportDemandeClientClientInjoignableConverter templateEmailReportDemandeClientClientInjoignableConverter) {
+        this.templateEmailReportDemandeClientClientInjoignableConverter = templateEmailReportDemandeClientClientInjoignableConverter;
+    }
+
     public boolean isTemplateEmailFtl() {
         return this.templateEmailFtl;
     }
@@ -360,5 +469,43 @@ public class DefaultTemplateConfigurationConverter extends AbstractConverter<Def
         this.templateEmailCri = templateEmailCri;
     }
 
+    public boolean isTemplateEmailReportDemandeManeoClientInjoignable() {
+        return this.templateEmailReportDemandeManeoClientInjoignable;
+    }
 
+    public void setTemplateEmailReportDemandeManeoClientInjoignable(boolean templateEmailReportDemandeManeoClientInjoignable) {
+        this.templateEmailReportDemandeManeoClientInjoignable = templateEmailReportDemandeManeoClientInjoignable;
+    }
+
+    public boolean isTemplateEmailReportDemandeManeoClientJoignableAccepte() {
+        return this.templateEmailReportDemandeManeoClientJoignableAccepte;
+    }
+
+    public void setTemplateEmailReportDemandeManeoClientJoignableAccepte(boolean templateEmailReportDemandeManeoClientJoignableAccepte) {
+        this.templateEmailReportDemandeManeoClientJoignableAccepte = templateEmailReportDemandeManeoClientJoignableAccepte;
+    }
+
+    public boolean isTemplateEmailReportDemandeManeoClientJoignableRefus() {
+        return this.templateEmailReportDemandeManeoClientJoignableRefus;
+    }
+
+    public void setTemplateEmailReportDemandeManeoClientJoignableRefus(boolean templateEmailReportDemandeManeoClientJoignableRefus) {
+        this.templateEmailReportDemandeManeoClientJoignableRefus = templateEmailReportDemandeManeoClientJoignableRefus;
+    }
+
+    public boolean isTemplateEmailReportDemandeClientClientJoignable() {
+        return this.templateEmailReportDemandeClientClientJoignable;
+    }
+
+    public void setTemplateEmailReportDemandeClientClientJoignable(boolean templateEmailReportDemandeClientClientJoignable) {
+        this.templateEmailReportDemandeClientClientJoignable = templateEmailReportDemandeClientClientJoignable;
+    }
+
+    public boolean isTemplateEmailReportDemandeClientClientInjoignable() {
+        return this.templateEmailReportDemandeClientClientInjoignable;
+    }
+
+    public void setTemplateEmailReportDemandeClientClientInjoignable(boolean templateEmailReportDemandeClientClientInjoignable) {
+        this.templateEmailReportDemandeClientClientInjoignable = templateEmailReportDemandeClientClientInjoignable;
+    }
 }
