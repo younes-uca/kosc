@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Objects;
 
 //import static jdk.internal.org.jline.utils.Colors.s;
 
@@ -35,6 +36,7 @@ public class OrdreKoscCddAdminServiceImpl implements OrdreKoscCddAdminService {
         query += SearchUtil.addConstraintDate("o", "datePriseRdv", "=", ordreKoscVo.getDatePriseRdv());
         query += SearchUtil.addConstraintMinMax("o", "nbrHeureDateSubmissionAndNow", ordreKoscVo.getNbrHeureDateSubmissionAndNowMin(), ordreKoscVo.getNbrHeureDateSubmissionAndNowMax());
         query += SearchUtil.addConstraintMinMax("o", "dateEnvoiCri", ordreKoscVo.getDateEnvoiCriMin(), ordreKoscVo.getDateEnvoiCriMax());
+       // query += SearchUtil.addConstraintMinMax("o", "dateEnvoiPlanification", ordreKoscVo.getDateEnvoiPlanificationMin(), ordreKoscVo.getDateEnvoiPlanificationMax());
 
         if (ordreKoscVo.getOperatorVo() != null) {
             query += SearchUtil.addConstraint("o", "operator.id", "=", ordreKoscVo.getOperatorVo().getId());
@@ -55,8 +57,15 @@ public class OrdreKoscCddAdminServiceImpl implements OrdreKoscCddAdminService {
             query += SearchUtil.addConstraint("o", "codeDecharge", "LIKE", ordreKoscVo.getCodeDecharge());
         }
 
-        if (ordreKoscVo.getEtatDemandeKoscVos() != null){
-            query+= " AND o.etatDemandeKosc.id IN ("+convertId(ordreKoscVo.getEtatDemandeKoscVos())+")";
+        if (ordreKoscVo.getEtatDemandeKoscVos() != null) {
+            for(EtatDemandeKoscVo etat:ordreKoscVo.getEtatDemandeKoscVos()){
+                if(Objects.equals(etat.getCode(), "planification")){
+                    query+= " AND o.etatDemandeKosc.id IN ("+convertIdItem(etat)+")";
+                    query+= SearchUtil.addConstraintMinMax("o", "dateEnvoiPlanification", ordreKoscVo.getDateEnvoiPlanificationMin(), ordreKoscVo.getDateEnvoiPlanificationMax());
+                }
+                else
+                    query+= " AND o.etatDemandeKosc.id IN ("+convertIdItem(etat)+")";
+            }
         }
 
         query += " AND o.codeDecharge is NULL";
@@ -79,6 +88,9 @@ public class OrdreKoscCddAdminServiceImpl implements OrdreKoscCddAdminService {
         }
         return  res.substring(0,res.length()-2);
     }
-
+    private String convertIdItem(EtatDemandeKoscVo etatDemandeKoscVo) {
+        String res="'"+etatDemandeKoscVo.getId()+"' ,";
+        return  res.substring(0,res.length()-2);
+    }
 
 }
