@@ -53,7 +53,9 @@ import {SourceReplanificationVo} from "../../../../../../controller/model/Source
 export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     private causKoOks = ['client-injoignable', 'refus-client', 'mauvais-contact', 'autre'];
-    private etats = ['ko', 'initialisation', 'confirmation-client', 'planification'];
+    // private etats = ['ko', 'initialisation', 'confirmation-client', 'planification'];
+    private etats = ['ok', 'ko', 'initialisation-wo', 'initialisation-erdv',
+        'confirmation-client', 'planification', 'client-injoinable', 'refus-client', 'mauvais-contact', 'autre'];
     showSpinner = false;
     blocked = false;
     filenames: string[] = [];
@@ -209,14 +211,14 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     initPalinificationModel(): void {
         this.palinificationModel = [
-            {label: 'ConfirmationClient', icon: 'pi pi-file', command: () => this.changeEtat(this.etats[2])},
-            {label: 'Mail Planification', icon: 'pi pi-file-excel', command: () => this.changeEtat(this.etats[3])},
+            {label: 'ConfirmationClient', icon: 'pi pi-file', command: () => this.changeEtat(this.etats[4])},
+            {label: 'Mail Planification', icon: 'pi pi-file-excel', command: () => this.changeEtat(this.etats[5])},
         ];
     }
 
     private changeEtat(myEtat: string) {
         this.selectedOrdreKosc.etatDemandeKoscVo = this.findEtatDemandeByCode(myEtat);
-        if (myEtat === this.etats[2]) {
+        if (myEtat === this.etats[4]) {
             this.indexEdit = 3;
             this.emailIndex = 0;
             this.selectedOrdreKosc.fromConfirmationClient = this.selectedDefaultTemplateConfiguration.emailManeo;
@@ -224,7 +226,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.objetConfirmationClient = eval(this.selectedDefaultTemplateConfiguration.templateEmailConfirmationClientVo.objet);
             this.selectedOrdreKosc.corpsConfirmationClient = eval(this.selectedDefaultTemplateConfiguration.templateEmailConfirmationClientVo.corps);
 
-        } else if (myEtat === this.etats[3]) {
+        } else if (myEtat === this.etats[5]) {
             this.indexEdit = 3;
             this.emailIndex = 1;
             this.selectedOrdreKosc.fromPlanification = this.selectedDefaultTemplateConfiguration.emailManeo;
@@ -239,22 +241,22 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             {
                 label: 'Client injoinable',
                 icon: 'pi pi-file',
-                command: () => this.selectTab(this.etats[0], this.causKoOks[0])
+                command: () => this.selectTab(this.etats[6])
             },
             {
                 label: 'Refus Client',
                 icon: 'pi pi-file',
-                command: () => this.selectTab(this.etats[0], this.causKoOks[1])
+                command: () => this.selectTab(this.etats[7])
             },
             {
                 label: 'Mauvais contact',
                 icon: 'pi pi-file-excel',
-                command: () => this.selectTab(this.etats[0], this.causKoOks[2])
+                command: () => this.selectTab(this.etats[8])
             },
             {
                 label: 'Autre',
                 icon: 'pi pi-file-excel',
-                command: () => this.selectTab(this.etats[0], this.causKoOks[3])
+                command: () => this.selectTab(this.etats[9])
             },
         ];
     }
@@ -273,15 +275,14 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
 
-    private selectTab(myEtat: string, myCause: string) {
+    private selectTab(myEtat: string) {
 
         this.selectedOrdreKosc.etatDemandeKoscVo = this.findEtatDemandeByCode(myEtat);
-        this.selectedOrdreKosc.causeKoOkVo = this.findByEtatDemandeCause(myCause);
+        // this.selectedOrdreKosc.causeKoOkVo = this.findByEtatDemandeCause(myCause);
 
-
-        if (myCause === this.causKoOks[0]) {
+        if (myEtat === this.etats[6]) {
             this.indexEdit = 3;
-            this.emailIndex = 3;
+            this.emailIndex = 2;
             this.selectedOrdreKosc.fromClientInjoinable = this.selectedDefaultTemplateConfiguration.emailManeo;
             this.selectedOrdreKosc.toClientInjoinable = this.selectedOrdreKosc.endCustumorContactEmail;
             this.selectedOrdreKosc.objetClientInjoinable = eval(this.selectedDefaultTemplateConfiguration.templateEmailClientInjoinableVo.objet);
@@ -291,23 +292,23 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.toClientInjoinableKosc = this.selectedDefaultTemplateConfiguration.emailKosc;
             this.selectedOrdreKosc.objetClientInjoinableKosc = eval(this.selectedDefaultTemplateConfiguration.templateEmailClientInjoinableKoscVo.objet);
             this.selectedOrdreKosc.corpsClientInjoinableKosc = eval(this.selectedDefaultTemplateConfiguration.templateEmailClientInjoinableKoscVo.corps);
-        } else if (myCause === this.causKoOks[1]) {
+        } else if (myEtat === this.etats[7]) {
             this.indexEdit = 3;
-            this.emailIndex = 5;
+            this.emailIndex = 4;
             this.selectedOrdreKosc.fromRefus = this.selectedDefaultTemplateConfiguration.emailManeo;
             this.selectedOrdreKosc.toRefus = this.selectedOrdreKosc.endCustumorContactEmail;
             this.selectedOrdreKosc.objetRefus = eval(this.selectedDefaultTemplateConfiguration.templateEmailRefusVo.objet);
             this.selectedOrdreKosc.corpsRefus = eval(this.selectedDefaultTemplateConfiguration.templateEmailRefusVo.corps);
-        } else if (myCause === this.causKoOks[2]) {
+        } else if (myEtat === this.etats[8]) {
             this.indexEdit = 3;
-            this.emailIndex = 4;
+            this.emailIndex = 3;
             this.selectedOrdreKosc.fromMauvaisContact = this.selectedDefaultTemplateConfiguration.emailManeo;
             this.selectedOrdreKosc.toMauvaisContact = this.selectedDefaultTemplateConfiguration.emailKosc;
             this.selectedOrdreKosc.objetMauvaisContact = eval(this.selectedDefaultTemplateConfiguration.templateEmailMauvaisContactVo.objet);
             this.selectedOrdreKosc.corpsMauvaisContact = eval(this.selectedDefaultTemplateConfiguration.templateEmailMauvaisContactVo.corps);
-        }else if (myCause === this.causKoOks[3]) {
+        }else if (myEtat === this.etats[9]) {
             this.indexEdit = 3;
-            this.emailIndex = 6;
+            this.emailIndex = 5;
             this.selectedOrdreKosc.fromAutre = this.selectedDefaultTemplateConfiguration.emailManeo;
             this.selectedOrdreKosc.toAutre = this.selectedDefaultTemplateConfiguration.emailKosc;
         }
@@ -632,7 +633,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
 
-    goToMailReplanification() {
+ /*   goToMailReplanification() {
         this.indexEdit = 3;
         this.emailIndex = 2;
         this.selectedOrdreKosc.etatDemandeKoscVo = this.findEtatDemandeByCode(this.etats[0]);
@@ -648,7 +649,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         this.selectedOrdreKosc.corpsReplanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailReplanificationVo.corps);
 
 
-    }
+    }*/
 
     public findEtatDemandeByCode(code: string) {
         let res = this.etatDemandeKoscService.findByCode(code, this.etatDemandeKoscs);
