@@ -17,14 +17,14 @@ import com.maneo.kosc.security.common.AuthoritiesConstants;
 import com.maneo.kosc.security.bean.User;
 import com.maneo.kosc.security.service.facade.UserService;
 
-@RequestMapping("/api/users")
+@RequestMapping("/api/admin/users")
 @RestController
 // @PreAuthorize("hasRole('ROLE_SUPER_ADMIN')")
 public class UserRest {
     @Autowired
     private UserService userService;
 
-    @PreAuthorize("hasRole('ROLE_SUPER_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/")
     public List<User> findAll() {
         return this.userService.findAll();

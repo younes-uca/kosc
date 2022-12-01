@@ -359,8 +359,8 @@ public class OrdreKosc {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date datePriseRdv;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss.SSS")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateRdv;
 
     @JsonFormat(pattern = "yyyy-MM-dd")

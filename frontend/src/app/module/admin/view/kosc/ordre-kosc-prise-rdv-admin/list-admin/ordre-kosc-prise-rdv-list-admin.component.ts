@@ -189,166 +189,10 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         this.searchRequestPriseRdv();
     }
 
-    displayPriseRdv = false;
-
-    async showPriseRdvDialog(ordreKosc: OrdreKoscVo) {
-        const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'edit');
-        if (isPermistted) {
-            this.ordreKoscService.findByIdWithAssociatedList(ordreKosc).subscribe(res => {
-                this.selectedOrdreKosc = res;
-                this.selectedOrdreKosc.dateDebutTraitement = DateUtils.toDate(ordreKosc.dateDebutTraitement);
-                this.selectedOrdreKosc.submissionDate = DateUtils.toDate(ordreKosc.submissionDate);
-                this.selectedOrdreKosc.datePremierAppel = DateUtils.toDate(ordreKosc.datePremierAppel);
-                this.selectedOrdreKosc.dateDeuxiemeAppel = DateUtils.toDate(ordreKosc.dateDeuxiemeAppel);
-                this.selectedOrdreKosc.dateTroisiemeAppel = DateUtils.toDate(ordreKosc.dateTroisiemeAppel);
-                this.selectedOrdreKosc.dateDernierAppel = DateUtils.toDate(ordreKosc.dateDernierAppel);
-                this.selectedOrdreKosc.datePriseRdv = DateUtils.toDate(ordreKosc.datePriseRdv);
-                this.selectedOrdreKosc.dateRdv = DateUtils.toDate(ordreKosc.dateRdv);
-                this.selectedOrdreKosc.dateAppelReplanification = DateUtils.toDate(ordreKosc.dateAppelReplanification);
-                this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
-                this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
-                this.selectedOrdreKosc.dateOuverture = new Date(ordreKosc.dateOuverture);
-                this.selectedOrdreKosc.dateEnvoiCri = new Date(ordreKosc.dateEnvoiCri);
-                this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
-                this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
-
-                this.selectedOrdreKosc.dateEnvoiPlanification = DateUtils.toDate(ordreKosc.dateEnvoiPlanification);
-                this.selectedOrdreKosc.dateEnvoiReplanification = DateUtils.toDate(ordreKosc.dateEnvoiReplanification);
-                this.selectedOrdreKosc.dateEnvoiReport = DateUtils.toDate(ordreKosc.dateEnvoiReport);
-                this.selectedOrdreKosc.dateEnvoiCloture = DateUtils.toDate(ordreKosc.dateEnvoiCloture);
-                this.selectedOrdreKosc.dateEnvoiSuivi = DateUtils.toDate(ordreKosc.dateEnvoiSuivi);
-
-
-                this.displayPriseRdv = true;
-                this.isShown = false;
-                this.isShown1 = false;
-            });
-
-
-        } else {
-            this.messageService.add({
-                severity: 'error', summary: 'Erreur', detail: 'Probléme de permission'
-            });
-        }
-
-
-    }
-
-    public editEtat(codeEtat: string){
-        let myEtatDemandeKoscVo = this.etatDemandeKoscs.find(e => e.code = codeEtat);
-        this.selectedOrdreKosc.etatDemandeKoscVo = myEtatDemandeKoscVo;
-        this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'Le changement est fait avec succes'});
-        this.editWithShowOption(false);
-        this.displayPriseRdv = false;
-
-    }
-
-    public editPasEncore(ordreKosc: OrdreKoscVo){
-        let date: Date = new Date();
-        if(this.selectedOrdreKosc.datePremierAppel == null){
-            this.selectedOrdreKosc.datePremierAppel = date;
-            this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'Le changement est fait avec succes'});
-        }else if(this.selectedOrdreKosc.dateDeuxiemeAppel == null){
-            if (this.selectedOrdreKosc.datePremierAppel <= date) {
-                this.selectedOrdreKosc.dateDeuxiemeAppel = date;
-                this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'Le changement est fait avec succes'});
-            }else{
-                this.messageService.add({severity: 'info', summary: 'Remarque', detail: 'Vous avez d\éj\à appel\é ce client aujourd\'hui'});
-            }
-        }else if(this.selectedOrdreKosc.dateTroisiemeAppel == null){
-            if(this.selectedOrdreKosc.dateDeuxiemeAppel <= date){
-                this.selectedOrdreKosc.dateTroisiemeAppel = date;
-                this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'Le changement est fait avec succes'});
-            }
-        }else{
-            this.messageService.add({severity: 'info', summary: 'Remarque', detail: 'Le troisi\ème appel est d\éj\à fait !'});
-        }
-        this.editWithShowOption(false);
-        this.displayPriseRdv = false;
-    }
-
-    public editOui(codeEtat: string){
-        let myEtatDemandeKoscVo = this.etatDemandeKoscs.find(e => e.code = codeEtat);
-        this.selectedOrdreKosc.datePriseRdv = new Date();
-        this.selectedOrdreKosc.etatDemandeKoscVo = myEtatDemandeKoscVo;
-        this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'Le changement est fait avec succes'});
-        this.editWithShowOption(false);
-        this.displayPriseRdv = false;
-    }
-
-
-    public editClientInjoignable() {
-        this.ordreKoscService.updateNonJoignable().subscribe(ordreKosc => {
-                const myIndex = this.ordreKoscs.findIndex(e => e.id === this.selectedOrdreKosc.id);
-                this.ordreKoscs[myIndex] = ordreKosc;
-                this.displayPriseRdv = false;
-            }
-        );
-    }
-
-
-
-    isShown: boolean = false;
-
-    toggleShow() {
-        this.isShown = !this.isShown;
-        this.isShown1 = false;
-
-    }
-
-    isShown1: boolean = false;
-
-    toggleShowOui() {
-        this.isShown1 = !this.isShown1;
-        this.isShown = false;
-    }
-
-
-    public edit() {
-        this.submitted = true;
-        this.validateForm();
-        this.displayPriseRdv = false;
-        if (this.errorMessages.length === 0) {
-            this.editWithShowOption(false);
-
-        } else {
-            this.messageService.add({
-                severity: 'error',
-                summary: 'Erreurs',
-                detail: 'Merci de corrigé les erreurs sur le formulaire'
-            });
-        }
-    }
-
-    public editWithShowOption(showList: boolean) {
-        this.ordreKoscService.edit().subscribe(ordreKosc => {
-            const myIndex = this.ordreKoscs.findIndex(e => e.id === this.selectedOrdreKosc.id);
-            this.ordreKoscs[myIndex] = ordreKosc;
-            this.ordreKoscService.deleteIfEtatNotIn(this.searchOrdreKosc.etatDemandeKoscVos, this.ordreKoscs, ordreKosc);
-            this.editOrdreKoscDialog = false;
-            this.submitted = false;
-            this.selectedOrdreKosc = new OrdreKoscVo();
-
-
-        }, error => {
-            console.log(error);
-        });
-
-    }
-
-    hideEditDialog() {
-        this.displayPriseRdv = false;
-        this.setValidation(true);
-    }
-
     private setValidation(value: boolean) {
         this.validOrdreKoscReferenceWorkOrder = value;
     }
 
-    private validateForm(): void {
-        this.errorMessages = new Array<string>();
-        this.validateOrdreKoscDateAppel();
-    }
 
     erdvAndConfort(ordreKoscVo : OrdreKoscVo){
         if( ordreKoscVo.erdv == true && ordreKoscVo.confort == true){
@@ -361,16 +205,7 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
 
 
 
-    private validateOrdreKoscDateAppel() {
-        if (this.selectedOrdreKosc.datePremierAppel != null && this.selectedOrdreKosc.dateDeuxiemeAppel) {
-            if (this.selectedOrdreKosc.datePremierAppel.getDate() >= this.selectedOrdreKosc.dateDeuxiemeAppel.getDate() || this.selectedOrdreKosc.dateTroisiemeAppel < this.selectedOrdreKosc.dateDeuxiemeAppel) {
-                this.errorMessages.push('Date de deuxieme appel non valide');
-                this.validOrdreKoscDateAppel = false;
-            } else {
-                this.validOrdreKoscDateAppel = true;
-            }
-        }
-    }
+
 
     activeState: boolean[] = [true, false, false];
 
@@ -403,20 +238,11 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/')
     }
 
-    public afficher24() {
-        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = 24;
-        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = 48;
+    public searchBetweenHour(nbrHeureMin:number, nbrHeureMax:number) {
+        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = nbrHeureMin;
+        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = nbrHeureMax;
     }
 
-    public afficher48() {
-        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = 24;
-        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = 72;
-    }
-
-    public afficher72() {
-        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = 24;
-        this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = 96;
-    }
 
     public afficherAll() {
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMin = null;
@@ -729,15 +555,15 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         this.dateButons = [
             {
                 label: '24h', icon: 'pi pi-check', command: () => {
-                    this.afficher24();
+                    this.searchBetweenHour(24,48);
                 }
             }, {
                 label: '48h', icon: 'pi pi-check', command: () => {
-                    this.afficher48();
+                    this.searchBetweenHour(24,72);
                 }
             }, {
                 label: '72h', icon: 'pi pi-check', command: () => {
-                    this.afficher72();
+                    this.searchBetweenHour(24,96);
 
                 },
             }, {
@@ -764,29 +590,27 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
             // },
             {
                 label: 'Export Kizeo 24', icon: 'pi pi-file-excel', command: async () => {
-                    this.afficher24();
+                    this.searchBetweenHour(24,48);
                     this.searchRequestPriseRdv();
-                    // await this.exporter();
+                   // await this.exporter();
                 }
             },
             {
-                label: 'Export Kizeo 48', icon: 'pi pi-file-excel', command: () => {
-                    this.afficher48();
+                label: 'Export Kizeo 48', icon: 'pi pi-file-excel', command: async () => {
+                    this.searchBetweenHour(24,72);
                     this.searchRequestPriseRdv();
-                    console.log(this.ordreKoscsPriseRdv);
-                    //this.prepareColumnExport();
-                    //this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName) })
+                   // console.log(this.ordreKoscsPriseRdv);
+                   // await this.exporter();
 
 
                 }
             },
             {
                 label: 'Export Kizeo 72', icon: 'pi pi-file-excel', command: () => {
-                    this.afficher72();
+                    this.searchBetweenHour(24,96);
                     this.searchRequestPriseRdv();
                     console.log(this.ordreKoscsPriseRdv);
-                    // this.prepareColumnExport();
-                    // this.exportService.exporterExcel(this.criteriaData, this.exportData, this.fileName) })
+                    // await this.exporter();
 
 
                 }
