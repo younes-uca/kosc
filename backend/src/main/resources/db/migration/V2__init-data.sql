@@ -155,7 +155,8 @@ INSERT INTO `etat_demande_kosc` (`id`, `code`, `libelle`, `style`) VALUES
                                                                        (10010, 'report-demande-client-cl-inj', 'Report demande client injoinable', 'warning'),
                                                                        (10011, 'mauvais-contact', 'Mauvais Contact', 'warning'),
                                                                        (10012, 'client-injoinable', 'Client Injoinable', 'warning'),
-                                                                       (10013, 'refus-client', 'Refus Client', 'warning');
+                                                                       (10013, 'refus-client', 'Refus Client', 'warning'),
+                                                                       (10014, 'autre', 'Autre', 'warning');
 
 --
 -- DÃ©chargement des donnÃ©es de la table `etat_demande_kosc_seq`
