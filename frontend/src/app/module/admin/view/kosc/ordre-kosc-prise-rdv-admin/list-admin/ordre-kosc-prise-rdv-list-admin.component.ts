@@ -345,7 +345,7 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
 
 
     nbrHeureDateSubmissionAndNowSeverityStyle(ordreKosc: OrdreKoscVo) {
-        return ordreKosc.nbrHeureDateSubmissionAndNow >= 72 ? 'danger' : ordreKosc.nbrHeureDateSubmissionAndNow >= 48 ? 'warning' : 'success';
+        return (ordreKosc.nbrHeureDateSubmissionAndNow > 48 && ordreKosc.nbrHeureDateSubmissionAndNow <= 72) ? 'danger' : (ordreKosc.nbrHeureDateSubmissionAndNow > 24 && ordreKosc.nbrHeureDateSubmissionAndNow <= 48) ? 'warning' : ordreKosc.nbrHeureDateSubmissionAndNow <= 24 ? 'success' : 'info';
 
     }
 
@@ -555,15 +555,15 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         this.dateButons = [
             {
                 label: '24h', icon: 'pi pi-check', command: () => {
-                    this.searchBetweenHour(24,48);
+                    this.searchBetweenHour(0,24);
                 }
             }, {
                 label: '48h', icon: 'pi pi-check', command: () => {
-                    this.searchBetweenHour(24,72);
+                    this.searchBetweenHour(24,48);
                 }
             }, {
                 label: '72h', icon: 'pi pi-check', command: () => {
-                    this.searchBetweenHour(24,96);
+                    this.searchBetweenHour(48,72);
 
                 },
             }, {
