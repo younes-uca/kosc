@@ -159,7 +159,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.datePremierAppel = date;
             this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'OrdreKosc avec reference ' + this.ordreKoscService.selectedOrdreKosc.reference + ' est mis à jour avec succes'});
         }else if(this.selectedOrdreKosc.dateDeuxiemeAppel == null){
-            if (this.selectedOrdreKosc.datePremierAppel <= date) {
+            if (this.selectedOrdreKosc.datePremierAppel > date) {
                 this.messageService.add({severity: 'info', summary: 'Remarque', detail: 'Vous avez d\éj\à appel\é ce client aujourd\'hui'});
             }else{
                 this.selectedOrdreKosc.dateDeuxiemeAppel = date;
