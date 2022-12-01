@@ -235,5 +235,120 @@ public class EmailingOrderKoscAdminServiceImpl  implements EmailingOrderKoscAdmi
         }
     }
 
+    @Override
+    public void sendMailReportDemandeManeoClientInjoignable(OrdreKosc ordreKosc) {
+        LocalDate todaysDate = LocalDate.now();
+        try {
+            EmailDetails emailDetails = new EmailDetails();
+            emailDetails.setFrom(ordreKosc.getFromReportDemandeManeoClientInjoignable());
+            emailDetails.setTo(ordreKosc.getToReportDemandeManeoClientInjoignable());
+            emailDetails.setObjet(ordreKosc.getObjetReportDemandeManeoClientInjoignable());
+            emailDetails.setCorps(ordreKosc.getCorpsReportDemandeManeoClientInjoignable());
+            emailSenderAdminService.sendEmail(emailDetails);
+            ordreKosc.setEnvoyeReportDemandeManeoClientInjoignable(true);
+            ordreKosc.setDateEnvoiReportDemandeManeoClientInjoignable(DateUtil.toDate(todaysDate));
+            ordreKoscDao.save(ordreKosc);
+
+        } catch (Exception exception) {
+            OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
+            ordreKosc.setEnvoyeReportDemandeManeoClientInjoignable(false);
+            ordreKosc.setDateEnvoiReportDemandeManeoClientInjoignable(null);
+            ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
+        }
+        
+    }
+
+    @Override
+    public void sendMailReportDemandeManeoClientJoignableAccepte(OrdreKosc ordreKosc) {
+        LocalDate todaysDate = LocalDate.now();
+        try {
+            EmailDetails emailDetails = new EmailDetails();
+            emailDetails.setFrom(ordreKosc.getFromReportDemandeManeoClientJoignableAccepte());
+            emailDetails.setTo(ordreKosc.getToReportDemandeManeoClientJoignableAccepte());
+            emailDetails.setObjet(ordreKosc.getObjetReportDemandeManeoClientJoignableAccepte());
+            emailDetails.setCorps(ordreKosc.getCorpsReportDemandeManeoClientJoignableAccepte());
+            emailSenderAdminService.sendEmail(emailDetails);
+            ordreKosc.setEnvoyeReportDemandeManeoClientJoignableAccepte(true);
+            ordreKosc.setDateEnvoiReportDemandeManeoClientJoignableAccepte(DateUtil.toDate(todaysDate));
+            ordreKoscDao.save(ordreKosc);
+
+        } catch (Exception exception) {
+            OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
+            ordreKosc.setEnvoyeReportDemandeManeoClientJoignableAccepte(false);
+            ordreKosc.setDateEnvoiReportDemandeManeoClientJoignableAccepte(null);
+            ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
+        }
+
+    }
+
+    @Override
+    public void sendMailReportDemandeManeoClientJoignableRefus(OrdreKosc ordreKosc) {
+        LocalDate todaysDate = LocalDate.now();
+        try {
+            EmailDetails emailDetails = new EmailDetails();
+            emailDetails.setFrom(ordreKosc.getFromReportDemandeManeoClientJoignableRefus());
+            emailDetails.setTo(ordreKosc.getToReportDemandeManeoClientJoignableRefus());
+            emailDetails.setObjet(ordreKosc.getObjetReportDemandeManeoClientJoignableRefus());
+            emailDetails.setCorps(ordreKosc.getCorpsReportDemandeManeoClientJoignableRefus());
+            emailSenderAdminService.sendEmail(emailDetails);
+            ordreKosc.setEnvoyeReportDemandeManeoClientJoignableRefus(true);
+            ordreKosc.setDateEnvoiReportDemandeManeoClientJoignableRefus(DateUtil.toDate(todaysDate));
+            ordreKoscDao.save(ordreKosc);
+
+        } catch (Exception exception) {
+            OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
+            ordreKosc.setEnvoyeReportDemandeManeoClientJoignableRefus(false);
+            ordreKosc.setDateEnvoiReportDemandeManeoClientJoignableRefus(null);
+            ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
+        }
+
+    }
+
+    @Override
+    public void sendMailReportDemandeClientClientInjoignable(OrdreKosc ordreKosc) {
+        LocalDate todaysDate = LocalDate.now();
+        try {
+            EmailDetails emailDetails = new EmailDetails();
+            emailDetails.setFrom(ordreKosc.getFromReportDemandeClientClientInjoignable());
+            emailDetails.setTo(ordreKosc.getToReportDemandeClientClientInjoignable());
+            emailDetails.setObjet(ordreKosc.getObjetReportDemandeClientClientInjoignable());
+            emailDetails.setCorps(ordreKosc.getCorpsReportDemandeClientClientInjoignable());
+            emailSenderAdminService.sendEmail(emailDetails);
+            ordreKosc.setEnvoyeReportDemandeClientClientInjoignable(true);
+            ordreKosc.setDateEnvoiReportDemandeClientClientInjoignable(DateUtil.toDate(todaysDate));
+            ordreKoscDao.save(ordreKosc);
+
+        } catch (Exception exception) {
+            OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
+            ordreKosc.setEnvoyeReportDemandeClientClientInjoignable(false);
+            ordreKosc.setDateEnvoiReportDemandeClientClientInjoignable(null);
+            ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
+        }
+
+    }
+
+    @Override
+    public void sendMailReportDemandeClientClientJoignable(OrdreKosc ordreKosc) {
+        LocalDate todaysDate = LocalDate.now();
+        try {
+            EmailDetails emailDetails = new EmailDetails();
+            emailDetails.setFrom(ordreKosc.getFromReportDemandeClientClientJoignable());
+            emailDetails.setTo(ordreKosc.getToReportDemandeClientClientJoignable());
+            emailDetails.setObjet(ordreKosc.getObjetReportDemandeClientClientJoignable());
+            emailDetails.setCorps(ordreKosc.getCorpsReportDemandeClientClientJoignable());
+            emailSenderAdminService.sendEmail(emailDetails);
+            ordreKosc.setEnvoyeReportDemandeClientClientJoignable(true);
+            ordreKosc.setDateEnvoiReportDemandeClientClientJoignable(DateUtil.toDate(todaysDate));
+            ordreKoscDao.save(ordreKosc);
+
+        } catch (Exception exception) {
+            OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
+            ordreKosc.setEnvoyeReportDemandeClientClientJoignable(false);
+            ordreKosc.setDateEnvoiReportDemandeClientClientJoignable(null);
+            ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
+        }
+
+    }
+
 
 }

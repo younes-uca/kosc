@@ -394,40 +394,52 @@ export class OrdreKoscListAdminComponent implements OnInit {
         }
 
     }
+    private initOrderKoscDate(ordreKosc: OrdreKoscVo) {
+        this.selectedOrdreKosc.dateDebutTraitement = new Date(ordreKosc.dateDebutTraitement);
+        this.selectedOrdreKosc.submissionDate = new Date(ordreKosc.submissionDate);
+        this.selectedOrdreKosc.datePremierAppel = new Date(ordreKosc.datePremierAppel);
+        this.selectedOrdreKosc.dateDeuxiemeAppel = new Date(ordreKosc.dateDeuxiemeAppel);
+        this.selectedOrdreKosc.dateTroisiemeAppel = new Date(ordreKosc.dateTroisiemeAppel);
+        this.selectedOrdreKosc.datePriseRdv = new Date(ordreKosc.datePriseRdv);
+        this.selectedOrdreKosc.dateRdv = new Date(ordreKosc.dateRdv);
+        this.selectedOrdreKosc.dateOuverture = new Date(ordreKosc.dateOuverture);
+        this.selectedOrdreKosc.dateEnvoiPlanification = new Date(ordreKosc.dateEnvoiPlanification);
+        this.selectedOrdreKosc.dateAppelReplanification = new Date(ordreKosc.dateAppelReplanification);
+        this.selectedOrdreKosc.dateEnvoiReport = new Date(ordreKosc.dateEnvoiReport);
+        this.selectedOrdreKosc.dateEnvoiReplanification = new Date(ordreKosc.dateEnvoiReplanification);
+        this.selectedOrdreKosc.dateEnvoiRefus = new Date(ordreKosc.dateEnvoiRefus);
+        this.selectedOrdreKosc.dateEnvoiMauvaisContact = new Date(ordreKosc.dateEnvoiMauvaisContact);
+        this.selectedOrdreKosc.dateEnvoiConfirmationClient = new Date(ordreKosc.dateEnvoiConfirmationClient);
+        this.selectedOrdreKosc.dateEnvoiCri = new Date(ordreKosc.dateEnvoiCri);
+        this.selectedOrdreKosc.dateEnvoiFtl = new Date(ordreKosc.dateEnvoiFtl);
+        this.selectedOrdreKosc.dateInterventionTechniqueDebut = new Date(ordreKosc.dateInterventionTechniqueDebut);
+        this.selectedOrdreKosc.dateInterventionTechniqueFin = new Date(ordreKosc.dateInterventionTechniqueFin);
+        this.selectedOrdreKosc.dateEnvoiClientInjoinable = new Date(ordreKosc.dateEnvoiClientInjoinable);
+        this.selectedOrdreKosc.dateEnvoiClientInjoinableKosc = new Date(ordreKosc.dateEnvoiClientInjoinableKosc);
+        this.selectedOrdreKosc.dateEnvoiCloture = new Date(ordreKosc.dateEnvoiCloture);
+        this.selectedOrdreKosc.dateEnvoiSuivi = new Date(ordreKosc.dateEnvoiSuivi);
 
+        this.viewOrdreKoscDialog = true;
+        this.selectedIndexView = 0
+        this.selectedKoscTabView = 0;
+    }
     public async viewOrdreKosc(ordreKosc: OrdreKoscVo) {
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'view');
-        if (isPermistted) {
-            this.ordreKoscService.findByIdWithAssociatedList(ordreKosc).subscribe(res => {
-                this.selectedOrdreKosc = res;
-                this.selectedOrdreKosc.dateDebutTraitement = new Date(ordreKosc.dateDebutTraitement);
-                this.selectedOrdreKosc.submissionDate = new Date(ordreKosc.submissionDate);
-                this.selectedOrdreKosc.datePremierAppel = new Date(ordreKosc.datePremierAppel);
-                this.selectedOrdreKosc.dateDeuxiemeAppel = new Date(ordreKosc.dateDeuxiemeAppel);
-                this.selectedOrdreKosc.dateTroisiemeAppel = new Date(ordreKosc.dateTroisiemeAppel);
-                this.selectedOrdreKosc.datePriseRdv = new Date(ordreKosc.datePriseRdv);
-                this.selectedOrdreKosc.dateRdv = new Date(ordreKosc.dateRdv);
-                this.selectedOrdreKosc.dateOuverture = new Date(ordreKosc.dateOuverture);
-                this.selectedOrdreKosc.dateEnvoiPlanification = new Date(ordreKosc.dateEnvoiPlanification);
-                this.selectedOrdreKosc.dateAppelReplanification = new Date(ordreKosc.dateAppelReplanification);
-                this.selectedOrdreKosc.dateEnvoiReport = new Date(ordreKosc.dateEnvoiReport);
-                this.selectedOrdreKosc.dateEnvoiReplanification = new Date(ordreKosc.dateEnvoiReplanification);
-                this.selectedOrdreKosc.dateEnvoiRefus = new Date(ordreKosc.dateEnvoiRefus);
-                this.selectedOrdreKosc.dateEnvoiMauvaisContact = new Date(ordreKosc.dateEnvoiMauvaisContact);
-                this.selectedOrdreKosc.dateEnvoiConfirmationClient = new Date(ordreKosc.dateEnvoiConfirmationClient);
-                this.selectedOrdreKosc.dateEnvoiCri = new Date(ordreKosc.dateEnvoiCri);
-                this.selectedOrdreKosc.dateEnvoiFtl = new Date(ordreKosc.dateEnvoiFtl);
-                this.selectedOrdreKosc.dateInterventionTechniqueDebut = new Date(ordreKosc.dateInterventionTechniqueDebut);
-                this.selectedOrdreKosc.dateInterventionTechniqueFin = new Date(ordreKosc.dateInterventionTechniqueFin);
-                this.selectedOrdreKosc.dateEnvoiClientInjoinable = new Date(ordreKosc.dateEnvoiClientInjoinable);
-                this.selectedOrdreKosc.dateEnvoiClientInjoinableKosc = new Date(ordreKosc.dateEnvoiClientInjoinableKosc);
-                this.selectedOrdreKosc.dateEnvoiCloture = new Date(ordreKosc.dateEnvoiCloture);
-                this.selectedOrdreKosc.dateEnvoiSuivi = new Date(ordreKosc.dateEnvoiSuivi);
 
-                this.viewOrdreKoscDialog = true;
-                this.selectedIndexView=0
-                this.selectedKoscTabView = 0;
-            });
+
+
+        if (isPermistted) {
+            if(ordreKosc != null && ordreKosc.id != null){
+                this.ordreKoscService.findByIdWithAssociatedList(ordreKosc).subscribe(res => {
+                    this.selectedOrdreKosc = res;
+                    this.initOrderKoscDate(ordreKosc);
+                });
+
+            }else{
+                this.selectedOrdreKosc = ordreKosc;
+                this.initOrderKoscDate(ordreKosc);
+
+            }
         } else {
             this.messageService.add({
                 severity: 'error', summary: 'erreur', detail: 'problème d\'autorisation'

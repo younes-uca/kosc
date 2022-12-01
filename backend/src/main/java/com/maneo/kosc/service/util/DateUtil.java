@@ -228,12 +228,16 @@ public class DateUtil {
 
 
     public static LocalDate convert(Date dateToConvert) {
-        String pattern = "dd/MM/yyyy";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        if(dateToConvert != null){
+            String pattern = "dd/MM/yyyy";
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
 
-        String dateAsString = formateDate(pattern, dateToConvert);
-        LocalDate localDate = LocalDate.parse(dateAsString, formatter);
-        return localDate;
+            String dateAsString = formateDate(pattern, dateToConvert);
+            LocalDate localDate = LocalDate.parse(dateAsString, formatter);
+            return localDate;
+        }
+        return null;
+
     }
 
     public static Date convert(LocalDate localDate) {
