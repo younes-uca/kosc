@@ -20,4 +20,14 @@ public interface EmailingOrderKoscAdminService {
     void sendMailReplanificationReport(OrdreKosc ordreKosc);
 
     void sendMailReplanification(OrdreKosc ordreKosc);
+
+    void sendMailReportDemandeManeoClientInjoignable(OrdreKosc ordreKosc);
+
+    void sendMailReportDemandeManeoClientJoignableAccepte(OrdreKosc ordreKosc);
+
+    void sendMailReportDemandeManeoClientJoignableRefus(OrdreKosc ordreKosc);
+
+    void sendMailReportDemandeClientClientInjoignable(OrdreKosc ordreKosc);
+
+    void sendMailReportDemandeClientClientJoignable(OrdreKosc ordreKosc);
 }

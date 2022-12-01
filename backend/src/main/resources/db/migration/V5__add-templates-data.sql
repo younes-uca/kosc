@@ -175,3 +175,27 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+ALTER TABLE `default_template_configuration` ADD `template_email_report_demande_client_client_injoignable` bigint(20) DEFAULT NULL;
+ALTER TABLE `default_template_configuration` ADD `template_email_report_demande_client_client_joignable` bigint(20) DEFAULT NULL;
+ALTER TABLE `default_template_configuration` ADD `template_email_report_demande_maneo_client_injoignable` bigint(20) DEFAULT NULL;
+ALTER TABLE `default_template_configuration` ADD `template_email_report_demande_maneo_client_joignable_accepte` bigint(20) DEFAULT NULL;
+ALTER TABLE `default_template_configuration` ADD `template_email_report_demande_maneo_client_joignable_refus` bigint(20) DEFAULT NULL;
+
+
+UPDATE  `default_template_configuration`  SET
+template_email_client_injoinable = 10000,
+template_email_planification = 10000,
+template_email_client_injoinable_kosc = NULL,
+template_email_confirmation_client = NULL,
+template_email_mauvais_contact = NULL,
+template_email_refus = NULL,
+template_email_replanification = NULL,
+template_email_report = NULL,
+template_email_report_demande_client_client_injoignable = 10000,
+template_email_report_demande_client_client_joignable = 10000,
+template_email_report_demande_maneo_client_injoignable = 10000,
+template_email_report_demande_maneo_client_joignable_accepte = 10000,
+template_email_report_demande_maneo_client_joignable_refus = 10000
+
+WHERE id=10000;

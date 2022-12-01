@@ -43,7 +43,7 @@ import {RegionService} from "../../../../../../controller/service/Region.service
 })
 export class OrdreKoscSuiviEditAdminComponent implements OnInit {
 
-    methods
+    // methods
 
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService
         , private stringUtilService: StringUtilService
@@ -66,6 +66,8 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
     ) {
 
     }
+    showSpinner = false;
+    blocked = false;
 
     _submitted = false;
 
@@ -913,5 +915,130 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
         } else {
             this.validOrdreKoscReferenceWorkOrder = true;
         }
+    }
+
+    sendMailReportDemandeManeoClientInjoignable() {
+        this.showSpinner = true;
+        this.blocked = true;
+        this.ordreKoscService.sendMailReportDemandeManeoClientInjoignable().subscribe(data => {
+                if (data.envoyeReportDemandeManeoClientInjoignable == true) {
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: 'Email envoyé avec succès'
+                    });
+                    this.editOrdreKoscDialog = false;
+                } else {
+                    this.messageService.add({
+                            severity: 'error',
+                            summary: 'Erreurs', detail: 'échec d\'envoi'
+                        }
+                    );
+                }
+                this.showSpinner = false;
+                this.blocked = false;
+            }
+        );
+
+    }
+
+    sendMailReportDemandeManeoClientJoignableAccepte() {
+        this.showSpinner = true;
+        this.blocked = true;
+        this.ordreKoscService.sendMailReportDemandeManeoClientJoignableAccepte().subscribe(data => {
+                if (data.envoyeReportDemandeManeoClientJoignableAccepte == true) {
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: 'Email envoyé avec succès'
+                    });
+                    this.editOrdreKoscDialog = false;
+                } else {
+                    this.messageService.add({
+                            severity: 'error',
+                            summary: 'Erreurs', detail: 'échec d\'envoi'
+                        }
+                    );
+                }
+                this.showSpinner = false;
+                this.blocked = false;
+            }
+        );
+
+    }
+
+    sendMailReportDemandeManeoClientJoignableRefus() {
+        this.showSpinner = true;
+        this.blocked = true;
+        this.ordreKoscService.sendMailReportDemandeManeoClientJoignableRefus().subscribe(data => {
+                if (data.envoyeReportDemandeManeoClientJoignableRefus == true) {
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: 'Email envoyé avec succès'
+                    });
+                    this.editOrdreKoscDialog = false;
+                } else {
+                    this.messageService.add({
+                            severity: 'error',
+                            summary: 'Erreurs', detail: 'échec d\'envoi'
+                        }
+                    );
+                }
+                this.showSpinner = false;
+                this.blocked = false;
+            }
+        );
+
+    }
+
+    sendMailReportDemandeClientClientInjoignable() {
+        this.showSpinner = true;
+        this.blocked = true;
+        this.ordreKoscService.sendMailReportDemandeClientClientInjoignable().subscribe(data => {
+                if (data.envoyeReportDemandeClientClientInjoignable == true) {
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: 'Email envoyé avec succès'
+                    });
+                    this.editOrdreKoscDialog = false;
+                } else {
+                    this.messageService.add({
+                            severity: 'error',
+                            summary: 'Erreurs', detail: 'échec d\'envoi'
+                        }
+                    );
+                }
+                this.showSpinner = false;
+                this.blocked = false;
+            }
+        );
+
+    }
+
+    sendMailReportDemandeClientClientJoignable() {
+        this.showSpinner = true;
+        this.blocked = true;
+        this.ordreKoscService.sendMailReportDemandeClientClientJoignable().subscribe(data => {
+                if (data.envoyeReportDemandeClientClientJoignable == true) {
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: 'Email envoyé avec succès'
+                    });
+                    this.editOrdreKoscDialog = false;
+                } else {
+                    this.messageService.add({
+                            severity: 'error',
+                            summary: 'Erreurs', detail: 'échec d\'envoi'
+                        }
+                    );
+                }
+                this.showSpinner = false;
+                this.blocked = false;
+            }
+        );
+
     }
 }

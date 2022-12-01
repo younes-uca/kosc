@@ -376,9 +376,10 @@
 <!--                </div>-->
 <!--            </p-tabPanel>-->
             <p-tabPanel header="Report">
+                <p-blockUI [blocked]="blocked"></p-blockUI>
                 <div class="p-grid">
                     <p-tabView>
-                        <p-tabPanel header="Demande Maneo ">
+                        <p-tabPanel header="Demande Maneo">
                             <div class="p-grid">
                                 <p-tabView>
                                     <p-tabPanel header="Client Injoignable">
