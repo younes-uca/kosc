@@ -386,4 +386,30 @@ export class OrdreKoscService {
     set searchOrdreKoscSuiviRdv(value: OrdreKoscVo) {
         this._searchOrdreKoscSuiviRdv = value;
     }
+
+    sendMailReportDemandeManeoClientInjoignable() {
+        return this.http.post<OrdreKoscVo>(this.API + 'send-mail-report-demande-maneo-client-injoignable', {...this.selectedOrdreKosc});
+
+    }
+
+    sendMailReportDemandeManeoClientJoignableAccepte() {
+        return this.http.post<OrdreKoscVo>(this.API + 'send-mail-report-demande-maneo-client-joignable-accepte', {...this.selectedOrdreKosc});
+
+    }
+
+    sendMailReportDemandeManeoClientJoignableRefus() {
+        return this.http.post<OrdreKoscVo>(this.API + 'send-mail-report-demande-maneo-client-joignable-refus', {...this.selectedOrdreKosc});
+
+
+    }
+
+    sendMailReportDemandeClientClientInjoignable() {
+        return this.http.post<OrdreKoscVo>(this.API + 'send-mail-report-demande-client-client-injoignable', {...this.selectedOrdreKosc});
+
+    }
+
+    sendMailReportDemandeClientClientJoignable() {
+        return this.http.post<OrdreKoscVo>(this.API + 'send-mail-report-demande-client-client-joignable', {...this.selectedOrdreKosc});
+
+    }
 }

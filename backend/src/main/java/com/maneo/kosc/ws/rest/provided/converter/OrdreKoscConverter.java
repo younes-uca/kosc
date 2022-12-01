@@ -47,6 +47,16 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
     private TechnicienConverter technicienConverter;
     @Autowired
     private TemplateEmailCriConverter templateEmailCriConverter;
+    @Autowired
+    private TemplateEmailReportDemandeClientClientInjoignableConverter templateEmailReportDemandeClientClientInjoignableConverter;
+    @Autowired
+    private TemplateEmailReportDemandeClientClientJoignableConverter templateEmailReportDemandeClientClientJoignableConverter;
+    @Autowired
+    private TemplateEmailReportDemandeManeoClientInjoignableConverter templateEmailReportDemandeManeoClientInjoignableConverter;
+    @Autowired
+    private TemplateEmailReportDemandeManeoClientJoignableAccepteConverter templateEmailReportDemandeManeoClientJoignableAccepteConverter;
+    @Autowired
+    private TemplateEmailReportDemandeManeoClientJoignableRefusConverter templateEmailReportDemandeManeoClientJoignableRefusConverter;
     private Boolean operator;
     private Boolean departement;
     private Boolean technicien;
@@ -485,6 +495,76 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
 
             if (StringUtil.isNotEmpty(vo.getType()))
                 item.setType(vo.getType());
+
+
+            if (StringUtil.isNotEmpty(vo.getObjetReportDemandeManeoClientInjoignable()))
+                item.setObjetReportDemandeManeoClientInjoignable(vo.getObjetReportDemandeManeoClientInjoignable());
+            if (StringUtil.isNotEmpty(vo.getCorpsReportDemandeManeoClientInjoignable()))
+                item.setCorpsReportDemandeManeoClientInjoignable(vo.getCorpsReportDemandeManeoClientInjoignable());
+            if (vo.getEnvoyeReportDemandeManeoClientInjoignable() != null)
+                item.setEnvoyeReportDemandeManeoClientInjoignable(vo.getEnvoyeReportDemandeManeoClientInjoignable());
+            if (StringUtil.isNotEmpty(vo.getDateEnvoiReportDemandeManeoClientInjoignable()))
+                item.setDateEnvoiReportDemandeManeoClientInjoignable(DateUtil.parse(vo.getDateEnvoiReportDemandeManeoClientInjoignable()));
+            if (StringUtil.isNotEmpty(vo.getFromReportDemandeManeoClientInjoignable()))
+                item.setFromReportDemandeManeoClientInjoignable(vo.getFromReportDemandeManeoClientInjoignable());
+            if (StringUtil.isNotEmpty(vo.getToReportDemandeManeoClientInjoignable()))
+                item.setToReportDemandeManeoClientInjoignable(vo.getToReportDemandeManeoClientInjoignable());
+
+
+            if (StringUtil.isNotEmpty(vo.getObjetReportDemandeManeoClientJoignableAccepte()))
+                item.setObjetReportDemandeManeoClientJoignableAccepte(vo.getObjetReportDemandeManeoClientJoignableAccepte());
+            if (StringUtil.isNotEmpty(vo.getCorpsReportDemandeManeoClientJoignableAccepte()))
+                item.setCorpsReportDemandeManeoClientJoignableAccepte(vo.getCorpsReportDemandeManeoClientJoignableAccepte());
+            if (vo.getEnvoyeReportDemandeManeoClientJoignableAccepte() != null)
+                item.setEnvoyeReportDemandeManeoClientJoignableAccepte(vo.getEnvoyeReportDemandeManeoClientJoignableAccepte());
+            if (StringUtil.isNotEmpty(vo.getDateEnvoiReportDemandeManeoClientJoignableAccepte()))
+                item.setDateEnvoiReportDemandeManeoClientJoignableAccepte(DateUtil.parse(vo.getDateEnvoiReportDemandeManeoClientJoignableAccepte()));
+            if (StringUtil.isNotEmpty(vo.getFromReportDemandeManeoClientJoignableAccepte()))
+                item.setFromReportDemandeManeoClientJoignableAccepte(vo.getFromReportDemandeManeoClientJoignableAccepte());
+            if (StringUtil.isNotEmpty(vo.getToReportDemandeManeoClientJoignableAccepte()))
+                item.setToReportDemandeManeoClientJoignableAccepte(vo.getToReportDemandeManeoClientJoignableAccepte());
+
+
+            if (StringUtil.isNotEmpty(vo.getObjetReportDemandeManeoClientJoignableRefus()))
+                item.setObjetReportDemandeManeoClientJoignableRefus(vo.getObjetReportDemandeManeoClientJoignableRefus());
+            if (StringUtil.isNotEmpty(vo.getCorpsReportDemandeManeoClientJoignableRefus()))
+                item.setCorpsReportDemandeManeoClientJoignableRefus(vo.getCorpsReportDemandeManeoClientJoignableRefus());
+            if (vo.getEnvoyeReportDemandeManeoClientJoignableRefus() != null)
+                item.setEnvoyeReportDemandeManeoClientJoignableRefus(vo.getEnvoyeReportDemandeManeoClientJoignableRefus());
+            if (StringUtil.isNotEmpty(vo.getDateEnvoiReportDemandeManeoClientJoignableRefus()))
+                item.setDateEnvoiReportDemandeManeoClientJoignableRefus(DateUtil.parse(vo.getDateEnvoiReportDemandeManeoClientJoignableRefus()));
+            if (StringUtil.isNotEmpty(vo.getFromReportDemandeManeoClientJoignableRefus()))
+                item.setFromReportDemandeManeoClientJoignableRefus(vo.getFromReportDemandeManeoClientJoignableRefus());
+            if (StringUtil.isNotEmpty(vo.getToReportDemandeManeoClientJoignableRefus()))
+                item.setToReportDemandeManeoClientJoignableRefus(vo.getToReportDemandeManeoClientJoignableRefus());
+
+
+            if (StringUtil.isNotEmpty(vo.getObjetReportDemandeClientClientInjoignable()))
+                item.setObjetReportDemandeClientClientInjoignable(vo.getObjetReportDemandeClientClientInjoignable());
+            if (StringUtil.isNotEmpty(vo.getCorpsReportDemandeClientClientInjoignable()))
+                item.setCorpsReportDemandeClientClientInjoignable(vo.getCorpsReportDemandeClientClientInjoignable());
+            if (vo.getEnvoyeReportDemandeClientClientInjoignable() != null)
+                item.setEnvoyeReportDemandeClientClientInjoignable(vo.getEnvoyeReportDemandeClientClientInjoignable());
+            if (StringUtil.isNotEmpty(vo.getDateEnvoiReportDemandeClientClientInjoignable()))
+                item.setDateEnvoiReportDemandeClientClientInjoignable(DateUtil.parse(vo.getDateEnvoiReportDemandeClientClientInjoignable()));
+            if (StringUtil.isNotEmpty(vo.getFromReportDemandeClientClientInjoignable()))
+                item.setFromReportDemandeClientClientInjoignable(vo.getFromReportDemandeClientClientInjoignable());
+            if (StringUtil.isNotEmpty(vo.getToReportDemandeClientClientInjoignable()))
+                item.setToReportDemandeClientClientInjoignable(vo.getToReportDemandeClientClientInjoignable());
+
+
+            if (StringUtil.isNotEmpty(vo.getObjetReportDemandeClientClientJoignable()))
+                item.setObjetReportDemandeClientClientJoignable(vo.getObjetReportDemandeClientClientJoignable());
+            if (StringUtil.isNotEmpty(vo.getCorpsReportDemandeClientClientJoignable()))
+                item.setCorpsReportDemandeClientClientJoignable(vo.getCorpsReportDemandeClientClientJoignable());
+            if (vo.getEnvoyeReportDemandeClientClientJoignable() != null)
+                item.setEnvoyeReportDemandeClientClientJoignable(vo.getEnvoyeReportDemandeClientClientJoignable());
+            if (StringUtil.isNotEmpty(vo.getDateEnvoiReportDemandeClientClientJoignable()))
+                item.setDateEnvoiReportDemandeClientClientJoignable(DateUtil.parse(vo.getDateEnvoiReportDemandeClientClientJoignable()));
+            if (StringUtil.isNotEmpty(vo.getFromReportDemandeClientClientJoignable()))
+                item.setFromReportDemandeClientClientJoignable(vo.getFromReportDemandeClientClientJoignable());
+            if (StringUtil.isNotEmpty(vo.getToReportDemandeClientClientJoignable()))
+                item.setToReportDemandeClientClientJoignable(vo.getToReportDemandeClientClientJoignable());
 
             if (vo.getOperatorVo() != null && this.operator)
                 item.setOperator(operatorConverter.toItem(vo.getOperatorVo()));
@@ -1103,6 +1183,99 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
 
             if (StringUtil.isNotEmpty(item.getType()))
                 vo.setType(item.getType());
+
+
+            if (StringUtil.isNotEmpty(item.getObjetReportDemandeManeoClientInjoignable()))
+                vo.setObjetReportDemandeManeoClientInjoignable(item.getObjetReportDemandeManeoClientInjoignable());
+
+            if (StringUtil.isNotEmpty(item.getCorpsReportDemandeManeoClientInjoignable()))
+                vo.setCorpsReportDemandeManeoClientInjoignable(item.getCorpsReportDemandeManeoClientInjoignable());
+
+            if (StringUtil.isNotEmpty(item.getFromReportDemandeManeoClientInjoignable()))
+                vo.setFromReportDemandeManeoClientInjoignable(item.getFromReportDemandeManeoClientInjoignable());
+
+            if (StringUtil.isNotEmpty(item.getToReportDemandeManeoClientInjoignable()))
+                vo.setToReportDemandeManeoClientInjoignable(item.getToReportDemandeManeoClientInjoignable());
+
+            if (item.getEnvoyeReportDemandeManeoClientInjoignable() != null)
+                vo.setEnvoyeReportDemandeManeoClientInjoignable(item.getEnvoyeReportDemandeManeoClientInjoignable());
+            if (item.getDateEnvoiReportDemandeManeoClientInjoignable() != null)
+                vo.setDateEnvoiReportDemandeManeoClientInjoignable(DateUtil.formateDate(item.getDateEnvoiReportDemandeManeoClientInjoignable()));
+
+            
+            
+
+            if (StringUtil.isNotEmpty(item.getObjetReportDemandeManeoClientJoignableAccepte()))
+                vo.setObjetReportDemandeManeoClientJoignableAccepte(item.getObjetReportDemandeManeoClientJoignableAccepte());
+
+            if (StringUtil.isNotEmpty(item.getCorpsReportDemandeManeoClientJoignableAccepte()))
+                vo.setCorpsReportDemandeManeoClientJoignableAccepte(item.getCorpsReportDemandeManeoClientJoignableAccepte());
+
+            if (StringUtil.isNotEmpty(item.getFromReportDemandeManeoClientJoignableAccepte()))
+                vo.setFromReportDemandeManeoClientJoignableAccepte(item.getFromReportDemandeManeoClientJoignableAccepte());
+
+            if (StringUtil.isNotEmpty(item.getToReportDemandeManeoClientJoignableAccepte()))
+                vo.setToReportDemandeManeoClientJoignableAccepte(item.getToReportDemandeManeoClientJoignableAccepte());
+
+            if (item.getEnvoyeReportDemandeManeoClientJoignableAccepte() != null)
+                vo.setEnvoyeReportDemandeManeoClientJoignableAccepte(item.getEnvoyeReportDemandeManeoClientJoignableAccepte());
+            if (item.getDateEnvoiReportDemandeManeoClientJoignableAccepte() != null)
+                vo.setDateEnvoiReportDemandeManeoClientJoignableAccepte(DateUtil.formateDate(item.getDateEnvoiReportDemandeManeoClientJoignableAccepte()));       
+
+            
+            
+            
+            if (StringUtil.isNotEmpty(item.getObjetReportDemandeManeoClientJoignableRefus()))
+                vo.setObjetReportDemandeManeoClientJoignableRefus(item.getObjetReportDemandeManeoClientJoignableRefus());
+
+            if (StringUtil.isNotEmpty(item.getCorpsReportDemandeManeoClientJoignableRefus()))
+                vo.setCorpsReportDemandeManeoClientJoignableRefus(item.getCorpsReportDemandeManeoClientJoignableRefus());
+
+            if (StringUtil.isNotEmpty(item.getFromReportDemandeManeoClientJoignableRefus()))
+                vo.setFromReportDemandeManeoClientJoignableRefus(item.getFromReportDemandeManeoClientJoignableRefus());
+
+            if (StringUtil.isNotEmpty(item.getToReportDemandeManeoClientJoignableRefus()))
+                vo.setToReportDemandeManeoClientJoignableRefus(item.getToReportDemandeManeoClientJoignableRefus());
+
+            if (item.getEnvoyeReportDemandeManeoClientJoignableRefus() != null)
+                vo.setEnvoyeReportDemandeManeoClientJoignableRefus(item.getEnvoyeReportDemandeManeoClientJoignableRefus());
+            if (item.getDateEnvoiReportDemandeManeoClientJoignableRefus() != null)
+                vo.setDateEnvoiReportDemandeManeoClientJoignableRefus(DateUtil.formateDate(item.getDateEnvoiReportDemandeManeoClientJoignableRefus()));
+ 
+            
+            if (StringUtil.isNotEmpty(item.getObjetReportDemandeClientClientInjoignable()))
+                vo.setObjetReportDemandeClientClientInjoignable(item.getObjetReportDemandeClientClientInjoignable());
+
+            if (StringUtil.isNotEmpty(item.getCorpsReportDemandeClientClientInjoignable()))
+                vo.setCorpsReportDemandeClientClientInjoignable(item.getCorpsReportDemandeClientClientInjoignable());
+
+            if (StringUtil.isNotEmpty(item.getFromReportDemandeClientClientInjoignable()))
+                vo.setFromReportDemandeClientClientInjoignable(item.getFromReportDemandeClientClientInjoignable());
+
+            if (StringUtil.isNotEmpty(item.getToReportDemandeClientClientInjoignable()))
+                vo.setToReportDemandeClientClientInjoignable(item.getToReportDemandeClientClientInjoignable());
+
+            if (item.getEnvoyeReportDemandeClientClientInjoignable() != null)
+                vo.setEnvoyeReportDemandeClientClientInjoignable(item.getEnvoyeReportDemandeClientClientInjoignable());
+            if (item.getDateEnvoiReportDemandeClientClientInjoignable() != null)
+                vo.setDateEnvoiReportDemandeClientClientInjoignable(DateUtil.formateDate(item.getDateEnvoiReportDemandeClientClientInjoignable()));
+            
+            if (StringUtil.isNotEmpty(item.getObjetReportDemandeClientClientJoignable()))
+                vo.setObjetReportDemandeClientClientJoignable(item.getObjetReportDemandeClientClientJoignable());
+
+            if (StringUtil.isNotEmpty(item.getCorpsReportDemandeClientClientJoignable()))
+                vo.setCorpsReportDemandeClientClientJoignable(item.getCorpsReportDemandeClientClientJoignable());
+
+            if (StringUtil.isNotEmpty(item.getFromReportDemandeClientClientJoignable()))
+                vo.setFromReportDemandeClientClientJoignable(item.getFromReportDemandeClientClientJoignable());
+
+            if (StringUtil.isNotEmpty(item.getToReportDemandeClientClientJoignable()))
+                vo.setToReportDemandeClientClientJoignable(item.getToReportDemandeClientClientJoignable());
+
+            if (item.getEnvoyeReportDemandeClientClientJoignable() != null)
+                vo.setEnvoyeReportDemandeClientClientJoignable(item.getEnvoyeReportDemandeClientClientJoignable());
+            if (item.getDateEnvoiReportDemandeClientClientJoignable() != null)
+                vo.setDateEnvoiReportDemandeClientClientJoignable(DateUtil.formateDate(item.getDateEnvoiReportDemandeClientClientJoignable()));
 
             if (item.getOperator() != null && this.operator) {
                 vo.setOperatorVo(operatorConverter.toVo(item.getOperator()));

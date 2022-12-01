@@ -597,5 +597,38 @@ public class OrdreKoscRestAdmin {
         return ordreKoscConverter.toVo(criteriaSuiviRdv);
     }
 
+    @PostMapping("/send-mail-report-demande-maneo-client-injoignable")
+    public OrdreKoscVo sendMailReportDemandeManeoClientInjoignable(@RequestBody OrdreKoscVo ordreKoscVo) {
+        OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
+        emailingOrderKoscAdminService.sendMailReportDemandeManeoClientInjoignable(ordreKosc);
+        return ordreKoscConverter.toVo(ordreKosc);
+    }
 
+    @PostMapping("/send-mail-report-demande-maneo-client-joignable-accepte")
+    public OrdreKoscVo sendMailReportDemandeManeoClientJoignableAccepte(@RequestBody OrdreKoscVo ordreKoscVo) {
+        OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
+        emailingOrderKoscAdminService.sendMailReportDemandeManeoClientJoignableAccepte(ordreKosc);
+        return ordreKoscConverter.toVo(ordreKosc);
+    }
+
+    @PostMapping("/send-mail-report-demande-maneo-client-joignable-refus")
+    public OrdreKoscVo sendMailReportDemandeManeoClientJoignableRefus(@RequestBody OrdreKoscVo ordreKoscVo) {
+        OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
+        emailingOrderKoscAdminService.sendMailReportDemandeManeoClientJoignableRefus(ordreKosc);
+        return ordreKoscConverter.toVo(ordreKosc);
+    }
+
+    @PostMapping("/send-mail-report-demande-client-client-injoignable")
+    public OrdreKoscVo sendMailReportDemandeClientClientInjoignable(@RequestBody OrdreKoscVo ordreKoscVo) {
+        OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
+        emailingOrderKoscAdminService.sendMailReportDemandeClientClientInjoignable(ordreKosc);
+        return ordreKoscConverter.toVo(ordreKosc);
+    }
+
+    @PostMapping("/send-mail-report-demande-client-client-joignable")
+    public OrdreKoscVo sendMailReportDemandeClientClientJoignable(@RequestBody OrdreKoscVo ordreKoscVo) {
+        OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
+        emailingOrderKoscAdminService.sendMailReportDemandeClientClientJoignable(ordreKosc);
+        return ordreKoscConverter.toVo(ordreKosc);
+    }
 }

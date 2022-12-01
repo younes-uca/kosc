@@ -19,7 +19,8 @@
                     </div>
                     <div class="p-field p-col-12 p-md-3">
                         <label for="2">Work<span style="color: red;">*</span></label>
-                        <input [(ngModel)]="selectedOrdreKosc.referenceWorkOrder" [disabled]="true" [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscReferenceWorkOrder}"
+                        <input [(ngModel)]="selectedOrdreKosc.referenceWorkOrder" [disabled]="true"
+                               [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscReferenceWorkOrder}"
                                class="p-mb-2 p-mr-2"
                                id="2" pInputText
                                placeholder="Reference work order"
@@ -41,7 +42,8 @@
                     </div>
                     <div class="p-col-1">
                         <label></label>
-                        <button (click)="openCreateTechnicien('technicien')" class="p-button-success one-colonne-btn-success-align" icon="pi pi-plus"
+                        <button (click)="openCreateTechnicien('technicien')"
+                                class="p-button-success one-colonne-btn-success-align" icon="pi pi-plus"
                                 pButton pRipple
                                 type="button"></button>
                     </div>
@@ -68,7 +70,8 @@
                     </div>
                     <div class="p-col-1">
                         <label></label>
-                        <button (click)="openCreateDepartement('departement')" class="p-button-success one-colonne-btn-success-align" icon="pi pi-plus"
+                        <button (click)="openCreateDepartement('departement')"
+                                class="p-button-success one-colonne-btn-success-align" icon="pi pi-plus"
                                 pButton pRipple
                                 type="button"></button>
                     </div>
@@ -87,7 +90,8 @@
                     </div>
                     <div class="p-col-1">
                         <label></label>
-                        <button (click)="openCreateEtatDemandeKosc('etatDemandeKosc')" class="p-button-success one-colonne-btn-success-align" icon="pi pi-plus"
+                        <button (click)="openCreateEtatDemandeKosc('etatDemandeKosc')"
+                                class="p-button-success one-colonne-btn-success-align" icon="pi pi-plus"
                                 pButton pRipple
                                 type="button"></button>
                     </div>
@@ -105,7 +109,8 @@
                     </div>
                     <div class="p-col-1">
                         <label></label>
-                        <button (click)="openCreateOperator('operator')" class="p-button-success one-colonne-btn-success-align" icon="pi pi-plus"
+                        <button (click)="openCreateOperator('operator')"
+                                class="p-button-success one-colonne-btn-success-align" icon="pi pi-plus"
                                 pButton pRipple
                                 type="button"></button>
                     </div>
@@ -147,7 +152,8 @@
 
                     <div class="p-field p-col-12 p-md-3">
                         <label for="200">Commentaire operateur</label>
-                        <textarea [(ngModel)]="selectedOrdreKosc.commentaireTechnicien" [disabled]="true" cols="30" id="200" pInputTextarea
+                        <textarea [(ngModel)]="selectedOrdreKosc.commentaireTechnicien" [disabled]="true" cols="30"
+                                  id="200" pInputTextarea
                                   placeholder="Commentaire operateur (add it to yaml)"
                                   rows="5"
                         ></textarea>
@@ -155,7 +161,8 @@
 
                     <div class="p-field p-col-12 p-md-3">
                         <label for="25">Submission date</label>
-                        <p-calendar [(ngModel)]="selectedOrdreKosc.submissionDate" [disabled]="true" [showSeconds]="false" [showTime]="true"
+                        <p-calendar [(ngModel)]="selectedOrdreKosc.submissionDate" [disabled]="true"
+                                    [showSeconds]="false" [showTime]="true"
                                     dateFormat="{{dateFormat}}" id="25"
                                     placeholder="Submission date">
                         </p-calendar>
@@ -219,149 +226,509 @@
                     </div>
                 </div>
             </p-tabPanel>
-            <p-tabPanel header="Cloture">
+<!--            <p-tabPanel header="Cloture">-->
+<!--                <div class="p-grid">-->
+<!--                    <div class="p-field p-col-12 p-md-3">-->
+<!--                        <label for="145">Template email cloture</label>-->
+<!--                        <p-dropdown [(ngModel)]="selectedOrdreKosc.templateEmailClotureVo"-->
+<!--                                    [filter]="true"-->
+<!--                                    [options]="templateEmailClotures" [showClear]="true" filterMatchMode="contains"-->
+<!--                                    id="145"-->
+<!--                                    optionLabel="libelle"-->
+<!--                                    placeholder="Template email cloture">-->
+<!--                        </p-dropdown>-->
+
+<!--                    </div>-->
+<!--                    <div class="p-col-1">-->
+<!--                        <label></label>-->
+<!--                        <button (click)="openCreateTemplateEmailCloture('templateEmailCloture')"-->
+<!--                                class="p-button-success one-colonne-btn-success-align" icon="pi pi-plus"-->
+<!--                                pButton-->
+<!--                                pRipple-->
+<!--                                type="button"></button>-->
+<!--                    </div>-->
+<!--                    <div class="p-field p-col-12 p-md-3">-->
+<!--                        <label for="146">Objet cloture</label>-->
+<!--                        <input [(ngModel)]="selectedOrdreKosc.objetCloture" class="p-mb-2 p-mr-2" id="146"-->
+<!--                               pInputText-->
+<!--                               placeholder="Objet cloture" type="text"-->
+<!--                        />-->
+
+<!--                    </div>-->
+<!--                    <div class="p-field p-col-12 p-md-5">-->
+<!--                        <label for="147">Corps cloture</label>-->
+<!--                        <textarea [(ngModel)]="selectedOrdreKosc.corpsCloture" cols="30" id="147" pInputTextarea-->
+<!--                                  placeholder="Corps cloture" rows="10"-->
+<!--                        ></textarea>-->
+
+<!--                    </div>-->
+<!--                    <div class="p-field align-inputswitch p-col-12  p-md-4">-->
+<!--                        <div class="label-inputswitch">-->
+<!--                            <label for="148">Envoye cloture</label>-->
+<!--                        </div>-->
+<!--                        <div class="input-switch">-->
+<!--                            <p-inputSwitch [(ngModel)]="selectedOrdreKosc.envoyeCloture" id="148"-->
+<!--                            >-->
+<!--                            </p-inputSwitch>-->
+
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="p-field p-col-12 p-md-3">-->
+<!--                        <label for="149">Date envoi cloture</label>-->
+<!--                        <p-calendar [(ngModel)]="selectedOrdreKosc.dateEnvoiCloture" [showSeconds]="false"-->
+<!--                                    [showTime]="true"-->
+<!--                                    dateFormat="{{dateFormat}}"-->
+<!--                                    id="149"-->
+<!--                                    placeholder="Date envoi cloture">-->
+<!--                        </p-calendar>-->
+
+<!--                    </div>-->
+<!--                    <div class="p-field p-col-12 p-md-5">-->
+<!--                        <label for="143">Commantaire cloture</label>-->
+<!--                        <textarea [(ngModel)]="selectedOrdreKosc.commantaireCloture" cols="30" id="143" pInputTextarea-->
+<!--                                  placeholder="5sena ndiro piece joint"-->
+<!--                                  rows="10"-->
+<!--                        ></textarea>-->
+
+<!--                    </div>-->
+<!--                    &lt;!&ndash;                            <div class="p-field p-col-12 p-md-3">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                                <label for="150">Email cloture piece joints</label>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                                <input class="p-mb-2 p-mr-2" type="text" pInputText&ndash;&gt;-->
+<!--                    &lt;!&ndash;                                       placeholder="Email cloture piece joints"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                                       id="150" [(ngModel)]="selectedOrdreKosc.emailCloturePieceJoints"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                                />&ndash;&gt;-->
+
+<!--                    &lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--                </div>-->
+<!--            </p-tabPanel>-->
+<!--            <p-tabPanel header="Suivi">-->
+<!--                <div class="p-grid">-->
+<!--                    <div class="p-field p-col-12 p-md-3">-->
+<!--                        <label for="151">Template suivi</label>-->
+<!--                        <p-dropdown [(ngModel)]="selectedOrdreKosc.templateSuiviVo" [filter]="true"-->
+<!--                                    [options]="templateSuivis" [showClear]="true" filterMatchMode="contains"-->
+<!--                                    id="151"-->
+<!--                                    optionLabel="libelle"-->
+<!--                                    placeholder="Template suivi">-->
+<!--                        </p-dropdown>-->
+
+<!--                    </div>-->
+
+<!--                    <div class="p-col-1">-->
+<!--                        <label></label>-->
+<!--                        <button (click)="openCreateTemplateSuivi('templateSuivi')"-->
+<!--                                class="p-button-success one-colonne-btn-success-align" icon="pi pi-plus"-->
+<!--                                pButton pRipple-->
+<!--                                type="button"></button>-->
+<!--                    </div>-->
+<!--                    <div class="p-field p-col-12 p-md-3">-->
+<!--                        <label for="152">Objet suivi</label>-->
+<!--                        <input [(ngModel)]="selectedOrdreKosc.objetSuivi" class="p-mb-2 p-mr-2" id="152"-->
+<!--                               pInputText-->
+<!--                               placeholder="Objet suivi" type="text"-->
+<!--                        />-->
+
+<!--                    </div>-->
+<!--                    <div class="p-field p-col-12 p-md-5">-->
+<!--                        <label for="153">Corps suivi</label>-->
+<!--                        <textarea [(ngModel)]="selectedOrdreKosc.corpsSuivi" cols="30" id="153" pInputTextarea-->
+<!--                                  placeholder="Corps suivi" rows="10"-->
+<!--                        ></textarea>-->
+
+<!--                    </div>-->
+<!--                    <div class="p-field align-inputswitch p-col-12  p-md-3">-->
+<!--                        <div class="label-inputswitch">-->
+<!--                            <label for="154">Envoye suivi</label>-->
+<!--                        </div>-->
+<!--                        <div class="input-switch">-->
+<!--                            <p-inputSwitch [(ngModel)]="selectedOrdreKosc.envoyeSuivi" id="154"-->
+<!--                            >-->
+<!--                            </p-inputSwitch>-->
+
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="p-field p-col-12 p-md-3">-->
+<!--                        <label for="155">Date envoi suivi</label>-->
+<!--                        <p-calendar [(ngModel)]="selectedOrdreKosc.dateEnvoiSuivi" [showSeconds]="false"-->
+<!--                                    [showTime]="true"-->
+<!--                                    dateFormat="{{dateFormat}}"-->
+<!--                                    id="155"-->
+<!--                                    placeholder="Date envoi suivi">-->
+<!--                        </p-calendar>-->
+
+<!--                    </div>-->
+
+<!--                    <div class="p-col-1">-->
+<!--                        <label></label>-->
+<!--                    </div>-->
+<!--                    <div class="p-field align-inputswitch p-col-12  p-md-3">-->
+<!--                        <div class="label-inputswitch">-->
+<!--                            <label for="154">Annuler envoi email</label>-->
+<!--                        </div>-->
+<!--                        <div class="input-switch">-->
+<!--                            <p-inputSwitch [(ngModel)]="selectedOrdreKosc.existingOtp" id="156"-->
+<!--                            >-->
+<!--                            </p-inputSwitch>-->
+
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                </div>-->
+<!--            </p-tabPanel>-->
+            <p-tabPanel header="Report">
+                <p-blockUI [blocked]="blocked"></p-blockUI>
                 <div class="p-grid">
-                    <div class="p-field p-col-12 p-md-3">
-                        <label for="145">Template email cloture</label>
-                        <p-dropdown [(ngModel)]="selectedOrdreKosc.templateEmailClotureVo"
-                                    [filter]="true"
-                                    [options]="templateEmailClotures" [showClear]="true" filterMatchMode="contains"
-                                    id="145"
-                                    optionLabel="libelle"
-                                    placeholder="Template email cloture">
-                        </p-dropdown>
+                    <p-tabView>
+                        <p-tabPanel header="Demande Maneo">
+                            <div class="p-grid">
+                                <p-tabView>
+                                    <p-tabPanel header="Client Injoignable">
+                                        <div class="p-grid">
 
-                    </div>
-                    <div class="p-col-1">
-                        <label></label>
-                        <button (click)="openCreateTemplateEmailCloture('templateEmailCloture')" class="p-button-success one-colonne-btn-success-align" icon="pi pi-plus"
-                                pButton
-                                pRipple
-                                type="button"></button>
-                    </div>
-                    <div class="p-field p-col-12 p-md-3">
-                        <label for="146">Objet cloture</label>
-                        <input [(ngModel)]="selectedOrdreKosc.objetCloture" class="p-mb-2 p-mr-2" id="146"
-                               pInputText
-                               placeholder="Objet cloture" type="text"
-                        />
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="129">From<span style="color: red;"></span></label>
+                                    <input [(ngModel)]="selectedOrdreKosc.fromReportDemandeManeoClientInjoignable"
+                                           [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromReportDemandeManeoClientInjoignable}"
+                                           class="p-mb-2 p-mr-2"
+                                           id="129"
+                                           pInputText placeholder="From"
+                                           type="text"/>
+                                    <small *ngIf='!validOrdreKoscFromReportDemandeManeoClientInjoignable'
+                                           class='p-error'>From est
+                                        obligatoire.</small>
+                                </div>
 
-                    </div>
-                    <div class="p-field p-col-12 p-md-5">
-                        <label for="147">Corps cloture</label>
-                        <textarea [(ngModel)]="selectedOrdreKosc.corpsCloture" cols="30" id="147" pInputTextarea
-                                  placeholder="Corps cloture" rows="10"
-                        ></textarea>
 
-                    </div>
-                    <div class="p-field align-inputswitch p-col-12  p-md-4">
-                        <div class="label-inputswitch">
-                            <label for="148">Envoye cloture</label>
-                        </div>
-                        <div class="input-switch">
-                            <p-inputSwitch [(ngModel)]="selectedOrdreKosc.envoyeCloture" id="148"
-                            >
-                            </p-inputSwitch>
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="130">To<span style="color: red;"></span></label>
+                                    <input [(ngModel)]="selectedOrdreKosc.toReportDemandeManeoClientInjoignable"
+                                           [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToReportDemandeManeoClientInjoignable}"
+                                           class="p-mb-2 p-mr-2"
+                                           id="130"
+                                           pInputText placeholder="To"
+                                           type="text"/>
+                                    <small *ngIf='!validOrdreKoscToReportDemandeManeoClientInjoignable' class='p-error'>To
+                                        est
+                                        obligatoire.</small>
+                                </div>
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="137">Objet</label>
+                                    <input [(ngModel)]="selectedOrdreKosc.objetReportDemandeManeoClientInjoignable"
+                                           class="p-mb-2 p-mr-2"
+                                           id="137"
+                                           pInputText
+                                           placeholder="Objet" type="text"
+                                    />
 
-                        </div>
-                    </div>
-                    <div class="p-field p-col-12 p-md-3">
-                        <label for="149">Date envoi cloture</label>
-                        <p-calendar [(ngModel)]="selectedOrdreKosc.dateEnvoiCloture" [showSeconds]="false" [showTime]="true"
-                                    dateFormat="{{dateFormat}}"
-                                    id="149"
-                                    placeholder="Date envoi cloture">
-                        </p-calendar>
+                                </div>
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="63">Corps </label>
+                                    <textarea [(ngModel)]="selectedOrdreKosc.corpsReportDemandeManeoClientInjoignable"
+                                              cols="30" id="63"
+                                              pInputTextarea
+                                              placeholder="Corps"
+                                              rows="6"
+                                    ></textarea>
 
-                    </div>
-                    <div class="p-field p-col-12 p-md-5">
-                        <label for="143">Commantaire cloture</label>
-                        <textarea [(ngModel)]="selectedOrdreKosc.commantaireCloture" cols="30" id="143" pInputTextarea
-                                  placeholder="5sena ndiro piece joint"
-                                  rows="10"
-                        ></textarea>
+                                </div>
+                                <div class="p-field p-col-12 p-md-4">
+                                    <button (click)="sendMailReportDemandeManeoClientInjoignable()"
+                                            class="p-button-help"
+                                            icon="pi pi-send" label="Envoyer"
+                                            pButton
+                                            type="button"></button>
+                                </div>
+                                <div class="p-field p-col-12 p-md-4">
+                                    <p-progressSpinner *ngIf="showSpinner"
+                                                       [style]="{width: '50px', height: '50px'}"
+                                                       styleClass="custom-spinner" strokeWidth="8"
+                                                       fill="#EEEEEE"
+                                                       animationDuration=".5s"></p-progressSpinner>
 
-                    </div>
-                    <!--                            <div class="p-field p-col-12 p-md-3">-->
-                    <!--                                <label for="150">Email cloture piece joints</label>-->
-                    <!--                                <input class="p-mb-2 p-mr-2" type="text" pInputText-->
-                    <!--                                       placeholder="Email cloture piece joints"-->
-                    <!--                                       id="150" [(ngModel)]="selectedOrdreKosc.emailCloturePieceJoints"-->
-                    <!--                                />-->
 
-                    <!--                            </div>-->
-                </div>
-            </p-tabPanel>
-            <p-tabPanel header="Suivi">
-                <div class="p-grid">
-                    <div class="p-field p-col-12 p-md-3">
-                        <label for="151">Template suivi</label>
-                        <p-dropdown [(ngModel)]="selectedOrdreKosc.templateSuiviVo" [filter]="true"
-                                    [options]="templateSuivis" [showClear]="true" filterMatchMode="contains"
-                                    id="151"
-                                    optionLabel="libelle"
-                                    placeholder="Template suivi">
-                        </p-dropdown>
+                                </div>
+                                        </div>
+                                    </p-tabPanel>
+                                    <p-tabPanel header="Client Joignable Accepte">
+                                        <div class="p-grid">
 
-                    </div>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <label for="129">From<span style="color: red;"></span></label>
+                                                <input [(ngModel)]="selectedOrdreKosc.fromReportDemandeManeoClientJoignableAccepte"
+                                                       [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromReportDemandeManeoClientJoignableAccepte}"
+                                                       class="p-mb-2 p-mr-2"
+                                                       id="129"
+                                                       pInputText placeholder="From"
+                                                       type="text"/>
+                                                <small *ngIf='!validOrdreKoscFromReportDemandeManeoClientJoignableAccepte'
+                                                       class='p-error'>From est
+                                                    obligatoire.</small>
+                                            </div>
 
-                    <div class="p-col-1">
-                        <label></label>
-                        <button (click)="openCreateTemplateSuivi('templateSuivi')" class="p-button-success one-colonne-btn-success-align" icon="pi pi-plus"
-                                pButton pRipple
-                                type="button"></button>
-                    </div>
-                    <div class="p-field p-col-12 p-md-3">
-                        <label for="152">Objet suivi</label>
-                        <input [(ngModel)]="selectedOrdreKosc.objetSuivi" class="p-mb-2 p-mr-2" id="152"
-                               pInputText
-                               placeholder="Objet suivi" type="text"
-                        />
 
-                    </div>
-                    <div class="p-field p-col-12 p-md-5">
-                        <label for="153">Corps suivi</label>
-                        <textarea [(ngModel)]="selectedOrdreKosc.corpsSuivi" cols="30" id="153" pInputTextarea
-                                  placeholder="Corps suivi" rows="10"
-                        ></textarea>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <label for="130">To<span style="color: red;"></span></label>
+                                                <input [(ngModel)]="selectedOrdreKosc.toReportDemandeManeoClientJoignableAccepte"
+                                                       [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToReportDemandeManeoClientJoignableAccepte}"
+                                                       class="p-mb-2 p-mr-2"
+                                                       id="130"
+                                                       pInputText placeholder="To"
+                                                       type="text"/>
+                                                <small *ngIf='!validOrdreKoscToReportDemandeManeoClientJoignableAccepte' class='p-error'>To
+                                                    est
+                                                    obligatoire.</small>
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <label for="137">Objet</label>
+                                                <input [(ngModel)]="selectedOrdreKosc.objetReportDemandeManeoClientJoignableAccepte"
+                                                       class="p-mb-2 p-mr-2"
+                                                       id="137"
+                                                       pInputText
+                                                       placeholder="Objet" type="text"
+                                                />
 
-                    </div>
-                    <div class="p-field align-inputswitch p-col-12  p-md-3">
-                        <div class="label-inputswitch">
-                            <label for="154">Envoye suivi</label>
-                        </div>
-                        <div class="input-switch">
-                            <p-inputSwitch [(ngModel)]="selectedOrdreKosc.envoyeSuivi" id="154"
-                            >
-                            </p-inputSwitch>
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <label for="63">Corps </label>
+                                                <textarea [(ngModel)]="selectedOrdreKosc.corpsReportDemandeManeoClientJoignableAccepte"
+                                                          cols="30" id="63"
+                                                          pInputTextarea
+                                                          placeholder="Corps"
+                                                          rows="6"
+                                                ></textarea>
 
-                        </div>
-                    </div>
-                    <div class="p-field p-col-12 p-md-3">
-                        <label for="155">Date envoi suivi</label>
-                        <p-calendar [(ngModel)]="selectedOrdreKosc.dateEnvoiSuivi" [showSeconds]="false" [showTime]="true"
-                                    dateFormat="{{dateFormat}}"
-                                    id="155"
-                                    placeholder="Date envoi suivi">
-                        </p-calendar>
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-4">
+                                                <button (click)="sendMailReportDemandeManeoClientJoignableAccepte()"
+                                                        class="p-button-help"
+                                                        icon="pi pi-send" label="Envoyer"
+                                                        pButton
+                                                        type="button"></button>
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-4">
+                                                <p-progressSpinner *ngIf="showSpinner"
+                                                                   [style]="{width: '50px', height: '50px'}"
+                                                                   styleClass="custom-spinner" strokeWidth="8"
+                                                                   fill="#EEEEEE"
+                                                                   animationDuration=".5s"></p-progressSpinner>
 
-                    </div>
 
-                    <div class="p-col-1">
-                        <label></label>
-                    </div>
-                    <div class="p-field align-inputswitch p-col-12  p-md-3">
-                        <div class="label-inputswitch">
-                            <label for="154">Annuler envoi email</label>
-                        </div>
-                        <div class="input-switch">
-                            <p-inputSwitch [(ngModel)]="selectedOrdreKosc.existingOtp" id="156"
-                            >
-                            </p-inputSwitch>
+                                            </div>
+                                        </div>
+                                    </p-tabPanel>
+                                    <p-tabPanel header="Client Joignable Refuse">
+                                        <div class="p-grid">
 
-                        </div>
-                    </div>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <label for="129">From<span style="color: red;"></span></label>
+                                                <input [(ngModel)]="selectedOrdreKosc.fromReportDemandeManeoClientJoignableRefus"
+                                                       [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromReportDemandeManeoClientJoignableRefus}"
+                                                       class="p-mb-2 p-mr-2"
+                                                       id="129"
+                                                       pInputText placeholder="From"
+                                                       type="text"/>
+                                                <small *ngIf='!validOrdreKoscFromReportDemandeManeoClientJoignableRefus'
+                                                       class='p-error'>From est
+                                                    obligatoire.</small>
+                                            </div>
 
+
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <label for="130">To<span style="color: red;"></span></label>
+                                                <input [(ngModel)]="selectedOrdreKosc.toReportDemandeManeoClientJoignableRefus"
+                                                       [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToReportDemandeManeoClientJoignableRefus}"
+                                                       class="p-mb-2 p-mr-2"
+                                                       id="130"
+                                                       pInputText placeholder="To"
+                                                       type="text"/>
+                                                <small *ngIf='!validOrdreKoscToReportDemandeManeoClientJoignableRefus' class='p-error'>To
+                                                    est
+                                                    obligatoire.</small>
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <label for="137">Objet</label>
+                                                <input [(ngModel)]="selectedOrdreKosc.objetReportDemandeManeoClientJoignableRefus"
+                                                       class="p-mb-2 p-mr-2"
+                                                       id="137"
+                                                       pInputText
+                                                       placeholder="Objet" type="text"
+                                                />
+
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <label for="63">Corps </label>
+                                                <textarea [(ngModel)]="selectedOrdreKosc.corpsReportDemandeManeoClientJoignableRefus"
+                                                          cols="30" id="63"
+                                                          pInputTextarea
+                                                          placeholder="Corps"
+                                                          rows="6"
+                                                ></textarea>
+
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-4">
+                                                <button (click)="sendMailReportDemandeManeoClientJoignableRefus()"
+                                                        class="p-button-help"
+                                                        icon="pi pi-send" label="Envoyer"
+                                                        pButton
+                                                        type="button"></button>
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-4">
+                                                <p-progressSpinner *ngIf="showSpinner"
+                                                                   [style]="{width: '50px', height: '50px'}"
+                                                                   styleClass="custom-spinner" strokeWidth="8"
+                                                                   fill="#EEEEEE"
+                                                                   animationDuration=".5s"></p-progressSpinner>
+
+
+                                            </div>
+                                        </div>
+                                    </p-tabPanel>
+                                </p-tabView>
+                            </div>
+                        </p-tabPanel>
+                        <p-tabPanel header="Demande Client">
+                            <div class="p-grid">
+                                <p-tabView>
+                                    <p-tabPanel header="Client Injoignable">
+                                        <div class="p-grid">
+
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <label for="129">From<span style="color: red;"></span></label>
+                                                <input [(ngModel)]="selectedOrdreKosc.fromReportDemandeClientClientInjoignable"
+                                                       [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromReportDemandeClientClientInjoignable}"
+                                                       class="p-mb-2 p-mr-2"
+                                                       id="129"
+                                                       pInputText placeholder="From"
+                                                       type="text"/>
+                                                <small *ngIf='!validOrdreKoscFromReportDemandeClientClientInjoignable'
+                                                       class='p-error'>From est
+                                                    obligatoire.</small>
+                                            </div>
+
+
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <label for="130">To<span style="color: red;"></span></label>
+                                                <input [(ngModel)]="selectedOrdreKosc.toReportDemandeClientClientInjoignable"
+                                                       [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToReportDemandeClientClientInjoignable}"
+                                                       class="p-mb-2 p-mr-2"
+                                                       id="130"
+                                                       pInputText placeholder="To"
+                                                       type="text"/>
+                                                <small *ngIf='!validOrdreKoscToReportDemandeClientClientInjoignable' class='p-error'>To
+                                                    est
+                                                    obligatoire.</small>
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <label for="137">Objet</label>
+                                                <input [(ngModel)]="selectedOrdreKosc.objetReportDemandeClientClientInjoignable"
+                                                       class="p-mb-2 p-mr-2"
+                                                       id="137"
+                                                       pInputText
+                                                       placeholder="Objet" type="text"
+                                                />
+
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <label for="63">Corps </label>
+                                                <textarea [(ngModel)]="selectedOrdreKosc.corpsReportDemandeClientClientInjoignable"
+                                                          cols="30" id="63"
+                                                          pInputTextarea
+                                                          placeholder="Corps"
+                                                          rows="6"
+                                                ></textarea>
+
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-4">
+                                                <button (click)="sendMailReportDemandeClientClientInjoignable()"
+                                                        class="p-button-help"
+                                                        icon="pi pi-send" label="Envoyer"
+                                                        pButton
+                                                        type="button"></button>
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-4">
+                                                <p-progressSpinner *ngIf="showSpinner"
+                                                                   [style]="{width: '50px', height: '50px'}"
+                                                                   styleClass="custom-spinner" strokeWidth="8"
+                                                                   fill="#EEEEEE"
+                                                                   animationDuration=".5s"></p-progressSpinner>
+
+
+                                            </div>
+                                        </div>
+                                    </p-tabPanel>
+                                    <p-tabPanel header="Client Joignable">
+                                        <div class="p-grid">
+
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <label for="129">From<span style="color: red;"></span></label>
+                                                <input [(ngModel)]="selectedOrdreKosc.fromReportDemandeClientClientJoignable"
+                                                       [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromReportDemandeClientClientJoignable}"
+                                                       class="p-mb-2 p-mr-2"
+                                                       id="129"
+                                                       pInputText placeholder="From"
+                                                       type="text"/>
+                                                <small *ngIf='!validOrdreKoscFromReportDemandeClientClientJoignable'
+                                                       class='p-error'>From est
+                                                    obligatoire.</small>
+                                            </div>
+
+
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <label for="130">To<span style="color: red;"></span></label>
+                                                <input [(ngModel)]="selectedOrdreKosc.toReportDemandeClientClientJoignable"
+                                                       [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToReportDemandeClientClientJoignable}"
+                                                       class="p-mb-2 p-mr-2"
+                                                       id="130"
+                                                       pInputText placeholder="To"
+                                                       type="text"/>
+                                                <small *ngIf='!validOrdreKoscToReportDemandeClientClientJoignable' class='p-error'>To
+                                                    est
+                                                    obligatoire.</small>
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <label for="137">Objet</label>
+                                                <input [(ngModel)]="selectedOrdreKosc.objetReportDemandeClientClientJoignable"
+                                                       class="p-mb-2 p-mr-2"
+                                                       id="137"
+                                                       pInputText
+                                                       placeholder="Objet" type="text"
+                                                />
+
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <label for="63">Corps </label>
+                                                <textarea [(ngModel)]="selectedOrdreKosc.corpsReportDemandeClientClientJoignable"
+                                                          cols="30" id="63"
+                                                          pInputTextarea
+                                                          placeholder="Corps"
+                                                          rows="6"
+                                                ></textarea>
+
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-4">
+                                                <button (click)="sendMailReportDemandeClientClientJoignable()"
+                                                        class="p-button-help"
+                                                        icon="pi pi-send" label="Envoyer"
+                                                        pButton
+                                                        type="button"></button>
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-4">
+                                                <p-progressSpinner *ngIf="showSpinner"
+                                                                   [style]="{width: '50px', height: '50px'}"
+                                                                   styleClass="custom-spinner" strokeWidth="8"
+                                                                   fill="#EEEEEE"
+                                                                   animationDuration=".5s"></p-progressSpinner>
+
+
+                                            </div>
+                                        </div>
+                                    </p-tabPanel>
+
+                                </p-tabView>
+
+                            </div>
+                        </p-tabPanel>
+                    </p-tabView>
                 </div>
             </p-tabPanel>
         </p-tabView>

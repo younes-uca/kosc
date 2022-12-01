@@ -121,6 +121,9 @@ import {
 import {
     TemplateEmailReportDemandeManeoClientInjoignableListAdminComponent
 } from "./template-email-report-demande-maneo-client-injoignable-admin/list-admin/template-email-report-demande-maneo-client-injoignable-list-admin.component";
+import {
+    TemplateEmailReportDemandeManeoClientJoignableAccepteListAdminComponent
+} from "./template-email-report-demande-maneo-client-joignable-accepte-admin/list-admin/template-email-report-demande-maneo-client-joignable-accepte-list-admin.component";
 
 
 @NgModule({
@@ -532,6 +535,18 @@ import {
                                 {
                                     path: 'list',
                                     component: TemplateEmailReportDemandeManeoClientJoignableRefusListAdminComponent ,
+                                    canActivate: [AuthGuard]
+                                }
+                            ]
+                        },
+
+                        {
+
+                            path: 'template-email-report-demande-maneo-client-joignable-accepte',
+                            children: [
+                                {
+                                    path: 'list',
+                                    component: TemplateEmailReportDemandeManeoClientJoignableAccepteListAdminComponent ,
                                     canActivate: [AuthGuard]
                                 }
                             ]
