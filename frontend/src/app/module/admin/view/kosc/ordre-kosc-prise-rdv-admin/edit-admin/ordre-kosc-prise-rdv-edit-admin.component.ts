@@ -62,6 +62,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     fileName = '';
 
     public appropriateTechniciens:Array<TechnicienVo>;
+    private buttonDisabled: boolean;
 
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService
         , private stringUtilService: StringUtilService
@@ -88,6 +89,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 // methods
     ngOnInit(): void {
 
+        this.buttonDisabled = true
 
         this.selectedCauseKoOk = new CauseKoOkVo();
         this.defaultTemplateConfigurationService.findDefaultTemplateConfiguration().subscribe((data) =>
@@ -123,7 +125,13 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         this.templateSuiviService.findAll().subscribe((data) => this.templateSuivis = data);
     }
 
-
+    checkButton() {
+        if (this.selectedOrdreKosc.dateDeuxiemeAppel != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     displayPriseRdv = false;
 
     async showPriseRdvDialog() {
@@ -275,6 +283,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     private selectTab(myEtat: string, myCause: string) {
 
+        this.displayPriseRdv = false;
         this.selectedOrdreKosc.etatDemandeKoscVo = this.findEtatDemandeByCode(myEtat);
         this.selectedOrdreKosc.causeKoOkVo = this.findByEtatDemandeCause(myCause);
 
@@ -286,7 +295,6 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.toClientInjoinable = this.selectedOrdreKosc.endCustumorContactEmail;
             this.selectedOrdreKosc.objetClientInjoinable = eval(this.selectedDefaultTemplateConfiguration.templateEmailClientInjoinableVo.objet);
             this.selectedOrdreKosc.corpsClientInjoinable = eval(this.selectedDefaultTemplateConfiguration.templateEmailClientInjoinableVo.corps);
-
             this.selectedOrdreKosc.fromClientInjoinableKosc = this.selectedDefaultTemplateConfiguration.emailManeo;
             this.selectedOrdreKosc.toClientInjoinableKosc = this.selectedDefaultTemplateConfiguration.emailKosc;
             this.selectedOrdreKosc.objetClientInjoinableKosc = eval(this.selectedDefaultTemplateConfiguration.templateEmailClientInjoinableKoscVo.objet);
@@ -311,6 +319,8 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.fromAutre = this.selectedDefaultTemplateConfiguration.emailManeo;
             this.selectedOrdreKosc.toAutre = this.selectedDefaultTemplateConfiguration.emailKosc;
         }
+
+
     }
 
     public edit() {
