@@ -302,34 +302,34 @@ export class OrdreKoscVo {
     public fromReportDemandeManeoClientInjoignable: string;
     public toReportDemandeManeoClientInjoignable: string;
     public envoyeReportDemandeManeoClientInjoignable: null | boolean;
-    public dateReportDemandeManeoClientInjoignable: Date;
+    public dateEnvoiReportDemandeManeoClientInjoignable: Date;
 
     public objetReportDemandeManeoClientJoignableAccepte: string;
     public corpsReportDemandeManeoClientJoignableAccepte: string;
     public fromReportDemandeManeoClientJoignableAccepte: string;
     public toReportDemandeManeoClientJoignableAccepte: string;
     public envoyeReportDemandeManeoClientJoignableAccepte: null | boolean;
-    public dateReportDemandeManeoClientJoignableAccepte: Date;
+    public dateEnvoiReportDemandeManeoClientJoignableAccepte: Date;
 
     public objetReportDemandeManeoClientJoignableRefus: string;
     public corpsReportDemandeManeoClientJoignableRefus: string;
     public fromReportDemandeManeoClientJoignableRefus: string;
     public toReportDemandeManeoClientJoignableRefus: string;
     public envoyeReportDemandeManeoClientJoignableRefus: null | boolean;
-    public dateReportDemandeManeoClientJoignableRefus: Date;
+    public dateEnvoiReportDemandeManeoClientJoignableRefus: Date;
 
     public objetReportDemandeClientClientInjoignable: string;
     public corpsReportDemandeClientClientInjoignable: string;
     public fromReportDemandeClientClientInjoignable: string;
     public toReportDemandeClientClientInjoignable: string;
     public envoyeReportDemandeClientClientInjoignable: null | boolean;
-    public dateReportDemandeClientClientInjoignable: Date;
+    public dateEnvoiReportDemandeClientClientInjoignable: Date;
 
     public objetReportDemandeClientClientJoignable: string;
     public corpsReportDemandeClientClientJoignable: string;
     public fromReportDemandeClientClientJoignable: string;
     public toReportDemandeClientClientJoignable: string;
     public envoyeReportDemandeClientClientJoignable: null | boolean;
-    public dateReportDemandeClientClientJoignable: Date;
+    public dateEnvoiReportDemandeClientClientJoignable: Date;
 
 }

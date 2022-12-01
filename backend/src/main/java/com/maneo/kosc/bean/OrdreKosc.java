@@ -634,7 +634,7 @@ public class OrdreKosc {
     private Boolean envoyeReportDemandeManeoClientInjoignable = false;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
-    private Date dateReportDemandeManeoClientInjoignable;
+    private Date dateEnvoiReportDemandeManeoClientInjoignable;
 
 
 
@@ -655,7 +655,7 @@ public class OrdreKosc {
     private Boolean envoyeReportDemandeManeoClientJoignableAccepte = false;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
-    private Date dateReportDemandeManeoClientJoignableAccepte;
+    private Date dateEnvoiReportDemandeManeoClientJoignableAccepte;
 
 
 
@@ -676,7 +676,7 @@ public class OrdreKosc {
     private Boolean envoyeReportDemandeManeoClientJoignableRefus = false;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
-    private  Date dateReportDemandeManeoClientJoignableRefus;
+    private  Date dateEnvoiReportDemandeManeoClientJoignableRefus;
 
 
 
@@ -697,7 +697,7 @@ public class OrdreKosc {
     private Boolean envoyeReportDemandeClientClientInjoignable = false;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
-    private Date dateReportDemandeClientClientInjoignable;
+    private Date dateEnvoiReportDemandeClientClientInjoignable;
 
 
 
@@ -718,7 +718,7 @@ public class OrdreKosc {
     private Boolean envoyeReportDemandeClientClientJoignable = false ;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
-    private Date dateReportDemandeClientClientJoignable;
+    private Date dateEnvoiReportDemandeClientClientJoignable;
 
 
     @ManyToOne
@@ -2620,12 +2620,12 @@ public class OrdreKosc {
         this.envoyeReportDemandeManeoClientInjoignable = envoyeReportDemandeManeoClientInjoignable;
     }
 
-    public Date getDateReportDemandeManeoClientInjoignable() {
-        return dateReportDemandeManeoClientInjoignable;
+    public Date getDateEnvoiReportDemandeManeoClientInjoignable() {
+        return dateEnvoiReportDemandeManeoClientInjoignable;
     }
 
-    public void setDateReportDemandeManeoClientInjoignable(Date dateReportDemandeManeoClientInjoignable) {
-        this.dateReportDemandeManeoClientInjoignable = dateReportDemandeManeoClientInjoignable;
+    public void setDateEnvoiReportDemandeManeoClientInjoignable(Date dateEnvoiReportDemandeManeoClientInjoignable) {
+        this.dateEnvoiReportDemandeManeoClientInjoignable = dateEnvoiReportDemandeManeoClientInjoignable;
     }
 
     public String getObjetReportDemandeManeoClientJoignableAccepte() {
@@ -2668,12 +2668,12 @@ public class OrdreKosc {
         this.envoyeReportDemandeManeoClientJoignableAccepte = envoyeReportDemandeManeoClientJoignableAccepte;
     }
 
-    public Date getDateReportDemandeManeoClientJoignableAccepte() {
-        return dateReportDemandeManeoClientJoignableAccepte;
+    public Date getDateEnvoiReportDemandeManeoClientJoignableAccepte() {
+        return dateEnvoiReportDemandeManeoClientJoignableAccepte;
     }
 
-    public void setDateReportDemandeManeoClientJoignableAccepte(Date dateReportDemandeManeoClientJoignableAccepte) {
-        this.dateReportDemandeManeoClientJoignableAccepte = dateReportDemandeManeoClientJoignableAccepte;
+    public void setDateEnvoiReportDemandeManeoClientJoignableAccepte(Date dateEnvoiReportDemandeManeoClientJoignableAccepte) {
+        this.dateEnvoiReportDemandeManeoClientJoignableAccepte = dateEnvoiReportDemandeManeoClientJoignableAccepte;
     }
 
     public String getObjetReportDemandeManeoClientJoignableRefus() {
@@ -2716,12 +2716,12 @@ public class OrdreKosc {
         this.envoyeReportDemandeManeoClientJoignableRefus = envoyeReportDemandeManeoClientJoignableRefus;
     }
 
-    public Date getDateReportDemandeManeoClientJoignableRefus() {
-        return dateReportDemandeManeoClientJoignableRefus;
+    public Date getDateEnvoiReportDemandeManeoClientJoignableRefus() {
+        return dateEnvoiReportDemandeManeoClientJoignableRefus;
     }
 
-    public void setDateReportDemandeManeoClientJoignableRefus(Date dateReportDemandeManeoClientJoignableRefus) {
-        this.dateReportDemandeManeoClientJoignableRefus = dateReportDemandeManeoClientJoignableRefus;
+    public void setDateEnvoiReportDemandeManeoClientJoignableRefus(Date dateEnvoiReportDemandeManeoClientJoignableRefus) {
+        this.dateEnvoiReportDemandeManeoClientJoignableRefus = dateEnvoiReportDemandeManeoClientJoignableRefus;
     }
 
     public String getObjetReportDemandeClientClientInjoignable() {
@@ -2764,12 +2764,12 @@ public class OrdreKosc {
         this.envoyeReportDemandeClientClientInjoignable = envoyeReportDemandeClientClientInjoignable;
     }
 
-    public Date getDateReportDemandeClientClientInjoignable() {
-        return dateReportDemandeClientClientInjoignable;
+    public Date getDateEnvoiReportDemandeClientClientInjoignable() {
+        return dateEnvoiReportDemandeClientClientInjoignable;
     }
 
-    public void setDateReportDemandeClientClientInjoignable(Date dateReportDemandeClientClientInjoignable) {
-        this.dateReportDemandeClientClientInjoignable = dateReportDemandeClientClientInjoignable;
+    public void setDateEnvoiReportDemandeClientClientInjoignable(Date dateEnvoiReportDemandeClientClientInjoignable) {
+        this.dateEnvoiReportDemandeClientClientInjoignable = dateEnvoiReportDemandeClientClientInjoignable;
     }
 
     public String getObjetReportDemandeClientClientJoignable() {
@@ -2812,12 +2812,12 @@ public class OrdreKosc {
         this.envoyeReportDemandeClientClientJoignable = envoyeReportDemandeClientClientJoignable;
     }
 
-    public Date getDateReportDemandeClientClientJoignable() {
-        return dateReportDemandeClientClientJoignable;
+    public Date getDateEnvoiReportDemandeClientClientJoignable() {
+        return dateEnvoiReportDemandeClientClientJoignable;
     }
 
-    public void setDateReportDemandeClientClientJoignable(Date dateReportDemandeClientClientJoignable) {
-        this.dateReportDemandeClientClientJoignable = dateReportDemandeClientClientJoignable;
+    public void setDateEnvoiReportDemandeClientClientJoignable(Date dateEnvoiReportDemandeClientClientJoignable) {
+        this.dateEnvoiReportDemandeClientClientJoignable = dateEnvoiReportDemandeClientClientJoignable;
     }
 }
 
