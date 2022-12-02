@@ -199,3 +199,77 @@ template_email_report_demande_maneo_client_joignable_accepte = 10000,
 template_email_report_demande_maneo_client_joignable_refus = 10000
 
 WHERE id=10000;
+
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1
+-- Généré le : ven. 02 déc. 2022 à 09:53
+-- Version du serveur : 10.4.24-MariaDB
+-- Version de PHP : 8.1.6
+
+SET FOREIGN_KEY_CHECKS=0;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données : `kosc`
+--
+
+--
+-- Déchargement des données de la table `template_email_client_injoinable_kosc`
+--
+
+INSERT INTO `template_email_client_injoinable_kosc` (`id`, `corps`, `libelle`, `objet`) VALUES
+(10000, '`Bonjour,\\n\\nVotre client final n\'est pas joignable, nous avons tenté de le joindre à plusieurs reprises mais sans succès au numéro :  \'${this.selectedOrdreKosc.endCustumorContactPhone}\'/\'${this.selectedOrdreKosc.endCustumorContactCellPhone}\'\\n\\nUn mail a été envoyé en parallèle, sans retour de leur part, merci de faire le point avec votre client opérateur et revenir vers nous avec de nouvelle coordonnée pour planifier un rendez-vous.\\n\\nBien Cordialement\\n{Nom d\'utilisateur}\\nc.a@maneoreseaux.com\\n{Téléphone de l\'utilisateur}`', 'CLIENT INJOIGNABLE KOSC', '`[CLIENT INJOIGNABLE]${this.selectedOrdreKosc.reference}_${this.selectedOrdreKosc.referenceWorkOrder}_${this.selectedOrdreKosc.endCustumorContactLastName} ${this.selectedOrdreKosc.endCustumorContactFirstName}`');
+
+--
+-- Déchargement des données de la table `template_email_confirmation_client`
+--
+
+INSERT INTO `template_email_confirmation_client` (`id`, `corps`, `libelle`, `objet`) VALUES
+    (10000, '`Bonjour,\\n\\nSuite à  votre demande de raccordement fibre pour la commande \"${this.selectedOrdreKosc.reference}\", l\'intervention de notre technicien est prévu le :\\n${this.datePipe.transform(this.selectedOrdreKosc.dateInterventionTechniqueDebut)},${this.selectedOrdreKosc.endCustumorStreetNumber} ${this.selectedOrdreKosc.endCustumorStreetName},${this.selectedOrdreKosc.endCustumorBuilding},${this.selectedOrdreKosc.endCustumorCity}\\n\\nDans cette attente, veuillez agréer, mes plus cordiales salutations.\\n\\nBien Cordialement\\n{Nom d\'utilisateur}\\nc.a@maneoreseaux.com\\n{Téléphone de l\'utilisateur}`', 'CONFIRMATION CLIENT', '`CONFIRMATION DE RENDEZ-VOUS POUR RACCORDEMENT FTTH`');
+
+--
+-- Déchargement des données de la table `template_email_mauvais_contact`
+--
+
+INSERT INTO `template_email_mauvais_contact` (`id`, `corps`, `libelle`, `objet`) VALUES
+(10000, '`Bonjour,\\n\\nPour la référence en objet, le client au \'${this.selectedOrdreKosc.endCustumorContactPhone}\' refuse de prendre un rendez-vous parce que c\'est pas le bon contact pour la prise de rendez-vous.\\nMerci de bien vouloir voir de votre côté.\\n\\nBien Cordialement\\n{Nom d\'utilisateur}\\nc.a@maneoreseaux.com\\n{Téléphone de l\'utilisateur}`', 'MAUVAIS CONTACT', '`${this.selectedOrdreKosc.reference}_${this.selectedOrdreKosc.operatorVo?.libelle}`');
+
+--
+-- Déchargement des données de la table `template_email_refus`
+--
+
+INSERT INTO `template_email_refus` (`id`, `corps`, `libelle`, `objet`) VALUES
+    (10000, '`Bonjour,\\n\\nPour la référence en objet, le client au \'${this.selectedOrdreKosc.endCustumorContactPhone}\' refuse de prendre un rendez-vous parce que......\\nMerci de bien vouloir voir de votre côté.\\n\\nBien Cordialement\\n{Nom d\'utilisateur}\\nc.a@maneoreseaux.com\\n{Téléphone de l\'utilisateur}`', 'REFUS CLIENT', '`${this.selectedOrdreKosc.reference}_${this.selectedOrdreKosc.operatorVo?.libelle}`');
+
+--
+-- Déchargement des données de la table `template_email_replanification`
+--
+
+INSERT INTO `template_email_replanification` (`id`, `corps`, `libelle`, `objet`) VALUES
+    (10000, '`Bonjour,\\n\\nVeuillez trouver ci-dessous les éléments  prise de RDV concernant L’OT en objet\\n\\nREFERENCE DOSSIER : ${this.selectedOrdreKosc.referenceWorkOrder}\\nREFERENCE DE L\'INTERVENTION : ${this.selectedOrdreKosc.reference}\\nOPERATEUR EX : ${this.selectedOrdreKosc.operatorVo?.libelle}\\nSTATUT DE CLOTURE CLIENT : SO\\nSTATUT RDV : RDV RACCO PRIS\\nDATE RDV : ${this.datePipe.transform(this.selectedOrdreKosc.dateInterventionTechniqueDebut)}\\nHEURE RDV : {creneau de RDV}\\nPTO EXISTANTE SUR SITE SELON CLIENT :\\nType D \'INTERVENTION PLANIFIEE : ${this.selectedOrdreKosc.supplierServiceCode}\\nREMARQUE DU CONTACT SITE À RACCORDER OU CA :  ${this.selectedOrdreKosc.commentaireClient}\\n\\nBien Cordialement\\n{Nom d\'utilisateur}\\nc.a@maneoreseaux.com\\n{Téléphone de l\'utilisateur}`', 'REPLANIFICATION', '`${this.selectedOrdreKosc.reference}_${this.selectedOrdreKosc.referenceWorkOrder}_${this.selectedOrdreKosc.operatorVo?.libelle}_${this.selectedOrdreKosc.endCustumorContactLastName}`');
+SET FOREIGN_KEY_CHECKS=1;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+UPDATE `default_template_configuration`
+SET template_email_client_injoinable_kosc = 10000,
+    template_email_confirmation_client    = 10000,
+    template_email_mauvais_contact        = 10000,
+    template_email_refus                  = 10000,
+    template_email_replanification        = 10000
+
+WHERE id = 10000;
