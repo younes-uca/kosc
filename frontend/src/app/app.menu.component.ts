@@ -88,7 +88,7 @@ export class AppMenuComponent implements OnInit {
                         routerLink: ['/app/admin/kosc/ordre-kosc-affectation-technicien/list']
                     },*/
                     {
-                        label: 'Suivi Prise Rendez Vous',
+                        label: 'Suivi Commande',
                         icon: 'pi pi-fw pi-plus-circle',
                         routerLink: ['/app/admin/kosc/ordre-kosc-suivi/list']
                     },
