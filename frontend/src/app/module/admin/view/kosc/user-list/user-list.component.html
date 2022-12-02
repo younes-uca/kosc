@@ -92,8 +92,8 @@
             <small *ngIf="submitted && !user.nom" class="p-error">nom is required.</small>
         </div>
         <div class="p-field">
-            <label for="password">username</label>
-            <input [(ngModel)]="user.username" cols="20" id="password" pInputText required rows="3"/>
+            <label for="username">login</label>
+            <input [(ngModel)]="user.username" cols="20" id="username" pInputText required rows="3"/>
             <small *ngIf="submitted && !user.username" class="p-error">nom is required.</small>
         </div>
         <div *ngIf="!user.id" class="p-field">
@@ -102,13 +102,13 @@
             <small *ngIf="submitted && !user.password" class="p-error">nom is required.</small>
         </div>
         <div class="p-field">
-            <label for="password">Email</label>
-            <input [(ngModel)]="user.email" cols="20" id="password" pInputText required rows="3"/>
+            <label for="Email">Email</label>
+            <input [(ngModel)]="user.email" cols="20" id="Email" pInputText required rows="3"/>
             <small *ngIf="submitted && !user.email" class="p-error">Email is required.</small>
         </div>
-        <div *ngIf="user.roles[0]" class="p-field">
+        <div class="p-field">
             <label for="roles">Role</label>
-            <p-dropdown [(ngModel)]="user.roles[0]" [options]="roles" optionLabel="authority">
+            <p-dropdown [(ngModel)]="user.roles[0]" [options]="roles" optionLabel="authority" id="roles">
             </p-dropdown>
         </div>
     </ng-template>

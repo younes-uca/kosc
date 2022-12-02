@@ -8,7 +8,7 @@ import {LoginAdminComponent} from './module/admin/login-admin/login-admin.compon
 import {RegisterAdminComponent} from './module/admin/register-admin/register-admin.component';
 import {LoginChercheurComponent} from './module/chercheur/login-chercheur/login-chercheur.component';
 import {RegisterChercheurComponent} from './module/chercheur/register-chercheur/register-chercheur.component';
-import {UserListComponent} from "./module/admin/user-list/user-list.component";
+import {UserListComponent} from "./module/admin/view/kosc/user-list/user-list.component";
 
 @NgModule({
     imports: [

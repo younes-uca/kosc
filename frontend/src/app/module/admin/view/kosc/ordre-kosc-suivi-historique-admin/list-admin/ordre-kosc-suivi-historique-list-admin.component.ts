@@ -4,7 +4,7 @@ import {OrdreKoscVo} from 'src/app/controller/model/OrdreKosc.model';
 import {Router} from '@angular/router';
 import {environment} from 'src/environments/environment';
 import {RoleService} from 'src/app/controller/service/role.service';
-import {DatePipe} from '@angular/common';
+import {DatePipe, formatDate} from '@angular/common';
 
 
 import {OperatorService} from 'src/app/controller/service/Operator.service';
@@ -38,6 +38,7 @@ import {ExportService} from 'src/app/controller/service/Export.service';
 import {
     TemplateEmailClientInjoinableKoscService
 } from "../../../../../../controller/service/TemplateEmailClientInjoinableKosc.service";
+import * as moment from "moment/moment";
 
 @Component({
     selector: 'app-ordre-kosc-suivi-historique-list-admin',
@@ -111,12 +112,11 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
 
     }
 
-    public searchRequestSuiviCdd() {
-        console.log(this.searchOrdreKosc.dateEnvoiCriMin);
-        this.ordreKoscService.findByCriteriaSuiviCdd(this.searchOrdreKosc).subscribe(ordreKoscs => {
+    public searchRequestCdd() {
+        console.log(this.searchOrdreKosc.etatDemandeKoscVos);
+        this.ordreKoscService.findByCriteriaCdd(this.searchOrdreKosc).subscribe(ordreKoscs => {
             this.ordreKoscs = ordreKoscs;
             console.log(ordreKoscs);
-            // this.searchOrdreKosc = new OrdreKoscVo();
         }, error => console.log(error));
     }
 
@@ -126,8 +126,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         isPermistted ? this.etatDemandeKoscService.findAll().subscribe(etatDemandeKoscs =>{
                 this.etatDemandeKoscs = etatDemandeKoscs;
                 this.searchOrdreKosc.etatDemandeKoscVos = this.etatDemandeKoscs.filter(e => etatNonDesire.indexOf(e.code) != -1);
-                console.log( this.searchOrdreKosc.etatDemandeKoscVos);
-                // console.log( this.searchOrdreKosc.etatDemandeKoscVos);
+
             }, error => console.log(error))
             : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
 
@@ -183,11 +182,11 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
     }
 
     get searchOrdreKosc(): OrdreKoscVo {
-        return this.ordreKoscService.searchOrdreKoscSuiviCdd;
+        return this.ordreKoscService.searchOrdreKoscCdd;
     }
 
     set searchOrdreKosc(value: OrdreKoscVo) {
-        this.ordreKoscService.searchOrdreKoscSuiviCdd = value;
+        this.ordreKoscService.searchOrdreKoscCdd = value;
     }
 
     get dateFormat() {
@@ -195,7 +194,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
     }
 
     ngAfterViewInit(): void {
-        this.searchRequestSuiviCdd();
+        this.searchRequestCdd();
     }
 
     ngOnInit(): void {
@@ -206,7 +205,8 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         ];
         this.home = {icon: 'pi pi-home', routerLink: '/'};
 
-        this.loadEtatDemandeKoscIncluding(['ok', 'ko']);
+        this.loadEtatDemandeKoscIncluding(['ok','ko','planification']);
+        this.setDateEnvoiMinAndMax();
         this.initExport();
         this.initCol();
         this.loadOperator();
@@ -1055,5 +1055,12 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         }else {
             return false;
         }
+    }
+
+    private setDateEnvoiMinAndMax() {
+        let today =new Date();
+        this.searchOrdreKosc.dateEnvoiPlanificationMin=null;
+        this.searchOrdreKosc.dateEnvoiPlanificationMax= moment(today).format("yyyy-MM-DD");
+        console.log(this.searchOrdreKosc.dateEnvoiPlanificationMax)
     }
 }

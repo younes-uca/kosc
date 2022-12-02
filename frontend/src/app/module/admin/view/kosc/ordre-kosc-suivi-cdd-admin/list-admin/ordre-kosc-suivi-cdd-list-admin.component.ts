@@ -111,7 +111,7 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
 
     public searchRequestSuiviCdd() {
         console.log(this.searchOrdreKosc.etatDemandeKoscVos);
-        this.ordreKoscService.findByCriteriaSuiviCdd2(this.searchOrdreKosc).subscribe(ordreKoscs => {
+        this.ordreKoscService.findByCriteriaSuiviCdd(this.searchOrdreKosc).subscribe(ordreKoscs => {
             this.ordreKoscs = ordreKoscs;
             console.log(ordreKoscs);
             // this.searchOrdreKosc = new OrdreKoscVo();

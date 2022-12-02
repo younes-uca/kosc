@@ -42,22 +42,26 @@ public class JourFerieAdminServiceImpl extends AbstractServiceImpl<JourFerie> im
     private List<JourFerieVo> findByDateMinAndMax(Date dateDebut, Date dateFin) {
         List<JourFerie> calendrierJourFerieses = findAll();
         List<JourFerieVo> res = new ArrayList();
-        if (calendrierJourFerieses != null) {
-            for (JourFerie jf : calendrierJourFerieses) {
-                if (jf.getDateFin().getTime() < dateFin.getTime() || jf.getDateDebut().getTime() > dateDebut.getTime()) {
-                    Date dateMax = jf.getDateFin();
-                    Date dateMin = jf.getDateDebut();
-                    if (jf.getDateDebut().getTime() < dateDebut.getTime()) {
-                        dateMin = dateDebut;
+
+        if(dateFin!=null && dateDebut!=null){
+            if (calendrierJourFerieses != null) {
+                for (JourFerie jf : calendrierJourFerieses) {
+                    if (jf.getDateFin().getTime() < dateFin.getTime() || jf.getDateDebut().getTime() > dateDebut.getTime()) {
+                        Date dateMax = jf.getDateFin();
+                        Date dateMin = jf.getDateDebut();
+                        if (jf.getDateDebut().getTime() < dateDebut.getTime()) {
+                            dateMin = dateDebut;
+                        }
+                        if (dateFin.getTime() < jf.getDateFin().getTime()) {
+                            dateMax = dateFin;
+                        }
+                        JourFerieVo jfv = new JourFerieVo(jf.getDateDebut(), jf.getDateFin(), DateUtil.diffDays(dateMin, dateMax));
+                        res.add(jfv);
                     }
-                    if (dateFin.getTime() < jf.getDateFin().getTime()) {
-                        dateMax = dateFin;
-                    }
-                    JourFerieVo jfv = new JourFerieVo(jf.getDateDebut(), jf.getDateFin(), DateUtil.diffDays(dateMin, dateMax));
-                    res.add(jfv);
                 }
             }
         }
+
         return res;
     }
 

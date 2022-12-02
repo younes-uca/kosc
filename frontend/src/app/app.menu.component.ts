@@ -280,6 +280,21 @@ export class AppMenuComponent implements OnInit {
                         },
                     ]
                 },
+                {
+                    label: 'Gestion Users',
+                    icon: 'pi pi-users',
+                    items: [
+                        {
+                            label: 'Users Edit',
+                            icon: 'pi pi-fw pi-plus-circle',
+                            routerLink: ['/app/admin/kosc/ordre-kosc-gestion-utilisateur/Gestion_users']
+                        },{
+                            label: 'Roles Edit',
+                            icon: 'pi pi-fw pi-plus-circle',
+                            routerLink: ['']
+                        }
+                    ]
+                }
             ]
         this.modelchercheur =
             [

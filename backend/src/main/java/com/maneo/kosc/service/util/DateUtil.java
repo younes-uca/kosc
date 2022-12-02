@@ -260,10 +260,12 @@ public class DateUtil {
     }
 
     public static Long totalJourWithoutWeekEnd(LocalDate dateMin, LocalDate dateMax) {
-        Long i = 0L;
-        for (LocalDate date = dateMin; date.compareTo(dateMax) <= 0; date = date.plusDays(1)) {
-            if (!isWeekEnd(date)) {
-                i++;
+         Long i = 0L;
+        if(dateMax != null && dateMin!=null){
+            for (LocalDate date = dateMin; date.compareTo(dateMax) <= 0; date = date.plusDays(1)) {
+                if (!isWeekEnd(date)) {
+                    i++;
+                }
             }
         }
         return i;

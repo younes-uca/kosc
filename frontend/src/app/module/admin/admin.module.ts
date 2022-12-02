@@ -32,7 +32,7 @@ import {SplitButtonModule} from 'primeng/splitbutton';
 import {MessageModule} from 'primeng/message';
 import {MessagesModule} from 'primeng/messages';
 import {SwitchChercheurAdminComponent} from './view/switch_chercheur/switch-chercheur-admin.component';
-import {UserListComponent} from "./user-list/user-list.component";
+import {UserListComponent} from "./view/kosc/user-list/user-list.component";
 import {FileUploadModule} from "primeng/fileupload";
 
 @NgModule({
