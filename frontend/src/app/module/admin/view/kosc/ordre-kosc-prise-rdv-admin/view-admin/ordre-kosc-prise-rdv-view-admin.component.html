@@ -48,16 +48,15 @@
 
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="30">Date rdv</label>
-                        <p-calendar dateFormat="{{dateFormat}}" [(ngModel)]="selectedOrdreKosc.dateRdv"
-                                    [showSeconds]="false" [showTime]="true" [disabled]="true"
-                                    id="30"
-                                    placeholder="Date rdv">
+                        <label for="50">Date dernier appel</label>
+                        <p-calendar [(ngModel)]="selectedOrdreKosc.dateDernierAppel" [showSeconds]="false"
+                                    [showTime]="true" [disabled]="true"
+                                    dateFormat="{{dateFormat}}"
+                                    id="50"
+                                    placeholder="Date dernier appel">
                         </p-calendar>
 
-
                     </div>
-
                     <div class="p-field p-col-11 p-md-3">
                         <label for="51">Etat demande kosc</label>
                         <p-dropdown [(ngModel)]="selectedOrdreKosc.etatDemandeKoscVo"
