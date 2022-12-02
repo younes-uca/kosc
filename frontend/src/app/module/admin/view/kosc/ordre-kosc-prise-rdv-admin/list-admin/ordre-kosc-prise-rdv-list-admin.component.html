@@ -130,6 +130,20 @@
                                             </span>
 
 
+
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                     <p-dropdown id="39" [options]="yesOrNoErdv" [(ngModel)]="searchOrdreKosc.erdv"
+                                                 [filter]="false" [showClear]="true" placeholder="Erdv"
+                                                 optionLabel="label" optionValue="value">
+                                     </p-dropdown>
+                                 </span>
+
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                     <p-dropdown id="390" [options]="yesOrNoConfort" [(ngModel)]="searchOrdreKosc.confort"
+                                                 [filter]="false" [showClear]="true" placeholder="Confort"
+                                                 optionLabel="label" optionValue="value">
+                                     </p-dropdown>
+                                 </span>
                     <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
 
                     <p-multiSelect [options]="etatDemandeKoscs"
@@ -137,7 +151,6 @@
                                    defaultLabel="Etat"
                                    optionLabel="libelle" [virtualScroll]="false"></p-multiSelect>
                               </span>
-
                 </div>
 
                 <div class="align-search-button">

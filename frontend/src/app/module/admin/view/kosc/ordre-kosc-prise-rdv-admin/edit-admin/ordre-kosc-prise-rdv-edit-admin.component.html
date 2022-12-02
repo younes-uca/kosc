@@ -38,16 +38,16 @@
                         </p-calendar>
 
                     </div>
-                    <!--                    <div class="p-field p-col-12 p-md-3">-->
-                    <!--                        <label for="50">Date dernier appel</label>-->
-                    <!--                        <p-calendar [(ngModel)]="selectedOrdreKosc.dateDernierAppel" [showSeconds]="false"-->
-                    <!--                                    [showTime]="true"-->
-                    <!--                                    dateFormat="{{dateFormat}}"-->
-                    <!--                                    id="50"-->
-                    <!--                                    placeholder="Date dernier appel">-->
-                    <!--                        </p-calendar>-->
+                                        <div class="p-field p-col-12 p-md-3">
+                                            <label for="50">Date dernier appel</label>
+                                            <p-calendar [(ngModel)]="selectedOrdreKosc.dateDernierAppel" [showSeconds]="false"
+                                                        [showTime]="true" [disabled]="true"
+                                                        dateFormat="{{dateFormat}}"
+                                                        id="50"
+                                                        placeholder="Date dernier appel">
+                                            </p-calendar>
 
-                    <!--                    </div>-->
+                                        </div>
                     <!--                    <div class="p-field p-col-12 p-md-3">-->
                     <!--                        <label for="62">Numero dernier appel</label>-->
                     <!--                        <input [(ngModel)]="selectedOrdreKosc.numeroDernierAppel" [disabled]="false"-->
@@ -66,16 +66,16 @@
                         </p-calendar>
 
                     </div>
-                    <div class="p-field p-col-12 p-md-3">
-                        <label for="30">Date rdv</label>
-                        <p-calendar dateFormat="{{dateFormat}}" [(ngModel)]="selectedOrdreKosc.dateRdv"
-                                    [showSeconds]="false" [showTime]="true"
-                                    id="30"
-                                    placeholder="Date rdv">
-                        </p-calendar>
+<!--                    <div class="p-field p-col-12 p-md-3">-->
+<!--                        <label for="30">Date rdv</label>-->
+<!--                        <p-calendar dateFormat="{{dateFormat}}" [(ngModel)]="selectedOrdreKosc.dateRdv"-->
+<!--                                    [showSeconds]="false" [showTime]="true"-->
+<!--                                    id="30"-->
+<!--                                    placeholder="Date rdv">-->
+<!--                        </p-calendar>-->
 
 
-                    </div>
+<!--                    </div>-->
 
                     <div class="p-field p-col-11 p-md-3">
                         <label for="51">Etat demande kosc</label>
@@ -1326,15 +1326,15 @@
             <div *ngIf="isShown" class="row container-fluid" id="divshow">
                 <div class="p-grid p-ai-center p-mt-5">
                     <button class=" p-button-info p-mr-1 p-col-12 p-md-3" style="width: 24%; " pButton pRipple
-                            label="Client injoignable" [disabled]="checkButton()"
+                            label="Client injoignable" [disabled]="checkButtonInjoignable()"
                             (click)="selectTab(etats[6])"></button>
 
                     <button class=" p-button-warning p-mr-1 p-col-12 p-md-3" style="width: 24%; " pButton pRipple
                             label="Mauvais contact"
-                            (click)="selectTab(etats[8])"></button>
+                            (click)="selectTab(etats[8])" [disabled]="checkButton()"></button>
                     <button class=" p-button-danger p-mr-1 p-col-12 p-md-3" style="width: 24%; " pButton pRipple
                             label="Refus client"
-                            (click)="selectTab(etats[7])"></button>
+                            (click)="selectTab(etats[7])" [disabled]="checkButton()"></button>
                     <button class=" p-button-success p-col-12 p-md-3" style="width: 24%;" pButton pRipple
                             label="Autre raison.."
                             (click)="selectTab(etats[9])"></button>
