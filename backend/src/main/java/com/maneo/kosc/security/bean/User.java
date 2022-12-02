@@ -23,11 +23,11 @@ public class User implements UserDetails {
     protected Long id;
     protected boolean credentialsNonExpired;
     protected boolean enabled;
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss.SSS")
-    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     protected Date createdAt;
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss.SSS")
-    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     protected Date updatedAt;
     protected String email;
     protected boolean accountNonExpired;
