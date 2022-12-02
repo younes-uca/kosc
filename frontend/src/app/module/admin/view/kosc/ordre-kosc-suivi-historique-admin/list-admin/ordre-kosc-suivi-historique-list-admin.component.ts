@@ -113,11 +113,10 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
     }
 
     public searchRequestCdd() {
-        console.log(this.searchOrdreKosc.dateEnvoiCriMin);
-        this.ordreKoscService.findByCriteriaSuiviCdd(this.searchOrdreKosc).subscribe(ordreKoscs => {
+        console.log(this.searchOrdreKosc.etatDemandeKoscVos);
+        this.ordreKoscService.findByCriteriaCdd(this.searchOrdreKosc).subscribe(ordreKoscs => {
             this.ordreKoscs = ordreKoscs;
             console.log(ordreKoscs);
-            // this.searchOrdreKosc = new OrdreKoscVo();
         }, error => console.log(error));
     }
 
@@ -183,11 +182,11 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
     }
 
     get searchOrdreKosc(): OrdreKoscVo {
-        return this.ordreKoscService.searchOrdreKoscSuiviCdd;
+        return this.ordreKoscService.searchOrdreKoscCdd;
     }
 
     set searchOrdreKosc(value: OrdreKoscVo) {
-        this.ordreKoscService.searchOrdreKoscSuiviCdd = value;
+        this.ordreKoscService.searchOrdreKoscCdd = value;
     }
 
     get dateFormat() {
@@ -206,7 +205,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         ];
         this.home = {icon: 'pi pi-home', routerLink: '/'};
 
-        this.loadEtatDemandeKoscIncluding(['planification','ok','ko']);
+        this.loadEtatDemandeKoscIncluding(['ok','ko','planification']);
         this.setDateEnvoiMinAndMax();
         this.initExport();
         this.initCol();

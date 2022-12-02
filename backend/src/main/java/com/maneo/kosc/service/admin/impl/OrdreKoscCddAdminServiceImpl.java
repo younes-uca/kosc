@@ -58,7 +58,6 @@ public class OrdreKoscCddAdminServiceImpl implements OrdreKoscCddAdminService {
         }
 
         if (ordreKoscVo.getEtatDemandeKoscVos() != null) {
-
                     query+= " AND o.etatDemandeKosc.id IN ("+convertId(ordreKoscVo.getEtatDemandeKoscVos())+")";
             }
 

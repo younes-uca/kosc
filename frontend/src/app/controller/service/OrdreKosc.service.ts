@@ -32,6 +32,7 @@ export class OrdreKoscService {
     private _indexEdit = 0;
     private _searchOrdreKosc: OrdreKoscVo;
     private _searchOrdreKoscSuiviCdd: OrdreKoscVo;
+    private _searchOrdreKoscCdd: OrdreKoscVo;
 
     private _ordreKoscs: Array<OrdreKoscVo>;
 
@@ -191,11 +192,11 @@ export class OrdreKoscService {
     }
 
 
-    public findByCriteriaSuiviCdd(ordreKosc: OrdreKoscVo): Observable<Array<OrdreKoscVo>> {
+    public findByCriteriaCdd(ordreKosc: OrdreKoscVo): Observable<Array<OrdreKoscVo>> {
         return this.http.post<Array<OrdreKoscVo>>(this.API + 'search-suivi-cdd', ordreKosc);
     }
 
-    public findByCriteriaSuiviCdd2(ordreKosc: OrdreKoscVo): Observable<Array<OrdreKoscVo>> {
+    public findByCriteriaSuiviCdd(ordreKosc: OrdreKoscVo): Observable<Array<OrdreKoscVo>> {
         return this.http.post<Array<OrdreKoscVo>>(this.API + 'search-suivi-historique-cdd', ordreKosc);
     }
 
@@ -372,7 +373,19 @@ export class OrdreKoscService {
     }
 
     set searchOrdreKoscSuiviCdd(value: OrdreKoscVo) {
-        this._searchOrdreKoscSuiviCdd = value;
+        this._searchOrdreKoscCdd = value;
+    }
+
+
+    get searchOrdreKoscCdd(): OrdreKoscVo {
+        if (this._searchOrdreKoscCdd == null) {
+            this._searchOrdreKoscCdd = new OrdreKoscVo();
+        }
+        return this._searchOrdreKoscCdd;
+    }
+
+    set searchOrdreKoscCdd(value: OrdreKoscVo) {
+        this._searchOrdreKoscCdd = value;
     }
 
 

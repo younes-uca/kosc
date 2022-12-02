@@ -124,6 +124,7 @@ import {
 import {
     TemplateEmailReportDemandeManeoClientJoignableAccepteListAdminComponent
 } from "./template-email-report-demande-maneo-client-joignable-accepte-admin/list-admin/template-email-report-demande-maneo-client-joignable-accepte-list-admin.component";
+import {UserListComponent} from "./user-list/user-list.component";
 
 
 @NgModule({
@@ -488,6 +489,17 @@ import {
                                 {
                                     path: 'list',
                                     component: OrdreKoscSuiviCddAdminComponent,
+                                    canActivate: [AuthGuard]
+                                }
+                            ]
+                        }
+                        ,   {
+
+                            path: 'ordre-kosc-gestion-utilisateur',
+                            children: [
+                                {
+                                    path: 'Gestion_users',
+                                    component: UserListComponent,
                                     canActivate: [AuthGuard]
                                 }
                             ]
