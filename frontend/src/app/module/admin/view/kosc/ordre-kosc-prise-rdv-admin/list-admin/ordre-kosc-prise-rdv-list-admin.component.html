@@ -290,9 +290,9 @@
 
 
                         <td>
-                            <span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.submissionDate | date :'dd/MM/yyyy' }}</span>
+                            <span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.submissionDate | date :'dd/MM/yyyy' }}  </span>
                             <p-badge
-                                    value=" ({{ordreKosc.nbrHeureDateSubmissionAndNow}}h)"
+                                    value="({{ordreKosc.nbrHeureDateSubmissionAndNow}}h)"
                                     severity="{{nbrHeureDateSubmissionAndNowSeverityStyle(ordreKosc)}}">
                             </p-badge>
                         </td>
