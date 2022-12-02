@@ -153,20 +153,22 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     }
 
-    public editPasEncore(){
+    public editPasEncore(ordreKosc: OrdreKoscVo){
         let date: Date = new Date();
+
         if(this.selectedOrdreKosc.datePremierAppel == null){
             this.selectedOrdreKosc.datePremierAppel = date;
             this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'OrdreKosc avec reference ' + this.ordreKoscService.selectedOrdreKosc.reference + ' est mis à jour avec succes'});
         }else if(this.selectedOrdreKosc.dateDeuxiemeAppel == null){
-            if (this.selectedOrdreKosc.datePremierAppel > date) {
+
+            if (this.selectedOrdreKosc.datePremierAppel.getDate() >= date.getDate()) {
                 this.messageService.add({severity: 'info', summary: 'Remarque', detail: 'Vous avez d\éj\à appel\é ce client aujourd\'hui'});
             }else{
                 this.selectedOrdreKosc.dateDeuxiemeAppel = date;
                 this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'OrdreKosc avec reference ' + this.ordreKoscService.selectedOrdreKosc.reference + ' est mis à jour avec succes'});
             }
         }else if(this.selectedOrdreKosc.dateTroisiemeAppel == null){
-            if(this.selectedOrdreKosc.dateDeuxiemeAppel <= date){
+            if(this.selectedOrdreKosc.dateDeuxiemeAppel.getDate() < date.getDate()){
                 this.selectedOrdreKosc.dateTroisiemeAppel = date;
                 this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'OrdreKosc avec reference ' + this.ordreKoscService.selectedOrdreKosc.reference + ' est mis à jour avec succes'});
             }else{
@@ -820,7 +822,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     private validateOrdreKoscDateAppel() {
         if(this.selectedOrdreKosc.datePremierAppel && this.selectedOrdreKosc.dateDeuxiemeAppel && this.selectedOrdreKosc.dateTroisiemeAppel){
-            if(this.selectedOrdreKosc.datePremierAppel >= this.selectedOrdreKosc.dateDeuxiemeAppel || this.selectedOrdreKosc.dateTroisiemeAppel < this.selectedOrdreKosc.dateDeuxiemeAppel ){
+            if(this.selectedOrdreKosc.datePremierAppel.getDate() >= this.selectedOrdreKosc.dateDeuxiemeAppel.getDate() || this.selectedOrdreKosc.dateTroisiemeAppel.getDate() < this.selectedOrdreKosc.dateDeuxiemeAppel.getDate() ){
                 this.errorMessages.push('Date de deuxieme appel non valide');
                 this.validOrdreKoscDateAppel = false;
             } else {
