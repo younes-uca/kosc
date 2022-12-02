@@ -58,15 +58,10 @@ public class OrdreKoscCddAdminServiceImpl implements OrdreKoscCddAdminService {
         }
 
         if (ordreKoscVo.getEtatDemandeKoscVos() != null) {
-            for(EtatDemandeKoscVo etat:ordreKoscVo.getEtatDemandeKoscVos()){
-                if(Objects.equals(etat.getCode(), "planification")){
-                    query+= " AND o.etatDemandeKosc.id IN ("+convertIdItem(etat)+")";
-                    query+= SearchUtil.addConstraintMinMax("o", "dateEnvoiPlanification", ordreKoscVo.getDateEnvoiPlanificationMin(), ordreKoscVo.getDateEnvoiPlanificationMax());
-                }
-                else
-                    query+= " AND o.etatDemandeKosc.id IN ("+convertIdItem(etat)+")";
+
+                    query+= " AND o.etatDemandeKosc.id IN ("+convertId(ordreKoscVo.getEtatDemandeKoscVos())+")";
             }
-        }
+
 
         query += " AND o.codeDecharge is NULL";
 
