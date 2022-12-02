@@ -30,6 +30,8 @@ import {TechnicienVo} from 'src/app/controller/model/Technicien.model';
 import {TechnicienService} from 'src/app/controller/service/Technicien.service';
 import {TemplateEmailClientInjoinableVo} from 'src/app/controller/model/TemplateEmailClientInjoinable.model';
 import {TemplateEmailClientInjoinableService} from 'src/app/controller/service/TemplateEmailClientInjoinable.service';
+import {CauseKoOkVo} from "../../../../../../controller/model/CauseKoOk.model";
+import {CauseKoOkService} from "../../../../../../controller/service/CauseKoOk.service";
 
 @Component({
     selector: 'app-ordre-kosc-prise-rdv-view-admin',
@@ -37,6 +39,9 @@ import {TemplateEmailClientInjoinableService} from 'src/app/controller/service/T
     styleUrls: ['./ordre-kosc-prise-rdv-view-admin.component.css']
 })
 export class OrdreKoscPriseRdvViewAdminComponent implements OnInit {
+    blocked = false;
+    showSpinner = false;
+    private editOrdreKoscDialog: boolean;
 
 
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService
@@ -54,8 +59,36 @@ export class OrdreKoscPriseRdvViewAdminComponent implements OnInit {
         , private templateEmailReportService: TemplateEmailReportService
         , private technicienService: TechnicienService
         , private templateEmailClientInjoinableService: TemplateEmailClientInjoinableService
+                      , private causeKoOkService: CauseKoOkService
+
     ) {
     }
+
+
+    sendMauvaisContactEmail() {
+        this.showSpinner = true;
+        this.blocked = true;
+        this.ordreKoscService.sendMauvaisContactEmail().subscribe(data => {
+                if (data.envoyeMauvaisContact == true) {
+
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: 'Email envoyé avec succès'
+                    });
+                    this.editOrdreKoscDialog = false;
+                } else {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Erreurs', detail: 'échec d\'envoi'
+                    });
+                }
+                this.showSpinner = false;
+                this.blocked = false;
+            }
+        );
+    }
+
 
     get ordreKoscs(): Array<OrdreKoscVo> {
         return this.ordreKoscService.ordreKoscs;
@@ -384,5 +417,39 @@ export class OrdreKoscPriseRdvViewAdminComponent implements OnInit {
 
     hideViewDialog() {
         this.viewOrdreKoscDialog = false;
+    }
+
+    public appropriateTechniciens:Array<TechnicienVo>;
+
+    public findAppropriateTechnicien(rdv:Date,codeDepartement:string){
+        this.technicienService.findAppropriateTechnicien(rdv, codeDepartement).subscribe(data =>{
+            this.appropriateTechniciens=data;
+        })
+    }
+
+    get indexEdit(): number {
+        return this.ordreKoscService.indexEdit;
+    }
+
+    set indexEdit(value: number) {
+        this.ordreKoscService.indexEdit = value;
+    }
+
+    get causeKoOks(): Array<CauseKoOkVo> {
+        return this.causeKoOkService.causeKoOks;
+    }
+
+    set causeKoOks(value: Array<CauseKoOkVo>) {
+        this.causeKoOkService.causeKoOks = value;
+    }
+
+    private _emailIndex = 0;
+
+    get emailIndex(): number {
+        return this._emailIndex;
+    }
+
+    set emailIndex(value: number) {
+        this._emailIndex = value;
     }
 }
