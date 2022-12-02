@@ -205,7 +205,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         ];
         this.home = {icon: 'pi pi-home', routerLink: '/'};
 
-        this.loadEtatDemandeKoscIncluding(['ok','ko','planification']);
+        this.loadEtatDemandeKoscIncluding(['planification']);
         this.setDateEnvoiMinAndMax();
         this.initExport();
         this.initCol();
