@@ -96,7 +96,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         this.selectedCauseKoOk = new CauseKoOkVo();
         this.defaultTemplateConfigurationService.findDefaultTemplateConfiguration().subscribe((data) =>
             this.selectedDefaultTemplateConfiguration = data,
-        )
+        );
 
         this.causeKoOkService.findAll().subscribe((data) => this.causeKoOks = data);
         this.initPalinificationModel();
@@ -555,29 +555,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         );
     }
 
-    sendMailReplanification() {
-        this.showSpinner = true;
-        this.blocked = true;
-        this.ordreKoscService.sendMailReplanification().subscribe(data => {
-                if (data.envoyeReplanification == true) {
 
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                    this.editOrdreKoscDialog = false;
-                } else  {
-                    this.messageService.add({
-                        severity: 'error',
-                        summary: 'Erreurs', detail: 'échec d\'envoi'
-                    });
-                }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );
-    }
 
 
     onDownloadFile(fileName: string): void {

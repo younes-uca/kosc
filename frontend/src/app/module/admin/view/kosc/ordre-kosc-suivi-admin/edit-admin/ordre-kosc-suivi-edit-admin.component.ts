@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {OrdreKoscService} from 'src/app/controller/service/OrdreKosc.service';
 import {OrdreKoscVo} from 'src/app/controller/model/OrdreKosc.model';
 import {RoleService} from 'src/app/controller/service/role.service';
-import {MessageService} from 'primeng/api';
+import {MenuItem, MessageService} from 'primeng/api';
 import {Router} from '@angular/router';
 import {environment} from 'src/environments/environment';
 import {DatePipe} from '@angular/common';
@@ -35,6 +35,10 @@ import {TemplateEmailPlanificationVo} from 'src/app/controller/model/TemplateEma
 import {TemplateEmailPlanificationService} from 'src/app/controller/service/TemplateEmailPlanification.service';
 import {RegionVo} from "../../../../../../controller/model/Region.model";
 import {RegionService} from "../../../../../../controller/service/Region.service";
+import {
+    DefaultTemplateConfigurationService
+} from "../../../../../../controller/service/DefaultTemplateConfiguration.service";
+import {DefaultTemplateConfigurationVo} from "../../../../../../controller/model/DefaultTemplateConfiguration.model";
 
 @Component({
     selector: 'app-ordre-kosc-suivi-edit-admin',
@@ -42,6 +46,8 @@ import {RegionService} from "../../../../../../controller/service/Region.service
     styleUrls: ['./ordre-kosc-suivi-edit-admin.component.css']
 })
 export class OrdreKoscSuiviEditAdminComponent implements OnInit {
+
+
 
     // methods
 
@@ -63,11 +69,16 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
         , private templateEmailClientInjoinableKoscService: TemplateEmailClientInjoinableKoscService
         , private templateEmailClientInjoinableService: TemplateEmailClientInjoinableService
         , private templateEmailPlanificationService: TemplateEmailPlanificationService
+        , private defaultTemplateConfigurationService: DefaultTemplateConfigurationService
     ) {
 
     }
     showSpinner = false;
     blocked = false;
+    indexEdit = 0;
+    indexDemande = 0;
+    indexClient = 0;
+    indexManeo = 0;
 
     _submitted = false;
 
@@ -332,6 +343,27 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
 
     set validTemplateSuiviLibelle(value: boolean) {
         this._validTemplateSuiviLibelle = value;
+    }
+
+
+    private _ReportDemandeManeo: MenuItem[];
+    private _ReportDemandeClient: MenuItem[];
+
+
+    get ReportDemandeManeo(): MenuItem[] {
+        return this._ReportDemandeManeo;
+    }
+
+    set ReportDemandeManeo(value: MenuItem[]) {
+        this._ReportDemandeManeo = value;
+    }
+
+    get ReportDemandeClient(): MenuItem[] {
+        return this._ReportDemandeClient;
+    }
+
+    set ReportDemandeClient(value: MenuItem[]) {
+        this._ReportDemandeClient = value;
     }
 
     get ordreKoscs(): Array<OrdreKoscVo> {
@@ -678,9 +710,22 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
     set createRegionDialog(value: boolean) {
         this.regionService.createRegionDialog = value;
     }
+    get selectedDefaultTemplateConfiguration(): DefaultTemplateConfigurationVo {
+
+        return this.defaultTemplateConfigurationService.selectedDefaultTemplateConfiguration;
+    }
+
+    set selectedDefaultTemplateConfiguration(value: DefaultTemplateConfigurationVo) {
+        this.defaultTemplateConfigurationService.selectedDefaultTemplateConfiguration = value;
+    }
 
     ngOnInit(): void {
 
+        this.initReportDemandeManeo();
+        this.initReportDemandeClient();
+        this.defaultTemplateConfigurationService.findDefaultTemplateConfiguration().subscribe((data) =>
+            this.selectedDefaultTemplateConfiguration = data,
+        );
         this.selectedOperator = new OperatorVo();
         this.operatorService.findAll().subscribe((data) => this.operators = data);
         this.selectedDepartement = new DepartementVo();
@@ -1041,4 +1086,126 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
         );
 
     }
+    private reportEtats = ['report-demande-maneo-cl-inj', 'report-demande-maneo-cl-j-accepte', 'report-demande-maneo-cl-j-refus',
+        'report-demande-client-cl-inj'  ,'report-demande-client-cl-j'];
+    private initReportDemandeManeo() {
+        this.ReportDemandeManeo = [
+            {
+                label: 'Client injoinable',
+                icon: 'pi pi-file',
+                command: () => this.selectTab(this.reportEtats[0])
+            },
+            {
+                label: 'Client joinable accepte',
+                icon: 'pi pi-file',
+                command: () => this.selectTab(this.reportEtats[1])
+            },
+            {
+                label: 'Client joinable refuse',
+                icon: 'pi pi-file-excel',
+                command: () => this.selectTab(this.reportEtats[2])
+            },
+        ];
+    }
+
+    private initReportDemandeClient() {
+        this.ReportDemandeClient = [
+            {
+                label: 'Client injoinable',
+                icon: 'pi pi-file',
+                command: () => this.selectTab(this.reportEtats[3])
+            },
+            {
+                label: 'Client joinable',
+                icon: 'pi pi-file',
+                command: () => this.selectTab(this.reportEtats[4])
+            },
+        ];
+    }
+
+
+    private selectTab(myEtat: string) {
+        this.selectedOrdreKosc.etatDemandeKoscVo = this.findEtatDemandeByCode(myEtat);
+        this.indexEdit = 1;
+        if (myEtat === this.reportEtats[0]) {
+            this.indexDemande = 0;
+            this.indexManeo = 0;
+            this.selectedOrdreKosc.fromReportDemandeManeoClientInjoignable = this.selectedDefaultTemplateConfiguration.emailManeo;
+            this.selectedOrdreKosc.toReportDemandeManeoClientInjoignable = this.selectedOrdreKosc.endCustumorContactEmail;
+            this.selectedOrdreKosc.objetReportDemandeManeoClientInjoignable = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeManeoClientInjoignableVo.objet);
+            this.selectedOrdreKosc.corpsReportDemandeManeoClientInjoignable = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeManeoClientInjoignableVo.corps);
+        } else if (myEtat === this.reportEtats[1]) {
+            this.indexDemande = 0;
+            this.indexManeo = 1;
+            this.selectedOrdreKosc.fromReportDemandeManeoClientJoignableAccepte = this.selectedDefaultTemplateConfiguration.emailManeo;
+            this.selectedOrdreKosc.toReportDemandeManeoClientJoignableAccepte = this.selectedOrdreKosc.endCustumorContactEmail;
+            this.selectedOrdreKosc.objetReportDemandeManeoClientJoignableAccepte = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeManeoClientJoignableAccepteVo.objet);
+            this.selectedOrdreKosc.corpsReportDemandeManeoClientJoignableAccepte = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeManeoClientJoignableAccepteVo.corps);
+        } else if (myEtat === this.reportEtats[2]) {
+            this.indexDemande = 0;
+            this.indexManeo = 2;
+            this.selectedOrdreKosc.fromReportDemandeManeoClientJoignableRefus = this.selectedDefaultTemplateConfiguration.emailManeo;
+            this.selectedOrdreKosc.toReportDemandeManeoClientJoignableRefus = this.selectedOrdreKosc.endCustumorContactEmail;
+            this.selectedOrdreKosc.objetReportDemandeManeoClientJoignableRefus = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeManeoClientJoignableRefusVo.objet);
+            this.selectedOrdreKosc.corpsReportDemandeManeoClientJoignableRefus = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeManeoClientJoignableRefusVo.corps);
+        }else if (myEtat === this.reportEtats[3]) {
+            this.indexDemande = 1;
+            this.indexClient = 0;
+            this.selectedOrdreKosc.fromReportDemandeClientClientInjoignable = this.selectedDefaultTemplateConfiguration.emailManeo;
+            this.selectedOrdreKosc.toReportDemandeClientClientInjoignable = this.selectedOrdreKosc.endCustumorContactEmail;
+            this.selectedOrdreKosc.objetReportDemandeClientClientInjoignable = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeClientClientInjoignableVo.objet);
+            this.selectedOrdreKosc.corpsReportDemandeClientClientInjoignable = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeClientClientInjoignableVo.corps);
+
+        }else if (myEtat === this.reportEtats[4]) {
+            this.indexDemande = 1;
+            this.indexClient = 1;
+            this.selectedOrdreKosc.fromReportDemandeClientClientJoignable = this.selectedDefaultTemplateConfiguration.emailManeo;
+            this.selectedOrdreKosc.toReportDemandeClientClientJoignable = this.selectedOrdreKosc.endCustumorContactEmail;
+            this.selectedOrdreKosc.objetReportDemandeClientClientJoignable = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeClientClientJoignableVo.objet);
+            this.selectedOrdreKosc.corpsReportDemandeClientClientJoignable = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeClientClientJoignableVo.corps);
+        }
+
+
+    }
+
+    goToMailReplanification() {
+        this.indexEdit = 2;
+        this.selectedOrdreKosc.fromReplanification = this.selectedDefaultTemplateConfiguration.emailManeo;
+        this.selectedOrdreKosc.toReplanification = this.selectedOrdreKosc.endCustumorContactEmail;
+        this.selectedOrdreKosc.objetReplanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailReplanificationVo.objet);
+        this.selectedOrdreKosc.corpsReplanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailReplanificationVo.corps);
+
+
+    }
+    public findEtatDemandeByCode(code: string) {
+        let res = this.etatDemandeKoscService.findByCode(code, this.etatDemandeKoscs);
+        return res;
+    }
+
+    sendMailReplanification() {
+        this.showSpinner = true;
+        this.blocked = true;
+        this.ordreKoscService.sendMailReplanification().subscribe(data => {
+                if (data.envoyeReplanification == true) {
+
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: 'Email envoyé avec succès'
+                    });
+                    this.editOrdreKoscDialog = false;
+                } else  {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Erreurs', detail: 'échec d\'envoi'
+                    });
+                }
+                this.showSpinner = false;
+                this.blocked = false;
+            }
+        );
+    }
+
+
+
 }

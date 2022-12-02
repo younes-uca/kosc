@@ -4,7 +4,7 @@
 
 
     <ng-template pTemplate="content">
-        <p-tabView>
+        <p-tabView [(activeIndex)]="indexEdit">
             <p-tabPanel header="Information">
 
                 <div class="p-grid">
@@ -378,10 +378,10 @@
             <p-tabPanel header="Report">
                 <p-blockUI [blocked]="blocked"></p-blockUI>
                 <div class="p-grid">
-                    <p-tabView>
+                    <p-tabView [(activeIndex)]="indexDemande">
                         <p-tabPanel header="Demande Maneo">
                             <div class="p-grid">
-                                <p-tabView>
+                                <p-tabView [(activeIndex)]="indexManeo">
                                     <p-tabPanel header="Client Injoignable">
                                         <div class="p-grid">
 
@@ -588,7 +588,7 @@
                         </p-tabPanel>
                         <p-tabPanel header="Demande Client">
                             <div class="p-grid">
-                                <p-tabView>
+                                <p-tabView [(activeIndex)]="indexClient">
                                     <p-tabPanel header="Client Injoignable">
                                         <div class="p-grid">
 
@@ -731,6 +731,68 @@
                     </p-tabView>
                 </div>
             </p-tabPanel>
+            <p-tabPanel header="Replanification">
+                <div class="p-grid">
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="65">From<span style="color: red;"></span></label>
+                        <input [(ngModel)]="selectedOrdreKosc.fromReplanification"
+                               [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromReplanification}"
+                               class="p-mb-2 p-mr-2"
+                               id="65"
+                               pInputText placeholder="From"
+                               type="text"/>
+                        <small *ngIf='!validOrdreKoscFromReplanification' class='p-error'>From est
+                            obligatoire.</small>
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="64">To<span style="color: red;"></span></label>
+                        <input [(ngModel)]="selectedOrdreKosc.toReplanification"
+                               [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToReplanification}"
+                               class="p-mb-2 p-mr-2"
+                               id="64"
+                               pInputText placeholder="To"
+                               type="text"/>
+                        <small *ngIf='!validOrdreKoscToReplanification' class='p-error'>To est
+                            obligatoire.</small>
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="132">Objet</label>
+                        <input [(ngModel)]="selectedOrdreKosc.objetReplanification"
+                               class="p-mb-2 p-mr-2" id="132"
+                               pInputText
+                               placeholder="Objet replanification" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="133">Corps</label>
+                        <textarea [(ngModel)]="selectedOrdreKosc.corpsReplanification" cols="30"
+                                  id="133" pInputTextarea
+                                  placeholder="Corps replanification"
+                                  rows="6"
+                        ></textarea>
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <button (click)="sendMailReplanification()" class="p-button-help"
+                                icon="pi pi-send" label="Envoyer"
+                                pButton
+                                type="button"></button>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <p-progressSpinner *ngIf="showSpinner"
+                                           [style]="{width: '50px', height: '50px'}"
+                                           styleClass="custom-spinner" strokeWidth="8"
+                                           fill="#EEEEEE"
+                                           animationDuration=".5s"></p-progressSpinner>
+
+
+                    </div>
+                </div>
+            </p-tabPanel>
         </p-tabView>
 
     </ng-template>
@@ -743,7 +805,20 @@
             </div>
             <div>
                 <button (click)="edit()" icon="pi pi-check" label="Valider" pButton pRipple
-                        style="margin:10px"></button>
+                        style="margin:5px"></button>
+            </div>
+            <div style="margin:5px">
+                <p-splitButton label="Report Demande Maneo" icon="pi pi-ban" styleClass="p-button-warning"
+                               [model]="ReportDemandeManeo"></p-splitButton>
+            </div>
+            <div style="margin:5px">
+                <p-splitButton label="Report Demande Client" icon="pi pi-ban"  styleClass="p-button-danger"
+                               [model]="ReportDemandeClient"></p-splitButton>
+            </div>
+
+            <div style="margin:5px">
+                <button pButton pRipple label="Replanifier" icon="pi pi-thumbs-up" class="p-button-success"
+                        (click)="goToMailReplanification()"></button>
             </div>
         </div>
     </ng-template>
