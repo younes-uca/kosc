@@ -173,7 +173,7 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
     ngOnInit(): void {
 
         this.items = [
-            {label: 'Suivi Rendez-vous', routerLink: '/app/admin/kosc/ordre-kosc-suivi/list'},
+            {label: 'Suivi Commande', routerLink: '/app/admin/kosc/ordre-kosc-suivi/list'},
 
         ];
         this.home = {icon: 'pi pi-home', routerLink: '/'};
