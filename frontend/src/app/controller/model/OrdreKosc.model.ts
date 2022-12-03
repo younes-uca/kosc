@@ -335,6 +335,10 @@ export class OrdreKoscVo {
     public dateCri: Date;
 
     public userMauvaisContact: User;
+    public userRefus: User;
+    public userClientInjoinable: User;
+    public userAutre: User;
+
 
 
 }
