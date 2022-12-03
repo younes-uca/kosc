@@ -74,6 +74,8 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
     departements: Array<DepartementVo>;
     techniciens: Array<TechnicienVo>;
     dateRdvs: any[];
+    yesOrNoErdv: any[] = [];
+    yesOrNoConfort: any[] = [];
 
     items: MenuItem[];
 
@@ -182,6 +184,14 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
             value: 0
         }];
         this.yesOrNoEnvoyeSuivi = [{label: 'EnvoyeSuivi', value: null}, {label: 'Oui', value: 1}, {
+            label: 'Non',
+            value: 0
+        }];
+        this.yesOrNoErdv = [{label: 'Erdv', value: null}, {label: 'Oui', value: 1}, {
+            label: 'Non',
+            value: 0
+        }];
+        this.yesOrNoConfort = [{label: 'Confort', value: null}, {label: 'Oui', value: 1}, {
             label: 'Non',
             value: 0
         }];
