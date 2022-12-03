@@ -190,29 +190,7 @@ public class EmailingOrderKoscAdminServiceImpl  implements EmailingOrderKoscAdmi
 
     }
 
-    @Override
-    public void sendMailReplanificationReport(OrdreKosc ordreKosc) {
-        LocalDate todaysDate = LocalDate.now();
-        try {
-            EmailDetails emailDetails = new EmailDetails();
-            emailDetails.setFrom(ordreKosc.getFromReport());
-            emailDetails.setTo(ordreKosc.getToReport());
-            emailDetails.setObjet(ordreKosc.getObjetReport());
-            emailDetails.setCorps(ordreKosc.getCorpsReport());
-            emailSenderAdminService.sendEmail(emailDetails);
-            ordreKosc.setEnvoyeReport(true);
-            ordreKosc.setDateEnvoiReport(DateUtil.toDate(todaysDate));
-            ordreKoscDao.save(ordreKosc);
 
-
-        } catch (Exception exception) {
-            OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
-            ordreKosc.setEnvoyeReport(false);
-            ordreKosc.setDateEnvoiReport(null);
-            ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
-        }
-
-    }
 
     @Override
     public void sendMailReplanification(OrdreKosc ordreKosc) {

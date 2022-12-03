@@ -392,23 +392,7 @@ public class OrdreKosc {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date dateAppelReplanification;
-    @Lob
-    @Column(columnDefinition = "TEXT")
-    private String objetReport;
-    @Lob
-    @Column(columnDefinition = "TEXT")
-    private String corpsReport;
-    @Lob
-    @Column(columnDefinition = "TEXT")
-    private String fromReport;
-    @Lob
-    @Column(columnDefinition = "TEXT")
-    private String toReport;
-    @Column(columnDefinition = "boolean default false")
-    private Boolean envoyeReport = false;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
-    private Date dateEnvoiReport;
+
     @Lob
     @Column(columnDefinition = "TEXT")
     private String objetReplanification;
@@ -732,8 +716,7 @@ public class OrdreKosc {
     private Technicien technicien;
     @ManyToOne
     private TemplateEmailPlanification templateEmailPlanification;
-    @ManyToOne
-    private TemplateEmailReport templateEmailReport;
+
     @ManyToOne
     private TemplateEmailReplanification templateEmailReplanification;
     @ManyToOne
@@ -802,13 +785,7 @@ public class OrdreKosc {
         this.delaiPriseRdvParHeure = delaiPriseRdvParHeure;
     }
 
-    public String getToReport() {
-        return toReport;
-    }
 
-    public void setToReport(String toReport) {
-        this.toReport = toReport;
-    }
 
     public String getToReplanification() {
         return toReplanification;
@@ -1826,53 +1803,7 @@ public class OrdreKosc {
         this.dateAppelReplanification = dateAppelReplanification;
     }
 
-    public TemplateEmailReport getTemplateEmailReport() {
-        return this.templateEmailReport;
-    }
 
-    public void setTemplateEmailReport(TemplateEmailReport templateEmailReport) {
-        this.templateEmailReport = templateEmailReport;
-    }
-
-    public String getObjetReport() {
-        return this.objetReport;
-    }
-
-    public void setObjetReport(String objetReport) {
-        this.objetReport = objetReport;
-    }
-
-    public String getCorpsReport() {
-        return this.corpsReport;
-    }
-
-    public void setCorpsReport(String corpsReport) {
-        this.corpsReport = corpsReport;
-    }
-
-    public String getFromReport() {
-        return this.fromReport;
-    }
-
-    public void setFromReport(String fromReport) {
-        this.fromReport = fromReport;
-    }
-
-    public Boolean getEnvoyeReport() {
-        return this.envoyeReport;
-    }
-
-    public void setEnvoyeReport(Boolean envoyeReport) {
-        this.envoyeReport = envoyeReport;
-    }
-
-    public Date getDateEnvoiReport() {
-        return this.dateEnvoiReport;
-    }
-
-    public void setDateEnvoiReport(Date dateEnvoiReport) {
-        this.dateEnvoiReport = dateEnvoiReport;
-    }
 
     public TemplateEmailReplanification getTemplateEmailReplanification() {
         return this.templateEmailReplanification;

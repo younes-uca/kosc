@@ -39,8 +39,7 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
     private TemplateEmailConfirmationClientConverter templateEmailConfirmationClientConverter;
     @Autowired
     private DepartementConverter departementConverter;
-    @Autowired
-    private TemplateEmailReportConverter templateEmailReportConverter;
+
     @Autowired
     private TemplateEmailMauvaisContactConverter templateEmailMauvaisContactConverter;
     @Autowired
@@ -61,7 +60,7 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
     private Boolean departement;
     private Boolean technicien;
     private Boolean templateEmailPlanification;
-    private Boolean templateEmailReport;
+
     private Boolean templateEmailReplanification;
     private Boolean templateEmailRefus;
     private Boolean templateEmailMauvaisContact;
@@ -347,14 +346,6 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
                 item.setToPlanification(vo.getToPlanification());
             if (StringUtil.isNotEmpty(vo.getDateAppelReplanification()))
                 item.setDateAppelReplanification(DateUtil.parse(vo.getDateAppelReplanification()));
-            if (StringUtil.isNotEmpty(vo.getObjetReport()))
-                item.setObjetReport(vo.getObjetReport());
-            if (StringUtil.isNotEmpty(vo.getCorpsReport()))
-                item.setCorpsReport(vo.getCorpsReport());
-            if (vo.getEnvoyeReport() != null)
-                item.setEnvoyeReport(vo.getEnvoyeReport());
-            if (StringUtil.isNotEmpty(vo.getDateEnvoiReport()))
-                item.setDateEnvoiReport(DateUtil.parse(vo.getDateEnvoiReport()));
             if (StringUtil.isNotEmpty(vo.getObjetReplanification()))
                 item.setObjetReplanification(vo.getObjetReplanification());
             if (StringUtil.isNotEmpty(vo.getCorpsReplanification()))
@@ -579,8 +570,7 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
                 item.setTechnicien(technicienConverter.toItem(vo.getTechnicienVo()));
             if (vo.getTemplateEmailPlanificationVo() != null && this.templateEmailPlanification)
                 item.setTemplateEmailPlanification(templateEmailPlanificationConverter.toItem(vo.getTemplateEmailPlanificationVo()));
-            if (vo.getTemplateEmailReportVo() != null && this.templateEmailReport)
-                item.setTemplateEmailReport(templateEmailReportConverter.toItem(vo.getTemplateEmailReportVo()));
+
             if (vo.getTemplateEmailReplanificationVo() != null && this.templateEmailReplanification)
                 item.setTemplateEmailReplanification(templateEmailReplanificationConverter.toItem(vo.getTemplateEmailReplanificationVo()));
             if (vo.getTemplateEmailRefusVo() != null && this.templateEmailRefus)
@@ -993,16 +983,6 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
 
             if (item.getDateAppelReplanification() != null)
                 vo.setDateAppelReplanification(DateUtil.formateDate(item.getDateAppelReplanification()));
-            if (StringUtil.isNotEmpty(item.getObjetReport()))
-                vo.setObjetReport(item.getObjetReport());
-
-            if (StringUtil.isNotEmpty(item.getCorpsReport()))
-                vo.setCorpsReport(item.getCorpsReport());
-
-            if (item.getEnvoyeReport() != null)
-                vo.setEnvoyeReport(item.getEnvoyeReport());
-            if (item.getDateEnvoiReport() != null)
-                vo.setDateEnvoiReport(DateUtil.formateDate(item.getDateEnvoiReport()));
             if (StringUtil.isNotEmpty(item.getObjetReplanification()))
                 vo.setObjetReplanification(item.getObjetReplanification());
 
@@ -1298,9 +1278,7 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
             if (item.getTemplateEmailPlanification() != null && this.templateEmailPlanification) {
                 vo.setTemplateEmailPlanificationVo(templateEmailPlanificationConverter.toVo(item.getTemplateEmailPlanification()));
             }
-            if (item.getTemplateEmailReport() != null && this.templateEmailReport) {
-                vo.setTemplateEmailReportVo(templateEmailReportConverter.toVo(item.getTemplateEmailReport()));
-            }
+
             if (item.getTemplateEmailReplanification() != null && this.templateEmailReplanification) {
                 vo.setTemplateEmailReplanificationVo(templateEmailReplanificationConverter.toVo(item.getTemplateEmailReplanification()));
             }
@@ -1358,7 +1336,6 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
         departement = value;
         technicien = value;
         templateEmailPlanification = value;
-        templateEmailReport = value;
         templateEmailReplanification = value;
         templateEmailRefus = value;
         templateEmailMauvaisContact = value;
@@ -1487,13 +1464,7 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
         this.departementConverter = departementConverter;
     }
 
-    public TemplateEmailReportConverter getTemplateEmailReportConverter() {
-        return this.templateEmailReportConverter;
-    }
 
-    public void setTemplateEmailReportConverter(TemplateEmailReportConverter templateEmailReportConverter) {
-        this.templateEmailReportConverter = templateEmailReportConverter;
-    }
 
     public TemplateEmailMauvaisContactConverter getTemplateEmailMauvaisContactConverter() {
         return this.templateEmailMauvaisContactConverter;
@@ -1551,13 +1522,6 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
         this.templateEmailPlanification = templateEmailPlanification;
     }
 
-    public boolean isTemplateEmailReport() {
-        return this.templateEmailReport;
-    }
-
-    public void setTemplateEmailReport(boolean templateEmailReport) {
-        this.templateEmailReport = templateEmailReport;
-    }
 
     public boolean isTemplateEmailReplanification() {
         return this.templateEmailReplanification;

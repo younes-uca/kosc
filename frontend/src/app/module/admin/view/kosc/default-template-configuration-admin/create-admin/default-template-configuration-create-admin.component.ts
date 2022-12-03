@@ -9,8 +9,6 @@ import {DatePipe} from '@angular/common';
 import {StringUtilService} from 'src/app/controller/service/StringUtil.service';
 
 
-import {TemplateEmailReportVo} from 'src/app/controller/model/TemplateEmailReport.model';
-import {TemplateEmailReportService} from 'src/app/controller/service/TemplateEmailReport.service';
 import {TemplateEmailClientInjoinableVo} from 'src/app/controller/model/TemplateEmailClientInjoinable.model';
 import {TemplateEmailClientInjoinableService} from 'src/app/controller/service/TemplateEmailClientInjoinable.service';
 import {TemplateEmailMauvaisContactVo} from 'src/app/controller/model/TemplateEmailMauvaisContact.model';
@@ -80,7 +78,6 @@ export class DefaultTemplateConfigurationCreateAdminComponent implements OnInit 
         , private roleService: RoleService
         , private messageService: MessageService
         , private router: Router
-        , private templateEmailReportService: TemplateEmailReportService
         , private templateEmailClientInjoinableService: TemplateEmailClientInjoinableService
         , private templateEmailMauvaisContactService: TemplateEmailMauvaisContactService
         , private templateEmailReplanificationService: TemplateEmailReplanificationService
@@ -691,29 +688,6 @@ export class DefaultTemplateConfigurationCreateAdminComponent implements OnInit 
         this.templateEmailClotureService.createTemplateEmailClotureDialog = value;
     }
 
-    get selectedTemplateEmailReport(): TemplateEmailReportVo {
-        return this.templateEmailReportService.selectedTemplateEmailReport;
-    }
-
-    set selectedTemplateEmailReport(value: TemplateEmailReportVo) {
-        this.templateEmailReportService.selectedTemplateEmailReport = value;
-    }
-
-    get templateEmailReports(): Array<TemplateEmailReportVo> {
-        return this.templateEmailReportService.templateEmailReports;
-    }
-
-    set templateEmailReports(value: Array<TemplateEmailReportVo>) {
-        this.templateEmailReportService.templateEmailReports = value;
-    }
-
-    get createTemplateEmailReportDialog(): boolean {
-        return this.templateEmailReportService.createTemplateEmailReportDialog;
-    }
-
-    set createTemplateEmailReportDialog(value: boolean) {
-        this.templateEmailReportService.createTemplateEmailReportDialog = value;
-    }
 
     get selectedTemplateEmailReplanification(): TemplateEmailReplanificationVo {
         return this.templateEmailReplanificationService.selectedTemplateEmailReplanification;
@@ -970,8 +944,6 @@ export class DefaultTemplateConfigurationCreateAdminComponent implements OnInit 
         this.templateSuiviService.findAll().subscribe((data) => this.templateSuivis = data);
         this.selectedTemplateEmailClientInjoinable = new TemplateEmailClientInjoinableVo();
         this.templateEmailClientInjoinableService.findAll().subscribe((data) => this.templateEmailClientInjoinables = data);
-        this.selectedTemplateEmailReport = new TemplateEmailReportVo();
-        this.templateEmailReportService.findAll().subscribe((data) => this.templateEmailReports = data);
         this.selectedTemplateEmailPlanification = new TemplateEmailPlanificationVo();
         this.templateEmailPlanificationService.findAll().subscribe((data) => this.templateEmailPlanifications = data);
         this.selectedTemplateEmailReplanification = new TemplateEmailReplanificationVo();
@@ -1110,17 +1082,6 @@ export class DefaultTemplateConfigurationCreateAdminComponent implements OnInit 
         }
     }
 
-    public async openCreateTemplateEmailReport(templateEmailReport: string) {
-        const isPermistted = await this.roleService.isPermitted('TemplateEmailReport', 'add');
-        if (isPermistted) {
-            this.selectedTemplateEmailReport = new TemplateEmailReportVo();
-            this.createTemplateEmailReportDialog = true;
-        } else {
-            this.messageService.add({
-                severity: 'error', summary: 'erreur', detail: 'problème de permission'
-            });
-        }
-    }
 
     public async openCreateTemplateEmailReplanification(templateEmailReplanification: string) {
         const isPermistted = await this.roleService.isPermitted('TemplateEmailReplanification', 'add');

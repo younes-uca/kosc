@@ -73,9 +73,7 @@ import {
 } from './raison-arret-travail-chercheur/raison-arret-travail-chercheur.component';
 
 
-import {
-    TemplateEmailReportChercheurComponent
-} from './template-email-report-chercheur/template-email-report-chercheur.component';
+
 
 
 import {TemplateSuiviChercheurComponent} from './template-suivi-chercheur/template-suivi-chercheur.component';
@@ -323,17 +321,6 @@ import {
                             ]
                         },
 
-                        {
-
-                            path: 'template-email-report',
-                            children: [
-                                {
-                                    path: 'list',
-                                    component: TemplateEmailReportChercheurComponent,
-                                    canActivate: [AuthGuard]
-                                }
-                            ]
-                        },
 
                         {
 

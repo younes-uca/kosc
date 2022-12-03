@@ -87,9 +87,9 @@ public interface OrdreKoscAdminService extends AbstractService<OrdreKosc, Long, 
 
     int deleteByTemplateEmailPlanificationId(Long id);
 
-    List<OrdreKosc> findByTemplateEmailReportId(Long id);
 
-    int deleteByTemplateEmailReportId(Long id);
+
+
 
     List<OrdreKosc> findByTemplateEmailReplanificationId(Long id);
 

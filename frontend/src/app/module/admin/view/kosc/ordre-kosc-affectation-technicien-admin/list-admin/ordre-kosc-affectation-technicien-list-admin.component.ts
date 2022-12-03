@@ -16,7 +16,6 @@ import {
 } from 'src/app/controller/service/TemplateEmailClientInjoinableKosc.service';
 import {TemplateEmailPlanificationService} from 'src/app/controller/service/TemplateEmailPlanification.service';
 import {TemplateEmailReplanificationService} from 'src/app/controller/service/TemplateEmailReplanification.service';
-import {TemplateEmailReportService} from 'src/app/controller/service/TemplateEmailReport.service';
 import {EtatDemandeKoscService} from 'src/app/controller/service/EtatDemandeKosc.service';
 import {TemplateEmailClotureService} from 'src/app/controller/service/TemplateEmailCloture.service';
 import {TemplateSuiviService} from 'src/app/controller/service/TemplateSuivi.service';
@@ -29,7 +28,6 @@ import {TemplateSuiviVo} from 'src/app/controller/model/TemplateSuivi.model';
 import {OperatorVo} from 'src/app/controller/model/Operator.model';
 import {DepartementVo} from 'src/app/controller/model/Departement.model';
 import {TemplateEmailClientInjoinableKoscVo} from 'src/app/controller/model/TemplateEmailClientInjoinableKosc.model';
-import {TemplateEmailReportVo} from 'src/app/controller/model/TemplateEmailReport.model';
 
 import {TechnicienVo} from 'src/app/controller/model/Technicien.model';
 import {TemplateEmailClientInjoinableVo} from 'src/app/controller/model/TemplateEmailClientInjoinable.model';
@@ -69,7 +67,6 @@ export class OrdreKoscAffectationTechnicienListAdminComponent implements OnInit 
     templateEmailClientInjoinableKoscs: Array<TemplateEmailClientInjoinableKoscVo>;
     templateEmailPlanifications: Array<TemplateEmailPlanificationVo>;
     templateEmailReplanifications: Array<TemplateEmailReplanificationVo>;
-    templateEmailReports: Array<TemplateEmailReportVo>;
     etatDemandeKoscs: Array<EtatDemandeKoscVo>;
     templateEmailClotures: Array<TemplateEmailClotureVo>;
     templateSuivis: Array<TemplateSuiviVo>;
@@ -86,7 +83,6 @@ export class OrdreKoscAffectationTechnicienListAdminComponent implements OnInit 
         , private templateEmailClientInjoinableKoscService: TemplateEmailClientInjoinableKoscService
         , private templateEmailPlanificationService: TemplateEmailPlanificationService
         , private templateEmailReplanificationService: TemplateEmailReplanificationService
-        , private templateEmailReportService: TemplateEmailReportService
         , private etatDemandeKoscService: EtatDemandeKoscService
         , private templateEmailClotureService: TemplateEmailClotureService
         , private templateSuiviService: TemplateSuiviService
@@ -170,7 +166,6 @@ export class OrdreKoscAffectationTechnicienListAdminComponent implements OnInit 
         this.loadTemplateEmailClientInjoinableKosc();
         this.loadTemplateEmailPlanification();
         this.loadTemplateEmailReplanification();
-        this.loadTemplateEmailReport();
         this.loadEtatDemandeKosc();
         this.loadTemplateEmailCloture();
         this.loadTemplateSuivi();
@@ -258,7 +253,6 @@ export class OrdreKoscAffectationTechnicienListAdminComponent implements OnInit 
 
                 this.selectedOrdreKosc.dateEnvoiPlanification = new Date(ordreKosc.dateEnvoiPlanification);
                 this.selectedOrdreKosc.dateEnvoiReplanification = new Date(ordreKosc.dateEnvoiReplanification);
-                this.selectedOrdreKosc.dateEnvoiReport = new Date(ordreKosc.dateEnvoiReport);
                 this.selectedOrdreKosc.dateEnvoiCloture = new Date(ordreKosc.dateEnvoiCloture);
                 this.selectedOrdreKosc.dateEnvoiSuivi = new Date(ordreKosc.dateEnvoiSuivi);
 
@@ -293,7 +287,6 @@ export class OrdreKoscAffectationTechnicienListAdminComponent implements OnInit 
                 this.selectedOrdreKosc.dateInterventionTechniqueFin = new Date(ordreKosc.dateInterventionTechniqueFin);
                 this.selectedOrdreKosc.dateEnvoiPlanification = new Date(ordreKosc.dateEnvoiPlanification);
                 this.selectedOrdreKosc.dateEnvoiReplanification = new Date(ordreKosc.dateEnvoiReplanification);
-                this.selectedOrdreKosc.dateEnvoiReport = new Date(ordreKosc.dateEnvoiReport);
                 this.selectedOrdreKosc.dateEnvoiCloture = new Date(ordreKosc.dateEnvoiCloture);
                 this.selectedOrdreKosc.dateEnvoiSuivi = new Date(ordreKosc.dateEnvoiSuivi);
 
@@ -408,13 +401,7 @@ export class OrdreKoscAffectationTechnicienListAdminComponent implements OnInit 
 
     }
 
-    public async loadTemplateEmailReport() {
-        await this.roleService.findAll();
-        const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
-        isPermistted ? this.templateEmailReportService.findAll().subscribe(templateEmailReports => this.templateEmailReports = templateEmailReports, error => console.log(error))
-            : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
 
-    }
 
     public async loadEtatDemandeKosc() {
         await this.roleService.findAll();
@@ -601,15 +588,9 @@ export class OrdreKoscAffectationTechnicienListAdminComponent implements OnInit 
                 'Date intervention technique debut': this.datePipe.transform(e.dateInterventionTechniqueDebut, 'dd/MM/yyyy hh:mm'),
                 'Date intervention technique fin': this.datePipe.transform(e.dateInterventionTechniqueFin, 'dd/MM/yyyy hh:mm'),
                 'Template email client injoinable': e.templateEmailClientInjoinableVo?.libelle,
-                // 'Objet client': e.objetClient ,
-                // 'Corps client': e.corpsClient ,
-                // 'Envoye client': e.envoyeClient? 'Vrai' : 'Faux' ,
-                // 'Date envoi client': this.datePipe.transform(e.dateEnvoiClient , 'dd/MM/yyyy hh:mm'),
+
                 'Template email kosc': e.templateEmailClientInjoinableKoscVo?.libelle,
-                // 'Objet kosc': e.objetKosc ,
-                // 'Corps kosc': e.corpsKosc ,
-                // 'Envoye kosc': e.envoyeKosc? 'Vrai' : 'Faux' ,
-                // 'Date envoi kosc': this.datePipe.transform(e.dateEnvoiKosc , 'dd/MM/yyyy hh:mm'),
+
                 'Template email planification': e.templateEmailPlanificationVo?.libelle,
                 'Objet planification': e.objetPlanification,
                 'Corps planification': e.corpsPlanification,
@@ -620,11 +601,6 @@ export class OrdreKoscAffectationTechnicienListAdminComponent implements OnInit 
                 'Corps replanification': e.corpsReplanification,
                 'Envoye replanification': e.envoyeReplanification ? 'Vrai' : 'Faux',
                 'Date envoi replanification': this.datePipe.transform(e.dateEnvoiReplanification, 'dd/MM/yyyy hh:mm'),
-                'Template email report': e.templateEmailReportVo?.libelle,
-                'Objet report': e.objetReport,
-                'Corps report': e.corpsReport,
-                'Envoye report': e.envoyeReport ? 'Vrai' : 'Faux',
-                'Date envoi report': this.datePipe.transform(e.dateEnvoiReport, 'dd/MM/yyyy hh:mm'),
                 'Commentaire technicien': e.commentaireTechnicien,
                 'Commentaire client': e.commentaireClient,
                 'Commantaire cloture': e.commantaireCloture,
@@ -796,12 +772,6 @@ export class OrdreKoscAffectationTechnicienListAdminComponent implements OnInit 
             'Envoye replanification': this.searchOrdreKosc.envoyeReplanification ? (this.searchOrdreKosc.envoyeReplanification ? environment.trueValue : environment.falseValue) : environment.emptyForExport,
             'Date envoi replanification Min': this.searchOrdreKosc.dateEnvoiReplanificationMin ? this.datePipe.transform(this.searchOrdreKosc.dateEnvoiReplanificationMin, this.dateFormat) : environment.emptyForExport,
             'Date envoi replanification Max': this.searchOrdreKosc.dateEnvoiReplanificationMax ? this.datePipe.transform(this.searchOrdreKosc.dateEnvoiReplanificationMax, this.dateFormat) : environment.emptyForExport,
-            'Template email report': this.searchOrdreKosc.templateEmailReportVo?.libelle ? this.searchOrdreKosc.templateEmailReportVo?.libelle : environment.emptyForExport,
-            'Objet report': this.searchOrdreKosc.objetReport ? this.searchOrdreKosc.objetReport : environment.emptyForExport,
-            'Corps report': this.searchOrdreKosc.corpsReport ? this.searchOrdreKosc.corpsReport : environment.emptyForExport,
-            'Envoye report': this.searchOrdreKosc.envoyeReport ? (this.searchOrdreKosc.envoyeReport ? environment.trueValue : environment.falseValue) : environment.emptyForExport,
-            'Date envoi report Min': this.searchOrdreKosc.dateEnvoiReportMin ? this.datePipe.transform(this.searchOrdreKosc.dateEnvoiReportMin, this.dateFormat) : environment.emptyForExport,
-            'Date envoi report Max': this.searchOrdreKosc.dateEnvoiReportMax ? this.datePipe.transform(this.searchOrdreKosc.dateEnvoiReportMax, this.dateFormat) : environment.emptyForExport,
             'Commentaire technicien': this.searchOrdreKosc.commentaireTechnicien ? this.searchOrdreKosc.commentaireTechnicien : environment.emptyForExport,
             'Commentaire client': this.searchOrdreKosc.commentaireClient ? this.searchOrdreKosc.commentaireClient : environment.emptyForExport,
             'Commantaire cloture': this.searchOrdreKosc.commantaireCloture ? this.searchOrdreKosc.commantaireCloture : environment.emptyForExport,

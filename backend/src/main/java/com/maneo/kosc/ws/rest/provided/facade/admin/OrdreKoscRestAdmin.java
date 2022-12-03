@@ -112,12 +112,7 @@ public class OrdreKoscRestAdmin {
         return ordreKoscConverter.toVo(ordreKosc);
     }
 
-    @PostMapping("/send/mail/replanification/report")
-    public OrdreKoscVo sendMailReplanificationReport(@RequestBody OrdreKoscVo ordreKoscVo) {
-        OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
-        emailingOrderKoscAdminService.sendMailReplanificationReport(ordreKosc);
-        return ordreKoscConverter.toVo(ordreKosc);
-    }
+
 
     @PostMapping("/send/mail/replanification")
     public OrdreKoscVo sendMailReplanification(@RequestBody OrdreKoscVo ordreKoscVo) {
@@ -387,17 +382,6 @@ public class OrdreKoscRestAdmin {
         return ordreKoscService.deleteByTemplateEmailPlanificationId(id);
     }
 
-    @ApiOperation("find by templateEmailReport id")
-    @GetMapping("/templateEmailReport/id/{id}")
-    public List<OrdreKosc> findByTemplateEmailReportId(@PathVariable Long id) {
-        return ordreKoscService.findByTemplateEmailReportId(id);
-    }
-
-    @ApiOperation("delete by templateEmailReport id")
-    @DeleteMapping("/templateEmailReport/id/{id}")
-    public int deleteByTemplateEmailReportId(@PathVariable Long id) {
-        return ordreKoscService.deleteByTemplateEmailReportId(id);
-    }
 
     @ApiOperation("find by templateEmailReplanification id")
     @GetMapping("/templateEmailReplanification/id/{id}")

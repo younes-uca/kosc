@@ -26,8 +26,7 @@ public class DefaultTemplateConfigurationConverter extends AbstractConverter<Def
     private TemplateEmailRefusConverter templateEmailRefusConverter;
     @Autowired
     private TemplateEmailConfirmationClientConverter templateEmailConfirmationClientConverter;
-    @Autowired
-    private TemplateEmailReportConverter templateEmailReportConverter;
+
     @Autowired
     private TemplateEmailClientInjoinableKoscConverter templateEmailClientInjoinableKoscConverter;
     @Autowired
@@ -55,7 +54,7 @@ public class DefaultTemplateConfigurationConverter extends AbstractConverter<Def
     private Boolean templateEmailCloture;
     private Boolean templateSuivi;
     private Boolean templateEmailClientInjoinable;
-    private Boolean templateEmailReport;
+
     private Boolean templateEmailPlanification;
     private Boolean templateEmailReplanification;
     private Boolean templateEmailRefus;
@@ -101,8 +100,7 @@ public class DefaultTemplateConfigurationConverter extends AbstractConverter<Def
                 item.setTemplateSuivi(templateSuiviConverter.toItem(vo.getTemplateSuiviVo()));
             if (vo.getTemplateEmailClientInjoinableVo() != null && this.templateEmailClientInjoinable)
                 item.setTemplateEmailClientInjoinable(templateEmailClientInjoinableConverter.toItem(vo.getTemplateEmailClientInjoinableVo()));
-            if (vo.getTemplateEmailReportVo() != null && this.templateEmailReport)
-                item.setTemplateEmailReport(templateEmailReportConverter.toItem(vo.getTemplateEmailReportVo()));
+
             if (vo.getTemplateEmailPlanificationVo() != null && this.templateEmailPlanification)
                 item.setTemplateEmailPlanification(templateEmailPlanificationConverter.toItem(vo.getTemplateEmailPlanificationVo()));
             if (vo.getTemplateEmailReplanificationVo() != null && this.templateEmailReplanification)
@@ -167,9 +165,7 @@ public class DefaultTemplateConfigurationConverter extends AbstractConverter<Def
             if (item.getTemplateEmailClientInjoinable() != null && this.templateEmailClientInjoinable) {
                 vo.setTemplateEmailClientInjoinableVo(templateEmailClientInjoinableConverter.toVo(item.getTemplateEmailClientInjoinable()));
             }
-            if (item.getTemplateEmailReport() != null && this.templateEmailReport) {
-                vo.setTemplateEmailReportVo(templateEmailReportConverter.toVo(item.getTemplateEmailReport()));
-            }
+
             if (item.getTemplateEmailPlanification() != null && this.templateEmailPlanification) {
                 vo.setTemplateEmailPlanificationVo(templateEmailPlanificationConverter.toVo(item.getTemplateEmailPlanification()));
             }
@@ -221,7 +217,6 @@ public class DefaultTemplateConfigurationConverter extends AbstractConverter<Def
         templateEmailCloture = value;
         templateSuivi = value;
         templateEmailClientInjoinable = value;
-        templateEmailReport = value;
         templateEmailPlanification = value;
         templateEmailReplanification = value;
         templateEmailRefus = value;
@@ -293,13 +288,7 @@ public class DefaultTemplateConfigurationConverter extends AbstractConverter<Def
         this.templateEmailConfirmationClientConverter = templateEmailConfirmationClientConverter;
     }
 
-    public TemplateEmailReportConverter getTemplateEmailReportConverter() {
-        return this.templateEmailReportConverter;
-    }
 
-    public void setTemplateEmailReportConverter(TemplateEmailReportConverter templateEmailReportConverter) {
-        this.templateEmailReportConverter = templateEmailReportConverter;
-    }
 
     public TemplateEmailClientInjoinableKoscConverter getTemplateEmailClientInjoinableKoscConverter() {
         return this.templateEmailClientInjoinableKoscConverter;
@@ -405,13 +394,6 @@ public class DefaultTemplateConfigurationConverter extends AbstractConverter<Def
         this.templateEmailClientInjoinable = templateEmailClientInjoinable;
     }
 
-    public boolean isTemplateEmailReport() {
-        return this.templateEmailReport;
-    }
-
-    public void setTemplateEmailReport(boolean templateEmailReport) {
-        this.templateEmailReport = templateEmailReport;
-    }
 
     public boolean isTemplateEmailPlanification() {
         return this.templateEmailPlanification;

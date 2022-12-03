@@ -20,10 +20,6 @@ import {OperatorVo} from 'src/app/controller/model/Operator.model';
 import {OperatorService} from 'src/app/controller/service/Operator.service';
 import {DepartementVo} from 'src/app/controller/model/Departement.model';
 import {DepartementService} from 'src/app/controller/service/Departement.service';
-import {TemplateEmailReportVo} from 'src/app/controller/model/TemplateEmailReport.model';
-import {TemplateEmailReportService} from 'src/app/controller/service/TemplateEmailReport.service';
-// import {ClientVo} from 'src/app/controller/model/Client.model';
-// import {ClientService} from 'src/app/controller/service/Client.service';
 import {TechnicienVo} from 'src/app/controller/model/Technicien.model';
 import {TechnicienService} from 'src/app/controller/service/Technicien.service';
 import {TemplateEmailClientInjoinableVo} from 'src/app/controller/model/TemplateEmailClientInjoinable.model';
@@ -48,9 +44,8 @@ export class OrdreKoscSuiviViewAdminComponent implements OnInit {
         , private templateSuiviService: TemplateSuiviService
         , private operatorService: OperatorService
         , private departementService: DepartementService
-                // ,private templateEmailClientInjoinableKoscService: TemplateEmailClientInjoinableKoscService
-        , private templateEmailReportService: TemplateEmailReportService
-                // ,private clientService: ClientService
+
+
         , private technicienService: TechnicienService
         , private templateEmailClientInjoinableService: TemplateEmailClientInjoinableService
     ) {
@@ -174,29 +169,8 @@ export class OrdreKoscSuiviViewAdminComponent implements OnInit {
         this.templateEmailClotureService.editTemplateEmailClotureDialog = value;
     }
 
-    get selectedTemplateEmailReport(): TemplateEmailReportVo {
-        return this.templateEmailReportService.selectedTemplateEmailReport;
-    }
 
-    set selectedTemplateEmailReport(value: TemplateEmailReportVo) {
-        this.templateEmailReportService.selectedTemplateEmailReport = value;
-    }
 
-    get templateEmailReports(): Array<TemplateEmailReportVo> {
-        return this.templateEmailReportService.templateEmailReports;
-    }
-
-    set templateEmailReports(value: Array<TemplateEmailReportVo>) {
-        this.templateEmailReportService.templateEmailReports = value;
-    }
-
-    get editTemplateEmailReportDialog(): boolean {
-        return this.templateEmailReportService.editTemplateEmailReportDialog;
-    }
-
-    set editTemplateEmailReportDialog(value: boolean) {
-        this.templateEmailReportService.editTemplateEmailReportDialog = value;
-    }
 
     get selectedDepartement(): DepartementVo {
         return this.departementService.selectedDepartement;
@@ -377,18 +351,14 @@ export class OrdreKoscSuiviViewAdminComponent implements OnInit {
         this.departementService.findAll().subscribe((data) => this.departements = data);
         this.selectedTechnicien = new TechnicienVo();
         this.technicienService.findAll().subscribe((data) => this.techniciens = data);
-        // this.selectedClient = new ClientVo();
-        // this.clientService.findAll().subscribe((data) => this.clients = data);
         this.selectedTemplateEmailClientInjoinable = new TemplateEmailClientInjoinableVo();
         this.templateEmailClientInjoinableService.findAll().subscribe((data) => this.templateEmailClientInjoinables = data);
-        // this.selectedTemplateEmailClientInjoinableKosc = new TemplateEmailClientInjoinableKoscVo();
-        // this.templateEmailClientInjoinableKoscService.findAll().subscribe((data) => this.templateEmailClientInjoinableKoscs = data);
+
         this.selectedTemplateEmailPlanification = new TemplateEmailPlanificationVo();
         this.templateEmailPlanificationService.findAll().subscribe((data) => this.templateEmailPlanifications = data);
         this.selectedTemplateEmailReplanification = new TemplateEmailReplanificationVo();
         this.templateEmailReplanificationService.findAll().subscribe((data) => this.templateEmailReplanifications = data);
-        this.selectedTemplateEmailReport = new TemplateEmailReportVo();
-        this.templateEmailReportService.findAll().subscribe((data) => this.templateEmailReports = data);
+
         this.selectedEtatDemandeKosc = new EtatDemandeKoscVo();
         this.etatDemandeKoscService.findAll().subscribe((data) => this.etatDemandeKoscs = data);
         this.selectedTemplateEmailCloture = new TemplateEmailClotureVo();

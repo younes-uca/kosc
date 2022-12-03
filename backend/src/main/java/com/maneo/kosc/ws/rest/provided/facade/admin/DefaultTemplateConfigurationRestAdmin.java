@@ -130,17 +130,8 @@ public class DefaultTemplateConfigurationRestAdmin {
         return defaultTemplateConfigurationService.deleteByTemplateEmailClientInjoinableId(id);
     }
 
-    @ApiOperation("find by templateEmailReport id")
-    @GetMapping("/templateEmailReport/id/{id}")
-    public List<DefaultTemplateConfiguration> findByTemplateEmailReportId(@PathVariable Long id) {
-        return defaultTemplateConfigurationService.findByTemplateEmailReportId(id);
-    }
 
-    @ApiOperation("delete by templateEmailReport id")
-    @DeleteMapping("/templateEmailReport/id/{id}")
-    public int deleteByTemplateEmailReportId(@PathVariable Long id) {
-        return defaultTemplateConfigurationService.deleteByTemplateEmailReportId(id);
-    }
+
 
     @ApiOperation("find by templateEmailPlanification id")
     @GetMapping("/templateEmailPlanification/id/{id}")

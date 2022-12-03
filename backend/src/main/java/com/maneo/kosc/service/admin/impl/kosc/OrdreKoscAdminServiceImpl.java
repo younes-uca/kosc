@@ -59,8 +59,7 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
     private TemplateEmailConfirmationClientAdminService templateEmailConfirmationClientService;
     @Autowired
     private DepartementAdminService departementService;
-    @Autowired
-    private TemplateEmailReportAdminService templateEmailReportService;
+
     @Autowired
     private TemplateEmailMauvaisContactAdminService templateEmailMauvaisContactService;
     @Autowired
@@ -292,16 +291,7 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
         return ordreKoscDao.deleteByTemplateEmailPlanificationId(id);
     }
 
-    @Override
-    public List<OrdreKosc> findByTemplateEmailReportId(Long id) {
-        return ordreKoscDao.findByTemplateEmailReportId(id);
-    }
 
-    @Override
-    @Transactional
-    public int deleteByTemplateEmailReportId(Long id) {
-        return ordreKoscDao.deleteByTemplateEmailReportId(id);
-    }
 
     @Override
     public List<OrdreKosc> findByTemplateEmailReplanificationId(Long id) {
@@ -550,8 +540,6 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
             ordreKosc.setExistingOtp(false);
         if (ordreKosc.getEnvoyePlanification() == null)
             ordreKosc.setEnvoyePlanification(false);
-        if (ordreKosc.getEnvoyeReport() == null)
-            ordreKosc.setEnvoyeReport(false);
         if (ordreKosc.getEnvoyeReplanification() == null)
             ordreKosc.setEnvoyeReplanification(false);
         if (ordreKosc.getEnvoyeRefus() == null)
@@ -776,12 +764,6 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
         query += SearchUtil.addConstraint("o", "fromPlanification", "LIKE", ordreKoscVo.getFromPlanification());
         query += SearchUtil.addConstraint("o", "toPlanification", "LIKE", ordreKoscVo.getToPlanification());
         query += SearchUtil.addConstraintDate("o", "dateAppelReplanification", "=", ordreKoscVo.getDateAppelReplanification());
-        query += SearchUtil.addConstraint("o", "objetReport", "LIKE", ordreKoscVo.getObjetReport());
-        query += SearchUtil.addConstraint("o", "corpsReport", "LIKE", ordreKoscVo.getCorpsReport());
-        query += SearchUtil.addConstraint("o", "fromReport", "LIKE", ordreKoscVo.getFromReport());
-        query += SearchUtil.addConstraint("o", "toReport", "LIKE", ordreKoscVo.getToReport());
-        query += SearchUtil.addConstraint("o", "envoyeReport", "=", ordreKoscVo.getEnvoyeReport());
-        query += SearchUtil.addConstraintDate("o", "dateEnvoiReport", "=", ordreKoscVo.getDateEnvoiReport());
         query += SearchUtil.addConstraint("o", "objetReplanification", "LIKE", ordreKoscVo.getObjetReplanification());
         query += SearchUtil.addConstraint("o", "corpsReplanification", "LIKE", ordreKoscVo.getCorpsReplanification());
         query += SearchUtil.addConstraint("o", "fromReplanification", "LIKE", ordreKoscVo.getFromReplanification());
@@ -885,9 +867,7 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
             query += SearchUtil.addConstraint("o", "templateEmailPlanification.id", "=", ordreKoscVo.getTemplateEmailPlanificationVo().getId());
         }
 
-        if (ordreKoscVo.getTemplateEmailReportVo() != null) {
-            query += SearchUtil.addConstraint("o", "templateEmailReport.id", "=", ordreKoscVo.getTemplateEmailReportVo().getId());
-        }
+
 
         if (ordreKoscVo.getTemplateEmailReplanificationVo() != null) {
             query += SearchUtil.addConstraint("o", "templateEmailReplanification.id", "=", ordreKoscVo.getTemplateEmailReplanificationVo().getId());
@@ -1027,16 +1007,7 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
         ordreKosc.setTemplateEmailPlanification(loadedTemplateEmailPlanification);
     }
 
-    private void findTemplateEmailReport(OrdreKosc ordreKosc) {
-        TemplateEmailReport loadedTemplateEmailReport = null;
-        if (ordreKosc.getTemplateEmailReport() != null && ordreKosc.getTemplateEmailReport().getId() != null)
-            loadedTemplateEmailReport = templateEmailReportService.findById(ordreKosc.getTemplateEmailReport().getId());
 
-        if (loadedTemplateEmailReport == null) {
-            return;
-        }
-        ordreKosc.setTemplateEmailReport(loadedTemplateEmailReport);
-    }
 
     private void findTemplateEmailReplanification(OrdreKosc ordreKosc) {
         TemplateEmailReplanification loadedTemplateEmailReplanification = null;

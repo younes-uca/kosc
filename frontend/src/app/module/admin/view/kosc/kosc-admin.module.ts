@@ -201,19 +201,8 @@ import {
     RaisonArretTravailListAdminComponent
 } from './raison-arret-travail-admin/list-admin/raison-arret-travail-list-admin.component';
 import {RaisonArretTravailAdminComponent} from './raison-arret-travail-admin/raison-arret-travail-admin.component';
-import {
-    TemplateEmailReportCreateAdminComponent
-} from './template-email-report-admin/create-admin/template-email-report-create-admin.component';
-import {
-    TemplateEmailReportEditAdminComponent
-} from './template-email-report-admin/edit-admin/template-email-report-edit-admin.component';
-import {
-    TemplateEmailReportViewAdminComponent
-} from './template-email-report-admin/view-admin/template-email-report-view-admin.component';
-import {
-    TemplateEmailReportListAdminComponent
-} from './template-email-report-admin/list-admin/template-email-report-list-admin.component';
-import {TemplateEmailReportAdminComponent} from './template-email-report-admin/template-email-report-admin.component';
+
+
 import {
     TemplateSuiviCreateAdminComponent
 } from './template-suivi-admin/create-admin/template-suivi-create-admin.component';
@@ -559,11 +548,6 @@ import {
         RaisonArretTravailViewAdminComponent,
         RaisonArretTravailEditAdminComponent,
         RaisonArretTravailAdminComponent,
-        TemplateEmailReportCreateAdminComponent,
-        TemplateEmailReportListAdminComponent,
-        TemplateEmailReportViewAdminComponent,
-        TemplateEmailReportEditAdminComponent,
-        TemplateEmailReportAdminComponent,
         TemplateSuiviCreateAdminComponent,
         TemplateSuiviListAdminComponent,
         TemplateSuiviViewAdminComponent,
@@ -747,11 +731,6 @@ import {
         RaisonArretTravailViewAdminComponent,
         RaisonArretTravailEditAdminComponent,
         RaisonArretTravailAdminComponent,
-        TemplateEmailReportCreateAdminComponent,
-        TemplateEmailReportListAdminComponent,
-        TemplateEmailReportViewAdminComponent,
-        TemplateEmailReportEditAdminComponent,
-        TemplateEmailReportAdminComponent,
         TemplateSuiviCreateAdminComponent,
         TemplateSuiviListAdminComponent,
         TemplateSuiviViewAdminComponent,

@@ -30,8 +30,7 @@ public class DefaultTemplateConfiguration {
     private TemplateSuivi templateSuivi;
     @ManyToOne
     private TemplateEmailClientInjoinable templateEmailClientInjoinable;
-    @ManyToOne
-    private TemplateEmailReport templateEmailReport;
+
     @ManyToOne
     private TemplateEmailPlanification templateEmailPlanification;
     @ManyToOne
@@ -119,13 +118,7 @@ public class DefaultTemplateConfiguration {
         this.templateEmailClientInjoinable = templateEmailClientInjoinable;
     }
 
-    public TemplateEmailReport getTemplateEmailReport() {
-        return this.templateEmailReport;
-    }
 
-    public void setTemplateEmailReport(TemplateEmailReport templateEmailReport) {
-        this.templateEmailReport = templateEmailReport;
-    }
 
     public TemplateEmailPlanification getTemplateEmailPlanification() {
         return this.templateEmailPlanification;

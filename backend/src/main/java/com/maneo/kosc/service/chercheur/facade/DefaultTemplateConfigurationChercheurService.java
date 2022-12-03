@@ -33,9 +33,9 @@ public interface DefaultTemplateConfigurationChercheurService extends AbstractSe
 
     int deleteByTemplateEmailClientInjoinableId(Long id);
 
-    List<DefaultTemplateConfiguration> findByTemplateEmailReportId(Long id);
 
-    int deleteByTemplateEmailReportId(Long id);
+
+
 
     List<DefaultTemplateConfiguration> findByTemplateEmailPlanificationId(Long id);
 

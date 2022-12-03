@@ -12,8 +12,6 @@ import {SourceReplanificationService} from '../../../../../../controller/service
 import FileSaver from 'file-saver';
 import {TemplateEmailClotureVo} from 'src/app/controller/model/TemplateEmailCloture.model';
 import {TemplateEmailClotureService} from 'src/app/controller/service/TemplateEmailCloture.service';
-import {TemplateEmailReportVo} from 'src/app/controller/model/TemplateEmailReport.model';
-import {TemplateEmailReportService} from 'src/app/controller/service/TemplateEmailReport.service';
 import {EtatDemandeKoscVo} from 'src/app/controller/model/EtatDemandeKosc.model';
 import {EtatDemandeKoscService} from 'src/app/controller/service/EtatDemandeKosc.service';
 import {TemplateEmailClientInjoinableVo} from 'src/app/controller/model/TemplateEmailClientInjoinable.model';
@@ -72,7 +70,6 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         , private messageService: MessageService
         , private router: Router
         , private templateEmailClotureService: TemplateEmailClotureService
-        , private templateEmailReportService: TemplateEmailReportService
         , private etatDemandeKoscService: EtatDemandeKoscService
         , private templateEmailClientInjoinableService: TemplateEmailClientInjoinableService
         , private technicienService: TechnicienService
@@ -117,8 +114,6 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         this.templateEmailPlanificationService.findAll().subscribe((data) => this.templateEmailPlanifications = data);
         this.selectedTemplateEmailReplanification = new TemplateEmailReplanificationVo();
         this.templateEmailReplanificationService.findAll().subscribe((data) => this.templateEmailReplanifications = data);
-        this.selectedTemplateEmailReport = new TemplateEmailReportVo();
-        this.templateEmailReportService.findAll().subscribe((data) => this.templateEmailReports = data);
         this.selectedEtatDemandeKosc = new EtatDemandeKoscVo();
         this.etatDemandeKoscService.findAll().subscribe((data) => this.etatDemandeKoscs = data);
         this.selectedTemplateEmailCloture = new TemplateEmailClotureVo();
@@ -549,32 +544,6 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         );
     }
 
-    sendMailReplanificationReport() {
-        this.showSpinner = true;
-        this.blocked = true;
-        this.ordreKoscService.sendMailReplanificationReport().subscribe(data => {
-                if (data.envoyeReport == true) {
-
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                    this.editOrdreKoscDialog = false;
-                } else {
-                    this.messageService.add({
-                        severity: 'error',
-                        summary: 'Erreurs', detail: 'échec d\'envoi'
-                    });
-
-                }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );
-    }
-
-
 
 
     onDownloadFile(fileName: string): void {
@@ -698,18 +667,6 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         if (isPermistted) {
             this.selectedTemplateEmailCloture = new TemplateEmailClotureVo();
             this.createTemplateEmailClotureDialog = true;
-        } else {
-            this.messageService.add({
-                severity: 'error', summary: 'erreur', detail: 'problème de permission'
-            });
-        }
-    }
-
-    public async openCreateTemplateEmailReport(templateEmailReport: string) {
-        const isPermistted = await this.roleService.isPermitted('TemplateEmailReport', 'edit');
-        if (isPermistted) {
-            this.selectedTemplateEmailReport = new TemplateEmailReportVo();
-            this.createTemplateEmailReportDialog = true;
         } else {
             this.messageService.add({
                 severity: 'error', summary: 'erreur', detail: 'problème de permission'
@@ -1223,29 +1180,6 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         this.templateEmailClotureService.createTemplateEmailClotureDialog = value;
     }
 
-    get selectedTemplateEmailReport(): TemplateEmailReportVo {
-        return this.templateEmailReportService.selectedTemplateEmailReport;
-    }
-
-    set selectedTemplateEmailReport(value: TemplateEmailReportVo) {
-        this.templateEmailReportService.selectedTemplateEmailReport = value;
-    }
-
-    get templateEmailReports(): Array<TemplateEmailReportVo> {
-        return this.templateEmailReportService.templateEmailReports;
-    }
-
-    set templateEmailReports(value: Array<TemplateEmailReportVo>) {
-        this.templateEmailReportService.templateEmailReports = value;
-    }
-
-    get createTemplateEmailReportDialog(): boolean {
-        return this.templateEmailReportService.createTemplateEmailReportDialog;
-    }
-
-    set createTemplateEmailReportDialog(value: boolean) {
-        this.templateEmailReportService.createTemplateEmailReportDialog = value;
-    }
 
     get selectedDepartement(): DepartementVo {
         return this.departementService.selectedDepartement;

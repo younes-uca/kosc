@@ -11,7 +11,6 @@ import {OperatorService} from 'src/app/controller/service/Operator.service';
 import {DepartementService} from 'src/app/controller/service/Departement.service';
 import {TechnicienService} from 'src/app/controller/service/Technicien.service';
 import {TemplateEmailPlanificationService} from 'src/app/controller/service/TemplateEmailPlanification.service';
-import {TemplateEmailReportService} from 'src/app/controller/service/TemplateEmailReport.service';
 import {TemplateEmailReplanificationService} from 'src/app/controller/service/TemplateEmailReplanification.service';
 import {TemplateEmailRefusService} from 'src/app/controller/service/TemplateEmailRefus.service';
 import {TemplateEmailMauvaisContactService} from 'src/app/controller/service/TemplateEmailMauvaisContact.service';
@@ -44,7 +43,6 @@ import {TemplateEmailClotureVo} from 'src/app/controller/model/TemplateEmailClot
 import {TemplateEmailRefusVo} from 'src/app/controller/model/TemplateEmailRefus.model';
 import {TemplateEmailConfirmationClientVo} from 'src/app/controller/model/TemplateEmailConfirmationClient.model';
 import {DepartementVo} from 'src/app/controller/model/Departement.model';
-import {TemplateEmailReportVo} from 'src/app/controller/model/TemplateEmailReport.model';
 import {TemplateEmailMauvaisContactVo} from 'src/app/controller/model/TemplateEmailMauvaisContact.model';
 import {TechnicienVo} from 'src/app/controller/model/Technicien.model';
 import {TemplateEmailCriVo} from 'src/app/controller/model/TemplateEmailCri.model';
@@ -106,7 +104,6 @@ export class OrdreKoscListAdminComponent implements OnInit {
     departements: Array<DepartementVo>;
     techniciens: Array<TechnicienVo>;
     templateEmailPlanifications: Array<TemplateEmailPlanificationVo>;
-    templateEmailReports: Array<TemplateEmailReportVo>;
     templateEmailReplanifications: Array<TemplateEmailReplanificationVo>;
     templateEmailRefuss: Array<TemplateEmailRefusVo>;
     templateEmailMauvaisContacts: Array<TemplateEmailMauvaisContactVo>;
@@ -134,7 +131,6 @@ export class OrdreKoscListAdminComponent implements OnInit {
         , private departementService: DepartementService
         , private technicienService: TechnicienService
         , private templateEmailPlanificationService: TemplateEmailPlanificationService
-        , private templateEmailReportService: TemplateEmailReportService
         , private templateEmailReplanificationService: TemplateEmailReplanificationService
         , private templateEmailRefusService: TemplateEmailRefusService
         , private templateEmailMauvaisContactService: TemplateEmailMauvaisContactService
@@ -261,7 +257,6 @@ export class OrdreKoscListAdminComponent implements OnInit {
         this.loadDepartement();
         this.loadTechnicien();
         this.loadTemplateEmailPlanification();
-        this.loadTemplateEmailReport();
         this.loadTemplateEmailReplanification();
         this.loadTemplateEmailRefus();
         this.loadTemplateEmailMauvaisContact();
@@ -367,7 +362,6 @@ export class OrdreKoscListAdminComponent implements OnInit {
                 this.selectedOrdreKosc.dateOuverture =DateUtils.toDate(ordreKosc.dateOuverture);
                 this.selectedOrdreKosc.dateEnvoiPlanification =DateUtils.toDate(ordreKosc.dateEnvoiPlanification);
                 this.selectedOrdreKosc.dateAppelReplanification =DateUtils.toDate(ordreKosc.dateAppelReplanification);
-                this.selectedOrdreKosc.dateEnvoiReport = DateUtils.toDate(ordreKosc.dateEnvoiReport);
                 this.selectedOrdreKosc.dateEnvoiReplanification =DateUtils.toDate(ordreKosc.dateEnvoiReplanification);
                 this.selectedOrdreKosc.dateEnvoiRefus =DateUtils.toDate(ordreKosc.dateEnvoiRefus);
                 this.selectedOrdreKosc.dateEnvoiMauvaisContact =DateUtils.toDate(ordreKosc.dateEnvoiMauvaisContact);
@@ -405,7 +399,6 @@ export class OrdreKoscListAdminComponent implements OnInit {
         this.selectedOrdreKosc.dateOuverture = new Date(ordreKosc.dateOuverture);
         this.selectedOrdreKosc.dateEnvoiPlanification = new Date(ordreKosc.dateEnvoiPlanification);
         this.selectedOrdreKosc.dateAppelReplanification = new Date(ordreKosc.dateAppelReplanification);
-        this.selectedOrdreKosc.dateEnvoiReport = new Date(ordreKosc.dateEnvoiReport);
         this.selectedOrdreKosc.dateEnvoiReplanification = new Date(ordreKosc.dateEnvoiReplanification);
         this.selectedOrdreKosc.dateEnvoiRefus = new Date(ordreKosc.dateEnvoiRefus);
         this.selectedOrdreKosc.dateEnvoiMauvaisContact = new Date(ordreKosc.dateEnvoiMauvaisContact);
@@ -525,13 +518,6 @@ export class OrdreKoscListAdminComponent implements OnInit {
 
     }
 
-    public async loadTemplateEmailReport() {
-        await this.roleService.findAll();
-        const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
-        isPermistted ? this.templateEmailReportService.findAll().subscribe(templateEmailReports => this.templateEmailReports = templateEmailReports, error => console.log(error))
-            : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
-
-    }
 
     public async loadTemplateEmailReplanification() {
         await this.roleService.findAll();

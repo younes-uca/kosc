@@ -195,11 +195,6 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-plus-circle',
                         routerLink: ['/app/admin/kosc/template-email-planification/list']
                     },
-                    {
-                        label: 'Liste template email report',
-                        icon: 'pi pi-fw pi-plus-circle',
-                        routerLink: ['/app/admin/kosc/template-email-report/list']
-                    },
 
                     {
                         label: 'Liste template email report demande maneo client joignable accepte',

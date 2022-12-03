@@ -35,8 +35,7 @@ public class DefaultTemplateConfigurationChercheurServiceImpl extends AbstractSe
     private TemplateEmailRefusChercheurService templateEmailRefusService;
     @Autowired
     private TemplateEmailConfirmationClientChercheurService templateEmailConfirmationClientService;
-    @Autowired
-    private TemplateEmailReportChercheurService templateEmailReportService;
+
     @Autowired
     private TemplateEmailClientInjoinableKoscChercheurService templateEmailClientInjoinableKoscService;
     @Autowired
@@ -100,16 +99,9 @@ public class DefaultTemplateConfigurationChercheurServiceImpl extends AbstractSe
         return defaultTemplateConfigurationDao.deleteByTemplateEmailClientInjoinableId(id);
     }
 
-    @Override
-    public List<DefaultTemplateConfiguration> findByTemplateEmailReportId(Long id) {
-        return defaultTemplateConfigurationDao.findByTemplateEmailReportId(id);
-    }
 
-    @Override
-    @Transactional
-    public int deleteByTemplateEmailReportId(Long id) {
-        return defaultTemplateConfigurationDao.deleteByTemplateEmailReportId(id);
-    }
+
+
 
     @Override
     public List<DefaultTemplateConfiguration> findByTemplateEmailPlanificationId(Long id) {
@@ -236,7 +228,7 @@ public class DefaultTemplateConfigurationChercheurServiceImpl extends AbstractSe
         findTemplateEmailCloture(defaultTemplateConfiguration);
         findTemplateSuivi(defaultTemplateConfiguration);
         findTemplateEmailClientInjoinable(defaultTemplateConfiguration);
-        findTemplateEmailReport(defaultTemplateConfiguration);
+
         findTemplateEmailPlanification(defaultTemplateConfiguration);
         findTemplateEmailReplanification(defaultTemplateConfiguration);
         findTemplateEmailRefus(defaultTemplateConfiguration);
@@ -294,9 +286,6 @@ public class DefaultTemplateConfigurationChercheurServiceImpl extends AbstractSe
             query += SearchUtil.addConstraint("o", "templateEmailClientInjoinable.id", "=", defaultTemplateConfigurationVo.getTemplateEmailClientInjoinableVo().getId());
         }
 
-        if (defaultTemplateConfigurationVo.getTemplateEmailReportVo() != null) {
-            query += SearchUtil.addConstraint("o", "templateEmailReport.id", "=", defaultTemplateConfigurationVo.getTemplateEmailReportVo().getId());
-        }
 
         if (defaultTemplateConfigurationVo.getTemplateEmailPlanificationVo() != null) {
             query += SearchUtil.addConstraint("o", "templateEmailPlanification.id", "=", defaultTemplateConfigurationVo.getTemplateEmailPlanificationVo().getId());
@@ -373,16 +362,7 @@ public class DefaultTemplateConfigurationChercheurServiceImpl extends AbstractSe
         defaultTemplateConfiguration.setTemplateEmailClientInjoinable(loadedTemplateEmailClientInjoinable);
     }
 
-    private void findTemplateEmailReport(DefaultTemplateConfiguration defaultTemplateConfiguration) {
-        TemplateEmailReport loadedTemplateEmailReport = null;
-        if (defaultTemplateConfiguration.getTemplateEmailReport() != null && defaultTemplateConfiguration.getTemplateEmailReport().getId() != null)
-            loadedTemplateEmailReport = templateEmailReportService.findById(defaultTemplateConfiguration.getTemplateEmailReport().getId());
 
-        if (loadedTemplateEmailReport == null) {
-            return;
-        }
-        defaultTemplateConfiguration.setTemplateEmailReport(loadedTemplateEmailReport);
-    }
 
     private void findTemplateEmailPlanification(DefaultTemplateConfiguration defaultTemplateConfiguration) {
         TemplateEmailPlanification loadedTemplateEmailPlanification = null;

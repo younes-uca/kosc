@@ -22,8 +22,6 @@ import {TemplateEmailConfirmationClientVo} from 'src/app/controller/model/Templa
 import {
     TemplateEmailConfirmationClientService
 } from 'src/app/controller/service/TemplateEmailConfirmationClient.service';
-import {TemplateEmailReportVo} from 'src/app/controller/model/TemplateEmailReport.model';
-import {TemplateEmailReportService} from 'src/app/controller/service/TemplateEmailReport.service';
 import {TemplateEmailClientInjoinableKoscVo} from 'src/app/controller/model/TemplateEmailClientInjoinableKosc.model';
 import {
     TemplateEmailClientInjoinableKoscService
@@ -84,7 +82,6 @@ export class DefaultTemplateConfigurationViewAdminComponent implements OnInit {
         , private templateSuiviService: TemplateSuiviService
         , private templateEmailRefusService: TemplateEmailRefusService
         , private templateEmailConfirmationClientService: TemplateEmailConfirmationClientService
-        , private templateEmailReportService: TemplateEmailReportService
         , private templateEmailClientInjoinableKoscService: TemplateEmailClientInjoinableKoscService
         , private templateEmailMauvaisContactService: TemplateEmailMauvaisContactService
         , private templateEmailClientInjoinableService: TemplateEmailClientInjoinableService
@@ -269,29 +266,7 @@ export class DefaultTemplateConfigurationViewAdminComponent implements OnInit {
         this.templateEmailClotureService.editTemplateEmailClotureDialog = value;
     }
 
-    get selectedTemplateEmailReport(): TemplateEmailReportVo {
-        return this.templateEmailReportService.selectedTemplateEmailReport;
-    }
 
-    set selectedTemplateEmailReport(value: TemplateEmailReportVo) {
-        this.templateEmailReportService.selectedTemplateEmailReport = value;
-    }
-
-    get templateEmailReports(): Array<TemplateEmailReportVo> {
-        return this.templateEmailReportService.templateEmailReports;
-    }
-
-    set templateEmailReports(value: Array<TemplateEmailReportVo>) {
-        this.templateEmailReportService.templateEmailReports = value;
-    }
-
-    get editTemplateEmailReportDialog(): boolean {
-        return this.templateEmailReportService.editTemplateEmailReportDialog;
-    }
-
-    set editTemplateEmailReportDialog(value: boolean) {
-        this.templateEmailReportService.editTemplateEmailReportDialog = value;
-    }
 
     get selectedTemplateEmailReplanification(): TemplateEmailReplanificationVo {
         return this.templateEmailReplanificationService.selectedTemplateEmailReplanification;
@@ -547,8 +522,6 @@ export class DefaultTemplateConfigurationViewAdminComponent implements OnInit {
         this.templateSuiviService.findAll().subscribe((data) => this.templateSuivis = data);
         this.selectedTemplateEmailClientInjoinable = new TemplateEmailClientInjoinableVo();
         this.templateEmailClientInjoinableService.findAll().subscribe((data) => this.templateEmailClientInjoinables = data);
-        this.selectedTemplateEmailReport = new TemplateEmailReportVo();
-        this.templateEmailReportService.findAll().subscribe((data) => this.templateEmailReports = data);
         this.selectedTemplateEmailPlanification = new TemplateEmailPlanificationVo();
         this.templateEmailPlanificationService.findAll().subscribe((data) => this.templateEmailPlanifications = data);
         this.selectedTemplateEmailReplanification = new TemplateEmailReplanificationVo();
