@@ -8,21 +8,16 @@
                     pRipple></button>
         </ng-template>
 
-        <ng-template pTemplate="right">
-            <p-fileUpload [maxFileSize]="1000000" accept="image/*" chooseLabel="Import" class="p-mr-2 p-d-inline-block" label="Import"
-                          mode="basic"></p-fileUpload>
-            <button class="p-button-help" icon="pi pi-upload" label="Export" pButton pRipple></button>
-        </ng-template>
     </p-toolbar>
 
     <p-table #dt [(selection)]="selectedRoles" [globalFilterFields]="['prenom','nom','email','username']" [paginator]="true"
-             [rowHover]="true" [rows]="10"
+             [rowHover]="false" [rows]="10"
              [showCurrentPageReport]="true" [value]="roles"
              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
              dataKey="id">
         <ng-template pTemplate="caption">
             <div class="p-d-flex p-ai-center p-jc-between">
-                <h5 class="p-m-0">Manage Users</h5>
+                <h5 class="p-m-0">Manage Roles</h5>
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
                     <input (input)="dt.filterGlobal($event.target.value, 'contains')" pInputText placeholder="Search..."
@@ -41,7 +36,6 @@
                 <th pSortableColumn="created at">Created at
                     <p-sortIcon field="created at"></p-sortIcon>
                 </th>
-
 
                 <th></th>
             </tr>
@@ -80,7 +74,7 @@
 
         <div class="p-field">
             <label for="permissions">Permissions</label>
-            <p-dropdown [(ngModel)]="selectedRole.permissions[0]" [options]="permissions" optionLabel="authority" id="permissions">
+            <p-dropdown [(ngModel)]="selectedRole.permissions[0]" [options]="" optionLabel="authority" id="permissions">
             </p-dropdown>
         </div>
     </ng-template>
