@@ -116,6 +116,7 @@ public class UserServiceImpl implements UserService {
         chercheur.setEmail(user.getEmail());
         chercheur.setPrenom(user.getPrenom());
         chercheur.setNom(user.getNom());
+        chercheur.setTelephone(user.getTelephone());
         chercheur.getRoles().addAll(user.getRoles());
         chercheur.setAccountNonExpired(true);
         chercheur.setAccountNonLocked(true);
@@ -135,6 +136,7 @@ public class UserServiceImpl implements UserService {
             foundedUser.setUsername(user.getUsername());
             foundedUser.setPrenom(user.getPrenom());
             foundedUser.setNom(user.getNom());
+            foundedUser.setTelephone(user.getTelephone());
             foundedUser.setEnabled(user.isEnabled());
             foundedUser.setCredentialsNonExpired(user.isCredentialsNonExpired());
             foundedUser.setAccountNonLocked(user.isAccountNonLocked());

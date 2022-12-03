@@ -36,6 +36,8 @@ public class User implements UserDetails {
     protected String password;
     protected String prenom;
     protected String nom;
+
+    protected String telephone;
     protected boolean passwordChanged;
 
 
@@ -57,6 +59,8 @@ public class User implements UserDetails {
         this.prenom = username;
         this.nom = username;
         this.email = username;
+        this.telephone = username;
+
     }
 
     public boolean getCredentialsNonExpired() {
@@ -205,4 +209,11 @@ public class User implements UserDetails {
         this.nom = nom;
     }
 
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
 }

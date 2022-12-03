@@ -74,6 +74,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withClaim("nom", user.getNom())
                 .withClaim("prenom", user.getPrenom())
                 .withClaim("email",user.getEmail())
+                .withClaim("telephone",user.getTelephone())
                 .sign(Algorithm.HMAC256(SecurityParams.SECRET));
         response.addHeader(SecurityParams.JWT_HEADER_NAME, SecurityParams.HEADER_PREFIX + jwt);
         System.out.println(jwt);

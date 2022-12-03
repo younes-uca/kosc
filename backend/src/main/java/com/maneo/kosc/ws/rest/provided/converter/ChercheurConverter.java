@@ -46,8 +46,7 @@ public class ChercheurConverter extends AbstractConverter<Chercheur, ChercheurVo
             if (StringUtil.isNotEmpty(vo.getNom()))
                 item.setNom(vo.getNom());
 
-
-            return item;
+                return item;
         }
     }
 
