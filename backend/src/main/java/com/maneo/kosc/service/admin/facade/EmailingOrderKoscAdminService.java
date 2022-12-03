@@ -30,4 +30,6 @@ public interface EmailingOrderKoscAdminService {
     void sendMailReportDemandeClientClientInjoignable(OrdreKosc ordreKosc);
 
     void sendMailReportDemandeClientClientJoignable(OrdreKosc ordreKosc);
+
+    void sendMailCri(OrdreKosc ordreKosc);
 }

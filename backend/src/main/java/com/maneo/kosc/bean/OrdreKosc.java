@@ -719,6 +719,9 @@ public class OrdreKosc {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date dateEnvoiReportDemandeClientClientJoignable;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date dateCri;
 
 
     @ManyToOne
@@ -2818,6 +2821,14 @@ public class OrdreKosc {
 
     public void setDateEnvoiReportDemandeClientClientJoignable(Date dateEnvoiReportDemandeClientClientJoignable) {
         this.dateEnvoiReportDemandeClientClientJoignable = dateEnvoiReportDemandeClientClientJoignable;
+    }
+
+    public Date getDateCri() {
+        return dateCri;
+    }
+
+    public void setDateCri(Date dateCri) {
+        this.dateCri = dateCri;
     }
 }
 

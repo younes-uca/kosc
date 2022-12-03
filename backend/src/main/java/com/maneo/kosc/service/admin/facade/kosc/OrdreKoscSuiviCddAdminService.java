@@ -1,4 +1,4 @@
-package com.maneo.kosc.service.admin.facade;
+package com.maneo.kosc.service.admin.facade.kosc;
 
 import com.maneo.kosc.bean.OrdreKosc;
 import com.maneo.kosc.ws.rest.provided.vo.OrdreKoscVo;

@@ -346,7 +346,8 @@ public class OrdreKoscVo {
     private String toReportDemandeClientClientJoignable;
     private Boolean envoyeReportDemandeClientClientJoignable ;
     private String dateEnvoiReportDemandeClientClientJoignable;
-    
+    private String dateCri;
+
     
     
     
@@ -2815,5 +2816,13 @@ public class OrdreKoscVo {
 
     public void setDateEnvoiReportDemandeClientClientJoignable(String dateEnvoiReportDemandeClientClientJoignable) {
         this.dateEnvoiReportDemandeClientClientJoignable = dateEnvoiReportDemandeClientClientJoignable;
+    }
+
+    public String getDateCri() {
+        return dateCri;
+    }
+
+    public void setDateCri(String dateCri) {
+        this.dateCri = dateCri;
     }
 }

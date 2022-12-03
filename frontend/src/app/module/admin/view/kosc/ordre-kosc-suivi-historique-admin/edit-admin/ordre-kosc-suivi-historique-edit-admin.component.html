@@ -1673,8 +1673,17 @@
             <p-tabPanel header="Mail Cri">
                 <p-blockUI [blocked]="blocked"></p-blockUI>
                 <div class="p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="30">Date cri</label>
+                        <p-calendar dateFormat="{{dateFormat}}" [(ngModel)]="selectedOrdreKosc.dateCri"
+                                    [showSeconds]="false" [showTime]="true"
+                                    id="30"
+                                    placeholder="Date cri">
+                        </p-calendar>
 
-                    <div class="p-field p-col-12 p-md-6">
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
                         <label for="160">From</label>
                         <input [(ngModel)]="selectedOrdreKosc.fromCri"
                                [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromCri}" class="p-mb-2 p-mr-2"
@@ -1685,7 +1694,7 @@
                     </div>
 
 
-                    <div class="p-field p-col-12 p-md-6">
+                    <div class="p-field p-col-12 p-md-4">
                         <label for="161">To</label>
                         <input [(ngModel)]="selectedOrdreKosc.toCri"
                                [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToCri}" class="p-mb-2 p-mr-2"

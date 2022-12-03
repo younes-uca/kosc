@@ -566,6 +566,11 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
             if (StringUtil.isNotEmpty(vo.getToReportDemandeClientClientJoignable()))
                 item.setToReportDemandeClientClientJoignable(vo.getToReportDemandeClientClientJoignable());
 
+            if (StringUtil.isNotEmpty(vo.getDateCri()))
+                item.setDateCri(DateUtil.parse(vo.getDateCri()));
+
+
+
             if (vo.getOperatorVo() != null && this.operator)
                 item.setOperator(operatorConverter.toItem(vo.getOperatorVo()));
             if (vo.getDepartementVo() != null && this.departement)
@@ -1276,6 +1281,10 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
                 vo.setEnvoyeReportDemandeClientClientJoignable(item.getEnvoyeReportDemandeClientClientJoignable());
             if (item.getDateEnvoiReportDemandeClientClientJoignable() != null)
                 vo.setDateEnvoiReportDemandeClientClientJoignable(DateUtil.formateDate(item.getDateEnvoiReportDemandeClientClientJoignable()));
+
+
+            if (item.getDateCri() != null)
+                vo.setDateCri(DateUtil.formateDate(item.getDateCri()));
 
             if (item.getOperator() != null && this.operator) {
                 vo.setOperatorVo(operatorConverter.toVo(item.getOperator()));

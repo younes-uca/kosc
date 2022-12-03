@@ -1,4 +1,4 @@
-package com.maneo.kosc.service.admin.facade;
+package com.maneo.kosc.service.admin.facade.kosc;
 
 import java.util.Date;
 import java.util.List;
