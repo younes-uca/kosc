@@ -64,6 +64,8 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
     }
 
     _submitted = false;
+    showSpinner = false;
+    blocked = false;
 
     get submitted(): boolean {
         return this._submitted;
@@ -844,5 +846,9 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
         } else {
             this.validOrdreKoscReferenceWorkOrder = true;
         }
+    }
+
+    sendMailCri() {
+
     }
 }
