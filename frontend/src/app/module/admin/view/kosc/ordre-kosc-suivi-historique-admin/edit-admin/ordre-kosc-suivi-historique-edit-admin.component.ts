@@ -64,6 +64,8 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
     }
 
     _submitted = false;
+    showSpinner = false;
+    blocked = false;
 
     get submitted(): boolean {
         return this._submitted;
@@ -844,5 +846,33 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
         } else {
             this.validOrdreKoscReferenceWorkOrder = true;
         }
+    }
+
+    sendMailCri() {
+        this.showSpinner = true;
+        this.blocked = true;
+
+        this.ordreKoscService.sendMailCri().subscribe(data => {
+                if (data.envoyeCri == true) {
+
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: 'Email envoyé avec succès'
+                    });
+                    this.editOrdreKoscDialog = false;
+                } else {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Erreurs', detail: 'échec d\'envoi'
+                    });
+
+                }
+                this.showSpinner = false;
+                this.blocked = false;
+            }
+        );
+
+
     }
 }

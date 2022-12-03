@@ -3,6 +3,7 @@ package com.maneo.kosc.service.admin.impl;
 import com.maneo.kosc.bean.*;
 import com.maneo.kosc.dao.OrdreKoscDao;
 import com.maneo.kosc.service.admin.facade.*;
+import com.maneo.kosc.service.admin.facade.kosc.OrdreKoscAdminService;
 import com.maneo.kosc.service.util.DateUtil;
 
 
@@ -345,6 +346,30 @@ public class EmailingOrderKoscAdminServiceImpl  implements EmailingOrderKoscAdmi
             OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
             ordreKosc.setEnvoyeReportDemandeClientClientJoignable(false);
             ordreKosc.setDateEnvoiReportDemandeClientClientJoignable(null);
+            ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
+        }
+
+    }
+
+    @Override
+    public void sendMailCri(OrdreKosc ordreKosc) {
+
+        LocalDate todaysDate = LocalDate.now();
+        try {
+            EmailDetails emailDetails = new EmailDetails();
+            emailDetails.setFrom(ordreKosc.getFromCri());
+            emailDetails.setTo(ordreKosc.getToCri());
+            emailDetails.setObjet(ordreKosc.getObjetCri());
+            emailDetails.setCorps(ordreKosc.getCorpsCri());
+            emailSenderAdminService.sendEmail(emailDetails);
+            ordreKosc.setEnvoyeCri(true);
+            ordreKosc.setDateEnvoiCri(DateUtil.toDate(todaysDate));
+            ordreKoscDao.save(ordreKosc);
+
+        } catch (Exception exception) {
+            OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
+            ordreKosc.setEnvoyeCri(false);
+            ordreKosc.setDateEnvoiCri(null);
             ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
 

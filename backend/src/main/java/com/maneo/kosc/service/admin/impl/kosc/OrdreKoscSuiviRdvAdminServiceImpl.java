@@ -1,10 +1,9 @@
-package com.maneo.kosc.service.admin.impl;
+package com.maneo.kosc.service.admin.impl.kosc;
 
-import com.maneo.kosc.bean.EtatDemandeKosc;
 import com.maneo.kosc.bean.OrdreKosc;
 import com.maneo.kosc.dao.EtatDemandeKoscDao;
 import com.maneo.kosc.dao.OrdreKoscDao;
-import com.maneo.kosc.service.admin.facade.OrdreKoscSuivRdvAdminService;
+import com.maneo.kosc.service.admin.facade.kosc.OrdreKoscSuivRdvAdminService;
 import com.maneo.kosc.service.util.SearchUtil;
 import com.maneo.kosc.ws.rest.provided.vo.EtatDemandeKoscVo;
 import com.maneo.kosc.ws.rest.provided.vo.OrdreKoscVo;

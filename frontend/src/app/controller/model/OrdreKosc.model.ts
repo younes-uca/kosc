@@ -332,4 +332,7 @@ export class OrdreKoscVo {
     public envoyeReportDemandeClientClientJoignable: null | boolean;
     public dateEnvoiReportDemandeClientClientJoignable: Date;
 
+
+    public dateCri: Date;
+
 }
