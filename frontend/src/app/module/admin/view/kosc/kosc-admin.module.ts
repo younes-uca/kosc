@@ -425,12 +425,14 @@ import {
 import {
     TemplateEmailReportDemandeClientClientJoignableListAdminComponent
 } from "./template-email-report-demande-client-client-joignable-admin/list-admin/template-email-report-demande-client-client-joignable-list-admin.component";
+import {RoleListComponent} from "./role-list/role-list.component";
 
 
 
 
 @NgModule({
     declarations: [
+        RoleListComponent,
         OrdreKoscSuiviCddViewAdminComponent,
         OrdreKoscSuiviCddEditAdminComponent,
         OrdreKoscSuiviCddListAdminComponent,

@@ -8,6 +8,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.maneo.kosc.security.bean.User;
 
 public class OrdreKoscVo {
 
@@ -367,6 +368,23 @@ public class OrdreKoscVo {
     private TemplateSuiviVo templateSuiviVo;
     private CauseKoOkVo causeKoOkVo;
     private SourceReplanificationVo sourceReplanificationVo;
+
+    private User userPlanification;
+    private User userReplanification;
+    private User userRefus;
+    private User userMauvaisContact;
+    private User userConfirmationClient;
+    private User userCri;
+    private User userFtl;
+    private User userClientInjoinable;
+    private User userAutre;
+    private User userClientInjoinableKosc;
+    private User userReportDemandeManeoClientInjoignable;
+    private User userReportDemandeManeoClientJoignableAccepte;
+    private User userReportDemandeManeoClientJoignableRefus;
+    private User userReportDemandeClientClientInjoignable;
+    private User userReportDemandeClientClientJoignable;
+    private User userImportation;
 
 
     public String getNumeroDernierAppel() {
@@ -2766,5 +2784,133 @@ public class OrdreKoscVo {
 
     public void setDateCri(String dateCri) {
         this.dateCri = dateCri;
+    }
+
+    public User getUserPlanification() {
+        return userPlanification;
+    }
+
+    public void setUserPlanification(User userPlanification) {
+        this.userPlanification = userPlanification;
+    }
+
+    public User getUserReplanification() {
+        return userReplanification;
+    }
+
+    public void setUserReplanification(User userReplanification) {
+        this.userReplanification = userReplanification;
+    }
+
+    public User getUserRefus() {
+        return userRefus;
+    }
+
+    public void setUserRefus(User userRefus) {
+        this.userRefus = userRefus;
+    }
+
+    public User getUserMauvaisContact() {
+        return userMauvaisContact;
+    }
+
+    public void setUserMauvaisContact(User userMauvaisContact) {
+        this.userMauvaisContact = userMauvaisContact;
+    }
+
+    public User getUserConfirmationClient() {
+        return userConfirmationClient;
+    }
+
+    public void setUserConfirmationClient(User userConfirmationClient) {
+        this.userConfirmationClient = userConfirmationClient;
+    }
+
+    public User getUserCri() {
+        return userCri;
+    }
+
+    public void setUserCri(User userCri) {
+        this.userCri = userCri;
+    }
+
+    public User getUserFtl() {
+        return userFtl;
+    }
+
+    public void setUserFtl(User userFtl) {
+        this.userFtl = userFtl;
+    }
+
+    public User getUserClientInjoinable() {
+        return userClientInjoinable;
+    }
+
+    public void setUserClientInjoinable(User userClientInjoinable) {
+        this.userClientInjoinable = userClientInjoinable;
+    }
+
+    public User getUserAutre() {
+        return userAutre;
+    }
+
+    public void setUserAutre(User userAutre) {
+        this.userAutre = userAutre;
+    }
+
+    public User getUserClientInjoinableKosc() {
+        return userClientInjoinableKosc;
+    }
+
+    public void setUserClientInjoinableKosc(User userClientInjoinableKosc) {
+        this.userClientInjoinableKosc = userClientInjoinableKosc;
+    }
+
+    public User getUserReportDemandeManeoClientInjoignable() {
+        return userReportDemandeManeoClientInjoignable;
+    }
+
+    public void setUserReportDemandeManeoClientInjoignable(User userReportDemandeManeoClientInjoignable) {
+        this.userReportDemandeManeoClientInjoignable = userReportDemandeManeoClientInjoignable;
+    }
+
+    public User getUserReportDemandeManeoClientJoignableAccepte() {
+        return userReportDemandeManeoClientJoignableAccepte;
+    }
+
+    public void setUserReportDemandeManeoClientJoignableAccepte(User userReportDemandeManeoClientJoignableAccepte) {
+        this.userReportDemandeManeoClientJoignableAccepte = userReportDemandeManeoClientJoignableAccepte;
+    }
+
+    public User getUserReportDemandeManeoClientJoignableRefus() {
+        return userReportDemandeManeoClientJoignableRefus;
+    }
+
+    public void setUserReportDemandeManeoClientJoignableRefus(User userReportDemandeManeoClientJoignableRefus) {
+        this.userReportDemandeManeoClientJoignableRefus = userReportDemandeManeoClientJoignableRefus;
+    }
+
+    public User getUserReportDemandeClientClientInjoignable() {
+        return userReportDemandeClientClientInjoignable;
+    }
+
+    public void setUserReportDemandeClientClientInjoignable(User userReportDemandeClientClientInjoignable) {
+        this.userReportDemandeClientClientInjoignable = userReportDemandeClientClientInjoignable;
+    }
+
+    public User getUserReportDemandeClientClientJoignable() {
+        return userReportDemandeClientClientJoignable;
+    }
+
+    public void setUserReportDemandeClientClientJoignable(User userReportDemandeClientClientJoignable) {
+        this.userReportDemandeClientClientJoignable = userReportDemandeClientClientJoignable;
+    }
+
+    public User getUserImportation() {
+        return userImportation;
+    }
+
+    public void setUserImportation(User userImportation) {
+        this.userImportation = userImportation;
     }
 }

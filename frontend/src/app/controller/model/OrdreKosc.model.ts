@@ -15,6 +15,7 @@ import {DepartementVo} from './Departement.model';
 import {TemplateEmailMauvaisContactVo} from './TemplateEmailMauvaisContact.model';
 import {TechnicienVo} from './Technicien.model';
 import {TemplateEmailCriVo} from './TemplateEmailCri.model';
+import {User} from "./User.model";
 
 
 export class OrdreKoscVo {
@@ -146,6 +147,12 @@ export class OrdreKoscVo {
     public fromPlanification: string;
     public toPlanification: string;
     public dateAppelReplanification: Date;
+    public objetReport: string;
+    public corpsReport: string;
+    public fromReport: string;
+    public toReport: string;
+    public envoyeReport: null | boolean;
+    public dateEnvoiReport: Date;
     public objetReplanification: string;
     public corpsReplanification: string;
     public fromReplanification: string;
@@ -237,6 +244,8 @@ export class OrdreKoscVo {
     public dateEnvoiPlanificationMin: string;
     public dateAppelReplanificationMax: string;
     public dateAppelReplanificationMin: string;
+    public dateEnvoiReportMax: string;
+    public dateEnvoiReportMin: string;
     public dateEnvoiReplanificationMax: string;
     public dateEnvoiReplanificationMin: string;
     public dateEnvoiRefusMax: string;
@@ -268,7 +277,7 @@ export class OrdreKoscVo {
     public technicienVo: TechnicienVo;
     public templateEmailPlanificationVo: TemplateEmailPlanificationVo;
     public templateEmailReplanificationVo: TemplateEmailReplanificationVo;
-    public  templateEmailRefusVo: TemplateEmailRefusVo;
+    public templateEmailRefusVo: TemplateEmailRefusVo;
     public templateEmailMauvaisContactVo: TemplateEmailMauvaisContactVo;
     public templateEmailConfirmationClientVo: TemplateEmailConfirmationClientVo;
     public templateEmailCriVo: TemplateEmailCriVo;
@@ -324,5 +333,8 @@ export class OrdreKoscVo {
 
 
     public dateCri: Date;
+
+    public userMauvaisContact: User;
+
 
 }

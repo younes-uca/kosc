@@ -75,6 +75,23 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
     private Boolean causeKoOk;
     private Boolean sourceReplanification;
 
+    private Boolean userPlanification;
+    private Boolean userReplanification;
+    private Boolean userRefus;
+    private Boolean userMauvaisContact;
+    private Boolean userConfirmationClient;
+    private Boolean userCri;
+    private Boolean userFtl;
+    private Boolean userClientInjoinable;
+    private Boolean userAutre;
+    private Boolean userClientInjoinableKosc;
+    private Boolean userReportDemandeManeoClientInjoignable;
+    private Boolean userReportDemandeManeoClientJoignableAccepte;
+    private Boolean userReportDemandeManeoClientJoignableRefus;
+    private Boolean userReportDemandeClientClientInjoignable;
+    private Boolean userReportDemandeClientClientJoignable;
+    private Boolean userImportation;
+
     public OrdreKoscConverter() {
         init(true);
     }
@@ -559,7 +576,6 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
 
             if (StringUtil.isNotEmpty(vo.getDateCri()))
                 item.setDateCri(DateUtil.parse(vo.getDateCri()));
-
 
 
             if (vo.getOperatorVo() != null && this.operator)
@@ -1187,8 +1203,6 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
             if (item.getDateEnvoiReportDemandeManeoClientInjoignable() != null)
                 vo.setDateEnvoiReportDemandeManeoClientInjoignable(DateUtil.formateDate(item.getDateEnvoiReportDemandeManeoClientInjoignable()));
 
-            
-            
 
             if (StringUtil.isNotEmpty(item.getObjetReportDemandeManeoClientJoignableAccepte()))
                 vo.setObjetReportDemandeManeoClientJoignableAccepte(item.getObjetReportDemandeManeoClientJoignableAccepte());
@@ -1205,11 +1219,9 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
             if (item.getEnvoyeReportDemandeManeoClientJoignableAccepte() != null)
                 vo.setEnvoyeReportDemandeManeoClientJoignableAccepte(item.getEnvoyeReportDemandeManeoClientJoignableAccepte());
             if (item.getDateEnvoiReportDemandeManeoClientJoignableAccepte() != null)
-                vo.setDateEnvoiReportDemandeManeoClientJoignableAccepte(DateUtil.formateDate(item.getDateEnvoiReportDemandeManeoClientJoignableAccepte()));       
+                vo.setDateEnvoiReportDemandeManeoClientJoignableAccepte(DateUtil.formateDate(item.getDateEnvoiReportDemandeManeoClientJoignableAccepte()));
 
-            
-            
-            
+
             if (StringUtil.isNotEmpty(item.getObjetReportDemandeManeoClientJoignableRefus()))
                 vo.setObjetReportDemandeManeoClientJoignableRefus(item.getObjetReportDemandeManeoClientJoignableRefus());
 
@@ -1226,8 +1238,8 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
                 vo.setEnvoyeReportDemandeManeoClientJoignableRefus(item.getEnvoyeReportDemandeManeoClientJoignableRefus());
             if (item.getDateEnvoiReportDemandeManeoClientJoignableRefus() != null)
                 vo.setDateEnvoiReportDemandeManeoClientJoignableRefus(DateUtil.formateDate(item.getDateEnvoiReportDemandeManeoClientJoignableRefus()));
- 
-            
+
+
             if (StringUtil.isNotEmpty(item.getObjetReportDemandeClientClientInjoignable()))
                 vo.setObjetReportDemandeClientClientInjoignable(item.getObjetReportDemandeClientClientInjoignable());
 
@@ -1244,7 +1256,7 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
                 vo.setEnvoyeReportDemandeClientClientInjoignable(item.getEnvoyeReportDemandeClientClientInjoignable());
             if (item.getDateEnvoiReportDemandeClientClientInjoignable() != null)
                 vo.setDateEnvoiReportDemandeClientClientInjoignable(DateUtil.formateDate(item.getDateEnvoiReportDemandeClientClientInjoignable()));
-            
+
             if (StringUtil.isNotEmpty(item.getObjetReportDemandeClientClientJoignable()))
                 vo.setObjetReportDemandeClientClientJoignable(item.getObjetReportDemandeClientClientJoignable());
 
@@ -1266,58 +1278,59 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
             if (item.getDateCri() != null)
                 vo.setDateCri(DateUtil.formateDate(item.getDateCri()));
 
-            if (item.getOperator() != null && this.operator) {
+            if (this.operator && item.getOperator() != null) {
                 vo.setOperatorVo(operatorConverter.toVo(item.getOperator()));
             }
-            if (item.getDepartement() != null && this.departement) {
+            if (this.departement && item.getDepartement() != null) {
                 vo.setDepartementVo(departementConverter.toVo(item.getDepartement()));
             }
-            if (item.getTechnicien() != null && this.technicien) {
+            if (this.technicien && item.getTechnicien() != null) {
                 vo.setTechnicienVo(technicienConverter.toVo(item.getTechnicien()));
             }
-            if (item.getTemplateEmailPlanification() != null && this.templateEmailPlanification) {
+            if (this.templateEmailPlanification && item.getTemplateEmailPlanification() != null) {
                 vo.setTemplateEmailPlanificationVo(templateEmailPlanificationConverter.toVo(item.getTemplateEmailPlanification()));
             }
 
-            if (item.getTemplateEmailReplanification() != null && this.templateEmailReplanification) {
+            if (this.templateEmailReplanification && item.getTemplateEmailReplanification() != null) {
+
                 vo.setTemplateEmailReplanificationVo(templateEmailReplanificationConverter.toVo(item.getTemplateEmailReplanification()));
             }
-            if (item.getTemplateEmailRefus() != null && this.templateEmailRefus) {
+            if (this.templateEmailRefus && item.getTemplateEmailRefus() != null) {
                 vo.setTemplateEmailRefusVo(templateEmailRefusConverter.toVo(item.getTemplateEmailRefus()));
             }
-            if (item.getTemplateEmailMauvaisContact() != null && this.templateEmailMauvaisContact) {
+            if (this.templateEmailMauvaisContact && item.getTemplateEmailMauvaisContact() != null) {
                 vo.setTemplateEmailMauvaisContactVo(templateEmailMauvaisContactConverter.toVo(item.getTemplateEmailMauvaisContact()));
             }
-            if (item.getTemplateEmailConfirmationClient() != null && this.templateEmailConfirmationClient) {
+            if (this.templateEmailConfirmationClient && item.getTemplateEmailConfirmationClient() != null) {
                 vo.setTemplateEmailConfirmationClientVo(templateEmailConfirmationClientConverter.toVo(item.getTemplateEmailConfirmationClient()));
             }
-            if (item.getTemplateEmailCri() != null && this.templateEmailCri) {
+            if (this.templateEmailCri && item.getTemplateEmailCri() != null) {
                 vo.setTemplateEmailCriVo(templateEmailCriConverter.toVo(item.getTemplateEmailCri()));
             }
-            if (item.getTemplateEmailFtl() != null && this.templateEmailFtl) {
+            if (this.templateEmailFtl && item.getTemplateEmailFtl() != null) {
                 vo.setTemplateEmailFtlVo(templateEmailFtlConverter.toVo(item.getTemplateEmailFtl()));
             }
-            if (item.getTemplateEmailClientInjoinable() != null && this.templateEmailClientInjoinable) {
+            if (this.templateEmailClientInjoinable && item.getTemplateEmailClientInjoinable() != null) {
                 vo.setTemplateEmailClientInjoinableVo(templateEmailClientInjoinableConverter.toVo(item.getTemplateEmailClientInjoinable()));
             }
-            if (item.getTemplateEmailClientInjoinableKosc() != null && this.templateEmailClientInjoinableKosc) {
+            if (this.templateEmailClientInjoinableKosc && item.getTemplateEmailClientInjoinableKosc() != null) {
                 vo.setTemplateEmailClientInjoinableKoscVo(templateEmailClientInjoinableKoscConverter.toVo(item.getTemplateEmailClientInjoinableKosc()));
             }
-            if (item.getEtatDemandeKosc() != null && this.etatDemandeKosc) {
+            if (this.etatDemandeKosc && item.getEtatDemandeKosc() != null) {
                 vo.setEtatDemandeKoscVo(etatDemandeKoscConverter.toVo(item.getEtatDemandeKosc()));
             }
-            if (item.getTemplateEmailCloture() != null && this.templateEmailCloture) {
+            if (this.templateEmailCloture && item.getTemplateEmailCloture() != null) {
                 vo.setTemplateEmailClotureVo(templateEmailClotureConverter.toVo(item.getTemplateEmailCloture()));
             }
-            if (item.getTemplateSuivi() != null && this.templateSuivi) {
+            if (this.templateSuivi && item.getTemplateSuivi() != null) {
                 vo.setTemplateSuiviVo(templateSuiviConverter.toVo(item.getTemplateSuivi()));
             }
-            if (item.getCauseKoOk() != null && this.causeKoOk) {
+            if (this.causeKoOk && item.getCauseKoOk() != null) {
                 vo.setCauseKoOkVo(causeKoOkConverter.toVo(item.getCauseKoOk()));
             }
 
 
-            if (item.getSourceReplanification() != null && this.sourceReplanification) {
+            if (this.sourceReplanification && item.getSourceReplanification() != null) {
                 vo.setSourceReplanificationVo(sourceReplanificationConverter.toVo(item.getSourceReplanification()));
             }
             if (item.getDateDernierAppel() != null) {
@@ -1326,7 +1339,54 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
             if (item.getNumeroDernierAppel() != null) {
                 vo.setNumeroDernierAppel(NumberUtil.toString(item.getNumeroDernierAppel()));
             }
-
+            if (this.userPlanification && item.getUserPlanification() != null) {
+                vo.setUserPlanification(item.getUserPlanification());
+            }
+            if (this.userReplanification && item.getUserReplanification() != null) {
+                vo.setUserReplanification(item.getUserReplanification());
+            }
+            if (this.userRefus && item.getUserRefus() != null) {
+                vo.setUserRefus(item.getUserRefus());
+            }
+            if (this.userMauvaisContact && item.getUserMauvaisContact() != null) {
+                vo.setUserMauvaisContact(item.getUserMauvaisContact());
+            }
+            if (this.userConfirmationClient && item.getUserConfirmationClient() != null) {
+                vo.setUserConfirmationClient(item.getUserConfirmationClient());
+            }
+            if (this.userCri && item.getUserCri() != null) {
+                vo.setUserCri(item.getUserCri());
+            }
+            if (this.userCri && item.getUserCri() != null) {
+                vo.setUserCri(item.getUserCri());
+            }
+            if (this.userFtl && item.getUserFtl() != null) {
+                vo.setUserFtl(item.getUserFtl());
+            }
+            if (this.userClientInjoinable && item.getUserClientInjoinable() != null) {
+                vo.setUserClientInjoinable(item.getUserClientInjoinable());
+            }
+            if (this.userAutre && item.getUserAutre() != null) {
+                vo.setUserAutre(item.getUserAutre());
+            }
+            if (this.userClientInjoinableKosc && item.getUserClientInjoinableKosc() != null) {
+                vo.setUserClientInjoinableKosc(item.getUserClientInjoinableKosc());
+            }
+            if (this.userReportDemandeManeoClientInjoignable && item.getUserReportDemandeManeoClientInjoignable() != null) {
+                vo.setUserReportDemandeManeoClientInjoignable(item.getUserReportDemandeManeoClientInjoignable());
+            }
+            if (this.userReportDemandeManeoClientJoignableAccepte && item.getUserReportDemandeManeoClientJoignableAccepte() != null) {
+                vo.setUserReportDemandeManeoClientJoignableAccepte(item.getUserReportDemandeManeoClientJoignableAccepte());
+            }
+            if (this.userReportDemandeManeoClientJoignableRefus && item.getUserReportDemandeManeoClientJoignableRefus() != null) {
+                vo.setUserReportDemandeManeoClientJoignableRefus(item.getUserReportDemandeManeoClientJoignableRefus());
+            }
+            if (this.userReportDemandeClientClientInjoignable && item.getUserReportDemandeClientClientInjoignable() != null) {
+                vo.setUserReportDemandeClientClientInjoignable(item.getUserReportDemandeClientClientInjoignable());
+            }
+            if (this.userImportation && item.getUserImportation() != null) {
+                vo.setUserImportation(item.getUserImportation());
+            }
             return vo;
         }
     }
@@ -1349,6 +1409,22 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
         templateSuivi = value;
         causeKoOk = value;
         sourceReplanification = value;
+        userPlanification = value;
+        userReplanification = value;
+        userRefus = value;
+        userMauvaisContact = value;
+        userConfirmationClient = value;
+        userCri = value;
+        userFtl = value;
+        userClientInjoinable = value;
+        userAutre = value;
+        userClientInjoinableKosc = value;
+        userReportDemandeManeoClientInjoignable = value;
+        userReportDemandeManeoClientJoignableAccepte = value;
+        userReportDemandeManeoClientJoignableRefus = value;
+        userReportDemandeClientClientInjoignable = value;
+        userReportDemandeClientClientJoignable = value;
+        userImportation = value;
     }
 
 
@@ -1627,5 +1703,131 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
         this.sourceReplanification = sourceReplanification;
     }
 
+    public Boolean isUserPlanification() {
+        return this.userPlanification;
+    }
 
+    public void setUserPlanification(Boolean userPlanification) {
+        this.userPlanification = userPlanification;
+    }
+
+    public Boolean isUserReplanification() {
+        return this.userReplanification;
+    }
+
+    public void setUserReplanification(Boolean userReplanification) {
+        this.userReplanification = userReplanification;
+    }
+
+    public Boolean isUserRefus() {
+        return this.userRefus;
+    }
+
+    public void setUserRefus(Boolean userRefus) {
+        this.userRefus = userRefus;
+    }
+
+    public Boolean isUserMauvaisContact() {
+        return this.userMauvaisContact;
+    }
+
+    public void setUserMauvaisContact(Boolean userMauvaisContact) {
+        this.userMauvaisContact = userMauvaisContact;
+    }
+
+    public Boolean isUserConfirmationClient() {
+        return this.userConfirmationClient;
+    }
+
+    public void setUserConfirmationClient(Boolean userConfirmationClient) {
+        this.userConfirmationClient = userConfirmationClient;
+    }
+
+    public Boolean isUserCri() {
+        return this.userCri;
+    }
+
+    public void setUserCri(Boolean userCri) {
+        this.userCri = userCri;
+    }
+
+    public Boolean isUserFtl() {
+        return this.userFtl;
+    }
+
+    public void setUserFtl(Boolean userFtl) {
+        this.userFtl = userFtl;
+    }
+
+    public Boolean isUserClientInjoinable() {
+        return this.userClientInjoinable;
+    }
+
+    public void setUserClientInjoinable(Boolean userClientInjoinable) {
+        this.userClientInjoinable = userClientInjoinable;
+    }
+
+    public Boolean isUserAutre() {
+        return this.userAutre;
+    }
+
+    public void setUserAutre(Boolean userAutre) {
+        this.userAutre = userAutre;
+    }
+
+    public Boolean isUserClientInjoinableKosc() {
+        return this.userClientInjoinableKosc;
+    }
+
+    public void setUserClientInjoinableKosc(Boolean userClientInjoinableKosc) {
+        this.userClientInjoinableKosc = userClientInjoinableKosc;
+    }
+
+    public Boolean isUserReportDemandeManeoClientInjoignable() {
+        return this.userReportDemandeManeoClientInjoignable;
+    }
+
+    public void setUserReportDemandeManeoClientInjoignable(Boolean userReportDemandeManeoClientInjoignable) {
+        this.userReportDemandeManeoClientInjoignable = userReportDemandeManeoClientInjoignable;
+    }
+
+    public Boolean isUserReportDemandeManeoClientJoignableAccepte() {
+        return this.userReportDemandeManeoClientJoignableAccepte;
+    }
+
+    public void setUserReportDemandeManeoClientJoignableAccepte(Boolean userReportDemandeManeoClientJoignableAccepte) {
+        this.userReportDemandeManeoClientJoignableAccepte = userReportDemandeManeoClientJoignableAccepte;
+    }
+
+    public Boolean isUserReportDemandeManeoClientJoignableRefus() {
+        return this.userReportDemandeManeoClientJoignableRefus;
+    }
+
+    public void setUserReportDemandeManeoClientJoignableRefus(Boolean userReportDemandeManeoClientJoignableRefus) {
+        this.userReportDemandeManeoClientJoignableRefus = userReportDemandeManeoClientJoignableRefus;
+    }
+
+    public Boolean isUserReportDemandeClientClientInjoignable() {
+        return this.userReportDemandeClientClientInjoignable;
+    }
+
+    public void setUserReportDemandeClientClientInjoignable(Boolean userReportDemandeClientClientInjoignable) {
+        this.userReportDemandeClientClientInjoignable = userReportDemandeClientClientInjoignable;
+    }
+
+    public Boolean isUserReportDemandeClientClientJoignable() {
+        return this.userReportDemandeClientClientJoignable;
+    }
+
+    public void setUserReportDemandeClientClientJoignable(Boolean userReportDemandeClientClientJoignable) {
+        this.userReportDemandeClientClientJoignable = userReportDemandeClientClientJoignable;
+    }
+
+    public Boolean getUserImportation() {
+        return userImportation;
+    }
+
+    public void setUserImportation(Boolean userImportation) {
+        this.userImportation = userImportation;
+    }
 }
