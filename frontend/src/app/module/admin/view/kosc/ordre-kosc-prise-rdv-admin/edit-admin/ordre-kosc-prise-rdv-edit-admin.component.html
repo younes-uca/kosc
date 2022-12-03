@@ -599,7 +599,7 @@
                     <p-tabPanel header="Mail Planification">
 
                         <div class="p-grid">
-                            <div class="p-field p-col-12 p-md-6">
+                            <div class="p-field p-col-12 p-md-4">
                                 <label for="123">From<span style="color: red;">*</span></label>
                                 <input [(ngModel)]="selectedOrdreKosc.fromPlanification"
                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromPlanification}"
@@ -612,7 +612,7 @@
                             </div>
 
 
-                            <div class="p-field p-col-12 p-md-6">
+                            <div class="p-field p-col-12 p-md-4">
                                 <label for="124">To<span style="color: red;"></span></label>
                                 <input [(ngModel)]="selectedOrdreKosc.toPlanification"
                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToPlanification}"
@@ -623,7 +623,16 @@
                                 <!--                                <small *ngIf='!validOrdreKoscToPlanification' class='p-error'>To est-->
                                 <!--                                    obligatoire.</small>-->
                             </div>
+                            <div class="p-field p-col-12 p-md-4">
+                                <label for="30">Date rendez-vous</label>
+                                <p-calendar dateFormat="{{dateFormat}}" [(ngModel)]="selectedOrdreKosc.dateRdv"
+                                            [showSeconds]="false" [showTime]="true"
+                                            id="30"
+                                            placeholder="Date rdv">
+                                </p-calendar>
 
+
+                            </div>
                             <div class="p-field p-col-12 p-md-6">
                                 <label for="127">Objet</label>
                                 <input [(ngModel)]="selectedOrdreKosc.objetPlanification" class="p-mb-2 p-mr-2" id="127"
@@ -632,6 +641,7 @@
                                 />
 
                             </div>
+
                             <div class="p-field p-col-12 p-md-6">
                                 <label for="128">Corps</label>
                                 <textarea [(ngModel)]="selectedOrdreKosc.corpsPlanification" cols="30" id="128"
@@ -641,12 +651,14 @@
                                 ></textarea>
 
                             </div>
+
+
                             <div class="p-field p-col-12 p-md-4">
                                 <button (click)="sendMailPlanificationEmail()" class="p-button-help" icon="pi pi-send"
                                         label="Envoyer" pButton
                                         type="button"></button>
-
                             </div>
+
                             <div class="p-field p-col-12 p-md-4">
                                 <p-progressSpinner *ngIf="showSpinner" [style]="{width: '50px', height: '50px'}"
                                                    styleClass="custom-spinner" strokeWidth="8" fill="#EEEEEE"
