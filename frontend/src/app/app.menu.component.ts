@@ -286,7 +286,7 @@ export class AppMenuComponent implements OnInit {
                         },{
                             label: 'Roles Edit',
                             icon: 'pi pi-fw pi-plus-circle',
-                            routerLink: ['']
+                            routerLink: ['/app/admin/kosc/ordre-kosc-gestion-utilisateur/Gestion_roles']
                         }
                     ]
                 }

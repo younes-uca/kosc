@@ -124,6 +124,7 @@ import {
     TemplateEmailReportDemandeManeoClientJoignableAccepteListAdminComponent
 } from "./template-email-report-demande-maneo-client-joignable-accepte-admin/list-admin/template-email-report-demande-maneo-client-joignable-accepte-list-admin.component";
 import {UserListComponent} from "./user-list/user-list.component";
+import {RoleListComponent} from "./role-list/role-list.component";
 
 
 @NgModule({
@@ -488,6 +489,11 @@ import {UserListComponent} from "./user-list/user-list.component";
                                 {
                                     path: 'Gestion_users',
                                     component: UserListComponent,
+                                    canActivate: [AuthGuard]
+                                },
+                                {
+                                    path: 'Gestion_roles',
+                                    component: RoleListComponent,
                                     canActivate: [AuthGuard]
                                 }
                             ]

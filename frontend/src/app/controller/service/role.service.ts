@@ -12,11 +12,13 @@ export class RoleService {
     public _role = new BehaviorSubject<string>('');
     public role$: Observable<string> = this._role.asObservable();
     private readonly API = environment.apiUrl;
+    selectedRoles: Role[];
 
     constructor(private http: HttpClient) {
     }
 
     _roles: Role[] = [];
+    private _selectedRole : Role;
 
     get roles(): Role[] {
         return this._roles;
@@ -25,6 +27,18 @@ export class RoleService {
     set roles(roles: Role[]) {
         this._roles = roles;
     }
+
+    get selectedRole(): Role {
+        if(this._selectedRole==null){
+            this._selectedRole=new Role();
+        }
+        return this._selectedRole;
+    }
+
+    set selectedRole(value: Role) {
+        this._selectedRole = value;
+    }
+
 
     async findAll() {
         const roles = await this.http.get<Role[]>(this.API + "roles/").pipe(take(1)).toPromise();
@@ -44,5 +58,17 @@ export class RoleService {
                 .filter(name => name.split('.')[1] == action)
         }
         return permissions ? ((permissions.length > 0) ? true : false) : false;
+    }
+
+    save(selectedRole: Role) {
+
+    }
+
+    update(selectedRole: Role) {
+
+    }
+
+    delete(id: string) {
+
     }
 }

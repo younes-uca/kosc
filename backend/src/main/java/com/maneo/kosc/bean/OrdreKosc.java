@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.maneo.kosc.security.bean.User;
 
 
 import javax.persistence.*;
@@ -389,6 +390,8 @@ public class OrdreKosc {
     @Lob
     @Column(columnDefinition = "TEXT")
     private String toPlanification;
+    @ManyToOne
+    private User userPlanification;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date dateAppelReplanification;
@@ -405,6 +408,8 @@ public class OrdreKosc {
     @Lob
     @Column(columnDefinition = "TEXT")
     private String toReplanification;
+    @ManyToOne
+    private User userReplanification;
     @Column(columnDefinition = "boolean default false")
     private Boolean envoyeReplanification = false;
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -422,6 +427,8 @@ public class OrdreKosc {
     @Lob
     @Column(columnDefinition = "TEXT")
     private String toRefus;
+    @ManyToOne
+    private User userRefus;
     @Column(columnDefinition = "boolean default false")
     private Boolean envoyeRefus = false;
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -439,6 +446,8 @@ public class OrdreKosc {
     @Lob
     @Column(columnDefinition = "TEXT")
     private String toMauvaisContact;
+    @ManyToOne
+    private User userMauvaisContact;
     @Column(columnDefinition = "boolean default false")
     private Boolean envoyeMauvaisContact = false;
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -456,6 +465,8 @@ public class OrdreKosc {
     @Lob
     @Column(columnDefinition = "TEXT")
     private String toConfirmationClient;
+    @ManyToOne
+    private User userConfirmationClient;
     @Column(columnDefinition = "boolean default false")
     private Boolean envoyeConfirmationClient = false;
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -473,6 +484,8 @@ public class OrdreKosc {
     @Lob
     @Column(columnDefinition = "TEXT")
     private String toCri;
+    @ManyToOne
+    private User userCri;
     @Column(columnDefinition = "boolean default false")
     private Boolean envoyeCri = false;
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -490,6 +503,8 @@ public class OrdreKosc {
     @Lob
     @Column(columnDefinition = "TEXT")
     private String toFtl;
+    @ManyToOne
+    private User userFtl;
     @Column(columnDefinition = "boolean default false")
     private Boolean envoyeFtl = false;
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -513,6 +528,8 @@ public class OrdreKosc {
     @Lob
     @Column(columnDefinition = "TEXT")
     private String toClientInjoinable;
+    @ManyToOne
+    private User userClientInjoinable;
     @Column(columnDefinition = "boolean default false")
     private Boolean envoyeClientInjoinable = false;
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -530,6 +547,8 @@ public class OrdreKosc {
     @Lob
     @Column(columnDefinition = "TEXT")
     private String toAutre;
+    @ManyToOne
+    private User userAutre;
     @Column(columnDefinition = "boolean default false")
     private Boolean envoyeAutre = false;
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -547,6 +566,8 @@ public class OrdreKosc {
     @Lob
     @Column(columnDefinition = "TEXT")
     private String toClientInjoinableKosc;
+    @ManyToOne
+    private User userClientInjoinableKosc;
     @Column(columnDefinition = "boolean default false")
     private Boolean envoyeClientInjoinableKosc = false;
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -613,7 +634,9 @@ public class OrdreKosc {
     private String fromReportDemandeManeoClientInjoignable;
     @Lob
     @Column(columnDefinition = "TEXT")
-    private  String toReportDemandeManeoClientInjoignable;
+    private String toReportDemandeManeoClientInjoignable;
+    @ManyToOne
+    private User userReportDemandeManeoClientInjoignable;
     @Column(columnDefinition = "boolean default false")
     private Boolean envoyeReportDemandeManeoClientInjoignable = false;
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -621,26 +644,26 @@ public class OrdreKosc {
     private Date dateEnvoiReportDemandeManeoClientInjoignable;
 
 
-
     @Lob
     @Column(columnDefinition = "TEXT")
     private String objetReportDemandeManeoClientJoignableAccepte;
     @Lob
     @Column(columnDefinition = "TEXT")
-    private  String corpsReportDemandeManeoClientJoignableAccepte;
+    private String corpsReportDemandeManeoClientJoignableAccepte;
     @Lob
     @Column(columnDefinition = "TEXT")
     private String fromReportDemandeManeoClientJoignableAccepte;
     @Lob
     @Column(columnDefinition = "TEXT")
     private String toReportDemandeManeoClientJoignableAccepte;
+    @ManyToOne
+    private User userReportDemandeManeoClientJoignableAccepte;
     @Column(columnDefinition = "boolean default false")
 
     private Boolean envoyeReportDemandeManeoClientJoignableAccepte = false;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date dateEnvoiReportDemandeManeoClientJoignableAccepte;
-
 
 
     @Lob
@@ -654,14 +677,15 @@ public class OrdreKosc {
     private String fromReportDemandeManeoClientJoignableRefus;
     @Lob
     @Column(columnDefinition = "TEXT")
-    private  String toReportDemandeManeoClientJoignableRefus;
+    private String toReportDemandeManeoClientJoignableRefus;
+    @ManyToOne
+    private User userReportDemandeManeoClientJoignableRefus;
     @Column(columnDefinition = "boolean default false")
 
     private Boolean envoyeReportDemandeManeoClientJoignableRefus = false;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
-    private  Date dateEnvoiReportDemandeManeoClientJoignableRefus;
-
+    private Date dateEnvoiReportDemandeManeoClientJoignableRefus;
 
 
     @Lob
@@ -676,13 +700,14 @@ public class OrdreKosc {
     @Lob
     @Column(columnDefinition = "TEXT")
     private String toReportDemandeClientClientInjoignable;
+    @ManyToOne
+    private User userReportDemandeClientClientInjoignable;
     @Column(columnDefinition = "boolean default false")
 
     private Boolean envoyeReportDemandeClientClientInjoignable = false;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date dateEnvoiReportDemandeClientClientInjoignable;
-
 
 
     @Lob
@@ -697,9 +722,11 @@ public class OrdreKosc {
     @Lob
     @Column(columnDefinition = "TEXT")
     private String toReportDemandeClientClientJoignable;
+    @ManyToOne
+    private User userReportDemandeClientClientJoignable;
     @Column(columnDefinition = "boolean default false")
 
-    private Boolean envoyeReportDemandeClientClientJoignable = false ;
+    private Boolean envoyeReportDemandeClientClientJoignable = false;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date dateEnvoiReportDemandeClientClientJoignable;
@@ -746,6 +773,9 @@ public class OrdreKosc {
     private CauseKoOk causeKoOk;
     @ManyToOne
     private SourceReplanification sourceReplanification;
+
+    @ManyToOne
+    private User userImportation;
 
 
     public OrdreKosc() {
@@ -2760,6 +2790,134 @@ public class OrdreKosc {
 
     public void setDateCri(Date dateCri) {
         this.dateCri = dateCri;
+    }
+
+    public User getUserPlanification() {
+        return userPlanification;
+    }
+
+    public void setUserPlanification(User userPlanification) {
+        this.userPlanification = userPlanification;
+    }
+
+    public User getUserReplanification() {
+        return userReplanification;
+    }
+
+    public void setUserReplanification(User userReplanification) {
+        this.userReplanification = userReplanification;
+    }
+
+    public User getUserRefus() {
+        return userRefus;
+    }
+
+    public void setUserRefus(User userRefus) {
+        this.userRefus = userRefus;
+    }
+
+    public User getUserMauvaisContact() {
+        return userMauvaisContact;
+    }
+
+    public void setUserMauvaisContact(User userMauvaisContact) {
+        this.userMauvaisContact = userMauvaisContact;
+    }
+
+    public User getUserConfirmationClient() {
+        return userConfirmationClient;
+    }
+
+    public void setUserConfirmationClient(User userConfirmationClient) {
+        this.userConfirmationClient = userConfirmationClient;
+    }
+
+    public User getUserCri() {
+        return userCri;
+    }
+
+    public void setUserCri(User userCri) {
+        this.userCri = userCri;
+    }
+
+    public User getUserFtl() {
+        return userFtl;
+    }
+
+    public void setUserFtl(User userFtl) {
+        this.userFtl = userFtl;
+    }
+
+    public User getUserClientInjoinable() {
+        return userClientInjoinable;
+    }
+
+    public void setUserClientInjoinable(User userClientInjoinable) {
+        this.userClientInjoinable = userClientInjoinable;
+    }
+
+    public User getUserAutre() {
+        return userAutre;
+    }
+
+    public void setUserAutre(User userAutre) {
+        this.userAutre = userAutre;
+    }
+
+    public User getUserClientInjoinableKosc() {
+        return userClientInjoinableKosc;
+    }
+
+    public void setUserClientInjoinableKosc(User userClientInjoinableKosc) {
+        this.userClientInjoinableKosc = userClientInjoinableKosc;
+    }
+
+    public User getUserReportDemandeManeoClientInjoignable() {
+        return userReportDemandeManeoClientInjoignable;
+    }
+
+    public void setUserReportDemandeManeoClientInjoignable(User userReportDemandeManeoClientInjoignable) {
+        this.userReportDemandeManeoClientInjoignable = userReportDemandeManeoClientInjoignable;
+    }
+
+    public User getUserReportDemandeManeoClientJoignableAccepte() {
+        return userReportDemandeManeoClientJoignableAccepte;
+    }
+
+    public void setUserReportDemandeManeoClientJoignableAccepte(User userReportDemandeManeoClientJoignableAccepte) {
+        this.userReportDemandeManeoClientJoignableAccepte = userReportDemandeManeoClientJoignableAccepte;
+    }
+
+    public User getUserReportDemandeManeoClientJoignableRefus() {
+        return userReportDemandeManeoClientJoignableRefus;
+    }
+
+    public void setUserReportDemandeManeoClientJoignableRefus(User userReportDemandeManeoClientJoignableRefus) {
+        this.userReportDemandeManeoClientJoignableRefus = userReportDemandeManeoClientJoignableRefus;
+    }
+
+    public User getUserReportDemandeClientClientInjoignable() {
+        return userReportDemandeClientClientInjoignable;
+    }
+
+    public void setUserReportDemandeClientClientInjoignable(User userReportDemandeClientClientInjoignable) {
+        this.userReportDemandeClientClientInjoignable = userReportDemandeClientClientInjoignable;
+    }
+
+    public User getUserReportDemandeClientClientJoignable() {
+        return userReportDemandeClientClientJoignable;
+    }
+
+    public void setUserReportDemandeClientClientJoignable(User userReportDemandeClientClientJoignable) {
+        this.userReportDemandeClientClientJoignable = userReportDemandeClientClientJoignable;
+    }
+
+    public User getUserImportation() {
+        return userImportation;
+    }
+
+    public void setUserImportation(User userImportation) {
+        this.userImportation = userImportation;
     }
 }
 

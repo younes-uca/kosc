@@ -223,6 +223,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
     private changeEtat(myEtat: string) {
+        this.displayPriseRdv = false;
         this.selectedOrdreKosc.etatDemandeKoscVo = this.findEtatDemandeByCode(myEtat);
         if (myEtat === this.etats[4]) {
             this.indexEdit = 3;
@@ -770,7 +771,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 //validation methods
     private validateForm(): void {
         this.errorMessages = new Array<string>();
-        // this.validateOrdreKoscDateRdv();
+        this.validateOrdreKoscDateRdv();
         /* this.validateOrdreKoscReferenceWorkOrder();*/
         this.validateOrdreKoscDateAppel();
 
@@ -787,12 +788,18 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     private validateOrdreKoscDateRdv() {
         let date = new Date();
-        if (this.selectedOrdreKosc.dateRdv.getDate() < date.getDate()) {
-            this.errorMessages.push('Date non valide ');
-            this.validDateRdv = false;
-        } else {
-            this.validDateRdv = true;
+        if (this.selectedOrdreKosc.dateRdv != null){
+            if (this.selectedOrdreKosc.dateRdv >= date ) {
+                console.log(this.selectedOrdreKosc.dateRdv >= date);
+                this.selectedOrdreKosc.datePriseRdv = new Date();
+                this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'OrdreKosc avec reference ' + this.ordreKoscService.selectedOrdreKosc.reference + ' est mis à jour avec succes '});
+                this.validDateRdv = true;
+            } else if( this.selectedOrdreKosc.dateRdv < date) {
+                this.errorMessages.push('Date non valide ');
+                this.validDateRdv = false;
+            }
         }
+
     }
 
     private validateOrdreKoscDateAppel() {
