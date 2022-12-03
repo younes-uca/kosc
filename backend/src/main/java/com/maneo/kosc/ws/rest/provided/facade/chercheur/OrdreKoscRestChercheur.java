@@ -168,17 +168,7 @@ public class OrdreKoscRestChercheur {
         return ordreKoscService.deleteByTemplateEmailPlanificationId(id);
     }
 
-    @ApiOperation("find by templateEmailReport id")
-    @GetMapping("/templateEmailReport/id/{id}")
-    public List<OrdreKosc> findByTemplateEmailReportId(@PathVariable Long id) {
-        return ordreKoscService.findByTemplateEmailReportId(id);
-    }
 
-    @ApiOperation("delete by templateEmailReport id")
-    @DeleteMapping("/templateEmailReport/id/{id}")
-    public int deleteByTemplateEmailReportId(@PathVariable Long id) {
-        return ordreKoscService.deleteByTemplateEmailReportId(id);
-    }
 
     @ApiOperation("find by templateEmailReplanification id")
     @GetMapping("/templateEmailReplanification/id/{id}")

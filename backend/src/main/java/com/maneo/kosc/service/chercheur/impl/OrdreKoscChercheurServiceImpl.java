@@ -15,7 +15,6 @@ import com.maneo.kosc.bean.Operator;
 import com.maneo.kosc.bean.Departement;
 import com.maneo.kosc.bean.Technicien;
 import com.maneo.kosc.bean.TemplateEmailPlanification;
-import com.maneo.kosc.bean.TemplateEmailReport;
 import com.maneo.kosc.bean.TemplateEmailReplanification;
 import com.maneo.kosc.bean.TemplateEmailRefus;
 import com.maneo.kosc.bean.TemplateEmailMauvaisContact;
@@ -45,7 +44,6 @@ import com.maneo.kosc.service.chercheur.facade.TemplateEmailClotureChercheurServ
 import com.maneo.kosc.service.chercheur.facade.TemplateEmailRefusChercheurService;
 import com.maneo.kosc.service.chercheur.facade.TemplateEmailConfirmationClientChercheurService;
 import com.maneo.kosc.service.chercheur.facade.DepartementChercheurService;
-import com.maneo.kosc.service.chercheur.facade.TemplateEmailReportChercheurService;
 import com.maneo.kosc.service.chercheur.facade.TemplateEmailMauvaisContactChercheurService;
 import com.maneo.kosc.service.chercheur.facade.TechnicienChercheurService;
 import com.maneo.kosc.service.chercheur.facade.TemplateEmailCriChercheurService;
@@ -89,8 +87,7 @@ public class OrdreKoscChercheurServiceImpl extends AbstractServiceImpl<OrdreKosc
     private TemplateEmailConfirmationClientChercheurService templateEmailConfirmationClientService;
     @Autowired
     private DepartementChercheurService departementService;
-    @Autowired
-    private TemplateEmailReportChercheurService templateEmailReportService;
+
     @Autowired
     private TemplateEmailMauvaisContactChercheurService templateEmailMauvaisContactService;
     @Autowired
@@ -187,16 +184,9 @@ public class OrdreKoscChercheurServiceImpl extends AbstractServiceImpl<OrdreKosc
         return ordreKoscDao.deleteByTemplateEmailPlanificationId(id);
     }
 
-    @Override
-    public List<OrdreKosc> findByTemplateEmailReportId(Long id) {
-        return ordreKoscDao.findByTemplateEmailReportId(id);
-    }
 
-    @Override
-    @Transactional
-    public int deleteByTemplateEmailReportId(Long id) {
-        return ordreKoscDao.deleteByTemplateEmailReportId(id);
-    }
+
+
 
     @Override
     public List<OrdreKosc> findByTemplateEmailReplanificationId(Long id) {
@@ -441,8 +431,7 @@ public class OrdreKoscChercheurServiceImpl extends AbstractServiceImpl<OrdreKosc
             ordreKosc.setExistingOtp(false);
         if (ordreKosc.getEnvoyePlanification() == null)
             ordreKosc.setEnvoyePlanification(false);
-        if (ordreKosc.getEnvoyeReport() == null)
-            ordreKosc.setEnvoyeReport(false);
+
         if (ordreKosc.getEnvoyeReplanification() == null)
             ordreKosc.setEnvoyeReplanification(false);
         if (ordreKosc.getEnvoyeRefus() == null)
@@ -480,7 +469,7 @@ public class OrdreKoscChercheurServiceImpl extends AbstractServiceImpl<OrdreKosc
             findDepartement(ordreKosc);
             findTechnicien(ordreKosc);
             findTemplateEmailPlanification(ordreKosc);
-            findTemplateEmailReport(ordreKosc);
+
             findTemplateEmailReplanification(ordreKosc);
             findTemplateEmailRefus(ordreKosc);
             findTemplateEmailMauvaisContact(ordreKosc);
@@ -651,12 +640,6 @@ public class OrdreKoscChercheurServiceImpl extends AbstractServiceImpl<OrdreKosc
         query += SearchUtil.addConstraint("o", "fromPlanification", "LIKE", ordreKoscVo.getFromPlanification());
         query += SearchUtil.addConstraint("o", "toPlanification", "LIKE", ordreKoscVo.getToPlanification());
         query += SearchUtil.addConstraintDate("o", "dateAppelReplanification", "=", ordreKoscVo.getDateAppelReplanification());
-        query += SearchUtil.addConstraint("o", "objetReport", "LIKE", ordreKoscVo.getObjetReport());
-        query += SearchUtil.addConstraint("o", "corpsReport", "LIKE", ordreKoscVo.getCorpsReport());
-        query += SearchUtil.addConstraint("o", "fromReport", "LIKE", ordreKoscVo.getFromReport());
-        query += SearchUtil.addConstraint("o", "toReport", "LIKE", ordreKoscVo.getToReport());
-        query += SearchUtil.addConstraint("o", "envoyeReport", "=", ordreKoscVo.getEnvoyeReport());
-        query += SearchUtil.addConstraintDate("o", "dateEnvoiReport", "=", ordreKoscVo.getDateEnvoiReport());
         query += SearchUtil.addConstraint("o", "objetReplanification", "LIKE", ordreKoscVo.getObjetReplanification());
         query += SearchUtil.addConstraint("o", "corpsReplanification", "LIKE", ordreKoscVo.getCorpsReplanification());
         query += SearchUtil.addConstraint("o", "fromReplanification", "LIKE", ordreKoscVo.getFromReplanification());
@@ -760,9 +743,6 @@ public class OrdreKoscChercheurServiceImpl extends AbstractServiceImpl<OrdreKosc
             query += SearchUtil.addConstraint("o", "templateEmailPlanification.id", "=", ordreKoscVo.getTemplateEmailPlanificationVo().getId());
         }
 
-        if (ordreKoscVo.getTemplateEmailReportVo() != null) {
-            query += SearchUtil.addConstraint("o", "templateEmailReport.id", "=", ordreKoscVo.getTemplateEmailReportVo().getId());
-        }
 
         if (ordreKoscVo.getTemplateEmailReplanificationVo() != null) {
             query += SearchUtil.addConstraint("o", "templateEmailReplanification.id", "=", ordreKoscVo.getTemplateEmailReplanificationVo().getId());
@@ -861,16 +841,7 @@ public class OrdreKoscChercheurServiceImpl extends AbstractServiceImpl<OrdreKosc
         ordreKosc.setTemplateEmailPlanification(loadedTemplateEmailPlanification);
     }
 
-    private void findTemplateEmailReport(OrdreKosc ordreKosc) {
-        TemplateEmailReport loadedTemplateEmailReport = null;
-        if (ordreKosc.getTemplateEmailReport() != null && ordreKosc.getTemplateEmailReport().getId() != null)
-            loadedTemplateEmailReport = templateEmailReportService.findById(ordreKosc.getTemplateEmailReport().getId());
 
-        if (loadedTemplateEmailReport == null) {
-            return;
-        }
-        ordreKosc.setTemplateEmailReport(loadedTemplateEmailReport);
-    }
 
     private void findTemplateEmailReplanification(OrdreKosc ordreKosc) {
         TemplateEmailReplanification loadedTemplateEmailReplanification = null;

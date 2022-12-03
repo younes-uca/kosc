@@ -38,8 +38,6 @@ import {
 } from 'src/app/controller/service/TemplateEmailConfirmationClient.service';
 import {DepartementVo} from 'src/app/controller/model/Departement.model';
 import {DepartementService} from 'src/app/controller/service/Departement.service';
-import {TemplateEmailReportVo} from 'src/app/controller/model/TemplateEmailReport.model';
-import {TemplateEmailReportService} from 'src/app/controller/service/TemplateEmailReport.service';
 import {TemplateEmailMauvaisContactVo} from 'src/app/controller/model/TemplateEmailMauvaisContact.model';
 import {TemplateEmailMauvaisContactService} from 'src/app/controller/service/TemplateEmailMauvaisContact.service';
 import {TechnicienVo} from 'src/app/controller/model/Technicien.model';
@@ -73,7 +71,6 @@ export class OrdreKoscViewAdminComponent implements OnInit {
         , private templateEmailRefusService: TemplateEmailRefusService
         , private templateEmailConfirmationClientService: TemplateEmailConfirmationClientService
         , private departementService: DepartementService
-        , private templateEmailReportService: TemplateEmailReportService
         , private templateEmailMauvaisContactService: TemplateEmailMauvaisContactService
         , private technicienService: TechnicienService
         , private templateEmailCriService: TemplateEmailCriService
@@ -200,29 +197,6 @@ export class OrdreKoscViewAdminComponent implements OnInit {
         this.templateEmailPlanificationService.editTemplateEmailPlanificationDialog = value;
     }
 
-    get selectedTemplateEmailReport(): TemplateEmailReportVo {
-        return this.templateEmailReportService.selectedTemplateEmailReport;
-    }
-
-    set selectedTemplateEmailReport(value: TemplateEmailReportVo) {
-        this.templateEmailReportService.selectedTemplateEmailReport = value;
-    }
-
-    get templateEmailReports(): Array<TemplateEmailReportVo> {
-        return this.templateEmailReportService.templateEmailReports;
-    }
-
-    set templateEmailReports(value: Array<TemplateEmailReportVo>) {
-        this.templateEmailReportService.templateEmailReports = value;
-    }
-
-    get editTemplateEmailReportDialog(): boolean {
-        return this.templateEmailReportService.editTemplateEmailReportDialog;
-    }
-
-    set editTemplateEmailReportDialog(value: boolean) {
-        this.templateEmailReportService.editTemplateEmailReportDialog = value;
-    }
 
     get selectedDepartement(): DepartementVo {
         return this.departementService.selectedDepartement;
@@ -578,8 +552,7 @@ export class OrdreKoscViewAdminComponent implements OnInit {
         this.technicienService.findAll().subscribe((data) => this.techniciens = data);
         this.selectedTemplateEmailPlanification = new TemplateEmailPlanificationVo();
         this.templateEmailPlanificationService.findAll().subscribe((data) => this.templateEmailPlanifications = data);
-        this.selectedTemplateEmailReport = new TemplateEmailReportVo();
-        this.templateEmailReportService.findAll().subscribe((data) => this.templateEmailReports = data);
+
         this.selectedTemplateEmailReplanification = new TemplateEmailReplanificationVo();
         this.templateEmailReplanificationService.findAll().subscribe((data) => this.templateEmailReplanifications = data);
         this.selectedTemplateEmailRefus = new TemplateEmailRefusVo();

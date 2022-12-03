@@ -11,8 +11,6 @@ import {StringUtilService} from 'src/app/controller/service/StringUtil.service';
 
 import {TemplateEmailClotureVo} from 'src/app/controller/model/TemplateEmailCloture.model';
 import {TemplateEmailClotureService} from 'src/app/controller/service/TemplateEmailCloture.service';
-import {TemplateEmailReportVo} from 'src/app/controller/model/TemplateEmailReport.model';
-import {TemplateEmailReportService} from 'src/app/controller/service/TemplateEmailReport.service';
 import {EtatDemandeKoscVo} from 'src/app/controller/model/EtatDemandeKosc.model';
 import {EtatDemandeKoscService} from 'src/app/controller/service/EtatDemandeKosc.service';
 import {TemplateEmailClientInjoinableVo} from 'src/app/controller/model/TemplateEmailClientInjoinable.model';

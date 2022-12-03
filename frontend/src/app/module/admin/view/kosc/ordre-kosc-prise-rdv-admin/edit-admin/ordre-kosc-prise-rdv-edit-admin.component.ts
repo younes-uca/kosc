@@ -12,8 +12,6 @@ import {SourceReplanificationService} from '../../../../../../controller/service
 import FileSaver from 'file-saver';
 import {TemplateEmailClotureVo} from 'src/app/controller/model/TemplateEmailCloture.model';
 import {TemplateEmailClotureService} from 'src/app/controller/service/TemplateEmailCloture.service';
-import {TemplateEmailReportVo} from 'src/app/controller/model/TemplateEmailReport.model';
-import {TemplateEmailReportService} from 'src/app/controller/service/TemplateEmailReport.service';
 import {EtatDemandeKoscVo} from 'src/app/controller/model/EtatDemandeKosc.model';
 import {EtatDemandeKoscService} from 'src/app/controller/service/EtatDemandeKosc.service';
 import {TemplateEmailClientInjoinableVo} from 'src/app/controller/model/TemplateEmailClientInjoinable.model';
@@ -44,6 +42,7 @@ import {
     DefaultTemplateConfigurationService
 } from "../../../../../../controller/service/DefaultTemplateConfiguration.service";
 import {SourceReplanificationVo} from "../../../../../../controller/model/SourceReplanification.model";
+import {AuthService} from "../../../../../../controller/service/Auth.service";
 
 @Component({
     selector: 'app-ordre-kosc-prise-rdv-edit-admin',
@@ -63,7 +62,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     fileToUpload: File | null = null;
     fileName = '';
 
-    public appropriateTechniciens:Array<TechnicienVo>;
+    public appropriateTechniciens: Array<TechnicienVo>;
     private buttonDisabled: boolean;
 
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService
@@ -72,7 +71,6 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         , private messageService: MessageService
         , private router: Router
         , private templateEmailClotureService: TemplateEmailClotureService
-        , private templateEmailReportService: TemplateEmailReportService
         , private etatDemandeKoscService: EtatDemandeKoscService
         , private templateEmailClientInjoinableService: TemplateEmailClientInjoinableService
         , private technicienService: TechnicienService
@@ -83,11 +81,13 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         , private templateEmailClientInjoinableKoscService: TemplateEmailClientInjoinableKoscService
         , private templateEmailPlanificationService: TemplateEmailPlanificationService
         , private causeKoOkService: CauseKoOkService
-        , private defaultTemplateConfigurationService: DefaultTemplateConfigurationService,
-          private sourceReplanificationService: SourceReplanificationService
+        , private defaultTemplateConfigurationService: DefaultTemplateConfigurationService
+        , private sourceReplanificationService: SourceReplanificationService
+        , private authService: AuthService
     ) {
 
     }
+
 // methods
     ngOnInit(): void {
 
@@ -117,8 +117,6 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         this.templateEmailPlanificationService.findAll().subscribe((data) => this.templateEmailPlanifications = data);
         this.selectedTemplateEmailReplanification = new TemplateEmailReplanificationVo();
         this.templateEmailReplanificationService.findAll().subscribe((data) => this.templateEmailReplanifications = data);
-        this.selectedTemplateEmailReport = new TemplateEmailReportVo();
-        this.templateEmailReportService.findAll().subscribe((data) => this.templateEmailReports = data);
         this.selectedEtatDemandeKosc = new EtatDemandeKoscVo();
         this.etatDemandeKoscService.findAll().subscribe((data) => this.etatDemandeKoscs = data);
         this.selectedTemplateEmailCloture = new TemplateEmailClotureVo();
@@ -132,56 +130,88 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     async showPriseRdvDialog() {
 
-                this.displayPriseRdv = true;
-                this.isShown = false;
-                this.isShown1 = false;
+        this.displayPriseRdv = true;
+        this.isShown = false;
+        this.isShown1 = false;
 
     }
 
-    public editEtat(codeEtat: string){
+    public editEtat(codeEtat: string) {
         let myEtatDemandeKoscVo = this.etatDemandeKoscs.find(e => e.code = codeEtat);
         this.selectedOrdreKosc.etatDemandeKoscVo = myEtatDemandeKoscVo;
-        this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'Le changement est fait avec succes'});
+        this.messageService.add({
+            severity: 'success',
+            summary: 'Remarque',
+            detail: 'Le changement est fait avec succes'
+        });
         this.editWithShowOption(false);
         this.displayPriseRdv = false;
 
     }
 
-    public editPasEncore(ordreKosc: OrdreKoscVo){
+    public editPasEncore(ordreKosc: OrdreKoscVo) {
         let date: Date = new Date();
 
-        if(this.selectedOrdreKosc.datePremierAppel == null){
+        if (this.selectedOrdreKosc.datePremierAppel == null) {
             this.selectedOrdreKosc.datePremierAppel = date;
-            this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'OrdreKosc avec reference ' + this.ordreKoscService.selectedOrdreKosc.reference + ' est mis à jour avec succes'});
-        }else if(this.selectedOrdreKosc.dateDeuxiemeAppel == null && this.selectedOrdreKosc.datePremierAppel){
+            this.messageService.add({
+                severity: 'success',
+                summary: 'Remarque',
+                detail: 'OrdreKosc avec reference ' + this.ordreKoscService.selectedOrdreKosc.reference + ' est mis à jour avec succes'
+            });
+        } else if (this.selectedOrdreKosc.dateDeuxiemeAppel == null && this.selectedOrdreKosc.datePremierAppel) {
             if (this.selectedOrdreKosc.datePremierAppel.getDate() < date.getDate()) {
                 this.selectedOrdreKosc.dateDeuxiemeAppel = date;
-                this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'OrdreKosc avec reference ' + this.ordreKoscService.selectedOrdreKosc.reference + ' est mis à jour avec succes'});
-            }else{
-                this.messageService.add({severity: 'info', summary: 'Remarque', detail: 'Vous avez d\éj\à appel\é ce client aujourd\'hui'});
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Remarque',
+                    detail: 'OrdreKosc avec reference ' + this.ordreKoscService.selectedOrdreKosc.reference + ' est mis à jour avec succes'
+                });
+            } else {
+                this.messageService.add({
+                    severity: 'info',
+                    summary: 'Remarque',
+                    detail: 'Vous avez d\éj\à appel\é ce client aujourd\'hui'
+                });
             }
-        }else if(this.selectedOrdreKosc.dateTroisiemeAppel == null && this.selectedOrdreKosc.dateDeuxiemeAppel && this.selectedOrdreKosc.datePremierAppel){
-            if(this.selectedOrdreKosc.dateDeuxiemeAppel.getDate() <= date.getDate()){
+        } else if (this.selectedOrdreKosc.dateTroisiemeAppel == null && this.selectedOrdreKosc.dateDeuxiemeAppel && this.selectedOrdreKosc.datePremierAppel) {
+            if (this.selectedOrdreKosc.dateDeuxiemeAppel.getDate() <= date.getDate()) {
                 this.selectedOrdreKosc.dateTroisiemeAppel = date;
-                this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'OrdreKosc avec reference ' + this.ordreKoscService.selectedOrdreKosc.reference + ' est mis à jour avec succes'});
-            }else{
-                this.messageService.add({severity: 'info', summary: 'Remarque', detail: 'Vous avez d\éj\à appel\é ce client aujourd\'hui'});
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Remarque',
+                    detail: 'OrdreKosc avec reference ' + this.ordreKoscService.selectedOrdreKosc.reference + ' est mis à jour avec succes'
+                });
+            } else {
+                this.messageService.add({
+                    severity: 'info',
+                    summary: 'Remarque',
+                    detail: 'Vous avez d\éj\à appel\é ce client aujourd\'hui'
+                });
             }
-        }else{
-            this.messageService.add({severity: 'info', summary: 'Remarque', detail: 'Le troisi\ème appel est d\éj\à fait !'});
+        } else {
+            this.messageService.add({
+                severity: 'info',
+                summary: 'Remarque',
+                detail: 'Le troisi\ème appel est d\éj\à fait !'
+            });
         }
         // this.editWithShowOption(false);
         this.displayPriseRdv = false;
     }
 
-    public editOui(codeEtat: string){
-        if(this.selectedOrdreKosc.dateRdv < new Date()){
+    public editOui(codeEtat: string) {
+        if (this.selectedOrdreKosc.dateRdv < new Date()) {
             this.messageService.add({severity: 'info', summary: 'Remarque', detail: 'Date rendez-vous incorrecte'});
-        }else{
+        } else {
             let myEtatDemandeKoscVo = this.etatDemandeKoscs.find(e => e.code = codeEtat);
             this.selectedOrdreKosc.datePriseRdv = new Date();
             this.selectedOrdreKosc.etatDemandeKoscVo = myEtatDemandeKoscVo;
-            this.messageService.add({severity: 'success', summary: 'Remarque', detail: 'OrdreKosc avec reference ' + this.ordreKoscService.selectedOrdreKosc.reference + ' est mis à jour avec succes '});
+            this.messageService.add({
+                severity: 'success',
+                summary: 'Remarque',
+                detail: 'OrdreKosc avec reference ' + this.ordreKoscService.selectedOrdreKosc.reference + ' est mis à jour avec succes '
+            });
             this.editWithShowOption(false);
             this.displayPriseRdv = false;
         }
@@ -197,7 +227,6 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             }
         );
     }
-
 
 
     isShown: boolean = false;
@@ -219,7 +248,6 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
 
-
     initPalinificationModel(): void {
         this.palinificationModel = [
             {label: 'ConfirmationClient', icon: 'pi pi-file', command: () => this.changeEtat(this.etats[4])},
@@ -228,6 +256,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
     private changeEtat(myEtat: string) {
+        this.displayPriseRdv = false;
         this.selectedOrdreKosc.etatDemandeKoscVo = this.findEtatDemandeByCode(myEtat);
         if (myEtat === this.etats[4]) {
             this.indexEdit = 3;
@@ -254,6 +283,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             return true;
         }
     }
+
     checkButton() {
         if (this.selectedOrdreKosc.datePremierAppel != null) {
             return false;
@@ -319,6 +349,8 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.toClientInjoinableKosc = this.selectedDefaultTemplateConfiguration.emailKosc;
             this.selectedOrdreKosc.objetClientInjoinableKosc = eval(this.selectedDefaultTemplateConfiguration.templateEmailClientInjoinableKoscVo.objet);
             this.selectedOrdreKosc.corpsClientInjoinableKosc = eval(this.selectedDefaultTemplateConfiguration.templateEmailClientInjoinableKoscVo.corps);
+            this.selectedOrdreKosc.userClientInjoinable = this.authService.authenticatedUser;
+            console.log(this.selectedOrdreKosc.userClientInjoinable);
         } else if (myEtat === this.etats[7]) {
             this.indexEdit = 3;
             this.emailIndex = 4;
@@ -326,6 +358,8 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.toRefus = this.selectedOrdreKosc.endCustumorContactEmail;
             this.selectedOrdreKosc.objetRefus = eval(this.selectedDefaultTemplateConfiguration.templateEmailRefusVo.objet);
             this.selectedOrdreKosc.corpsRefus = eval(this.selectedDefaultTemplateConfiguration.templateEmailRefusVo.corps);
+            this.selectedOrdreKosc.userRefus = this.authService.authenticatedUser;
+            console.log(this.selectedOrdreKosc.userRefus);
         } else if (myEtat === this.etats[8]) {
             this.indexEdit = 3;
             this.emailIndex = 3;
@@ -333,11 +367,15 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.toMauvaisContact = this.selectedDefaultTemplateConfiguration.emailKosc;
             this.selectedOrdreKosc.objetMauvaisContact = eval(this.selectedDefaultTemplateConfiguration.templateEmailMauvaisContactVo.objet);
             this.selectedOrdreKosc.corpsMauvaisContact = eval(this.selectedDefaultTemplateConfiguration.templateEmailMauvaisContactVo.corps);
-        }else if (myEtat === this.etats[9]) {
+            this.selectedOrdreKosc.userMauvaisContact = this.authService.authenticatedUser;
+            console.log(this.selectedOrdreKosc.userMauvaisContact);
+        } else if (myEtat === this.etats[9]) {
             this.indexEdit = 3;
             this.emailIndex = 5;
             this.selectedOrdreKosc.fromAutre = this.selectedDefaultTemplateConfiguration.emailManeo;
             this.selectedOrdreKosc.toAutre = this.selectedDefaultTemplateConfiguration.emailKosc;
+            this.selectedOrdreKosc.userAutre = this.authService.authenticatedUser;
+            console.log(this.selectedOrdreKosc.userAutre);
         }
 
 
@@ -549,33 +587,6 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         );
     }
 
-    sendMailReplanificationReport() {
-        this.showSpinner = true;
-        this.blocked = true;
-        this.ordreKoscService.sendMailReplanificationReport().subscribe(data => {
-                if (data.envoyeReport == true) {
-
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                    this.editOrdreKoscDialog = false;
-                } else {
-                    this.messageService.add({
-                        severity: 'error',
-                        summary: 'Erreurs', detail: 'échec d\'envoi'
-                    });
-
-                }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );
-    }
-
-
-
 
     onDownloadFile(fileName: string): void {
         this.ordreKoscService.download(fileName).subscribe(
@@ -640,23 +651,23 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
 
- /*   goToMailReplanification() {
-        this.indexEdit = 3;
-        this.emailIndex = 2;
-        this.selectedOrdreKosc.etatDemandeKoscVo = this.findEtatDemandeByCode(this.etats[0]);
-        this.selectedOrdreKosc.fromReport = this.selectedDefaultTemplateConfiguration.emailManeo;
-        this.selectedOrdreKosc.toReport = this.selectedDefaultTemplateConfiguration.emailKosc;
-        this.selectedOrdreKosc.objetReport = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportVo.objet);
-        this.selectedOrdreKosc.corpsReport = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportVo.corps);
+    /*   goToMailReplanification() {
+           this.indexEdit = 3;
+           this.emailIndex = 2;
+           this.selectedOrdreKosc.etatDemandeKoscVo = this.findEtatDemandeByCode(this.etats[0]);
+           this.selectedOrdreKosc.fromReport = this.selectedDefaultTemplateConfiguration.emailManeo;
+           this.selectedOrdreKosc.toReport = this.selectedDefaultTemplateConfiguration.emailKosc;
+           this.selectedOrdreKosc.objetReport = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportVo.objet);
+           this.selectedOrdreKosc.corpsReport = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportVo.corps);
 
 
-        this.selectedOrdreKosc.fromReplanification = this.selectedDefaultTemplateConfiguration.emailManeo;
-        this.selectedOrdreKosc.toReplanification = this.selectedDefaultTemplateConfiguration.emailKosc;
-        this.selectedOrdreKosc.objetReplanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailReplanificationVo.objet);
-        this.selectedOrdreKosc.corpsReplanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailReplanificationVo.corps);
+           this.selectedOrdreKosc.fromReplanification = this.selectedDefaultTemplateConfiguration.emailManeo;
+           this.selectedOrdreKosc.toReplanification = this.selectedDefaultTemplateConfiguration.emailKosc;
+           this.selectedOrdreKosc.objetReplanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailReplanificationVo.objet);
+           this.selectedOrdreKosc.corpsReplanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailReplanificationVo.corps);
 
 
-    }*/
+       }*/
 
     public findEtatDemandeByCode(code: string) {
         let res = this.etatDemandeKoscService.findByCode(code, this.etatDemandeKoscs);
@@ -668,6 +679,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         return this.causeKoOkService.findByCause(cause, this.causeKoOks);
 
     }
+
 //openPopup
     public async openCreateTemplateEmailPlanification(templateEmailPlanification: string) {
         const isPermistted = await this.roleService.isPermitted('TemplateEmailPlanification', 'edit');
@@ -698,18 +710,6 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         if (isPermistted) {
             this.selectedTemplateEmailCloture = new TemplateEmailClotureVo();
             this.createTemplateEmailClotureDialog = true;
-        } else {
-            this.messageService.add({
-                severity: 'error', summary: 'erreur', detail: 'problème de permission'
-            });
-        }
-    }
-
-    public async openCreateTemplateEmailReport(templateEmailReport: string) {
-        const isPermistted = await this.roleService.isPermitted('TemplateEmailReport', 'edit');
-        if (isPermistted) {
-            this.selectedTemplateEmailReport = new TemplateEmailReportVo();
-            this.createTemplateEmailReportDialog = true;
         } else {
             this.messageService.add({
                 severity: 'error', summary: 'erreur', detail: 'problème de permission'
@@ -813,7 +813,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 //validation methods
     private validateForm(): void {
         this.errorMessages = new Array<string>();
-        // this.validateOrdreKoscDateRdv();
+        this.validateOrdreKoscDateRdv();
         /* this.validateOrdreKoscReferenceWorkOrder();*/
         this.validateOrdreKoscDateAppel();
 
@@ -830,17 +830,27 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     private validateOrdreKoscDateRdv() {
         let date = new Date();
-        if (this.selectedOrdreKosc.dateRdv.getDate() < date.getDate()) {
-            this.errorMessages.push('Date non valide ');
-            this.validDateRdv = false;
-        } else {
-            this.validDateRdv = true;
+        if (this.selectedOrdreKosc.dateRdv != null) {
+            if (this.selectedOrdreKosc.dateRdv >= date) {
+                console.log(this.selectedOrdreKosc.dateRdv >= date);
+                this.selectedOrdreKosc.datePriseRdv = new Date();
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Remarque',
+                    detail: 'OrdreKosc avec reference ' + this.ordreKoscService.selectedOrdreKosc.reference + ' est mis à jour avec succes '
+                });
+                this.validDateRdv = true;
+            } else if (this.selectedOrdreKosc.dateRdv < date) {
+                this.errorMessages.push('Date non valide ');
+                this.validDateRdv = false;
+            }
         }
+
     }
 
     private validateOrdreKoscDateAppel() {
-        if(this.selectedOrdreKosc.dateDeuxiemeAppel){
-            if((this.selectedOrdreKosc.dateTroisiemeAppel < this.selectedOrdreKosc.dateDeuxiemeAppel  && this.selectedOrdreKosc.dateTroisiemeAppel != null) || this.selectedOrdreKosc.datePremierAppel >= this.selectedOrdreKosc.dateDeuxiemeAppel ){
+        if (this.selectedOrdreKosc.dateDeuxiemeAppel) {
+            if ((this.selectedOrdreKosc.dateTroisiemeAppel < this.selectedOrdreKosc.dateDeuxiemeAppel && this.selectedOrdreKosc.dateTroisiemeAppel != null) || this.selectedOrdreKosc.datePremierAppel >= this.selectedOrdreKosc.dateDeuxiemeAppel) {
                 this.errorMessages.push('Date de deuxieme appel non valide');
                 this.validOrdreKoscDateAppel = false;
             } else {
@@ -849,11 +859,12 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         }
     }
 
-    public findAppropriateTechnicien(rdv:Date,codeDepartement:string){
-        this.technicienService.findAppropriateTechnicien(rdv, codeDepartement).subscribe(data =>{
-            this.appropriateTechniciens=data;
+    public findAppropriateTechnicien(rdv: Date, codeDepartement: string) {
+        this.technicienService.findAppropriateTechnicien(rdv, codeDepartement).subscribe(data => {
+            this.appropriateTechniciens = data;
         })
     }
+
     _submitted = false;
 
     get submitted(): boolean {
@@ -1223,29 +1234,6 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         this.templateEmailClotureService.createTemplateEmailClotureDialog = value;
     }
 
-    get selectedTemplateEmailReport(): TemplateEmailReportVo {
-        return this.templateEmailReportService.selectedTemplateEmailReport;
-    }
-
-    set selectedTemplateEmailReport(value: TemplateEmailReportVo) {
-        this.templateEmailReportService.selectedTemplateEmailReport = value;
-    }
-
-    get templateEmailReports(): Array<TemplateEmailReportVo> {
-        return this.templateEmailReportService.templateEmailReports;
-    }
-
-    set templateEmailReports(value: Array<TemplateEmailReportVo>) {
-        this.templateEmailReportService.templateEmailReports = value;
-    }
-
-    get createTemplateEmailReportDialog(): boolean {
-        return this.templateEmailReportService.createTemplateEmailReportDialog;
-    }
-
-    set createTemplateEmailReportDialog(value: boolean) {
-        this.templateEmailReportService.createTemplateEmailReportDialog = value;
-    }
 
     get selectedDepartement(): DepartementVo {
         return this.departementService.selectedDepartement;
@@ -1424,7 +1412,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         return environment.dateFormatEdit;
     }
 
-    get validDateRdv():boolean {
+    get validDateRdv(): boolean {
         return this._validDateRdv;
     }
 
@@ -1448,6 +1436,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     set indexEdit(value: number) {
         this.ordreKoscService.indexEdit = value;
     }
+
     private _emailIndex = 0;
 
     get emailIndex(): number {

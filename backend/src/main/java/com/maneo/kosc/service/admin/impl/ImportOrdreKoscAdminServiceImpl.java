@@ -321,8 +321,6 @@ public class ImportOrdreKoscAdminServiceImpl implements ImportOrdreKoscAdminServ
             ordreKosc.setExistingOtp(false);
         if (ordreKosc.getEnvoyePlanification() == null)
             ordreKosc.setEnvoyePlanification(false);
-        if (ordreKosc.getEnvoyeReport() == null)
-            ordreKosc.setEnvoyeReport(false);
         if (ordreKosc.getEnvoyeReplanification() == null)
             ordreKosc.setEnvoyeReplanification(false);
         if (ordreKosc.getEnvoyeRefus() == null)

@@ -29,8 +29,6 @@ import {CauseKoOkVo} from 'src/app/controller/model/CauseKoOk.model';
 import {CauseKoOkService} from 'src/app/controller/service/CauseKoOk.service';
 import {DepartementVo} from 'src/app/controller/model/Departement.model';
 import {DepartementService} from 'src/app/controller/service/Departement.service';
-import {TemplateEmailReportVo} from 'src/app/controller/model/TemplateEmailReport.model';
-import {TemplateEmailReportService} from 'src/app/controller/service/TemplateEmailReport.service';
 import {TemplateEmailClientInjoinableVo} from 'src/app/controller/model/TemplateEmailClientInjoinable.model';
 import {TemplateEmailClientInjoinableService} from 'src/app/controller/service/TemplateEmailClientInjoinable.service';
 import {SourceReplanificationVo} from 'src/app/controller/model/SourceReplanification.model';
@@ -71,7 +69,6 @@ export class OrdreKoscCreateChercheurComponent implements OnInit {
         , private templateSuiviService: TemplateSuiviService
         , private causeKoOkService: CauseKoOkService
         , private departementService: DepartementService
-        , private templateEmailReportService: TemplateEmailReportService
         , private templateEmailClientInjoinableService: TemplateEmailClientInjoinableService
         , private sourceReplanificationService: SourceReplanificationService
         , private templateEmailPlanificationService: TemplateEmailPlanificationService
@@ -1091,29 +1088,7 @@ export class OrdreKoscCreateChercheurComponent implements OnInit {
         this.templateEmailPlanificationService.createTemplateEmailPlanificationDialog = value;
     }
 
-    get selectedTemplateEmailReport(): TemplateEmailReportVo {
-        return this.templateEmailReportService.selectedTemplateEmailReport;
-    }
 
-    set selectedTemplateEmailReport(value: TemplateEmailReportVo) {
-        this.templateEmailReportService.selectedTemplateEmailReport = value;
-    }
-
-    get templateEmailReports(): Array<TemplateEmailReportVo> {
-        return this.templateEmailReportService.templateEmailReports;
-    }
-
-    set templateEmailReports(value: Array<TemplateEmailReportVo>) {
-        this.templateEmailReportService.templateEmailReports = value;
-    }
-
-    get createTemplateEmailReportDialog(): boolean {
-        return this.templateEmailReportService.createTemplateEmailReportDialog;
-    }
-
-    set createTemplateEmailReportDialog(value: boolean) {
-        this.templateEmailReportService.createTemplateEmailReportDialog = value;
-    }
 
     get selectedDepartement(): DepartementVo {
         return this.departementService.selectedDepartement;
@@ -1469,8 +1444,6 @@ export class OrdreKoscCreateChercheurComponent implements OnInit {
         this.technicienService.findAll().subscribe((data) => this.techniciens = data);
         this.selectedTemplateEmailPlanification = new TemplateEmailPlanificationVo();
         this.templateEmailPlanificationService.findAll().subscribe((data) => this.templateEmailPlanifications = data);
-        this.selectedTemplateEmailReport = new TemplateEmailReportVo();
-        this.templateEmailReportService.findAll().subscribe((data) => this.templateEmailReports = data);
         this.selectedTemplateEmailReplanification = new TemplateEmailReplanificationVo();
         this.templateEmailReplanificationService.findAll().subscribe((data) => this.templateEmailReplanifications = data);
         this.selectedTemplateEmailRefus = new TemplateEmailRefusVo();
@@ -1577,17 +1550,6 @@ export class OrdreKoscCreateChercheurComponent implements OnInit {
         }
     }
 
-    public async openCreateTemplateEmailReport(templateEmailReport: string) {
-        const isPermistted = await this.roleService.isPermitted('TemplateEmailReport', 'add');
-        if (isPermistted) {
-            this.selectedTemplateEmailReport = new TemplateEmailReportVo();
-            this.createTemplateEmailReportDialog = true;
-        } else {
-            this.messageService.add({
-                severity: 'error', summary: 'erreur', detail: 'problème de permission'
-            });
-        }
-    }
 
     public async openCreateDepartement(departement: string) {
         const isPermistted = await this.roleService.isPermitted('Departement', 'add');
@@ -1810,8 +1772,6 @@ export class OrdreKoscCreateChercheurComponent implements OnInit {
         this.validateOrdreKoscCorpsPlanification();
         this.validateOrdreKoscFromPlanification();
         this.validateOrdreKoscToPlanification();
-        this.validateOrdreKoscObjetReport();
-        this.validateOrdreKoscCorpsReport();
         this.validateOrdreKoscObjetReplanification();
         this.validateOrdreKoscCorpsReplanification();
         this.validateOrdreKoscObjetRefus();
@@ -1884,23 +1844,9 @@ export class OrdreKoscCreateChercheurComponent implements OnInit {
         }
     }
 
-    private validateOrdreKoscObjetReport() {
-        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.objetReport)) {
-            this.errorMessages.push('Objet report non valide');
-            this.validOrdreKoscObjetReport = false;
-        } else {
-            this.validOrdreKoscObjetReport = true;
-        }
-    }
 
-    private validateOrdreKoscCorpsReport() {
-        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.corpsReport)) {
-            this.errorMessages.push('Corps report non valide');
-            this.validOrdreKoscCorpsReport = false;
-        } else {
-            this.validOrdreKoscCorpsReport = true;
-        }
-    }
+
+
 
     private validateOrdreKoscObjetReplanification() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.objetReplanification)) {

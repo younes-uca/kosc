@@ -240,21 +240,6 @@ import {
     RaisonArretTravailChercheurComponent
 } from './raison-arret-travail-chercheur/raison-arret-travail-chercheur.component';
 import {
-    TemplateEmailReportCreateChercheurComponent
-} from './template-email-report-chercheur/create-chercheur/template-email-report-create-chercheur.component';
-import {
-    TemplateEmailReportEditChercheurComponent
-} from './template-email-report-chercheur/edit-chercheur/template-email-report-edit-chercheur.component';
-import {
-    TemplateEmailReportViewChercheurComponent
-} from './template-email-report-chercheur/view-chercheur/template-email-report-view-chercheur.component';
-import {
-    TemplateEmailReportListChercheurComponent
-} from './template-email-report-chercheur/list-chercheur/template-email-report-list-chercheur.component';
-import {
-    TemplateEmailReportChercheurComponent
-} from './template-email-report-chercheur/template-email-report-chercheur.component';
-import {
     TemplateSuiviCreateChercheurComponent
 } from './template-suivi-chercheur/create-chercheur/template-suivi-create-chercheur.component';
 import {
@@ -462,11 +447,6 @@ import {RippleModule} from "primeng/ripple";
         RaisonArretTravailViewChercheurComponent,
         RaisonArretTravailEditChercheurComponent,
         RaisonArretTravailChercheurComponent,
-        TemplateEmailReportCreateChercheurComponent,
-        TemplateEmailReportListChercheurComponent,
-        TemplateEmailReportViewChercheurComponent,
-        TemplateEmailReportEditChercheurComponent,
-        TemplateEmailReportChercheurComponent,
         TemplateSuiviCreateChercheurComponent,
         TemplateSuiviListChercheurComponent,
         TemplateSuiviViewChercheurComponent,
@@ -622,11 +602,7 @@ import {RippleModule} from "primeng/ripple";
         RaisonArretTravailViewChercheurComponent,
         RaisonArretTravailEditChercheurComponent,
         RaisonArretTravailChercheurComponent,
-        TemplateEmailReportCreateChercheurComponent,
-        TemplateEmailReportListChercheurComponent,
-        TemplateEmailReportViewChercheurComponent,
-        TemplateEmailReportEditChercheurComponent,
-        TemplateEmailReportChercheurComponent,
+
         TemplateSuiviCreateChercheurComponent,
         TemplateSuiviListChercheurComponent,
         TemplateSuiviViewChercheurComponent,

@@ -138,14 +138,10 @@ public class OrdreKoscVo {
     private String fromPlanification;
     private String toPlanification;
     private String dateAppelReplanification;
-    private String objetReport;
-    private String corpsReport;
-    private String toReport;
-    private String fromReport;
+
     private String type;
 
-    private Boolean envoyeReport;
-    private String dateEnvoiReport;
+
     private String objetReplanification;
     private String corpsReplanification;
     private String fromReplanification;
@@ -357,7 +353,7 @@ public class OrdreKoscVo {
     private DepartementVo departementVo;
     private TechnicienVo technicienVo;
     private TemplateEmailPlanificationVo templateEmailPlanificationVo;
-    private TemplateEmailReportVo templateEmailReportVo;
+
     private TemplateEmailReplanificationVo templateEmailReplanificationVo;
     private TemplateEmailRefusVo templateEmailRefusVo;
     private TemplateEmailMauvaisContactVo templateEmailMauvaisContactVo;
@@ -1418,53 +1414,6 @@ public class OrdreKoscVo {
         this.dateAppelReplanification = dateAppelReplanification;
     }
 
-    public String getObjetReport() {
-        return this.objetReport;
-    }
-
-    public void setObjetReport(String objetReport) {
-        this.objetReport = objetReport;
-    }
-
-    public String getCorpsReport() {
-        return this.corpsReport;
-    }
-
-    public void setCorpsReport(String corpsReport) {
-        this.corpsReport = corpsReport;
-    }
-
-    public String getFromReport() {
-        return this.fromReport;
-    }
-
-    public void setFromReport(String fromReport) {
-        this.fromReport = fromReport;
-    }
-
-    public String getToReport() {
-        return this.toReport;
-    }
-
-    public void setToReport(String toReport) {
-        this.toReport = toReport;
-    }
-
-    public Boolean getEnvoyeReport() {
-        return this.envoyeReport;
-    }
-
-    public void setEnvoyeReport(Boolean envoyeReport) {
-        this.envoyeReport = envoyeReport;
-    }
-
-    public String getDateEnvoiReport() {
-        return this.dateEnvoiReport;
-    }
-
-    public void setDateEnvoiReport(String dateEnvoiReport) {
-        this.dateEnvoiReport = dateEnvoiReport;
-    }
 
     public String getObjetReplanification() {
         return this.objetReplanification;
@@ -2420,13 +2369,6 @@ public class OrdreKoscVo {
         this.templateEmailPlanificationVo = templateEmailPlanificationVo;
     }
 
-    public TemplateEmailReportVo getTemplateEmailReportVo() {
-        return this.templateEmailReportVo;
-    }
-
-    public void setTemplateEmailReportVo(TemplateEmailReportVo templateEmailReportVo) {
-        this.templateEmailReportVo = templateEmailReportVo;
-    }
 
     public TemplateEmailReplanificationVo getTemplateEmailReplanificationVo() {
         return this.templateEmailReplanificationVo;

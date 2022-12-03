@@ -5,7 +5,6 @@ import {TemplateEmailPlanificationVo} from './TemplateEmailPlanification.model';
 import {TemplateSuiviVo} from './TemplateSuivi.model';
 import {TemplateEmailRefusVo} from './TemplateEmailRefus.model';
 import {TemplateEmailConfirmationClientVo} from './TemplateEmailConfirmationClient.model';
-import {TemplateEmailReportVo} from './TemplateEmailReport.model';
 import {TemplateEmailClientInjoinableKoscVo} from './TemplateEmailClientInjoinableKosc.model';
 import {TemplateEmailMauvaisContactVo} from './TemplateEmailMauvaisContact.model';
 import {TemplateEmailClientInjoinableVo} from './TemplateEmailClientInjoinable.model';
@@ -38,7 +37,6 @@ export class DefaultTemplateConfigurationVo {
     public templateEmailClotureVo: TemplateEmailClotureVo;
     public templateSuiviVo: TemplateSuiviVo;
     public templateEmailClientInjoinableVo: TemplateEmailClientInjoinableVo;
-    public templateEmailReportVo: TemplateEmailReportVo;
     public templateEmailPlanificationVo: TemplateEmailPlanificationVo;
     public templateEmailReplanificationVo: TemplateEmailReplanificationVo;
     public templateEmailRefusVo: TemplateEmailRefusVo;

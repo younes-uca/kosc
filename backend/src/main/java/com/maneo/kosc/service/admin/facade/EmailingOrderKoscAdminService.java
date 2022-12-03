@@ -17,7 +17,6 @@ public interface EmailingOrderKoscAdminService {
 
     void sendMauvaisContactEmail(OrdreKosc ordreKosc);
 
-    void sendMailReplanificationReport(OrdreKosc ordreKosc);
 
     void sendMailReplanification(OrdreKosc ordreKosc);
 

@@ -67,7 +67,6 @@ import {DepartementAdminComponent} from './departement-admin/departement-admin.c
 import {RaisonArretTravailAdminComponent} from './raison-arret-travail-admin/raison-arret-travail-admin.component';
 
 
-import {TemplateEmailReportAdminComponent} from './template-email-report-admin/template-email-report-admin.component';
 
 
 import {TemplateSuiviAdminComponent} from './template-suivi-admin/template-suivi-admin.component';
@@ -353,17 +352,6 @@ import {RoleListComponent} from "./role-list/role-list.component";
                             ]
                         },
 
-                        {
-
-                            path: 'template-email-report',
-                            children: [
-                                {
-                                    path: 'list',
-                                    component: TemplateEmailReportAdminComponent,
-                                    canActivate: [AuthGuard]
-                                }
-                            ]
-                        },
 
                         {
 

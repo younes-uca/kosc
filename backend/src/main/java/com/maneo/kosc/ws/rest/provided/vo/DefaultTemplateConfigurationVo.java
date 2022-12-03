@@ -15,7 +15,7 @@ public class DefaultTemplateConfigurationVo {
     private TemplateEmailClotureVo templateEmailClotureVo;
     private TemplateSuiviVo templateSuiviVo;
     private TemplateEmailClientInjoinableVo templateEmailClientInjoinableVo;
-    private TemplateEmailReportVo templateEmailReportVo;
+
     private TemplateEmailPlanificationVo templateEmailPlanificationVo;
     private TemplateEmailReplanificationVo templateEmailReplanificationVo;
     private TemplateEmailRefusVo templateEmailRefusVo;
@@ -104,13 +104,7 @@ public class DefaultTemplateConfigurationVo {
         this.templateEmailClientInjoinableVo = templateEmailClientInjoinableVo;
     }
 
-    public TemplateEmailReportVo getTemplateEmailReportVo() {
-        return this.templateEmailReportVo;
-    }
 
-    public void setTemplateEmailReportVo(TemplateEmailReportVo templateEmailReportVo) {
-        this.templateEmailReportVo = templateEmailReportVo;
-    }
 
     public TemplateEmailPlanificationVo getTemplateEmailPlanificationVo() {
         return this.templateEmailPlanificationVo;

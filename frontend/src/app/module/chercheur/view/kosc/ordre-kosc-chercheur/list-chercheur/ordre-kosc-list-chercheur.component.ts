@@ -11,7 +11,6 @@ import {OperatorService} from 'src/app/controller/service/Operator.service';
 import {DepartementService} from 'src/app/controller/service/Departement.service';
 import {TechnicienService} from 'src/app/controller/service/Technicien.service';
 import {TemplateEmailPlanificationService} from 'src/app/controller/service/TemplateEmailPlanification.service';
-import {TemplateEmailReportService} from 'src/app/controller/service/TemplateEmailReport.service';
 import {TemplateEmailReplanificationService} from 'src/app/controller/service/TemplateEmailReplanification.service';
 import {TemplateEmailRefusService} from 'src/app/controller/service/TemplateEmailRefus.service';
 import {TemplateEmailMauvaisContactService} from 'src/app/controller/service/TemplateEmailMauvaisContact.service';
@@ -44,7 +43,6 @@ import {TemplateEmailClotureVo} from 'src/app/controller/model/TemplateEmailClot
 import {TemplateEmailRefusVo} from 'src/app/controller/model/TemplateEmailRefus.model';
 import {TemplateEmailConfirmationClientVo} from 'src/app/controller/model/TemplateEmailConfirmationClient.model';
 import {DepartementVo} from 'src/app/controller/model/Departement.model';
-import {TemplateEmailReportVo} from 'src/app/controller/model/TemplateEmailReport.model';
 import {TemplateEmailMauvaisContactVo} from 'src/app/controller/model/TemplateEmailMauvaisContact.model';
 import {TechnicienVo} from 'src/app/controller/model/Technicien.model';
 import {TemplateEmailCriVo} from 'src/app/controller/model/TemplateEmailCri.model';
@@ -83,7 +81,6 @@ export class OrdreKoscListChercheurComponent implements OnInit {
     departements: Array<DepartementVo>;
     techniciens: Array<TechnicienVo>;
     templateEmailPlanifications: Array<TemplateEmailPlanificationVo>;
-    templateEmailReports: Array<TemplateEmailReportVo>;
     templateEmailReplanifications: Array<TemplateEmailReplanificationVo>;
     templateEmailRefuss: Array<TemplateEmailRefusVo>;
     templateEmailMauvaisContacts: Array<TemplateEmailMauvaisContactVo>;
@@ -104,7 +101,6 @@ export class OrdreKoscListChercheurComponent implements OnInit {
         , private departementService: DepartementService
         , private technicienService: TechnicienService
         , private templateEmailPlanificationService: TemplateEmailPlanificationService
-        , private templateEmailReportService: TemplateEmailReportService
         , private templateEmailReplanificationService: TemplateEmailReplanificationService
         , private templateEmailRefusService: TemplateEmailRefusService
         , private templateEmailMauvaisContactService: TemplateEmailMauvaisContactService
@@ -189,7 +185,6 @@ export class OrdreKoscListChercheurComponent implements OnInit {
         this.loadDepartement();
         this.loadTechnicien();
         this.loadTemplateEmailPlanification();
-        this.loadTemplateEmailReport();
         this.loadTemplateEmailReplanification();
         this.loadTemplateEmailRefus();
         this.loadTemplateEmailMauvaisContact();
@@ -286,7 +281,6 @@ export class OrdreKoscListChercheurComponent implements OnInit {
                 this.selectedOrdreKosc.dateOuverture = new Date(ordreKosc.dateOuverture);
                 this.selectedOrdreKosc.dateEnvoiPlanification = new Date(ordreKosc.dateEnvoiPlanification);
                 this.selectedOrdreKosc.dateAppelReplanification = new Date(ordreKosc.dateAppelReplanification);
-                this.selectedOrdreKosc.dateEnvoiReport = new Date(ordreKosc.dateEnvoiReport);
                 this.selectedOrdreKosc.dateEnvoiReplanification = new Date(ordreKosc.dateEnvoiReplanification);
                 this.selectedOrdreKosc.dateEnvoiRefus = new Date(ordreKosc.dateEnvoiRefus);
                 this.selectedOrdreKosc.dateEnvoiMauvaisContact = new Date(ordreKosc.dateEnvoiMauvaisContact);
@@ -325,7 +319,6 @@ export class OrdreKoscListChercheurComponent implements OnInit {
                 this.selectedOrdreKosc.dateOuverture = new Date(ordreKosc.dateOuverture);
                 this.selectedOrdreKosc.dateEnvoiPlanification = new Date(ordreKosc.dateEnvoiPlanification);
                 this.selectedOrdreKosc.dateAppelReplanification = new Date(ordreKosc.dateAppelReplanification);
-                this.selectedOrdreKosc.dateEnvoiReport = new Date(ordreKosc.dateEnvoiReport);
                 this.selectedOrdreKosc.dateEnvoiReplanification = new Date(ordreKosc.dateEnvoiReplanification);
                 this.selectedOrdreKosc.dateEnvoiRefus = new Date(ordreKosc.dateEnvoiRefus);
                 this.selectedOrdreKosc.dateEnvoiMauvaisContact = new Date(ordreKosc.dateEnvoiMauvaisContact);
@@ -424,13 +417,6 @@ export class OrdreKoscListChercheurComponent implements OnInit {
 
     }
 
-    public async loadTemplateEmailReport() {
-        await this.roleService.findAll();
-        const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
-        isPermistted ? this.templateEmailReportService.findAll().subscribe(templateEmailReports => this.templateEmailReports = templateEmailReports, error => console.log(error))
-            : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
-
-    }
 
     public async loadTemplateEmailReplanification() {
         await this.roleService.findAll();
@@ -709,11 +695,6 @@ export class OrdreKoscListChercheurComponent implements OnInit {
                 'From planification': e.fromPlanification,
                 'To planification': e.toPlanification,
                 'Date appel replanification': this.datePipe.transform(e.dateAppelReplanification, 'dd/MM/yyyy hh:mm'),
-                'Template email report': e.templateEmailReportVo?.libelle,
-                'Objet report': e.objetReport,
-                'Corps report': e.corpsReport,
-                'Envoye report': e.envoyeReport ? 'Vrai' : 'Faux',
-                'Date envoi report': this.datePipe.transform(e.dateEnvoiReport, 'dd/MM/yyyy hh:mm'),
                 'Template email replanification': e.templateEmailReplanificationVo?.libelle,
                 'Objet replanification': e.objetReplanification,
                 'Corps replanification': e.corpsReplanification,
@@ -925,12 +906,6 @@ export class OrdreKoscListChercheurComponent implements OnInit {
             'To planification': this.searchOrdreKosc.toPlanification ? this.searchOrdreKosc.toPlanification : environment.emptyForExport,
             'Date appel replanification Min': this.searchOrdreKosc.dateAppelReplanificationMin ? this.datePipe.transform(this.searchOrdreKosc.dateAppelReplanificationMin, this.dateFormat) : environment.emptyForExport,
             'Date appel replanification Max': this.searchOrdreKosc.dateAppelReplanificationMax ? this.datePipe.transform(this.searchOrdreKosc.dateAppelReplanificationMax, this.dateFormat) : environment.emptyForExport,
-            'Template email report': this.searchOrdreKosc.templateEmailReportVo?.libelle ? this.searchOrdreKosc.templateEmailReportVo?.libelle : environment.emptyForExport,
-            'Objet report': this.searchOrdreKosc.objetReport ? this.searchOrdreKosc.objetReport : environment.emptyForExport,
-            'Corps report': this.searchOrdreKosc.corpsReport ? this.searchOrdreKosc.corpsReport : environment.emptyForExport,
-            'Envoye report': this.searchOrdreKosc.envoyeReport ? (this.searchOrdreKosc.envoyeReport ? environment.trueValue : environment.falseValue) : environment.emptyForExport,
-            'Date envoi report Min': this.searchOrdreKosc.dateEnvoiReportMin ? this.datePipe.transform(this.searchOrdreKosc.dateEnvoiReportMin, this.dateFormat) : environment.emptyForExport,
-            'Date envoi report Max': this.searchOrdreKosc.dateEnvoiReportMax ? this.datePipe.transform(this.searchOrdreKosc.dateEnvoiReportMax, this.dateFormat) : environment.emptyForExport,
             'Template email replanification': this.searchOrdreKosc.templateEmailReplanificationVo?.libelle ? this.searchOrdreKosc.templateEmailReplanificationVo?.libelle : environment.emptyForExport,
             'Objet replanification': this.searchOrdreKosc.objetReplanification ? this.searchOrdreKosc.objetReplanification : environment.emptyForExport,
             'Corps replanification': this.searchOrdreKosc.corpsReplanification ? this.searchOrdreKosc.corpsReplanification : environment.emptyForExport,

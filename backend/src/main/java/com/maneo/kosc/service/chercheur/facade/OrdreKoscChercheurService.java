@@ -65,9 +65,8 @@ public interface OrdreKoscChercheurService extends AbstractService<OrdreKosc, Lo
 
     int deleteByTemplateEmailPlanificationId(Long id);
 
-    List<OrdreKosc> findByTemplateEmailReportId(Long id);
 
-    int deleteByTemplateEmailReportId(Long id);
+
 
     List<OrdreKosc> findByTemplateEmailReplanificationId(Long id);
 

@@ -11,7 +11,6 @@ import {TemplateEmailFtlService} from 'src/app/controller/service/TemplateEmailF
 import {TemplateEmailClotureService} from 'src/app/controller/service/TemplateEmailCloture.service';
 import {TemplateSuiviService} from 'src/app/controller/service/TemplateSuivi.service';
 import {TemplateEmailClientInjoinableService} from 'src/app/controller/service/TemplateEmailClientInjoinable.service';
-import {TemplateEmailReportService} from 'src/app/controller/service/TemplateEmailReport.service';
 import {TemplateEmailPlanificationService} from 'src/app/controller/service/TemplateEmailPlanification.service';
 import {TemplateEmailReplanificationService} from 'src/app/controller/service/TemplateEmailReplanification.service';
 import {TemplateEmailRefusService} from 'src/app/controller/service/TemplateEmailRefus.service';
@@ -31,7 +30,6 @@ import {TemplateEmailPlanificationVo} from 'src/app/controller/model/TemplateEma
 import {TemplateSuiviVo} from 'src/app/controller/model/TemplateSuivi.model';
 import {TemplateEmailRefusVo} from 'src/app/controller/model/TemplateEmailRefus.model';
 import {TemplateEmailConfirmationClientVo} from 'src/app/controller/model/TemplateEmailConfirmationClient.model';
-import {TemplateEmailReportVo} from 'src/app/controller/model/TemplateEmailReport.model';
 import {TemplateEmailClientInjoinableKoscVo} from 'src/app/controller/model/TemplateEmailClientInjoinableKosc.model';
 import {TemplateEmailMauvaisContactVo} from 'src/app/controller/model/TemplateEmailMauvaisContact.model';
 import {TemplateEmailClientInjoinableVo} from 'src/app/controller/model/TemplateEmailClientInjoinable.model';
@@ -73,7 +71,6 @@ export class DefaultTemplateConfigurationListAdminComponent implements OnInit {
     templateEmailClotures: Array<TemplateEmailClotureVo>;
     templateSuivis: Array<TemplateSuiviVo>;
     templateEmailClientInjoinables: Array<TemplateEmailClientInjoinableVo>;
-    templateEmailReports: Array<TemplateEmailReportVo>;
     templateEmailPlanifications: Array<TemplateEmailPlanificationVo>;
     templateEmailReplanifications: Array<TemplateEmailReplanificationVo>;
     templateEmailRefuss: Array<TemplateEmailRefusVo>;
@@ -91,7 +88,6 @@ export class DefaultTemplateConfigurationListAdminComponent implements OnInit {
         , private templateEmailClotureService: TemplateEmailClotureService
         , private templateSuiviService: TemplateSuiviService
         , private templateEmailClientInjoinableService: TemplateEmailClientInjoinableService
-        , private templateEmailReportService: TemplateEmailReportService
         , private templateEmailPlanificationService: TemplateEmailPlanificationService
         , private templateEmailReplanificationService: TemplateEmailReplanificationService
         , private templateEmailRefusService: TemplateEmailRefusService
@@ -176,7 +172,6 @@ export class DefaultTemplateConfigurationListAdminComponent implements OnInit {
         this.loadTemplateEmailCloture();
         this.loadTemplateSuivi();
         this.loadTemplateEmailClientInjoinable();
-        this.loadTemplateEmailReport();
         this.loadTemplateEmailPlanification();
         this.loadTemplateEmailReplanification();
         this.loadTemplateEmailRefus();
@@ -319,13 +314,7 @@ export class DefaultTemplateConfigurationListAdminComponent implements OnInit {
 
     }
 
-    public async loadTemplateEmailReport() {
-        await this.roleService.findAll();
-        const isPermistted = await this.roleService.isPermitted('DefaultTemplateConfiguration', 'list');
-        isPermistted ? this.templateEmailReportService.findAll().subscribe(templateEmailReports => this.templateEmailReports = templateEmailReports, error => console.log(error))
-            : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
 
-    }
 
     public async loadTemplateEmailPlanification() {
         await this.roleService.findAll();
@@ -435,7 +424,6 @@ export class DefaultTemplateConfigurationListAdminComponent implements OnInit {
                 'Template email cloture': e.templateEmailClotureVo?.libelle,
                 'Template suivi': e.templateSuiviVo?.libelle,
                 'Template email client injoinable': e.templateEmailClientInjoinableVo?.libelle,
-                'Template email report': e.templateEmailReportVo?.libelle,
                 'Template email planification': e.templateEmailPlanificationVo?.libelle,
                 'Template email replanification': e.templateEmailReplanificationVo?.libelle,
                 'Template email refus': e.templateEmailRefusVo?.libelle,
@@ -454,7 +442,6 @@ export class DefaultTemplateConfigurationListAdminComponent implements OnInit {
             'Template email cloture': this.searchDefaultTemplateConfiguration.templateEmailClotureVo?.libelle ? this.searchDefaultTemplateConfiguration.templateEmailClotureVo?.libelle : environment.emptyForExport,
             'Template suivi': this.searchDefaultTemplateConfiguration.templateSuiviVo?.libelle ? this.searchDefaultTemplateConfiguration.templateSuiviVo?.libelle : environment.emptyForExport,
             'Template email client injoinable': this.searchDefaultTemplateConfiguration.templateEmailClientInjoinableVo?.libelle ? this.searchDefaultTemplateConfiguration.templateEmailClientInjoinableVo?.libelle : environment.emptyForExport,
-            'Template email report': this.searchDefaultTemplateConfiguration.templateEmailReportVo?.libelle ? this.searchDefaultTemplateConfiguration.templateEmailReportVo?.libelle : environment.emptyForExport,
             'Template email planification': this.searchDefaultTemplateConfiguration.templateEmailPlanificationVo?.libelle ? this.searchDefaultTemplateConfiguration.templateEmailPlanificationVo?.libelle : environment.emptyForExport,
             'Template email replanification': this.searchDefaultTemplateConfiguration.templateEmailReplanificationVo?.libelle ? this.searchDefaultTemplateConfiguration.templateEmailReplanificationVo?.libelle : environment.emptyForExport,
             'Template email refus': this.searchDefaultTemplateConfiguration.templateEmailRefusVo?.libelle ? this.searchDefaultTemplateConfiguration.templateEmailRefusVo?.libelle : environment.emptyForExport,

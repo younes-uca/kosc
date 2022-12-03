@@ -12,10 +12,10 @@ import {TemplateEmailClotureVo} from './TemplateEmailCloture.model';
 import {TemplateEmailRefusVo} from './TemplateEmailRefus.model';
 import {TemplateEmailConfirmationClientVo} from './TemplateEmailConfirmationClient.model';
 import {DepartementVo} from './Departement.model';
-import {TemplateEmailReportVo} from './TemplateEmailReport.model';
 import {TemplateEmailMauvaisContactVo} from './TemplateEmailMauvaisContact.model';
 import {TechnicienVo} from './Technicien.model';
 import {TemplateEmailCriVo} from './TemplateEmailCri.model';
+import {User} from "./User.model";
 
 
 export class OrdreKoscVo {
@@ -276,7 +276,6 @@ export class OrdreKoscVo {
     public departementVo: DepartementVo;
     public technicienVo: TechnicienVo;
     public templateEmailPlanificationVo: TemplateEmailPlanificationVo;
-    public templateEmailReportVo: TemplateEmailReportVo;
     public templateEmailReplanificationVo: TemplateEmailReplanificationVo;
     public templateEmailRefusVo: TemplateEmailRefusVo;
     public templateEmailMauvaisContactVo: TemplateEmailMauvaisContactVo;
@@ -334,5 +333,12 @@ export class OrdreKoscVo {
 
 
     public dateCri: Date;
+
+    public userMauvaisContact: User;
+    public userRefus: User;
+    public userClientInjoinable: User;
+    public userAutre: User;
+
+
 
 }
