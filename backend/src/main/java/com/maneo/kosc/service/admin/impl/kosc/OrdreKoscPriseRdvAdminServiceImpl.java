@@ -1,8 +1,9 @@
-package com.maneo.kosc.service.admin.impl;
+package com.maneo.kosc.service.admin.impl.kosc;
 
 import com.maneo.kosc.bean.*;
 import com.maneo.kosc.dao.OrdreKoscDao;
 import com.maneo.kosc.service.admin.facade.*;
+import com.maneo.kosc.service.admin.facade.kosc.OrdreKoscPriseRdvAdminService;
 import com.maneo.kosc.service.util.DateUtil;
 import com.maneo.kosc.service.util.ListUtil;
 import com.maneo.kosc.service.util.SearchUtil;

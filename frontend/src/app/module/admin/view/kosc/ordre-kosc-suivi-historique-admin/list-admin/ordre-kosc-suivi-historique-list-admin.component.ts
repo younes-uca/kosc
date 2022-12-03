@@ -39,6 +39,10 @@ import {
     TemplateEmailClientInjoinableKoscService
 } from "../../../../../../controller/service/TemplateEmailClientInjoinableKosc.service";
 import * as moment from "moment/moment";
+import {DefaultTemplateConfigurationVo} from "../../../../../../controller/model/DefaultTemplateConfiguration.model";
+import {
+    DefaultTemplateConfigurationService
+} from "../../../../../../controller/service/DefaultTemplateConfiguration.service";
 
 @Component({
     selector: 'app-ordre-kosc-suivi-historique-list-admin',
@@ -93,6 +97,8 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         , private etatDemandeKoscService: EtatDemandeKoscService
         , private templateEmailClotureService: TemplateEmailClotureService
         , private templateSuiviService: TemplateSuiviService
+        , private defaultTemplateConfigurationService: DefaultTemplateConfigurationService,
+
     ) {
     }
     stylefyConfort(ordreKosc: OrdreKoscVo): string {
@@ -204,8 +210,10 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
 
         ];
         this.home = {icon: 'pi pi-home', routerLink: '/'};
-
-        this.loadEtatDemandeKoscIncluding(['ok','ko','planification']);
+        this.defaultTemplateConfigurationService.findDefaultTemplateConfiguration().subscribe((data) =>
+            this.selectedDefaultTemplateConfiguration = data,
+        );
+        this.loadEtatDemandeKoscIncluding(['planification']);
         this.setDateEnvoiMinAndMax();
         this.initExport();
         this.initCol();
@@ -306,6 +314,12 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
                 this.selectedOrdreKosc.dateEnvoiCloture = new Date(ordreKosc.dateEnvoiCloture);
                 this.selectedOrdreKosc.dateEnvoiSuivi = new Date(ordreKosc.dateEnvoiSuivi);
                 this.editOrdreKoscDialog = true;
+
+                this.selectedOrdreKosc.fromCri = this.selectedDefaultTemplateConfiguration.emailManeo;
+                this.selectedOrdreKosc.toCri = this.selectedDefaultTemplateConfiguration.emailKosc;
+                this.selectedOrdreKosc.objetCri = eval(this.selectedDefaultTemplateConfiguration.templateEmailCriVo.objet);
+                this.selectedOrdreKosc.corpsCri = eval(this.selectedDefaultTemplateConfiguration.templateEmailCriVo.corps);
+                
             });
         } else {
             this.messageService.add({
@@ -629,6 +643,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
                 'Departement': e.departementVo?.libelle,
                 'Technicien': e.technicienVo?.identifiant,
                 'Date envoi cri': this.datePipe.transform(e.dateEnvoiCri, 'dd/MM/yyyy hh:mm'),
+                'Date cri': this.datePipe.transform(e.dateCri, 'dd/MM/yyyy hh:mm'),
                 'Pbo reel': e.pboReel,
                 'Numero serie ont': e.numeroSerieOnt,
                 'Work order type': e.workOrderType,
@@ -863,6 +878,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
             'Envoye suivi': this.searchOrdreKosc.envoyeSuivi ? (this.searchOrdreKosc.envoyeSuivi ? environment.trueValue : environment.falseValue) : environment.emptyForExport,
             'Date envoi suivi Min': this.searchOrdreKosc.dateEnvoiSuiviMin ? this.datePipe.transform(this.searchOrdreKosc.dateEnvoiSuiviMin, this.dateFormat) : environment.emptyForExport,
             'Date envoi suivi Max': this.searchOrdreKosc.dateEnvoiSuiviMax ? this.datePipe.transform(this.searchOrdreKosc.dateEnvoiSuiviMax, this.dateFormat) : environment.emptyForExport,
+            'Date Cri': this.searchOrdreKosc.dateCri? this.datePipe.transform(this.searchOrdreKosc.dateCri, this.dateFormat) : environment.emptyForExport,
         }];
 
     }
@@ -964,6 +980,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
             {field: 'departement?.libelle', header: 'Departement'},
             {field: 'technicien?.identifiant', header: 'Technicien'},
             {field: 'dateEnvoiCri', header: 'Date envoi cri'},
+            {field: 'dateCri', header: 'Date cri'},
             {field: 'pboReel', header: 'Pbo reel'},
             {field: 'numeroSerieOnt', header: 'Numero serie ont'},
             {field: 'workOrderType', header: 'Work order type'},
@@ -1062,5 +1079,14 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         this.searchOrdreKosc.dateEnvoiPlanificationMin=null;
         this.searchOrdreKosc.dateEnvoiPlanificationMax= moment(today).format("yyyy-MM-DD");
         console.log(this.searchOrdreKosc.dateEnvoiPlanificationMax)
+    }
+
+    get selectedDefaultTemplateConfiguration(): DefaultTemplateConfigurationVo {
+
+        return this.defaultTemplateConfigurationService.selectedDefaultTemplateConfiguration;
+    }
+
+    set selectedDefaultTemplateConfiguration(value: DefaultTemplateConfigurationVo) {
+        this.defaultTemplateConfigurationService.selectedDefaultTemplateConfiguration = value;
     }
 }

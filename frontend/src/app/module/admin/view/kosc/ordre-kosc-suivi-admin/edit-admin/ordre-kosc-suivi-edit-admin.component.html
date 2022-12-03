@@ -384,8 +384,16 @@
                                 <p-tabView [(activeIndex)]="indexManeo">
                                     <p-tabPanel header="Client Injoignable">
                                         <div class="p-grid">
-
-                                <div class="p-field p-col-12 p-md-6">
+                                            <div class="p-field p-col-12 p-md-4">
+                                                <label for="45">Date replanification</label>
+                                                <p-calendar [(ngModel)]="selectedOrdreKosc.dateAppelReplanification" [showSeconds]="false"
+                                                            [showTime]="true"
+                                                            dateFormat="{{dateFormat}}"
+                                                            id="45"
+                                                            placeholder="Date appel replanification">
+                                                </p-calendar>
+                                            </div>
+                                <div class="p-field p-col-12 p-md-4">
                                     <label for="129">From<span style="color: red;"></span></label>
                                     <input [(ngModel)]="selectedOrdreKosc.fromReportDemandeManeoClientInjoignable"
                                            [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromReportDemandeManeoClientInjoignable}"
@@ -399,7 +407,7 @@
                                 </div>
 
 
-                                <div class="p-field p-col-12 p-md-6">
+                                <div class="p-field p-col-12 p-md-4">
                                     <label for="130">To<span style="color: red;"></span></label>
                                     <input [(ngModel)]="selectedOrdreKosc.toReportDemandeManeoClientInjoignable"
                                            [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToReportDemandeManeoClientInjoignable}"
@@ -411,6 +419,7 @@
                                         est
                                         obligatoire.</small>
                                 </div>
+
                                 <div class="p-field p-col-12 p-md-6">
                                     <label for="137">Objet</label>
                                     <input [(ngModel)]="selectedOrdreKosc.objetReportDemandeManeoClientInjoignable"
@@ -451,8 +460,16 @@
                                     </p-tabPanel>
                                     <p-tabPanel header="Client Joignable Accepte">
                                         <div class="p-grid">
-
-                                            <div class="p-field p-col-12 p-md-6">
+                                            <div class="p-field p-col-12 p-md-4">
+                                                <label for="45">Date replanification</label>
+                                                <p-calendar [(ngModel)]="selectedOrdreKosc.dateAppelReplanification" [showSeconds]="false"
+                                                            [showTime]="true"
+                                                            dateFormat="{{dateFormat}}"
+                                                            id="45"
+                                                            placeholder="Date appel replanification">
+                                                </p-calendar>
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-4">
                                                 <label for="129">From<span style="color: red;"></span></label>
                                                 <input [(ngModel)]="selectedOrdreKosc.fromReportDemandeManeoClientJoignableAccepte"
                                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromReportDemandeManeoClientJoignableAccepte}"
@@ -466,7 +483,7 @@
                                             </div>
 
 
-                                            <div class="p-field p-col-12 p-md-6">
+                                            <div class="p-field p-col-12 p-md-4">
                                                 <label for="130">To<span style="color: red;"></span></label>
                                                 <input [(ngModel)]="selectedOrdreKosc.toReportDemandeManeoClientJoignableAccepte"
                                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToReportDemandeManeoClientJoignableAccepte}"
@@ -478,6 +495,7 @@
                                                     est
                                                     obligatoire.</small>
                                             </div>
+
                                             <div class="p-field p-col-12 p-md-6">
                                                 <label for="137">Objet</label>
                                                 <input [(ngModel)]="selectedOrdreKosc.objetReportDemandeManeoClientJoignableAccepte"
@@ -518,8 +536,16 @@
                                     </p-tabPanel>
                                     <p-tabPanel header="Client Joignable Refuse">
                                         <div class="p-grid">
-
-                                            <div class="p-field p-col-12 p-md-6">
+                                            <div class="p-field p-col-12 p-md-4">
+                                                <label for="45">Date replanification</label>
+                                                <p-calendar [(ngModel)]="selectedOrdreKosc.dateAppelReplanification" [showSeconds]="false"
+                                                            [showTime]="true"
+                                                            dateFormat="{{dateFormat}}"
+                                                            id="45"
+                                                            placeholder="Date appel replanification">
+                                                </p-calendar>
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-4">
                                                 <label for="129">From<span style="color: red;"></span></label>
                                                 <input [(ngModel)]="selectedOrdreKosc.fromReportDemandeManeoClientJoignableRefus"
                                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromReportDemandeManeoClientJoignableRefus}"
@@ -533,7 +559,7 @@
                                             </div>
 
 
-                                            <div class="p-field p-col-12 p-md-6">
+                                            <div class="p-field p-col-12 p-md-4">
                                                 <label for="130">To<span style="color: red;"></span></label>
                                                 <input [(ngModel)]="selectedOrdreKosc.toReportDemandeManeoClientJoignableRefus"
                                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToReportDemandeManeoClientJoignableRefus}"
@@ -591,8 +617,16 @@
                                 <p-tabView [(activeIndex)]="indexClient">
                                     <p-tabPanel header="Client Injoignable">
                                         <div class="p-grid">
-
-                                            <div class="p-field p-col-12 p-md-6">
+                                            <div class="p-field p-col-12 p-md-4">
+                                                <label for="45">Date replanification</label>
+                                                <p-calendar [(ngModel)]="selectedOrdreKosc.dateAppelReplanification" [showSeconds]="false"
+                                                            [showTime]="true"
+                                                            dateFormat="{{dateFormat}}"
+                                                            id="45"
+                                                            placeholder="Date appel replanification">
+                                                </p-calendar>
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-4">
                                                 <label for="129">From<span style="color: red;"></span></label>
                                                 <input [(ngModel)]="selectedOrdreKosc.fromReportDemandeClientClientInjoignable"
                                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromReportDemandeClientClientInjoignable}"
@@ -606,7 +640,7 @@
                                             </div>
 
 
-                                            <div class="p-field p-col-12 p-md-6">
+                                            <div class="p-field p-col-12 p-md-4">
                                                 <label for="130">To<span style="color: red;"></span></label>
                                                 <input [(ngModel)]="selectedOrdreKosc.toReportDemandeClientClientInjoignable"
                                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToReportDemandeClientClientInjoignable}"
@@ -618,6 +652,7 @@
                                                     est
                                                     obligatoire.</small>
                                             </div>
+
                                             <div class="p-field p-col-12 p-md-6">
                                                 <label for="137">Objet</label>
                                                 <input [(ngModel)]="selectedOrdreKosc.objetReportDemandeClientClientInjoignable"
@@ -658,8 +693,16 @@
                                     </p-tabPanel>
                                     <p-tabPanel header="Client Joignable">
                                         <div class="p-grid">
-
-                                            <div class="p-field p-col-12 p-md-6">
+                                            <div class="p-field p-col-12 p-md-4">
+                                                <label for="45">Date replanification</label>
+                                                <p-calendar [(ngModel)]="selectedOrdreKosc.dateAppelReplanification" [showSeconds]="false"
+                                                            [showTime]="true"
+                                                            dateFormat="{{dateFormat}}"
+                                                            id="45"
+                                                            placeholder="Date appel replanification">
+                                                </p-calendar>
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-4">
                                                 <label for="129">From<span style="color: red;"></span></label>
                                                 <input [(ngModel)]="selectedOrdreKosc.fromReportDemandeClientClientJoignable"
                                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromReportDemandeClientClientJoignable}"
@@ -673,7 +716,7 @@
                                             </div>
 
 
-                                            <div class="p-field p-col-12 p-md-6">
+                                            <div class="p-field p-col-12 p-md-4">
                                                 <label for="130">To<span style="color: red;"></span></label>
                                                 <input [(ngModel)]="selectedOrdreKosc.toReportDemandeClientClientJoignable"
                                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToReportDemandeClientClientJoignable}"
@@ -685,6 +728,7 @@
                                                     est
                                                     obligatoire.</small>
                                             </div>
+
                                             <div class="p-field p-col-12 p-md-6">
                                                 <label for="137">Objet</label>
                                                 <input [(ngModel)]="selectedOrdreKosc.objetReportDemandeClientClientJoignable"
@@ -733,8 +777,16 @@
             </p-tabPanel>
             <p-tabPanel header="Replanification">
                 <div class="p-grid">
-
-                    <div class="p-field p-col-12 p-md-6">
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="45">Date replanification</label>
+                        <p-calendar [(ngModel)]="selectedOrdreKosc.dateAppelReplanification" [showSeconds]="false"
+                                    [showTime]="true"
+                                    dateFormat="{{dateFormat}}"
+                                    id="45"
+                                    placeholder="Date appel replanification">
+                        </p-calendar>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
                         <label for="65">From<span style="color: red;"></span></label>
                         <input [(ngModel)]="selectedOrdreKosc.fromReplanification"
                                [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromReplanification}"
@@ -747,7 +799,7 @@
                     </div>
 
 
-                    <div class="p-field p-col-12 p-md-6">
+                    <div class="p-field p-col-12 p-md-4">
                         <label for="64">To<span style="color: red;"></span></label>
                         <input [(ngModel)]="selectedOrdreKosc.toReplanification"
                                [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToReplanification}"
@@ -758,6 +810,7 @@
                         <small *ngIf='!validOrdreKoscToReplanification' class='p-error'>To est
                             obligatoire.</small>
                     </div>
+
                     <div class="p-field p-col-12 p-md-6">
                         <label for="132">Objet</label>
                         <input [(ngModel)]="selectedOrdreKosc.objetReplanification"

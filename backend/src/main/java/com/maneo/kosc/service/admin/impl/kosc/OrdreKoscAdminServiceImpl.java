@@ -1,4 +1,4 @@
-package com.maneo.kosc.service.admin.impl;
+package com.maneo.kosc.service.admin.impl.kosc;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -6,11 +6,10 @@ import java.util.stream.Collectors;
 
 import com.maneo.kosc.bean.*;
 import com.maneo.kosc.service.admin.facade.*;
-import com.maneo.kosc.ws.rest.provided.vo.EtatDemandeKoscVo;
+import com.maneo.kosc.service.admin.facade.kosc.OrdreKoscAdminService;
 import com.maneo.kosc.ws.rest.provided.vo.StatisticResultVo;
 import com.maneo.kosc.ws.rest.provided.vo.StatisticVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 

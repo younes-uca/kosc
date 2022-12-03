@@ -1,8 +1,8 @@
-package com.maneo.kosc.service.admin.impl;
+package com.maneo.kosc.service.admin.impl.kosc;
 
 import com.maneo.kosc.bean.OrdreKosc;
 import com.maneo.kosc.dao.OrdreKoscDao;
-import com.maneo.kosc.service.admin.facade.OrdreKoscCddAdminService;
+import com.maneo.kosc.service.admin.facade.kosc.OrdreKoscCddAdminService;
 import com.maneo.kosc.service.util.SearchUtil;
 import com.maneo.kosc.ws.rest.provided.vo.EtatDemandeKoscVo;
 import com.maneo.kosc.ws.rest.provided.vo.OrdreKoscVo;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import java.util.List;
-import java.util.Objects;
 
 //import static jdk.internal.org.jline.utils.Colors.s;
 
@@ -34,9 +33,10 @@ public class OrdreKoscCddAdminServiceImpl implements OrdreKoscCddAdminService {
         query += SearchUtil.addConstraint("o", "reference", "LIKE", ordreKoscVo.getReference());
         query += SearchUtil.addConstraint("o", "referenceWorkOrder", "LIKE", ordreKoscVo.getReferenceWorkOrder());
         query += SearchUtil.addConstraintDate("o", "datePriseRdv", "=", ordreKoscVo.getDatePriseRdv());
+        query += SearchUtil.addConstraintDate("o", "dateCri", "=", ordreKoscVo.getDateCri());
         query += SearchUtil.addConstraintMinMax("o", "nbrHeureDateSubmissionAndNow", ordreKoscVo.getNbrHeureDateSubmissionAndNowMin(), ordreKoscVo.getNbrHeureDateSubmissionAndNowMax());
-        query += SearchUtil.addConstraintMinMax("o", "dateEnvoiCri", ordreKoscVo.getDateEnvoiCriMin(), ordreKoscVo.getDateEnvoiCriMax());
-       // query += SearchUtil.addConstraintMinMax("o", "dateEnvoiPlanification", ordreKoscVo.getDateEnvoiPlanificationMin(), ordreKoscVo.getDateEnvoiPlanificationMax());
+        //query += SearchUtil.addConstraintMinMaxDate("o", "dateEnvoiCri", ordreKoscVo.getDateEnvoiCriMin(), ordreKoscVo.getDateEnvoiCriMax());
+        query += SearchUtil.addConstraintMinMaxDate("o", "dateEnvoiPlanification", ordreKoscVo.getDateEnvoiPlanificationMin(), ordreKoscVo.getDateEnvoiPlanificationMax());
 
         if (ordreKoscVo.getOperatorVo() != null) {
             query += SearchUtil.addConstraint("o", "operator.id", "=", ordreKoscVo.getOperatorVo().getId());

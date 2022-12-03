@@ -3,6 +3,7 @@ package com.maneo.kosc.ws.rest.provided.facade.admin;
 
 import com.maneo.kosc.bean.OrdreKosc;
 import com.maneo.kosc.service.admin.facade.*;
+import com.maneo.kosc.service.admin.facade.kosc.*;
 import com.maneo.kosc.ws.rest.provided.converter.OrdreKoscConverter;
 import com.maneo.kosc.ws.rest.provided.vo.OrdreKoscVo;
 import com.maneo.kosc.ws.rest.provided.vo.StatisticResultVo;
@@ -629,6 +630,12 @@ public class OrdreKoscRestAdmin {
     public OrdreKoscVo sendMailReportDemandeClientClientJoignable(@RequestBody OrdreKoscVo ordreKoscVo) {
         OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
         emailingOrderKoscAdminService.sendMailReportDemandeClientClientJoignable(ordreKosc);
+        return ordreKoscConverter.toVo(ordreKosc);
+    }
+     @PostMapping("/send-mail-cri")
+    public OrdreKoscVo sendMailCri(@RequestBody OrdreKoscVo ordreKoscVo) {
+        OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
+        emailingOrderKoscAdminService.sendMailCri(ordreKosc);
         return ordreKoscConverter.toVo(ordreKosc);
     }
 }

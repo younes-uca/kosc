@@ -425,4 +425,8 @@ export class OrdreKoscService {
         return this.http.post<OrdreKoscVo>(this.API + 'send-mail-report-demande-client-client-joignable', {...this.selectedOrdreKosc});
 
     }
+
+    sendMailCri() {
+        return this.http.post<OrdreKoscVo>(this.API + 'send-mail-cri', {...this.selectedOrdreKosc});
+    }
 }

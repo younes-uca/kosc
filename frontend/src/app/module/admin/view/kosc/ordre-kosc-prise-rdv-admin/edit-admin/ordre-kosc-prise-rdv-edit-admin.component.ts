@@ -211,8 +211,11 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     isShown1: boolean = false;
 
     toggleShowOui() {
-        this.isShown1 = !this.isShown1;
-        this.isShown = false;
+        // this.isShown1 = !this.isShown1;
+        // this.isShown = false;
+        this.changeEtat(this.etats[5]);
+        this.displayPriseRdv = false;
+
     }
 
 

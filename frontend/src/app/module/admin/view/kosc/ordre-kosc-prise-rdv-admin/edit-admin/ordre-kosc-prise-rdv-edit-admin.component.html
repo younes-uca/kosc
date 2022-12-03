@@ -59,6 +59,16 @@
                     <!--                    </div>-->
 
 
+<!--                    <div class="p-field p-col-12 p-md-3">-->
+<!--                        <label for="30">Date rdv</label>-->
+<!--                        <p-calendar dateFormat="{{dateFormat}}" [(ngModel)]="selectedOrdreKosc.dateRdv"-->
+<!--                                    [showSeconds]="false" [showTime]="true"-->
+<!--                                    id="30"-->
+<!--                                    placeholder="Date rdv">-->
+<!--                        </p-calendar>-->
+
+
+<!--                    </div>-->
 
                     <div class="p-field p-col-11 p-md-3">
                         <label for="51">Etat demande kosc</label>
@@ -515,7 +525,7 @@
                         <div class="p-grid">
 
                             <div class="p-field p-col-12 p-md-6">
-                                <label for="153">DE<span style="color: red;">*</span></label>
+                                <label for="153">From<span style="color: red;">*</span></label>
                                 <input [(ngModel)]="selectedOrdreKosc.fromConfirmationClient"
                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromConfirmationClient}"
                                        class="p-mb-2 p-mr-2"
@@ -528,7 +538,7 @@
 
 
                             <div class="p-field p-col-12 p-md-6">
-                                <label for="154">A<span style="color: red;">*</span></label>
+                                <label for="154">To<span style="color: red;">*</span></label>
                                 <input [(ngModel)]="selectedOrdreKosc.toConfirmationClient"
                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToConfirmationClient}"
                                        class="p-mb-2 p-mr-2"
@@ -591,7 +601,7 @@
 
                             </div>
                             <div class="p-field p-col-12 p-md-6">
-                                <label for="30">Date rdv</label>
+                                <label for="30">Date rendez-vous</label>
                                 <p-calendar dateFormat="{{dateFormat}}" [(ngModel)]="selectedOrdreKosc.dateRdv"
                                             [showSeconds]="false" [showTime]="true"
                                             id="30"
@@ -600,9 +610,8 @@
 
 
                             </div>
-
                             <div class="p-field p-col-12 p-md-4">
-                                <label for="123">DE<span style="color: red;">*</span></label>
+                                <label for="123">From<span style="color: red;">*</span></label>
                                 <input [(ngModel)]="selectedOrdreKosc.fromPlanification"
                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromPlanification}"
                                        class="p-mb-2 p-mr-2"
@@ -615,7 +624,7 @@
 
 
                             <div class="p-field p-col-12 p-md-4">
-                                <label for="124">A<span style="color: red;"></span></label>
+                                <label for="124">To<span style="color: red;"></span></label>
                                 <input [(ngModel)]="selectedOrdreKosc.toPlanification"
                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToPlanification}"
                                        class="p-mb-2 p-mr-2"
@@ -626,7 +635,7 @@
                                 <!--                                    obligatoire.</small>-->
                             </div>
 
-                            <div class="p-field p-col-12 p-md-4">
+                            <div class="p-field p-col-12 p-md-6">
                                 <label for="127">Objet</label>
                                 <input [(ngModel)]="selectedOrdreKosc.objetPlanification" class="p-mb-2 p-mr-2" id="127"
                                        pInputText
@@ -634,6 +643,7 @@
                                 />
 
                             </div>
+
                             <div class="p-field p-col-12 p-md-6">
                                 <label for="128">Corps</label>
                                 <textarea [(ngModel)]="selectedOrdreKosc.corpsPlanification" cols="30" id="128"
@@ -643,12 +653,14 @@
                                 ></textarea>
 
                             </div>
-                            <div class="p-field p-col-12 p-md-4 p-mt-4">
+
+
+                            <div class="p-field p-col-12 p-md-4">
                                 <button (click)="sendMailPlanificationEmail()" class="p-button-help" icon="pi pi-send"
                                         label="Envoyer" pButton
                                         type="button"></button>
-
                             </div>
+
                             <div class="p-field p-col-12 p-md-4">
                                 <p-progressSpinner *ngIf="showSpinner" [style]="{width: '50px', height: '50px'}"
                                                    styleClass="custom-spinner" strokeWidth="8" fill="#EEEEEE"
@@ -1312,7 +1324,7 @@
             <div class="p-mt-3 p-grid float">
                 <button class=" p-button-success p-mr-2 p-col-12 p-md-4" style="width: 32%; " pButton pRipple
                         label="Oui"
-                        (click)="changeEtat(etats[5])"></button>
+                        (click)="toggleShowOui()"></button>
                 <button class=" p-button-danger p-mr-2 p-col-12 p-md-4" style="width: 33%; " pButton pRipple label="Non"
                         (click)="toggleShow()"></button>
                 <button class=" p-button-warning p-col-12 p-md-4" style="width: 32%; " pButton pRipple
