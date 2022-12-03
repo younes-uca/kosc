@@ -91,12 +91,14 @@ export class AuthService {
         const email = tokenDecoded.email;
         const prenom = tokenDecoded.prenom;
         const nom = tokenDecoded.nom;
+        const telephone = tokenDecoded.telephone;
         const passwordChanged = tokenDecoded.passwordChanged;
         this._authenticatedUser.passwordChanged = passwordChanged;
         this._authenticatedUser.username = username;
         this._authenticatedUser.nom = nom;
         this._authenticatedUser.prenom = prenom;
         this._authenticatedUser.email = email;
+        this._authenticatedUser.telephone = telephone;
         this._authenticatedUser.roles = roles;
         localStorage.setItem('autenticated', JSON.stringify(true));
         this.authenticated = true;

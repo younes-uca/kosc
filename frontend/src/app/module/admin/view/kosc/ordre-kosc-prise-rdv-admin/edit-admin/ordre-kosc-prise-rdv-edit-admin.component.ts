@@ -43,6 +43,7 @@ import {
 } from "../../../../../../controller/service/DefaultTemplateConfiguration.service";
 import {SourceReplanificationVo} from "../../../../../../controller/model/SourceReplanification.model";
 import {AuthService} from "../../../../../../controller/service/Auth.service";
+import {User} from "../../../../../../controller/model/User.model";
 
 @Component({
     selector: 'app-ordre-kosc-prise-rdv-edit-admin',
@@ -89,6 +90,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
 // methods
+
     ngOnInit(): void {
 
         this.buttonDisabled = true
@@ -334,6 +336,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     private selectTab(myEtat: string) {
 
+        let userCourant = this.authService.authenticatedUser;
         this.displayPriseRdv = false;
         this.selectedOrdreKosc.etatDemandeKoscVo = this.findEtatDemandeByCode(myEtat);
         // this.selectedOrdreKosc.causeKoOkVo = this.findByEtatDemandeCause(myCause);
@@ -349,7 +352,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.toClientInjoinableKosc = this.selectedDefaultTemplateConfiguration.emailKosc;
             this.selectedOrdreKosc.objetClientInjoinableKosc = eval(this.selectedDefaultTemplateConfiguration.templateEmailClientInjoinableKoscVo.objet);
             this.selectedOrdreKosc.corpsClientInjoinableKosc = eval(this.selectedDefaultTemplateConfiguration.templateEmailClientInjoinableKoscVo.corps);
-            this.selectedOrdreKosc.userClientInjoinable = this.authService.authenticatedUser;
+            this.selectedOrdreKosc.userClientInjoinable = userCourant;
             console.log(this.selectedOrdreKosc.userClientInjoinable);
         } else if (myEtat === this.etats[7]) {
             this.indexEdit = 3;
@@ -358,7 +361,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.toRefus = this.selectedOrdreKosc.endCustumorContactEmail;
             this.selectedOrdreKosc.objetRefus = eval(this.selectedDefaultTemplateConfiguration.templateEmailRefusVo.objet);
             this.selectedOrdreKosc.corpsRefus = eval(this.selectedDefaultTemplateConfiguration.templateEmailRefusVo.corps);
-            this.selectedOrdreKosc.userRefus = this.authService.authenticatedUser;
+            this.selectedOrdreKosc.userRefus = userCourant;
             console.log(this.selectedOrdreKosc.userRefus);
         } else if (myEtat === this.etats[8]) {
             this.indexEdit = 3;
@@ -367,14 +370,14 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.toMauvaisContact = this.selectedDefaultTemplateConfiguration.emailKosc;
             this.selectedOrdreKosc.objetMauvaisContact = eval(this.selectedDefaultTemplateConfiguration.templateEmailMauvaisContactVo.objet);
             this.selectedOrdreKosc.corpsMauvaisContact = eval(this.selectedDefaultTemplateConfiguration.templateEmailMauvaisContactVo.corps);
-            this.selectedOrdreKosc.userMauvaisContact = this.authService.authenticatedUser;
+            this.selectedOrdreKosc.userMauvaisContact = userCourant;
             console.log(this.selectedOrdreKosc.userMauvaisContact);
         } else if (myEtat === this.etats[9]) {
             this.indexEdit = 3;
             this.emailIndex = 5;
             this.selectedOrdreKosc.fromAutre = this.selectedDefaultTemplateConfiguration.emailManeo;
             this.selectedOrdreKosc.toAutre = this.selectedDefaultTemplateConfiguration.emailKosc;
-            this.selectedOrdreKosc.userAutre = this.authService.authenticatedUser;
+            this.selectedOrdreKosc.userAutre = userCourant;
             console.log(this.selectedOrdreKosc.userAutre);
         }
 
