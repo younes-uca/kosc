@@ -1,7 +1,6 @@
 package com.maneo.kosc.service.admin.facade;
 
-import java.util.List;
-import com.maneo.kosc.bean.TemplateEmailReportDemandeManeoClientJoignableAccepte;
+import com.maneo.kosc.bean.template.TemplateEmailReportDemandeManeoClientJoignableAccepte;
 import com.maneo.kosc.ws.rest.provided.vo.TemplateEmailReportDemandeManeoClientJoignableAccepteVo;
 import com.maneo.kosc.service.core.facade.AbstractService;
 

@@ -1,6 +1,7 @@
 package com.maneo.kosc.service.admin.impl;
 
-import com.maneo.kosc.bean.*;
+import com.maneo.kosc.bean.kosc.OrdreKosc;
+import com.maneo.kosc.bean.template.EmailDetails;
 import com.maneo.kosc.dao.OrdreKoscDao;
 import com.maneo.kosc.service.admin.facade.*;
 import com.maneo.kosc.service.admin.facade.kosc.OrdreKoscAdminService;

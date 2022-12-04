@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 
-import com.maneo.kosc.bean.TemplateEmailReportDemandeManeoClientInjoignable;
+import com.maneo.kosc.bean.template.TemplateEmailReportDemandeManeoClientInjoignable;
 
 
 @Repository

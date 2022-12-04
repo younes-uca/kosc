@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import com.maneo.kosc.bean.Region;
+import com.maneo.kosc.bean.technicien.Region;
 import com.maneo.kosc.ws.rest.provided.converter.RegionConverter;
 import com.maneo.kosc.ws.rest.provided.vo.RegionVo;
 

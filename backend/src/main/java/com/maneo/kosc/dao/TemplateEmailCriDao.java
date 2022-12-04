@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 
-import com.maneo.kosc.bean.TemplateEmailCri;
+import com.maneo.kosc.bean.template.TemplateEmailCri;
 
 
 @Repository

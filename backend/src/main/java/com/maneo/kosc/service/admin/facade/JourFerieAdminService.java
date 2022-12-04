@@ -1,6 +1,6 @@
 package com.maneo.kosc.service.admin.facade;
 
-import com.maneo.kosc.bean.JourFerie;
+import com.maneo.kosc.bean.referentiel.JourFerie;
 import com.maneo.kosc.ws.rest.provided.vo.JourFerieVo;
 import org.springframework.transaction.annotation.Transactional;
 

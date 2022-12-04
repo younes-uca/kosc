@@ -1,6 +1,6 @@
 package com.maneo.kosc.service.admin.impl;
 
-import com.maneo.kosc.bean.JourFerie;
+import com.maneo.kosc.bean.referentiel.JourFerie;
 import com.maneo.kosc.dao.JourFerieDao;
 import com.maneo.kosc.service.admin.facade.JourFerieAdminService;
 import com.maneo.kosc.service.core.impl.AbstractServiceImpl;

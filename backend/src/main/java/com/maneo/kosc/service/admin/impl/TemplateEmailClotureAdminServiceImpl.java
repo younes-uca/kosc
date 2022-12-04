@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 
-import com.maneo.kosc.bean.TemplateEmailCloture;
+import com.maneo.kosc.bean.template.TemplateEmailCloture;
 import com.maneo.kosc.dao.TemplateEmailClotureDao;
 import com.maneo.kosc.service.admin.facade.TemplateEmailClotureAdminService;
 

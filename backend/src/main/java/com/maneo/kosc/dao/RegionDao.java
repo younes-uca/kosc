@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 
-import com.maneo.kosc.bean.Region;
+import com.maneo.kosc.bean.technicien.Region;
 
 
 @Repository

@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 
-import com.maneo.kosc.bean.TemplateSuivi;
+import com.maneo.kosc.bean.template.TemplateSuivi;
 
 
 @Repository

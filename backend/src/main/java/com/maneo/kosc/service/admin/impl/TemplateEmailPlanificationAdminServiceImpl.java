@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 
-import com.maneo.kosc.bean.TemplateEmailPlanification;
+import com.maneo.kosc.bean.template.TemplateEmailPlanification;
 import com.maneo.kosc.dao.TemplateEmailPlanificationDao;
 import com.maneo.kosc.service.admin.facade.TemplateEmailPlanificationAdminService;
 

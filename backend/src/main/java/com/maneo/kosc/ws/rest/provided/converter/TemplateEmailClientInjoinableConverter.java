@@ -1,11 +1,10 @@
 package com.maneo.kosc.ws.rest.provided.converter;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.maneo.kosc.service.util.*;
 
 
-import com.maneo.kosc.bean.TemplateEmailClientInjoinable;
+import com.maneo.kosc.bean.template.TemplateEmailClientInjoinable;
 import com.maneo.kosc.ws.rest.provided.vo.TemplateEmailClientInjoinableVo;
 
 @Component

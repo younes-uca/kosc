@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 
-import com.maneo.kosc.bean.TemplateEmailRefus;
+import com.maneo.kosc.bean.template.TemplateEmailRefus;
 
 
 @Repository

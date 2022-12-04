@@ -1,7 +1,5 @@
 package com.maneo.kosc.ws.rest.provided.vo;
 
-import com.maneo.kosc.bean.OrdreKosc;
-
 import java.util.Date;
 
 public class StatisticVo {

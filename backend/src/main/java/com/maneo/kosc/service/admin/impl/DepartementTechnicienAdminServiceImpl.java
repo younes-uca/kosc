@@ -4,7 +4,10 @@ import java.util.List;
 
 import java.util.ArrayList;
 
-import com.maneo.kosc.bean.*;
+import com.maneo.kosc.bean.technicien.ArretTravail;
+import com.maneo.kosc.bean.technicien.Departement;
+import com.maneo.kosc.bean.technicien.DepartementTechnicien;
+import com.maneo.kosc.bean.technicien.Technicien;
 import com.maneo.kosc.service.admin.facade.ArretTravailAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;

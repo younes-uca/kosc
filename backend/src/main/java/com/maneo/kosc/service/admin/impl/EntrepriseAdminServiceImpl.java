@@ -1,7 +1,6 @@
 package com.maneo.kosc.service.admin.impl;
 
 import java.util.List;
-import java.util.Date;
 
 import java.util.ArrayList;
 
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 
-import com.maneo.kosc.bean.Entreprise;
+import com.maneo.kosc.bean.technicien.Entreprise;
 import com.maneo.kosc.dao.EntrepriseDao;
 import com.maneo.kosc.service.admin.facade.EntrepriseAdminService;
 

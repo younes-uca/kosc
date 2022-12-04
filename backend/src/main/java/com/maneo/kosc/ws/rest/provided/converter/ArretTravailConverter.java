@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import com.maneo.kosc.service.util.*;
 
 
-import com.maneo.kosc.bean.ArretTravail;
+import com.maneo.kosc.bean.technicien.ArretTravail;
 import com.maneo.kosc.ws.rest.provided.vo.ArretTravailVo;
 
 @Component

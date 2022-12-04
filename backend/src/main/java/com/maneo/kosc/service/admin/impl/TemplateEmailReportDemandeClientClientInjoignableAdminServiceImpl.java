@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
-import com.maneo.kosc.bean.TemplateEmailReportDemandeClientClientInjoignable;
+import com.maneo.kosc.bean.template.TemplateEmailReportDemandeClientClientInjoignable;
 import com.maneo.kosc.dao.TemplateEmailReportDemandeClientClientInjoignableDao;
 
 import com.maneo.kosc.ws.rest.provided.vo.TemplateEmailReportDemandeClientClientInjoignableVo;

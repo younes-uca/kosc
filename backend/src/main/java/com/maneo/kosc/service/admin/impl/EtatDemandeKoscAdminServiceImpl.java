@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 
-import com.maneo.kosc.bean.EtatDemandeKosc;
+import com.maneo.kosc.bean.referentiel.EtatDemandeKosc;
 import com.maneo.kosc.dao.EtatDemandeKoscDao;
 import com.maneo.kosc.service.admin.facade.EtatDemandeKoscAdminService;
 

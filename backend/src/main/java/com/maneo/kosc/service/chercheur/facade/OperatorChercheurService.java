@@ -1,8 +1,6 @@
 package com.maneo.kosc.service.chercheur.facade;
 
-import java.util.List;
-
-import com.maneo.kosc.bean.Operator;
+import com.maneo.kosc.bean.referentiel.Operator;
 import com.maneo.kosc.ws.rest.provided.vo.OperatorVo;
 import com.maneo.kosc.service.core.facade.AbstractService;
 

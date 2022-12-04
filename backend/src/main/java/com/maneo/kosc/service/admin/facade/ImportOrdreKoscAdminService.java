@@ -1,6 +1,6 @@
 package com.maneo.kosc.service.admin.facade;
 
-import com.maneo.kosc.bean.OrdreKosc;
+import com.maneo.kosc.bean.kosc.OrdreKosc;
 
 import java.util.List;
 

@@ -1,8 +1,6 @@
 package com.maneo.kosc.service.admin.facade;
 
-import java.util.List;
-
-import com.maneo.kosc.bean.CauseKoOk;
+import com.maneo.kosc.bean.referentiel.CauseKoOk;
 import com.maneo.kosc.ws.rest.provided.vo.CauseKoOkVo;
 import com.maneo.kosc.service.core.facade.AbstractService;
 

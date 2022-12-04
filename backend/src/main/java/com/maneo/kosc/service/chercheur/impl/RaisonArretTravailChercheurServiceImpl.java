@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 
-import com.maneo.kosc.bean.RaisonArretTravail;
+import com.maneo.kosc.bean.technicien.RaisonArretTravail;
 import com.maneo.kosc.dao.RaisonArretTravailDao;
 import com.maneo.kosc.service.chercheur.facade.RaisonArretTravailChercheurService;
 

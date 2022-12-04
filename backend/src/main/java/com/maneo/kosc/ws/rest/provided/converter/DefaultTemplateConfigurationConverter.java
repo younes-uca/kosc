@@ -1,13 +1,11 @@
 package com.maneo.kosc.ws.rest.provided.converter;
 
-import com.maneo.kosc.bean.*;
+import com.maneo.kosc.bean.template.DefaultTemplateConfiguration;
 import com.maneo.kosc.service.util.NumberUtil;
 import com.maneo.kosc.service.util.StringUtil;
 import com.maneo.kosc.ws.rest.provided.vo.DefaultTemplateConfigurationVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.persistence.ManyToOne;
 
 @Component
 public class DefaultTemplateConfigurationConverter extends AbstractConverter<DefaultTemplateConfiguration, DefaultTemplateConfigurationVo> {

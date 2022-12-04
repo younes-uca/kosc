@@ -83,6 +83,6 @@ export class RoleService {
     }
 
     delete(id: string) {
-
+this.http.delete(this.API+"id/"+id);
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
-import com.maneo.kosc.bean.TemplateEmailReportDemandeClientClientJoignable;
+import com.maneo.kosc.bean.template.TemplateEmailReportDemandeClientClientJoignable;
 import com.maneo.kosc.dao.TemplateEmailReportDemandeClientClientJoignableDao;
 import com.maneo.kosc.service.admin.facade.TemplateEmailReportDemandeClientClientJoignableAdminService;
 

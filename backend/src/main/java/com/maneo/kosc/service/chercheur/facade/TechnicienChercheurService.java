@@ -2,7 +2,7 @@ package com.maneo.kosc.service.chercheur.facade;
 
 import java.util.List;
 
-import com.maneo.kosc.bean.Technicien;
+import com.maneo.kosc.bean.technicien.Technicien;
 import com.maneo.kosc.ws.rest.provided.vo.TechnicienVo;
 import com.maneo.kosc.service.core.facade.AbstractService;
 

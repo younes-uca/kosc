@@ -1,10 +1,13 @@
 package com.maneo.kosc.service.admin.impl;
 
-import com.maneo.kosc.bean.*;
+import com.maneo.kosc.bean.kosc.OrdreKosc;
+import com.maneo.kosc.bean.referentiel.EtatDemandeKosc;
+import com.maneo.kosc.bean.referentiel.Operator;
+import com.maneo.kosc.bean.technicien.Departement;
+import com.maneo.kosc.bean.technicien.Technicien;
 import com.maneo.kosc.dao.DepartementDao;
 import com.maneo.kosc.dao.OrdreKoscDao;
 import com.maneo.kosc.service.admin.facade.*;
-import com.maneo.kosc.service.util.ListUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

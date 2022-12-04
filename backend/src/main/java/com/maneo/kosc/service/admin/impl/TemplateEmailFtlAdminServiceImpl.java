@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 
-import com.maneo.kosc.bean.TemplateEmailFtl;
+import com.maneo.kosc.bean.template.TemplateEmailFtl;
 import com.maneo.kosc.dao.TemplateEmailFtlDao;
 import com.maneo.kosc.service.admin.facade.TemplateEmailFtlAdminService;
 

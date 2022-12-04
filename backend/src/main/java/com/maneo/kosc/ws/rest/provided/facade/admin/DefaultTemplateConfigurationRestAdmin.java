@@ -1,6 +1,6 @@
 package com.maneo.kosc.ws.rest.provided.facade.admin;
 
-import com.maneo.kosc.bean.DefaultTemplateConfiguration;
+import com.maneo.kosc.bean.template.DefaultTemplateConfiguration;
 import com.maneo.kosc.service.admin.facade.DefaultTemplateConfigurationAdminService;
 import com.maneo.kosc.ws.rest.provided.converter.DefaultTemplateConfigurationConverter;
 import com.maneo.kosc.ws.rest.provided.vo.DefaultTemplateConfigurationVo;

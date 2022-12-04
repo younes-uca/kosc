@@ -1,11 +1,10 @@
 package com.maneo.kosc.ws.rest.provided.converter;
 
-import com.maneo.kosc.bean.JourFerie;
+import com.maneo.kosc.bean.referentiel.JourFerie;
 import com.maneo.kosc.service.util.DateUtil;
 import com.maneo.kosc.service.util.NumberUtil;
 import com.maneo.kosc.service.util.StringUtil;
 import com.maneo.kosc.ws.rest.provided.vo.JourFerieVo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component

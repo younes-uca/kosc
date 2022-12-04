@@ -1,6 +1,6 @@
 package com.maneo.kosc.ws.rest.provided.converter;
 
-import com.maneo.kosc.bean.OrdreKosc;
+import com.maneo.kosc.bean.kosc.OrdreKosc;
 import com.maneo.kosc.service.util.DateUtil;
 import com.maneo.kosc.service.util.NumberUtil;
 import com.maneo.kosc.service.util.StringUtil;

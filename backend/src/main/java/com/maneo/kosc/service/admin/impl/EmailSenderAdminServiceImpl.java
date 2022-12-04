@@ -1,6 +1,6 @@
 package com.maneo.kosc.service.admin.impl;
 
-import com.maneo.kosc.bean.EmailDetails;
+import com.maneo.kosc.bean.template.EmailDetails;
 import com.maneo.kosc.service.admin.facade.EmailSenderAdminService;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

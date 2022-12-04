@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 
-import com.maneo.kosc.bean.TemplateEmailMauvaisContact;
+import com.maneo.kosc.bean.template.TemplateEmailMauvaisContact;
 import com.maneo.kosc.dao.TemplateEmailMauvaisContactDao;
 import com.maneo.kosc.service.admin.facade.TemplateEmailMauvaisContactAdminService;
 

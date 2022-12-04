@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 
-import com.maneo.kosc.bean.Entreprise;
+import com.maneo.kosc.bean.technicien.Entreprise;
 
 
 @Repository

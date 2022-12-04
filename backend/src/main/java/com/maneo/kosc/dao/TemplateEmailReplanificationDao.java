@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 
-import com.maneo.kosc.bean.TemplateEmailReplanification;
+import com.maneo.kosc.bean.template.TemplateEmailReplanification;
 
 
 @Repository

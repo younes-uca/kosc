@@ -1,7 +1,7 @@
 package com.maneo.kosc.service.admin.facade;
 
 import java.util.List;
-import com.maneo.kosc.bean.DefaultTemplateConfiguration;
+import com.maneo.kosc.bean.template.DefaultTemplateConfiguration;
 import com.maneo.kosc.ws.rest.provided.vo.DefaultTemplateConfigurationVo;
 import com.maneo.kosc.service.core.facade.AbstractService;
 

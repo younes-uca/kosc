@@ -1,6 +1,5 @@
 package com.maneo.kosc.service.core.impl;
 
-import com.maneo.kosc.bean.DefaultTemplateConfiguration;
 import com.maneo.kosc.service.util.ListUtil;
 
 import java.util.ArrayList;

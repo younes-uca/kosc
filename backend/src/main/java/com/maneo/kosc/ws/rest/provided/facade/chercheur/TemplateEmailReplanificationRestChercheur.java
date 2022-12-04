@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import com.maneo.kosc.bean.TemplateEmailReplanification;
+import com.maneo.kosc.bean.template.TemplateEmailReplanification;
 import com.maneo.kosc.ws.rest.provided.converter.TemplateEmailReplanificationConverter;
 import com.maneo.kosc.ws.rest.provided.vo.TemplateEmailReplanificationVo;
 

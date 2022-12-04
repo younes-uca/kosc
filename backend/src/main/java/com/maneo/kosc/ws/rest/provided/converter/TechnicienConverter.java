@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import com.maneo.kosc.service.util.*;
 
 
-import com.maneo.kosc.bean.Technicien;
+import com.maneo.kosc.bean.technicien.Technicien;
 import com.maneo.kosc.ws.rest.provided.vo.TechnicienVo;
 
 @Component

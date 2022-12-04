@@ -3,7 +3,7 @@ package com.maneo.kosc.service.admin.facade;
 import java.util.Date;
 import java.util.List;
 
-import com.maneo.kosc.bean.ArretTravail;
+import com.maneo.kosc.bean.technicien.ArretTravail;
 import com.maneo.kosc.ws.rest.provided.vo.ArretTravailVo;
 import com.maneo.kosc.service.core.facade.AbstractService;
 

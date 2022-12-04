@@ -4,7 +4,6 @@ import java.util.*;
 
 import java.util.stream.Collectors;
 
-import com.maneo.kosc.bean.OrdreKosc;
 import com.maneo.kosc.dao.DepartementTechnicienDao;
 import com.maneo.kosc.dao.OrdreKoscDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +12,8 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 
-import com.maneo.kosc.bean.Technicien;
-import com.maneo.kosc.bean.Entreprise;
+import com.maneo.kosc.bean.technicien.Technicien;
+import com.maneo.kosc.bean.technicien.Entreprise;
 import com.maneo.kosc.dao.TechnicienDao;
 import com.maneo.kosc.service.admin.facade.TechnicienAdminService;
 import com.maneo.kosc.service.admin.facade.EntrepriseAdminService;

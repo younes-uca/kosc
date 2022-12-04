@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 
-import com.maneo.kosc.bean.DepartementTechnicien;
-import com.maneo.kosc.bean.Technicien;
-import com.maneo.kosc.bean.Departement;
+import com.maneo.kosc.bean.technicien.DepartementTechnicien;
+import com.maneo.kosc.bean.technicien.Technicien;
+import com.maneo.kosc.bean.technicien.Departement;
 import com.maneo.kosc.dao.DepartementTechnicienDao;
 import com.maneo.kosc.service.chercheur.facade.DepartementTechnicienChercheurService;
 import com.maneo.kosc.service.chercheur.facade.DepartementChercheurService;

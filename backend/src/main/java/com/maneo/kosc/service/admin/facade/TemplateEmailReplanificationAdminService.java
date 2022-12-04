@@ -1,8 +1,6 @@
 package com.maneo.kosc.service.admin.facade;
 
-import java.util.List;
-
-import com.maneo.kosc.bean.TemplateEmailReplanification;
+import com.maneo.kosc.bean.template.TemplateEmailReplanification;
 import com.maneo.kosc.ws.rest.provided.vo.TemplateEmailReplanificationVo;
 import com.maneo.kosc.service.core.facade.AbstractService;
 

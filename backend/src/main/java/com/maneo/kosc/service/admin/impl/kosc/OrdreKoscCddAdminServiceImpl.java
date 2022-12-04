@@ -1,6 +1,6 @@
 package com.maneo.kosc.service.admin.impl.kosc;
 
-import com.maneo.kosc.bean.OrdreKosc;
+import com.maneo.kosc.bean.kosc.OrdreKosc;
 import com.maneo.kosc.dao.OrdreKoscDao;
 import com.maneo.kosc.service.admin.facade.kosc.OrdreKoscCddAdminService;
 import com.maneo.kosc.service.util.SearchUtil;

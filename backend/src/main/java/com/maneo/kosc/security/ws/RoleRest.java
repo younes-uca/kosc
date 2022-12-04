@@ -22,7 +22,7 @@ public class RoleRest {
     public List<Role> findAll() {
         return this.roleService.findAll();
     }
-    @Transient
+
     @DeleteMapping("/id/{id}")
     public void deleteById(Long id) {
         roleService.deleteById(id);
@@ -35,7 +35,7 @@ public class RoleRest {
     public Role update(@RequestBody Role role) {
         return roleService.update(role);
     }
-@Transient
+
 @DeleteMapping("")
     public int delete(Role role) {
         return roleService.delete(role);

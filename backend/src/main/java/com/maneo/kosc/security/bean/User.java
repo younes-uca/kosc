@@ -6,7 +6,6 @@ import java.util.Date;
 
 import javax.persistence.*;
 
-import com.maneo.kosc.bean.TemplateEmailRefus;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonFormat;

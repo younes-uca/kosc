@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 
-import com.maneo.kosc.bean.TemplateEmailClientInjoinableKosc;
+import com.maneo.kosc.bean.template.TemplateEmailClientInjoinableKosc;
 import com.maneo.kosc.dao.TemplateEmailClientInjoinableKoscDao;
 import com.maneo.kosc.service.chercheur.facade.TemplateEmailClientInjoinableKoscChercheurService;
 

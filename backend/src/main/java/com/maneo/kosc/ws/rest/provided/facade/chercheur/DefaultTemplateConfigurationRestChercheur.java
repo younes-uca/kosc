@@ -1,6 +1,6 @@
 package com.maneo.kosc.ws.rest.provided.facade.chercheur;
 
-import com.maneo.kosc.bean.DefaultTemplateConfiguration;
+import com.maneo.kosc.bean.template.DefaultTemplateConfiguration;
 import com.maneo.kosc.service.chercheur.facade.DefaultTemplateConfigurationChercheurService;
 import com.maneo.kosc.ws.rest.provided.converter.DefaultTemplateConfigurationConverter;
 import com.maneo.kosc.ws.rest.provided.vo.DefaultTemplateConfigurationVo;

@@ -2,7 +2,7 @@ package com.maneo.kosc.service.admin.facade;
 
 import java.util.List;
 
-import com.maneo.kosc.bean.DepartementTechnicien;
+import com.maneo.kosc.bean.technicien.DepartementTechnicien;
 import com.maneo.kosc.ws.rest.provided.vo.DepartementTechnicienVo;
 import com.maneo.kosc.service.core.facade.AbstractService;
 

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 
-import com.maneo.kosc.bean.TemplateEmailConfirmationClient;
+import com.maneo.kosc.bean.template.TemplateEmailConfirmationClient;
 import com.maneo.kosc.dao.TemplateEmailConfirmationClientDao;
 import com.maneo.kosc.service.admin.facade.TemplateEmailConfirmationClientAdminService;
 

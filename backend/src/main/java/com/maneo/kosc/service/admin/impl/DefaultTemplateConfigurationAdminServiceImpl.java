@@ -1,6 +1,6 @@
 package com.maneo.kosc.service.admin.impl;
 
-import com.maneo.kosc.bean.*;
+import com.maneo.kosc.bean.template.*;
 import com.maneo.kosc.dao.DefaultTemplateConfigurationDao;
 import com.maneo.kosc.service.admin.facade.*;
 import com.maneo.kosc.service.core.impl.AbstractServiceImpl;
