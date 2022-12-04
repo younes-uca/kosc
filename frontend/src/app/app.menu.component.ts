@@ -109,42 +109,42 @@ export class AppMenuComponent implements OnInit {
                     icon: 'pi pi-wallet',
                     items: [
                         // {
-                        //     label: 'Liste chercheur',
+                        //     label: 'chercheur',
                         //     icon: 'pi pi-fw pi-plus-circle',
                         //     routerLink: ['/app/admin/kosc/chercheur/list']
                         // },
                         {
-                            label: 'Liste technicien',
+                            label: 'Technicien',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/admin/kosc/technicien/list']
                         },
                         {
-                            label: 'Liste arret travail',
+                            label: 'Arret travail',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/admin/kosc/arret-travail/list']
                         },
                         {
-                            label: 'Liste departement',
+                            label: 'Departement',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/admin/kosc/departement/list']
                         },
                         {
-                            label: 'Liste raison arret travail',
+                            label: 'Raison arret travail',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/admin/kosc/raison-arret-travail/list']
                         },
                         {
-                            label: 'Liste departement technicien',
+                            label: 'Departement technicien',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/admin/kosc/departement-technicien/list']
                         },
                         {
-                            label: 'Liste region',
+                            label: 'Region',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/admin/kosc/region/list']
                         },
                         {
-                            label: 'Liste entreprise',
+                            label: 'Entreprise',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/admin/kosc/entreprise/list']
                         },
@@ -155,89 +155,89 @@ export class AppMenuComponent implements OnInit {
                 items: [
 
                     {
-                        label: 'Liste template email ftl',
+                        label: 'Template ftl',
                         icon: 'pi pi-fw pi-plus-circle',
                         routerLink: ['/app/admin/kosc/template-email-ftl/list']
                     },
                     {
-                        label: 'Liste template email mauvais contact',
+                        label: 'Template mauvais contact',
                         icon: 'pi pi-fw pi-plus-circle',
                         routerLink: ['/app/admin/kosc/template-email-mauvais-contact/list']
                     },
                     {
-                        label: 'Liste template email refus',
+                        label: 'Template refus',
                         icon: 'pi pi-fw pi-plus-circle',
                         routerLink: ['/app/admin/kosc/template-email-refus/list']
                     },
 
                     {
-                        label: 'Liste template email confirmation client',
+                        label: 'Template confirmation client',
                         icon: 'pi pi-fw pi-plus-circle',
                         routerLink: ['/app/admin/kosc/template-email-confirmation-client/list']
                     },
                     {
-                        label: 'Liste template email replanification',
+                        label: 'Template replanification',
                         icon: 'pi pi-fw pi-plus-circle',
                         routerLink: ['/app/admin/kosc/template-email-replanification/list']
                     },
                     {
-                        label: 'Liste template email cloture',
+                        label: 'Template cloture',
                         icon: 'pi pi-fw pi-plus-circle',
                         routerLink: ['/app/admin/kosc/template-email-cloture/list']
                     },
                     {
-                        label: 'Liste template email client injoinable kosc',
+                        label: 'Template client injoinable kosc',
                         icon: 'pi pi-fw pi-plus-circle',
                         routerLink: ['/app/admin/kosc/template-email-client-injoinable-kosc/list']
                     },
                     {
-                        label: 'Liste template email planification',
+                        label: 'Template planification',
                         icon: 'pi pi-fw pi-plus-circle',
                         routerLink: ['/app/admin/kosc/template-email-planification/list']
                     },
 
                     {
-                        label: 'Liste template email report demande maneo client joignable accepte',
+                        label: 'Template report demande maneo client joignable accepte',
                         icon: 'pi pi-fw pi-plus-circle',
                         routerLink: ['/app/admin/kosc/template-email-report-demande-maneo-client-joignable-accepte/list']
                     },
                     {
-                        label: 'Liste template email report demande maneo client injoignable',
+                        label: 'Template report demande maneo client injoignable',
                         icon: 'pi pi-fw pi-plus-circle',
                         routerLink: ['/app/admin/kosc/template-email-report-demande-maneo-client-injoignable/list']
                     },
                     {
-                        label: 'Liste template email report demande client client injoignable',
+                        label: 'Template report demande client client injoignable',
                         icon: 'pi pi-fw pi-plus-circle',
                         routerLink: ['/app/admin/kosc/template-email-report-demande-client-client-injoignable/list']
                     },
                     {
-                        label: 'Liste template email report demande maneo client joignable refus',
+                        label: 'Template report demande maneo client joignable refus',
                         icon: 'pi pi-fw pi-plus-circle',
                         routerLink: ['/app/admin/kosc/template-email-report-demande-maneo-client-joignable-refus/list']
                     },
                     {
-                        label: 'Liste template email report demande client client joignable',
+                        label: 'Template report demande client client joignable',
                         icon: 'pi pi-fw pi-plus-circle',
                         routerLink: ['/app/admin/kosc/template-email-report-demande-client-client-joignable/list']
                     },
                     {
-                        label: 'Liste template suivi',
+                        label: 'Template suivi',
                         icon: 'pi pi-fw pi-plus-circle',
                         routerLink: ['/app/admin/kosc/template-suivi/list']
                     },
                     {
-                        label: 'Liste template email client injoinable',
+                        label: 'Template client injoinable',
                         icon: 'pi pi-fw pi-plus-circle',
                         routerLink: ['/app/admin/kosc/template-email-client-injoinable/list']
                     },
                     {
-                        label: 'Liste template email cri',
+                        label: 'Template cri',
                         icon: 'pi pi-fw pi-plus-circle',
                         routerLink: ['/app/admin/kosc/template-email-cri/list']
                     },
                     {
-                        label: 'Liste default template configuration',
+                        label: 'Default template configuration',
                         icon: 'pi pi-fw pi-plus-circle',
                         routerLink: ['/app/admin/kosc/default-template-configuration/list']
                     },
@@ -249,27 +249,27 @@ export class AppMenuComponent implements OnInit {
                     icon: 'pi pi-wallet',
                     items: [
                         {
-                            label: 'Liste cause ko ok',
+                            label: 'Cause ko ok',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/admin/kosc/cause-ko-ok/list']
                         },
                         {
-                            label: 'Liste source replanification',
+                            label: 'Source replanification',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/admin/kosc/source-replanification/list']
                         },
                         {
-                            label: 'Liste etat demande kosc',
+                            label: 'Etat demande kosc',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/admin/kosc/etat-demande-kosc/list']
                         },
                         {
-                            label: 'Liste operator',
+                            label: 'Operator',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/admin/kosc/operator/list']
                         },
                         {
-                            label: 'Liste Jours Fériés',
+                            label: 'Jours Fériés',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/admin/kosc/jour-ferie/list']
                         },
@@ -280,11 +280,11 @@ export class AppMenuComponent implements OnInit {
                     icon: 'pi pi-users',
                     items: [
                         {
-                            label: 'Users Edit',
+                            label: 'User',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/admin/kosc/ordre-kosc-gestion-utilisateur/Gestion_users']
                         },{
-                            label: 'Roles Edit',
+                            label: 'Role',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/admin/kosc/ordre-kosc-gestion-utilisateur/Gestion_roles']
                         }
@@ -298,76 +298,76 @@ export class AppMenuComponent implements OnInit {
                     icon: 'pi pi-wallet',
                     items: [
                         {
-                            label: 'Liste cause ko ok',
+                            label: 'cause ko ok',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/cause-ko-ok/list']
                         },
                         {
-                            label: 'Liste template email ftl',
+                            label: 'Template ftl',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/template-email-ftl/list']
                         },
                         {
-                            label: 'Liste template email mauvais contact',
+                            label: 'Template mauvais contact',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/template-email-mauvais-contact/list']
                         },
                         {
-                            label: 'Liste template email refus',
+                            label: 'Template refus',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/template-email-refus/list']
                         },
                         {
-                            label: 'Liste source replanification',
+                            label: 'source replanification',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/source-replanification/list']
                         },
                         {
-                            label: 'Liste template email confirmation client',
+                            label: 'Template confirmation client',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/template-email-confirmation-client/list']
                         },
                         {
-                            label: 'Liste template email replanification',
+                            label: 'Template replanification',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/template-email-replanification/list']
                         },
                         {
-                            label: 'Liste template email cloture',
+                            label: 'Template cloture',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/template-email-cloture/list']
                         },
                         {
-                            label: 'Liste template email client injoinable kosc',
+                            label: 'Template client injoinable kosc',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/template-email-client-injoinable-kosc/list']
                         },
                         {
-                            label: 'Liste template email planification',
+                            label: 'Template planification',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/template-email-planification/list']
                         },
                         {
-                            label: 'Liste template email report',
+                            label: 'Template report',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/template-email-report/list']
                         },
                         {
-                            label: 'Liste template suivi',
+                            label: 'template suivi',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/template-suivi/list']
                         },
                         {
-                            label: 'Liste template email client injoinable',
+                            label: 'Template client injoinable',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/template-email-client-injoinable/list']
                         },
                         {
-                            label: 'Liste template email cri',
+                            label: 'Template cri',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/template-email-cri/list']
                         }, {
-                            label: 'Liste default template configuration',
+                            label: 'default template configuration',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/default-template-configuration/list']
                         },
@@ -378,42 +378,42 @@ export class AppMenuComponent implements OnInit {
                     icon: 'pi pi-wallet',
                     items: [
                         {
-                            label: 'Liste chercheur',
+                            label: 'chercheur',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/chercheur/list']
                         },
                         {
-                            label: 'Liste technicien',
+                            label: 'technicien',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/technicien/list']
                         },
                         {
-                            label: 'Liste arret travail',
+                            label: 'arret travail',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/arret-travail/list']
                         },
                         {
-                            label: 'Liste departement',
+                            label: 'departement',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/departement/list']
                         },
                         {
-                            label: 'Liste raison arret travail',
+                            label: 'raison arret travail',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/raison-arret-travail/list']
                         },
                         {
-                            label: 'Liste departement technicien',
+                            label: 'departement technicien',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/departement-technicien/list']
                         },
                         {
-                            label: 'Liste region',
+                            label: 'region',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/region/list']
                         },
                         {
-                            label: 'Liste entreprise',
+                            label: 'entreprise',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/entreprise/list']
                         },
@@ -424,7 +424,7 @@ export class AppMenuComponent implements OnInit {
                     icon: 'pi pi-wallet',
                     items: [
                         {
-                            label: 'Liste ordre kosc',
+                            label: 'ordre kosc',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/ordre-kosc/list']
                         },
@@ -435,12 +435,12 @@ export class AppMenuComponent implements OnInit {
                     icon: 'pi pi-wallet',
                     items: [
                         {
-                            label: 'Liste etat demande kosc',
+                            label: 'etat demande kosc',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/etat-demande-kosc/list']
                         },
                         {
-                            label: 'Liste operator',
+                            label: 'operator',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/chercheur/kosc/operator/list']
                         },
