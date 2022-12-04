@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 
 import com.maneo.kosc.bean.template.TemplateSuivi;
-import com.maneo.kosc.dao.TemplateSuiviDao;
+import com.maneo.kosc.dao.template.TemplateSuiviDao;
 import com.maneo.kosc.service.chercheur.facade.TemplateSuiviChercheurService;
 
 import com.maneo.kosc.ws.rest.provided.vo.TemplateSuiviVo;

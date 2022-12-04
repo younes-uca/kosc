@@ -334,7 +334,7 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
                 item.setDateTroisiemeAppel(DateUtil.parseTimestampUniversalFormat(vo.getDateTroisiemeAppel()));
             if (StringUtil.isNotEmpty(vo.getDatePriseRdv()))
                 item.setDatePriseRdv(DateUtil.parseTimestampUniversalFormat(vo.getDatePriseRdv()));
-            if (StringUtil.isNotEmpty(vo.getDateRdv()))
+             if (StringUtil.isNotEmpty(vo.getDateRdv()))
                 item.setDateRdv(DateUtil.parseTimestampUniversalFormat(vo.getDateRdv()));
             if (StringUtil.isNotEmpty(vo.getDateOuverture()))
                 item.setDateOuverture(DateUtil.parse(vo.getDateOuverture()));

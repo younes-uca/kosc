@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 
 import com.maneo.kosc.bean.template.TemplateEmailRefus;
-import com.maneo.kosc.dao.TemplateEmailRefusDao;
+import com.maneo.kosc.dao.template.TemplateEmailRefusDao;
 import com.maneo.kosc.service.admin.facade.TemplateEmailRefusAdminService;
 
 import com.maneo.kosc.ws.rest.provided.vo.TemplateEmailRefusVo;

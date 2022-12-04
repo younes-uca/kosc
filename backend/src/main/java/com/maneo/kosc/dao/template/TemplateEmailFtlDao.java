@@ -1,4 +1,4 @@
-package com.maneo.kosc.dao;
+package com.maneo.kosc.dao.template;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
