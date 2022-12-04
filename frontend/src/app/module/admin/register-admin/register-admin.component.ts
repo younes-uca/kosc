@@ -15,7 +15,8 @@ export class RegisterAdminComponent implements OnInit {
         nom: new UntypedFormControl('', Validators.required),
         email: new UntypedFormControl('', Validators.required),
         userName: new UntypedFormControl('', Validators.required),
-        password: new UntypedFormControl('', Validators.required)
+        password: new UntypedFormControl('', Validators.required),
+        telephone: new UntypedFormControl('', Validators.required)
     });
 
     constructor(private authService: AuthService) {
@@ -34,7 +35,7 @@ export class RegisterAdminComponent implements OnInit {
 
     submit() {
         const formValues = this.registerForm.value;
-        const {prenom, nom, userName, password, email} = formValues;
+        const {prenom, nom, userName, password, email, telephone} = formValues;
         const role = new Role();
         role.authority = 'ROLE_Admin';
         this.user.prenom = prenom;
@@ -42,9 +43,9 @@ export class RegisterAdminComponent implements OnInit {
         this.user.username = userName;
         this.user.password = password;
         this.user.email = email;
+        this.user.telephone = telephone;
         this.user.roles = [role];
         this.authService.registerAdmin();
-
     }
 
 }

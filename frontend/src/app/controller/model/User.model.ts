@@ -7,6 +7,7 @@ export class User {
     public id: string;
     public prenom: string;
     public nom: string;
+    public telephone: string;
     public username: string;
     public password: string;
     public passwordChanged: boolean;
