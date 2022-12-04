@@ -113,7 +113,7 @@ export class AuthService {
 
     public registerAdmin() {
         console.log(this.user);
-        this.http.post<any>(this.API + 'api/users/save', this.user, {observe: 'response'}).subscribe(
+        this.http.post<any>(this.API + 'api/admin/users/save', this.user, {observe: 'response'}).subscribe(
             resp => {
                 this.router.navigate(['admin/login']);
             }, (error: HttpErrorResponse) => {

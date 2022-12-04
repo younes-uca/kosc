@@ -51,13 +51,21 @@
                     </div>
                     <!-- </h:panelGroup> -->
                 </div>
+                <div class="p-col-12 username-container">
+                    <!-- <h:panelGroup> -->
+                    <label>Telephone</label>
+                    <div class="login-input">
+                        <input autofocus class="p-mb-2 p-mr-2" formControlName="telephone" id="1" pInputText required
+                               type="text"/>
+                    </div>
 
 
-                <div class="p-col-12 p-sm-6 p-md-6">
-                    <button (click)="submit()" [disabled]="registerForm.invalid" icon="pi pi-check" label="Register" pButton
-                            type="button"></button>
+                    <div class="p-col-12 p-sm-6 p-md-6">
+                        <button (click)="submit()" [disabled]="registerForm.invalid" icon="pi pi-check" label="Register"
+                                pButton
+                                type="button"></button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
