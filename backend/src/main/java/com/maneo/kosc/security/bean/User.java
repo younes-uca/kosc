@@ -36,7 +36,6 @@ public class User implements UserDetails {
     protected String password;
     protected String prenom;
     protected String nom;
-
     protected String telephone;
     protected boolean passwordChanged;
 
