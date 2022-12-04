@@ -1,12 +1,12 @@
 package com.maneo.kosc.service.chercheur.impl;
 
 import com.maneo.kosc.bean.template.*;
-import com.maneo.kosc.dao.DefaultTemplateConfigurationDao;
+import com.maneo.kosc.dao.template.DefaultTemplateConfigurationDao;
 import com.maneo.kosc.service.chercheur.facade.*;
 import com.maneo.kosc.service.core.impl.AbstractServiceImpl;
 import com.maneo.kosc.service.util.ListUtil;
 import com.maneo.kosc.service.util.SearchUtil;
-import com.maneo.kosc.ws.rest.provided.vo.DefaultTemplateConfigurationVo;
+import com.maneo.kosc.ws.rest.provided.vo.template.DefaultTemplateConfigurationVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

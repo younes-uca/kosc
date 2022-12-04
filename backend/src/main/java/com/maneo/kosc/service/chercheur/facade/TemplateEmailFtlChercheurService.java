@@ -1,7 +1,7 @@
 package com.maneo.kosc.service.chercheur.facade;
 
 import com.maneo.kosc.bean.template.TemplateEmailFtl;
-import com.maneo.kosc.ws.rest.provided.vo.TemplateEmailFtlVo;
+import com.maneo.kosc.ws.rest.provided.vo.template.TemplateEmailFtlVo;
 import com.maneo.kosc.service.core.facade.AbstractService;
 
 public interface TemplateEmailFtlChercheurService extends AbstractService<TemplateEmailFtl, Long, TemplateEmailFtlVo> {

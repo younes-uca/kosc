@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import com.maneo.kosc.bean.referentiel.SourceReplanification;
-import com.maneo.kosc.ws.rest.provided.converter.SourceReplanificationConverter;
-import com.maneo.kosc.ws.rest.provided.vo.SourceReplanificationVo;
+import com.maneo.kosc.ws.rest.provided.converter.referentiel.SourceReplanificationConverter;
+import com.maneo.kosc.ws.rest.provided.vo.referentiel.SourceReplanificationVo;
 
 @Api("Manages sourceReplanification services")
 @RestController

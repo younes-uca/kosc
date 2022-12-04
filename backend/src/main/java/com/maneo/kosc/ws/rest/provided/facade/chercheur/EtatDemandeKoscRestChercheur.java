@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import com.maneo.kosc.bean.referentiel.EtatDemandeKosc;
-import com.maneo.kosc.ws.rest.provided.converter.EtatDemandeKoscConverter;
-import com.maneo.kosc.ws.rest.provided.vo.EtatDemandeKoscVo;
+import com.maneo.kosc.ws.rest.provided.converter.referentiel.EtatDemandeKoscConverter;
+import com.maneo.kosc.ws.rest.provided.vo.referentiel.EtatDemandeKoscVo;
 
 @Api("Manages etatDemandeKosc services")
 @RestController

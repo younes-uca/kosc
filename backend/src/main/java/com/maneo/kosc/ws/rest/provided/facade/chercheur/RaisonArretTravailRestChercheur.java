@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import com.maneo.kosc.bean.technicien.RaisonArretTravail;
-import com.maneo.kosc.ws.rest.provided.converter.RaisonArretTravailConverter;
-import com.maneo.kosc.ws.rest.provided.vo.RaisonArretTravailVo;
+import com.maneo.kosc.ws.rest.provided.converter.technicien.RaisonArretTravailConverter;
+import com.maneo.kosc.ws.rest.provided.vo.technicien.RaisonArretTravailVo;
 
 @Api("Manages raisonArretTravail services")
 @RestController

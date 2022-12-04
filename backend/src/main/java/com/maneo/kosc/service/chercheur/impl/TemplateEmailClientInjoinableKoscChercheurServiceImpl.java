@@ -14,7 +14,7 @@ import com.maneo.kosc.bean.template.TemplateEmailClientInjoinableKosc;
 import com.maneo.kosc.dao.template.TemplateEmailClientInjoinableKoscDao;
 import com.maneo.kosc.service.chercheur.facade.TemplateEmailClientInjoinableKoscChercheurService;
 
-import com.maneo.kosc.ws.rest.provided.vo.TemplateEmailClientInjoinableKoscVo;
+import com.maneo.kosc.ws.rest.provided.vo.template.TemplateEmailClientInjoinableKoscVo;
 import com.maneo.kosc.service.util.*;
 
 import com.maneo.kosc.service.core.impl.AbstractServiceImpl;

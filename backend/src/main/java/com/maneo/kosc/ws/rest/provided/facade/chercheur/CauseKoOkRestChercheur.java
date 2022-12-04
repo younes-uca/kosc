@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import com.maneo.kosc.bean.referentiel.CauseKoOk;
-import com.maneo.kosc.ws.rest.provided.converter.CauseKoOkConverter;
-import com.maneo.kosc.ws.rest.provided.vo.CauseKoOkVo;
+import com.maneo.kosc.ws.rest.provided.converter.referentiel.CauseKoOkConverter;
+import com.maneo.kosc.ws.rest.provided.vo.referentiel.CauseKoOkVo;
 
 @Api("Manages causeKoOk services")
 @RestController

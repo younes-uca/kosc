@@ -1,4 +1,4 @@
-package com.maneo.kosc.security.ws.rest.provided.facade;
+package com.maneo.kosc.security.ws;
 
 import java.util.List;
 

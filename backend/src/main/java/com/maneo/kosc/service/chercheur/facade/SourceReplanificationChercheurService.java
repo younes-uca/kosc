@@ -1,7 +1,7 @@
 package com.maneo.kosc.service.chercheur.facade;
 
 import com.maneo.kosc.bean.referentiel.SourceReplanification;
-import com.maneo.kosc.ws.rest.provided.vo.SourceReplanificationVo;
+import com.maneo.kosc.ws.rest.provided.vo.referentiel.SourceReplanificationVo;
 import com.maneo.kosc.service.core.facade.AbstractService;
 
 public interface SourceReplanificationChercheurService extends AbstractService<SourceReplanification, Long, SourceReplanificationVo> {

@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 
 import com.maneo.kosc.bean.referentiel.Operator;
-import com.maneo.kosc.dao.OperatorDao;
+import com.maneo.kosc.dao.referentiel.OperatorDao;
 import com.maneo.kosc.service.chercheur.facade.OperatorChercheurService;
 
-import com.maneo.kosc.ws.rest.provided.vo.OperatorVo;
+import com.maneo.kosc.ws.rest.provided.vo.referentiel.OperatorVo;
 import com.maneo.kosc.service.util.*;
 
 import com.maneo.kosc.service.core.impl.AbstractServiceImpl;

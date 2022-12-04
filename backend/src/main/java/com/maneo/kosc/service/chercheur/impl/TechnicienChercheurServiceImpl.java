@@ -12,11 +12,11 @@ import javax.persistence.EntityManager;
 
 import com.maneo.kosc.bean.technicien.Technicien;
 import com.maneo.kosc.bean.technicien.Entreprise;
-import com.maneo.kosc.dao.TechnicienDao;
+import com.maneo.kosc.dao.technicien.TechnicienDao;
 import com.maneo.kosc.service.chercheur.facade.TechnicienChercheurService;
 import com.maneo.kosc.service.chercheur.facade.EntrepriseChercheurService;
 
-import com.maneo.kosc.ws.rest.provided.vo.TechnicienVo;
+import com.maneo.kosc.ws.rest.provided.vo.technicien.TechnicienVo;
 import com.maneo.kosc.service.util.*;
 
 import com.maneo.kosc.service.core.impl.AbstractServiceImpl;

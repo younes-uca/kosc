@@ -1,7 +1,7 @@
 package com.maneo.kosc.service.chercheur.facade;
 
 import com.maneo.kosc.bean.technicien.Region;
-import com.maneo.kosc.ws.rest.provided.vo.RegionVo;
+import com.maneo.kosc.ws.rest.provided.vo.technicien.RegionVo;
 import com.maneo.kosc.service.core.facade.AbstractService;
 
 public interface RegionChercheurService extends AbstractService<Region, Long, RegionVo> {

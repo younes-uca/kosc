@@ -14,7 +14,7 @@ import com.maneo.kosc.bean.template.TemplateEmailMauvaisContact;
 import com.maneo.kosc.dao.template.TemplateEmailMauvaisContactDao;
 import com.maneo.kosc.service.chercheur.facade.TemplateEmailMauvaisContactChercheurService;
 
-import com.maneo.kosc.ws.rest.provided.vo.TemplateEmailMauvaisContactVo;
+import com.maneo.kosc.ws.rest.provided.vo.template.TemplateEmailMauvaisContactVo;
 import com.maneo.kosc.service.util.*;
 
 import com.maneo.kosc.service.core.impl.AbstractServiceImpl;

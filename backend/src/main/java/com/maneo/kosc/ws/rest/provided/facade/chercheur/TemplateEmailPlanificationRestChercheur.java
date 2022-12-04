@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import com.maneo.kosc.bean.template.TemplateEmailPlanification;
-import com.maneo.kosc.ws.rest.provided.converter.TemplateEmailPlanificationConverter;
-import com.maneo.kosc.ws.rest.provided.vo.TemplateEmailPlanificationVo;
+import com.maneo.kosc.ws.rest.provided.converter.template.TemplateEmailPlanificationConverter;
+import com.maneo.kosc.ws.rest.provided.vo.template.TemplateEmailPlanificationVo;
 
 @Api("Manages templateEmailPlanification services")
 @RestController

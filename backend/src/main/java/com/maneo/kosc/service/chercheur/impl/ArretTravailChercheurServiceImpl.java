@@ -13,12 +13,12 @@ import javax.persistence.EntityManager;
 import com.maneo.kosc.bean.technicien.ArretTravail;
 import com.maneo.kosc.bean.technicien.Technicien;
 import com.maneo.kosc.bean.technicien.RaisonArretTravail;
-import com.maneo.kosc.dao.ArretTravailDao;
+import com.maneo.kosc.dao.technicien.ArretTravailDao;
 import com.maneo.kosc.service.chercheur.facade.ArretTravailChercheurService;
 import com.maneo.kosc.service.chercheur.facade.RaisonArretTravailChercheurService;
 import com.maneo.kosc.service.chercheur.facade.TechnicienChercheurService;
 
-import com.maneo.kosc.ws.rest.provided.vo.ArretTravailVo;
+import com.maneo.kosc.ws.rest.provided.vo.technicien.ArretTravailVo;
 import com.maneo.kosc.service.util.*;
 
 import com.maneo.kosc.service.core.impl.AbstractServiceImpl;

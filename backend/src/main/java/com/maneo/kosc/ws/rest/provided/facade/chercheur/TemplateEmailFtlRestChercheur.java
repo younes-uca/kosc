@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import com.maneo.kosc.bean.template.TemplateEmailFtl;
-import com.maneo.kosc.ws.rest.provided.converter.TemplateEmailFtlConverter;
-import com.maneo.kosc.ws.rest.provided.vo.TemplateEmailFtlVo;
+import com.maneo.kosc.ws.rest.provided.converter.template.TemplateEmailFtlConverter;
+import com.maneo.kosc.ws.rest.provided.vo.template.TemplateEmailFtlVo;
 
 @Api("Manages templateEmailFtl services")
 @RestController

@@ -1,7 +1,7 @@
 package com.maneo.kosc.service.chercheur.facade;
 
 import com.maneo.kosc.bean.referentiel.Operator;
-import com.maneo.kosc.ws.rest.provided.vo.OperatorVo;
+import com.maneo.kosc.ws.rest.provided.vo.referentiel.OperatorVo;
 import com.maneo.kosc.service.core.facade.AbstractService;
 
 public interface OperatorChercheurService extends AbstractService<Operator, Long, OperatorVo> {

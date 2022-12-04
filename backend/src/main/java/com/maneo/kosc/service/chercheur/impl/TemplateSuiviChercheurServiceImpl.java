@@ -14,7 +14,7 @@ import com.maneo.kosc.bean.template.TemplateSuivi;
 import com.maneo.kosc.dao.template.TemplateSuiviDao;
 import com.maneo.kosc.service.chercheur.facade.TemplateSuiviChercheurService;
 
-import com.maneo.kosc.ws.rest.provided.vo.TemplateSuiviVo;
+import com.maneo.kosc.ws.rest.provided.vo.template.TemplateSuiviVo;
 import com.maneo.kosc.service.util.*;
 
 import com.maneo.kosc.service.core.impl.AbstractServiceImpl;

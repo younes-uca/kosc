@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import com.maneo.kosc.bean.technicien.ArretTravail;
-import com.maneo.kosc.ws.rest.provided.converter.ArretTravailConverter;
-import com.maneo.kosc.ws.rest.provided.vo.ArretTravailVo;
+import com.maneo.kosc.ws.rest.provided.converter.technicien.ArretTravailConverter;
+import com.maneo.kosc.ws.rest.provided.vo.technicien.ArretTravailVo;
 
 @Api("Manages arretTravail services")
 @RestController

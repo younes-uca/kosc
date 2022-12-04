@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import com.maneo.kosc.bean.template.TemplateEmailCri;
-import com.maneo.kosc.ws.rest.provided.converter.TemplateEmailCriConverter;
-import com.maneo.kosc.ws.rest.provided.vo.TemplateEmailCriVo;
+import com.maneo.kosc.ws.rest.provided.converter.template.TemplateEmailCriConverter;
+import com.maneo.kosc.ws.rest.provided.vo.template.TemplateEmailCriVo;
 
 @Api("Manages templateEmailCri services")
 @RestController

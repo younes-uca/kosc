@@ -14,7 +14,7 @@ import com.maneo.kosc.bean.template.TemplateEmailCloture;
 import com.maneo.kosc.dao.template.TemplateEmailClotureDao;
 import com.maneo.kosc.service.chercheur.facade.TemplateEmailClotureChercheurService;
 
-import com.maneo.kosc.ws.rest.provided.vo.TemplateEmailClotureVo;
+import com.maneo.kosc.ws.rest.provided.vo.template.TemplateEmailClotureVo;
 import com.maneo.kosc.service.util.*;
 
 import com.maneo.kosc.service.core.impl.AbstractServiceImpl;

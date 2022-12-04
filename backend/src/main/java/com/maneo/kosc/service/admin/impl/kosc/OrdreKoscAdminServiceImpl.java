@@ -12,8 +12,14 @@ import com.maneo.kosc.bean.referentiel.SourceReplanification;
 import com.maneo.kosc.bean.technicien.Departement;
 import com.maneo.kosc.bean.technicien.Technicien;
 import com.maneo.kosc.bean.template.*;
-import com.maneo.kosc.service.admin.facade.*;
 import com.maneo.kosc.service.admin.facade.kosc.OrdreKoscAdminService;
+import com.maneo.kosc.service.admin.facade.referentiel.CauseKoOkAdminService;
+import com.maneo.kosc.service.admin.facade.referentiel.EtatDemandeKoscAdminService;
+import com.maneo.kosc.service.admin.facade.referentiel.OperatorAdminService;
+import com.maneo.kosc.service.admin.facade.referentiel.SourceReplanificationAdminService;
+import com.maneo.kosc.service.admin.facade.technicien.DepartementAdminService;
+import com.maneo.kosc.service.admin.facade.technicien.TechnicienAdminService;
+import com.maneo.kosc.service.admin.facade.template.*;
 import com.maneo.kosc.ws.rest.provided.vo.StatisticResultVo;
 import com.maneo.kosc.ws.rest.provided.vo.StatisticVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +29,9 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 
-import com.maneo.kosc.dao.OrdreKoscDao;
+import com.maneo.kosc.dao.kosc.OrdreKoscDao;
 
-import com.maneo.kosc.ws.rest.provided.vo.OrdreKoscVo;
+import com.maneo.kosc.ws.rest.provided.vo.kosc.OrdreKoscVo;
 import com.maneo.kosc.service.util.*;
 
 import com.maneo.kosc.service.core.impl.AbstractServiceImpl;

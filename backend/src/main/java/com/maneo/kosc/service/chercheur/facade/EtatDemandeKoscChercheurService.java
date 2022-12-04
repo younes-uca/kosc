@@ -1,7 +1,7 @@
 package com.maneo.kosc.service.chercheur.facade;
 
 import com.maneo.kosc.bean.referentiel.EtatDemandeKosc;
-import com.maneo.kosc.ws.rest.provided.vo.EtatDemandeKoscVo;
+import com.maneo.kosc.ws.rest.provided.vo.referentiel.EtatDemandeKoscVo;
 import com.maneo.kosc.service.core.facade.AbstractService;
 
 public interface EtatDemandeKoscChercheurService extends AbstractService<EtatDemandeKosc, Long, EtatDemandeKoscVo> {

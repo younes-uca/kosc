@@ -1,7 +1,7 @@
 package com.maneo.kosc.service.chercheur.facade;
 
 import com.maneo.kosc.bean.referentiel.CauseKoOk;
-import com.maneo.kosc.ws.rest.provided.vo.CauseKoOkVo;
+import com.maneo.kosc.ws.rest.provided.vo.referentiel.CauseKoOkVo;
 import com.maneo.kosc.service.core.facade.AbstractService;
 
 public interface CauseKoOkChercheurService extends AbstractService<CauseKoOk, Long, CauseKoOkVo> {

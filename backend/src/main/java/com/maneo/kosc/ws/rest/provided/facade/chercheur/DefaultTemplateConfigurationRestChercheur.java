@@ -2,8 +2,8 @@ package com.maneo.kosc.ws.rest.provided.facade.chercheur;
 
 import com.maneo.kosc.bean.template.DefaultTemplateConfiguration;
 import com.maneo.kosc.service.chercheur.facade.DefaultTemplateConfigurationChercheurService;
-import com.maneo.kosc.ws.rest.provided.converter.DefaultTemplateConfigurationConverter;
-import com.maneo.kosc.ws.rest.provided.vo.DefaultTemplateConfigurationVo;
+import com.maneo.kosc.ws.rest.provided.converter.template.DefaultTemplateConfigurationConverter;
+import com.maneo.kosc.ws.rest.provided.vo.template.DefaultTemplateConfigurationVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

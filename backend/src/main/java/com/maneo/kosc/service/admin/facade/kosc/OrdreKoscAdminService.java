@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.maneo.kosc.bean.kosc.OrdreKosc;
-import com.maneo.kosc.ws.rest.provided.vo.OrdreKoscVo;
+import com.maneo.kosc.ws.rest.provided.vo.kosc.OrdreKoscVo;
 import com.maneo.kosc.service.core.facade.AbstractService;
 import com.maneo.kosc.ws.rest.provided.vo.StatisticResultVo;
 import com.maneo.kosc.ws.rest.provided.vo.StatisticVo;

@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 
 import com.maneo.kosc.bean.referentiel.SourceReplanification;
-import com.maneo.kosc.dao.SourceReplanificationDao;
+import com.maneo.kosc.dao.referentiel.SourceReplanificationDao;
 import com.maneo.kosc.service.chercheur.facade.SourceReplanificationChercheurService;
 
-import com.maneo.kosc.ws.rest.provided.vo.SourceReplanificationVo;
+import com.maneo.kosc.ws.rest.provided.vo.referentiel.SourceReplanificationVo;
 import com.maneo.kosc.service.util.*;
 
 import com.maneo.kosc.service.core.impl.AbstractServiceImpl;

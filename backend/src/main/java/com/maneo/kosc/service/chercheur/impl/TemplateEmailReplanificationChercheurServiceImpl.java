@@ -14,7 +14,7 @@ import com.maneo.kosc.bean.template.TemplateEmailReplanification;
 import com.maneo.kosc.dao.template.TemplateEmailReplanificationDao;
 import com.maneo.kosc.service.chercheur.facade.TemplateEmailReplanificationChercheurService;
 
-import com.maneo.kosc.ws.rest.provided.vo.TemplateEmailReplanificationVo;
+import com.maneo.kosc.ws.rest.provided.vo.template.TemplateEmailReplanificationVo;
 import com.maneo.kosc.service.util.*;
 
 import com.maneo.kosc.service.core.impl.AbstractServiceImpl;

@@ -28,7 +28,7 @@ import com.maneo.kosc.bean.template.TemplateEmailCloture;
 import com.maneo.kosc.bean.template.TemplateSuivi;
 import com.maneo.kosc.bean.referentiel.CauseKoOk;
 import com.maneo.kosc.bean.referentiel.SourceReplanification;
-import com.maneo.kosc.dao.OrdreKoscDao;
+import com.maneo.kosc.dao.kosc.OrdreKoscDao;
 import com.maneo.kosc.service.chercheur.facade.OrdreKoscChercheurService;
 import com.maneo.kosc.service.chercheur.facade.TemplateEmailReplanificationChercheurService;
 import com.maneo.kosc.service.chercheur.facade.TemplateEmailPlanificationChercheurService;
@@ -48,7 +48,7 @@ import com.maneo.kosc.service.chercheur.facade.TemplateEmailMauvaisContactCherch
 import com.maneo.kosc.service.chercheur.facade.TechnicienChercheurService;
 import com.maneo.kosc.service.chercheur.facade.TemplateEmailCriChercheurService;
 
-import com.maneo.kosc.ws.rest.provided.vo.OrdreKoscVo;
+import com.maneo.kosc.ws.rest.provided.vo.kosc.OrdreKoscVo;
 import com.maneo.kosc.service.util.*;
 
 import com.maneo.kosc.service.core.impl.AbstractServiceImpl;

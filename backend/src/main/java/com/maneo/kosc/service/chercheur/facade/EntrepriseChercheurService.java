@@ -1,7 +1,7 @@
 package com.maneo.kosc.service.chercheur.facade;
 
 import com.maneo.kosc.bean.technicien.Entreprise;
-import com.maneo.kosc.ws.rest.provided.vo.EntrepriseVo;
+import com.maneo.kosc.ws.rest.provided.vo.technicien.EntrepriseVo;
 import com.maneo.kosc.service.core.facade.AbstractService;
 
 public interface EntrepriseChercheurService extends AbstractService<Entreprise, Long, EntrepriseVo> {

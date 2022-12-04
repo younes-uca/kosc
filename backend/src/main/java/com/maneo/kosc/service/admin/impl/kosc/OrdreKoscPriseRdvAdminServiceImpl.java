@@ -1,13 +1,14 @@
 package com.maneo.kosc.service.admin.impl.kosc;
 
 import com.maneo.kosc.bean.kosc.OrdreKosc;
-import com.maneo.kosc.dao.OrdreKoscDao;
-import com.maneo.kosc.service.admin.facade.*;
+import com.maneo.kosc.dao.kosc.OrdreKoscDao;
 import com.maneo.kosc.service.admin.facade.kosc.OrdreKoscPriseRdvAdminService;
+import com.maneo.kosc.service.admin.facade.referentiel.EtatDemandeKoscAdminService;
+import com.maneo.kosc.service.admin.facade.referentiel.JourFerieAdminService;
 import com.maneo.kosc.service.util.DateUtil;
 import com.maneo.kosc.service.util.ListUtil;
 import com.maneo.kosc.service.util.SearchUtil;
-import com.maneo.kosc.ws.rest.provided.vo.OrdreKoscVo;
+import com.maneo.kosc.ws.rest.provided.vo.kosc.OrdreKoscVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

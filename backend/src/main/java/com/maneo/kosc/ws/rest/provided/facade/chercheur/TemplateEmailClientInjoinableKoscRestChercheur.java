@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import com.maneo.kosc.bean.template.TemplateEmailClientInjoinableKosc;
-import com.maneo.kosc.ws.rest.provided.converter.TemplateEmailClientInjoinableKoscConverter;
-import com.maneo.kosc.ws.rest.provided.vo.TemplateEmailClientInjoinableKoscVo;
+import com.maneo.kosc.ws.rest.provided.converter.template.TemplateEmailClientInjoinableKoscConverter;
+import com.maneo.kosc.ws.rest.provided.vo.template.TemplateEmailClientInjoinableKoscVo;
 
 @Api("Manages templateEmailClientInjoinableKosc services")
 @RestController

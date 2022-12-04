@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import com.maneo.kosc.bean.template.TemplateEmailConfirmationClient;
-import com.maneo.kosc.ws.rest.provided.converter.TemplateEmailConfirmationClientConverter;
-import com.maneo.kosc.ws.rest.provided.vo.TemplateEmailConfirmationClientVo;
+import com.maneo.kosc.ws.rest.provided.converter.template.TemplateEmailConfirmationClientConverter;
+import com.maneo.kosc.ws.rest.provided.vo.template.TemplateEmailConfirmationClientVo;
 
 @Api("Manages templateEmailConfirmationClient services")
 @RestController

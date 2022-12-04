@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 
 import com.maneo.kosc.bean.referentiel.CauseKoOk;
-import com.maneo.kosc.dao.CauseKoOkDao;
+import com.maneo.kosc.dao.referentiel.CauseKoOkDao;
 import com.maneo.kosc.service.chercheur.facade.CauseKoOkChercheurService;
 
-import com.maneo.kosc.ws.rest.provided.vo.CauseKoOkVo;
+import com.maneo.kosc.ws.rest.provided.vo.referentiel.CauseKoOkVo;
 import com.maneo.kosc.service.util.*;
 
 import com.maneo.kosc.service.core.impl.AbstractServiceImpl;

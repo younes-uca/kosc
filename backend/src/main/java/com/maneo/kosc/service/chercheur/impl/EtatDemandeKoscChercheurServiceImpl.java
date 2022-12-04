@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 
 import com.maneo.kosc.bean.referentiel.EtatDemandeKosc;
-import com.maneo.kosc.dao.EtatDemandeKoscDao;
+import com.maneo.kosc.dao.referentiel.EtatDemandeKoscDao;
 import com.maneo.kosc.service.chercheur.facade.EtatDemandeKoscChercheurService;
 
-import com.maneo.kosc.ws.rest.provided.vo.EtatDemandeKoscVo;
+import com.maneo.kosc.ws.rest.provided.vo.referentiel.EtatDemandeKoscVo;
 import com.maneo.kosc.service.util.*;
 
 import com.maneo.kosc.service.core.impl.AbstractServiceImpl;

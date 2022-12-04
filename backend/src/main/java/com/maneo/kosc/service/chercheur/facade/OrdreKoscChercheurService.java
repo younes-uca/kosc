@@ -3,7 +3,7 @@ package com.maneo.kosc.service.chercheur.facade;
 import java.util.List;
 
 import com.maneo.kosc.bean.kosc.OrdreKosc;
-import com.maneo.kosc.ws.rest.provided.vo.OrdreKoscVo;
+import com.maneo.kosc.ws.rest.provided.vo.kosc.OrdreKoscVo;
 import com.maneo.kosc.service.core.facade.AbstractService;
 
 public interface OrdreKoscChercheurService extends AbstractService<OrdreKosc, Long, OrdreKoscVo> {

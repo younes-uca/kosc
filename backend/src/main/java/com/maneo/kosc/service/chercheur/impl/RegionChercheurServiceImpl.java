@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 
 import com.maneo.kosc.bean.technicien.Region;
-import com.maneo.kosc.dao.RegionDao;
+import com.maneo.kosc.dao.technicien.RegionDao;
 import com.maneo.kosc.service.chercheur.facade.RegionChercheurService;
 
-import com.maneo.kosc.ws.rest.provided.vo.RegionVo;
+import com.maneo.kosc.ws.rest.provided.vo.technicien.RegionVo;
 import com.maneo.kosc.service.util.*;
 
 import com.maneo.kosc.service.core.impl.AbstractServiceImpl;

@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import com.maneo.kosc.bean.technicien.DepartementTechnicien;
-import com.maneo.kosc.ws.rest.provided.converter.DepartementTechnicienConverter;
-import com.maneo.kosc.ws.rest.provided.vo.DepartementTechnicienVo;
+import com.maneo.kosc.ws.rest.provided.converter.technicien.DepartementTechnicienConverter;
+import com.maneo.kosc.ws.rest.provided.vo.technicien.DepartementTechnicienVo;
 
 @Api("Manages departementTechnicien services")
 @RestController

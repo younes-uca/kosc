@@ -14,7 +14,7 @@ import com.maneo.kosc.bean.template.TemplateEmailRefus;
 import com.maneo.kosc.dao.template.TemplateEmailRefusDao;
 import com.maneo.kosc.service.chercheur.facade.TemplateEmailRefusChercheurService;
 
-import com.maneo.kosc.ws.rest.provided.vo.TemplateEmailRefusVo;
+import com.maneo.kosc.ws.rest.provided.vo.template.TemplateEmailRefusVo;
 import com.maneo.kosc.service.util.*;
 
 import com.maneo.kosc.service.core.impl.AbstractServiceImpl;

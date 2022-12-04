@@ -3,7 +3,7 @@ package com.maneo.kosc.service.chercheur.facade;
 import java.util.List;
 
 import com.maneo.kosc.bean.technicien.ArretTravail;
-import com.maneo.kosc.ws.rest.provided.vo.ArretTravailVo;
+import com.maneo.kosc.ws.rest.provided.vo.technicien.ArretTravailVo;
 import com.maneo.kosc.service.core.facade.AbstractService;
 
 public interface ArretTravailChercheurService extends AbstractService<ArretTravail, Long, ArretTravailVo> {
