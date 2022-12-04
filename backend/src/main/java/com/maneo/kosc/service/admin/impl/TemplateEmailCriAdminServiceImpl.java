@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 
 import com.maneo.kosc.bean.template.TemplateEmailCri;
-import com.maneo.kosc.dao.TemplateEmailCriDao;
+import com.maneo.kosc.dao.template.TemplateEmailCriDao;
 import com.maneo.kosc.service.admin.facade.TemplateEmailCriAdminService;
 
 import com.maneo.kosc.ws.rest.provided.vo.TemplateEmailCriVo;

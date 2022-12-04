@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 
 import com.maneo.kosc.bean.template.TemplateEmailReplanification;
-import com.maneo.kosc.dao.TemplateEmailReplanificationDao;
+import com.maneo.kosc.dao.template.TemplateEmailReplanificationDao;
 import com.maneo.kosc.service.admin.facade.TemplateEmailReplanificationAdminService;
 
 import com.maneo.kosc.ws.rest.provided.vo.TemplateEmailReplanificationVo;

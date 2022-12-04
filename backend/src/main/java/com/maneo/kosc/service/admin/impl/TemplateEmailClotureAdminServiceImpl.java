@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 
 import com.maneo.kosc.bean.template.TemplateEmailCloture;
-import com.maneo.kosc.dao.TemplateEmailClotureDao;
+import com.maneo.kosc.dao.template.TemplateEmailClotureDao;
 import com.maneo.kosc.service.admin.facade.TemplateEmailClotureAdminService;
 
 import com.maneo.kosc.ws.rest.provided.vo.TemplateEmailClotureVo;
