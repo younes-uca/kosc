@@ -389,28 +389,28 @@ export class OrdreKoscListAdminComponent implements OnInit {
 
     }
     private initOrderKoscDate(ordreKosc: OrdreKoscVo) {
-        this.selectedOrdreKosc.dateDebutTraitement = new Date(ordreKosc.dateDebutTraitement);
-        this.selectedOrdreKosc.submissionDate = new Date(ordreKosc.submissionDate);
-        this.selectedOrdreKosc.datePremierAppel = new Date(ordreKosc.datePremierAppel);
-        this.selectedOrdreKosc.dateDeuxiemeAppel = new Date(ordreKosc.dateDeuxiemeAppel);
-        this.selectedOrdreKosc.dateTroisiemeAppel = new Date(ordreKosc.dateTroisiemeAppel);
-        this.selectedOrdreKosc.datePriseRdv = new Date(ordreKosc.datePriseRdv);
-        this.selectedOrdreKosc.dateRdv = new Date(ordreKosc.dateRdv);
-        this.selectedOrdreKosc.dateOuverture = new Date(ordreKosc.dateOuverture);
-        this.selectedOrdreKosc.dateEnvoiPlanification = new Date(ordreKosc.dateEnvoiPlanification);
-        this.selectedOrdreKosc.dateAppelReplanification = new Date(ordreKosc.dateAppelReplanification);
-        this.selectedOrdreKosc.dateEnvoiReplanification = new Date(ordreKosc.dateEnvoiReplanification);
-        this.selectedOrdreKosc.dateEnvoiRefus = new Date(ordreKosc.dateEnvoiRefus);
-        this.selectedOrdreKosc.dateEnvoiMauvaisContact = new Date(ordreKosc.dateEnvoiMauvaisContact);
-        this.selectedOrdreKosc.dateEnvoiConfirmationClient = new Date(ordreKosc.dateEnvoiConfirmationClient);
-        this.selectedOrdreKosc.dateEnvoiCri = new Date(ordreKosc.dateEnvoiCri);
-        this.selectedOrdreKosc.dateEnvoiFtl = new Date(ordreKosc.dateEnvoiFtl);
-        this.selectedOrdreKosc.dateInterventionTechniqueDebut = new Date(ordreKosc.dateInterventionTechniqueDebut);
-        this.selectedOrdreKosc.dateInterventionTechniqueFin = new Date(ordreKosc.dateInterventionTechniqueFin);
-        this.selectedOrdreKosc.dateEnvoiClientInjoinable = new Date(ordreKosc.dateEnvoiClientInjoinable);
-        this.selectedOrdreKosc.dateEnvoiClientInjoinableKosc = new Date(ordreKosc.dateEnvoiClientInjoinableKosc);
-        this.selectedOrdreKosc.dateEnvoiCloture = new Date(ordreKosc.dateEnvoiCloture);
-        this.selectedOrdreKosc.dateEnvoiSuivi = new Date(ordreKosc.dateEnvoiSuivi);
+        this.selectedOrdreKosc.dateDebutTraitement = DateUtils.toDate(ordreKosc.dateDebutTraitement);
+        this.selectedOrdreKosc.submissionDate = DateUtils.toDate(ordreKosc.submissionDate);
+        this.selectedOrdreKosc.datePremierAppel = DateUtils.toDate(ordreKosc.datePremierAppel);
+        this.selectedOrdreKosc.dateDeuxiemeAppel = DateUtils.toDate(ordreKosc.dateDeuxiemeAppel);
+        this.selectedOrdreKosc.dateTroisiemeAppel = DateUtils.toDate(ordreKosc.dateTroisiemeAppel);
+        this.selectedOrdreKosc.datePriseRdv = DateUtils.toDate(ordreKosc.datePriseRdv);
+        this.selectedOrdreKosc.dateRdv = DateUtils.toDate(ordreKosc.dateRdv);
+        this.selectedOrdreKosc.dateOuverture = DateUtils.toDate(ordreKosc.dateOuverture);
+        this.selectedOrdreKosc.dateEnvoiPlanification = DateUtils.toDate(ordreKosc.dateEnvoiPlanification);
+        this.selectedOrdreKosc.dateAppelReplanification = DateUtils.toDate(ordreKosc.dateAppelReplanification);
+        this.selectedOrdreKosc.dateEnvoiReplanification = DateUtils.toDate(ordreKosc.dateEnvoiReplanification);
+        this.selectedOrdreKosc.dateEnvoiRefus = DateUtils.toDate(ordreKosc.dateEnvoiRefus);
+        this.selectedOrdreKosc.dateEnvoiMauvaisContact = DateUtils.toDate(ordreKosc.dateEnvoiMauvaisContact);
+        this.selectedOrdreKosc.dateEnvoiConfirmationClient = DateUtils.toDate(ordreKosc.dateEnvoiConfirmationClient);
+        this.selectedOrdreKosc.dateEnvoiCri = DateUtils.toDate(ordreKosc.dateEnvoiCri);
+        this.selectedOrdreKosc.dateEnvoiFtl = DateUtils.toDate(ordreKosc.dateEnvoiFtl);
+        this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
+        this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
+        this.selectedOrdreKosc.dateEnvoiClientInjoinable = DateUtils.toDate(ordreKosc.dateEnvoiClientInjoinable);
+        this.selectedOrdreKosc.dateEnvoiClientInjoinableKosc = DateUtils.toDate(ordreKosc.dateEnvoiClientInjoinableKosc);
+        this.selectedOrdreKosc.dateEnvoiCloture = DateUtils.toDate(ordreKosc.dateEnvoiCloture);
+        this.selectedOrdreKosc.dateEnvoiSuivi = DateUtils.toDate(ordreKosc.dateEnvoiSuivi);
 
         this.viewOrdreKoscDialog = true;
         this.selectedIndexView = 0
