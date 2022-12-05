@@ -22,8 +22,7 @@ public class EmailingOrderKoscAdminServiceImpl  implements EmailingOrderKoscAdmi
 
     @Autowired
     private EmailSenderAdminService emailSenderAdminService;
-    @Autowired
-    private OrdreKoscAdminService ordreKoscAdminService;
+
 
     @Override
     public void sendConfirmationEmailToClient(OrdreKosc ordreKosc) {
@@ -43,7 +42,7 @@ public class EmailingOrderKoscAdminServiceImpl  implements EmailingOrderKoscAdmi
             ordreKosc.setDateEnvoiConfirmationClient(null);
            // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKoscDao.save(ordreKosc);
+        saveAndInitDateDernierAppel(ordreKosc);
 
 
 
@@ -68,7 +67,7 @@ public class EmailingOrderKoscAdminServiceImpl  implements EmailingOrderKoscAdmi
             ordreKosc.setDateEnvoiPlanification(null);
             //ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKoscDao.save(ordreKosc);
+        saveAndInitDateDernierAppel(ordreKosc);
 
     }
 
@@ -92,7 +91,7 @@ public class EmailingOrderKoscAdminServiceImpl  implements EmailingOrderKoscAdmi
             ordreKosc.setDateEnvoiClientInjoinable(null);
            // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKoscDao.save(ordreKosc);
+        saveAndInitDateDernierAppel(ordreKosc);
 
     }
 
@@ -115,7 +114,7 @@ public class EmailingOrderKoscAdminServiceImpl  implements EmailingOrderKoscAdmi
             ordreKosc.setDateEnvoiClientInjoinableKosc(null);
             //ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKoscDao.save(ordreKosc);
+        saveAndInitDateDernierAppel(ordreKosc);
 
     }
 
@@ -139,7 +138,7 @@ public class EmailingOrderKoscAdminServiceImpl  implements EmailingOrderKoscAdmi
             ordreKosc.setDateEnvoiRefus(null);
            // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKoscDao.save(ordreKosc);
+        saveAndInitDateDernierAppel(ordreKosc);
 
     }
 
@@ -162,7 +161,7 @@ public class EmailingOrderKoscAdminServiceImpl  implements EmailingOrderKoscAdmi
             ordreKosc.setDateEnvoiAutre(null);
             //ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKoscDao.save(ordreKosc);
+        saveAndInitDateDernierAppel(ordreKosc);
 
     }
 
@@ -186,7 +185,7 @@ public class EmailingOrderKoscAdminServiceImpl  implements EmailingOrderKoscAdmi
             ordreKosc.setDateEnvoiMauvaisContact(null);
            // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKoscDao.save(ordreKosc);
+        saveAndInitDateDernierAppel(ordreKosc);
 
 
     }
@@ -212,7 +211,7 @@ public class EmailingOrderKoscAdminServiceImpl  implements EmailingOrderKoscAdmi
             ordreKosc.setDateEnvoiReplanification(null);
             //ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKoscDao.save(ordreKosc);
+        saveAndInitDateDernierAppel(ordreKosc);
     }
 
     @Override
@@ -235,7 +234,7 @@ public class EmailingOrderKoscAdminServiceImpl  implements EmailingOrderKoscAdmi
             ordreKosc.setDateEnvoiReportDemandeManeoClientInjoignable(null);
            // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKoscDao.save(ordreKosc);
+        saveAndInitDateDernierAppel(ordreKosc);
 
 
     }
@@ -259,7 +258,7 @@ public class EmailingOrderKoscAdminServiceImpl  implements EmailingOrderKoscAdmi
             ordreKosc.setDateEnvoiReportDemandeManeoClientJoignableAccepte(null);
             //ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKoscDao.save(ordreKosc);
+        saveAndInitDateDernierAppel(ordreKosc);
 
     }
 
@@ -283,7 +282,7 @@ public class EmailingOrderKoscAdminServiceImpl  implements EmailingOrderKoscAdmi
             ordreKosc.setDateEnvoiReportDemandeManeoClientJoignableRefus(null);
            // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKoscDao.save(ordreKosc);
+        saveAndInitDateDernierAppel(ordreKosc);
 
 
     }
@@ -308,7 +307,7 @@ public class EmailingOrderKoscAdminServiceImpl  implements EmailingOrderKoscAdmi
             ordreKosc.setDateEnvoiReportDemandeClientClientInjoignable(null);
             //ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKoscDao.save(ordreKosc);
+        saveAndInitDateDernierAppel(ordreKosc);
 
     }
 
@@ -332,7 +331,7 @@ public class EmailingOrderKoscAdminServiceImpl  implements EmailingOrderKoscAdmi
             ordreKosc.setDateEnvoiReportDemandeClientClientJoignable(null);
            // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKoscDao.save(ordreKosc);
+        saveAndInitDateDernierAppel(ordreKosc);
 
     }
 
@@ -357,8 +356,24 @@ public class EmailingOrderKoscAdminServiceImpl  implements EmailingOrderKoscAdmi
             ordreKosc.setDateEnvoiCri(null);
             //ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKoscDao.save(ordreKosc);
+        saveAndInitDateDernierAppel(ordreKosc);
 
+
+    }
+
+
+    private void saveAndInitDateDernierAppel(OrdreKosc ordreKosc) {
+        if (ordreKosc.getDateTroisiemeAppel() != null) {
+            ordreKosc.setDateDernierAppel(ordreKosc.getDateTroisiemeAppel());
+            ordreKosc.setNumeroDernierAppel(3L);
+        } else if (ordreKosc.getDateDeuxiemeAppel() != null) {
+            ordreKosc.setDateDernierAppel(ordreKosc.getDateDeuxiemeAppel());
+            ordreKosc.setNumeroDernierAppel(2L);
+        } else if (ordreKosc.getDatePremierAppel() != null) {
+            ordreKosc.setDateDernierAppel(ordreKosc.getDatePremierAppel());
+            ordreKosc.setNumeroDernierAppel(1L);
+        }
+        ordreKoscDao.save(ordreKosc);
 
     }
 
