@@ -665,8 +665,6 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
                 item.setDateDernierAppel(DateUtil.parseTimestampUniversalFormat(vo.getDateDernierAppel()));
             if (StringUtil.isNotEmpty(vo.getNumeroDernierAppel()))
                 item.setNumeroDernierAppel(NumberUtil.toLong(vo.getNumeroDernierAppel()));
-
-
             return item;
         }
     }
