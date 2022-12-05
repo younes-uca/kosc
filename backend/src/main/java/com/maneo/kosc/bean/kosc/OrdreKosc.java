@@ -1,22 +1,19 @@
 package com.maneo.kosc.bean.kosc;
 
-import java.util.List;
-import java.util.Objects;
-
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.maneo.kosc.bean.technicien.Departement;
-import com.maneo.kosc.bean.referentiel.SourceReplanification;
-import com.maneo.kosc.bean.technicien.Technicien;
 import com.maneo.kosc.bean.referentiel.CauseKoOk;
 import com.maneo.kosc.bean.referentiel.EtatDemandeKosc;
 import com.maneo.kosc.bean.referentiel.Operator;
+import com.maneo.kosc.bean.referentiel.SourceReplanification;
+import com.maneo.kosc.bean.technicien.Departement;
+import com.maneo.kosc.bean.technicien.Technicien;
 import com.maneo.kosc.bean.template.*;
 import com.maneo.kosc.security.bean.User;
 
-
 import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 
 @Entity
@@ -466,6 +463,47 @@ public class OrdreKosc {
     @Lob
     @Column(columnDefinition = "TEXT")
     private String corpsConfirmationClient;
+
+    @Column(columnDefinition = "TEXT")
+    private String supplier;
+
+    @Column(columnDefinition = "TEXT")
+    private String customerOperator;
+
+    @Column(columnDefinition = "TEXT")
+    private String slid;
+
+    @Column(columnDefinition = "TEXT")
+    private String koscContactFirstName;
+
+    @Column(columnDefinition = "TEXT")
+    private String koscContactLastName;
+
+    @Column(columnDefinition = "TEXT")
+    private String koscContactPhone;
+
+    @Column(columnDefinition = "TEXT")
+    private String koscContactEmail1;
+
+    @Column(columnDefinition = "TEXT")
+    private String koscContactEmail2;
+
+    @Column(columnDefinition = "TEXT")
+    private String koscContactEmail3;
+
+    @Column(columnDefinition = "TEXT")
+    private String koscSplitterPosition;
+
+    @Column(columnDefinition = "TEXT")
+    private String koscComment;
+
+
+    @Column(columnDefinition = "TEXT")
+    private String otpRef;
+
+    @Column(columnDefinition = "TEXT")
+    private String operatorComment;
+
     @Lob
     @Column(columnDefinition = "TEXT")
     private String fromConfirmationClient;
@@ -821,7 +859,6 @@ public class OrdreKosc {
     public void setDelaiPriseRdvParHeure(double delaiPriseRdvParHeure) {
         this.delaiPriseRdvParHeure = delaiPriseRdvParHeure;
     }
-
 
 
     public String getToReplanification() {
@@ -1839,7 +1876,6 @@ public class OrdreKosc {
     public void setDateAppelReplanification(Date dateAppelReplanification) {
         this.dateAppelReplanification = dateAppelReplanification;
     }
-
 
 
     public TemplateEmailReplanification getTemplateEmailReplanification() {
@@ -2925,6 +2961,109 @@ public class OrdreKosc {
 
     public void setUserImportation(User userImportation) {
         this.userImportation = userImportation;
+    }
+
+    public String getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(String supplier) {
+        this.supplier = supplier;
+    }
+
+    public String getCustomerOperator() {
+        return customerOperator;
+    }
+
+    public void setCustomerOperator(String customerOperator) {
+        this.customerOperator = customerOperator;
+    }
+
+    public String getSlid() {
+        return slid;
+    }
+
+    public void setSlid(String slid) {
+        this.slid = slid;}
+
+    public String getKoscContactFirstName() {
+        return koscContactFirstName;
+    }
+
+    public void setKoscContactFirstName(String koscContactFirstName) {
+        this.koscContactFirstName = koscContactFirstName;
+    }
+
+    public String getKoscContactLastName() {
+        return koscContactLastName;
+    }
+
+    public void setKoscContactLastName(String koscContactLastName) {
+        this.koscContactLastName = koscContactLastName;
+    }
+
+    public String getKoscContactPhone() {
+        return koscContactPhone;
+    }
+
+    public void setKoscContactPhone(String koscContactPhone) {
+        this.koscContactPhone = koscContactPhone;
+    }
+
+    public String getKoscContactEmail1() {
+        return koscContactEmail1;
+    }
+
+    public void setKoscContactEmail1(String koscContactEmail1) {
+        this.koscContactEmail1 = koscContactEmail1;
+    }
+
+    public String getKoscContactEmail2() {
+        return koscContactEmail2;
+    }
+
+    public void setKoscContactEmail2(String koscContactEmail2) {
+        this.koscContactEmail2 = koscContactEmail2;
+    }
+
+    public String getKoscContactEmail3() {
+        return koscContactEmail3;
+    }
+
+    public void setKoscContactEmail3(String koscContactEmail3) {
+        this.koscContactEmail3 = koscContactEmail3;
+    }
+
+    public String getKoscSplitterPosition() {
+        return koscSplitterPosition;
+    }
+
+    public void setKoscSplitterPosition(String koscSplitterPosition) {
+        this.koscSplitterPosition = koscSplitterPosition;
+    }
+
+    public String getKoscComment() {
+        return koscComment;
+    }
+
+    public void setKoscComment(String koscComment) {
+        this.koscComment = koscComment;
+    }
+
+    public String getOtpRef() {
+        return otpRef;
+    }
+
+    public void setOtpRef(String koscOtpRef) {
+        this.otpRef = koscOtpRef;
+    }
+
+    public String getOperatorComment() {
+        return operatorComment;
+    }
+
+    public void setOperatorComment(String operatorComment) {
+        this.operatorComment = operatorComment;
     }
 }
 
