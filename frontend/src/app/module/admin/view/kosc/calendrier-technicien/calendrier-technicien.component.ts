@@ -24,7 +24,8 @@ import tippy from "tippy.js";
 })
 export class CalendrierTechnicienComponent implements OnInit {
 
-    Events = [];
+    deptTechEvents = [];
+    arretTravailEvents = [];
     options: any;
     header: any;
     event: any;
@@ -44,15 +45,15 @@ export class CalendrierTechnicienComponent implements OnInit {
             plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
             eventDidMount: this.handleEventHover.bind(this),
             initialView: 'dayGridMonth',
-            timeZone: 'local', // the default (unnecessary to specify)
-            // dateClick: this.handleDateClick.bind(this), // bind is important!
+            timeZone: 'local',
+            dateClick: this.handleDateClick.bind(this), // bind is important!
             // eventClick: this.handleEventClick.bind(this),
             // events: [
             //     { title: 'event 1', date: '2022-06-01' },
             //     { title: 'event 2', date: '2022-06-02' }
             // ]
-            events: this.Events,
-            eventColor: '#378006',
+            events: this.deptTechEvents,
+            eventColor: '#547a3b',
             weekends: false,
             headerToolbar: {
                 left: 'prev,next today',
@@ -87,14 +88,15 @@ export class CalendrierTechnicienComponent implements OnInit {
                 title: e.technicienVo.nom + ' ' + e.technicienVo.prenom,
                 start: e.dateDebut,
                 end: e.dateFin,
+                // content: e.id,
                 displayEventTime: true,
             };
-            this.Events.push(this.event);
+            this.deptTechEvents.push(this.event);
             console.log(this.event);
         })
     }
 
-    
+
     handleDateClick(arg) {
         // alert('date click! ' + arg.dateStr)
         this.openCreateDepartementTechnicien('dptTech');
@@ -151,6 +153,11 @@ export class CalendrierTechnicienComponent implements OnInit {
     }
 
     _submitted = false;
+    private _errorMessages = new Array<string>();
+    _validDepartementTechnicienTechnicien = true;
+    _validDepartementTechnicienDepartement = true;
+    _validDepartementTechnicienDateDebut = true;
+
 
     get submitted(): boolean {
         return this._submitted;
@@ -160,7 +167,6 @@ export class CalendrierTechnicienComponent implements OnInit {
         this._submitted = value;
     }
 
-    private _errorMessages = new Array<string>();
 
     get errorMessages(): string[] {
         return this._errorMessages;
@@ -170,7 +176,6 @@ export class CalendrierTechnicienComponent implements OnInit {
         this._errorMessages = value;
     }
 
-    _validDepartementTechnicienTechnicien = true;
 
     get validDepartementTechnicienTechnicien(): boolean {
         return this._validDepartementTechnicienTechnicien;
@@ -180,7 +185,6 @@ export class CalendrierTechnicienComponent implements OnInit {
         this._validDepartementTechnicienTechnicien = value;
     }
 
-    _validDepartementTechnicienDepartement = true;
 
     get validDepartementTechnicienDepartement(): boolean {
         return this._validDepartementTechnicienDepartement;
@@ -190,7 +194,6 @@ export class CalendrierTechnicienComponent implements OnInit {
         this._validDepartementTechnicienDepartement = value;
     }
 
-    _validDepartementTechnicienDateDebut = true;
 
     get validDepartementTechnicienDateDebut(): boolean {
         return this._validDepartementTechnicienDateDebut;
