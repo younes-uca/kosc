@@ -861,8 +861,8 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
                     this.editOrdreKoscDialog = false;
                 } else {
                     this.messageService.add({
-                        severity: 'error',
-                        summary: 'Erreurs', detail: 'échec d\'envoi'
+                        severity: 'warn',
+                        summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
                     });
 
                 }
