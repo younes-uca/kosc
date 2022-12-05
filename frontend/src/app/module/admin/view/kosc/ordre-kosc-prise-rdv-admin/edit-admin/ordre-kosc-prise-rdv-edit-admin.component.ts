@@ -91,6 +91,13 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
 // methods
 
+    public formatDdMmYy(date : Date): string{
+        return date != null ? this.datePipe.transform(date, 'd/M/yyyy') : '' ;
+    }
+    public formatHhMm(date : Date): string{
+        return date != null ? this.datePipe.transform(date, 'hh:mm') : '' ;
+    }
+
     ngOnInit(): void {
 
         this.buttonDisabled = true
