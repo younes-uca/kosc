@@ -125,6 +125,7 @@ import {
 } from "./template-email-report-demande-maneo-client-joignable-accepte-admin/list-admin/template-email-report-demande-maneo-client-joignable-accepte-list-admin.component";
 import {UserListComponent} from "./user-list/user-list.component";
 import {RoleListComponent} from "./role-list/role-list.component";
+import {CalendrierTechnicienComponent} from "./calendrier-technicien/calendrier-technicien.component";
 
 
 @NgModule({
@@ -372,6 +373,17 @@ import {RoleListComponent} from "./role-list/role-list.component";
                                 {
                                     path: 'list',
                                     component: DepartementTechnicienAdminComponent,
+                                    canActivate: [AuthGuard]
+                                }
+                            ]
+                        },
+                        {
+
+                            path: 'calendrier-technicien',
+                            children: [
+                                {
+                                    path: 'list',
+                                    component: CalendrierTechnicienComponent,
                                     canActivate: [AuthGuard]
                                 }
                             ]

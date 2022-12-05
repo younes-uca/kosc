@@ -139,6 +139,11 @@ export class AppMenuComponent implements OnInit {
                             routerLink: ['/app/admin/kosc/departement-technicien/list']
                         },
                         {
+                            label: 'Calendrier technicien',
+                            icon: 'pi pi-fw pi-plus-circle',
+                            routerLink: ['/app/admin/kosc/calendrier-technicien/list']
+                        },
+                        {
                             label: 'Region',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/admin/kosc/region/list']

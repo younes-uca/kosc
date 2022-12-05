@@ -1,0 +1,11 @@
+<div class="card card-w-title">
+    <h5>Schedule</h5>
+    <button (click)="openCreateDepartementTechnicien('departementTechnicien')"
+            class="p-button-success p-mr-2 p-mb-2" icon="pi pi-plus" label="Nouveau" pButton
+            pRipple></button>
+    <p-fullCalendar [options]="options"></p-fullCalendar>
+
+
+    <app-departement-technicien-create-admin></app-departement-technicien-create-admin>
+    <app-departement-technicien-edit-admin></app-departement-technicien-edit-admin>
+</div>

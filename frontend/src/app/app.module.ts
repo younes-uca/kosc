@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -69,9 +69,18 @@ import {TableModule} from "primeng/table";
 import {ToastModule} from "primeng/toast";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {DialogModule} from "primeng/dialog";
+import { CalendrierTechnicienComponent } from './module/admin/view/kosc/calendrier-technicien/calendrier-technicien.component';
+import {AppCodeModule} from "./app.code.component";
+import {FullCalendarModule} from "primeng/fullcalendar";
+
 
 @NgModule({
     imports: [
+        AppCodeModule,
+        TabViewModule,
+        CalendarModule,
+        AppCodeModule,
+        TabViewModule,
         ButtonModule,
         PasswordModule,
         FormsModule,
@@ -103,16 +112,16 @@ import {DialogModule} from "primeng/dialog";
         DialogModule,
         ToastModule,
         ConfirmDialogModule,
+        FullCalendarModule,
 
     ],
 
     declarations: [
+
         AppComponent,
         AccessDeniedComponent,
         AppComponent,
         AccessDeniedComponent,
-
-
         AppMainComponent,
         AppMenuComponent,
         AppMenuitemComponent,
@@ -134,7 +143,8 @@ import {DialogModule} from "primeng/dialog";
         AppNotfoundComponent,
         AppErrorComponent,
         AppAccessdeniedComponent,
-        HomeComponent
+        HomeComponent,
+        CalendrierTechnicienComponent
     ],
     providers: [
         /*    { provide: LocationStrategy, useClass: HashLocationStrategy }, */
@@ -154,6 +164,7 @@ import {DialogModule} from "primeng/dialog";
         DatePipe,
     ],
     bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {
 }

@@ -41,7 +41,8 @@ export class DepartementTechnicienListAdminComponent implements OnInit {
 
     home: MenuItem;
 
-    constructor(private datePipe: DatePipe, private departementTechnicienService: DepartementTechnicienService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
+    constructor(private datePipe: DatePipe, private departementTechnicienService: DepartementTechnicienService,
+                private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
         , private technicienService: TechnicienService
         , private departementService: DepartementService
         , private arretTravailService: ArretTravailService
