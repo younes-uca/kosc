@@ -11,7 +11,7 @@
 
                     <div class="p-field p-col-12 p-md-3">
                         <label for="1">Order</label>
-                        <input [(ngModel)]="selectedOrdreKosc.reference" [disabled]="true" class="p-mb-2 p-mr-2"
+                        <input [(ngModel)]="selectedOrdreKosc.reference"  [disabled]="false" class="p-mb-2 p-mr-2"
                                id="1" pInputText
                                placeholder="Reference Order" type="text"
                         />
@@ -19,7 +19,7 @@
                     </div>
                     <div class="p-field p-col-12 p-md-3">
                         <label for="2">Work<span style="color: red;">*</span></label>
-                        <input [(ngModel)]="selectedOrdreKosc.referenceWorkOrder" [disabled]="true"
+                        <input [(ngModel)]="selectedOrdreKosc.referenceWorkOrder"  [disabled]="false"
                                [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscReferenceWorkOrder}"
                                class="p-mb-2 p-mr-2"
                                id="2" pInputText
@@ -31,7 +31,7 @@
 
                     <div class="p-field p-col-11 p-md-2">
                         <label for="999">Technicien</label>
-                        <p-dropdown [(ngModel)]="selectedOrdreKosc.technicienVo" [disabled]="true"
+                        <p-dropdown [(ngModel)]="selectedOrdreKosc.technicienVo"  [disabled]="false"
                                     [filter]="true" [options]="techniciens" [showClear]="true"
                                     filterMatchMode="contains"
                                     id="999"
@@ -50,7 +50,7 @@
 
                     <div class="p-field p-col-12 p-md-3">
                         <label for="30">Date rdv</label>
-                        <p-calendar [(ngModel)]="selectedOrdreKosc.dateRdv" [disabled]="true" [showSeconds]="false"
+                        <p-calendar [(ngModel)]="selectedOrdreKosc.dateRdv" [disabled]="false" [showSeconds]="false"
                                     [showTime]="true"
                                     dateFormat="{{dateFormat}}" id="30"
                                     placeholder="Date rdv">
@@ -60,7 +60,7 @@
 
                     <div class="p-field p-col-11 p-md-2">
                         <label for="98">Departement</label>
-                        <p-dropdown [(ngModel)]="selectedOrdreKosc.departementVo" [disabled]="true"
+                        <p-dropdown [(ngModel)]="selectedOrdreKosc.departementVo"  [disabled]="false"
                                     [filter]="true" [options]="departements" [showClear]="true"
                                     filterMatchMode="contains" id="98"
                                     optionLabel="libelle"
@@ -98,7 +98,7 @@
 
                     <div class="p-field p-col-11 p-md-2">
                         <label for="220">Operator</label>
-                        <p-dropdown [(ngModel)]="selectedOrdreKosc.operatorVo" [disabled]="true"
+                        <p-dropdown [(ngModel)]="selectedOrdreKosc.operatorVo"  [disabled]="false"
                                     [filter]="true" [options]="operators" [showClear]="true"
                                     filterMatchMode="contains"
                                     id="220"
@@ -117,7 +117,7 @@
 
                     <div class="p-field p-col-12 p-md-3">
                         <label for="102">Numero serie ont</label>
-                        <input [(ngModel)]="selectedOrdreKosc.numeroSerieOnt" [disabled]="true" class="p-mb-2 p-mr-2"
+                        <input [(ngModel)]="selectedOrdreKosc.numeroSerieOnt"  [disabled]="false" class="p-mb-2 p-mr-2"
                                id="102" pInputText
                                placeholder="Numero serie ont" type="text"
                         />
@@ -143,7 +143,7 @@
                     <!--                    </div>-->
                     <div class="p-field p-col-12 p-md-3">
                         <label for="142">Commentaire client</label>
-                        <textarea [(ngModel)]="selectedOrdreKosc.commentaireClient" [disabled]="true" cols="30" id="142"
+                        <textarea [(ngModel)]="selectedOrdreKosc.commentaireClient"  [disabled]="false" cols="30" id="142"
                                   pInputTextarea placeholder="Commentaire client"
                                   rows="5"
                         ></textarea>
@@ -152,7 +152,7 @@
 
                     <div class="p-field p-col-12 p-md-3">
                         <label for="200">Commentaire operateur</label>
-                        <textarea [(ngModel)]="selectedOrdreKosc.commentaireTechnicien" [disabled]="true" cols="30"
+                        <textarea [(ngModel)]="selectedOrdreKosc.commentaireTechnicien"  [disabled]="false" cols="30"
                                   id="200" pInputTextarea
                                   placeholder="Commentaire operateur (add it to yaml)"
                                   rows="5"
@@ -161,7 +161,7 @@
 
                     <div class="p-field p-col-12 p-md-3">
                         <label for="25">Submission date</label>
-                        <p-calendar [(ngModel)]="selectedOrdreKosc.submissionDate" [disabled]="true"
+                        <p-calendar [(ngModel)]="selectedOrdreKosc.submissionDate"  [disabled]="false"
                                     [showSeconds]="false" [showTime]="true"
                                     dateFormat="{{dateFormat}}" id="25"
                                     placeholder="Submission date">
@@ -191,7 +191,7 @@
                             <label for="49">Racordement long</label>
                         </div>
                         <div class="input-switch">
-                            <p-inputSwitch [(ngModel)]="selectedOrdreKosc.racordementLong" [disabled]="true" id="49"
+                            <p-inputSwitch [(ngModel)]="selectedOrdreKosc.racordementLong"  [disabled]="false" id="49"
                             >
                             </p-inputSwitch>
 
@@ -200,7 +200,7 @@
 
                     <div class="p-field p-col-12 p-md-3">
                         <label for="390">Type pbo</label>
-                        <input [(ngModel)]="selectedOrdreKosc.typePbo" [disabled]="true" class="p-mb-2 p-mr-2"
+                        <input [(ngModel)]="selectedOrdreKosc.typePbo"  [disabled]="false" class="p-mb-2 p-mr-2"
                                id="390" pInputText
                                placeholder="Type pbo" type="text"
                         />
@@ -209,7 +209,7 @@
 
                     <div class="p-field p-col-12 p-md-3">
                         <label for="101">Pbo reel</label>
-                        <input [(ngModel)]="selectedOrdreKosc.pboReel" [disabled]="true" class="p-mb-2 p-mr-2"
+                        <input [(ngModel)]="selectedOrdreKosc.pboReel"  [disabled]="false" class="p-mb-2 p-mr-2"
                                id="101" pInputText
                                placeholder="Pbo reel" type="text"
                         />

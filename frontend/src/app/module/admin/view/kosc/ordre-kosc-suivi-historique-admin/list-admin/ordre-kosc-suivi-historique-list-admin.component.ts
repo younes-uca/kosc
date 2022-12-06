@@ -1051,8 +1051,8 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
 
     private setDateEnvoiMinAndMax() {
         let today =new Date();
-        this.searchOrdreKosc.dateEnvoiPlanificationMin=null;
-        this.searchOrdreKosc.dateEnvoiPlanificationMax= moment(today).format("yyyy-MM-DD");
+        this.searchOrdreKosc.dateRdvMin=null;
+        this.searchOrdreKosc.dateRdvMax= moment(today).format("yyyy-MM-DD");
         console.log(this.searchOrdreKosc.dateEnvoiPlanificationMax)
     }
 

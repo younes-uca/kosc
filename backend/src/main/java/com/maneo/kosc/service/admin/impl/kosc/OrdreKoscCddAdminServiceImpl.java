@@ -65,7 +65,7 @@ public class OrdreKoscCddAdminServiceImpl implements OrdreKoscCddAdminService {
         query += " AND o.codeDecharge is NULL";
 
         query += " ORDER BY o.nbrHeureDateSubmissionAndNow DESC, o.submissionDate ASC";
-        System.out.println("query = " + query);
+
 
         List<OrdreKosc> resultList = entityManager.createQuery(query).getResultList();
 
