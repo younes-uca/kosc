@@ -424,29 +424,39 @@ this.selectedOrdreKosc.userClientInjoinable= userCourant;
     }
 
     sendConfirmationEmailToClient() {
-        this.showSpinner = true;
-        this.blocked = true;
+        this.validateFormConfirmation();
+        if (this.errorMessages.length === 0) {
+            this.showSpinner = true;
+            this.blocked = true;
 
-        this.ordreKoscService.sendConfirmationEmailToClient().subscribe(data => {
-                if (data.envoyeConfirmationClient == true) {
+            this.ordreKoscService.sendConfirmationEmailToClient().subscribe(data => {
+                    if (data.envoyeConfirmationClient == true) {
 
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                    this.editOrdreKoscDialog = false;
-                } else {
-                    this.messageService.add({
-                        severity: 'warn',
-                        summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
-                    });
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Success',
+                            detail: 'Email envoyé avec succès'
+                        });
+                        this.editOrdreKoscDialog = false;
+                    } else {
+                        this.messageService.add({
+                            severity: 'warn',
+                            summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
+                        });
 
+                    }
+                    this.showSpinner = false;
+                    this.blocked = false;
                 }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );
+            );
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
+
 
     }
 
@@ -854,6 +864,15 @@ this.selectedOrdreKosc.userClientInjoinable= userCourant;
     }
 
 //validation methods
+
+
+    private validateFormConfirmation(): void {
+        this.validateOrdreKoscObjetConfirmationClient();
+        this.validateOrdreKoscCorpsConfirmationClient();
+        this.validateOrdreKoscFromConfirmationClient();
+        this.validateOrdreKoscToConfirmationClient();
+
+    }
     private validateFormMauvaisContact(): void {
         this.errorMessages = new Array<string>();
         this.validateOrdreKoscObjetMauvaisContact();
@@ -879,6 +898,7 @@ this.selectedOrdreKosc.userClientInjoinable= userCourant;
         this.validateOrdreKoscToRefus();
 
     }
+ 
     private validateForm(): void {
         this.errorMessages = new Array<string>();
         this.validateOrdreKoscDateRdv();
