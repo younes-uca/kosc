@@ -601,12 +601,15 @@
 
                             </div>
                             <div class="p-field p-col-12 p-md-6">
-                                <label for="30">Date rendez-vous</label>
+                                <label for="30">Date rendez-vous<span style="color: red;">*</span></label>
                                 <p-calendar dateFormat="{{dateFormat}}" [(ngModel)]="selectedOrdreKosc.dateRdv"
+                                            [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscDateRendezVous}"
                                             [showSeconds]="false" [showTime]="true"
                                             id="30"
                                             placeholder="Date rdv">
-                                </p-calendar>
+
+                                </p-calendar><small *ngIf='!validOrdreKoscDateRendezVous' class='p-error'>Date rendez-vous
+                                est obligatoire.</small>
 
 
                             </div>
@@ -618,39 +621,44 @@
                                        id="123"
                                        pInputText placeholder="De"
                                        type="text"/>
-                                <!--                                <small *ngIf='!validOrdreKoscFromPlanification' class='p-error'>From est-->
-                                <!--                                    obligatoire.</small>-->
+                                <small *ngIf='!validOrdreKoscFromPlanification' class='p-error'>From est
+                                                                    obligatoire.</small>
                             </div>
 
 
                             <div class="p-field p-col-12 p-md-4">
-                                <label for="124">A<span style="color: red;"></span></label>
+                                <label for="124">A<span style="color: red;">*</span></label>
                                 <input [(ngModel)]="selectedOrdreKosc.toPlanification"
                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToPlanification}"
                                        class="p-mb-2 p-mr-2"
                                        id="124"
                                        pInputText placeholder="A"
                                        type="text"/>
-                                <!--                                <small *ngIf='!validOrdreKoscToPlanification' class='p-error'>To est-->
-                                <!--                                    obligatoire.</small>-->
+                                <small *ngIf='!validOrdreKoscToPlanification' class='p-error'>To est
+                                                                    obligatoire.</small>
                             </div>
 
                             <div class="p-field p-col-12 p-md-4">
-                                <label for="127">Objet</label>
+                                <label for="127">Objet<span style="color: red;">*</span></label>
                                 <input [(ngModel)]="selectedOrdreKosc.objetPlanification" class="p-mb-2 p-mr-2" id="127"
+                                       [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscObjetPlanification}"
                                        pInputText
                                        placeholder="Objet" type="text"
-                                />
+                                /><small *ngIf='!validOrdreKoscObjetPlanification' class='p-error'>Objet est
+                                obligatoire.</small>
 
                             </div>
 
                             <div class="p-field p-col-12 p-md-6">
-                                <label for="128">Corps</label>
+                                <label for="128">Corps<span style="color: red;">*</span></label>
                                 <textarea [(ngModel)]="selectedOrdreKosc.corpsPlanification" cols="30" id="128"
+                                          [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscCorpsPlanification}"
+
                                           pInputTextarea
                                           placeholder="Corps"
                                           rows="10"
-                                ></textarea>
+                                ></textarea><small *ngIf='!validOrdreKoscCorpsPlanification' class='p-error'>Corps est
+                                obligatoire.</small>
 
                             </div>
 
@@ -1047,7 +1055,7 @@
                                 <input [(ngModel)]="selectedOrdreKosc.objetRefus"
                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscObjetRefus}"
                                        class="p-mb-2 p-mr-2"
-                                       id="136"
+                                       id="137"
                                        pInputText placeholder="Objet refus"
                                        type="text"/>
                                 <small *ngIf='!validOrdreKoscObjetRefus' class='p-error'>Objet est obligatoire.</small>

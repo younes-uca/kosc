@@ -20,7 +20,7 @@ import java.util.*;
 //import static jdk.internal.org.jline.utils.Colors.s;
 
 @Service
-public class ImportOrdreKoscAdminServiceImpl implements ImportOrdreKoscAdminService {
+public class OrdreKoscImportAdminServiceImpl implements ImportOrdreKoscAdminService {
 
     @Autowired
     private OrdreKoscDao ordreKoscDao;

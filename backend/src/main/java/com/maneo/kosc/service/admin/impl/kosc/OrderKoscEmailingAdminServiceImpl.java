@@ -6,7 +6,6 @@ import com.maneo.kosc.dao.kosc.OrdreKoscDao;
 import com.maneo.kosc.security.dao.UserDao;
 import com.maneo.kosc.service.admin.facade.*;
 import com.maneo.kosc.service.admin.facade.kosc.EmailingOrderKoscAdminService;
-import com.maneo.kosc.service.admin.facade.kosc.OrdreKoscAdminService;
 import com.maneo.kosc.service.util.DateUtil;
 
 
@@ -17,7 +16,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 
 @Service
-public class EmailingOrderKoscAdminServiceImpl  implements EmailingOrderKoscAdminService {
+public class OrderKoscEmailingAdminServiceImpl implements EmailingOrderKoscAdminService {
     @Autowired
     private OrdreKoscDao ordreKoscDao;
 private UserDao userDao;

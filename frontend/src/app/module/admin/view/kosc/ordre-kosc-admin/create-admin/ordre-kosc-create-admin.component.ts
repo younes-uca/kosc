@@ -141,25 +141,7 @@ export class OrdreKoscCreateAdminComponent implements OnInit {
         this._validOrdreKoscToPlanification = value;
     }
 
-    _validOrdreKoscObjetReport = true;
 
-    get validOrdreKoscObjetReport(): boolean {
-        return this._validOrdreKoscObjetReport;
-    }
-
-    set validOrdreKoscObjetReport(value: boolean) {
-        this._validOrdreKoscObjetReport = value;
-    }
-
-    _validOrdreKoscCorpsReport = true;
-
-    get validOrdreKoscCorpsReport(): boolean {
-        return this._validOrdreKoscCorpsReport;
-    }
-
-    set validOrdreKoscCorpsReport(value: boolean) {
-        this._validOrdreKoscCorpsReport = value;
-    }
 
     _validOrdreKoscObjetReplanification = true;
 
@@ -1729,8 +1711,6 @@ export class OrdreKoscCreateAdminComponent implements OnInit {
         this.validOrdreKoscCorpsPlanification = value;
         this.validOrdreKoscFromPlanification = value;
         this.validOrdreKoscToPlanification = value;
-        this.validOrdreKoscObjetReport = value;
-        this.validOrdreKoscCorpsReport = value;
         this.validOrdreKoscObjetReplanification = value;
         this.validOrdreKoscCorpsReplanification = value;
         this.validOrdreKoscObjetRefus = value;
