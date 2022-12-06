@@ -534,27 +534,36 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
     sendMauvaisContactEmail() {
-        this.showSpinner = true;
-        this.blocked = true;
-        this.ordreKoscService.sendMauvaisContactEmail().subscribe(data => {
-                if (data.envoyeMauvaisContact == true) {
+        this.validateFormMauvaisContact();
+        if (this.errorMessages.length === 0) {
+            this.showSpinner = true;
+            this.blocked = true;
+            this.ordreKoscService.sendMauvaisContactEmail().subscribe(data => {
+                    if (data.envoyeMauvaisContact == true) {
 
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                    this.editOrdreKoscDialog = false;
-                } else {
-                    this.messageService.add({
-                        severity: 'warn',
-                        summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
-                    });
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Success',
+                            detail: 'Email envoyé avec succès'
+                        });
+                        this.editOrdreKoscDialog = false;
+                    } else {
+                        this.messageService.add({
+                            severity: 'warn',
+                            summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
+                        });
+                    }
+                    this.showSpinner = false;
+                    this.blocked = false;
                 }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );
+            );
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
     }
 
     sendRefusClientEmail() {
@@ -843,6 +852,14 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
 //validation methods
+    private validateFormMauvaisContact(): void {
+        this.errorMessages = new Array<string>();
+        this.validateOrdreKoscObjetMauvaisContact();
+        this.validateOrdreKoscCorpsMauvaisContact();
+        this.validateOrdreKoscFromMauvaisContact();
+        this.validateOrdreKoscToMauvaisContact();
+
+    }
     private validateFormPlanification(): void {
         this.errorMessages = new Array<string>();
         this.validateOrdreKoscDateRendezVous();
