@@ -847,6 +847,8 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
     }
 
     sendMailCri() {
+        this.validateFormCri();
+        if (this.errorMessages.length === 0) {
         this.showSpinner = true;
         this.blocked = true;
 
@@ -869,8 +871,118 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
                 this.showSpinner = false;
                 this.blocked = false;
             }
-        );
-
+        );}
+    else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
 
     }
+
+    _validOrdreKoscObjetCri = true;
+
+    get validOrdreKoscObjetCri(): boolean {
+        return this._validOrdreKoscObjetCri;
+    }
+
+    set validOrdreKoscObjetCri(value: boolean) {
+        this._validOrdreKoscObjetCri = value;
+    }
+
+    _validOrdreKoscCorpsCri = true;
+
+    get validOrdreKoscCorpsCri(): boolean {
+        return this._validOrdreKoscCorpsCri;
+    }
+
+    set validOrdreKoscCorpsCri(value: boolean) {
+        this._validOrdreKoscCorpsCri = value;
+    }
+
+    _validOrdreKoscFromCri = true;
+
+    get validOrdreKoscFromCri(): boolean {
+        return this._validOrdreKoscFromCri;
+    }
+
+    set validOrdreKoscFromCri(value: boolean) {
+        this._validOrdreKoscFromCri = value;
+    }
+
+    _validOrdreKoscToCri = true;
+    private _validOrdreKoscDateCri = true;
+
+
+    get validOrdreKoscDateCri(): boolean {
+        return this._validOrdreKoscDateCri;
+    }
+
+    set validOrdreKoscDateCri(value: boolean) {
+        this._validOrdreKoscDateCri = value;
+    }
+
+    get validOrdreKoscToCri(): boolean {
+        return this._validOrdreKoscToCri;
+    }
+
+    set validOrdreKoscToCri(value: boolean) {
+        this._validOrdreKoscToCri = value;
+    }
+    private validateOrdreKoscObjetCri() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.objetCri)) {
+            this.errorMessages.push('Objet cri non valide');
+            this.validOrdreKoscObjetCri = false;
+        } else {
+            this.validOrdreKoscObjetCri = true;
+        }
+    }
+
+    private validateOrdreKoscCorpsCri() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.corpsCri)) {
+            this.errorMessages.push('Corps cri non valide');
+            this.validOrdreKoscCorpsCri = false;
+        } else {
+            this.validOrdreKoscCorpsCri = true;
+        }
+    }
+
+    private validateOrdreKoscFromCri() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.fromCri)) {
+            this.errorMessages.push('De cri non valide');
+            this.validOrdreKoscFromCri = false;
+        } else {
+            this.validOrdreKoscFromCri = true;
+        }
+    }
+
+    private validateOrdreKoscToCri() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.toCri)) {
+            this.errorMessages.push('A cri non valide');
+            this.validOrdreKoscToCri = false;
+        } else {
+            this.validOrdreKoscToCri = true;
+        }
+    }
+    private validateOrdreKoscDateCri() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.dateCri)) {
+            this.errorMessages.push('date cri non valide');
+            this.validOrdreKoscDateCri = false;
+        } else {
+            this.validOrdreKoscDateCri = true;
+        }
+    }
+    private validateFormCri(): void {
+        this.errorMessages = new Array<string>();
+        this.validateOrdreKoscDateCri();
+        this.validateOrdreKoscObjetCri();
+        this.validateOrdreKoscCorpsCri();
+        this.validateOrdreKoscFromCri();
+        this.validateOrdreKoscToCri();
+
+    }
+
+
 }

@@ -1186,34 +1186,34 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
     sendMailReplanification() {
         this.validateFormReplanification();
         if (this.errorMessages.length === 0) {
-        this.showSpinner = true;
-        this.blocked = true;
-        this.ordreKoscService.sendMailReplanification().subscribe(data => {
-                if (data.envoyeReplanification == true) {
+            this.showSpinner = true;
+            this.blocked = true;
+            this.ordreKoscService.sendMailReplanification().subscribe(data => {
+                    if (data.envoyeReplanification == true) {
 
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                    this.editOrdreKoscDialog = false;
-                } else {
-                    this.messageService.add({
-                        severity: 'warn',
-                        summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
-                    });
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Success',
+                            detail: 'Email envoyé avec succès'
+                        });
+                        this.editOrdreKoscDialog = false;
+                    } else {
+                        this.messageService.add({
+                            severity: 'warn',
+                            summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
+                        });
+                    }
+                    this.showSpinner = false;
+                    this.blocked = false;
                 }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );
-    } else {
-    this.messageService.add({
-                                severity: 'error',
-                                summary: 'Erreurs',
-                                detail: 'Merci de corrigé les erreurs sur le formulaire'
-                            });
-}
+            );
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
     }
 
 
