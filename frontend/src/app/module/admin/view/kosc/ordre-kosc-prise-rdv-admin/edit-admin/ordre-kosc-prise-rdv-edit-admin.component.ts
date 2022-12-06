@@ -894,6 +894,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
 
     private validateFormConfirmation(): void {
+        this.errorMessages = new Array<string>();
         this.validateOrdreKoscObjetConfirmationClient();
         this.validateOrdreKoscCorpsConfirmationClient();
         this.validateOrdreKoscFromConfirmationClient();
@@ -930,6 +931,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
     private validateFormClientInjoinableKosc(): void {
+        this.errorMessages = new Array<string>();
         this.validateOrdreKoscObjetClientInjoinableKosc();
         this.validateOrdreKoscCorpsClientInjoinableKosc();
         this.validateOrdreKoscFromClientInjoinableKosc();
@@ -1023,7 +1025,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     private validateOrdreKoscFromPlanification() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.fromPlanification)) {
-            this.errorMessages.push('From planification non valide');
+            this.errorMessages.push('De planification non valide');
             this.validOrdreKoscFromPlanification = false;
         } else {
             this.validOrdreKoscFromPlanification = true;
@@ -1032,7 +1034,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     private validateOrdreKoscToPlanification() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.toPlanification)) {
-            this.errorMessages.push('To planification non valide');
+            this.errorMessages.push('A planification non valide');
             this.validOrdreKoscToPlanification = false;
         } else {
             this.validOrdreKoscToPlanification = true;
@@ -1040,23 +1042,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
 
-    private validateOrdreKoscObjetReplanification() {
-        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.objetReplanification)) {
-            this.errorMessages.push('Objet replanification non valide');
-            this.validOrdreKoscObjetReplanification = false;
-        } else {
-            this.validOrdreKoscObjetReplanification = true;
-        }
-    }
 
-    private validateOrdreKoscCorpsReplanification() {
-        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.corpsReplanification)) {
-            this.errorMessages.push('Corps replanification non valide');
-            this.validOrdreKoscCorpsReplanification = false;
-        } else {
-            this.validOrdreKoscCorpsReplanification = true;
-        }
-    }
 
     private validateOrdreKoscObjetRefus() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.objetRefus)) {
@@ -1078,7 +1064,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     private validateOrdreKoscFromRefus() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.fromRefus)) {
-            this.errorMessages.push('From refus non valide');
+            this.errorMessages.push('De refus non valide');
             this.validOrdreKoscFromRefus = false;
         } else {
             this.validOrdreKoscFromRefus = true;
@@ -1087,7 +1073,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     private validateOrdreKoscToRefus() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.toRefus)) {
-            this.errorMessages.push('To refus non valide');
+            this.errorMessages.push('A refus non valide');
             this.validOrdreKoscToRefus = false;
         } else {
             this.validOrdreKoscToRefus = true;
@@ -1114,7 +1100,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     private validateOrdreKoscFromMauvaisContact() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.fromMauvaisContact)) {
-            this.errorMessages.push('From mauvais contact non valide');
+            this.errorMessages.push('De mauvais contact non valide');
             this.validOrdreKoscFromMauvaisContact = false;
         } else {
             this.validOrdreKoscFromMauvaisContact = true;
@@ -1123,7 +1109,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     private validateOrdreKoscToMauvaisContact() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.toMauvaisContact)) {
-            this.errorMessages.push('To mauvais contact non valide');
+            this.errorMessages.push('A mauvais contact non valide');
             this.validOrdreKoscToMauvaisContact = false;
         } else {
             this.validOrdreKoscToMauvaisContact = true;
@@ -1150,7 +1136,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     private validateOrdreKoscFromConfirmationClient() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.fromConfirmationClient)) {
-            this.errorMessages.push('From confirmation client non valide');
+            this.errorMessages.push('De confirmation client non valide');
             this.validOrdreKoscFromConfirmationClient = false;
         } else {
             this.validOrdreKoscFromConfirmationClient = true;
@@ -1159,7 +1145,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     private validateOrdreKoscToConfirmationClient() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.toConfirmationClient)) {
-            this.errorMessages.push('To confirmation client non valide');
+            this.errorMessages.push('A confirmation client non valide');
             this.validOrdreKoscToConfirmationClient = false;
         } else {
             this.validOrdreKoscToConfirmationClient = true;
@@ -1178,7 +1164,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     private validateOrdreKoscFromClientInjoinable() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.fromClientInjoinable)) {
-            this.errorMessages.push('From client injoinable non valide');
+            this.errorMessages.push('De client injoinable non valide');
             this.validOrdreKoscFromClientInjoinable = false;
         } else {
             this.validOrdreKoscFromClientInjoinable = true;
@@ -1186,7 +1172,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
     private validateOrdreKoscCorpsClientInjoinable() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.corpsClientInjoinable)) {
-            this.errorMessages.push('From client injoinable non valide');
+            this.errorMessages.push('De client injoinable non valide');
             this.validOrdreKoscCorpsClientInjoinable = false;
         } else {
             this.validOrdreKoscCorpsClientInjoinable = true;
@@ -1195,7 +1181,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     private validateOrdreKoscToClientInjoinable() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.toClientInjoinable)) {
-            this.errorMessages.push('To client injoinable non valide');
+            this.errorMessages.push('A client injoinable non valide');
             this.validOrdreKoscToClientInjoinable = false;
         } else {
             this.validOrdreKoscToClientInjoinable = true;
@@ -1240,7 +1226,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     private validateOrdreKoscFromClientInjoinableKosc() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.fromClientInjoinableKosc)) {
-            this.errorMessages.push('From client injoinable kosc non valide');
+            this.errorMessages.push('De client injoinable kosc non valide');
             this.validOrdreKoscFromClientInjoinableKosc = false;
         } else {
             this.validOrdreKoscFromClientInjoinableKosc = true;
@@ -1249,7 +1235,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     private validateOrdreKoscFromAutre() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.fromAutre)) {
-            this.errorMessages.push('From autre non valide');
+            this.errorMessages.push('De autre non valide');
             this.validOrdreKoscFromAutre = false;
         } else {
             this.validOrdreKoscFromAutre = true;
@@ -1258,7 +1244,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     private validateOrdreKoscToClientInjoinableKosc() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.toClientInjoinableKosc)) {
-            this.errorMessages.push('To client injoinable kosc non valide');
+            this.errorMessages.push('A client injoinable kosc non valide');
             this.validOrdreKoscToClientInjoinableKosc = false;
         } else {
             this.validOrdreKoscToClientInjoinableKosc = true;
@@ -1267,7 +1253,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     private validateOrdreKoscToAutre() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.toAutre)) {
-            this.errorMessages.push('To aute non valide');
+            this.errorMessages.push('A aute non valide');
             this.validOrdreKoscToAutre = false;
         } else {
             this.validOrdreKoscToAutre = true;
@@ -1486,7 +1472,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 // getters and setters
 
 
-    private _validOrdreKoscDateRendezVous = true;
+     _validOrdreKoscDateRendezVous = true;
 
 
     get validOrdreKoscDateRendezVous(): boolean {
@@ -1497,10 +1483,10 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         this._validOrdreKoscDateRendezVous = value;
     }
 
-    private _validOrdreKoscFromAutre = true;
-    private _validOrdreKoscToAutre = true;
-    private _validOrdreKoscObjetAutre = true;
-    private _validOrdreKoscCorpsAutre = true;
+     _validOrdreKoscFromAutre = true;
+     _validOrdreKoscToAutre = true;
+     _validOrdreKoscObjetAutre = true;
+     _validOrdreKoscCorpsAutre = true;
 
 
     get validOrdreKoscFromAutre(): boolean {
