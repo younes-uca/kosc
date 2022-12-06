@@ -36,7 +36,7 @@ public class OrdreKoscCddAdminServiceImpl implements OrdreKoscCddAdminService {
         query += SearchUtil.addConstraintDate("o", "dateCri", "=", ordreKoscVo.getDateCri());
         query += SearchUtil.addConstraintMinMax("o", "nbrHeureDateSubmissionAndNow", ordreKoscVo.getNbrHeureDateSubmissionAndNowMin(), ordreKoscVo.getNbrHeureDateSubmissionAndNowMax());
         //query += SearchUtil.addConstraintMinMaxDate("o", "dateEnvoiCri", ordreKoscVo.getDateEnvoiCriMin(), ordreKoscVo.getDateEnvoiCriMax());
-        query += SearchUtil.addConstraintMinMaxDate("o", "dateEnvoiPlanification", ordreKoscVo.getDateEnvoiPlanificationMin(), ordreKoscVo.getDateEnvoiPlanificationMax());
+       // query += SearchUtil.addConstraintMinMaxDate("o", "dateEnvoiPlanification", ordreKoscVo.getDateEnvoiPlanificationMin(), ordreKoscVo.getDateEnvoiPlanificationMax());
 
         if (ordreKoscVo.getOperatorVo() != null) {
             query += SearchUtil.addConstraint("o", "operator.id", "=", ordreKoscVo.getOperatorVo().getId());
@@ -65,7 +65,7 @@ public class OrdreKoscCddAdminServiceImpl implements OrdreKoscCddAdminService {
         query += " AND o.codeDecharge is NULL";
 
         query += " ORDER BY o.nbrHeureDateSubmissionAndNow DESC, o.submissionDate ASC";
-
+        System.out.println("query = " + query);
 
         List<OrdreKosc> resultList = entityManager.createQuery(query).getResultList();
 

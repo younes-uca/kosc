@@ -13,7 +13,8 @@ import {environment} from "../../../../../../environments/environment";
 import {TechnicienService} from "../../../../../controller/service/Technicien.service";
 import {DepartementService} from "../../../../../controller/service/Departement.service";
 import {MessageService} from "primeng/api";
-import tippy from "tippy.js";
+// @ts-ignore
+import tippy from 'tippy.js';
 
 
 
@@ -45,8 +46,8 @@ export class CalendrierTechnicienComponent implements OnInit {
             eventDidMount: this.handleEventHover.bind(this),
             initialView: 'dayGridMonth',
             timeZone: 'local', // the default (unnecessary to specify)
-            // dateClick: this.handleDateClick.bind(this), // bind is important!
-            // eventClick: this.handleEventClick.bind(this),
+            dateClick: this.handleDateClick.bind(this), // bind is important!
+            eventClick: this.handleEventClick.bind(this),
             // events: [
             //     { title: 'event 1', date: '2022-06-01' },
             //     { title: 'event 2', date: '2022-06-02' }
@@ -84,7 +85,8 @@ export class CalendrierTechnicienComponent implements OnInit {
     addEvents() {
         this.departementTechniciens.forEach(e => {
             this.event = {
-                title: e.technicienVo.nom + ' ' + e.technicienVo.prenom,
+                id: e.id,
+                title: e.technicienVo?.nom + ' ' + e.technicienVo?.prenom,
                 start: e.dateDebut,
                 end: e.dateFin,
                 displayEventTime: true,
@@ -96,13 +98,13 @@ export class CalendrierTechnicienComponent implements OnInit {
 
     
     handleDateClick(arg) {
-        // alert('date click! ' + arg.dateStr)
+        alert('date click! ' + arg.dateStr)
         this.openCreateDepartementTechnicien('dptTech');
     }
 
-    handleEventClick() {
-        this.viewDepartementTechnicien(this.selectedDepartementTechnicien);
-        console.log('click on event works');
+    handleEventClick(arg) {
+       // this.viewDepartementTechnicien(this.selectedDepartementTechnicien);
+        console.log('click on event works idddd == ' +arg.id);
     }
 
     handleEventHover(info) {
