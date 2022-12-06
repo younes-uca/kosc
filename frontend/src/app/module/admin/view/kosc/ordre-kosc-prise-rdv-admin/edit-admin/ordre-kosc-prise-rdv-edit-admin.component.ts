@@ -158,7 +158,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     }
 
-    public editPasEncore(ordreKosc: OrdreKoscVo) {
+    public editPasEncore() {
         let date: Date = new Date();
 
         if (this.selectedOrdreKosc.datePremierAppel == null) {
@@ -558,28 +558,40 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
     sendRefusClientEmail() {
-        this.showSpinner = true;
-        this.blocked = true;
-        this.ordreKoscService.sendRefusClientEmail().subscribe(data => {
-                if (data.envoyeRefus == true) {
 
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                    this.editOrdreKoscDialog = false;
-                } else {
-                    this.messageService.add({
-                        severity: 'warn',
-                        summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
-                    });
+        this.validateFormRefus();
+        if (this.errorMessages.length === 0) {
+            this.showSpinner = true;
+            this.blocked = true;
+            this.ordreKoscService.sendRefusClientEmail().subscribe(data => {
 
+                    if (data.envoyeRefus == true) {
+
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Success',
+                            detail: 'Email envoyé avec succès'
+                        });
+                        this.editOrdreKoscDialog = false;
+                    } else {
+                        this.messageService.add({
+                            severity: 'warn',
+                            summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
+                        });
+
+                    }
+                    this.showSpinner = false;
+                    this.blocked = false;
                 }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );
+            );
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
+
     }
 
     sendAutreEmail() {
@@ -833,10 +845,19 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 //validation methods
     private validateFormPlanification(): void {
         this.errorMessages = new Array<string>();
+        this.validateOrdreKoscDateRendezVous();
         this.validateOrdreKoscObjetPlanification();
         this.validateOrdreKoscCorpsPlanification();
         this.validateOrdreKoscFromPlanification();
         this.validateOrdreKoscToPlanification();
+
+    }
+    private validateFormRefus(): void {
+        this.errorMessages = new Array<string>();
+        this.validateOrdreKoscObjetRefus();
+        this.validateOrdreKoscCorpsRefus();
+        this.validateOrdreKoscFromRefus();
+        this.validateOrdreKoscToRefus();
 
     }
     private validateForm(): void {
@@ -1155,6 +1176,15 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         }
     }
 
+    private validateOrdreKoscDateRendezVous() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.dateRdv)) {
+            this.errorMessages.push('Date rendez-vous  non valide');
+            this.validOrdreKoscDateRendezVous = false;
+        } else {
+            this.validOrdreKoscDateRendezVous = true;
+        }
+    }
+
 
     public findAppropriateTechnicien(rdv: Date, codeDepartement: string) {
         this.technicienService.findAppropriateTechnicien(rdv, codeDepartement).subscribe(data => {
@@ -1357,6 +1387,18 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
 // getters and setters
 
+
+
+    private _validOrdreKoscDateRendezVous = true;
+
+
+    get validOrdreKoscDateRendezVous(): boolean {
+        return this._validOrdreKoscDateRendezVous;
+    }
+
+    set validOrdreKoscDateRendezVous(value: boolean) {
+        this._validOrdreKoscDateRendezVous = value;
+    }
 
     private _validOrdreKoscFromAutre = true;
     private _validOrdreKoscToAutre = true;
