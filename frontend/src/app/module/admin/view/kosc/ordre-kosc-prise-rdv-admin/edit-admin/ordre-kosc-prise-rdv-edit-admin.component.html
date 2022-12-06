@@ -638,6 +638,7 @@
                             <div class="p-field p-col-12 p-md-4">
                                 <label for="127">Objet</label>
                                 <input [(ngModel)]="selectedOrdreKosc.objetPlanification" class="p-mb-2 p-mr-2" id="127"
+                                       [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscObjetPlanification}"
                                        pInputText
                                        placeholder="Objet" type="text"
                                 />
@@ -647,6 +648,8 @@
                             <div class="p-field p-col-12 p-md-6">
                                 <label for="128">Corps</label>
                                 <textarea [(ngModel)]="selectedOrdreKosc.corpsPlanification" cols="30" id="128"
+                                          [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscCorpsPlanification}"
+
                                           pInputTextarea
                                           placeholder="Corps"
                                           rows="10"
@@ -1047,7 +1050,7 @@
                                 <input [(ngModel)]="selectedOrdreKosc.objetRefus"
                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscObjetRefus}"
                                        class="p-mb-2 p-mr-2"
-                                       id="136"
+                                       id="137"
                                        pInputText placeholder="Objet refus"
                                        type="text"/>
                                 <small *ngIf='!validOrdreKoscObjetRefus' class='p-error'>Objet est obligatoire.</small>
