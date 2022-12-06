@@ -265,6 +265,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
     private changeEtat(myEtat: string) {
+        let userCourant = this.authService.authenticatedUser;
         this.displayPriseRdv = false;
         this.selectedOrdreKosc.etatDemandeKoscVo = this.findEtatDemandeByCode(myEtat);
         if (myEtat === this.etats[4]) {
@@ -274,7 +275,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.toConfirmationClient = this.selectedOrdreKosc.endCustumorContactEmail;
             this.selectedOrdreKosc.objetConfirmationClient = eval(this.selectedDefaultTemplateConfiguration.templateEmailConfirmationClientVo.objet);
             this.selectedOrdreKosc.corpsConfirmationClient = eval(this.selectedDefaultTemplateConfiguration.templateEmailConfirmationClientVo.corps);
-
+this.selectedOrdreKosc.userClientInjoinable= userCourant;
         } else if (myEtat === this.etats[5]) {
             this.indexEdit = 3;
             this.emailIndex = 1;
@@ -282,6 +283,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.toPlanification = this.selectedDefaultTemplateConfiguration.emailKosc;
             this.selectedOrdreKosc.objetPlanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailPlanificationVo.objet);
             this.selectedOrdreKosc.corpsPlanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailPlanificationVo.corps);
+            this.selectedOrdreKosc.userPlanification = userCourant;
         }
     }
 

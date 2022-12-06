@@ -37,6 +37,7 @@ import {
     DefaultTemplateConfigurationService
 } from "../../../../../../controller/service/DefaultTemplateConfiguration.service";
 import {DefaultTemplateConfigurationVo} from "../../../../../../controller/model/DefaultTemplateConfiguration.model";
+import {AuthService} from "../../../../../../controller/service/Auth.service";
 
 @Component({
     selector: 'app-ordre-kosc-suivi-edit-admin',
@@ -67,6 +68,7 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
         , private templateEmailClientInjoinableService: TemplateEmailClientInjoinableService
         , private templateEmailPlanificationService: TemplateEmailPlanificationService
         , private defaultTemplateConfigurationService: DefaultTemplateConfigurationService
+                ,private authService:AuthService
     ) {
 
     }
@@ -1073,6 +1075,7 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
 
 
     private selectTab(myEtat: string) {
+        let userCourant = this.authService.authenticatedUser;
         this.selectedOrdreKosc.etatDemandeKoscVo = this.findEtatDemandeByCode(myEtat);
         this.indexEdit = 1;
         if (myEtat === this.reportEtats[0]) {
@@ -1082,6 +1085,7 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.toReportDemandeManeoClientInjoignable = this.selectedOrdreKosc.endCustumorContactEmail;
             this.selectedOrdreKosc.objetReportDemandeManeoClientInjoignable = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeManeoClientInjoignableVo.objet);
             this.selectedOrdreKosc.corpsReportDemandeManeoClientInjoignable = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeManeoClientInjoignableVo.corps);
+            this.selectedOrdreKosc.userReportDemandeManeoClientInjoignable = userCourant;
         } else if (myEtat === this.reportEtats[1]) {
             this.indexDemande = 0;
             this.indexManeo = 1;
@@ -1089,6 +1093,7 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.toReportDemandeManeoClientJoignableAccepte = this.selectedOrdreKosc.endCustumorContactEmail;
             this.selectedOrdreKosc.objetReportDemandeManeoClientJoignableAccepte = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeManeoClientJoignableAccepteVo.objet);
             this.selectedOrdreKosc.corpsReportDemandeManeoClientJoignableAccepte = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeManeoClientJoignableAccepteVo.corps);
+            this.selectedOrdreKosc.userReportDemandeManeoClientJoignableAccepte=userCourant;
         } else if (myEtat === this.reportEtats[2]) {
             this.indexDemande = 0;
             this.indexManeo = 2;
@@ -1096,6 +1101,7 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.toReportDemandeManeoClientJoignableRefus = this.selectedOrdreKosc.endCustumorContactEmail;
             this.selectedOrdreKosc.objetReportDemandeManeoClientJoignableRefus = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeManeoClientJoignableRefusVo.objet);
             this.selectedOrdreKosc.corpsReportDemandeManeoClientJoignableRefus = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeManeoClientJoignableRefusVo.corps);
+            this.selectedOrdreKosc.userReportDemandeManeoClientJoignableRefus=userCourant;
         }else if (myEtat === this.reportEtats[3]) {
             this.indexDemande = 1;
             this.indexClient = 0;
@@ -1103,7 +1109,7 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.toReportDemandeClientClientInjoignable = this.selectedOrdreKosc.endCustumorContactEmail;
             this.selectedOrdreKosc.objetReportDemandeClientClientInjoignable = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeClientClientInjoignableVo.objet);
             this.selectedOrdreKosc.corpsReportDemandeClientClientInjoignable = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeClientClientInjoignableVo.corps);
-
+            this.selectedOrdreKosc.userReportDemandeClientClientInjoignable=userCourant;
         }else if (myEtat === this.reportEtats[4]) {
             this.indexDemande = 1;
             this.indexClient = 1;
@@ -1111,6 +1117,7 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.toReportDemandeClientClientJoignable = this.selectedOrdreKosc.endCustumorContactEmail;
             this.selectedOrdreKosc.objetReportDemandeClientClientJoignable = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeClientClientJoignableVo.objet);
             this.selectedOrdreKosc.corpsReportDemandeClientClientJoignable = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeClientClientJoignableVo.corps);
+            this.selectedOrdreKosc.userReportDemandeClientClientJoignable=userCourant;
         }
 
 
