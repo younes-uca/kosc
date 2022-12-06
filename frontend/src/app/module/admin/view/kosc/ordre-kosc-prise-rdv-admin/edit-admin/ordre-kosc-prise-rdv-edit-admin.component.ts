@@ -33,7 +33,6 @@ import {
 
 import {TemplateEmailPlanificationVo} from 'src/app/controller/model/TemplateEmailPlanification.model';
 import {TemplateEmailPlanificationService} from 'src/app/controller/service/TemplateEmailPlanification.service';
-import {DateUtils} from "../../../../../../utils/DateUtils";
 import {CauseKoOkVo} from "../../../../../../controller/model/CauseKoOk.model";
 import {CauseKoOkService} from "../../../../../../controller/service/CauseKoOk.service";
 import {HttpErrorResponse, HttpEvent, HttpEventType} from "@angular/common/http";
@@ -43,7 +42,6 @@ import {
 } from "../../../../../../controller/service/DefaultTemplateConfiguration.service";
 import {SourceReplanificationVo} from "../../../../../../controller/model/SourceReplanification.model";
 import {AuthService} from "../../../../../../controller/service/Auth.service";
-import {User} from "../../../../../../controller/model/User.model";
 
 @Component({
     selector: 'app-ordre-kosc-prise-rdv-edit-admin',
@@ -91,11 +89,12 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
 // methods
 
-    public formatDdMmYy(date : Date): string{
-        return date != null ? this.datePipe.transform(date, 'd/M/yyyy') : '' ;
+    public formatDdMmYy(date: Date): string {
+        return date != null ? this.datePipe.transform(date, 'd/M/yyyy') : '';
     }
-    public formatHhMm(date : Date): string{
-        return date != null ? this.datePipe.transform(date, 'hh:mm') : '' ;
+
+    public formatHhMm(date: Date): string {
+        return date != null ? this.datePipe.transform(date, 'hh:mm') : '';
     }
 
     ngOnInit(): void {
@@ -275,7 +274,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.toConfirmationClient = this.selectedOrdreKosc.endCustumorContactEmail;
             this.selectedOrdreKosc.objetConfirmationClient = eval(this.selectedDefaultTemplateConfiguration.templateEmailConfirmationClientVo.objet);
             this.selectedOrdreKosc.corpsConfirmationClient = eval(this.selectedDefaultTemplateConfiguration.templateEmailConfirmationClientVo.corps);
-this.selectedOrdreKosc.userClientInjoinable= userCourant;
+            this.selectedOrdreKosc.userClientInjoinable = userCourant;
         } else if (myEtat === this.etats[5]) {
             this.indexEdit = 3;
             this.emailIndex = 1;
@@ -495,54 +494,73 @@ this.selectedOrdreKosc.userClientInjoinable= userCourant;
     }
 
     sendClientInjoignableEmailToClient() {
-        this.showSpinner = true;
-        this.blocked = true;
-        this.ordreKoscService.sendClientInjoignableEmailToClient().subscribe(data => {
-                if (data.envoyeClientInjoinable == true) {
+        this.validateFormClientInjoinable();
 
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                    this.editOrdreKoscDialog = false;
-                } else {
-                    this.messageService.add({
-                        severity: 'warn',
-                        summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
-                    });
+        if (this.errorMessages.length === 0) {
 
+            this.showSpinner = true;
+            this.blocked = true;
+            this.ordreKoscService.sendClientInjoignableEmailToClient().subscribe(data => {
+                    if (data.envoyeClientInjoinable == true) {
+
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Success',
+                            detail: 'Email envoyé avec succès'
+                        });
+                        this.editOrdreKoscDialog = false;
+                    } else {
+                        this.messageService.add({
+                            severity: 'warn',
+                            summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
+                        });
+
+                    }
+                    this.showSpinner = false;
+                    this.blocked = false;
                 }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );
-
+            );
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
     }
 
     sendClientInjoignableEmailToKosc() {
-        this.showSpinner = true;
-        this.blocked = true;
-        this.ordreKoscService.sendClientInjoignableEmailToKosc().subscribe(data => {
-                if (data.envoyeClientInjoinableKosc == true) {
+        this.validateFormClientInjoinableKosc();
+        if (this.errorMessages.length === 0) {
+            this.showSpinner = true;
+            this.blocked = true;
+            this.ordreKoscService.sendClientInjoignableEmailToKosc().subscribe(data => {
+                    if (data.envoyeClientInjoinableKosc == true) {
 
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                    this.editOrdreKoscDialog = false;
-                } else {
-                    this.messageService.add({
-                        severity: 'warn',
-                        summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
-                    });
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Success',
+                            detail: 'Email envoyé avec succès'
+                        });
+                        this.editOrdreKoscDialog = false;
+                    } else {
+                        this.messageService.add({
+                            severity: 'warn',
+                            summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
+                        });
 
+                    }
+                    this.showSpinner = false;
+                    this.blocked = false;
                 }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );
+            );
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
     }
 
     sendMauvaisContactEmail() {
@@ -616,28 +634,37 @@ this.selectedOrdreKosc.userClientInjoinable= userCourant;
     }
 
     sendAutreEmail() {
-        this.showSpinner = true;
-        this.blocked = true;
-        this.ordreKoscService.sendAutreEmail().subscribe(data => {
-                if (data.envoyeAutre == true) {
+        this.validateFormAutre();
+        if (this.errorMessages.length === 0) {
+            this.showSpinner = true;
+            this.blocked = true;
+            this.ordreKoscService.sendAutreEmail().subscribe(data => {
+                    if (data.envoyeAutre == true) {
 
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                    this.editOrdreKoscDialog = false;
-                } else {
-                    this.messageService.add({
-                        severity: 'warn',
-                        summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
-                    });
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Success',
+                            detail: 'Email envoyé avec succès'
+                        });
+                        this.editOrdreKoscDialog = false;
+                    } else {
+                        this.messageService.add({
+                            severity: 'warn',
+                            summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
+                        });
 
+                    }
+                    this.showSpinner = false;
+                    this.blocked = false;
                 }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );
+            );
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
     }
 
 
@@ -873,6 +900,7 @@ this.selectedOrdreKosc.userClientInjoinable= userCourant;
         this.validateOrdreKoscToConfirmationClient();
 
     }
+
     private validateFormMauvaisContact(): void {
         this.errorMessages = new Array<string>();
         this.validateOrdreKoscObjetMauvaisContact();
@@ -881,6 +909,7 @@ this.selectedOrdreKosc.userClientInjoinable= userCourant;
         this.validateOrdreKoscToMauvaisContact();
 
     }
+
     private validateFormPlanification(): void {
         this.errorMessages = new Array<string>();
         this.validateOrdreKoscDateRendezVous();
@@ -890,6 +919,7 @@ this.selectedOrdreKosc.userClientInjoinable= userCourant;
         this.validateOrdreKoscToPlanification();
 
     }
+
     private validateFormRefus(): void {
         this.errorMessages = new Array<string>();
         this.validateOrdreKoscObjetRefus();
@@ -898,7 +928,33 @@ this.selectedOrdreKosc.userClientInjoinable= userCourant;
         this.validateOrdreKoscToRefus();
 
     }
- 
+
+    private validateFormClientInjoinableKosc(): void {
+        this.validateOrdreKoscObjetClientInjoinableKosc();
+        this.validateOrdreKoscCorpsClientInjoinableKosc();
+        this.validateOrdreKoscFromClientInjoinableKosc();
+        this.validateOrdreKoscToClientInjoinableKosc();
+
+    }
+
+    private validateFormClientInjoinable(): void {
+        this.errorMessages = new Array<string>();
+        this.validateOrdreKoscObjetClientInjoinable();
+        this.validateOrdreKoscFromClientInjoinable();
+        this.validateOrdreKoscToClientInjoinable();
+        this.validateOrdreKoscCorpsClientInjoinable();
+
+    }
+
+    private validateFormAutre(): void {
+        this.errorMessages = new Array<string>();
+        this.validateOrdreKoscObjetAutre();
+        this.validateOrdreKoscCorpsAutre();
+        this.validateOrdreKoscFromAutre();
+        this.validateOrdreKoscToAutre();
+
+    }
+
     private validateForm(): void {
         this.errorMessages = new Array<string>();
         this.validateOrdreKoscDateRdv();
@@ -982,9 +1038,6 @@ this.selectedOrdreKosc.userClientInjoinable= userCourant;
             this.validOrdreKoscToPlanification = true;
         }
     }
-
-
-
 
 
     private validateOrdreKoscObjetReplanification() {
@@ -1114,8 +1167,6 @@ this.selectedOrdreKosc.userClientInjoinable= userCourant;
     }
 
 
-
-
     private validateOrdreKoscObjetClientInjoinable() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.objetClientInjoinable)) {
             this.errorMessages.push('Objet client injoinable non valide');
@@ -1131,6 +1182,14 @@ this.selectedOrdreKosc.userClientInjoinable= userCourant;
             this.validOrdreKoscFromClientInjoinable = false;
         } else {
             this.validOrdreKoscFromClientInjoinable = true;
+        }
+    }
+    private validateOrdreKoscCorpsClientInjoinable() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.corpsClientInjoinable)) {
+            this.errorMessages.push('From client injoinable non valide');
+            this.validOrdreKoscCorpsClientInjoinable = false;
+        } else {
+            this.validOrdreKoscCorpsClientInjoinable = true;
         }
     }
 
@@ -1173,7 +1232,7 @@ this.selectedOrdreKosc.userClientInjoinable= userCourant;
     private validateOrdreKoscCorpsAutre() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.corpsAutre)) {
             this.errorMessages.push('Corps autre non valide');
-            this.validOrdreKoscCorpsAutre  = false;
+            this.validOrdreKoscCorpsAutre = false;
         } else {
             this.validOrdreKoscCorpsAutre = true;
         }
@@ -1427,7 +1486,6 @@ this.selectedOrdreKosc.userClientInjoinable= userCourant;
 // getters and setters
 
 
-
     private _validOrdreKoscDateRendezVous = true;
 
 
@@ -1475,6 +1533,16 @@ this.selectedOrdreKosc.userClientInjoinable= userCourant;
 
     set validOrdreKoscCorpsAutre(value: boolean) {
         this._validOrdreKoscCorpsAutre = value;
+    }
+     _validOrdreKoscCorpsClientInjoinable=true;
+
+
+    get validOrdreKoscCorpsClientInjoinable(): boolean {
+        return this._validOrdreKoscCorpsClientInjoinable;
+    }
+
+    set validOrdreKoscCorpsClientInjoinable(value: boolean) {
+        this._validOrdreKoscCorpsClientInjoinable = value;
     }
 
     _validOrdreKoscObjetClientInjoinable = true;
@@ -2168,7 +2236,6 @@ this.selectedOrdreKosc.userClientInjoinable= userCourant;
     set sourceReplanifications(value: Array<SourceReplanificationVo>) {
         this.sourceReplanificationService.sourceReplanifications = value;
     }
-
 
 
 }

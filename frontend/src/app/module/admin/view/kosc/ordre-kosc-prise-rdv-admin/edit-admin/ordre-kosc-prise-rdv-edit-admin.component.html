@@ -846,21 +846,26 @@
 
 
                                         <div class="p-field p-col-12 p-md-6">
-                                            <label for="117">Objet</label>
+                                            <label for="117">Objet<span style="color: red;">*</span></label>
                                             <input [(ngModel)]="selectedOrdreKosc.objetClientInjoinable"
+                                                   [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscObjetClientInjoinable}"
+
                                                    class="p-mb-2 p-mr-2" id="117"
                                                    pInputText
                                                    placeholder="Objet client" type="text"
-                                            />
+                                            /><small *ngIf='!validOrdreKoscObjetClientInjoinable' class='p-error'>Objet est
+                                            obligatoire.</small>
 
                                         </div>
                                         <div class="p-field p-col-12 p-md-6">
-                                            <label for="118">Corps</label>
+                                            <label for="118">Corps<span style="color: red;">*</span></label>
                                             <textarea [(ngModel)]="selectedOrdreKosc.corpsClientInjoinable" cols="30"
+                                                      [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscCorpsClientInjoinable}"
                                                       id="118" pInputTextarea
                                                       placeholder="Corps client"
                                                       rows="7"
-                                            ></textarea>
+                                            ></textarea><small *ngIf='!validOrdreKoscCorpsClientInjoinable' class='p-error'>Corps est
+                                            obligatoire.</small>
 
                                         </div>
                                         <div class="p-field p-col-12 p-md-4">
