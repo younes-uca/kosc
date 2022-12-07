@@ -4,8 +4,12 @@ import java.util.*;
 
 import java.util.stream.Collectors;
 
+import com.maneo.kosc.bean.referentiel.JourFerie;
+import com.maneo.kosc.bean.technicien.ArretTravail;
 import com.maneo.kosc.dao.technicien.DepartementTechnicienDao;
 import com.maneo.kosc.dao.kosc.OrdreKoscDao;
+import com.maneo.kosc.service.admin.facade.referentiel.JourFerieAdminService;
+import com.maneo.kosc.service.admin.facade.technicien.ArretTravailAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
@@ -39,6 +43,11 @@ public class TechnicienAdminServiceImpl extends AbstractServiceImpl<Technicien> 
     private EntityManager entityManager;
     @Autowired
     private OrdreKoscDao ordreKoscDao;
+    @Autowired
+    private ArretTravailAdminService arretTravailAdminService;
+    @Autowired
+    private JourFerieAdminService jourFerieAdminService;
+
     @Override
     public Technicien findByUsername(String username) {
         return technicienDao.findByUsername(username);
@@ -96,7 +105,26 @@ public class TechnicienAdminServiceImpl extends AbstractServiceImpl<Technicien> 
          techniciensDispo=techniciensInDepart.stream()
                 .filter(technicien -> !techniciensInorders.contains(technicien))
                 .collect(Collectors.toList());}
+        for(Technicien technicien: techniciensDispo){
+            List<ArretTravail> techniciensArretTravail = arretTravailAdminService.findByTechnicienIdentifiant(technicien.getIdentifiant());
+            for (ArretTravail e : techniciensArretTravail) {
+                if (!compareDate(e.getDateDebut(), e.getDateFin(), dateRdv)){
+                    techniciensDispo.remove(techniciensDispo.indexOf(technicien));
+                }
+            }
+//            List<JourFerie> jourFeries = jourFerieAdminService.findAll();
+//            for (JourFerie jourFerie : jourFeries){
+//                if (compareDate(jourFerie.getDateDebut(), jourFerie.getDateFin(), dateRdv)){
+//                    techniciensDispo.removeAll(techniciensDispo);
+//                }
+//            }
+        }
+
         return techniciensDispo;
+    }
+
+    public boolean compareDate(Date dateDebut, Date dateFin, Date date){
+        return (date.before(dateDebut)) || (date.after(dateFin));
     }
 
     @Override
