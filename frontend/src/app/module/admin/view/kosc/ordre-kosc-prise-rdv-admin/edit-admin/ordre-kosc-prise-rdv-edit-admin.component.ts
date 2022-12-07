@@ -90,6 +90,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 // methods
 
     minimumDate = new Date();
+
     public formatDdMmYy(date: Date): string {
         return date != null ? this.datePipe.transform(date, 'd/M/yyyy') : '';
     }
@@ -251,7 +252,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     toggleShowOui() {
         // this.isShown1 = !this.isShown1;
         // this.isShown = false;
-        this.changeEtat(this.etats[5]);
+        this.selectTab(this.etats[5]);
         this.displayPriseRdv = false;
 
     }
@@ -259,33 +260,12 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     initPalinificationModel(): void {
         this.palinificationModel = [
-            {label: 'ConfirmationClient', icon: 'pi pi-file', command: () => this.changeEtat(this.etats[4])},
-            {label: 'Mail Planification', icon: 'pi pi-file-excel', command: () => this.changeEtat(this.etats[5])},
+            {label: 'ConfirmationClient', icon: 'pi pi-file', command: () => this.selectTab(this.etats[4])},
+            {label: 'Mail Planification', icon: 'pi pi-file-excel', command: () => this.selectTab(this.etats[5])},
         ];
     }
 
-    private changeEtat(myEtat: string) {
-        let userCourant = this.authService.authenticatedUser;
-        this.displayPriseRdv = false;
-        this.selectedOrdreKosc.etatDemandeKoscVo = this.findEtatDemandeByCode(myEtat);
-        if (myEtat === this.etats[4]) {
-            this.indexEdit = 3;
-            this.emailIndex = 0;
-            this.selectedOrdreKosc.fromConfirmationClient = this.selectedDefaultTemplateConfiguration.emailManeo;
-            this.selectedOrdreKosc.toConfirmationClient = this.selectedOrdreKosc.endCustumorContactEmail;
-            this.selectedOrdreKosc.objetConfirmationClient = eval(this.selectedDefaultTemplateConfiguration.templateEmailConfirmationClientVo.objet);
-            this.selectedOrdreKosc.corpsConfirmationClient = eval(this.selectedDefaultTemplateConfiguration.templateEmailConfirmationClientVo.corps);
-            this.selectedOrdreKosc.userClientInjoinable = userCourant;
-        } else if (myEtat === this.etats[5]) {
-            this.indexEdit = 3;
-            this.emailIndex = 1;
-            this.selectedOrdreKosc.fromPlanification = this.selectedDefaultTemplateConfiguration.emailManeo;
-            this.selectedOrdreKosc.toPlanification = this.selectedDefaultTemplateConfiguration.emailKosc;
-            this.selectedOrdreKosc.objetPlanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailPlanificationVo.objet);
-            this.selectedOrdreKosc.corpsPlanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailPlanificationVo.corps);
-            this.selectedOrdreKosc.userPlanification = userCourant;
-        }
-    }
+
 
     checkButtonInjoignable() {
         if (this.selectedOrdreKosc.dateDeuxiemeAppel != null) {
@@ -349,8 +329,23 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         this.displayPriseRdv = false;
         this.selectedOrdreKosc.etatDemandeKoscVo = this.findEtatDemandeByCode(myEtat);
         // this.selectedOrdreKosc.causeKoOkVo = this.findByEtatDemandeCause(myCause);
-
-        if (myEtat === this.etats[6]) {
+        if (myEtat === this.etats[4]) {
+            this.indexEdit = 3;
+            this.emailIndex = 0;
+            this.selectedOrdreKosc.fromConfirmationClient = this.selectedDefaultTemplateConfiguration.emailManeo;
+            this.selectedOrdreKosc.toConfirmationClient = this.selectedOrdreKosc.endCustumorContactEmail;
+            this.selectedOrdreKosc.objetConfirmationClient = eval(this.selectedDefaultTemplateConfiguration.templateEmailConfirmationClientVo.objet);
+            this.selectedOrdreKosc.corpsConfirmationClient = eval(this.selectedDefaultTemplateConfiguration.templateEmailConfirmationClientVo.corps);
+            this.selectedOrdreKosc.userClientInjoinable = userCourant;
+        } else if (myEtat === this.etats[5]) {
+            this.indexEdit = 3;
+            this.emailIndex = 1;
+            this.selectedOrdreKosc.fromPlanification = this.selectedDefaultTemplateConfiguration.emailManeo;
+            this.selectedOrdreKosc.toPlanification = this.selectedDefaultTemplateConfiguration.emailKosc;
+            this.selectedOrdreKosc.objetPlanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailPlanificationVo.objet);
+            this.selectedOrdreKosc.corpsPlanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailPlanificationVo.corps);
+            this.selectedOrdreKosc.userPlanification = userCourant;
+        } else if (myEtat === this.etats[6]) {
             this.indexEdit = 3;
             this.emailIndex = 2;
             this.selectedOrdreKosc.fromClientInjoinable = this.selectedDefaultTemplateConfiguration.emailManeo;
@@ -430,6 +425,8 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.blocked = true;
 
             this.ordreKoscService.sendConfirmationEmailToClient().subscribe(data => {
+                    this.deleteFromList(this.selectedOrdreKosc);
+
                     if (data.envoyeConfirmationClient == true) {
 
                         this.messageService.add({
@@ -437,7 +434,6 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
                             summary: 'Success',
                             detail: 'Email envoyé avec succès'
                         });
-                        this.editOrdreKoscDialog = false;
                     } else {
                         this.messageService.add({
                             severity: 'warn',
@@ -447,6 +443,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
                     }
                     this.showSpinner = false;
                     this.blocked = false;
+                    this.editOrdreKoscDialog = false;
                 }
             );
         } else {
@@ -466,14 +463,13 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.showSpinner = true;
             this.blocked = true;
             this.ordreKoscService.sendMailPlanificationEmail().subscribe(data => {
-               this.deleteFromList(this.selectedOrdreKosc);
+                    this.deleteFromList(this.selectedOrdreKosc);
                     if (data.envoyePlanification == true) {
                         this.messageService.add({
                             severity: 'success',
                             summary: 'Success',
                             detail: 'Email envoyé avec succès'
                         });
-                        this.editOrdreKoscDialog = false;
                     } else {
                         this.messageService.add({
                                 severity: 'warn',
@@ -500,10 +496,10 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         this.validateFormClientInjoinable();
 
         if (this.errorMessages.length === 0) {
-
             this.showSpinner = true;
             this.blocked = true;
             this.ordreKoscService.sendClientInjoignableEmailToClient().subscribe(data => {
+                    this.deleteFromList(this.selectedOrdreKosc);
                     if (data.envoyeClientInjoinable == true) {
 
                         this.messageService.add({
@@ -511,7 +507,6 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
                             summary: 'Success',
                             detail: 'Email envoyé avec succès'
                         });
-                        this.editOrdreKoscDialog = false;
                     } else {
                         this.messageService.add({
                             severity: 'warn',
@@ -539,6 +534,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.showSpinner = true;
             this.blocked = true;
             this.ordreKoscService.sendClientInjoignableEmailToKosc().subscribe(data => {
+                    this.deleteFromList(this.selectedOrdreKosc);
                     if (data.envoyeClientInjoinableKosc == true) {
 
                         this.messageService.add({
@@ -546,7 +542,6 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
                             summary: 'Success',
                             detail: 'Email envoyé avec succès'
                         });
-                        this.editOrdreKoscDialog = false;
                     } else {
                         this.messageService.add({
                             severity: 'warn',
@@ -556,6 +551,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
                     }
                     this.showSpinner = false;
                     this.blocked = false;
+                    this.editOrdreKoscDialog = false;
                 }
             );
         } else {
@@ -573,6 +569,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.showSpinner = true;
             this.blocked = true;
             this.ordreKoscService.sendMauvaisContactEmail().subscribe(data => {
+                    this.deleteFromList(this.selectedOrdreKosc);
                     if (data.envoyeMauvaisContact == true) {
 
                         this.messageService.add({
@@ -580,7 +577,6 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
                             summary: 'Success',
                             detail: 'Email envoyé avec succès'
                         });
-                        this.editOrdreKoscDialog = false;
                     } else {
                         this.messageService.add({
                             severity: 'warn',
@@ -589,6 +585,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
                     }
                     this.showSpinner = false;
                     this.blocked = false;
+                    this.editOrdreKoscDialog = false;
                 }
             );
         } else {
@@ -607,7 +604,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.showSpinner = true;
             this.blocked = true;
             this.ordreKoscService.sendRefusClientEmail().subscribe(data => {
-
+                    this.deleteFromList(this.selectedOrdreKosc);
                     if (data.envoyeRefus == true) {
 
                         this.messageService.add({
@@ -615,7 +612,6 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
                             summary: 'Success',
                             detail: 'Email envoyé avec succès'
                         });
-                        this.editOrdreKoscDialog = false;
                     } else {
                         this.messageService.add({
                             severity: 'warn',
@@ -625,6 +621,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
                     }
                     this.showSpinner = false;
                     this.blocked = false;
+                    this.editOrdreKoscDialog = false;
                 }
             );
         } else {
@@ -643,6 +640,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.showSpinner = true;
             this.blocked = true;
             this.ordreKoscService.sendAutreEmail().subscribe(data => {
+                    this.deleteFromList(this.selectedOrdreKosc);
                     if (data.envoyeAutre == true) {
 
                         this.messageService.add({
@@ -650,7 +648,6 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
                             summary: 'Success',
                             detail: 'Email envoyé avec succès'
                         });
-                        this.editOrdreKoscDialog = false;
                     } else {
                         this.messageService.add({
                             severity: 'warn',
@@ -660,6 +657,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
                     }
                     this.showSpinner = false;
                     this.blocked = false;
+                    this.editOrdreKoscDialog = false;
                 }
             );
         } else {
@@ -1046,8 +1044,6 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
 
-
-
     private validateOrdreKoscObjetRefus() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.objetRefus)) {
             this.errorMessages.push('Objet refus non valide');
@@ -1174,6 +1170,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.validOrdreKoscFromClientInjoinable = true;
         }
     }
+
     private validateOrdreKoscCorpsClientInjoinable() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.corpsClientInjoinable)) {
             this.errorMessages.push('De client injoinable non valide');
@@ -1476,7 +1473,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 // getters and setters
 
 
-     _validOrdreKoscDateRendezVous = true;
+    _validOrdreKoscDateRendezVous = true;
 
 
     get validOrdreKoscDateRendezVous(): boolean {
@@ -1487,10 +1484,10 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         this._validOrdreKoscDateRendezVous = value;
     }
 
-     _validOrdreKoscFromAutre = true;
-     _validOrdreKoscToAutre = true;
-     _validOrdreKoscObjetAutre = true;
-     _validOrdreKoscCorpsAutre = true;
+    _validOrdreKoscFromAutre = true;
+    _validOrdreKoscToAutre = true;
+    _validOrdreKoscObjetAutre = true;
+    _validOrdreKoscCorpsAutre = true;
 
 
     get validOrdreKoscFromAutre(): boolean {
@@ -1524,7 +1521,8 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     set validOrdreKoscCorpsAutre(value: boolean) {
         this._validOrdreKoscCorpsAutre = value;
     }
-     _validOrdreKoscCorpsClientInjoinable=true;
+
+    _validOrdreKoscCorpsClientInjoinable = true;
 
 
     get validOrdreKoscCorpsClientInjoinable(): boolean {

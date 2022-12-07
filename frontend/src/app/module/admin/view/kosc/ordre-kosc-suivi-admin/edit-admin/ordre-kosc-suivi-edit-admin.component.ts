@@ -917,13 +917,13 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
             this.showSpinner = true;
             this.blocked = true;
             this.ordreKoscService.sendMailReportDemandeManeoClientInjoignable().subscribe(data => {
+                this.deleteFromList(this.selectedOrdreKosc);
                     if (data.envoyeReportDemandeManeoClientInjoignable == true) {
                         this.messageService.add({
                             severity: 'success',
                             summary: 'Success',
                             detail: 'Email envoyé avec succès'
                         });
-                        this.editOrdreKoscDialog = false;
                     } else {
                         this.messageService.add({
                                 severity: 'warn',
@@ -933,6 +933,7 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
                     }
                     this.showSpinner = false;
                     this.blocked = false;
+                    this.editOrdreKoscDialog = false;
                 }
             );
         } else {
@@ -951,13 +952,13 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
             this.showSpinner = true;
             this.blocked = true;
             this.ordreKoscService.sendMailReportDemandeManeoClientJoignableAccepte().subscribe(data => {
+                this.deleteFromList(this.selectedOrdreKosc);
                     if (data.envoyeReportDemandeManeoClientJoignableAccepte == true) {
                         this.messageService.add({
                             severity: 'success',
                             summary: 'Success',
                             detail: 'Email envoyé avec succès'
                         });
-                        this.editOrdreKoscDialog = false;
                     } else {
                         this.messageService.add({
                                 severity: 'warn',
@@ -967,6 +968,7 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
                     }
                     this.showSpinner = false;
                     this.blocked = false;
+                    this.editOrdreKoscDialog = false;
                 }
             );
         } else {
@@ -985,6 +987,7 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
             this.showSpinner = true;
             this.blocked = true;
             this.ordreKoscService.sendMailReportDemandeManeoClientJoignableRefus().subscribe(data => {
+                this.deleteFromList(this.selectedOrdreKosc);
                     if (data.envoyeReportDemandeManeoClientJoignableRefus == true) {
                         this.messageService.add({
                             severity: 'success',
@@ -1001,6 +1004,7 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
                     }
                     this.showSpinner = false;
                     this.blocked = false;
+                    this.editOrdreKoscDialog = false;
                 }
             );
         } else {
@@ -1018,13 +1022,13 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
             this.showSpinner = true;
             this.blocked = true;
             this.ordreKoscService.sendMailReportDemandeClientClientInjoignable().subscribe(data => {
+                this.deleteFromList(this.selectedOrdreKosc);
                     if (data.envoyeReportDemandeClientClientInjoignable == true) {
                         this.messageService.add({
                             severity: 'success',
                             summary: 'Success',
                             detail: 'Email envoyé avec succès'
                         });
-                        this.editOrdreKoscDialog = false;
                     } else {
                         this.messageService.add({
                                 severity: 'warn',
@@ -1034,6 +1038,7 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
                     }
                     this.showSpinner = false;
                     this.blocked = false;
+                    this.editOrdreKoscDialog = false;
                 }
             );
         } else {
@@ -1052,13 +1057,13 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
             this.showSpinner = true;
             this.blocked = true;
             this.ordreKoscService.sendMailReportDemandeClientClientJoignable().subscribe(data => {
+                this.deleteFromList(this.selectedOrdreKosc);
                     if (data.envoyeReportDemandeClientClientJoignable == true) {
                         this.messageService.add({
                             severity: 'success',
                             summary: 'Success',
                             detail: 'Email envoyé avec succès'
                         });
-                        this.editOrdreKoscDialog = false;
                     } else {
                         this.messageService.add({
                                 severity: 'warn',
@@ -1068,6 +1073,7 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
                     }
                     this.showSpinner = false;
                     this.blocked = false;
+                    this.editOrdreKoscDialog = false;
                 }
             );
         } else {
@@ -1189,6 +1195,7 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
             this.showSpinner = true;
             this.blocked = true;
             this.ordreKoscService.sendMailReplanification().subscribe(data => {
+                this.deleteFromList(this.selectedOrdreKosc);
                     if (data.envoyeReplanification == true) {
                         this.messageService.add({
                             severity: 'success',
@@ -1833,5 +1840,11 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
 
     set validOrdreKoscCorpsReportDemandeManeoClientInjoignable(value: boolean) {
         this._validOrdreKoscCorpsReportDemandeManeoClientInjoignable = value;
+    }
+
+
+    private deleteFromList(selectedOrdreKosc: OrdreKoscVo) {
+        const position = this.ordreKoscs.indexOf(selectedOrdreKosc);
+        position > -1 ? this.ordreKoscs.splice(position, 1) : false;
     }
 }
