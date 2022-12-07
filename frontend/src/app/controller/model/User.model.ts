@@ -1,3 +1,5 @@
+import {Role} from "./Role.model";
+
 export class User {
     public credentialsNonExpired: boolean;
     public enabled: boolean;
@@ -15,5 +17,5 @@ export class User {
     public confirmPassword: string;
     public createdAt: Date;
     public updatedAt: Date;
-    public roles: any = [];
+    public roles  = new Array<Role>();
 }

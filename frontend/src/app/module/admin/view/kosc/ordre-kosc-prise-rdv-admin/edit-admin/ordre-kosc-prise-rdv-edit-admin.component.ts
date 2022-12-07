@@ -465,6 +465,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.showSpinner = true;
             this.blocked = true;
             this.ordreKoscService.sendMailPlanificationEmail().subscribe(data => {
+               this.deleteFromList(this.selectedOrdreKosc);
                     if (data.envoyePlanification == true) {
                         this.messageService.add({
                             severity: 'success',
@@ -518,6 +519,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
                     }
                     this.showSpinner = false;
                     this.blocked = false;
+                    this.editOrdreKoscDialog = false;
                 }
             );
         } else {
@@ -2224,4 +2226,17 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
 
+    private deleteFromList(selectedOrdreKosc: OrdreKoscVo) {
+        const position = this.ordreKoscsPriseRdv.indexOf(selectedOrdreKosc);
+        position > -1 ? this.ordreKoscsPriseRdv.splice(position, 1) : false;
+    }
+
+
+    get ordreKoscsPriseRdv(): Array<OrdreKoscVo> {
+        return this.ordreKoscService.ordreKoscsPriseRdv;
+    }
+
+    set ordreKoscsPriseRdv(value: Array<OrdreKoscVo>) {
+        this.ordreKoscService.ordreKoscsPriseRdv = value;
+    }
 }
