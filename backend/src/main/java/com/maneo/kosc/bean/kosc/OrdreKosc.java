@@ -42,8 +42,8 @@ public class OrdreKosc {
     @Lob
     @Column(columnDefinition = "TEXT")
     private String supplierServiceCode;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateDebutTraitement;
     @Lob
     @Column(columnDefinition = "TEXT")
@@ -99,7 +99,7 @@ public class OrdreKosc {
     @Lob
     @Column(columnDefinition = "TEXT")
     private String referenDossier;
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     @Temporal(TemporalType.DATE)
     private Date submissionDate;
     @Lob
@@ -352,24 +352,24 @@ public class OrdreKosc {
     @Lob
     @Column(columnDefinition = "TEXT")
     private String referencePrise;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date datePremierAppel;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateDeuxiemeAppel;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateTroisiemeAppel;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date datePriseRdv;
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss.SSS")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateRdv;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateOuverture;
     @Lob
     @Column(columnDefinition = "TEXT")
@@ -385,8 +385,8 @@ public class OrdreKosc {
     private String corpsPlanification;
     @Column(columnDefinition = "boolean default false")
     private Boolean envoyePlanification = false;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateEnvoiPlanification;
     @Lob
     @Column(columnDefinition = "TEXT")
@@ -396,8 +396,8 @@ public class OrdreKosc {
     private String toPlanification;
     @ManyToOne
     private User userPlanification;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateAppelReplanification;
 
     @Lob
@@ -416,8 +416,8 @@ public class OrdreKosc {
     private User userReplanification;
     @Column(columnDefinition = "boolean default false")
     private Boolean envoyeReplanification = false;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateEnvoiReplanification;
     @Lob
     @Column(columnDefinition = "TEXT")
@@ -435,8 +435,8 @@ public class OrdreKosc {
     private User userRefus;
     @Column(columnDefinition = "boolean default false")
     private Boolean envoyeRefus = false;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateEnvoiRefus;
     @Lob
     @Column(columnDefinition = "TEXT")
@@ -454,8 +454,8 @@ public class OrdreKosc {
     private User userMauvaisContact;
     @Column(columnDefinition = "boolean default false")
     private Boolean envoyeMauvaisContact = false;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateEnvoiMauvaisContact;
     @Lob
     @Column(columnDefinition = "TEXT")
@@ -514,8 +514,8 @@ public class OrdreKosc {
     private User userConfirmationClient;
     @Column(columnDefinition = "boolean default false")
     private Boolean envoyeConfirmationClient = false;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateEnvoiConfirmationClient;
     @Lob
     @Column(columnDefinition = "TEXT")
@@ -533,8 +533,8 @@ public class OrdreKosc {
     private User userCri;
     @Column(columnDefinition = "boolean default false")
     private Boolean envoyeCri = false;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateEnvoiCri;
     @Lob
     @Column(columnDefinition = "TEXT")
@@ -552,14 +552,14 @@ public class OrdreKosc {
     private User userFtl;
     @Column(columnDefinition = "boolean default false")
     private Boolean envoyeFtl = false;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateEnvoiFtl;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateInterventionTechniqueDebut;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateInterventionTechniqueFin;
     @Lob
     @Column(columnDefinition = "TEXT")
@@ -577,8 +577,8 @@ public class OrdreKosc {
     private User userClientInjoinable;
     @Column(columnDefinition = "boolean default false")
     private Boolean envoyeClientInjoinable = false;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateEnvoiClientInjoinable;
     @Lob
     @Column(columnDefinition = "TEXT")
@@ -596,8 +596,8 @@ public class OrdreKosc {
     private User userAutre;
     @Column(columnDefinition = "boolean default false")
     private Boolean envoyeAutre = false;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateEnvoiAutre;
     @Lob
     @Column(columnDefinition = "TEXT")
@@ -615,8 +615,8 @@ public class OrdreKosc {
     private User userClientInjoinableKosc;
     @Column(columnDefinition = "boolean default false")
     private Boolean envoyeClientInjoinableKosc = false;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateEnvoiClientInjoinableKosc;
     @Lob
     @Column(columnDefinition = "TEXT")
@@ -632,8 +632,8 @@ public class OrdreKosc {
     private String corpsCloture;
     @Column(columnDefinition = "boolean default false")
     private Boolean envoyeCloture = false;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateEnvoiCloture;
     @Lob
     @Column(columnDefinition = "TEXT")
@@ -646,11 +646,11 @@ public class OrdreKosc {
     private String corpsSuivi;
     @Column(columnDefinition = "boolean default false")
     private Boolean envoyeSuivi = false;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateEnvoiSuivi;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateErdv;
     @Column(columnDefinition = "TEXT")
     private String referenceCommandePriseInterneOC;
@@ -658,8 +658,8 @@ public class OrdreKosc {
     private Boolean erdv = false;
     @Column(columnDefinition = "boolean default false")
     private Boolean confort = false;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateDernierAppel;
 
     private Long numeroDernierAppel;
@@ -684,8 +684,8 @@ public class OrdreKosc {
     private User userReportDemandeManeoClientInjoignable;
     @Column(columnDefinition = "boolean default false")
     private Boolean envoyeReportDemandeManeoClientInjoignable = false;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateEnvoiReportDemandeManeoClientInjoignable;
 
 
@@ -706,8 +706,8 @@ public class OrdreKosc {
     @Column(columnDefinition = "boolean default false")
 
     private Boolean envoyeReportDemandeManeoClientJoignableAccepte = false;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateEnvoiReportDemandeManeoClientJoignableAccepte;
 
 
@@ -728,8 +728,8 @@ public class OrdreKosc {
     @Column(columnDefinition = "boolean default false")
 
     private Boolean envoyeReportDemandeManeoClientJoignableRefus = false;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateEnvoiReportDemandeManeoClientJoignableRefus;
 
 
@@ -750,8 +750,8 @@ public class OrdreKosc {
     @Column(columnDefinition = "boolean default false")
 
     private Boolean envoyeReportDemandeClientClientInjoignable = false;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateEnvoiReportDemandeClientClientInjoignable;
 
 
@@ -772,11 +772,11 @@ public class OrdreKosc {
     @Column(columnDefinition = "boolean default false")
 
     private Boolean envoyeReportDemandeClientClientJoignable = false;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateEnvoiReportDemandeClientClientJoignable;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateCri;
 
 
