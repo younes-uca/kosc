@@ -46,9 +46,9 @@ public class OrdreKoscRestAdmin {
     private OrdreKoscCddAdminService ordreKoscCddAdminService;
 
     @Autowired
-    private ImportOrdreKoscAdminService importOrdreKoscAdminService;
+    private OrdreKoscImportAdminService ordreKoscImportAdminService;
     @Autowired
-    private EmailingOrderKoscAdminService emailingOrderKoscAdminService;
+    private OrderKoscEmailingAdminService orderKoscEmailingAdminService;
 
     @Autowired
     private OrdreKoscConverter ordreKoscConverter;
@@ -65,49 +65,49 @@ public class OrdreKoscRestAdmin {
     @PostMapping("/send/confirmation/client")
     public OrdreKoscVo sendConfirmationEmailToClient(@RequestBody OrdreKoscVo ordreKoscVo) {
         OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
-        emailingOrderKoscAdminService.sendConfirmationEmailToClient(ordreKosc);
+        orderKoscEmailingAdminService.sendConfirmationEmailToClient(ordreKosc);
         return ordreKoscConverter.toVo(ordreKosc);
     }
 
     @PostMapping("/send/mail/planification")
     public OrdreKoscVo sendMailPlanificationEmail(@RequestBody OrdreKoscVo ordreKoscVo) {
         OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
-        emailingOrderKoscAdminService.sendMailPlanificationEmail(ordreKosc);
+        orderKoscEmailingAdminService.sendMailPlanificationEmail(ordreKosc);
         return ordreKoscConverter.toVo(ordreKosc);
     }
 
     @PostMapping("/send/client/injoignable/client")
     public OrdreKoscVo sendClientInjoignableEmailToClient(@RequestBody OrdreKoscVo ordreKoscVo) {
         OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
-        emailingOrderKoscAdminService.sendClientInjoignableEmailToClient(ordreKosc);
+        orderKoscEmailingAdminService.sendClientInjoignableEmailToClient(ordreKosc);
         return ordreKoscConverter.toVo(ordreKosc);
     }
 
     @PostMapping("/send/client/injoignable/kosc")
     public OrdreKoscVo sendClientInjoignableEmailToKosc(@RequestBody OrdreKoscVo ordreKoscVo) {
         OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
-        emailingOrderKoscAdminService.sendClientInjoignableEmailToKosc(ordreKosc);
+        orderKoscEmailingAdminService.sendClientInjoignableEmailToKosc(ordreKosc);
         return ordreKoscConverter.toVo(ordreKosc);
     }
 
     @PostMapping("/send/mauvais/contact")
     public OrdreKoscVo sendMauvaisContactEmail(@RequestBody OrdreKoscVo ordreKoscVo) {
         OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
-        emailingOrderKoscAdminService.sendMauvaisContactEmail(ordreKosc);
+        orderKoscEmailingAdminService.sendMauvaisContactEmail(ordreKosc);
         return ordreKoscConverter.toVo(ordreKosc);
     }
 
     @PostMapping("/send/refus/client")
     public OrdreKoscVo sendRefusClientEmail(@RequestBody OrdreKoscVo ordreKoscVo) {
         OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
-        emailingOrderKoscAdminService.sendRefusClientEmail(ordreKosc);
+        orderKoscEmailingAdminService.sendRefusClientEmail(ordreKosc);
         return ordreKoscConverter.toVo(ordreKosc);
     }
 
     @PostMapping("/send/autre")
     public OrdreKoscVo sendAutreEmail(@RequestBody OrdreKoscVo ordreKoscVo) {
         OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
-        emailingOrderKoscAdminService.sendAutreEmail(ordreKosc);
+        orderKoscEmailingAdminService.sendAutreEmail(ordreKosc);
         return ordreKoscConverter.toVo(ordreKosc);
     }
 
@@ -116,7 +116,7 @@ public class OrdreKoscRestAdmin {
     @PostMapping("/send/mail/replanification")
     public OrdreKoscVo sendMailReplanification(@RequestBody OrdreKoscVo ordreKoscVo) {
         OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
-        emailingOrderKoscAdminService.sendMailReplanification(ordreKosc);
+        orderKoscEmailingAdminService.sendMailReplanification(ordreKosc);
         return ordreKoscConverter.toVo(ordreKosc);
     }
 
@@ -231,7 +231,7 @@ public class OrdreKoscRestAdmin {
     @PostMapping("/import-all")
     public List<OrdreKoscVo> importAll(@RequestBody List<OrdreKoscVo> ordreKoscVos) {
         List<OrdreKosc> ordreKoscs = ordreKoscConverter.toItem(ordreKoscVos);
-        ordreKoscs = importOrdreKoscAdminService.importAll(ordreKoscs);
+        ordreKoscs = ordreKoscImportAdminService.importAll(ordreKoscs);
         return ordreKoscConverter.toVo(ordreKoscs);
     }
 
@@ -239,7 +239,7 @@ public class OrdreKoscRestAdmin {
     @PostMapping("/import-data-base")
     public List<OrdreKoscVo> importerDataBase(@RequestBody List<OrdreKoscVo> ordreKoscVos) {
         List<OrdreKosc> ordreKoscs = ordreKoscConverter.toItem(ordreKoscVos);
-        ordreKoscs = importOrdreKoscAdminService.importerDataBase(ordreKoscs);
+        ordreKoscs = ordreKoscImportAdminService.importerDataBase(ordreKoscs);
         return ordreKoscConverter.toVo(ordreKoscs);
     }
 
@@ -584,41 +584,41 @@ public class OrdreKoscRestAdmin {
     @PostMapping("/send-mail-report-demande-maneo-client-injoignable")
     public OrdreKoscVo sendMailReportDemandeManeoClientInjoignable(@RequestBody OrdreKoscVo ordreKoscVo) {
         OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
-        emailingOrderKoscAdminService.sendMailReportDemandeManeoClientInjoignable(ordreKosc);
+        orderKoscEmailingAdminService.sendMailReportDemandeManeoClientInjoignable(ordreKosc);
         return ordreKoscConverter.toVo(ordreKosc);
     }
 
     @PostMapping("/send-mail-report-demande-maneo-client-joignable-accepte")
     public OrdreKoscVo sendMailReportDemandeManeoClientJoignableAccepte(@RequestBody OrdreKoscVo ordreKoscVo) {
         OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
-        emailingOrderKoscAdminService.sendMailReportDemandeManeoClientJoignableAccepte(ordreKosc);
+        orderKoscEmailingAdminService.sendMailReportDemandeManeoClientJoignableAccepte(ordreKosc);
         return ordreKoscConverter.toVo(ordreKosc);
     }
 
     @PostMapping("/send-mail-report-demande-maneo-client-joignable-refus")
     public OrdreKoscVo sendMailReportDemandeManeoClientJoignableRefus(@RequestBody OrdreKoscVo ordreKoscVo) {
         OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
-        emailingOrderKoscAdminService.sendMailReportDemandeManeoClientJoignableRefus(ordreKosc);
+        orderKoscEmailingAdminService.sendMailReportDemandeManeoClientJoignableRefus(ordreKosc);
         return ordreKoscConverter.toVo(ordreKosc);
     }
 
     @PostMapping("/send-mail-report-demande-client-client-injoignable")
     public OrdreKoscVo sendMailReportDemandeClientClientInjoignable(@RequestBody OrdreKoscVo ordreKoscVo) {
         OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
-        emailingOrderKoscAdminService.sendMailReportDemandeClientClientInjoignable(ordreKosc);
+        orderKoscEmailingAdminService.sendMailReportDemandeClientClientInjoignable(ordreKosc);
         return ordreKoscConverter.toVo(ordreKosc);
     }
 
     @PostMapping("/send-mail-report-demande-client-client-joignable")
     public OrdreKoscVo sendMailReportDemandeClientClientJoignable(@RequestBody OrdreKoscVo ordreKoscVo) {
         OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
-        emailingOrderKoscAdminService.sendMailReportDemandeClientClientJoignable(ordreKosc);
+        orderKoscEmailingAdminService.sendMailReportDemandeClientClientJoignable(ordreKosc);
         return ordreKoscConverter.toVo(ordreKosc);
     }
      @PostMapping("/send-mail-cri")
     public OrdreKoscVo sendMailCri(@RequestBody OrdreKoscVo ordreKoscVo) {
         OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
-        emailingOrderKoscAdminService.sendMailCri(ordreKosc);
+        orderKoscEmailingAdminService.sendMailCri(ordreKosc);
         return ordreKoscConverter.toVo(ordreKosc);
     }
 }

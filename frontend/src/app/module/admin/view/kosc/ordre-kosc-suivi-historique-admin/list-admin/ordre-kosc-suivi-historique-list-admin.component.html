@@ -1349,7 +1349,7 @@
 
                         <th pSortableColumn="datePriseRdv">
                             <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>Date prise rdv</span>
+                                <span>Date rdv</span>
                                 <p-sortIcon field="datePriseRdv"></p-sortIcon>
                             </div>
                         </th>
@@ -2662,7 +2662,7 @@
 
 
                         <td><span
-                                [style]="stylefyConfort(ordreKosc)">{{ordreKosc.datePriseRdv | date :'dd/MM/yyyy HH:mm' }}</span>
+                                [style]="stylefyConfort(ordreKosc)">{{ordreKosc.dateRdv | date :'dd/MM/yyyy HH:mm' }}</span>
                         </td>
 
 
@@ -3144,10 +3144,10 @@
                                     icon="pi pi-list" pButton
                                     pRipple></button>
 
-                            <button (click)="duplicateOrdreKosc(ordreKosc)"
+                          <!--  <button (click)="duplicateOrdreKosc(ordreKosc)"
                                     class="p-button-rounded p-button-raised p-button-warning" icon="pi pi-copy"
                                     pButton
-                                    pRipple></button>
+                                    pRipple></button>-->
                         </td>
                     </tr>
                 </ng-template>

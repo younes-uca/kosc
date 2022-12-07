@@ -33,7 +33,6 @@ import {
 
 import {TemplateEmailPlanificationVo} from 'src/app/controller/model/TemplateEmailPlanification.model';
 import {TemplateEmailPlanificationService} from 'src/app/controller/service/TemplateEmailPlanification.service';
-import {DateUtils} from "../../../../../../utils/DateUtils";
 import {CauseKoOkVo} from "../../../../../../controller/model/CauseKoOk.model";
 import {CauseKoOkService} from "../../../../../../controller/service/CauseKoOk.service";
 import {HttpErrorResponse, HttpEvent, HttpEventType} from "@angular/common/http";
@@ -43,7 +42,6 @@ import {
 } from "../../../../../../controller/service/DefaultTemplateConfiguration.service";
 import {SourceReplanificationVo} from "../../../../../../controller/model/SourceReplanification.model";
 import {AuthService} from "../../../../../../controller/service/Auth.service";
-import {User} from "../../../../../../controller/model/User.model";
 
 @Component({
     selector: 'app-ordre-kosc-prise-rdv-edit-admin',
@@ -91,11 +89,12 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
 // methods
 
-    public formatDdMmYy(date : Date): string{
-        return date != null ? this.datePipe.transform(date, 'd/M/yyyy') : '' ;
+    public formatDdMmYy(date: Date): string {
+        return date != null ? this.datePipe.transform(date, 'd/M/yyyy') : '';
     }
-    public formatHhMm(date : Date): string{
-        return date != null ? this.datePipe.transform(date, 'hh:mm') : '' ;
+
+    public formatHhMm(date: Date): string {
+        return date != null ? this.datePipe.transform(date, 'hh:mm') : '';
     }
 
     ngOnInit(): void {
@@ -158,7 +157,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     }
 
-    public editPasEncore(ordreKosc: OrdreKoscVo) {
+    public editPasEncore() {
         let date: Date = new Date();
 
         if (this.selectedOrdreKosc.datePremierAppel == null) {
@@ -265,6 +264,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
     private changeEtat(myEtat: string) {
+        let userCourant = this.authService.authenticatedUser;
         this.displayPriseRdv = false;
         this.selectedOrdreKosc.etatDemandeKoscVo = this.findEtatDemandeByCode(myEtat);
         if (myEtat === this.etats[4]) {
@@ -274,7 +274,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.toConfirmationClient = this.selectedOrdreKosc.endCustumorContactEmail;
             this.selectedOrdreKosc.objetConfirmationClient = eval(this.selectedDefaultTemplateConfiguration.templateEmailConfirmationClientVo.objet);
             this.selectedOrdreKosc.corpsConfirmationClient = eval(this.selectedDefaultTemplateConfiguration.templateEmailConfirmationClientVo.corps);
-
+            this.selectedOrdreKosc.userClientInjoinable = userCourant;
         } else if (myEtat === this.etats[5]) {
             this.indexEdit = 3;
             this.emailIndex = 1;
@@ -282,6 +282,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.toPlanification = this.selectedDefaultTemplateConfiguration.emailKosc;
             this.selectedOrdreKosc.objetPlanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailPlanificationVo.objet);
             this.selectedOrdreKosc.corpsPlanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailPlanificationVo.corps);
+            this.selectedOrdreKosc.userPlanification = userCourant;
         }
     }
 
@@ -422,179 +423,250 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
     sendConfirmationEmailToClient() {
-        this.showSpinner = true;
-        this.blocked = true;
+        this.validateFormConfirmation();
+        if (this.errorMessages.length === 0) {
+            this.showSpinner = true;
+            this.blocked = true;
 
-        this.ordreKoscService.sendConfirmationEmailToClient().subscribe(data => {
-                if (data.envoyeConfirmationClient == true) {
+            this.ordreKoscService.sendConfirmationEmailToClient().subscribe(data => {
+                    if (data.envoyeConfirmationClient == true) {
 
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                    this.editOrdreKoscDialog = false;
-                } else {
-                    this.messageService.add({
-                        severity: 'warn',
-                        summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
-                    });
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Success',
+                            detail: 'Email envoyé avec succès'
+                        });
+                        this.editOrdreKoscDialog = false;
+                    } else {
+                        this.messageService.add({
+                            severity: 'warn',
+                            summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
+                        });
 
+                    }
+                    this.showSpinner = false;
+                    this.blocked = false;
                 }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );
+            );
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
+
 
     }
 
     sendMailPlanificationEmail() {
-        this.showSpinner = true;
-        this.blocked = true;
-        this.ordreKoscService.sendMailPlanificationEmail().subscribe(data => {
-                if (data.envoyePlanification == true) {
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                    this.editOrdreKoscDialog = false;
-                } else {
-                    this.messageService.add({
-                            severity: 'warn',
-                            summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
-                        }
-                    );
+        this.validateFormPlanification();
+        if (this.errorMessages.length === 0) {
+            this.showSpinner = true;
+            this.blocked = true;
+            this.ordreKoscService.sendMailPlanificationEmail().subscribe(data => {
+               this.deleteFromList(this.selectedOrdreKosc);
+                    if (data.envoyePlanification == true) {
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Success',
+                            detail: 'Email envoyé avec succès'
+                        });
+                        this.editOrdreKoscDialog = false;
+                    } else {
+                        this.messageService.add({
+                                severity: 'warn',
+                                summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
+                            }
+                        );
+                    }
+                    this.showSpinner = false;
+                    this.blocked = false;
                 }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );
+            );
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
+
     }
 
     sendClientInjoignableEmailToClient() {
-        this.showSpinner = true;
-        this.blocked = true;
-        this.ordreKoscService.sendClientInjoignableEmailToClient().subscribe(data => {
-                if (data.envoyeClientInjoinable == true) {
+        this.validateFormClientInjoinable();
 
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
+        if (this.errorMessages.length === 0) {
+
+            this.showSpinner = true;
+            this.blocked = true;
+            this.ordreKoscService.sendClientInjoignableEmailToClient().subscribe(data => {
+                    if (data.envoyeClientInjoinable == true) {
+
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Success',
+                            detail: 'Email envoyé avec succès'
+                        });
+                        this.editOrdreKoscDialog = false;
+                    } else {
+                        this.messageService.add({
+                            severity: 'warn',
+                            summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
+                        });
+
+                    }
+                    this.showSpinner = false;
+                    this.blocked = false;
                     this.editOrdreKoscDialog = false;
-                } else {
-                    this.messageService.add({
-                        severity: 'warn',
-                        summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
-                    });
-
                 }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );
-
+            );
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
     }
 
     sendClientInjoignableEmailToKosc() {
-        this.showSpinner = true;
-        this.blocked = true;
-        this.ordreKoscService.sendClientInjoignableEmailToKosc().subscribe(data => {
-                if (data.envoyeClientInjoinableKosc == true) {
+        this.validateFormClientInjoinableKosc();
+        if (this.errorMessages.length === 0) {
+            this.showSpinner = true;
+            this.blocked = true;
+            this.ordreKoscService.sendClientInjoignableEmailToKosc().subscribe(data => {
+                    if (data.envoyeClientInjoinableKosc == true) {
 
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                    this.editOrdreKoscDialog = false;
-                } else {
-                    this.messageService.add({
-                        severity: 'warn',
-                        summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
-                    });
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Success',
+                            detail: 'Email envoyé avec succès'
+                        });
+                        this.editOrdreKoscDialog = false;
+                    } else {
+                        this.messageService.add({
+                            severity: 'warn',
+                            summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
+                        });
 
+                    }
+                    this.showSpinner = false;
+                    this.blocked = false;
                 }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );
+            );
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
     }
 
     sendMauvaisContactEmail() {
-        this.showSpinner = true;
-        this.blocked = true;
-        this.ordreKoscService.sendMauvaisContactEmail().subscribe(data => {
-                if (data.envoyeMauvaisContact == true) {
+        this.validateFormMauvaisContact();
+        if (this.errorMessages.length === 0) {
+            this.showSpinner = true;
+            this.blocked = true;
+            this.ordreKoscService.sendMauvaisContactEmail().subscribe(data => {
+                    if (data.envoyeMauvaisContact == true) {
 
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                    this.editOrdreKoscDialog = false;
-                } else {
-                    this.messageService.add({
-                        severity: 'warn',
-                        summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
-                    });
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Success',
+                            detail: 'Email envoyé avec succès'
+                        });
+                        this.editOrdreKoscDialog = false;
+                    } else {
+                        this.messageService.add({
+                            severity: 'warn',
+                            summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
+                        });
+                    }
+                    this.showSpinner = false;
+                    this.blocked = false;
                 }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );
+            );
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
     }
 
     sendRefusClientEmail() {
-        this.showSpinner = true;
-        this.blocked = true;
-        this.ordreKoscService.sendRefusClientEmail().subscribe(data => {
-                if (data.envoyeRefus == true) {
 
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                    this.editOrdreKoscDialog = false;
-                } else {
-                    this.messageService.add({
-                        severity: 'warn',
-                        summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
-                    });
+        this.validateFormRefus();
+        if (this.errorMessages.length === 0) {
+            this.showSpinner = true;
+            this.blocked = true;
+            this.ordreKoscService.sendRefusClientEmail().subscribe(data => {
 
+                    if (data.envoyeRefus == true) {
+
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Success',
+                            detail: 'Email envoyé avec succès'
+                        });
+                        this.editOrdreKoscDialog = false;
+                    } else {
+                        this.messageService.add({
+                            severity: 'warn',
+                            summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
+                        });
+
+                    }
+                    this.showSpinner = false;
+                    this.blocked = false;
                 }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );
+            );
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
+
     }
 
     sendAutreEmail() {
-        this.showSpinner = true;
-        this.blocked = true;
-        this.ordreKoscService.sendAutreEmail().subscribe(data => {
-                if (data.envoyeAutre == true) {
+        this.validateFormAutre();
+        if (this.errorMessages.length === 0) {
+            this.showSpinner = true;
+            this.blocked = true;
+            this.ordreKoscService.sendAutreEmail().subscribe(data => {
+                    if (data.envoyeAutre == true) {
 
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                    this.editOrdreKoscDialog = false;
-                } else {
-                    this.messageService.add({
-                        severity: 'warn',
-                        summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
-                    });
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Success',
+                            detail: 'Email envoyé avec succès'
+                        });
+                        this.editOrdreKoscDialog = false;
+                    } else {
+                        this.messageService.add({
+                            severity: 'warn',
+                            summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
+                        });
 
+                    }
+                    this.showSpinner = false;
+                    this.blocked = false;
                 }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );
+            );
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
     }
 
 
@@ -821,6 +893,72 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
 //validation methods
+
+
+    private validateFormConfirmation(): void {
+        this.errorMessages = new Array<string>();
+        this.validateOrdreKoscObjetConfirmationClient();
+        this.validateOrdreKoscCorpsConfirmationClient();
+        this.validateOrdreKoscFromConfirmationClient();
+        this.validateOrdreKoscToConfirmationClient();
+
+    }
+
+    private validateFormMauvaisContact(): void {
+        this.errorMessages = new Array<string>();
+        this.validateOrdreKoscObjetMauvaisContact();
+        this.validateOrdreKoscCorpsMauvaisContact();
+        this.validateOrdreKoscFromMauvaisContact();
+        this.validateOrdreKoscToMauvaisContact();
+
+    }
+
+    private validateFormPlanification(): void {
+        this.errorMessages = new Array<string>();
+        this.validateOrdreKoscDateRendezVous();
+        this.validateOrdreKoscObjetPlanification();
+        this.validateOrdreKoscCorpsPlanification();
+        this.validateOrdreKoscFromPlanification();
+        this.validateOrdreKoscToPlanification();
+
+    }
+
+    private validateFormRefus(): void {
+        this.errorMessages = new Array<string>();
+        this.validateOrdreKoscObjetRefus();
+        this.validateOrdreKoscCorpsRefus();
+        this.validateOrdreKoscFromRefus();
+        this.validateOrdreKoscToRefus();
+
+    }
+
+    private validateFormClientInjoinableKosc(): void {
+        this.errorMessages = new Array<string>();
+        this.validateOrdreKoscObjetClientInjoinableKosc();
+        this.validateOrdreKoscCorpsClientInjoinableKosc();
+        this.validateOrdreKoscFromClientInjoinableKosc();
+        this.validateOrdreKoscToClientInjoinableKosc();
+
+    }
+
+    private validateFormClientInjoinable(): void {
+        this.errorMessages = new Array<string>();
+        this.validateOrdreKoscObjetClientInjoinable();
+        this.validateOrdreKoscFromClientInjoinable();
+        this.validateOrdreKoscToClientInjoinable();
+        this.validateOrdreKoscCorpsClientInjoinable();
+
+    }
+
+    private validateFormAutre(): void {
+        this.errorMessages = new Array<string>();
+        this.validateOrdreKoscObjetAutre();
+        this.validateOrdreKoscCorpsAutre();
+        this.validateOrdreKoscFromAutre();
+        this.validateOrdreKoscToAutre();
+
+    }
+
     private validateForm(): void {
         this.errorMessages = new Array<string>();
         this.validateOrdreKoscDateRdv();
@@ -868,6 +1006,271 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             }
         }
     }
+
+    private validateOrdreKoscObjetPlanification() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.objetPlanification)) {
+            this.errorMessages.push('Objet planification non valide');
+            this.validOrdreKoscObjetPlanification = false;
+        } else {
+            this.validOrdreKoscObjetPlanification = true;
+        }
+    }
+
+    private validateOrdreKoscCorpsPlanification() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.corpsPlanification)) {
+            this.errorMessages.push('Corps planification non valide');
+            this.validOrdreKoscCorpsPlanification = false;
+        } else {
+            this.validOrdreKoscCorpsPlanification = true;
+        }
+    }
+
+    private validateOrdreKoscFromPlanification() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.fromPlanification)) {
+            this.errorMessages.push('De planification non valide');
+            this.validOrdreKoscFromPlanification = false;
+        } else {
+            this.validOrdreKoscFromPlanification = true;
+        }
+    }
+
+    private validateOrdreKoscToPlanification() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.toPlanification)) {
+            this.errorMessages.push('A planification non valide');
+            this.validOrdreKoscToPlanification = false;
+        } else {
+            this.validOrdreKoscToPlanification = true;
+        }
+    }
+
+
+
+
+    private validateOrdreKoscObjetRefus() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.objetRefus)) {
+            this.errorMessages.push('Objet refus non valide');
+            this.validOrdreKoscObjetRefus = false;
+        } else {
+            this.validOrdreKoscObjetRefus = true;
+        }
+    }
+
+    private validateOrdreKoscCorpsRefus() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.corpsRefus)) {
+            this.errorMessages.push('Corps refus non valide');
+            this.validOrdreKoscCorpsRefus = false;
+        } else {
+            this.validOrdreKoscCorpsRefus = true;
+        }
+    }
+
+    private validateOrdreKoscFromRefus() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.fromRefus)) {
+            this.errorMessages.push('De refus non valide');
+            this.validOrdreKoscFromRefus = false;
+        } else {
+            this.validOrdreKoscFromRefus = true;
+        }
+    }
+
+    private validateOrdreKoscToRefus() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.toRefus)) {
+            this.errorMessages.push('A refus non valide');
+            this.validOrdreKoscToRefus = false;
+        } else {
+            this.validOrdreKoscToRefus = true;
+        }
+    }
+
+    private validateOrdreKoscObjetMauvaisContact() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.objetMauvaisContact)) {
+            this.errorMessages.push('Objet mauvais contact non valide');
+            this.validOrdreKoscObjetMauvaisContact = false;
+        } else {
+            this.validOrdreKoscObjetMauvaisContact = true;
+        }
+    }
+
+    private validateOrdreKoscCorpsMauvaisContact() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.corpsMauvaisContact)) {
+            this.errorMessages.push('Corps mauvais contact non valide');
+            this.validOrdreKoscCorpsMauvaisContact = false;
+        } else {
+            this.validOrdreKoscCorpsMauvaisContact = true;
+        }
+    }
+
+    private validateOrdreKoscFromMauvaisContact() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.fromMauvaisContact)) {
+            this.errorMessages.push('De mauvais contact non valide');
+            this.validOrdreKoscFromMauvaisContact = false;
+        } else {
+            this.validOrdreKoscFromMauvaisContact = true;
+        }
+    }
+
+    private validateOrdreKoscToMauvaisContact() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.toMauvaisContact)) {
+            this.errorMessages.push('A mauvais contact non valide');
+            this.validOrdreKoscToMauvaisContact = false;
+        } else {
+            this.validOrdreKoscToMauvaisContact = true;
+        }
+    }
+
+    private validateOrdreKoscObjetConfirmationClient() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.objetConfirmationClient)) {
+            this.errorMessages.push('Objet confirmation client non valide');
+            this.validOrdreKoscObjetConfirmationClient = false;
+        } else {
+            this.validOrdreKoscObjetConfirmationClient = true;
+        }
+    }
+
+    private validateOrdreKoscCorpsConfirmationClient() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.corpsConfirmationClient)) {
+            this.errorMessages.push('Corps confirmation client non valide');
+            this.validOrdreKoscCorpsConfirmationClient = false;
+        } else {
+            this.validOrdreKoscCorpsConfirmationClient = true;
+        }
+    }
+
+    private validateOrdreKoscFromConfirmationClient() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.fromConfirmationClient)) {
+            this.errorMessages.push('De confirmation client non valide');
+            this.validOrdreKoscFromConfirmationClient = false;
+        } else {
+            this.validOrdreKoscFromConfirmationClient = true;
+        }
+    }
+
+    private validateOrdreKoscToConfirmationClient() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.toConfirmationClient)) {
+            this.errorMessages.push('A confirmation client non valide');
+            this.validOrdreKoscToConfirmationClient = false;
+        } else {
+            this.validOrdreKoscToConfirmationClient = true;
+        }
+    }
+
+
+    private validateOrdreKoscObjetClientInjoinable() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.objetClientInjoinable)) {
+            this.errorMessages.push('Objet client injoinable non valide');
+            this.validOrdreKoscObjetClientInjoinable = false;
+        } else {
+            this.validOrdreKoscObjetClientInjoinable = true;
+        }
+    }
+
+    private validateOrdreKoscFromClientInjoinable() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.fromClientInjoinable)) {
+            this.errorMessages.push('De client injoinable non valide');
+            this.validOrdreKoscFromClientInjoinable = false;
+        } else {
+            this.validOrdreKoscFromClientInjoinable = true;
+        }
+    }
+    private validateOrdreKoscCorpsClientInjoinable() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.corpsClientInjoinable)) {
+            this.errorMessages.push('De client injoinable non valide');
+            this.validOrdreKoscCorpsClientInjoinable = false;
+        } else {
+            this.validOrdreKoscCorpsClientInjoinable = true;
+        }
+    }
+
+    private validateOrdreKoscToClientInjoinable() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.toClientInjoinable)) {
+            this.errorMessages.push('A client injoinable non valide');
+            this.validOrdreKoscToClientInjoinable = false;
+        } else {
+            this.validOrdreKoscToClientInjoinable = true;
+        }
+    }
+
+    private validateOrdreKoscObjetClientInjoinableKosc() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.objetClientInjoinableKosc)) {
+            this.errorMessages.push('Objet client injoinable kosc non valide');
+            this.validOrdreKoscObjetClientInjoinableKosc = false;
+        } else {
+            this.validOrdreKoscObjetClientInjoinableKosc = true;
+        }
+    }
+
+    private validateOrdreKoscObjetAutre() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.objetAutre)) {
+            this.errorMessages.push('Objet autre non valide');
+            this.validOrdreKoscObjetAutre = false;
+        } else {
+            this.validOrdreKoscObjetAutre = true;
+        }
+    }
+
+    private validateOrdreKoscCorpsClientInjoinableKosc() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.corpsClientInjoinableKosc)) {
+            this.errorMessages.push('Corps client injoinable kosc non valide');
+            this.validOrdreKoscCorpsClientInjoinableKosc = false;
+        } else {
+            this.validOrdreKoscCorpsClientInjoinableKosc = true;
+        }
+    }
+
+    private validateOrdreKoscCorpsAutre() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.corpsAutre)) {
+            this.errorMessages.push('Corps autre non valide');
+            this.validOrdreKoscCorpsAutre = false;
+        } else {
+            this.validOrdreKoscCorpsAutre = true;
+        }
+    }
+
+    private validateOrdreKoscFromClientInjoinableKosc() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.fromClientInjoinableKosc)) {
+            this.errorMessages.push('De client injoinable kosc non valide');
+            this.validOrdreKoscFromClientInjoinableKosc = false;
+        } else {
+            this.validOrdreKoscFromClientInjoinableKosc = true;
+        }
+    }
+
+    private validateOrdreKoscFromAutre() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.fromAutre)) {
+            this.errorMessages.push('De autre non valide');
+            this.validOrdreKoscFromAutre = false;
+        } else {
+            this.validOrdreKoscFromAutre = true;
+        }
+    }
+
+    private validateOrdreKoscToClientInjoinableKosc() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.toClientInjoinableKosc)) {
+            this.errorMessages.push('A client injoinable kosc non valide');
+            this.validOrdreKoscToClientInjoinableKosc = false;
+        } else {
+            this.validOrdreKoscToClientInjoinableKosc = true;
+        }
+    }
+
+    private validateOrdreKoscToAutre() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.toAutre)) {
+            this.errorMessages.push('A aute non valide');
+            this.validOrdreKoscToAutre = false;
+        } else {
+            this.validOrdreKoscToAutre = true;
+        }
+    }
+
+    private validateOrdreKoscDateRendezVous() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.dateRdv)) {
+            this.errorMessages.push('Date rendez-vous  non valide');
+            this.validOrdreKoscDateRendezVous = false;
+        } else {
+            this.validOrdreKoscDateRendezVous = true;
+        }
+    }
+
 
     public findAppropriateTechnicien(rdv: Date, codeDepartement: string) {
         this.technicienService.findAppropriateTechnicien(rdv, codeDepartement).subscribe(data => {
@@ -1024,11 +1427,322 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         this._validTemplateEmailPlanificationCode = value;
     }
 
+    _validOrdreKoscObjetPlanification = true;
+
+    get validOrdreKoscObjetPlanification(): boolean {
+        return this._validOrdreKoscObjetPlanification;
+    }
+
+    set validOrdreKoscObjetPlanification(value: boolean) {
+        this._validOrdreKoscObjetPlanification = value;
+    }
+
+    _validOrdreKoscCorpsPlanification = true;
+
+    get validOrdreKoscCorpsPlanification(): boolean {
+        return this._validOrdreKoscCorpsPlanification;
+    }
+
+    set validOrdreKoscCorpsPlanification(value: boolean) {
+        this._validOrdreKoscCorpsPlanification = value;
+    }
+
+    _validOrdreKoscFromPlanification = true;
+
+    get validOrdreKoscFromPlanification(): boolean {
+        return this._validOrdreKoscFromPlanification;
+    }
+
+    set validOrdreKoscFromPlanification(value: boolean) {
+        this._validOrdreKoscFromPlanification = value;
+    }
+
+    _validOrdreKoscToPlanification = true;
+
+    get validOrdreKoscToPlanification(): boolean {
+        return this._validOrdreKoscToPlanification;
+    }
+
+    set validOrdreKoscToPlanification(value: boolean) {
+        this._validOrdreKoscToPlanification = value;
+    }
+
 // methods
 
     _validTemplateEmailPlanificationLibelle = true;
 
 // getters and setters
+
+
+     _validOrdreKoscDateRendezVous = true;
+
+
+    get validOrdreKoscDateRendezVous(): boolean {
+        return this._validOrdreKoscDateRendezVous;
+    }
+
+    set validOrdreKoscDateRendezVous(value: boolean) {
+        this._validOrdreKoscDateRendezVous = value;
+    }
+
+     _validOrdreKoscFromAutre = true;
+     _validOrdreKoscToAutre = true;
+     _validOrdreKoscObjetAutre = true;
+     _validOrdreKoscCorpsAutre = true;
+
+
+    get validOrdreKoscFromAutre(): boolean {
+        return this._validOrdreKoscFromAutre;
+    }
+
+    set validOrdreKoscFromAutre(value: boolean) {
+        this._validOrdreKoscFromAutre = value;
+    }
+
+    get validOrdreKoscToAutre(): boolean {
+        return this._validOrdreKoscToAutre;
+    }
+
+    set validOrdreKoscToAutre(value: boolean) {
+        this._validOrdreKoscToAutre = value;
+    }
+
+    get validOrdreKoscObjetAutre(): boolean {
+        return this._validOrdreKoscObjetAutre;
+    }
+
+    set validOrdreKoscObjetAutre(value: boolean) {
+        this._validOrdreKoscObjetAutre = value;
+    }
+
+    get validOrdreKoscCorpsAutre(): boolean {
+        return this._validOrdreKoscCorpsAutre;
+    }
+
+    set validOrdreKoscCorpsAutre(value: boolean) {
+        this._validOrdreKoscCorpsAutre = value;
+    }
+     _validOrdreKoscCorpsClientInjoinable=true;
+
+
+    get validOrdreKoscCorpsClientInjoinable(): boolean {
+        return this._validOrdreKoscCorpsClientInjoinable;
+    }
+
+    set validOrdreKoscCorpsClientInjoinable(value: boolean) {
+        this._validOrdreKoscCorpsClientInjoinable = value;
+    }
+
+    _validOrdreKoscObjetClientInjoinable = true;
+
+    get validOrdreKoscObjetClientInjoinable(): boolean {
+        return this._validOrdreKoscObjetClientInjoinable;
+    }
+
+    set validOrdreKoscObjetClientInjoinable(value: boolean) {
+        this._validOrdreKoscObjetClientInjoinable = value;
+    }
+
+    _validOrdreKoscFromClientInjoinable = true;
+
+    get validOrdreKoscFromClientInjoinable(): boolean {
+        return this._validOrdreKoscFromClientInjoinable;
+    }
+
+    set validOrdreKoscFromClientInjoinable(value: boolean) {
+        this._validOrdreKoscFromClientInjoinable = value;
+    }
+
+    _validOrdreKoscToClientInjoinable = true;
+
+    get validOrdreKoscToClientInjoinable(): boolean {
+        return this._validOrdreKoscToClientInjoinable;
+    }
+
+    set validOrdreKoscToClientInjoinable(value: boolean) {
+        this._validOrdreKoscToClientInjoinable = value;
+    }
+
+    _validOrdreKoscObjetClientInjoinableKosc = true;
+
+    get validOrdreKoscObjetClientInjoinableKosc(): boolean {
+        return this._validOrdreKoscObjetClientInjoinableKosc;
+    }
+
+    set validOrdreKoscObjetClientInjoinableKosc(value: boolean) {
+        this._validOrdreKoscObjetClientInjoinableKosc = value;
+    }
+
+    _validOrdreKoscCorpsClientInjoinableKosc = true;
+
+    get validOrdreKoscCorpsClientInjoinableKosc(): boolean {
+        return this._validOrdreKoscCorpsClientInjoinableKosc;
+    }
+
+    set validOrdreKoscCorpsClientInjoinableKosc(value: boolean) {
+        this._validOrdreKoscCorpsClientInjoinableKosc = value;
+    }
+
+    _validOrdreKoscFromClientInjoinableKosc = true;
+
+    get validOrdreKoscFromClientInjoinableKosc(): boolean {
+        return this._validOrdreKoscFromClientInjoinableKosc;
+    }
+
+    set validOrdreKoscFromClientInjoinableKosc(value: boolean) {
+        this._validOrdreKoscFromClientInjoinableKosc = value;
+    }
+
+    _validOrdreKoscToClientInjoinableKosc = true;
+
+    get validOrdreKoscToClientInjoinableKosc(): boolean {
+        return this._validOrdreKoscToClientInjoinableKosc;
+    }
+
+    set validOrdreKoscToClientInjoinableKosc(value: boolean) {
+        this._validOrdreKoscToClientInjoinableKosc = value;
+    }
+
+    _validOrdreKoscObjetReplanification = true;
+
+    get validOrdreKoscObjetReplanification(): boolean {
+        return this._validOrdreKoscObjetReplanification;
+    }
+
+    set validOrdreKoscObjetReplanification(value: boolean) {
+        this._validOrdreKoscObjetReplanification = value;
+    }
+
+    _validOrdreKoscCorpsReplanification = true;
+
+    get validOrdreKoscCorpsReplanification(): boolean {
+        return this._validOrdreKoscCorpsReplanification;
+    }
+
+    set validOrdreKoscCorpsReplanification(value: boolean) {
+        this._validOrdreKoscCorpsReplanification = value;
+    }
+
+    _validOrdreKoscObjetRefus = true;
+
+    get validOrdreKoscObjetRefus(): boolean {
+        return this._validOrdreKoscObjetRefus;
+    }
+
+    set validOrdreKoscObjetRefus(value: boolean) {
+        this._validOrdreKoscObjetRefus = value;
+    }
+
+    _validOrdreKoscCorpsRefus = true;
+
+    get validOrdreKoscCorpsRefus(): boolean {
+        return this._validOrdreKoscCorpsRefus;
+    }
+
+    set validOrdreKoscCorpsRefus(value: boolean) {
+        this._validOrdreKoscCorpsRefus = value;
+    }
+
+    _validOrdreKoscFromRefus = true;
+
+    get validOrdreKoscFromRefus(): boolean {
+        return this._validOrdreKoscFromRefus;
+    }
+
+    set validOrdreKoscFromRefus(value: boolean) {
+        this._validOrdreKoscFromRefus = value;
+    }
+
+    _validOrdreKoscToRefus = true;
+
+    get validOrdreKoscToRefus(): boolean {
+        return this._validOrdreKoscToRefus;
+    }
+
+    set validOrdreKoscToRefus(value: boolean) {
+        this._validOrdreKoscToRefus = value;
+    }
+
+    _validOrdreKoscObjetMauvaisContact = true;
+
+    get validOrdreKoscObjetMauvaisContact(): boolean {
+        return this._validOrdreKoscObjetMauvaisContact;
+    }
+
+    set validOrdreKoscObjetMauvaisContact(value: boolean) {
+        this._validOrdreKoscObjetMauvaisContact = value;
+    }
+
+    _validOrdreKoscCorpsMauvaisContact = true;
+
+    get validOrdreKoscCorpsMauvaisContact(): boolean {
+        return this._validOrdreKoscCorpsMauvaisContact;
+    }
+
+    set validOrdreKoscCorpsMauvaisContact(value: boolean) {
+        this._validOrdreKoscCorpsMauvaisContact = value;
+    }
+
+    _validOrdreKoscFromMauvaisContact = true;
+
+    get validOrdreKoscFromMauvaisContact(): boolean {
+        return this._validOrdreKoscFromMauvaisContact;
+    }
+
+    set validOrdreKoscFromMauvaisContact(value: boolean) {
+        this._validOrdreKoscFromMauvaisContact = value;
+    }
+
+    _validOrdreKoscToMauvaisContact = true;
+
+    get validOrdreKoscToMauvaisContact(): boolean {
+        return this._validOrdreKoscToMauvaisContact;
+    }
+
+    set validOrdreKoscToMauvaisContact(value: boolean) {
+        this._validOrdreKoscToMauvaisContact = value;
+    }
+
+    _validOrdreKoscObjetConfirmationClient = true;
+
+    get validOrdreKoscObjetConfirmationClient(): boolean {
+        return this._validOrdreKoscObjetConfirmationClient;
+    }
+
+    set validOrdreKoscObjetConfirmationClient(value: boolean) {
+        this._validOrdreKoscObjetConfirmationClient = value;
+    }
+
+    _validOrdreKoscCorpsConfirmationClient = true;
+
+    get validOrdreKoscCorpsConfirmationClient(): boolean {
+        return this._validOrdreKoscCorpsConfirmationClient;
+    }
+
+    set validOrdreKoscCorpsConfirmationClient(value: boolean) {
+        this._validOrdreKoscCorpsConfirmationClient = value;
+    }
+
+    _validOrdreKoscFromConfirmationClient = true;
+
+    get validOrdreKoscFromConfirmationClient(): boolean {
+        return this._validOrdreKoscFromConfirmationClient;
+    }
+
+    set validOrdreKoscFromConfirmationClient(value: boolean) {
+        this._validOrdreKoscFromConfirmationClient = value;
+    }
+
+    _validOrdreKoscToConfirmationClient = true;
+
+    get validOrdreKoscToConfirmationClient(): boolean {
+        return this._validOrdreKoscToConfirmationClient;
+    }
+
+    set validOrdreKoscToConfirmationClient(value: boolean) {
+        this._validOrdreKoscToConfirmationClient = value;
+    }
+
 
     get validTemplateEmailPlanificationLibelle(): boolean {
         return this._validTemplateEmailPlanificationLibelle;
@@ -1509,5 +2223,20 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
     set sourceReplanifications(value: Array<SourceReplanificationVo>) {
         this.sourceReplanificationService.sourceReplanifications = value;
+    }
+
+
+    private deleteFromList(selectedOrdreKosc: OrdreKoscVo) {
+        const position = this.ordreKoscsPriseRdv.indexOf(selectedOrdreKosc);
+        position > -1 ? this.ordreKoscsPriseRdv.splice(position, 1) : false;
+    }
+
+
+    get ordreKoscsPriseRdv(): Array<OrdreKoscVo> {
+        return this.ordreKoscService.ordreKoscsPriseRdv;
+    }
+
+    set ordreKoscsPriseRdv(value: Array<OrdreKoscVo>) {
+        this.ordreKoscService.ordreKoscsPriseRdv = value;
     }
 }

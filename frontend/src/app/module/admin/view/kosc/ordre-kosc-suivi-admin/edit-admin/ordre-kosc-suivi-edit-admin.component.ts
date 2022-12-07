@@ -37,6 +37,7 @@ import {
     DefaultTemplateConfigurationService
 } from "../../../../../../controller/service/DefaultTemplateConfiguration.service";
 import {DefaultTemplateConfigurationVo} from "../../../../../../controller/model/DefaultTemplateConfiguration.model";
+import {AuthService} from "../../../../../../controller/service/Auth.service";
 
 @Component({
     selector: 'app-ordre-kosc-suivi-edit-admin',
@@ -44,7 +45,6 @@ import {DefaultTemplateConfigurationVo} from "../../../../../../controller/model
     styleUrls: ['./ordre-kosc-suivi-edit-admin.component.css']
 })
 export class OrdreKoscSuiviEditAdminComponent implements OnInit {
-
 
 
     // methods
@@ -67,9 +67,11 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
         , private templateEmailClientInjoinableService: TemplateEmailClientInjoinableService
         , private templateEmailPlanificationService: TemplateEmailPlanificationService
         , private defaultTemplateConfigurationService: DefaultTemplateConfigurationService
+        , private authService: AuthService
     ) {
 
     }
+
     showSpinner = false;
     blocked = false;
     indexEdit = 0;
@@ -481,7 +483,6 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
     }
 
 
-
     get selectedDepartement(): DepartementVo {
         return this.departementService.selectedDepartement;
     }
@@ -681,6 +682,7 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
     set createRegionDialog(value: boolean) {
         this.regionService.createRegionDialog = value;
     }
+
     get selectedDefaultTemplateConfiguration(): DefaultTemplateConfigurationVo {
 
         return this.defaultTemplateConfigurationService.selectedDefaultTemplateConfiguration;
@@ -799,8 +801,6 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
     }
 
 
-
-
     public async openCreateDepartement(departement: string) {
         const isPermistted = await this.roleService.isPermitted('Departement', 'edit');
         if (isPermistted) {
@@ -911,131 +911,178 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
     }
 
     sendMailReportDemandeManeoClientInjoignable() {
-        this.showSpinner = true;
-        this.blocked = true;
-        this.ordreKoscService.sendMailReportDemandeManeoClientInjoignable().subscribe(data => {
-                if (data.envoyeReportDemandeManeoClientInjoignable == true) {
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                    this.editOrdreKoscDialog = false;
-                } else {
-                    this.messageService.add({
-                        severity: 'warn',
-                        summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
-                        }
-                    );
+
+        this.validateFormReportDemandeManeoClientInjoignable();
+        if (this.errorMessages.length === 0) {
+            this.showSpinner = true;
+            this.blocked = true;
+            this.ordreKoscService.sendMailReportDemandeManeoClientInjoignable().subscribe(data => {
+                    if (data.envoyeReportDemandeManeoClientInjoignable == true) {
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Success',
+                            detail: 'Email envoyé avec succès'
+                        });
+                        this.editOrdreKoscDialog = false;
+                    } else {
+                        this.messageService.add({
+                                severity: 'warn',
+                                summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
+                            }
+                        );
+                    }
+                    this.showSpinner = false;
+                    this.blocked = false;
                 }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );
+            );
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
 
     }
 
     sendMailReportDemandeManeoClientJoignableAccepte() {
-        this.showSpinner = true;
-        this.blocked = true;
-        this.ordreKoscService.sendMailReportDemandeManeoClientJoignableAccepte().subscribe(data => {
-                if (data.envoyeReportDemandeManeoClientJoignableAccepte == true) {
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                    this.editOrdreKoscDialog = false;
-                } else {
-                    this.messageService.add({
-                        severity: 'warn',
-                        summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
-                        }
-                    );
+        this.validateFormReportDemandeManeoClientJoignableAccepte();
+        if (this.errorMessages.length === 0) {
+            this.showSpinner = true;
+            this.blocked = true;
+            this.ordreKoscService.sendMailReportDemandeManeoClientJoignableAccepte().subscribe(data => {
+                    if (data.envoyeReportDemandeManeoClientJoignableAccepte == true) {
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Success',
+                            detail: 'Email envoyé avec succès'
+                        });
+                        this.editOrdreKoscDialog = false;
+                    } else {
+                        this.messageService.add({
+                                severity: 'warn',
+                                summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
+                            }
+                        );
+                    }
+                    this.showSpinner = false;
+                    this.blocked = false;
                 }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );
+            );
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
 
     }
 
     sendMailReportDemandeManeoClientJoignableRefus() {
-        this.showSpinner = true;
-        this.blocked = true;
-        this.ordreKoscService.sendMailReportDemandeManeoClientJoignableRefus().subscribe(data => {
-                if (data.envoyeReportDemandeManeoClientJoignableRefus == true) {
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                    this.editOrdreKoscDialog = false;
-                } else {
-                    this.messageService.add({
-                        severity: 'warn',
-                        summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
-                        }
-                    );
+        this.validateFormReportDemandeManeoClientJoignableRefus();
+        if (this.errorMessages.length === 0) {
+            this.showSpinner = true;
+            this.blocked = true;
+            this.ordreKoscService.sendMailReportDemandeManeoClientJoignableRefus().subscribe(data => {
+                    if (data.envoyeReportDemandeManeoClientJoignableRefus == true) {
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Success',
+                            detail: 'Email envoyé avec succès'
+                        });
+                        this.editOrdreKoscDialog = false;
+                    } else {
+                        this.messageService.add({
+                                severity: 'warn',
+                                summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
+                            }
+                        );
+                    }
+                    this.showSpinner = false;
+                    this.blocked = false;
                 }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );
-
+            );
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
     }
 
     sendMailReportDemandeClientClientInjoignable() {
-        this.showSpinner = true;
-        this.blocked = true;
-        this.ordreKoscService.sendMailReportDemandeClientClientInjoignable().subscribe(data => {
-                if (data.envoyeReportDemandeClientClientInjoignable == true) {
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                    this.editOrdreKoscDialog = false;
-                } else {
-                    this.messageService.add({
-                        severity: 'warn',
-                        summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
-                        }
-                    );
+        this.validateFormReportDemandeClientClientInjoignable();
+        if (this.errorMessages.length === 0) {
+            this.showSpinner = true;
+            this.blocked = true;
+            this.ordreKoscService.sendMailReportDemandeClientClientInjoignable().subscribe(data => {
+                    if (data.envoyeReportDemandeClientClientInjoignable == true) {
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Success',
+                            detail: 'Email envoyé avec succès'
+                        });
+                        this.editOrdreKoscDialog = false;
+                    } else {
+                        this.messageService.add({
+                                severity: 'warn',
+                                summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
+                            }
+                        );
+                    }
+                    this.showSpinner = false;
+                    this.blocked = false;
                 }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );
+            );
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
 
     }
 
     sendMailReportDemandeClientClientJoignable() {
-        this.showSpinner = true;
-        this.blocked = true;
-        this.ordreKoscService.sendMailReportDemandeClientClientJoignable().subscribe(data => {
-                if (data.envoyeReportDemandeClientClientJoignable == true) {
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                    this.editOrdreKoscDialog = false;
-                } else {
-                    this.messageService.add({
-                        severity: 'warn',
-                        summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
-                        }
-                    );
+        this.validateFormReportDemandeClientClientJoignable();
+        if (this.errorMessages.length === 0) {
+            this.showSpinner = true;
+            this.blocked = true;
+            this.ordreKoscService.sendMailReportDemandeClientClientJoignable().subscribe(data => {
+                    if (data.envoyeReportDemandeClientClientJoignable == true) {
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Success',
+                            detail: 'Email envoyé avec succès'
+                        });
+                        this.editOrdreKoscDialog = false;
+                    } else {
+                        this.messageService.add({
+                                severity: 'warn',
+                                summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
+                            }
+                        );
+                    }
+                    this.showSpinner = false;
+                    this.blocked = false;
                 }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );
+            );
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
 
     }
+
     private reportEtats = ['report-demande-maneo-cl-inj', 'report-demande-maneo-cl-j-accepte', 'report-demande-maneo-cl-j-refus',
-        'report-demande-client-cl-inj'  ,'report-demande-client-cl-j'];
+        'report-demande-client-cl-inj', 'report-demande-client-cl-j'];
+
     private initReportDemandeManeo() {
         this.ReportDemandeManeo = [
             {
@@ -1073,6 +1120,7 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
 
 
     private selectTab(myEtat: string) {
+        let userCourant = this.authService.authenticatedUser;
         this.selectedOrdreKosc.etatDemandeKoscVo = this.findEtatDemandeByCode(myEtat);
         this.indexEdit = 1;
         if (myEtat === this.reportEtats[0]) {
@@ -1082,6 +1130,7 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.toReportDemandeManeoClientInjoignable = this.selectedOrdreKosc.endCustumorContactEmail;
             this.selectedOrdreKosc.objetReportDemandeManeoClientInjoignable = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeManeoClientInjoignableVo.objet);
             this.selectedOrdreKosc.corpsReportDemandeManeoClientInjoignable = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeManeoClientInjoignableVo.corps);
+            this.selectedOrdreKosc.userReportDemandeManeoClientInjoignable = userCourant;
         } else if (myEtat === this.reportEtats[1]) {
             this.indexDemande = 0;
             this.indexManeo = 1;
@@ -1089,6 +1138,7 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.toReportDemandeManeoClientJoignableAccepte = this.selectedOrdreKosc.endCustumorContactEmail;
             this.selectedOrdreKosc.objetReportDemandeManeoClientJoignableAccepte = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeManeoClientJoignableAccepteVo.objet);
             this.selectedOrdreKosc.corpsReportDemandeManeoClientJoignableAccepte = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeManeoClientJoignableAccepteVo.corps);
+            this.selectedOrdreKosc.userReportDemandeManeoClientJoignableAccepte = userCourant;
         } else if (myEtat === this.reportEtats[2]) {
             this.indexDemande = 0;
             this.indexManeo = 2;
@@ -1096,21 +1146,23 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.toReportDemandeManeoClientJoignableRefus = this.selectedOrdreKosc.endCustumorContactEmail;
             this.selectedOrdreKosc.objetReportDemandeManeoClientJoignableRefus = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeManeoClientJoignableRefusVo.objet);
             this.selectedOrdreKosc.corpsReportDemandeManeoClientJoignableRefus = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeManeoClientJoignableRefusVo.corps);
-        }else if (myEtat === this.reportEtats[3]) {
+            this.selectedOrdreKosc.userReportDemandeManeoClientJoignableRefus = userCourant;
+        } else if (myEtat === this.reportEtats[3]) {
             this.indexDemande = 1;
             this.indexClient = 0;
             this.selectedOrdreKosc.fromReportDemandeClientClientInjoignable = this.selectedDefaultTemplateConfiguration.emailManeo;
             this.selectedOrdreKosc.toReportDemandeClientClientInjoignable = this.selectedOrdreKosc.endCustumorContactEmail;
             this.selectedOrdreKosc.objetReportDemandeClientClientInjoignable = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeClientClientInjoignableVo.objet);
             this.selectedOrdreKosc.corpsReportDemandeClientClientInjoignable = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeClientClientInjoignableVo.corps);
-
-        }else if (myEtat === this.reportEtats[4]) {
+            this.selectedOrdreKosc.userReportDemandeClientClientInjoignable = userCourant;
+        } else if (myEtat === this.reportEtats[4]) {
             this.indexDemande = 1;
             this.indexClient = 1;
             this.selectedOrdreKosc.fromReportDemandeClientClientJoignable = this.selectedDefaultTemplateConfiguration.emailManeo;
             this.selectedOrdreKosc.toReportDemandeClientClientJoignable = this.selectedOrdreKosc.endCustumorContactEmail;
             this.selectedOrdreKosc.objetReportDemandeClientClientJoignable = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeClientClientJoignableVo.objet);
             this.selectedOrdreKosc.corpsReportDemandeClientClientJoignable = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportDemandeClientClientJoignableVo.corps);
+            this.selectedOrdreKosc.userReportDemandeClientClientJoignable = userCourant;
         }
 
 
@@ -1125,35 +1177,661 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
 
 
     }
+
     public findEtatDemandeByCode(code: string) {
         let res = this.etatDemandeKoscService.findByCode(code, this.etatDemandeKoscs);
         return res;
     }
 
     sendMailReplanification() {
-        this.showSpinner = true;
-        this.blocked = true;
-        this.ordreKoscService.sendMailReplanification().subscribe(data => {
-                if (data.envoyeReplanification == true) {
-
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                    this.editOrdreKoscDialog = false;
-                } else  {
-                    this.messageService.add({
-                        severity: 'warn',
-                        summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
-                    });
+        this.validateFormReplanification();
+        if (this.errorMessages.length === 0) {
+            this.showSpinner = true;
+            this.blocked = true;
+            this.ordreKoscService.sendMailReplanification().subscribe(data => {
+                    if (data.envoyeReplanification == true) {
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Success',
+                            detail: 'Email envoyé avec succès'
+                        });
+                        this.editOrdreKoscDialog = false;
+                    } else {
+                        this.messageService.add({
+                            severity: 'warn',
+                            summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
+                        });
+                    }
+                    this.showSpinner = false;
+                    this.blocked = false;
                 }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );
+            );
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de corrigé les erreurs sur le formulaire'
+            });
+        }
     }
 
 
+    private validateOrdreKoscObjetReplanification() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.objetReplanification)) {
+            this.errorMessages.push('Objet replanification non valide');
+            this.validOrdreKoscObjetReplanification = false;
+        } else {
+            this.validOrdreKoscObjetReplanification = true;
+        }
+    }
 
+    private validateOrdreKoscCorpsReplanification() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.corpsReplanification)) {
+            this.errorMessages.push('Corps replanification non valide');
+            this.validOrdreKoscCorpsReplanification = false;
+        } else {
+            this.validOrdreKoscCorpsReplanification = true;
+        }
+    }
+
+    private validateOrdreKoscFromReplanification() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.fromReplanification)) {
+            this.errorMessages.push('De replanification non valide');
+            this.validOrdreKoscFromReplanification = false;
+        } else {
+            this.validOrdreKoscFromReplanification = true;
+        }
+    }
+
+    private validateOrdreKoscToReplanification() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.toReplanification)) {
+            this.errorMessages.push('A replanification non valide');
+            this.validOrdreKoscToReplanification = false;
+        } else {
+            this.validOrdreKoscToReplanification = true;
+        }
+    }
+
+    private validateOrdreKoscDateReplanificationReplanification() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.dateAppelReplanification)) {
+            this.errorMessages.push('Date replanification replanification non valide');
+            this.validOrdreKoscDateReplanificationReplanification = false;
+        } else {
+            this.validOrdreKoscDateReplanificationReplanification = true;
+        }
+    }
+
+
+    private validateOrdreKoscObjetReportDemandeClientClientJoignable() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.objetReportDemandeClientClientJoignable)) {
+            this.errorMessages.push('Objet date replanification non valide');
+            this.validOrdreKoscObjetReportDemandeClientClientJoignable = false;
+        } else {
+            this.validOrdreKoscObjetReportDemandeClientClientJoignable = true;
+        }
+    }
+
+    private validateOrdreKoscCorpsReportDemandeClientClientJoignable() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.corpsReportDemandeClientClientJoignable)) {
+            this.errorMessages.push('Corps date replanification non valide');
+            this.validOrdreKoscCorpsReportDemandeClientClientJoignable = false;
+        } else {
+            this.validOrdreKoscCorpsReportDemandeClientClientJoignable = true;
+        }
+    }
+
+    private validateOrdreKoscFromReportDemandeClientClientJoignable() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.fromReportDemandeClientClientJoignable)) {
+            this.errorMessages.push('De date replanification non valide');
+            this.validOrdreKoscFromReportDemandeClientClientJoignable = false;
+        } else {
+            this.validOrdreKoscFromReportDemandeClientClientJoignable = true;
+        }
+    }
+
+    private validateOrdreKoscToReportDemandeClientClientJoignable() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.toReportDemandeClientClientJoignable)) {
+            this.errorMessages.push('A date replanification non valide');
+            this.validOrdreKoscToReportDemandeClientClientJoignable = false;
+        } else {
+            this.validOrdreKoscToReportDemandeClientClientJoignable = true;
+        }
+    }
+
+    private validateOrdreKoscDateReplanificationReportDemandeClientClientJoignable() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.dateAppelReplanification)) {
+            this.errorMessages.push('Date replanification date replanification non valide');
+            this.validOrdreKoscDateReplanificationReportDemandeClientClientJoignable = false;
+        } else {
+            this.validOrdreKoscDateReplanificationReportDemandeClientClientJoignable = true;
+        }
+    }
+
+
+    private validateOrdreKoscObjetReportDemandeManeoClientJoignableRefus() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.objetReportDemandeManeoClientJoignableRefus)) {
+            this.errorMessages.push('Objet report demande maneo client joignable refus non valide');
+            this.validOrdreKoscObjetReportDemandeManeoClientJoignableRefus = false;
+        } else {
+            this.validOrdreKoscObjetReportDemandeManeoClientJoignableRefus = true;
+        }
+    }
+
+    private validateOrdreKoscCorpsReportDemandeManeoClientJoignableRefus() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.corpsReportDemandeManeoClientJoignableRefus)) {
+            this.errorMessages.push('Corps report demande maneo client joignable refus non valide');
+            this.validOrdreKoscCorpsReportDemandeManeoClientJoignableRefus = false;
+        } else {
+            this.validOrdreKoscCorpsReportDemandeManeoClientJoignableRefus = true;
+        }
+    }
+
+    private validateOrdreKoscFromReportDemandeManeoClientJoignableRefus() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.fromReportDemandeManeoClientJoignableRefus)) {
+            this.errorMessages.push('De report demande maneo client joignable refus non valide');
+            this.validOrdreKoscFromReportDemandeManeoClientJoignableRefus = false;
+        } else {
+            this.validOrdreKoscFromReportDemandeManeoClientJoignableRefus = true;
+        }
+    }
+
+    private validateOrdreKoscToReportDemandeManeoClientJoignableRefus() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.toReportDemandeManeoClientJoignableRefus)) {
+            this.errorMessages.push('A report demande maneo client joignable refus non valide');
+            this.validOrdreKoscToReportDemandeManeoClientJoignableRefus = false;
+        } else {
+            this.validOrdreKoscToReportDemandeManeoClientJoignableRefus = true;
+        }
+    }
+
+    private validateOrdreKoscDateReplanificationReportDemandeManeoClientJoignableRefus() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.dateAppelReplanification)) {
+            this.errorMessages.push('Date replanification report demande maneo client joignable refus non valide');
+            this.validOrdreKoscDateReplanificationReportDemandeManeoClientJoignableRefus = false;
+        } else {
+            this.validOrdreKoscDateReplanificationReportDemandeManeoClientJoignableRefus = true;
+        }
+    }
+
+
+    private validateOrdreKoscObjetReportDemandeManeoClientJoignableAccepte() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.objetReportDemandeManeoClientJoignableAccepte)) {
+            this.errorMessages.push('Objet report demande maneo client joignable accepte non valide');
+            this.validOrdreKoscObjetReportDemandeManeoClientJoignableAccepte = false;
+        } else {
+            this.validOrdreKoscObjetReportDemandeManeoClientJoignableAccepte = true;
+        }
+    }
+
+    private validateOrdreKoscCorpsReportDemandeManeoClientJoignableAccepte() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.corpsReportDemandeManeoClientJoignableAccepte)) {
+            this.errorMessages.push('Corps report demande maneo client joignable accepte non valide');
+            this.validOrdreKoscCorpsReportDemandeManeoClientJoignableAccepte = false;
+        } else {
+            this.validOrdreKoscCorpsReportDemandeManeoClientJoignableAccepte = true;
+        }
+    }
+
+    private validateOrdreKoscFromReportDemandeManeoClientJoignableAccepte() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.fromReportDemandeManeoClientJoignableAccepte)) {
+            this.errorMessages.push('De report demande maneo client joignable accepte non valide');
+            this.validOrdreKoscFromReportDemandeManeoClientJoignableAccepte = false;
+        } else {
+            this.validOrdreKoscFromReportDemandeManeoClientJoignableAccepte = true;
+        }
+    }
+
+    private validateOrdreKoscToReportDemandeManeoClientJoignableAccepte() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.toReportDemandeManeoClientJoignableAccepte)) {
+            this.errorMessages.push('A report demande maneo client joignable accepte non valide');
+            this.validOrdreKoscToReportDemandeManeoClientJoignableAccepte = false;
+        } else {
+            this.validOrdreKoscToReportDemandeManeoClientJoignableAccepte = true;
+        }
+    }
+
+    private validateOrdreKoscDateReplanificationReportDemandeManeoClientJoignableAccepte() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.dateAppelReplanification)) {
+            this.errorMessages.push('Date replanification report demande maneo client joignable accepte non valide');
+            this.validOrdreKoscDateReplanificationReportDemandeManeoClientJoignableAccepte = false;
+        } else {
+            this.validOrdreKoscDateReplanificationReportDemandeManeoClientJoignableAccepte = true;
+        }
+    }
+
+
+    private validateOrdreKoscObjetReportDemandeManeoClientInjoignable() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.objetReportDemandeManeoClientInjoignable)) {
+            this.errorMessages.push('Objet report demande maneo client injoignable non valide');
+            this.validOrdreKoscObjetReportDemandeManeoClientInjoignable = false;
+        } else {
+            this.validOrdreKoscObjetReportDemandeManeoClientInjoignable = true;
+        }
+    }
+
+    private validateOrdreKoscCorpsReportDemandeManeoClientInjoignable() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.corpsReportDemandeManeoClientInjoignable)) {
+            this.errorMessages.push('Corps report demande maneo client injoignable non valide');
+            this.validOrdreKoscCorpsReportDemandeManeoClientInjoignable = false;
+        } else {
+            this.validOrdreKoscCorpsReportDemandeManeoClientInjoignable = true;
+        }
+    }
+
+    private validateOrdreKoscFromReportDemandeManeoClientInjoignable() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.fromReportDemandeManeoClientInjoignable)) {
+            this.errorMessages.push('De report demande maneo client injoignable non valide');
+            this.validOrdreKoscFromReportDemandeManeoClientInjoignable = false;
+        } else {
+            this.validOrdreKoscFromReportDemandeManeoClientInjoignable = true;
+        }
+    }
+
+    private validateOrdreKoscToReportDemandeManeoClientInjoignable() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.toReportDemandeManeoClientInjoignable)) {
+            this.errorMessages.push('A report demande maneo client injoignable non valide');
+            this.validOrdreKoscToReportDemandeManeoClientInjoignable = false;
+        } else {
+            this.validOrdreKoscToReportDemandeManeoClientInjoignable = true;
+        }
+    }
+
+    private validateOrdreKoscDateReplanificationReportDemandeManeoClientInjoignable() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.dateAppelReplanification)) {
+            this.errorMessages.push('Date replanification report demande maneo client injoignable non valide');
+            this.validOrdreKoscDateReplanificationReportDemandeManeoClientInjoignable = false;
+        } else {
+            this.validOrdreKoscDateReplanificationReportDemandeManeoClientInjoignable = true;
+        }
+    }
+
+
+    private validateOrdreKoscObjetReportDemandeClientClientInjoignable() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.objetReportDemandeClientClientInjoignable)) {
+            this.errorMessages.push('Objet report demande client client injoignable non valide');
+            this.validOrdreKoscObjetReportDemandeClientClientInjoignable = false;
+        } else {
+            this.validOrdreKoscObjetReportDemandeClientClientInjoignable = true;
+        }
+    }
+
+    private validateOrdreKoscCorpsReportDemandeClientClientInjoignable() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.corpsReportDemandeClientClientInjoignable)) {
+            this.errorMessages.push('Corps report demande client client injoignable non valide');
+            this.validOrdreKoscCorpsReportDemandeClientClientInjoignable = false;
+        } else {
+            this.validOrdreKoscCorpsReportDemandeClientClientInjoignable = true;
+        }
+    }
+
+    private validateOrdreKoscFromReportDemandeClientClientInjoignable() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.fromReportDemandeClientClientInjoignable)) {
+            this.errorMessages.push('De report demande client client injoignable non valide');
+            this.validOrdreKoscFromReportDemandeClientClientInjoignable = false;
+        } else {
+            this.validOrdreKoscFromReportDemandeClientClientInjoignable = true;
+        }
+    }
+
+    private validateOrdreKoscToReportDemandeClientClientInjoignable() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.toReportDemandeClientClientInjoignable)) {
+            this.errorMessages.push('A report demande client client injoignable non valide');
+            this.validOrdreKoscToReportDemandeClientClientInjoignable = false;
+        } else {
+            this.validOrdreKoscToReportDemandeClientClientInjoignable = true;
+        }
+    }
+
+    private validateOrdreKoscDateReplanificationReportDemandeClientClientInjoignable() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.dateAppelReplanification)) {
+            this.errorMessages.push('Date replanification report demande client client injoignable non valide');
+            this.validOrdreKoscDateReplanificationReportDemandeClientClientInjoignable = false;
+        } else {
+            this.validOrdreKoscDateReplanificationReportDemandeClientClientInjoignable = true;
+        }
+    }
+
+
+    private validateFormReportDemandeManeoClientInjoignable(): void {
+        this.errorMessages = new Array<string>();
+        this.validateOrdreKoscDateReplanificationReportDemandeManeoClientInjoignable();
+        this.validateOrdreKoscObjetReportDemandeManeoClientInjoignable();
+        this.validateOrdreKoscCorpsReportDemandeManeoClientInjoignable();
+        this.validateOrdreKoscFromReportDemandeManeoClientInjoignable();
+        this.validateOrdreKoscToReportDemandeManeoClientInjoignable();
+
+    }
+
+
+    private validateFormReportDemandeManeoClientJoignableAccepte(): void {
+        this.errorMessages = new Array<string>();
+        this.validateOrdreKoscDateReplanificationReportDemandeManeoClientJoignableAccepte();
+        this.validateOrdreKoscObjetReportDemandeManeoClientJoignableAccepte();
+        this.validateOrdreKoscCorpsReportDemandeManeoClientJoignableAccepte();
+        this.validateOrdreKoscFromReportDemandeManeoClientJoignableAccepte();
+        this.validateOrdreKoscToReportDemandeManeoClientJoignableAccepte();
+
+    }
+
+
+    private validateFormReportDemandeManeoClientJoignableRefus(): void {
+        this.errorMessages = new Array<string>();
+        this.validateOrdreKoscDateReplanificationReportDemandeManeoClientJoignableRefus();
+        this.validateOrdreKoscObjetReportDemandeManeoClientJoignableRefus();
+        this.validateOrdreKoscCorpsReportDemandeManeoClientJoignableRefus();
+        this.validateOrdreKoscFromReportDemandeManeoClientJoignableRefus();
+        this.validateOrdreKoscToReportDemandeManeoClientJoignableRefus();
+
+    }
+
+
+    private validateFormReportDemandeClientClientInjoignable(): void {
+        this.errorMessages = new Array<string>();
+        this.validateOrdreKoscDateReplanificationReportDemandeClientClientInjoignable();
+        this.validateOrdreKoscObjetReportDemandeClientClientInjoignable();
+        this.validateOrdreKoscCorpsReportDemandeClientClientInjoignable();
+        this.validateOrdreKoscFromReportDemandeClientClientInjoignable();
+        this.validateOrdreKoscToReportDemandeClientClientInjoignable();
+
+    }
+
+
+    private validateFormReportDemandeClientClientJoignable(): void {
+        this.errorMessages = new Array<string>();
+        this.validateOrdreKoscDateReplanificationReportDemandeClientClientJoignable();
+        this.validateOrdreKoscObjetReportDemandeClientClientJoignable();
+        this.validateOrdreKoscCorpsReportDemandeClientClientJoignable();
+        this.validateOrdreKoscFromReportDemandeClientClientJoignable();
+        this.validateOrdreKoscToReportDemandeClientClientJoignable();
+
+    }
+
+
+    private validateFormReplanification(): void {
+        this.errorMessages = new Array<string>();
+        this.validateOrdreKoscDateReplanificationReplanification();
+        this.validateOrdreKoscObjetReplanification();
+        this.validateOrdreKoscCorpsReplanification();
+        this.validateOrdreKoscFromReplanification();
+        this.validateOrdreKoscToReplanification();
+
+    }
+
+
+    private _validOrdreKoscFromReplanification = true;
+    private _validOrdreKoscDateReplanificationReplanification = true;
+    private _validOrdreKoscToReplanification = true;
+    private _validOrdreKoscObjetReplanification = true;
+    private _validOrdreKoscCorpsReplanification = true;
+
+    private _validOrdreKoscDateReplanificationReportDemandeClientClientJoignable = true;
+    private _validOrdreKoscFromReportDemandeClientClientJoignable = true;
+    private _validOrdreKoscToReportDemandeClientClientJoignable = true;
+    private _validOrdreKoscObjetReportDemandeClientClientJoignable = true;
+    private _validOrdreKoscCorpsReportDemandeClientClientJoignable = true;
+
+    private _validOrdreKoscDateReplanificationReportDemandeClientClientInjoignable = true;
+    private _validOrdreKoscFromReportDemandeClientClientInjoignable = true;
+    private _validOrdreKoscToReportDemandeClientClientInjoignable = true;
+    private _validOrdreKoscObjetReportDemandeClientClientInjoignable = true;
+    private _validOrdreKoscCorpsReportDemandeClientClientInjoignable = true;
+
+    private _validOrdreKoscDateReplanificationReportDemandeManeoClientJoignableRefus = true;
+    private _validOrdreKoscFromReportDemandeManeoClientJoignableRefus = true;
+    private _validOrdreKoscToReportDemandeManeoClientJoignableRefus = true;
+    private _validOrdreKoscObjetReportDemandeManeoClientJoignableRefus = true;
+    private _validOrdreKoscCorpsReportDemandeManeoClientJoignableRefus = true;
+
+    private _validOrdreKoscDateReplanificationReportDemandeManeoClientJoignableAccepte = true;
+    private _validOrdreKoscFromReportDemandeManeoClientJoignableAccepte = true;
+    private _validOrdreKoscToReportDemandeManeoClientJoignableAccepte = true;
+    private _validOrdreKoscObjetReportDemandeManeoClientJoignableAccepte = true;
+    private _validOrdreKoscCorpsReportDemandeManeoClientJoignableAccepte = true;
+
+    private _validOrdreKoscDateReplanificationReportDemandeManeoClientInjoignable = true;
+    private _validOrdreKoscFromReportDemandeManeoClientInjoignable = true;
+    private _validOrdreKoscToReportDemandeManeoClientInjoignable = true;
+    private _validOrdreKoscObjetReportDemandeManeoClientInjoignable = true;
+    private _validOrdreKoscCorpsReportDemandeManeoClientInjoignable = true;
+
+
+    get validOrdreKoscDateReplanificationReplanification(): boolean {
+        return this._validOrdreKoscDateReplanificationReplanification;
+    }
+
+    set validOrdreKoscDateReplanificationReplanification(value: boolean) {
+        this._validOrdreKoscDateReplanificationReplanification = value;
+    }
+
+    get validOrdreKoscDateReplanificationReportDemandeClientClientJoignable(): boolean {
+        return this._validOrdreKoscDateReplanificationReportDemandeClientClientJoignable;
+    }
+
+    set validOrdreKoscDateReplanificationReportDemandeClientClientJoignable(value: boolean) {
+        this._validOrdreKoscDateReplanificationReportDemandeClientClientJoignable = value;
+    }
+
+    get validOrdreKoscDateReplanificationReportDemandeClientClientInjoignable(): boolean {
+        return this._validOrdreKoscDateReplanificationReportDemandeClientClientInjoignable;
+    }
+
+    set validOrdreKoscDateReplanificationReportDemandeClientClientInjoignable(value: boolean) {
+        this._validOrdreKoscDateReplanificationReportDemandeClientClientInjoignable = value;
+    }
+
+    get validOrdreKoscDateReplanificationReportDemandeManeoClientJoignableRefus(): boolean {
+        return this._validOrdreKoscDateReplanificationReportDemandeManeoClientJoignableRefus;
+    }
+
+    set validOrdreKoscDateReplanificationReportDemandeManeoClientJoignableRefus(value: boolean) {
+        this._validOrdreKoscDateReplanificationReportDemandeManeoClientJoignableRefus = value;
+    }
+
+    get validOrdreKoscDateReplanificationReportDemandeManeoClientJoignableAccepte(): boolean {
+        return this._validOrdreKoscDateReplanificationReportDemandeManeoClientJoignableAccepte;
+    }
+
+    set validOrdreKoscDateReplanificationReportDemandeManeoClientJoignableAccepte(value: boolean) {
+        this._validOrdreKoscDateReplanificationReportDemandeManeoClientJoignableAccepte = value;
+    }
+
+    get validOrdreKoscDateReplanificationReportDemandeManeoClientInjoignable(): boolean {
+        return this._validOrdreKoscDateReplanificationReportDemandeManeoClientInjoignable;
+    }
+
+    set validOrdreKoscDateReplanificationReportDemandeManeoClientInjoignable(value: boolean) {
+        this._validOrdreKoscDateReplanificationReportDemandeManeoClientInjoignable = value;
+    }
+
+    get validOrdreKoscFromReplanification(): boolean {
+        return this._validOrdreKoscFromReplanification;
+    }
+
+    set validOrdreKoscFromReplanification(value: boolean) {
+        this._validOrdreKoscFromReplanification = value;
+    }
+
+    get validOrdreKoscToReplanification(): boolean {
+        return this._validOrdreKoscToReplanification;
+    }
+
+    set validOrdreKoscToReplanification(value: boolean) {
+        this._validOrdreKoscToReplanification = value;
+    }
+
+    get validOrdreKoscObjetReplanification(): boolean {
+        return this._validOrdreKoscObjetReplanification;
+    }
+
+    set validOrdreKoscObjetReplanification(value: boolean) {
+        this._validOrdreKoscObjetReplanification = value;
+    }
+
+    get validOrdreKoscCorpsReplanification(): boolean {
+        return this._validOrdreKoscCorpsReplanification;
+    }
+
+    set validOrdreKoscCorpsReplanification(value: boolean) {
+        this._validOrdreKoscCorpsReplanification = value;
+    }
+
+    get validOrdreKoscFromReportDemandeClientClientJoignable(): boolean {
+        return this._validOrdreKoscFromReportDemandeClientClientJoignable;
+    }
+
+    set validOrdreKoscFromReportDemandeClientClientJoignable(value: boolean) {
+        this._validOrdreKoscFromReportDemandeClientClientJoignable = value;
+    }
+
+    get validOrdreKoscToReportDemandeClientClientJoignable(): boolean {
+        return this._validOrdreKoscToReportDemandeClientClientJoignable;
+    }
+
+    set validOrdreKoscToReportDemandeClientClientJoignable(value: boolean) {
+        this._validOrdreKoscToReportDemandeClientClientJoignable = value;
+    }
+
+    get validOrdreKoscObjetReportDemandeClientClientJoignable(): boolean {
+        return this._validOrdreKoscObjetReportDemandeClientClientJoignable;
+    }
+
+    set validOrdreKoscObjetReportDemandeClientClientJoignable(value: boolean) {
+        this._validOrdreKoscObjetReportDemandeClientClientJoignable = value;
+    }
+
+    get validOrdreKoscCorpsReportDemandeClientClientJoignable(): boolean {
+        return this._validOrdreKoscCorpsReportDemandeClientClientJoignable;
+    }
+
+    set validOrdreKoscCorpsReportDemandeClientClientJoignable(value: boolean) {
+        this._validOrdreKoscCorpsReportDemandeClientClientJoignable = value;
+    }
+
+    get validOrdreKoscFromReportDemandeClientClientInjoignable(): boolean {
+        return this._validOrdreKoscFromReportDemandeClientClientInjoignable;
+    }
+
+    set validOrdreKoscFromReportDemandeClientClientInjoignable(value: boolean) {
+        this._validOrdreKoscFromReportDemandeClientClientInjoignable = value;
+    }
+
+    get validOrdreKoscToReportDemandeClientClientInjoignable(): boolean {
+        return this._validOrdreKoscToReportDemandeClientClientInjoignable;
+    }
+
+    set validOrdreKoscToReportDemandeClientClientInjoignable(value: boolean) {
+        this._validOrdreKoscToReportDemandeClientClientInjoignable = value;
+    }
+
+    get validOrdreKoscObjetReportDemandeClientClientInjoignable(): boolean {
+        return this._validOrdreKoscObjetReportDemandeClientClientInjoignable;
+    }
+
+    set validOrdreKoscObjetReportDemandeClientClientInjoignable(value: boolean) {
+        this._validOrdreKoscObjetReportDemandeClientClientInjoignable = value;
+    }
+
+    get validOrdreKoscCorpsReportDemandeClientClientInjoignable(): boolean {
+        return this._validOrdreKoscCorpsReportDemandeClientClientInjoignable;
+    }
+
+    set validOrdreKoscCorpsReportDemandeClientClientInjoignable(value: boolean) {
+        this._validOrdreKoscCorpsReportDemandeClientClientInjoignable = value;
+    }
+
+    get validOrdreKoscFromReportDemandeManeoClientJoignableRefus(): boolean {
+        return this._validOrdreKoscFromReportDemandeManeoClientJoignableRefus;
+    }
+
+    set validOrdreKoscFromReportDemandeManeoClientJoignableRefus(value: boolean) {
+        this._validOrdreKoscFromReportDemandeManeoClientJoignableRefus = value;
+    }
+
+    get validOrdreKoscToReportDemandeManeoClientJoignableRefus(): boolean {
+        return this._validOrdreKoscToReportDemandeManeoClientJoignableRefus;
+    }
+
+    set validOrdreKoscToReportDemandeManeoClientJoignableRefus(value: boolean) {
+        this._validOrdreKoscToReportDemandeManeoClientJoignableRefus = value;
+    }
+
+    get validOrdreKoscObjetReportDemandeManeoClientJoignableRefus(): boolean {
+        return this._validOrdreKoscObjetReportDemandeManeoClientJoignableRefus;
+    }
+
+    set validOrdreKoscObjetReportDemandeManeoClientJoignableRefus(value: boolean) {
+        this._validOrdreKoscObjetReportDemandeManeoClientJoignableRefus = value;
+    }
+
+    get validOrdreKoscCorpsReportDemandeManeoClientJoignableRefus(): boolean {
+        return this._validOrdreKoscCorpsReportDemandeManeoClientJoignableRefus;
+    }
+
+    set validOrdreKoscCorpsReportDemandeManeoClientJoignableRefus(value: boolean) {
+        this._validOrdreKoscCorpsReportDemandeManeoClientJoignableRefus = value;
+    }
+
+    get validOrdreKoscFromReportDemandeManeoClientJoignableAccepte(): boolean {
+        return this._validOrdreKoscFromReportDemandeManeoClientJoignableAccepte;
+    }
+
+    set validOrdreKoscFromReportDemandeManeoClientJoignableAccepte(value: boolean) {
+        this._validOrdreKoscFromReportDemandeManeoClientJoignableAccepte = value;
+    }
+
+    get validOrdreKoscToReportDemandeManeoClientJoignableAccepte(): boolean {
+        return this._validOrdreKoscToReportDemandeManeoClientJoignableAccepte;
+    }
+
+    set validOrdreKoscToReportDemandeManeoClientJoignableAccepte(value: boolean) {
+        this._validOrdreKoscToReportDemandeManeoClientJoignableAccepte = value;
+    }
+
+    get validOrdreKoscObjetReportDemandeManeoClientJoignableAccepte(): boolean {
+        return this._validOrdreKoscObjetReportDemandeManeoClientJoignableAccepte;
+    }
+
+    set validOrdreKoscObjetReportDemandeManeoClientJoignableAccepte(value: boolean) {
+        this._validOrdreKoscObjetReportDemandeManeoClientJoignableAccepte = value;
+    }
+
+    get validOrdreKoscCorpsReportDemandeManeoClientJoignableAccepte(): boolean {
+        return this._validOrdreKoscCorpsReportDemandeManeoClientJoignableAccepte;
+    }
+
+    set validOrdreKoscCorpsReportDemandeManeoClientJoignableAccepte(value: boolean) {
+        this._validOrdreKoscCorpsReportDemandeManeoClientJoignableAccepte = value;
+    }
+
+    get validOrdreKoscFromReportDemandeManeoClientInjoignable(): boolean {
+        return this._validOrdreKoscFromReportDemandeManeoClientInjoignable;
+    }
+
+    set validOrdreKoscFromReportDemandeManeoClientInjoignable(value: boolean) {
+        this._validOrdreKoscFromReportDemandeManeoClientInjoignable = value;
+    }
+
+    get validOrdreKoscToReportDemandeManeoClientInjoignable(): boolean {
+        return this._validOrdreKoscToReportDemandeManeoClientInjoignable;
+    }
+
+    set validOrdreKoscToReportDemandeManeoClientInjoignable(value: boolean) {
+        this._validOrdreKoscToReportDemandeManeoClientInjoignable = value;
+    }
+
+    get validOrdreKoscObjetReportDemandeManeoClientInjoignable(): boolean {
+        return this._validOrdreKoscObjetReportDemandeManeoClientInjoignable;
+    }
+
+    set validOrdreKoscObjetReportDemandeManeoClientInjoignable(value: boolean) {
+        this._validOrdreKoscObjetReportDemandeManeoClientInjoignable = value;
+    }
+
+    get validOrdreKoscCorpsReportDemandeManeoClientInjoignable(): boolean {
+        return this._validOrdreKoscCorpsReportDemandeManeoClientInjoignable;
+    }
+
+    set validOrdreKoscCorpsReportDemandeManeoClientInjoignable(value: boolean) {
+        this._validOrdreKoscCorpsReportDemandeManeoClientInjoignable = value;
+    }
 }

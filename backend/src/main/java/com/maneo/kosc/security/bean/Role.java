@@ -38,6 +38,10 @@ public class Role implements GrantedAuthority {
     @JsonIgnore
     private List<User> users = new ArrayList<>();
 
+    public Role(String authority) {
+        this.authority = authority;
+    }
+
     public Role() {
         super();
     }

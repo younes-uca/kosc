@@ -311,8 +311,8 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
 
                 this.selectedOrdreKosc.fromCri = this.selectedDefaultTemplateConfiguration.emailManeo;
                 this.selectedOrdreKosc.toCri = this.selectedDefaultTemplateConfiguration.emailKosc;
-                this.selectedOrdreKosc.objetCri = eval(this.selectedDefaultTemplateConfiguration.templateEmailCriVo.objet);
-                this.selectedOrdreKosc.corpsCri = eval(this.selectedDefaultTemplateConfiguration.templateEmailCriVo.corps);
+                this.selectedOrdreKosc.objetCri = eval(this.selectedDefaultTemplateConfiguration?.templateEmailCriVo?.objet);
+                this.selectedOrdreKosc.corpsCri = eval(this.selectedDefaultTemplateConfiguration?.templateEmailCriVo?.corps);
                 
             });
         } else {
@@ -1051,9 +1051,9 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
 
     private setDateEnvoiMinAndMax() {
         let today =new Date();
-        this.searchOrdreKosc.dateEnvoiPlanificationMin=null;
-        this.searchOrdreKosc.dateEnvoiPlanificationMax= moment(today).format("yyyy-MM-DD");
-        console.log(this.searchOrdreKosc.dateEnvoiPlanificationMax)
+        this.searchOrdreKosc.dateRdvMin=null;
+        this.searchOrdreKosc.dateRdvMax= moment(today).format("yyyy-MM-DD");
+        // console.log(this.searchOrdreKosc.dateEnvoiPlanificationMax)
     }
 
     get selectedDefaultTemplateConfiguration(): DefaultTemplateConfigurationVo {

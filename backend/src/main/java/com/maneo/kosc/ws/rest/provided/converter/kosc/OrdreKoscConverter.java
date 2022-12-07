@@ -121,6 +121,45 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
             if (StringUtil.isNotEmpty(vo.getCodeDecharge()))
                 item.setCodeDecharge(vo.getCodeDecharge());
 
+            if (StringUtil.isNotEmpty(vo.getSlid()))
+                item.setSlid(vo.getSlid());
+            if (StringUtil.isNotEmpty(vo.getSupplier()))
+                item.setSupplier(vo.getSupplier());
+
+            if (StringUtil.isNotEmpty(vo.getKoscSplitterPosition()))
+                item.setKoscSplitterPosition(vo.getKoscSplitterPosition());
+
+            if (StringUtil.isNotEmpty(vo.getKoscContactFirstName()))
+                item.setKoscContactFirstName(vo.getKoscContactFirstName());
+
+            if (StringUtil.isNotEmpty(vo.getKoscComment()))
+                item.setKoscComment(vo.getKoscComment());
+
+            if (StringUtil.isNotEmpty(vo.getOperatorComment()))
+                item.setOperatorComment(vo.getOperatorComment());
+
+            if (StringUtil.isNotEmpty(vo.getOtpRef()))
+                item.setOtpRef(vo.getOtpRef());
+
+            if (StringUtil.isNotEmpty(vo.getKoscContactLastName()))
+                item.setKoscContactLastName(vo.getKoscContactLastName());
+
+            if (StringUtil.isNotEmpty(vo.getKoscContactPhone()))
+                item.setKoscContactPhone(vo.getKoscContactPhone());
+
+            if (StringUtil.isNotEmpty(vo.getKoscContactEmail1()))
+                item.setKoscContactEmail1(vo.getKoscContactEmail1());
+
+            if (StringUtil.isNotEmpty(vo.getKoscContactEmail2()))
+                item.setKoscContactEmail2(vo.getKoscContactEmail2());
+
+            if (StringUtil.isNotEmpty(vo.getKoscContactEmail3()))
+                item.setKoscContactEmail3(vo.getKoscContactEmail3());
+
+            if (StringUtil.isNotEmpty(vo.getCustomerOperator()))
+                item.setCustomerOperator(vo.getCustomerOperator());
+
+
             if (StringUtil.isNotEmpty(vo.getDelaiPriseRdvParHeure()))
                 item.setDelaiPriseRdvParHeure(NumberUtil.toDouble(vo.getDelaiPriseRdvParHeure()));
 
@@ -626,8 +665,6 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
                 item.setDateDernierAppel(DateUtil.parseTimestampUniversalFormat(vo.getDateDernierAppel()));
             if (StringUtil.isNotEmpty(vo.getNumeroDernierAppel()))
                 item.setNumeroDernierAppel(NumberUtil.toLong(vo.getNumeroDernierAppel()));
-
-
             return item;
         }
     }
@@ -721,6 +758,46 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
 
             if (StringUtil.isNotEmpty(item.getHauteurPbo()))
                 vo.setHauteurPbo(item.getHauteurPbo());
+
+            if (StringUtil.isNotEmpty(item.getSlid()))
+                vo.setSlid(item.getSlid());
+
+            if (StringUtil.isNotEmpty(item.getSupplier()))
+                vo.setSupplier(item.getSupplier());
+
+            if (StringUtil.isNotEmpty(item.getKoscSplitterPosition()))
+                vo.setKoscSplitterPosition(item.getKoscSplitterPosition());
+
+            if (StringUtil.isNotEmpty(item.getKoscContactFirstName()))
+                vo.setKoscContactFirstName(item.getKoscContactFirstName());
+
+            if (StringUtil.isNotEmpty(item.getKoscComment()))
+                vo.setKoscComment(item.getKoscComment());
+
+            if (StringUtil.isNotEmpty(item.getOperatorComment()))
+                vo.setOperatorComment(item.getOperatorComment());
+
+            if (StringUtil.isNotEmpty(item.getOtpRef()))
+                vo.setOtpRef(item.getOtpRef());
+
+            if (StringUtil.isNotEmpty(item.getKoscContactLastName()))
+                vo.setKoscContactLastName(item.getKoscContactLastName());
+
+            if (StringUtil.isNotEmpty(item.getKoscContactPhone()))
+                vo.setKoscContactPhone(item.getKoscContactPhone());
+
+            if (StringUtil.isNotEmpty(item.getKoscContactEmail1()))
+                vo.setKoscContactEmail1(item.getKoscContactEmail1());
+
+            if (StringUtil.isNotEmpty(item.getKoscContactEmail2()))
+                vo.setKoscContactEmail2(item.getKoscContactEmail2());
+
+            if (StringUtil.isNotEmpty(item.getKoscContactEmail3()))
+                vo.setKoscContactEmail3(item.getKoscContactEmail3());
+
+            if (StringUtil.isNotEmpty(item.getCustomerOperator()))
+                vo.setCustomerOperator(item.getCustomerOperator());
+
 
             if (StringUtil.isNotEmpty(item.getTypeMaterielPbo()))
                 vo.setTypeMaterielPbo(item.getTypeMaterielPbo());

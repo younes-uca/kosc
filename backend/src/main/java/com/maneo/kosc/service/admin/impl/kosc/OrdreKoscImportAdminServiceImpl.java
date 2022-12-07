@@ -7,7 +7,7 @@ import com.maneo.kosc.bean.technicien.Departement;
 import com.maneo.kosc.bean.technicien.Technicien;
 import com.maneo.kosc.dao.technicien.DepartementDao;
 import com.maneo.kosc.dao.kosc.OrdreKoscDao;
-import com.maneo.kosc.service.admin.facade.kosc.ImportOrdreKoscAdminService;
+import com.maneo.kosc.service.admin.facade.kosc.OrdreKoscImportAdminService;
 import com.maneo.kosc.service.admin.facade.referentiel.EtatDemandeKoscAdminService;
 import com.maneo.kosc.service.admin.facade.referentiel.OperatorAdminService;
 import com.maneo.kosc.service.admin.facade.technicien.DepartementAdminService;
@@ -20,7 +20,7 @@ import java.util.*;
 //import static jdk.internal.org.jline.utils.Colors.s;
 
 @Service
-public class ImportOrdreKoscAdminServiceImpl implements ImportOrdreKoscAdminService {
+public class OrdreKoscImportAdminServiceImpl implements OrdreKoscImportAdminService {
 
     @Autowired
     private OrdreKoscDao ordreKoscDao;

@@ -36,7 +36,7 @@ export class AppTopBarComponent {
 
     ngOnInit(): void {
         this.authService.loadInfos();
-        if (this.authService.authenticatedUser.roles[0] === 'ROLE_ADMIN') {
+        if (this.authService.authenticatedUser.roles[0].authority === 'ROLE_ADMIN') {
             this.roleAdmin = true;
         }
     }

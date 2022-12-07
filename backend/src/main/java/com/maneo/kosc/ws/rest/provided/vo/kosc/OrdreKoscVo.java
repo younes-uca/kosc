@@ -346,7 +346,37 @@ public class OrdreKoscVo {
     private String dateEnvoiReportDemandeClientClientJoignable;
     private String dateCri;
 
-    
+
+    private String supplier;
+
+
+    private String customerOperator;
+
+
+    private String slid;
+
+    private String koscContactFirstName;
+
+    private String koscContactLastName;
+
+
+
+    private String koscContactPhone;
+
+    private String koscContactEmail1;
+
+    private String koscContactEmail2;
+
+    private String koscContactEmail3;
+
+    private String koscSplitterPosition;
+
+    private String koscComment;
+
+
+    private String otpRef;
+
+    private String operatorComment;
     
     
 
@@ -2913,5 +2943,108 @@ public class OrdreKoscVo {
 
     public void setUserImportation(User userImportation) {
         this.userImportation = userImportation;
+    }
+    public String getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(String supplier) {
+        this.supplier = supplier;
+    }
+
+    public String getCustomerOperator() {
+        return customerOperator;
+    }
+
+    public void setCustomerOperator(String customer_operator) {
+        this.customerOperator = customer_operator;
+    }
+
+    public String getSlid() {
+        return slid;
+    }
+
+    public void setSlid(String slid) {
+        this.slid = slid;
+    }
+
+    public String getKoscContactFirstName() {
+        return koscContactFirstName;
+    }
+
+    public void setKoscContactFirstName(String koscContactFirstName) {
+        this.koscContactFirstName = koscContactFirstName;
+    }
+
+    public String getKoscContactLastName() {
+        return koscContactLastName;
+    }
+
+    public void setKoscContactLastName(String koscContactLastName) {
+        this.koscContactLastName = koscContactLastName;
+    }
+
+    public String getKoscContactPhone() {
+        return koscContactPhone;
+    }
+
+    public void setKoscContactPhone(String koscContactPhone) {
+        this.koscContactPhone = koscContactPhone;
+    }
+
+    public String getKoscContactEmail1() {
+        return koscContactEmail1;
+    }
+
+    public void setKoscContactEmail1(String koscContactEmail1) {
+        this.koscContactEmail1 = koscContactEmail1;
+    }
+
+    public String getKoscContactEmail2() {
+        return koscContactEmail2;
+    }
+
+    public void setKoscContactEmail2(String koscContactEmail2) {
+        this.koscContactEmail2 = koscContactEmail2;
+    }
+
+    public String getKoscContactEmail3() {
+        return koscContactEmail3;
+    }
+
+    public void setKoscContactEmail3(String koscContactEmail3) {
+        this.koscContactEmail3 = koscContactEmail3;
+    }
+
+    public String getKoscSplitterPosition() {
+        return koscSplitterPosition;
+    }
+
+    public void setKoscSplitterPosition(String koscSplitterPosition) {
+        this.koscSplitterPosition = koscSplitterPosition;
+    }
+
+    public String getKoscComment() {
+        return koscComment;
+    }
+
+    public void setKoscComment(String koscComment) {
+        this.koscComment = koscComment;
+    }
+
+    public String getOtpRef() {
+        return otpRef;
+    }
+
+    public void setOtpRef(String otpRef) {
+        this.otpRef = otpRef;
+    }
+
+    public String getOperatorComment() {
+        return operatorComment;
+    }
+
+    public void setOperatorComment(String operatorComment) {
+        this.operatorComment = operatorComment;
     }
 }

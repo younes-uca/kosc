@@ -2,7 +2,7 @@ package com.maneo.kosc.service.admin.facade.kosc;
 
 import com.maneo.kosc.bean.kosc.OrdreKosc;
 
-public interface EmailingOrderKoscAdminService {
+public interface OrderKoscEmailingAdminService {
     void sendConfirmationEmailToClient(OrdreKosc ordreKosc);
 
     void sendMailPlanificationEmail(OrdreKosc ordreKosc);

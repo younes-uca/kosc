@@ -334,10 +334,54 @@ export class OrdreKoscVo {
 
     public dateCri: Date;
 
-    public userMauvaisContact: User;
-    public userRefus: User;
-    public userClientInjoinable: User;
-    public userAutre: User;
+     public  supplier : string;
+
+
+     public   customerOperator: string;
+
+
+     public   slid;
+
+     public   koscContactFirstName: string;
+
+     public   koscContactLastName: string;
+
+
+
+     public   koscContactPhone: string;
+
+     public   koscContactEmail1: string;
+
+     public   koscContactEmail2: string;
+
+     public   koscContactEmail3: string;
+
+     public   koscSplitterPosition: string;
+
+     public   koscComment: string;
+
+
+     public   otpRef: string;
+
+     public   operatorComment: string;
+
+
+     public  userPlanification :User;
+     public  userReplanification :User;
+     public  userRefus;
+     public  userMauvaisContact:User;
+     public  userConfirmationClient:User;
+     public  userCri:User;
+     public  userFtl:User;
+     public  userClientInjoinable:User;
+     public  userAutre:User;
+     public  userClientInjoinableKosc:User;
+     public  userReportDemandeManeoClientInjoignable:User;
+     public  userReportDemandeManeoClientJoignableAccepte:User;
+     public  userReportDemandeManeoClientJoignableRefus:User;
+     public  userReportDemandeClientClientInjoignable:User;
+     public  userReportDemandeClientClientJoignable:User;
+     public  userImportation:User;
 
 
 
