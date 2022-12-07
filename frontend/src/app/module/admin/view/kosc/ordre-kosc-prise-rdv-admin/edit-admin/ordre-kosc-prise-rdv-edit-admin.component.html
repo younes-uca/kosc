@@ -591,16 +591,16 @@
 
                     <p-tabPanel header="Mail Planification">
 
-                        <div class="p-grid">
-                            <div class="p-field p-col-12 p-md-6">
-                                <label for="29">Date prise rdv</label>
-                                <p-calendar [(ngModel)]="selectedOrdreKosc.datePriseRdv" [showSeconds]="false" [showTime]="true"
-                                            dateFormat="{{dateFormat}}" id="29" [disabled]="true"
-                                            placeholder="Date prise rdv">
-                                </p-calendar>
+                    <div class="p-grid">
+                        <!--   <div class="p-field p-col-12 p-md-6">
+                             <label for="29">Date prise rdv</label>
+                             <p-calendar [(ngModel)]="selectedOrdreKosc.datePriseRdv" [showSeconds]="false" [showTime]="true"
+                                         dateFormat="{{dateFormat}}" id="29" [disabled]="true"
+                                         placeholder="Date prise rdv">
+                             </p-calendar>
 
-                            </div>
-                            <div class="p-field p-col-12 p-md-6">
+                         </div>-->
+                            <div class="p-field p-col-12 p-md-4">
                                 <label for="30">Date rendez-vous<span style="color: red;">*</span></label>
                                 <p-calendar dateFormat="{{dateFormat}}" [(ngModel)]="selectedOrdreKosc.dateRdv"
                                             [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscDateRendezVous}"
@@ -649,7 +649,7 @@
 
                             </div>
 
-                            <div class="p-field p-col-12 p-md-6">
+                            <div class="p-field p-col-12 p-md-8">
                                 <label for="128">Corps<span style="color: red;">*</span></label>
                                 <textarea [(ngModel)]="selectedOrdreKosc.corpsPlanification" cols="30" id="128"
                                           [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscCorpsPlanification}"
@@ -663,7 +663,7 @@
                             </div>
 
 
-                            <div class="p-field p-col-12 p-md-4 p-mt-5">
+                            <div class="p-field p-col-12 p-md-4 p-mt-4">
                                 <button (click)="sendMailPlanificationEmail()" class="p-button-help" icon="pi pi-send"
                                         label="Envoyer" pButton
                                         type="button"></button>
@@ -819,7 +819,7 @@
                             <p-tabView>
                                 <p-tabPanel header="Client">
                                     <div class="p-grid">
-                                        <div class="p-field p-col-12 p-md-6">
+                                        <div class="p-field p-col-12 p-md-4">
                                             <label for="176">DE<span style="color: red;">*</span></label>
                                             <input [(ngModel)]="selectedOrdreKosc.fromClientInjoinable"
                                                    [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromClientInjoinable}"
@@ -832,7 +832,7 @@
                                         </div>
 
 
-                                        <div class="p-field p-col-12 p-md-6">
+                                        <div class="p-field p-col-12 p-md-4">
                                             <label for="177">A<span style="color: red;">*</span></label>
                                             <input [(ngModel)]="selectedOrdreKosc.toClientInjoinable"
                                                    [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToClientInjoinable}"
@@ -845,7 +845,7 @@
                                         </div>
 
 
-                                        <div class="p-field p-col-12 p-md-6">
+                                        <div class="p-field p-col-12 p-md-4">
                                             <label for="117">Objet<span style="color: red;">*</span></label>
                                             <input [(ngModel)]="selectedOrdreKosc.objetClientInjoinable"
                                                    [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscObjetClientInjoinable}"
@@ -857,13 +857,13 @@
                                             obligatoire.</small>
 
                                         </div>
-                                        <div class="p-field p-col-12 p-md-6">
+                                        <div class="p-field p-col-12 p-md-12">
                                             <label for="118">Corps<span style="color: red;">*</span></label>
                                             <textarea [(ngModel)]="selectedOrdreKosc.corpsClientInjoinable" cols="30"
                                                       [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscCorpsClientInjoinable}"
                                                       id="118" pInputTextarea
                                                       placeholder="Corps client"
-                                                      rows="7"
+                                                      rows="10"
                                             ></textarea><small *ngIf='!validOrdreKoscCorpsClientInjoinable' class='p-error'>Corps est
                                             obligatoire.</small>
 
@@ -890,7 +890,7 @@
 
                                 <p-tabPanel header="Kosc">
                                     <div class="p-grid">
-                                        <div class="p-field p-col-12 p-md-6">
+                                        <div class="p-field p-col-12 p-md-4">
                                             <label for="183">DE<span style="color: red;">*</span></label>
                                             <input [(ngModel)]="selectedOrdreKosc.fromClientInjoinableKosc"
                                                    [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromClientInjoinableKosc}"
@@ -903,7 +903,7 @@
                                         </div>
 
 
-                                        <div class="p-field p-col-12 p-md-6">
+                                        <div class="p-field p-col-12 p-md-4">
                                             <label for="184">A<span style="color: red;">*</span></label>
                                             <input [(ngModel)]="selectedOrdreKosc.toClientInjoinableKosc"
                                                    [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToClientInjoinableKosc}"
@@ -915,7 +915,7 @@
                                                 obligatoire.</small>
                                         </div>
 
-                                        <div class="p-field p-col-12 p-md-6">
+                                        <div class="p-field p-col-12 p-md-4">
                                             <label for="181">Objet<span style="color: red;">*</span></label>
                                             <input [(ngModel)]="selectedOrdreKosc.objetClientInjoinableKosc"
                                                    [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscObjetClientInjoinableKosc}"
@@ -928,14 +928,14 @@
                                         </div>
 
 
-                                        <div class="p-field p-col-12 p-md-6">
+                                        <div class="p-field p-col-12 p-md-12">
                                             <label for="182">Corps<span style="color: red;">*</span></label>
                                             <textarea [(ngModel)]="selectedOrdreKosc.corpsClientInjoinableKosc"
                                                       [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscCorpsClientInjoinableKosc}"
                                                       cols="30" id="182"
                                                       pInputTextarea
                                                       placeholder="Corps"
-                                                      rows="5"></textarea>
+                                                      rows="10"></textarea>
                                             <small *ngIf='!validOrdreKoscCorpsClientInjoinableKosc' class='p-error'>Corps
                                                 est obligatoire.</small>
                                         </div>
@@ -967,7 +967,7 @@
                     <p-tabPanel header="Mauvais contact">
 
                         <div class="p-grid">
-                            <div class="p-field p-col-12 p-md-6">
+                            <div class="p-field p-col-12 p-md-4">
                                 <label for="146">DE<span style="color: red;">*</span></label>
                                 <input [(ngModel)]="selectedOrdreKosc.fromMauvaisContact"
                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromMauvaisContact}"
@@ -980,7 +980,7 @@
                             </div>
 
 
-                            <div class="p-field p-col-12 p-md-6">
+                            <div class="p-field p-col-12 p-md-4">
                                 <label for="147">A<span style="color: red;">*</span></label>
                                 <input [(ngModel)]="selectedOrdreKosc.toMauvaisContact"
                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToMauvaisContact}"
@@ -991,7 +991,7 @@
                                 <small *ngIf='!validOrdreKoscToMauvaisContact' class='p-error'>A est
                                     obligatoire.</small>
                             </div>
-                            <div class="p-field p-col-12 p-md-6">
+                            <div class="p-field p-col-12 p-md-4">
                                 <label for="144">Objet<span style="color: red;">*</span></label>
                                 <input [(ngModel)]="selectedOrdreKosc.objetMauvaisContact"
                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscObjetMauvaisContact}"
@@ -1004,14 +1004,14 @@
                             </div>
 
 
-                            <div class="p-field p-col-12 p-md-6">
+                            <div class="p-field p-col-12 p-md-12">
                                 <label for="145">Corps<span style="color: red;">*</span></label>
                                 <textarea [(ngModel)]="selectedOrdreKosc.corpsMauvaisContact"
                                           [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscCorpsMauvaisContact}"
                                           cols="30" id="145"
                                           pInputTextarea
                                           placeholder="Corps"
-                                          rows="5"></textarea>
+                                          rows="10"></textarea>
                                 <small *ngIf='!validOrdreKoscCorpsMauvaisContact' class='p-error'>Corps est
                                     obligatoire.</small>
                             </div>
@@ -1032,7 +1032,7 @@
                     <p-tabPanel header="Refus client">
 
                         <div class="p-grid">
-                            <div class="p-field p-col-12 p-md-6">
+                            <div class="p-field p-col-12 p-md-4">
                                 <label for="139">DE<span style="color: red;">*</span></label>
                                 <input [(ngModel)]="selectedOrdreKosc.fromRefus"
                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromRefus}"
@@ -1045,7 +1045,7 @@
                             </div>
 
 
-                            <div class="p-field p-col-12 p-md-6">
+                            <div class="p-field p-col-12 p-md-4">
                                 <label for="140">A<span style="color: red;">*</span></label>
                                 <input [(ngModel)]="selectedOrdreKosc.toRefus"
                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToRefus}"
@@ -1055,7 +1055,7 @@
                                        type="text"/>
                                 <small *ngIf='!validOrdreKoscToRefus' class='p-error'>A est obligatoire.</small>
                             </div>
-                            <div class="p-field p-col-12 p-md-6">
+                            <div class="p-field p-col-12 p-md-4">
                                 <label for="137">Objet<span style="color: red;">*</span></label>
                                 <input [(ngModel)]="selectedOrdreKosc.objetRefus"
                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscObjetRefus}"
@@ -1067,13 +1067,13 @@
                             </div>
 
 
-                            <div class="p-field p-col-12 p-md-6">
+                            <div class="p-field p-col-12 p-md-12">
                                 <label for="138">Corps<span style="color: red;">*</span></label>
                                 <textarea [(ngModel)]="selectedOrdreKosc.corpsRefus"
                                           [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscCorpsRefus}" cols="30"
                                           id="138"
                                           pInputTextarea placeholder="Corps"
-                                          rows="5"></textarea>
+                                          rows="10"></textarea>
                                 <small *ngIf='!validOrdreKoscCorpsRefus' class='p-error'>Corps est obligatoire.</small>
                             </div>
 
@@ -1098,7 +1098,7 @@
                     <p-tabPanel header="Autre">
 
                         <div class="p-grid">
-                            <div class="p-field p-col-12 p-md-6">
+                            <div class="p-field p-col-12 p-md-4">
                                 <label for="139">DE<span style="color: red;">*</span></label>
                                 <input [(ngModel)]="selectedOrdreKosc.fromAutre"
                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromAutre}"
@@ -1111,7 +1111,7 @@
                             </div>
 
 
-                            <div class="p-field p-col-12 p-md-6">
+                            <div class="p-field p-col-12 p-md-4">
                                 <label for="140">A<span style="color: red;">*</span></label>
                                 <input [(ngModel)]="selectedOrdreKosc.toAutre"
                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToAutre}"
@@ -1121,7 +1121,7 @@
                                        type="text"/>
                                 <small *ngIf='!validOrdreKoscToAutre' class='p-error'>A est obligatoire.</small>
                             </div>
-                            <div class="p-field p-col-12 p-md-6">
+                            <div class="p-field p-col-12 p-md-4">
                                 <label for="137">Objet<span style="color: red;">*</span></label>
                                 <input [(ngModel)]="selectedOrdreKosc.objetAutre"
                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscObjetAutre}"
@@ -1133,13 +1133,13 @@
                             </div>
 
 
-                            <div class="p-field p-col-12 p-md-6">
+                            <div class="p-field p-col-12 p-md-12">
                                 <label for="138">Corps<span style="color: red;">*</span></label>
                                 <textarea [(ngModel)]="selectedOrdreKosc.corpsAutre"
                                           [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscCorpsAutre}" cols="30"
                                           id="138"
                                           pInputTextarea placeholder="Corps"
-                                          rows="5"></textarea>
+                                          rows="10"></textarea>
                                 <small *ngIf='!validOrdreKoscCorpsAutre' class='p-error'>Corps est obligatoire.</small>
                             </div>
 
