@@ -364,12 +364,24 @@ export class OrdreKoscVo {
      public   otpRef: string;
 
      public   operatorComment: string;
-    
 
-    public userMauvaisContact: User;
-    public userRefus: User;
-    public userClientInjoinable: User;
-    public userAutre: User;
+
+     public  userPlanification :User;
+     public  userReplanification :User;
+     public  userRefus;
+     public  userMauvaisContact:User;
+     public  userConfirmationClient:User;
+     public  userCri:User;
+     public  userFtl:User;
+     public  userClientInjoinable:User;
+     public  userAutre:User;
+     public  userClientInjoinableKosc:User;
+     public  userReportDemandeManeoClientInjoignable:User;
+     public  userReportDemandeManeoClientJoignableAccepte:User;
+     public  userReportDemandeManeoClientJoignableRefus:User;
+     public  userReportDemandeClientClientInjoignable:User;
+     public  userReportDemandeClientClientJoignable:User;
+     public  userImportation:User;
 
 
 

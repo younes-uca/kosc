@@ -3,22 +3,23 @@ package com.maneo.kosc.service.admin.impl.kosc;
 import com.maneo.kosc.bean.kosc.OrdreKosc;
 import com.maneo.kosc.bean.template.EmailDetails;
 import com.maneo.kosc.dao.kosc.OrdreKoscDao;
+import com.maneo.kosc.security.dao.UserDao;
 import com.maneo.kosc.service.admin.facade.*;
 import com.maneo.kosc.service.admin.facade.kosc.EmailingOrderKoscAdminService;
-import com.maneo.kosc.service.admin.facade.kosc.OrdreKoscAdminService;
 import com.maneo.kosc.service.util.DateUtil;
 
 
+import com.maneo.kosc.service.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
 @Service
-public class EmailingOrderKoscAdminServiceImpl  implements EmailingOrderKoscAdminService {
+public class OrderKoscEmailingAdminServiceImpl implements EmailingOrderKoscAdminService {
     @Autowired
     private OrdreKoscDao ordreKoscDao;
-
+private UserDao userDao;
 
     @Autowired
     private EmailSenderAdminService emailSenderAdminService;
@@ -373,7 +374,66 @@ public class EmailingOrderKoscAdminServiceImpl  implements EmailingOrderKoscAdmi
             ordreKosc.setDateDernierAppel(ordreKosc.getDatePremierAppel());
             ordreKosc.setNumeroDernierAppel(1L);
         }
+        prepareUser(ordreKosc);
         ordreKoscDao.save(ordreKosc);
+
+    }
+    private void prepareUser(OrdreKosc ordreKosc){
+
+        if(ordreKosc.getUserMauvaisContact()!=null && StringUtil.isNotEmpty(ordreKosc.getUserMauvaisContact().getEmail())){
+            ordreKosc.setUserMauvaisContact(userDao.findByEmail(ordreKosc.getUserMauvaisContact().getEmail()));
+        }
+        if(ordreKosc.getUserAutre()!=null && StringUtil.isNotEmpty(ordreKosc.getUserAutre().getEmail())){
+            ordreKosc.setUserAutre(userDao.findByEmail(ordreKosc.getUserAutre().getEmail()));
+        }
+        if(ordreKosc.getUserCri()!=null && StringUtil.isNotEmpty(ordreKosc.getUserCri().getEmail())){
+            ordreKosc.setUserCri(userDao.findByEmail(ordreKosc.getUserCri().getEmail()));
+        }
+        if(ordreKosc.getUserFtl()!=null && StringUtil.isNotEmpty(ordreKosc.getUserFtl().getEmail())){
+            ordreKosc.setUserFtl(userDao.findByEmail(ordreKosc.getUserFtl().getEmail()));
+        }
+        if(ordreKosc.getUserRefus()!=null && StringUtil.isNotEmpty(ordreKosc.getUserRefus().getEmail())){
+            ordreKosc.setUserRefus(userDao.findByEmail(ordreKosc.getUserRefus().getEmail()));
+        }
+
+        if(ordreKosc.getUserClientInjoinable()!=null && StringUtil.isNotEmpty(ordreKosc.getUserClientInjoinable().getEmail())){
+            ordreKosc.setUserClientInjoinable(userDao.findByEmail(ordreKosc.getUserClientInjoinable().getEmail()));
+        }
+
+        if(ordreKosc.getUserClientInjoinableKosc()!=null && StringUtil.isNotEmpty(ordreKosc.getUserClientInjoinableKosc().getEmail())){
+            ordreKosc.setUserClientInjoinableKosc(userDao.findByEmail(ordreKosc.getUserClientInjoinableKosc().getEmail()));
+        }
+
+        if(ordreKosc.getUserConfirmationClient()!=null && StringUtil.isNotEmpty(ordreKosc.getUserConfirmationClient().getEmail())){
+            ordreKosc.setUserConfirmationClient(userDao.findByEmail(ordreKosc.getUserConfirmationClient().getEmail()));
+        }
+        if(ordreKosc.getUserPlanification()!=null && StringUtil.isNotEmpty(ordreKosc.getUserPlanification().getEmail())){
+            ordreKosc.setUserPlanification(userDao.findByEmail(ordreKosc.getUserPlanification().getEmail()));
+        }
+
+        if(ordreKosc.getUserReplanification()!=null && StringUtil.isNotEmpty(ordreKosc.getUserReplanification().getEmail())){
+            ordreKosc.setUserReplanification(userDao.findByEmail(ordreKosc.getUserReplanification().getEmail()));
+        }
+        if(ordreKosc.getUserImportation()!=null && StringUtil.isNotEmpty(ordreKosc.getUserImportation().getEmail())){
+            ordreKosc.setUserImportation(userDao.findByEmail(ordreKosc.getUserImportation().getEmail()));
+        }
+        if(ordreKosc.getUserReportDemandeClientClientInjoignable()!=null && StringUtil.isNotEmpty(ordreKosc.getUserReportDemandeClientClientInjoignable().getEmail())){
+            ordreKosc.setUserReportDemandeClientClientInjoignable(userDao.findByEmail(ordreKosc.getUserReportDemandeClientClientInjoignable().getEmail()));
+        }
+        if(ordreKosc.getUserReportDemandeClientClientJoignable()!=null && StringUtil.isNotEmpty(ordreKosc.getUserReportDemandeClientClientJoignable().getEmail())){
+            ordreKosc.setUserReportDemandeClientClientJoignable(userDao.findByEmail(ordreKosc.getUserReportDemandeClientClientJoignable().getEmail()));
+        }
+
+        if(ordreKosc.getUserReportDemandeManeoClientJoignableAccepte()!=null && StringUtil.isNotEmpty(ordreKosc.getUserReportDemandeManeoClientJoignableAccepte().getEmail())){
+            ordreKosc.setUserReportDemandeManeoClientJoignableAccepte(userDao.findByEmail(ordreKosc.getUserReportDemandeManeoClientJoignableAccepte().getEmail()));
+        }
+        if(ordreKosc.getUserReportDemandeManeoClientJoignableRefus()!=null && StringUtil.isNotEmpty(ordreKosc.getUserReportDemandeManeoClientJoignableRefus().getEmail())){
+            ordreKosc.setUserReportDemandeManeoClientJoignableRefus(userDao.findByEmail(ordreKosc.getUserReportDemandeManeoClientJoignableRefus().getEmail()));
+        }
+        if(ordreKosc.getUserReportDemandeManeoClientInjoignable()!=null && StringUtil.isNotEmpty(ordreKosc.getUserReportDemandeManeoClientInjoignable().getEmail())){
+            ordreKosc.setUserReportDemandeManeoClientInjoignable(userDao.findByEmail(ordreKosc.getUserReportDemandeManeoClientInjoignable().getEmail()));
+        }
+
 
     }
 
