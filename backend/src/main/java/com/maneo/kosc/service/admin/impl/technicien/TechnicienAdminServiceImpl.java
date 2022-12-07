@@ -97,14 +97,14 @@ public class TechnicienAdminServiceImpl extends AbstractServiceImpl<Technicien> 
         List<Technicien> techniciensDispo;
         if(codeDepartement == null || codeDepartement.isEmpty())
             return null;
-       else if(dateRdv == null || dateRdv.toString().isEmpty())
+        else if(dateRdv == null || dateRdv.toString().isEmpty())
             return departementTechnicienDao.findTechnicienByDepartementCode(codeDepartement);
         else{
-        List<Technicien> techniciensInDepart = departementTechnicienDao.findTechnicienByDepartementCode(codeDepartement);
-        List<Technicien> techniciensInorders = ordreKoscDao.findTechnicienByDateRndv(dateRdv);
-         techniciensDispo=techniciensInDepart.stream()
-                .filter(technicien -> !techniciensInorders.contains(technicien))
-                .collect(Collectors.toList());}
+            List<Technicien> techniciensInDepart = departementTechnicienDao.findTechnicienByDepartementCode(codeDepartement);
+            List<Technicien> techniciensInorders = ordreKoscDao.findTechnicienByDateRndv(dateRdv);
+            techniciensDispo=techniciensInDepart.stream()
+                    .filter(technicien -> !techniciensInorders.contains(technicien))
+                    .collect(Collectors.toList());}
         for(Technicien technicien: techniciensDispo){
             List<ArretTravail> techniciensArretTravail = arretTravailAdminService.findByTechnicienIdentifiant(technicien.getIdentifiant());
             for (ArretTravail e : techniciensArretTravail) {
