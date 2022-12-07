@@ -311,8 +311,8 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
 
                 this.selectedOrdreKosc.fromCri = this.selectedDefaultTemplateConfiguration.emailManeo;
                 this.selectedOrdreKosc.toCri = this.selectedDefaultTemplateConfiguration.emailKosc;
-                this.selectedOrdreKosc.objetCri = eval(this.selectedDefaultTemplateConfiguration.templateEmailCriVo.objet);
-                this.selectedOrdreKosc.corpsCri = eval(this.selectedDefaultTemplateConfiguration.templateEmailCriVo.corps);
+                this.selectedOrdreKosc.objetCri = eval(this.selectedDefaultTemplateConfiguration?.templateEmailCriVo?.objet);
+                this.selectedOrdreKosc.corpsCri = eval(this.selectedDefaultTemplateConfiguration?.templateEmailCriVo?.corps);
                 
             });
         } else {

@@ -5,7 +5,7 @@ import com.maneo.kosc.bean.template.EmailDetails;
 import com.maneo.kosc.dao.kosc.OrdreKoscDao;
 import com.maneo.kosc.security.dao.UserDao;
 import com.maneo.kosc.service.admin.facade.*;
-import com.maneo.kosc.service.admin.facade.kosc.EmailingOrderKoscAdminService;
+import com.maneo.kosc.service.admin.facade.kosc.OrderKoscEmailingAdminService;
 import com.maneo.kosc.service.util.DateUtil;
 
 
@@ -14,9 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Service
-public class OrderKoscEmailingAdminServiceImpl implements EmailingOrderKoscAdminService {
+public class OrderKoscEmailingAdminServiceImpl implements OrderKoscEmailingAdminService {
     @Autowired
     private OrdreKoscDao ordreKoscDao;
 private UserDao userDao;
@@ -60,7 +61,7 @@ private UserDao userDao;
         try {
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyePlanification(true);
-            ordreKosc.setDateEnvoiPlanification(DateUtil.toDate(todaysDate));
+            ordreKosc.setDateEnvoiPlanification(new Date());
 
         } catch (Exception exception) {
            // OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
@@ -68,6 +69,7 @@ private UserDao userDao;
             ordreKosc.setDateEnvoiPlanification(null);
             //ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
+        ordreKosc.setDatePriseRdv(new Date());
         saveAndInitDateDernierAppel(ordreKosc);
 
     }
