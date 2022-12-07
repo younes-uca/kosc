@@ -23,6 +23,7 @@ import tippy from "tippy.js";
     styleUrls: ['./calendrier-technicien.component.scss']
 })
 export class CalendrierTechnicienComponent implements OnInit {
+    findByCriteriaShow = false;
 
     deptTechEvents = [];
     arretTravailEvents = [];
@@ -142,6 +143,15 @@ export class CalendrierTechnicienComponent implements OnInit {
             });
         }
 
+    }
+
+    public searchRequest() {
+        this.departementTechnicienService.findByCriteria(this.searchDepartementTechnicien).subscribe(departementTechniciens => {
+
+            this.departementTechniciens = departementTechniciens;
+            console.log(departementTechniciens);
+            // this.searchDepartementTechnicien = new DepartementTechnicienVo();
+        }, error => console.log(error));
     }
 
     get viewDepartementTechnicienDialog(): boolean {
@@ -294,6 +304,14 @@ export class CalendrierTechnicienComponent implements OnInit {
 
     get dateFormatColumn() {
         return environment.dateFormatCreate;
+    }
+
+    get searchDepartementTechnicien(): DepartementTechnicienVo {
+        return this.departementTechnicienService.searchDepartementTechnicien;
+    }
+
+    set searchDepartementTechnicien(value: DepartementTechnicienVo) {
+        this.departementTechnicienService.searchDepartementTechnicien = value;
     }
 }
 

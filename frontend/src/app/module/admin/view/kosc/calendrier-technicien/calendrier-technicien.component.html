@@ -1,8 +1,54 @@
 <div class="card card-w-title">
     <h5>Schedule</h5>
-    <button (click)="openCreateDepartementTechnicien('departementTechnicien')"
-            class="p-button-success p-mr-2 p-mb-2" icon="pi pi-plus" label="Nouveau" pButton
-            pRipple></button>
+    <div class="card">
+        <p-toolbar styleClass="p-mb-4">
+            <ng-template pTemplate="left">
+                <button (click)="openCreateDepartementTechnicien('departementTechnicien')"
+                        class="p-button-success p-mr-2 p-mb-2" icon="pi pi-plus" label="Nouveau" pButton
+                        pRipple></button>
+
+
+                <button (click)="this.findByCriteriaShow = !this.findByCriteriaShow"
+                        class="p-button-success p-mr-2 p-mb-2"
+                        icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}"
+                        label="Chercher"
+                        pButton
+                        pRipple></button>
+            </ng-template>
+
+
+        </p-toolbar>
+        <p-toolbar *ngIf="findByCriteriaShow">
+
+            <div class="align-form-search">
+                            <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                <p-dropdown [(ngModel)]="searchDepartementTechnicien.technicienVo"
+                                            [filter]="true"
+                                            [options]="techniciens"
+                                            [showClear]="true" id="1" optionLabel="identifiant"
+                                            placeholder="Technicien">
+                                </p-dropdown>
+                            </span>
+                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                <p-dropdown [(ngModel)]="searchDepartementTechnicien.departementVo"
+                                            [filter]="true"
+                                            [options]="departements"
+                                            [showClear]="true" id="2" optionLabel="libelle"
+                                            placeholder="Departement">
+                                </p-dropdown>
+                            </span>
+
+            </div>
+
+            <div class="align-search-button">
+                <button (click)="searchRequest()" class="p-button-info p-mr-2" icon="pi pi-sort-amount-down"
+                        label="Valider"
+                        pButton pRipple></button>
+            </div>
+        </p-toolbar>
+
+    </div>
+
     <p-fullCalendar [options]="options"></p-fullCalendar>
 
     <app-departement-technicien-create-admin></app-departement-technicien-create-admin>
