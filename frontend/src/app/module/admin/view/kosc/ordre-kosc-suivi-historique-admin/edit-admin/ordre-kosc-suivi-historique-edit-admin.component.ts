@@ -7,31 +7,12 @@ import {Router} from '@angular/router';
 import {environment} from 'src/environments/environment';
 import {DatePipe} from '@angular/common';
 import {StringUtilService} from 'src/app/controller/service/StringUtil.service';
-
-
-import {TemplateEmailClotureVo} from 'src/app/controller/model/TemplateEmailCloture.model';
-import {TemplateEmailClotureService} from 'src/app/controller/service/TemplateEmailCloture.service';
-import {EtatDemandeKoscVo} from 'src/app/controller/model/EtatDemandeKosc.model';
-import {EtatDemandeKoscService} from 'src/app/controller/service/EtatDemandeKosc.service';
-import {TemplateEmailClientInjoinableVo} from 'src/app/controller/model/TemplateEmailClientInjoinable.model';
-import {TemplateEmailClientInjoinableService} from 'src/app/controller/service/TemplateEmailClientInjoinable.service';
 import {TechnicienVo} from 'src/app/controller/model/Technicien.model';
 import {TechnicienService} from 'src/app/controller/service/Technicien.service';
-import {TemplateEmailReplanificationVo} from 'src/app/controller/model/TemplateEmailReplanification.model';
-import {TemplateEmailReplanificationService} from 'src/app/controller/service/TemplateEmailReplanification.service';
-import {TemplateSuiviVo} from 'src/app/controller/model/TemplateSuivi.model';
-import {TemplateSuiviService} from 'src/app/controller/service/TemplateSuivi.service';
 import {OperatorVo} from 'src/app/controller/model/Operator.model';
 import {OperatorService} from 'src/app/controller/service/Operator.service';
 import {DepartementVo} from 'src/app/controller/model/Departement.model';
 import {DepartementService} from 'src/app/controller/service/Departement.service';
-import {TemplateEmailClientInjoinableKoscVo} from 'src/app/controller/model/TemplateEmailClientInjoinableKosc.model';
-import {
-    TemplateEmailClientInjoinableKoscService
-} from 'src/app/controller/service/TemplateEmailClientInjoinableKosc.service';
-
-import {TemplateEmailPlanificationVo} from 'src/app/controller/model/TemplateEmailPlanification.model';
-import {TemplateEmailPlanificationService} from 'src/app/controller/service/TemplateEmailPlanification.service';
 
 @Component({
     selector: 'app-ordre-kosc-suivi-historique-edit-admin',
@@ -849,30 +830,30 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
     sendMailCri() {
         this.validateFormCri();
         if (this.errorMessages.length === 0) {
-        this.showSpinner = true;
-        this.blocked = true;
+            this.showSpinner = true;
+            this.blocked = true;
 
-        this.ordreKoscService.sendMailCri().subscribe(data => {
-                if (data.envoyeCri == true) {
+            this.ordreKoscService.sendMailCri().subscribe(data => {
+                    if (data.envoyeCri == true) {
 
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Success',
-                        detail: 'Email envoyé avec succès'
-                    });
-                    this.editOrdreKoscDialog = false;
-                } else {
-                    this.messageService.add({
-                        severity: 'warn',
-                        summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
-                    });
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Success',
+                            detail: 'Email envoyé avec succès'
+                        });
+                        this.editOrdreKoscDialog = false;
+                    } else {
+                        this.messageService.add({
+                            severity: 'warn',
+                            summary: 'Warning', detail: 'mise à jour avec succes et échec d\'envoi'
+                        });
 
+                    }
+                    this.showSpinner = false;
+                    this.blocked = false;
                 }
-                this.showSpinner = false;
-                this.blocked = false;
-            }
-        );}
-    else {
+            );
+        } else {
             this.messageService.add({
                 severity: 'error',
                 summary: 'Erreurs',
@@ -931,6 +912,7 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
     set validOrdreKoscToCri(value: boolean) {
         this._validOrdreKoscToCri = value;
     }
+
     private validateOrdreKoscObjetCri() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.objetCri)) {
             this.errorMessages.push('Objet cri non valide');
@@ -966,6 +948,7 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
             this.validOrdreKoscToCri = true;
         }
     }
+
     private validateOrdreKoscDateCri() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.dateCri)) {
             this.errorMessages.push('date cri non valide');
@@ -974,6 +957,7 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
             this.validOrdreKoscDateCri = true;
         }
     }
+
     private validateFormCri(): void {
         this.errorMessages = new Array<string>();
         this.validateOrdreKoscDateCri();

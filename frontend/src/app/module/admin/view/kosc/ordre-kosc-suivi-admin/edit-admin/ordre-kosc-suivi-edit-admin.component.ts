@@ -1190,7 +1190,6 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
             this.blocked = true;
             this.ordreKoscService.sendMailReplanification().subscribe(data => {
                     if (data.envoyeReplanification == true) {
-
                         this.messageService.add({
                             severity: 'success',
                             summary: 'Success',

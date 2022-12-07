@@ -1703,7 +1703,7 @@
                                type="text"/>
                         <small *ngIf='!validOrdreKoscToCri' class='p-error'>To est obligatoire.</small>
                     </div>
-                <div class="p-field p-col-12 p-md-6">
+                <div class="p-field p-col-12 p-md-4">
                     <label for="158">Objet</label>
                     <input [(ngModel)]="selectedOrdreKosc.objetCri"
                            [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscObjetCri}" class="p-mb-2 p-mr-2"
@@ -1714,12 +1714,12 @@
                 </div>
 
 
-                <div class="p-field p-col-12 p-md-6">
+                <div class="p-field p-col-12 p-md-8">
                     <label for="159">Corps</label>
                     <textarea [(ngModel)]="selectedOrdreKosc.corpsCri"
                               [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscCorpsCri}" cols="30" id="159"
                               pInputTextarea placeholder="Corps cri"
-                              rows="5"></textarea>
+                              rows="10"></textarea>
                     <small *ngIf='!validOrdreKoscCorpsCri' class='p-error'>Corps est obligatoire.</small>
                 </div>
 
