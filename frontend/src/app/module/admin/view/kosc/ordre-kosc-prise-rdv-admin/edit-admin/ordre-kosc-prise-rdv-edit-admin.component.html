@@ -604,7 +604,7 @@
                                 <label for="30">Date rendez-vous<span style="color: red;">*</span></label>
                                 <p-calendar dateFormat="{{dateFormat}}" [(ngModel)]="selectedOrdreKosc.dateRdv"
                                             [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscDateRendezVous}"
-                                            [showSeconds]="false" [showTime]="true"
+                                            [showSeconds]="false" [showTime]="true" [minDate]="minimumDate"
                                             id="30"
                                             placeholder="Date rdv">
 
