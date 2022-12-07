@@ -1738,6 +1738,145 @@
 
                 </div>
             </p-tabPanel>
+            <p-tabPanel header="End custumor">
+                <div class="p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="6">Nom</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorName" class="p-mb-2 p-mr-2" id="6"
+                               pInputText
+                               placeholder="nom" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="7">Série</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorSiret" class="p-mb-2 p-mr-2" id="7"
+                               pInputText
+                               placeholder="Série" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="8">Prenom</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorFirstName" class="p-mb-2 p-mr-2" id="8"
+                               pInputText
+                               placeholder="Prenom" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="9">Nom</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorLastName" class="p-mb-2 p-mr-2" id="9"
+                               pInputText
+                               placeholder="Nom" type="text"
+                        />
+
+                    </div>
+
+                    <div class="p-field p-col-11 p-md-3">
+                        <label for="10">Departement</label>
+                        <p-dropdown [(ngModel)]="selectedOrdreKosc.departementVo" [filter]="true"
+                                    [options]="departements" [showClear]="true" filterMatchMode="contains"
+                                    id="10"
+                                    optionLabel="libelle"
+                                    placeholder="Departement">
+                        </p-dropdown>
+
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="53">Adresse</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorStreetName" class="p-mb-2 p-mr-2" id="53"
+                               pInputText
+                               placeholder="Adresse" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="54">Numero de la rue</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorStreetNumber" class="p-mb-2 p-mr-2" id="54"
+                               pInputText
+                               placeholder="numero de la rue" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="55">Ville</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorCity" class="p-mb-2 p-mr-2" id="55"
+                               pInputText
+                               placeholder="Ville" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="56">Bâtiment</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorBuilding" class="p-mb-2 p-mr-2" id="56"
+                               pInputText
+                               placeholder="bâtiment" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="57">Escaliers</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorStairs" class="p-mb-2 p-mr-2" id="57"
+                               pInputText
+                               placeholder="Escaliers" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="58">Etage</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorFloor" class="p-mb-2 p-mr-2" id="58"
+                               pInputText
+                               placeholder="Etage" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="17">Contact prenom</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorContactFirstName" class="p-mb-2 p-mr-2" id="17"
+                               pInputText
+                               placeholder="Contact prenom" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="18">Contact nom</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorContactLastName" class="p-mb-2 p-mr-2" id="18"
+                               pInputText
+                               placeholder="Contact nom" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="19">Contact téléphone</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorContactPhone" class="p-mb-2 p-mr-2" id="19"
+                               pInputText
+                               placeholder="Contact téléphone" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="20">Contact téléphone portable</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorContactCellPhone" class="p-mb-2 p-mr-2" id="20"
+                               pInputText
+                               placeholder="Contact téléphone portable" type="text"
+                        />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="21">contact e-mail</label>
+                        <input [(ngModel)]="selectedOrdreKosc.endCustumorContactEmail" class="p-mb-2 p-mr-2" id="21"
+                               pInputText
+                               placeholder="Contact e-mail" type="text"
+                        />
+
+                    </div>
+
+
+                </div>
+            </p-tabPanel>
 
         </p-tabView>
 

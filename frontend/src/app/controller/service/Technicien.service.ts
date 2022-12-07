@@ -147,7 +147,7 @@ export class TechnicienService {
         return this.http.get<TechnicienVo>(this.API + 'detail/id/' + technicien.id);
     }
 
-    public findAppropriateTechnicien (dateRdv:Date,codeDepartemet:string) : Observable<Array<TechnicienVo>>{
+    public findAppropriateTechnicien (dateRdv:Date, codeDepartemet:string) : Observable<Array<TechnicienVo>>{
         let dateRdvToString = moment(dateRdv).format("yyyy-MM-DD hh:mm:ss.SSS");
         console.log(dateRdvToString);
         return this.http.get<Array<TechnicienVo>>(this.API+"date-rdv/"+dateRdvToString+"/code-departement/"+codeDepartemet)
