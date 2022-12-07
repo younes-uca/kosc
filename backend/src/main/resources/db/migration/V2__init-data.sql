@@ -21,6 +21,13 @@ SET time_zone = "+00:00";
 --
 -- Base de donnÃ©es : `kosc`
 --
+--
+-- DÃƒÂ©chargement des donnÃƒÂ©es de la table `ordre_kosc_seq`
+--
+
+INSERT INTO `ordre_kosc_seq` (`next_val`)
+VALUES (10000),
+       (10000);
 
 --
 -- DÃ©chargement des donnÃ©es de la table `arret_travail`
