@@ -89,6 +89,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
 // methods
 
+    minimumDate = new Date();
     public formatDdMmYy(date: Date): string {
         return date != null ? this.datePipe.transform(date, 'd/M/yyyy') : '';
     }
