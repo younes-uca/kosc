@@ -482,6 +482,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
                     }
                     this.showSpinner = false;
                     this.blocked = false;
+                    this.editOrdreKoscDialog = false;
                 }
             );
         } else {
