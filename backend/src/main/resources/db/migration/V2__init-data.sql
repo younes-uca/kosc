@@ -943,13 +943,7 @@ INSERT INTO `template_email_report_demande_maneo_client_joignable_refus` (`id`, 
 INSERT INTO `template_email_report_demande_maneo_client_joignable_refus_seq` (`next_val`) VALUES
 (10000);
 
---
--- DÃ©chargement des donnÃ©es de la table `template_email_report_seq`
---
 
-INSERT INTO `template_email_report_seq` (`next_val`) VALUES
-(10000),
-(10001);
 
 --
 -- DÃ©chargement des donnÃ©es de la table `template_suivi_seq`
