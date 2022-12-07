@@ -1053,7 +1053,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         let today =new Date();
         this.searchOrdreKosc.dateRdvMin=null;
         this.searchOrdreKosc.dateRdvMax= moment(today).format("yyyy-MM-DD");
-        console.log(this.searchOrdreKosc.dateEnvoiPlanificationMax)
+        // console.log(this.searchOrdreKosc.dateEnvoiPlanificationMax)
     }
 
     get selectedDefaultTemplateConfiguration(): DefaultTemplateConfigurationVo {
