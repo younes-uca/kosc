@@ -972,6 +972,11 @@ INSERT INTO `users_roles` (`user_id`, `role_id`) VALUES
 (3, 126),
 (4, 126);
 
+
+
+INSERT INTO `ordre_kosc_seq` (`next_val`) VALUES
+                                                 (10000),
+                                                 (10001);
 --
 -- DÃ©chargement des donnÃ©es de la table `user_app`
 --
