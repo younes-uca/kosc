@@ -219,7 +219,6 @@ export class OrdreKoscListAdminComponent implements OnInit {
         this.ordreKoscExcelService.importerDataBase(event).subscribe({
             next: () => {
                 this.showSpinner = false;
-
             },
             error: () => {
                 this.showSpinner = false;
