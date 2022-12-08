@@ -42,6 +42,8 @@ import {
 } from "../../../../../../controller/service/DefaultTemplateConfiguration.service";
 import {SourceReplanificationVo} from "../../../../../../controller/model/SourceReplanification.model";
 import {AuthService} from "../../../../../../controller/service/Auth.service";
+import {JourFerieVo} from "../../../../../../controller/model/JourFerie.model";
+import {JourFerieService} from "../../../../../../controller/service/JourFerie.service";
 
 @Component({
     selector: 'app-ordre-kosc-prise-rdv-edit-admin',
@@ -68,7 +70,8 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
         , private stringUtilService: StringUtilService
         , private roleService: RoleService
         , private messageService: MessageService
-        , private router: Router
+        , private router: Router,
+    private jourFerieService: JourFerieService
         , private templateEmailClotureService: TemplateEmailClotureService
         , private etatDemandeKoscService: EtatDemandeKoscService
         , private templateEmailClientInjoinableService: TemplateEmailClientInjoinableService
@@ -90,6 +93,8 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 // methods
 
     minimumDate = new Date();
+
+
 
     public formatDdMmYy(date: Date): string {
         return date != null ? this.datePipe.transform(date, 'd/M/yyyy') : '';
@@ -2243,4 +2248,13 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     set ordreKoscsPriseRdv(value: Array<OrdreKoscVo>) {
         this.ordreKoscService.ordreKoscsPriseRdv = value;
     }
+
+    get selectedJourFerie(): JourFerieVo {
+        return this.jourFerieService.selectedJourFerie;
+    }
+
+    set selectedJourFerie(value: JourFerieVo) {
+        this.jourFerieService.selectedJourFerie = value;
+    }
+
 }

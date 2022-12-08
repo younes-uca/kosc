@@ -909,7 +909,6 @@ export class OrdreKoscExcelService {
         myOrdreKoscData.dateTroisiemeAppel = this.convertDate(data[i]['3 eme appel ']);
         myOrdreKoscData.dateAppelReplanification = this.convertDate(data[i]['Re Planification']);
         myOrdreKoscData.dateInterventionTechniqueDebut = this.convertDate(data[i]['Date intervention Technicien']);
-
         return myOrdreKoscData;
     }
 
@@ -936,9 +935,13 @@ export class OrdreKoscExcelService {
         return myBoleenString.includes(value) ? true : false;
     }
 
-    convertDate(date) {
-        const myDate = new Date(Math.round((date - 25569) * 86400 * 1000));
-        return DateUtils.toDate(myDate);
+    convertDate(date ) {
+        if (date != null){
+            const myDate = new Date(Math.round((date - 25569) * 86400 * 1000));
+            return DateUtils.toDate(myDate);
+
+        }
+     return null;
     }
 
     private constructMessage(koscOrdres: Array<OrdreKoscVo>) : string {

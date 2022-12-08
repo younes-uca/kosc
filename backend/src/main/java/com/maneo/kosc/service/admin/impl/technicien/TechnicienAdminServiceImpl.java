@@ -108,23 +108,23 @@ public class TechnicienAdminServiceImpl extends AbstractServiceImpl<Technicien> 
         for(Technicien technicien: techniciensDispo){
             List<ArretTravail> techniciensArretTravail = arretTravailAdminService.findByTechnicienIdentifiant(technicien.getIdentifiant());
             for (ArretTravail e : techniciensArretTravail) {
-                if (!compareDate(e.getDateDebut(), e.getDateFin(), dateRdv)){
+                if (compareDate(e.getDateDebut(), e.getDateFin(), dateRdv)){
                     techniciensDispo.remove(techniciensDispo.indexOf(technicien));
                 }
             }
-//            List<JourFerie> jourFeries = jourFerieAdminService.findAll();
-//            for (JourFerie jourFerie : jourFeries){
-//                if (compareDate(jourFerie.getDateDebut(), jourFerie.getDateFin(), dateRdv)){
-//                    techniciensDispo.removeAll(techniciensDispo);
-//                }
-//            }
+            List<JourFerie> jourFeries = jourFerieAdminService.findAll();
+            for (JourFerie jourFerie : jourFeries){
+                if (compareDate(jourFerie.getDateDebut(), jourFerie.getDateFin(), dateRdv)){
+                    techniciensDispo = null;
+                }
+            }
         }
 
         return techniciensDispo;
     }
 
     public boolean compareDate(Date dateDebut, Date dateFin, Date date){
-        return (date.before(dateDebut)) || (date.after(dateFin));
+        return (date.before(dateFin) && date.after(dateDebut)) || (date.equals(dateDebut) && date.equals(dateFin));
     }
 
     @Override

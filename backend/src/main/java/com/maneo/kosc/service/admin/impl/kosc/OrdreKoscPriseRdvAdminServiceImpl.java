@@ -83,18 +83,6 @@ public class OrdreKoscPriseRdvAdminServiceImpl implements OrdreKoscPriseRdvAdmin
     }
 
 
-
-
-    public List<OrdreKosc> findDemain(){
-        return ordreKoscDao.findByDateRdvBetween(DateUtil.getDemain(), DateUtil.getApresDemain());
-    }
-    public List<OrdreKosc> findApresDemain(){
-        return ordreKoscDao.findByDateRdvBetween(DateUtil.getApresDemain(), DateUtil.getApresApresDemain());
-    }
-    public List<OrdreKosc> findApresApresDemain(){
-        return ordreKoscDao.findByDateRdvBetween(DateUtil.getApresApresDemain(), DateUtil.getApresApresApresDemain());
-    }
-
     private void initDateDernierAppel(OrdreKosc ordreKosc) {
         if(ordreKosc.getDateTroisiemeAppel()!=null){
             ordreKosc.setDateDernierAppel(ordreKosc.getDateTroisiemeAppel());
@@ -116,7 +104,7 @@ public class OrdreKoscPriseRdvAdminServiceImpl implements OrdreKoscPriseRdvAdmin
                 Long jourFierie = jourFerieAdminService.calcNombreJourTotal(ordreKosc.getSubmissionDate() , now);
                 System.out.println("totalJourWithoutWeekEnd = " + totalJourWithoutWeekEnd+"  jourFierie = " + jourFierie);
                 long res = DateUtil.calculerDifferenceHeure(ordreKosc.getSubmissionDate());
-                ordreKosc.setNbrHeureDateSubmissionAndNow((totalJourWithoutWeekEnd -jourFierie)*24);
+                ordreKosc.setNbrHeureDateSubmissionAndNow((totalJourWithoutWeekEnd -jourFierie-1)*24);
                 ordreKoscDao.save(ordreKosc);
             }
         }
