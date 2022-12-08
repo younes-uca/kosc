@@ -1844,7 +1844,7 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
 
 
     private deleteFromList(selectedOrdreKosc: OrdreKoscVo) {
-        const position = this.ordreKoscs.indexOf(selectedOrdreKosc);
+        const position = this.ordreKoscs.findIndex(e => e.id == selectedOrdreKosc.id);
         position > -1 ? this.ordreKoscs.splice(position, 1) : false;
     }
 }
