@@ -378,6 +378,7 @@ private UserDao userDao;
 
 
     private void saveAndInitDateDernierAppel(OrdreKosc ordreKosc) {
+        ordreKosc.setDateEnvoiCri(null);
         if (ordreKosc.getDateTroisiemeAppel() != null) {
             ordreKosc.setDateDernierAppel(ordreKosc.getDateTroisiemeAppel());
             ordreKosc.setNumeroDernierAppel(3L);
