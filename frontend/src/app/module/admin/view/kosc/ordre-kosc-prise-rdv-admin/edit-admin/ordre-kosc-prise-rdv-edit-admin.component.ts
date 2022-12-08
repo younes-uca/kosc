@@ -425,8 +425,8 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.blocked = true;
 
             this.ordreKoscService.sendConfirmationEmailToClient().subscribe(data => {
-                    this.deleteFromList(this.selectedOrdreKosc);
 
+                this.deleteFromList(this.selectedOrdreKosc);
                     if (data.envoyeConfirmationClient == true) {
 
                         this.messageService.add({
@@ -463,7 +463,8 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.showSpinner = true;
             this.blocked = true;
             this.ordreKoscService.sendMailPlanificationEmail().subscribe(data => {
-                    this.deleteFromList(this.selectedOrdreKosc);
+                debugger
+                this.deleteFromList(this.selectedOrdreKosc);
                     if (data.envoyePlanification == true) {
                         this.messageService.add({
                             severity: 'success',
@@ -2230,7 +2231,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
 
 
     private deleteFromList(selectedOrdreKosc: OrdreKoscVo) {
-        const position = this.ordreKoscsPriseRdv.indexOf(selectedOrdreKosc);
+        const position = this.ordreKoscsPriseRdv.findIndex(e => selectedOrdreKosc.id == e.id);
         position > -1 ? this.ordreKoscsPriseRdv.splice(position, 1) : false;
     }
 
