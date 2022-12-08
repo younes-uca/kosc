@@ -42,6 +42,7 @@ private UserDao userDao;
             ordreKosc.setDateEnvoiConfirmationClient(null);
            // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
+        ordreKosc.setDatePriseRdv(new Date());
         saveAndInitDateDernierAppel(ordreKosc);
 
 
@@ -61,6 +62,7 @@ private UserDao userDao;
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyePlanification(true);
             ordreKosc.setDateEnvoiPlanification( new Date());
+            ordreKosc.setDateEnvoiPlanification( new Date());
 
         } catch (Exception exception) {
            // OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
@@ -68,7 +70,6 @@ private UserDao userDao;
             ordreKosc.setDateEnvoiPlanification(null);
             //ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKosc.setDateEnvoiPlanification( new Date());
         ordreKosc.setDatePriseRdv(new Date());
         saveAndInitDateDernierAppel(ordreKosc);
 
@@ -94,6 +95,7 @@ private UserDao userDao;
             ordreKosc.setDateEnvoiClientInjoinable(null);
            // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
+        ordreKosc.setDatePriseRdv(new Date());
         saveAndInitDateDernierAppel(ordreKosc);
 
     }
@@ -117,6 +119,7 @@ private UserDao userDao;
             ordreKosc.setDateEnvoiClientInjoinableKosc(null);
             //ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
+        ordreKosc.setDatePriseRdv(new Date());
         saveAndInitDateDernierAppel(ordreKosc);
 
     }
@@ -141,6 +144,7 @@ private UserDao userDao;
             ordreKosc.setDateEnvoiRefus(null);
            // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
+        ordreKosc.setDatePriseRdv(new Date());
         saveAndInitDateDernierAppel(ordreKosc);
 
     }
@@ -164,6 +168,7 @@ private UserDao userDao;
             ordreKosc.setDateEnvoiAutre(null);
             //ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
+        ordreKosc.setDatePriseRdv(new Date());
         saveAndInitDateDernierAppel(ordreKosc);
 
     }
@@ -188,6 +193,7 @@ private UserDao userDao;
             ordreKosc.setDateEnvoiMauvaisContact(null);
            // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
+        ordreKosc.setDatePriseRdv(new Date());
         saveAndInitDateDernierAppel(ordreKosc);
 
 
@@ -214,6 +220,7 @@ private UserDao userDao;
             ordreKosc.setDateEnvoiReplanification(null);
             //ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
+        ordreKosc.setDatePriseRdv(new Date());
         saveAndInitDateDernierAppel(ordreKosc);
     }
 
@@ -237,6 +244,7 @@ private UserDao userDao;
             ordreKosc.setDateEnvoiReportDemandeManeoClientInjoignable(null);
            // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
+        ordreKosc.setDatePriseRdv(new Date());
         saveAndInitDateDernierAppel(ordreKosc);
 
 
@@ -261,6 +269,7 @@ private UserDao userDao;
             ordreKosc.setDateEnvoiReportDemandeManeoClientJoignableAccepte(null);
             //ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
+        ordreKosc.setDatePriseRdv(new Date());
         saveAndInitDateDernierAppel(ordreKosc);
 
     }
@@ -285,6 +294,7 @@ private UserDao userDao;
             ordreKosc.setDateEnvoiReportDemandeManeoClientJoignableRefus(null);
            // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
+        ordreKosc.setDatePriseRdv(new Date());
         saveAndInitDateDernierAppel(ordreKosc);
 
 
@@ -310,6 +320,7 @@ private UserDao userDao;
             ordreKosc.setDateEnvoiReportDemandeClientClientInjoignable(null);
             //ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
+        ordreKosc.setDatePriseRdv(new Date());
         saveAndInitDateDernierAppel(ordreKosc);
 
     }
@@ -334,6 +345,7 @@ private UserDao userDao;
             ordreKosc.setDateEnvoiReportDemandeClientClientJoignable(null);
            // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
+        ordreKosc.setDatePriseRdv(new Date());
         saveAndInitDateDernierAppel(ordreKosc);
 
     }
@@ -358,6 +370,7 @@ private UserDao userDao;
             ordreKosc.setDateEnvoiCri(null);
             //ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
+        ordreKosc.setDatePriseRdv(new Date());
         saveAndInitDateDernierAppel(ordreKosc);
 
 
