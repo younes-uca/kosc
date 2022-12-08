@@ -36,61 +36,6 @@ export class JourFerieListAdminComponent implements OnInit {
     ) {
     }
 
-    get jourFeries(): Array<JourFerieVo> {
-        return this.jourFerieService.jourFeries;
-    }
-
-    set jourFeries(value: Array<JourFerieVo>) {
-        this.jourFerieService.jourFeries = value;
-    }
-
-    get jourFerieSelections(): Array<JourFerieVo> {
-        return this.jourFerieService.jourFerieSelections;
-    }
-
-    set jourFerieSelections(value: Array<JourFerieVo>) {
-        this.jourFerieService.jourFerieSelections = value;
-    }
-
-    get selectedJourFerie(): JourFerieVo {
-        return this.jourFerieService.selectedJourFerie;
-    }
-
-    set selectedJourFerie(value: JourFerieVo) {
-        this.jourFerieService.selectedJourFerie = value;
-    }
-
-    get createJourFerieDialog(): boolean {
-        return this.jourFerieService.createJourFerieDialog;
-    }
-
-    set createJourFerieDialog(value: boolean) {
-        this.jourFerieService.createJourFerieDialog = value;
-    }
-
-    get editJourFerieDialog(): boolean {
-        return this.jourFerieService.editJourFerieDialog;
-    }
-
-    set editJourFerieDialog(value: boolean) {
-        this.jourFerieService.editJourFerieDialog = value;
-    }
-
-    get viewJourFerieDialog(): boolean {
-        return this.jourFerieService.viewJourFerieDialog;
-    }
-
-    set viewJourFerieDialog(value: boolean) {
-        this.jourFerieService.viewJourFerieDialog = value;
-    }
-
-    get searchJourFerie(): JourFerieVo {
-        return this.jourFerieService.searchJourFerie;
-    }
-
-    set searchJourFerie(value: JourFerieVo) {
-        this.jourFerieService.searchJourFerie = value;
-    }
 
     // getters and setters
 
@@ -278,5 +223,60 @@ export class JourFerieListAdminComponent implements OnInit {
         ];
     }
 
+    get jourFeries(): Array<JourFerieVo> {
+        return this.jourFerieService.jourFeries;
+    }
+
+    set jourFeries(value: Array<JourFerieVo>) {
+        this.jourFerieService.jourFeries = value;
+    }
+
+    get jourFerieSelections(): Array<JourFerieVo> {
+        return this.jourFerieService.jourFerieSelections;
+    }
+
+    set jourFerieSelections(value: Array<JourFerieVo>) {
+        this.jourFerieService.jourFerieSelections = value;
+    }
+
+    get selectedJourFerie(): JourFerieVo {
+        return this.jourFerieService.selectedJourFerie;
+    }
+
+    set selectedJourFerie(value: JourFerieVo) {
+        this.jourFerieService.selectedJourFerie = value;
+    }
+
+    get createJourFerieDialog(): boolean {
+        return this.jourFerieService.createJourFerieDialog;
+    }
+
+    set createJourFerieDialog(value: boolean) {
+        this.jourFerieService.createJourFerieDialog = value;
+    }
+
+    get editJourFerieDialog(): boolean {
+        return this.jourFerieService.editJourFerieDialog;
+    }
+
+    set editJourFerieDialog(value: boolean) {
+        this.jourFerieService.editJourFerieDialog = value;
+    }
+
+    get viewJourFerieDialog(): boolean {
+        return this.jourFerieService.viewJourFerieDialog;
+    }
+
+    set viewJourFerieDialog(value: boolean) {
+        this.jourFerieService.viewJourFerieDialog = value;
+    }
+
+    get searchJourFerie(): JourFerieVo {
+        return this.jourFerieService.searchJourFerie;
+    }
+
+    set searchJourFerie(value: JourFerieVo) {
+        this.jourFerieService.searchJourFerie = value;
+    }
 
 }

@@ -596,7 +596,7 @@
                             <p-calendar dateFormat="{{dateFormat}}" [(ngModel)]="selectedOrdreKosc.dateRdv"
                                         [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscDateRendezVous}"
                                         [showSeconds]="false" [showTime]="true" [minDate]="minimumDate"
-                                        id="30"
+                                        id="30" [disabledDays]="[6,0]"
                                         placeholder="Date rdv">
 
                             </p-calendar><small *ngIf='!validOrdreKoscDateRendezVous' class='p-error'>Date rendez-vous
