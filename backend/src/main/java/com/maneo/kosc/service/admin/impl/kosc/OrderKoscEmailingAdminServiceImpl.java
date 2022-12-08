@@ -6,14 +6,12 @@ import com.maneo.kosc.dao.kosc.OrdreKoscDao;
 import com.maneo.kosc.security.dao.UserDao;
 import com.maneo.kosc.service.admin.facade.*;
 import com.maneo.kosc.service.admin.facade.kosc.OrderKoscEmailingAdminService;
-import com.maneo.kosc.service.util.DateUtil;
 
 
 import com.maneo.kosc.service.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 @Service
@@ -28,7 +26,7 @@ private UserDao userDao;
 
     @Override
     public void sendConfirmationEmailToClient(OrdreKosc ordreKosc) {
-        LocalDate todaysDate = LocalDate.now();
+        
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromConfirmationClient());
         emailDetails.setTo(ordreKosc.getToConfirmationClient());
@@ -37,7 +35,7 @@ private UserDao userDao;
         try {
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeConfirmationClient(true);
-            ordreKosc.setDateEnvoiConfirmationClient(DateUtil.toDate(todaysDate));
+            ordreKosc.setDateEnvoiConfirmationClient(new Date());
         } catch (Exception exception) {
           //  OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
             ordreKosc.setEnvoyeConfirmationClient(false);
@@ -52,7 +50,8 @@ private UserDao userDao;
 
     @Override
     public void sendMailPlanificationEmail(OrdreKosc ordreKosc) {
-        LocalDate todaysDate = LocalDate.now();
+        
+
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromPlanification());
         emailDetails.setTo(ordreKosc.getToPlanification());
@@ -61,7 +60,7 @@ private UserDao userDao;
         try {
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyePlanification(true);
-            ordreKosc.setDateEnvoiPlanification(new Date());
+            ordreKosc.setDateEnvoiPlanification( new Date());
 
         } catch (Exception exception) {
            // OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
@@ -69,6 +68,7 @@ private UserDao userDao;
             ordreKosc.setDateEnvoiPlanification(null);
             //ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
+        ordreKosc.setDateEnvoiPlanification( new Date());
         ordreKosc.setDatePriseRdv(new Date());
         saveAndInitDateDernierAppel(ordreKosc);
 
@@ -76,7 +76,7 @@ private UserDao userDao;
 
     @Override
     public void sendClientInjoignableEmailToClient(OrdreKosc ordreKosc) {
-        LocalDate todaysDate = LocalDate.now();
+        
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromClientInjoinable());
         emailDetails.setTo(ordreKosc.getToClientInjoinable());
@@ -86,7 +86,7 @@ private UserDao userDao;
 
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeClientInjoinable(true);
-            ordreKosc.setDateEnvoiClientInjoinable(DateUtil.toDate(todaysDate));
+            ordreKosc.setDateEnvoiClientInjoinable(new Date());
 
         } catch (Exception exception) {
            // OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
@@ -100,7 +100,7 @@ private UserDao userDao;
 
     @Override
     public void sendClientInjoignableEmailToKosc(OrdreKosc ordreKosc) {
-        LocalDate todaysDate = LocalDate.now();
+        
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromClientInjoinableKosc());
         emailDetails.setTo(ordreKosc.getToClientInjoinableKosc());
@@ -110,7 +110,7 @@ private UserDao userDao;
 
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeClientInjoinableKosc(true);
-            ordreKosc.setDateEnvoiClientInjoinableKosc(DateUtil.toDate(todaysDate));
+            ordreKosc.setDateEnvoiClientInjoinableKosc(new Date());
         } catch (Exception exception) {
             //OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
             ordreKosc.setEnvoyeClientInjoinableKosc(false);
@@ -123,7 +123,7 @@ private UserDao userDao;
 
     @Override
     public void sendRefusClientEmail(OrdreKosc ordreKosc) {
-        LocalDate todaysDate = LocalDate.now();
+        
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromRefus());
         emailDetails.setTo(ordreKosc.getToRefus());
@@ -133,7 +133,7 @@ private UserDao userDao;
 
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeRefus(true);
-            ordreKosc.setDateEnvoiRefus(DateUtil.toDate(todaysDate));
+            ordreKosc.setDateEnvoiRefus(new Date());
 
         } catch (Exception exception) {
            // OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
@@ -147,7 +147,7 @@ private UserDao userDao;
 
     @Override
     public void sendAutreEmail(OrdreKosc ordreKosc) {
-        LocalDate todaysDate = LocalDate.now();
+        
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromAutre());
         emailDetails.setTo(ordreKosc.getToAutre());
@@ -156,7 +156,7 @@ private UserDao userDao;
         try {
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeAutre(true);
-            ordreKosc.setDateEnvoiAutre(DateUtil.toDate(todaysDate));
+            ordreKosc.setDateEnvoiAutre(new Date());
 
         } catch (Exception exception) {
             //OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
@@ -170,7 +170,7 @@ private UserDao userDao;
 
     @Override
     public void sendMauvaisContactEmail(OrdreKosc ordreKosc) {
-        LocalDate todaysDate = LocalDate.now();
+        
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromMauvaisContact());
         emailDetails.setTo(ordreKosc.getToMauvaisContact());
@@ -179,7 +179,7 @@ private UserDao userDao;
         try {
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeMauvaisContact(true);
-            ordreKosc.setDateEnvoiMauvaisContact(DateUtil.toDate(todaysDate));
+            ordreKosc.setDateEnvoiMauvaisContact(new Date());
 
 
         } catch (Exception exception) {
@@ -197,7 +197,7 @@ private UserDao userDao;
 
     @Override
     public void sendMailReplanification(OrdreKosc ordreKosc) {
-        LocalDate todaysDate = LocalDate.now();
+        
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromReplanification());
         emailDetails.setTo(ordreKosc.getToReplanification());
@@ -206,7 +206,7 @@ private UserDao userDao;
         try {
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeReplanification(true);
-            ordreKosc.setDateEnvoiReplanification(DateUtil.toDate(todaysDate));
+            ordreKosc.setDateEnvoiReplanification(new Date());
 
         } catch (Exception exception) {
             //OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
@@ -219,7 +219,7 @@ private UserDao userDao;
 
     @Override
     public void sendMailReportDemandeManeoClientInjoignable(OrdreKosc ordreKosc) {
-        LocalDate todaysDate = LocalDate.now();
+        
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromReportDemandeManeoClientInjoignable());
         emailDetails.setTo(ordreKosc.getToReportDemandeManeoClientInjoignable());
@@ -229,7 +229,7 @@ private UserDao userDao;
 
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeReportDemandeManeoClientInjoignable(true);
-            ordreKosc.setDateEnvoiReportDemandeManeoClientInjoignable(DateUtil.toDate(todaysDate));
+            ordreKosc.setDateEnvoiReportDemandeManeoClientInjoignable(new Date());
 
         } catch (Exception exception) {
             //OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
@@ -244,7 +244,7 @@ private UserDao userDao;
 
     @Override
     public void sendMailReportDemandeManeoClientJoignableAccepte(OrdreKosc ordreKosc) {
-        LocalDate todaysDate = LocalDate.now();
+        
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromReportDemandeManeoClientJoignableAccepte());
         emailDetails.setTo(ordreKosc.getToReportDemandeManeoClientJoignableAccepte());
@@ -253,7 +253,7 @@ private UserDao userDao;
         try {
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeReportDemandeManeoClientJoignableAccepte(true);
-            ordreKosc.setDateEnvoiReportDemandeManeoClientJoignableAccepte(DateUtil.toDate(todaysDate));
+            ordreKosc.setDateEnvoiReportDemandeManeoClientJoignableAccepte(new Date());
 
         } catch (Exception exception) {
             //OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
@@ -267,7 +267,7 @@ private UserDao userDao;
 
     @Override
     public void sendMailReportDemandeManeoClientJoignableRefus(OrdreKosc ordreKosc) {
-        LocalDate todaysDate = LocalDate.now();
+        
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromReportDemandeManeoClientJoignableRefus());
         emailDetails.setTo(ordreKosc.getToReportDemandeManeoClientJoignableRefus());
@@ -277,7 +277,7 @@ private UserDao userDao;
 
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeReportDemandeManeoClientJoignableRefus(true);
-            ordreKosc.setDateEnvoiReportDemandeManeoClientJoignableRefus(DateUtil.toDate(todaysDate));
+            ordreKosc.setDateEnvoiReportDemandeManeoClientJoignableRefus(new Date());
 
         } catch (Exception exception) {
           //  OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
@@ -292,7 +292,7 @@ private UserDao userDao;
 
     @Override
     public void sendMailReportDemandeClientClientInjoignable(OrdreKosc ordreKosc) {
-        LocalDate todaysDate = LocalDate.now();
+        
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromReportDemandeClientClientInjoignable());
         emailDetails.setTo(ordreKosc.getToReportDemandeClientClientInjoignable());
@@ -302,7 +302,7 @@ private UserDao userDao;
 
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeReportDemandeClientClientInjoignable(true);
-            ordreKosc.setDateEnvoiReportDemandeClientClientInjoignable(DateUtil.toDate(todaysDate));
+            ordreKosc.setDateEnvoiReportDemandeClientClientInjoignable(new Date());
 
         } catch (Exception exception) {
            // OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
@@ -316,7 +316,7 @@ private UserDao userDao;
 
     @Override
     public void sendMailReportDemandeClientClientJoignable(OrdreKosc ordreKosc) {
-        LocalDate todaysDate = LocalDate.now();
+        
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromReportDemandeClientClientJoignable());
         emailDetails.setTo(ordreKosc.getToReportDemandeClientClientJoignable());
@@ -326,7 +326,7 @@ private UserDao userDao;
 
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeReportDemandeClientClientJoignable(true);
-            ordreKosc.setDateEnvoiReportDemandeClientClientJoignable(DateUtil.toDate(todaysDate));
+            ordreKosc.setDateEnvoiReportDemandeClientClientJoignable(new Date());
 
         } catch (Exception exception) {
             //OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
@@ -341,7 +341,6 @@ private UserDao userDao;
     @Override
     public void sendMailCri(OrdreKosc ordreKosc) {
 
-        LocalDate todaysDate = LocalDate.now();
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromCri());
         emailDetails.setTo(ordreKosc.getToCri());
@@ -351,7 +350,7 @@ private UserDao userDao;
 
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeCri(true);
-            ordreKosc.setDateEnvoiCri(DateUtil.toDate(todaysDate));
+            ordreKosc.setDateEnvoiCri(new Date());
 
         } catch (Exception exception) {
             //OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
