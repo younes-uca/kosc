@@ -253,8 +253,8 @@ INSERT INTO `jour_ferie` (`id`, `date_debut`, `date_fin`, `libelle`) VALUES
                                                                          (10032, '2022-08-15', '2022-08-15', 'Assomption'),
                                                                          (10033, '2022-11-01', '2022-11-01', 'Toussaint'),
                                                                          (10034, '2022-11-11', '2022-11-11', 'Armistice 1918'),
-                                                                         (10036, '2022-11-25', '2022-11-25', 'Noel '),
-                                                                         (10037, '2022-11-27', '2022-11-28', 'test');
+                                                                         (10036, '2022-12-25', '2022-12-25', 'Noel '),
+                                                                         (10037, '2022-12-22', '2022-12-28', 'test');
 
 --
 -- DÃ©chargement des donnÃ©es de la table `jour_ferie_seq`
