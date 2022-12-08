@@ -13,6 +13,8 @@ import {OperatorVo} from 'src/app/controller/model/Operator.model';
 import {OperatorService} from 'src/app/controller/service/Operator.service';
 import {DepartementVo} from 'src/app/controller/model/Departement.model';
 import {DepartementService} from 'src/app/controller/service/Departement.service';
+import {EtatDemandeKoscService} from "../../../../../../controller/service/EtatDemandeKosc.service";
+import {EtatDemandeKoscVo} from "../../../../../../controller/model/EtatDemandeKosc.model";
 
 @Component({
     selector: 'app-ordre-kosc-suivi-historique-edit-admin',
@@ -28,7 +30,7 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
         , private router: Router
                 // , private templateEmailClotureService: TemplateEmailClotureService
                 // , private templateEmailReportService: TemplateEmailReportService
-                // , private etatDemandeKoscService: EtatDemandeKoscService
+                 , private etatDemandeKoscService: EtatDemandeKoscService
                 // , private templateEmailClientInjoinableService: TemplateEmailClientInjoinableService
                 // , private technicienService: TechnicienService
                 // , private templateEmailReplanificationService: TemplateEmailReplanificationService
@@ -500,17 +502,19 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
     //     this.templateEmailClientInjoinableKoscService.createTemplateEmailClientInjoinableKoscDialog = value;
     // }
     //
-    // get selectedEtatDemandeKosc(): EtatDemandeKoscVo {
-    //     return this.etatDemandeKoscService.selectedEtatDemandeKosc;
-    // }
+     get selectedEtatDemandeKosc(): EtatDemandeKoscVo {
+        return this.etatDemandeKoscService.selectedEtatDemandeKosc;
+    }
     //
     // set selectedEtatDemandeKosc(value: EtatDemandeKoscVo) {
     //     this.etatDemandeKoscService.selectedEtatDemandeKosc = value;
     // }
     //
-    // get etatDemandeKoscs(): Array<EtatDemandeKoscVo> {
-    //     return this.etatDemandeKoscService.etatDemandeKoscs;
-    // }
+     get etatDemandeKoscs(): Array<EtatDemandeKoscVo> {
+         let etatDemandeKoscs = this.etatDemandeKoscService.etatDemandeKoscs;
+         etatDemandeKoscs = etatDemandeKoscs.filter(e => e.code=='ok' || e.code=='ko');
+         return etatDemandeKoscs;
+    }
     //
     // set etatDemandeKoscs(value: Array<EtatDemandeKoscVo>) {
     //     this.etatDemandeKoscService.etatDemandeKoscs = value;
@@ -635,8 +639,10 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
     public edit() {
         this.submitted = true;
         this.validateForm();
+        debugger
         if (this.errorMessages.length === 0) {
             this.editWithShowOption(false);
+            this.editOrdreKoscDialog = false;
         } else {
             this.messageService.add({
                 severity: 'error',
@@ -647,6 +653,7 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
     }
 
     public editWithShowOption(showList: boolean) {
+        debugger
         console.log(this.selectedOrdreKosc.datePriseRdv)
         this.ordreKoscService.edit().subscribe(ordreKosc => {
             console.log('date backend :' + ordreKosc.datePriseRdv)
@@ -654,7 +661,6 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
             this.ordreKoscs[myIndex] = ordreKosc;
             this.ordreKoscService.deleteIfEtatNotIn(this.searchOrdreKosc.etatDemandeKoscVos, this.ordreKoscs, ordreKosc);
             this.updateListe();
-            this.editOrdreKoscDialog = false;
             this.submitted = false;
             this.selectedOrdreKosc = new OrdreKoscVo();
 
