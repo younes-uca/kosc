@@ -60,14 +60,13 @@ export class DateUtils {
             return null;
         } else {
             const [day, month, year] = date.split('/');
-            console.log("day"+day);
-            console.log("month"+month);
-            console.log("year"+year);
+            console.log("day" + day);
+            console.log("month" + month);
+            console.log("year" + year);
 
             return new Date(+year, +month - 1, +day);
         }
     }
-
 
 
 }

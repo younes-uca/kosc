@@ -7,7 +7,21 @@
         <p-tabView [(activeIndex)]="indexEdit">
             <p-tabPanel header="Prise rendez-vous">
                 <div class="p-grid">
-
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="1">Reference</label>
+                        <input [(ngModel)]="selectedOrdreKosc.reference" class="p-mb-2 p-mr-2" id="1"
+                               pInputText
+                               placeholder="Reference" type="text"/>
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="2">Reference work order</label>
+                        <input [(ngModel)]="selectedOrdreKosc.referenceWorkOrder"
+                               class="p-mb-2 p-mr-2" id="2"
+                               pInputText placeholder="Reference work order"
+                               type="text"/>
+                        <small *ngIf='!validOrdreKoscReferenceWorkOrder' class='p-error'>ReferenceWorkOrder est
+                            obligatoire.</small>
+                    </div>
                     <div class="p-field p-col-12 p-md-3">
                         <label for="26">Date premier appel</label>
                         <p-calendar [(ngModel)]="selectedOrdreKosc.datePremierAppel" [showSeconds]="false"
@@ -81,29 +95,6 @@
                         </p-dropdown>
                     </div>
 
-                    <div class="p-field p-col-11 p-md-3">
-                        <label for="32">Departement</label>
-                        <p-dropdown [(ngModel)]="selectedOrdreKosc.departementVo" [filter]="true"
-                                    [options]="departements" [showClear]="true" filterMatchMode="contains"
-                                    id="32"
-                                    optionLabel="libelle"
-                                    placeholder="Departement">
-                        </p-dropdown>
-
-                    </div>
-
-
-                    <div class="p-field p-col-11 p-md-3">
-                        <label for="33">Technicien</label>
-                        <p-dropdown [(ngModel)]="selectedOrdreKosc.technicienVo" [filter]="true"
-                                    (onClick)="findAppropriateTechnicien(selectedOrdreKosc.dateRdv,selectedOrdreKosc.departementVo?.code)"
-                                    [options]="appropriateTechniciens" [showClear]="true" filterMatchMode="contains"
-                                    id="33"
-                                    optionLabel="identifiant"
-                                    placeholder="Technicien">
-                        </p-dropdown>
-
-                    </div>
 
 
                     <div class="p-field p-col-12 p-md-6">
@@ -600,19 +591,44 @@
                              </p-calendar>
 
                          </div>-->
-                            <div class="p-field p-col-12 p-md-4">
-                                <label for="30">Date rendez-vous<span style="color: red;">*</span></label>
-                                <p-calendar dateFormat="{{dateFormat}}" [(ngModel)]="selectedOrdreKosc.dateRdv"
-                                            [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscDateRendezVous}"
-                                            [showSeconds]="false" [showTime]="true" [minDate]="minimumDate"
-                                            id="30"
-                                            placeholder="Date rdv">
+                        <div class="p-field p-col-12 p-md-4">
+                            <label for="30">Date rendez-vous<span style="color: red;">*</span></label>
+                            <p-calendar dateFormat="{{dateFormat}}" [(ngModel)]="selectedOrdreKosc.dateRdv"
+                                        [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscDateRendezVous}"
+                                        [showSeconds]="false" [showTime]="true" [minDate]="minimumDate"
+                                        id="30" [disabledDays]="[6,0]"
+                                        placeholder="Date rdv">
 
-                                </p-calendar><small *ngIf='!validOrdreKoscDateRendezVous' class='p-error'>Date rendez-vous
-                                est obligatoire.</small>
+                            </p-calendar><small *ngIf='!validOrdreKoscDateRendezVous' class='p-error'>Date rendez-vous
+                            est obligatoire.</small>
 
 
-                            </div>
+                        </div>
+                        <div class="p-field p-col-11 p-md-4">
+                            <label for="32">Departement</label>
+                            <p-dropdown [(ngModel)]="selectedOrdreKosc.departementVo" [filter]="true"
+                                        [options]="departements" [showClear]="true" filterMatchMode="contains"
+                                        id="32"
+                                        optionLabel="libelle"
+                                        placeholder="Departement">
+                            </p-dropdown>
+
+                        </div>
+
+
+                        <div class="p-field p-col-11 p-md-4">
+                            <label for="33">Technicien</label>
+                            <p-dropdown [(ngModel)]="selectedOrdreKosc.technicienVo" [filter]="true"
+                                        (onClick)="findAppropriateTechnicien(selectedOrdreKosc.dateRdv,selectedOrdreKosc.departementVo?.code)"
+                                        [options]="appropriateTechniciens" [showClear]="true" filterMatchMode="contains"
+                                        id="33"
+                                        optionLabel="identifiant"
+                                        placeholder="Technicien">
+                            </p-dropdown>
+
+                        </div>
+
+
                             <div class="p-field p-col-12 p-md-4">
                                 <label for="123">DE<span style="color: red;">*</span></label>
                                 <input [(ngModel)]="selectedOrdreKosc.fromPlanification"
@@ -649,7 +665,7 @@
 
                             </div>
 
-                            <div class="p-field p-col-12 p-md-8">
+                            <div class="p-field p-col-12 p-md-12">
                                 <label for="128">Corps<span style="color: red;">*</span></label>
                                 <textarea [(ngModel)]="selectedOrdreKosc.corpsPlanification" cols="30" id="128"
                                           [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscCorpsPlanification}"

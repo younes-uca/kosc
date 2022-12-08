@@ -834,6 +834,8 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
             this.blocked = true;
 
             this.ordreKoscService.sendMailCri().subscribe(data => {
+                    this.deleteFromList(this.selectedOrdreKosc);
+
                     if (data.envoyeCri == true) {
 
                         this.messageService.add({
@@ -968,5 +970,9 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
 
     }
 
+    private deleteFromList(selectedOrdreKosc: OrdreKoscVo) {
+        const position = this.ordreKoscs.indexOf(selectedOrdreKosc);
+        position > -1 ? this.ordreKoscs.splice(position, 1) : false;
+    }
 
 }
