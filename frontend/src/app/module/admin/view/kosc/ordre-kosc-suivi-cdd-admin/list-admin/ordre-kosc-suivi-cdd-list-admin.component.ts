@@ -201,6 +201,7 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
         ];
         this.home = {icon: 'pi pi-home', routerLink: '/'};
 
+
         this.loadEtatDemandeKoscIncluding(['ok', 'ko']);
         //this.setCriMinAndMax();
         this.initExport();

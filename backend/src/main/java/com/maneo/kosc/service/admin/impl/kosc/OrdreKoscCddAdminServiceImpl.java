@@ -68,7 +68,7 @@ public class OrdreKoscCddAdminServiceImpl implements OrdreKoscCddAdminService {
             }
 
         //query += " AND o.codeDecharge is NULL";
-       // query += SearchUtil.addConstraintMinMaxDate("o", "dateRdv", null,new Date() ); khaoula
+        query += SearchUtil.addConstraintMinMaxDate("o", "dateRdv", ordreKoscVo.getDateRdvMin(),ordreKoscVo.getDateRdvMax());
         query += " ORDER BY o.dateRdv DESC, o.submissionDate ASC";
 
 

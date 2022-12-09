@@ -207,10 +207,15 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
             {label: 'Suivi Historique', routerLink: '/app/admin/kosc/ordre-kosc-suivi-historique/list'},
 
         ];
+        // this.searchOrdreKosc.dateRdvMin = this.datePipe.transform(new Date(), "dd-MM-yy");
+        moment(this.searchOrdreKosc.dateRdvMin,"dd-MM-yy");
+        console.log( moment(this.searchOrdreKosc.dateRdvMin,"dd-MM-yy"));
+        // console.log(this.datePipe.transform(new Date(), this.dateFormat));
         this.home = {icon: 'pi pi-home', routerLink: '/'};
         this.defaultTemplateConfigurationService.findDefaultTemplateConfiguration().subscribe((data) =>
             this.selectedDefaultTemplateConfiguration = data,
         );
+        this.searchOrdreKosc.dateRdvMin = new Date().toDateString();
 
         this.loadEtatDemandeKoscIncluding(['planification']);
         this.setDateEnvoiMinAndMax();
@@ -714,6 +719,8 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
             'Referen dossier': this.searchOrdreKosc.referenDossier ? this.searchOrdreKosc.referenDossier : environment.emptyForExport,
             'Submission date Min': this.searchOrdreKosc.submissionDateMin ? this.datePipe.transform(this.searchOrdreKosc.submissionDateMin, this.dateFormat) : environment.emptyForExport,
             'Submission date Max': this.searchOrdreKosc.submissionDateMax ? this.datePipe.transform(this.searchOrdreKosc.submissionDateMax, this.dateFormat) : environment.emptyForExport,
+            'Date rdv Min': this.searchOrdreKosc.dateRdvMin ? this.datePipe.transform(this.searchOrdreKosc.dateRdvMin, this.dateFormat) : environment.emptyForExport,
+            'Date rdv Max': this.searchOrdreKosc.dateRdvMax ? this.datePipe.transform(this.searchOrdreKosc.dateRdvMax, this.dateFormat) : environment.emptyForExport,
             'Date premier appel Min': this.searchOrdreKosc.datePremierAppelMin ? this.datePipe.transform(this.searchOrdreKosc.datePremierAppelMin, this.dateFormat) : environment.emptyForExport,
             'Date premier appel Max': this.searchOrdreKosc.datePremierAppelMax ? this.datePipe.transform(this.searchOrdreKosc.datePremierAppelMax, this.dateFormat) : environment.emptyForExport,
             'Date deuxieme appel Min': this.searchOrdreKosc.dateDeuxiemeAppelMin ? this.datePipe.transform(this.searchOrdreKosc.dateDeuxiemeAppelMin, this.dateFormat) : environment.emptyForExport,
@@ -722,8 +729,6 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
             'Date troisieme appel Max': this.searchOrdreKosc.dateTroisiemeAppelMax ? this.datePipe.transform(this.searchOrdreKosc.dateTroisiemeAppelMax, this.dateFormat) : environment.emptyForExport,
             'Date prise rdv Min': this.searchOrdreKosc.datePriseRdvMin ? this.datePipe.transform(this.searchOrdreKosc.datePriseRdvMin, this.dateFormat) : environment.emptyForExport,
             'Date prise rdv Max': this.searchOrdreKosc.datePriseRdvMax ? this.datePipe.transform(this.searchOrdreKosc.datePriseRdvMax, this.dateFormat) : environment.emptyForExport,
-            'Date rdv Min': this.searchOrdreKosc.dateRdvMin ? this.datePipe.transform(this.searchOrdreKosc.dateRdvMin, this.dateFormat) : environment.emptyForExport,
-            'Date rdv Max': this.searchOrdreKosc.dateRdvMax ? this.datePipe.transform(this.searchOrdreKosc.dateRdvMax, this.dateFormat) : environment.emptyForExport,
             'Date appel replanification Min': this.searchOrdreKosc.dateAppelReplanificationMin ? this.datePipe.transform(this.searchOrdreKosc.dateAppelReplanificationMin, this.dateFormat) : environment.emptyForExport,
             'Date appel replanification Max': this.searchOrdreKosc.dateAppelReplanificationMax ? this.datePipe.transform(this.searchOrdreKosc.dateAppelReplanificationMax, this.dateFormat) : environment.emptyForExport,
             // 'Date intervention technique Min': this.searchOrdreKosc.dateInterventionTechniqueMin ? this.datePipe.transform(this.searchOrdreKosc.dateInterventionTechniqueMin , this.dateFormat) : environment.emptyForExport ,
