@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import java.util.Date;
 import java.util.List;
 
 //import static jdk.internal.org.jline.utils.Colors.s;
@@ -61,10 +62,9 @@ public class OrdreKoscCddAdminServiceImpl implements OrdreKoscCddAdminService {
                     query+= " AND o.etatDemandeKosc.id IN ("+convertId(ordreKoscVo.getEtatDemandeKoscVos())+")";
             }
 
-
-        query += " AND o.codeDecharge is NULL";
-
-        query += " ORDER BY o.nbrHeureDateSubmissionAndNow DESC, o.submissionDate ASC";
+        //query += " AND o.codeDecharge is NULL";
+        query += SearchUtil.addConstraintMinMaxDate("o", "dateRdv", new Date(),null );
+        query += " ORDER BY o.dateRdv DESC, o.submissionDate ASC";
 
 
         List<OrdreKosc> resultList = entityManager.createQuery(query).getResultList();

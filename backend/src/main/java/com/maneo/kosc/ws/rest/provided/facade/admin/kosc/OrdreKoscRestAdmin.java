@@ -143,6 +143,13 @@ public class OrdreKoscRestAdmin {
         OrdreKoscVo ordreKoscVo1 = ordreKoscConverter.toVo(ordreKoscSuiviRdvService.updateEtat(ordreKosc));
         return ordreKoscVo1;
     }
+    @ApiOperation("Update etat to ko or ok")
+    @PutMapping("/edit-pas-pncore/")
+    public OrdreKoscVo editPasEncore(@RequestBody OrdreKoscVo ordreKoscVo) {
+        OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
+        OrdreKoscVo ordreKoscVo1 = ordreKoscConverter.toVo(ordreKoscPriseRdvService.editPasEncore(ordreKosc));
+        return ordreKoscVo1;
+    }
 
     @ApiOperation("Updates the specified  ordreKosc")
     @PutMapping("/")

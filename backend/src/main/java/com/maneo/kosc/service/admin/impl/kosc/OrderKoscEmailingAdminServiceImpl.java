@@ -379,13 +379,16 @@ private UserDao userDao;
 
     private void saveAndInitDateDernierAppel(OrdreKosc ordreKosc) {
         ordreKosc.setDateEnvoiCri(null);
-        if (ordreKosc.getDateTroisiemeAppel() != null) {
+        if (ordreKosc.getDateTroisiemeAppel() == null && ordreKosc.getDateDeuxiemeAppel() != null) {
+           ordreKosc.setDateTroisiemeAppel(new Date());
             ordreKosc.setDateDernierAppel(ordreKosc.getDateTroisiemeAppel());
             ordreKosc.setNumeroDernierAppel(3L);
-        } else if (ordreKosc.getDateDeuxiemeAppel() != null) {
+        } else if (ordreKosc.getDatePremierAppel() != null && ordreKosc.getDateDeuxiemeAppel() == null) {
+            ordreKosc.setDateDeuxiemeAppel(new Date());
             ordreKosc.setDateDernierAppel(ordreKosc.getDateDeuxiemeAppel());
             ordreKosc.setNumeroDernierAppel(2L);
-        } else if (ordreKosc.getDatePremierAppel() != null) {
+        } else if (ordreKosc.getDatePremierAppel() == null) {
+            ordreKosc.setDatePremierAppel(new Date());
             ordreKosc.setDateDernierAppel(ordreKosc.getDatePremierAppel());
             ordreKosc.setNumeroDernierAppel(1L);
         }
