@@ -207,10 +207,8 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
             {label: 'Suivi Historique', routerLink: '/app/admin/kosc/ordre-kosc-suivi-historique/list'},
 
         ];
-        // this.searchOrdreKosc.dateRdvMin = this.datePipe.transform(new Date(), "dd-MM-yy");
-        moment(this.searchOrdreKosc.dateRdvMin,"dd-MM-yy");
-        console.log( moment(this.searchOrdreKosc.dateRdvMin,"dd-MM-yy"));
-        // console.log(this.datePipe.transform(new Date(), this.dateFormat));
+
+
         this.home = {icon: 'pi pi-home', routerLink: '/'};
         this.defaultTemplateConfigurationService.findDefaultTemplateConfiguration().subscribe((data) =>
             this.selectedDefaultTemplateConfiguration = data,
