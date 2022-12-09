@@ -93,6 +93,7 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
         , private templateSuiviService: TemplateSuiviService
     ) {
     }
+    // methods
 
     public async loadEtatDemandeKoscExcept(etatNonDesire : Array<String>) {
         await this.roleService.findAll();
@@ -100,7 +101,6 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
         isPermistted ? this.etatDemandeKoscService.findAll().subscribe(etatDemandeKoscs =>{
                 this.etatDemandeKoscs = etatDemandeKoscs;
                 this.searchOrdreKosc.etatDemandeKoscVos = this.etatDemandeKoscs.filter(e => etatNonDesire.indexOf(e.code) == -1);
-                // console.log( this.searchOrdreKosc.etatDemandeKoscVos);
             }, error => console.log(error))
             : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
 
@@ -111,7 +111,7 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
         this.ordreKoscService.findByCriteriaSuiviCdd(this.searchOrdreKosc).subscribe(ordreKoscs => {
             this.ordreKoscs = ordreKoscs;
             console.log(ordreKoscs);
-            // this.searchOrdreKosc = new OrdreKoscVo();
+            this.searchOrdreKosc = new OrdreKoscVo();
         }, error => console.log(error));
     }
 
@@ -121,73 +121,11 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
         isPermistted ? this.etatDemandeKoscService.findAll().subscribe(etatDemandeKoscs =>{
                 this.etatDemandeKoscs = etatDemandeKoscs;
                 this.searchOrdreKosc.etatDemandeKoscVos = this.etatDemandeKoscs.filter(e => etatNonDesire.indexOf(e.code) != -1);
-                console.log( this.searchOrdreKosc.etatDemandeKoscVos);
-                // console.log( this.searchOrdreKosc.etatDemandeKoscVos);
             }, error => console.log(error))
             : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
 
     }
 
-
-    get ordreKoscs(): Array<OrdreKoscVo> {
-        return this.ordreKoscService.ordreKoscsSuiviCdd;
-    }
-
-    set ordreKoscs(value: Array<OrdreKoscVo>) {
-        this.ordreKoscService.ordreKoscsSuiviCdd = value;
-    }
-
-    get ordreKoscSelections(): Array<OrdreKoscVo> {
-        return this.ordreKoscService.ordreKoscSelections;
-    }
-
-    set ordreKoscSelections(value: Array<OrdreKoscVo>) {
-        this.ordreKoscService.ordreKoscSelections = value;
-    }
-
-    get selectedOrdreKosc(): OrdreKoscVo {
-        return this.ordreKoscService.selectedOrdreKosc;
-    }
-
-    set selectedOrdreKosc(value: OrdreKoscVo) {
-        this.ordreKoscService.selectedOrdreKosc = value;
-    }
-
-    get createOrdreKoscDialog(): boolean {
-        return this.ordreKoscService.createOrdreKoscDialog;
-    }
-
-    set createOrdreKoscDialog(value: boolean) {
-        this.ordreKoscService.createOrdreKoscDialog = value;
-    }
-
-    get editOrdreKoscDialog(): boolean {
-        return this.ordreKoscService.editOrdreKoscDialog;
-    }
-
-    set editOrdreKoscDialog(value: boolean) {
-        this.ordreKoscService.editOrdreKoscDialog = value;
-    }
-
-    get viewOrdreKoscDialog(): boolean {
-        return this.ordreKoscService.viewOrdreKoscDialog;
-    }
-
-    set viewOrdreKoscDialog(value: boolean) {
-        this.ordreKoscService.viewOrdreKoscDialog = value;
-    }
-
-    get searchOrdreKosc(): OrdreKoscVo {
-        return this.ordreKoscService.searchOrdreKoscSuiviCdd;
-    }
-
-    set searchOrdreKosc(value: OrdreKoscVo) {
-        this.ordreKoscService.searchOrdreKoscSuiviCdd = value;
-    }
-
-    get dateFormat() {
-        return environment.dateFormatList;
-    }
 
     ngAfterViewInit(): void {
         this.searchRequestSuiviCdd();
@@ -261,7 +199,6 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
         }];
     }
 
-    // methods
     erdvAndConfort(ordreKoscVo : OrdreKoscVo){
         if( ordreKoscVo.erdv == true && ordreKoscVo.confort)
             return true
@@ -403,7 +340,6 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
 
     }
 
-    // getters and setters
 
     public async loadDepartement() {
         await this.roleService.findAll();
@@ -640,10 +576,6 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
                 'Date intervention technique fin': this.datePipe.transform(e.dateInterventionTechniqueFin, 'dd/MM/yyyy hh:mm'),
                 'Template email client injoinable': e.templateEmailClientInjoinableVo?.libelle,
                 'Template email kosc': e.templateEmailClientInjoinableKoscVo?.libelle,
-                // 'Objet kosc': e.objetKosc ,
-                // 'Corps kosc': e.corpsKosc ,
-                // 'Envoye kosc': e.envoyeKosc? 'Vrai' : 'Faux' ,
-                // 'Date envoi kosc': this.datePipe.transform(e.dateEnvoiKosc , 'dd/MM/yyyy hh:mm'),
                 'Template email planification': e.templateEmailPlanificationVo?.libelle,
                 'Objet planification': e.objetPlanification,
                 'Corps planification': e.corpsPlanification,
@@ -802,17 +734,7 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
             'Date intervention technique fin Min': this.searchOrdreKosc.dateInterventionTechniqueFinMin ? this.datePipe.transform(this.searchOrdreKosc.dateInterventionTechniqueFinMin, this.dateFormat) : environment.emptyForExport,
             'Date intervention technique fin Max': this.searchOrdreKosc.dateInterventionTechniqueFinMax ? this.datePipe.transform(this.searchOrdreKosc.dateInterventionTechniqueFinMax, this.dateFormat) : environment.emptyForExport,
             'Template email client injoinable': this.searchOrdreKosc.templateEmailClientInjoinableVo?.libelle ? this.searchOrdreKosc.templateEmailClientInjoinableVo?.libelle : environment.emptyForExport,
-            // 'Objet client': this.searchOrdreKosc.objetClient ? this.searchOrdreKosc.objetClient : environment.emptyForExport ,
-            // 'Corps client': this.searchOrdreKosc.corpsClient ? this.searchOrdreKosc.corpsClient : environment.emptyForExport ,
-            // 'Envoye client': this.searchOrdreKosc.envoyeClient ? (this.searchOrdreKosc.envoyeClient ? environment.trueValue : environment.falseValue) : environment.emptyForExport ,
-            // 'Date envoi client Min': this.searchOrdreKosc.dateEnvoiClientMin ? this.datePipe.transform(this.searchOrdreKosc.dateEnvoiClientMin , this.dateFormat) : environment.emptyForExport ,
-            // 'Date envoi client Max': this.searchOrdreKosc.dateEnvoiClientMax ? this.datePipe.transform(this.searchOrdreKosc.dateEnvoiClientMax , this.dateFormat) : environment.emptyForExport ,
             'Template email kosc': this.searchOrdreKosc.templateEmailClientInjoinableKoscVo?.libelle ? this.searchOrdreKosc.templateEmailClientInjoinableKoscVo?.libelle : environment.emptyForExport,
-            // 'Objet kosc': this.searchOrdreKosc.objetKosc ? this.searchOrdreKosc.objetKosc : environment.emptyForExport ,
-            // 'Corps kosc': this.searchOrdreKosc.corpsKosc ? this.searchOrdreKosc.corpsKosc : environment.emptyForExport ,
-            // 'Envoye kosc': this.searchOrdreKosc.envoyeKosc ? (this.searchOrdreKosc.envoyeKosc ? environment.trueValue : environment.falseValue) : environment.emptyForExport ,
-            // 'Date envoi kosc Min': this.searchOrdreKosc.dateEnvoiKoscMin ? this.datePipe.transform(this.searchOrdreKosc.dateEnvoiKoscMin , this.dateFormat) : environment.emptyForExport ,
-            // 'Date envoi kosc Max': this.searchOrdreKosc.dateEnvoiKoscMax ? this.datePipe.transform(this.searchOrdreKosc.dateEnvoiKoscMax , this.dateFormat) : environment.emptyForExport ,
             'Template email planification': this.searchOrdreKosc.templateEmailPlanificationVo?.libelle ? this.searchOrdreKosc.templateEmailPlanificationVo?.libelle : environment.emptyForExport,
             'Objet planification': this.searchOrdreKosc.objetPlanification ? this.searchOrdreKosc.objetPlanification : environment.emptyForExport,
             'Corps planification': this.searchOrdreKosc.corpsPlanification ? this.searchOrdreKosc.corpsPlanification : environment.emptyForExport,
@@ -1023,4 +945,66 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
         this.searchOrdreKosc.dateEnvoiCriMin = today.toLocaleDateString();
         this.searchOrdreKosc.dateEnvoiCriMax = today.toLocaleDateString();
     }
+    // getters and setters
+
+    get ordreKoscs(): Array<OrdreKoscVo> {
+        return this.ordreKoscService.ordreKoscsSuiviCdd;
+    }
+
+    set ordreKoscs(value: Array<OrdreKoscVo>) {
+        this.ordreKoscService.ordreKoscsSuiviCdd = value;
+    }
+
+    get ordreKoscSelections(): Array<OrdreKoscVo> {
+        return this.ordreKoscService.ordreKoscSelections;
+    }
+
+    set ordreKoscSelections(value: Array<OrdreKoscVo>) {
+        this.ordreKoscService.ordreKoscSelections = value;
+    }
+
+    get selectedOrdreKosc(): OrdreKoscVo {
+        return this.ordreKoscService.selectedOrdreKosc;
+    }
+
+    set selectedOrdreKosc(value: OrdreKoscVo) {
+        this.ordreKoscService.selectedOrdreKosc = value;
+    }
+
+    get createOrdreKoscDialog(): boolean {
+        return this.ordreKoscService.createOrdreKoscDialog;
+    }
+
+    set createOrdreKoscDialog(value: boolean) {
+        this.ordreKoscService.createOrdreKoscDialog = value;
+    }
+
+    get editOrdreKoscDialog(): boolean {
+        return this.ordreKoscService.editOrdreKoscDialog;
+    }
+
+    set editOrdreKoscDialog(value: boolean) {
+        this.ordreKoscService.editOrdreKoscDialog = value;
+    }
+
+    get viewOrdreKoscDialog(): boolean {
+        return this.ordreKoscService.viewOrdreKoscDialog;
+    }
+
+    set viewOrdreKoscDialog(value: boolean) {
+        this.ordreKoscService.viewOrdreKoscDialog = value;
+    }
+
+    get searchOrdreKosc(): OrdreKoscVo {
+        return this.ordreKoscService.searchOrdreKoscSuiviCdd;
+    }
+
+    set searchOrdreKosc(value: OrdreKoscVo) {
+        this.ordreKoscService.searchOrdreKoscSuiviCdd = value;
+    }
+
+    get dateFormat() {
+        return environment.dateFormatList;
+    }
+
 }
