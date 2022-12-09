@@ -300,7 +300,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
                 this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
                 this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
                 this.selectedOrdreKosc.dateOuverture = DateUtils.toDate(ordreKosc.dateOuverture);
-                console.log('haaa dateEnvoiCri ==> ' + ordreKosc.dateEnvoiCri);
+                // console.log('haaa dateEnvoiCri ==> ' + ordreKosc.dateEnvoiCri);
                 this.selectedOrdreKosc.dateEnvoiCri = DateUtils.toDate(ordreKosc.dateEnvoiCri);
                 this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
                 this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
@@ -314,6 +314,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
                 this.selectedOrdreKosc.toCri = this.selectedDefaultTemplateConfiguration.emailKosc;
                 this.selectedOrdreKosc.objetCri = eval(this.selectedDefaultTemplateConfiguration?.templateEmailCriVo?.objet);
                 this.selectedOrdreKosc.corpsCri = eval(this.selectedDefaultTemplateConfiguration?.templateEmailCriVo?.corps);
+                console.log()
                 
             });
         } else {

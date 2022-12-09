@@ -44,8 +44,6 @@ public interface OrdreKoscAdminService extends AbstractService<OrdreKosc, Long, 
 
     List<OrdreKosc> findSuivi();
 
-    List<OrdreKosc> genererCodeDecharge(List<OrdreKosc> ordreKoscs);
-
 
     List<StatisticVo> findOrdreKoscByDelaiPriseRdvParHeureAndSubmissionDateLessThanDay(Date submissionDateMin, Date submissionDateMax);
 

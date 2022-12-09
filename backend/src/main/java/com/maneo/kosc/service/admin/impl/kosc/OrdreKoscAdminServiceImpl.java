@@ -126,28 +126,6 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
     }
 
     @Override
-    public List<OrdreKosc> genererCodeDecharge(List<OrdreKosc> ordreKoscs) {
-        LocalDate todaysDate = LocalDate.now();
-        if (ordreKoscs != null) {
-            for (OrdreKosc ordreKosc : ordreKoscs) {
-                if (ordreKosc.getEtatDemandeKosc() != null ) {
-                    if(Objects.equals(ordreKosc.getEtatDemandeKosc().getCode(), "ko") && ordreKosc.getDateEnvoiCri() == null){
-                        ordreKosc.setDateEnvoiCri(DateUtil.toDate(todaysDate));
-                    }
-                    else if(Objects.equals(ordreKosc.getEtatDemandeKosc().getCode(), "ok") && ordreKosc.getCodeDecharge() == null){
-                    ordreKosc.setCodeDecharge("D"+DateUtil.formateDate("yyMMdd",DateUtil.toDate(todaysDate)) + "-MN" + ordreKosc.getId());
-                    ordreKosc.setDateEnvoiCri(DateUtil.toDate(todaysDate));
-                    }
-                    update(ordreKosc);
-                }
-            }
-            update(ordreKoscs);
-        }
-
-        return ordreKoscs;
-    }
-
-    @Override
     public List<StatisticVo> findOrdreKoscByDelaiPriseRdvParHeureAndSubmissionDateLessThanDay(Date submissionDateMin, Date submissionDateMax) {
         String query = "SELECT NEW com.maneo.kosc.ws.rest.provided.vo.StatisticVo(COUNT(k.id),1, k.submissionDate)  FROM OrdreKosc k WHERE 1=1 ";
         query += "   AND k.delaiPriseRdvParHeure < 24";

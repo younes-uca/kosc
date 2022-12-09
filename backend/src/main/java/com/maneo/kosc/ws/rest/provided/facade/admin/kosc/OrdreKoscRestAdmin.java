@@ -132,7 +132,7 @@ public class OrdreKoscRestAdmin {
     @PutMapping("/generate/")
     public List<OrdreKoscVo> genererCodeDecharge(@RequestBody List<OrdreKoscVo> ordreKoscVos) {
         List<OrdreKosc> ordreKoscs = ordreKoscConverter.toItem(ordreKoscVos);
-        ordreKoscService.genererCodeDecharge(ordreKoscs);
+        ordreKoscCddAdminService.genererCodeDecharge(ordreKoscs);
         List<OrdreKoscVo> ordreKoscVos1 = ordreKoscConverter.toVo(ordreKoscs);
         return ordreKoscVos1;
     }
