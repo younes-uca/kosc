@@ -75,7 +75,7 @@ INSERT INTO `chercheur` (`id`, `account_non_expired`, `account_non_locked`, `cre
 --
 
 INSERT INTO `default_template_configuration` (`id`, `email_kosc`, `email_maneo`, `enabled`, `template_email_client_injoinable`, `template_email_client_injoinable_kosc`, `template_email_cloture`, `template_email_confirmation_client`, `template_email_cri`, `template_email_ftl`, `template_email_mauvais_contact`, `template_email_planification`, `template_email_refus`, `template_email_replanification`, `template_suivi`, `template_email_report_demande_client_client_injoignable`, `template_email_report_demande_client_client_joignable`, `template_email_report_demande_maneo_client_injoignable`, `template_email_report_demande_maneo_client_joignable_accepte`, `template_email_report_demande_maneo_client_joignable_refus`) VALUES
-    (10000, 'kosc@gmail.com', 'maneo.ingenierie@gmail.com', 0, 10000, 10000, NULL, 10000, NULL, NULL, 10000, 10000, 10000, 10000, NULL, 10000, 10000, 10000, 10000, 10000);
+    (10000, 'kosc@gmail.com', 'maneo.ingenierie@gmail.com', 0, 10000, 10000, NULL, 10000, 10000, NULL, 10000, 10000, 10000, 10000, NULL, 10000, 10000, 10000, 10000, 10000);
 
 --
 -- DÃ©chargement des donnÃ©es de la table `default_template_configuration_seq`
@@ -242,7 +242,7 @@ INSERT INTO `hibernate_sequence` (`next_val`) VALUES
 
 INSERT INTO `jour_ferie` (`id`, `date_debut`, `date_fin`, `libelle`) VALUES
                                                                          (10003, '2022-11-01', '2022-11-01', 'Jour de l\'an'),
-(10009, '2022-04-17', '2022-04-17', 'Dimanche de P?ques'),
+(10009, '2022-04-17', '2022-04-17', 'Dimanche de Paques'),
 (10019, '2022-04-18', '2022-04-18', 'Lundi de Paques'),
 (10023, '2022-05-01', '2022-05-01', 'Fete du travail'),
 (10024, '2022-05-08', '2022-05-08', 'Victoire 1945'),
@@ -756,14 +756,14 @@ INSERT INTO `technicien` (`id`, `account_non_expired`, `account_non_locked`, `cr
 --
 
 INSERT INTO `template_email_client_injoinable` (`id`, `corps`, `libelle`, `objet`) VALUES
-    (10000, '`Bonjour,\\n\\nNous avons tentÃ© de vous joindre Ã  plusieurs reprises mais sans succÃ¨s au numÃ©ro : \'${this.selectedOrdreKosc.endCustumorContactPhone}\'/\'${this.selectedOrdreKosc.endCustumorContactCellPhone}\'\\n\\nMerci de revenir vers nous par mail et de nous recontacter au  ${this.authService.authenticatedUser?.telephone}  pour planifier un rendez-vous.\\n\\nBien Cordialement\\n${this.authService.authenticatedUser?.nom}\\nc.a@maneoreseaux.com\\n${this.authService.authenticatedUser?.telephone}`', 'CLIENT INJOIGNABLE', '`[CLIENT INJOIGNABLE]${this.selectedOrdreKosc.reference}_${this.selectedOrdreKosc.referenceWorkOrder}_${this.selectedOrdreKosc.endCustumorLastName}&${this.selectedOrdreKosc.endCustumorFirstName}`');
+    (10000, '`Bonjour,\\n\\nNous avons tenté de vous joindre à plusieurs reprises mais sans succès au numéro : \'${this.selectedOrdreKosc.endCustumorContactPhone}\'/\'${this.selectedOrdreKosc.endCustumorContactCellPhone}\'\\n\\nMerci de revenir vers nous par mail et de nous recontacter au  ${this.authService.authenticatedUser?.telephone}  pour planifier un rendez-vous.\\n\\nBien Cordialement\\n${this.authService.authenticatedUser?.nom}\\nc.a@maneoreseaux.com\\n${this.authService.authenticatedUser?.telephone}`', 'CLIENT INJOIGNABLE', '`[CLIENT INJOIGNABLE]${this.selectedOrdreKosc.reference}_${this.selectedOrdreKosc.referenceWorkOrder}_${this.selectedOrdreKosc.endCustumorLastName}&${this.selectedOrdreKosc.endCustumorFirstName}`');
 
 --
 -- DÃ©chargement des donnÃ©es de la table `template_email_client_injoinable_kosc`
 --
 
 INSERT INTO `template_email_client_injoinable_kosc` (`id`, `corps`, `libelle`, `objet`) VALUES
-    (10000, '`Bonjour,\\n\\nVotre client final n\'est pas joignable, nous avons tentÃ© de le joindre Ã  plusieurs reprises mais sans succÃ¨s au numÃ©ro :  \'${this.selectedOrdreKosc.endCustumorContactPhone}\'/\'${this.selectedOrdreKosc.endCustumorContactCellPhone}\'\\n\\nUn mail a Ã©tÃ© envoyÃ© en parallÃ¨le, sans retour de leur part, merci de faire le point avec votre client opÃ©rateur et revenir vers nous avec de nouvelle coordonnÃ©e pour planifier un rendez-vous.\\n\\nBien Cordialement\\n${this.authService.authenticatedUser?.nom}\\nc.a@maneoreseaux.com\\n${this.authService.authenticatedUser?.telephone}}`', 'CLIENT INJOIGNABLE KOSC', '`[CLIENT INJOIGNABLE]${this.selectedOrdreKosc.reference}_${this.selectedOrdreKosc.referenceWorkOrder}_${this.selectedOrdreKosc.endCustumorLastName} ${this.selectedOrdreKosc.endCustumorFirstName}`');
+    (10000, '`Bonjour,\\n\\nVotre client final n\'est pas joignable, nous avons tentÃ© de le joindre Ã  plusieurs reprises mais sans succÃ¨s au numÃ©ro :  \'${this.selectedOrdreKosc.endCustumorContactPhone}\'/\'${this.selectedOrdreKosc.endCustumorContactCellPhone}\'\\n\\nUn mail a été envoyé en parallèle, sans retour de leur part, merci de faire le point avec votre client opérateur et revenir vers nous avec de nouvelle coordonnée pour planifier un rendez-vous.\\n\\nBien Cordialement\\n${this.authService.authenticatedUser?.nom}\\nc.a@maneoreseaux.com\\n${this.authService.authenticatedUser?.telephone}}`', 'CLIENT INJOIGNABLE KOSC', '`[CLIENT INJOIGNABLE]${this.selectedOrdreKosc.reference}_${this.selectedOrdreKosc.referenceWorkOrder}_${this.selectedOrdreKosc.endCustumorLastName} ${this.selectedOrdreKosc.endCustumorFirstName}`');
 
 --
 -- DÃ©chargement des donnÃ©es de la table `template_email_client_injoinable_kosc_seq`
@@ -794,7 +794,7 @@ INSERT INTO `template_email_cloture_seq` (`next_val`) VALUES
 --
 
 INSERT INTO `template_email_confirmation_client` (`id`, `corps`, `libelle`, `objet`) VALUES
-(10000, '`Bonjour,\\n\\nSuite Ã Â  votreÂ demande de raccordement fibre pour la commande \"${this.selectedOrdreKosc.reference}\",Â l\'intervention de notre technicien est prÃ©vu le :\\n${this.formatDdMmYy(this.selectedOrdreKosc.dateInterventionTechniqueDebut)},${this.selectedOrdreKosc.endCustumorStreetNumber} ${this.selectedOrdreKosc.endCustumorStreetName},${this.selectedOrdreKosc.endCustumorBuilding},${this.selectedOrdreKosc.endCustumorCity}\\n\\nDans cette attente, veuillez agrÃ©er,Â mes plus cordiales salutations.\\n\\nBien Cordialement\\n${this.authService.authenticatedUser?.nom}\\nc.a@maneoreseaux.com\\n${this.authService.authenticatedUser?.telephone}`', 'CONFIRATION CLIENT', '`CONFIRMATION DE RENDEZ-VOUS POUR RACCORDEMENT FTTH`');
+(10000, '`Bonjour,\\n\\nSuite à votre demande de raccordement fibre pour la commande \"${this.selectedOrdreKosc.reference}\",àl\'intervention de notre technicien est prÃ©vu le :\\n${this.formatDdMmYy(this.selectedOrdreKosc.dateInterventionTechniqueDebut)},${this.selectedOrdreKosc.endCustumorStreetNumber} ${this.selectedOrdreKosc.endCustumorStreetName},${this.selectedOrdreKosc.endCustumorBuilding},${this.selectedOrdreKosc.endCustumorCity}\\n\\nDans cette attente, veuillez agrÃ©er,Â mes plus cordiales salutations.\\n\\nBien Cordialement\\n${this.authService.authenticatedUser?.nom}\\nc.a@maneoreseaux.com\\n${this.authService.authenticatedUser?.telephone}`', 'CONFIRATION CLIENT', '`CONFIRMATION DE RENDEZ-VOUS POUR RACCORDEMENT FTTH`');
 
 --
 -- DÃ©chargement des donnÃ©es de la table `template_email_confirmation_client_seq`
@@ -840,7 +840,7 @@ INSERT INTO `template_email_mauvais_contact_seq` (`next_val`) VALUES
 --
 
 INSERT INTO `template_email_planification` (`id`, `corps`, `libelle`, `objet`) VALUES
-    (10000, '`Bonjour,\\n\\nVeuillez trouver ci-dessous les Ã©lÃ©ments  prise de RDV concernant Lâ€™OT en objet\\n\\nREFERENCE DOSSIER : ${this.selectedOrdreKosc.referenceWorkOrder}\\nREFERENCE DE L\'INTERVENTION : ${this.selectedOrdreKosc.reference}\\nOPERATEUR EX : ${this.selectedOrdreKosc.operatorVo?.libelle}\\nSTATUT DE CLOTURE CLIENT : SO\\nSTATUT RDV : RDV RACCO PRIS\\nDATE RDV : ${this.formatDdMmYy(this.selectedOrdreKosc.dateInterventionTechniqueDebut)}\\nHEURE RDV : ${this.formatHhMm(this.selectedOrdreKosc.dateInterventionTechniqueDebut)}\\nPTO EXISTANTE SUR SITE SELON CLIENT :\\nType D \'INTERVENTION PLANIFIEE : ${this.selectedOrdreKosc.supplierServiceCode}\\nREMARQUE DU CONTACT SITE Ã€ RACCORDER OU CA :  ${this.selectedOrdreKosc.commentaireClient}\\n\\nBien Cordialement\\n${this.authService.authenticatedUser?.nom}\\nc.a@maneoreseaux.com\\n${this.authService.authenticatedUser?.telephone}`', 'PLANIFICATION', '`${this.selectedOrdreKosc.reference}_${this.selectedOrdreKosc.referenceWorkOrder}_${this.selectedOrdreKosc.operatorVo?.libelle}_${this.selectedOrdreKosc.endCustumorContactLastName}`');
+    (10000, '`Bonjour,\\n\\nVeuillez trouver ci-dessous les éléments  prise de RDV concernant Lâ€™OT en objet\\n\\nREFERENCE DOSSIER : ${this.selectedOrdreKosc.referenceWorkOrder}\\nREFERENCE DE L\'INTERVENTION : ${this.selectedOrdreKosc.reference}\\nOPERATEUR EX : ${this.selectedOrdreKosc.operatorVo?.libelle}\\nSTATUT DE CLOTURE CLIENT : SO\\nSTATUT RDV : RDV RACCO PRIS\\nDATE RDV : ${this.formatDdMmYy(this.selectedOrdreKosc.dateInterventionTechniqueDebut)}\\nHEURE RDV : ${this.formatHhMm(this.selectedOrdreKosc.dateInterventionTechniqueDebut)}\\nPTO EXISTANTE SUR SITE SELON CLIENT :\\nType D \'INTERVENTION PLANIFIEE : ${this.selectedOrdreKosc.supplierServiceCode}\\nREMARQUE DU CONTACT SITE À RACCORDER OU CA :  ${this.selectedOrdreKosc.commentaireClient}\\n\\nBien Cordialement\\n${this.authService.authenticatedUser?.nom}\\nc.a@maneoreseaux.com\\n${this.authService.authenticatedUser?.telephone}`', 'PLANIFICATION', '`${this.selectedOrdreKosc.reference}_${this.selectedOrdreKosc.referenceWorkOrder}_${this.selectedOrdreKosc.operatorVo?.libelle}_${this.selectedOrdreKosc.endCustumorContactLastName}`');
 
 --
 -- DÃ©chargement des donnÃ©es de la table `template_email_planification_seq`
@@ -986,6 +986,43 @@ INSERT INTO `user_app` (`id`, `account_non_expired`, `account_non_locked`, `crea
 (2, b'1', b'1', '2022-10-25 14:01:15', b'1', 'zouani@gmail.com', b'1', 'Zouani', '$2a$10$C9vArnf0PhBx9EoV7HlJHeo0xN3dwSmcQadZjpmyJ9F8V6kOlqdBG', b'0', 'Younes', NULL, 'zouani', '625495187'),
 (3, b'1', b'1', '2022-10-25 14:01:15', b'1', 'jarane@gmail.com', b'1', 'Jarane', '$2a$10$C9vArnf0PhBx9EoV7HlJHeo0xN3dwSmcQadZjpmyJ9F8V6kOlqdBG', b'0', 'Anas', NULL, 'jarane', '678241249'),
 (4, b'1', b'1', '2022-10-25 14:01:15', b'1', 'nadia@gmail.com', b'1', 'Alaoui', '$2a$10$C9vArnf0PhBx9EoV7HlJHeo0xN3dwSmcQadZjpmyJ9F8V6kOlqdBG', b'0', 'Nadia', NULL, 'alaoui', '645697892');
+SET FOREIGN_KEY_CHECKS=1;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- HÃ´te : 127.0.0.1
+-- GÃ©nÃ©rÃ© le : ven. 09 dÃ©c. 2022 Ã  22:06
+-- Version du serveur : 10.4.24-MariaDB
+-- Version de PHP : 8.1.6
+
+SET FOREIGN_KEY_CHECKS=0;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de donnÃ©es : `kosc`
+--
+
+--
+-- DÃ©chargement des donnÃ©es de la table `template_email_cri`
+--
+
+INSERT INTO `template_email_cri` (`id`, `corps`, `libelle`, `objet`) VALUES
+    (10000, '`Bonjour,\\n\\nREFERENCE DOSSIER : ${this.selectedOrdreKosc.referenceWorkOrder}\\nREFERENCE DE L\'INTERVENTION : ${this.selectedOrdreKosc.reference}\\nOPERATEUR :  ${this.selectedOrdreKosc.operatorVo?.libelle}\\nETAT INTERVENTION : ${this.selectedOrdreKosc.etatDemandeKoscVo?.libelle}\\n\\nDATE RDV : ${this.formatDdMmYy(this.selectedOrdreKosc.dateRdv)}\\nHEURE RDV : ${this.formatHhMm(this.selectedOrdreKosc.dateRdv)}\\n\\nETAT DE CLOTURE CLIENT : ${this.selectedOrdreKosc.codeDecharge}\\nNOMMAGE PTO :  ${this.selectedOrdreKosc.autreInfosPboPto}\\nTYPE RACCORDEMENT PBO-PTO : ${this.selectedOrdreKosc.typeRacordementPboPto}\\nTYPE RACCORDEMENT REALISE :\\n\\nLONGUEUR TOTALE CABLAGE : ml\\nLONGUEUR DOMAINE PUBLIC : ml\\nLONGUEUR DOMAINE PRIVE : ml\\n\\nBien Cordialement\\n${this.authService.authenticatedUser?.nom}\\nc.a@maneoreseaux.com\\n${this.authService.authenticatedUser?.telephone}`', 'CRI', '`${this.selectedOrdreKosc.reference}//${this.selectedOrdreKosc.referenceWorkOrder}//${this.selectedOrdreKosc.operatorVo?.libelle}//${this.selectedOrdreKosc.etatDemandeKoscVo?.libelle}`');
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
