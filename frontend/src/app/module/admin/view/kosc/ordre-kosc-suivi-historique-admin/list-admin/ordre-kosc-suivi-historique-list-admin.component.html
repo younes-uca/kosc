@@ -264,7 +264,7 @@
                                             </span>
 
 
-                                            <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
                                                 <p-calendar
                                                         class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateRdvMin"
                                                         id="30-1"
@@ -272,7 +272,7 @@
                                                 <label for="30-1">Date rdv Min</label>
                                             </span>
 
-                                             <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
                                                 <p-calendar
                                                         class="p-mr-2" [(ngModel)]="searchOrdreKosc.dateRdvMax"
                                                         id="30-2"
@@ -1021,12 +1021,16 @@
 
                     <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
 
-<p-multiSelect [options]="etatDemandeKoscs"
+                <p-multiSelect [options]="etatDemandeKoscs"
                [(ngModel)]="searchOrdreKosc.etatDemandeKoscVos"
                defaultLabel="Etat demande kosc"
                optionLabel="libelle" [virtualScroll]="false"></p-multiSelect>
       </span>
-
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                        <input class="p-mr-2" pInputText id="3"
+                                               type="text" [(ngModel)]="searchOrdreKosc.montantDevis">
+                                        <label for="3">Montant devis</label>
+                                    </span>
 
                 </div>
 
@@ -2520,6 +2524,13 @@
                             </div>
                         </th>
 
+                        <th pSortableColumn="montantDevis">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>Montant devis</span>
+                                <p-sortIcon field="montantDevis"></p-sortIcon>
+                            </div>
+                        </th>
+
 
                         <th>Actions</th>
                     </tr>
@@ -2561,8 +2572,8 @@
                             {{ordreKosc.referenceWorkOrder}}</span>
                         </td>
 
-
                         <td><span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.codeDecharge}}</span></td>
+
 
 
                         <!--                        <td>{{ordreKosc.supplierService}}</td>-->
@@ -3134,7 +3145,7 @@
                                 [style]="stylefyConfort(ordreKosc)">{{ordreKosc.dateCri | date :'dd/MM/yyyy HH:mm' }}</span>
                         </td>
 
-
+                        <td><span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.montantDevis}}</span></td>
                         <td>
                             <button (click)="editOrdreKosc(ordreKosc)" class="p-button-rounded p-button-success p-mr-2"
                                     icon="pi pi-pencil"
@@ -3144,10 +3155,10 @@
                                     icon="pi pi-list" pButton
                                     pRipple></button>
 
-                          <!--  <button (click)="duplicateOrdreKosc(ordreKosc)"
-                                    class="p-button-rounded p-button-raised p-button-warning" icon="pi pi-copy"
-                                    pButton
-                                    pRipple></button>-->
+                            <!--  <button (click)="duplicateOrdreKosc(ordreKosc)"
+                                      class="p-button-rounded p-button-raised p-button-warning" icon="pi pi-copy"
+                                      pButton
+                                      pRipple></button>-->
                         </td>
                     </tr>
                 </ng-template>

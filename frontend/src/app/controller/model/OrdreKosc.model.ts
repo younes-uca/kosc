@@ -334,7 +334,9 @@ export class OrdreKoscVo {
 
     public dateCri: Date;
 
-     public  supplier : string;
+    public montantDevis : string;
+
+    public  supplier : string;
 
 
      public   customerOperator: string;

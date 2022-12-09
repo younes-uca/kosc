@@ -32,14 +32,39 @@
 
 
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="3">Code decharge</label>
+                        <label for="3">Code decharge<span style="color: red;">*</span></label>
                         <input [(ngModel)]="selectedOrdreKosc.codeDecharge" class="p-mb-2 p-mr-2" id="3"
+                               [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscCodeDecharge}"
+
                                pInputText
                                placeholder="Code decharge" type="text"
-                        />
+                        /><small *ngIf='!validOrdreKoscCodeDecharge' class='p-error'>Code decharge est
+                        obligatoire.</small>
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="3">Montant devis<span style="color: red;">*</span></label>
+                        <input [(ngModel)]="selectedOrdreKosc.montantDevis" class="p-mb-2 p-mr-2" id="3"
+                               [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscMontantDevis}"
+                               pInputText
+                               placeholder="Montant devis" type="text"
+                        /><small *ngIf='!validOrdreKoscMontantDevis' class='p-error'>Montant devis est
+                        obligatoire.</small>
 
                     </div>
 
+                    <div class="p-field p-col-11 p-md-3">
+                        <label for="51">Etat demande kosc</label>
+                        <p-dropdown [(ngModel)]="selectedOrdreKosc.etatDemandeKoscVo"
+                                    [filter]="true"
+                                    [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscEtatDemandeKosc}"
+                                    [options]="etatDemandeKoscs" [showClear]="true" filterMatchMode="contains"
+                                    id="51"
+                                    optionLabel="libelle"
+                                    placeholder="Etat demande kosc">
+                        </p-dropdown><small *ngIf='!validOrdreKoscEtatDemandeKosc' class='p-error'>Etat demande kosc est
+                        obligatoire.</small>
+                    </div>
 
 <!--                    <div class="p-field p-col-12 p-md-3">-->
 <!--                        <label for="4">Supplier service</label>-->
@@ -1524,16 +1549,7 @@
 
 <!--                    </div>-->
 
-                   <div class="p-field p-col-11 p-md-2">
-                        <label for="144">Etat demande kosc</label>
-                        <p-dropdown [(ngModel)]="selectedOrdreKosc.etatDemandeKoscVo" [filter]="true"
-                                    [options]="etatDemandeKoscs" [showClear]="true" filterMatchMode="contains"
-                                   id="144"
-                                   optionLabel="libelle"
-                                    placeholder="Etat demande kosc">
-                        </p-dropdown>
 
-                  </div>
 <!--                    <div class="p-col-1">-->
 <!--                        <label></label>-->
 <!--                        <button (click)="openCreateetatDemandeKosc('etatDemandeKosc')"-->
