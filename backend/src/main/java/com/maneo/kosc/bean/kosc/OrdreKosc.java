@@ -822,11 +822,24 @@ public class OrdreKosc {
     @ManyToOne
     private User userImportation;
 
+    @Transient
+    private int result;
 
     public OrdreKosc() {
         super();
     }
 
+    public void setNumeroDernierAppel(Long numeroDernierAppel) {
+        this.numeroDernierAppel = numeroDernierAppel;
+    }
+
+    public int getResult() {
+        return result;
+    }
+
+    public void setResult(int result) {
+        this.result = result;
+    }
 
     public List<EtatDemandeKosc> getEtatDemandeKoscs() {
         return etatDemandeKoscs;
