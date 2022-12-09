@@ -134,13 +134,6 @@
                     </div>
 
 
-                    <!--                    <div class="p-field p-col-12 p-md-3">-->
-                    <!--                        <label for="143">Commentaire Kosc</label>-->
-                    <!--                        <textarea id="143" pInputTextarea rows="5" cols="30"-->
-                    <!--                                  placeholder="Commentaire Kosc (add it to yaml)"-->
-                    <!--                                  [(ngModel)]="selectedOrdreKosc.comment"-->
-                    <!--                        ></textarea>-->
-                    <!--                    </div>-->
                     <div class="p-field p-col-12 p-md-3">
                         <label for="142">Commentaire client</label>
                         <textarea [(ngModel)]="selectedOrdreKosc.commentaireClient" [disabled]="false" cols="30"
@@ -169,23 +162,6 @@
                         </p-calendar>
 
                     </div>
-                    <!--                    <div class="p-field p-col-11 p-md-2">-->
-                    <!--                        <label for="3000">Region</label>-->
-                    <!--                        <p-dropdown [options]="regions" [(ngModel)]="selectedOrdreKosc.departementVo"-->
-                    <!--                                    id="3000" [filter]="true" filterMatchMode="contains"-->
-                    <!--                                    [showClear]="true"-->
-                    <!--                                    optionLabel="libelle"-->
-                    <!--                                    placeholder="Region">-->
-                    <!--                        </p-dropdown>-->
-
-                    <!--                    </div>-->
-                    <!--                    <div class="p-col-1">-->
-                    <!--                        <label></label>-->
-                    <!--                        <button pButton pRipple type="button"-->
-                    <!--                                icon="pi pi-plus" (click)="openCreateRegion('region')"-->
-                    <!--                                class="p-button-success one-colonne-btn-success-align"></button>-->
-                    <!--                    </div>-->
-
 
                     <div class="p-field align-inputswitch p-col-12  p-md-3">
                         <div class="label-inputswitch">
@@ -227,155 +203,6 @@
                     </div>
                 </div>
             </p-tabPanel>
-            <!--            <p-tabPanel header="Cloture">-->
-            <!--                <div class="p-grid">-->
-            <!--                    <div class="p-field p-col-12 p-md-3">-->
-            <!--                        <label for="145">Template email cloture</label>-->
-            <!--                        <p-dropdown [(ngModel)]="selectedOrdreKosc.templateEmailClotureVo"-->
-            <!--                                    [filter]="true"-->
-            <!--                                    [options]="templateEmailClotures" [showClear]="true" filterMatchMode="contains"-->
-            <!--                                    id="145"-->
-            <!--                                    optionLabel="libelle"-->
-            <!--                                    placeholder="Template email cloture">-->
-            <!--                        </p-dropdown>-->
-
-            <!--                    </div>-->
-            <!--                    <div class="p-col-1">-->
-            <!--                        <label></label>-->
-            <!--                        <button (click)="openCreateTemplateEmailCloture('templateEmailCloture')"-->
-            <!--                                class="p-button-success one-colonne-btn-success-align" icon="pi pi-plus"-->
-            <!--                                pButton-->
-            <!--                                pRipple-->
-            <!--                                type="button"></button>-->
-            <!--                    </div>-->
-            <!--                    <div class="p-field p-col-12 p-md-3">-->
-            <!--                        <label for="146">Objet cloture</label>-->
-            <!--                        <input [(ngModel)]="selectedOrdreKosc.objetCloture" class="p-mb-2 p-mr-2" id="146"-->
-            <!--                               pInputText-->
-            <!--                               placeholder="Objet cloture" type="text"-->
-            <!--                        />-->
-
-            <!--                    </div>-->
-            <!--                    <div class="p-field p-col-12 p-md-5">-->
-            <!--                        <label for="147">Corps cloture</label>-->
-            <!--                        <textarea [(ngModel)]="selectedOrdreKosc.corpsCloture" cols="30" id="147" pInputTextarea-->
-            <!--                                  placeholder="Corps cloture" rows="10"-->
-            <!--                        ></textarea>-->
-
-            <!--                    </div>-->
-            <!--                    <div class="p-field align-inputswitch p-col-12  p-md-4">-->
-            <!--                        <div class="label-inputswitch">-->
-            <!--                            <label for="148">Envoye cloture</label>-->
-            <!--                        </div>-->
-            <!--                        <div class="input-switch">-->
-            <!--                            <p-inputSwitch [(ngModel)]="selectedOrdreKosc.envoyeCloture" id="148"-->
-            <!--                            >-->
-            <!--                            </p-inputSwitch>-->
-
-            <!--                        </div>-->
-            <!--                    </div>-->
-            <!--                    <div class="p-field p-col-12 p-md-3">-->
-            <!--                        <label for="149">Date envoi cloture</label>-->
-            <!--                        <p-calendar [(ngModel)]="selectedOrdreKosc.dateEnvoiCloture" [showSeconds]="false"-->
-            <!--                                    [showTime]="true"-->
-            <!--                                    dateFormat="{{dateFormat}}"-->
-            <!--                                    id="149"-->
-            <!--                                    placeholder="Date envoi cloture">-->
-            <!--                        </p-calendar>-->
-
-            <!--                    </div>-->
-            <!--                    <div class="p-field p-col-12 p-md-5">-->
-            <!--                        <label for="143">Commantaire cloture</label>-->
-            <!--                        <textarea [(ngModel)]="selectedOrdreKosc.commantaireCloture" cols="30" id="143" pInputTextarea-->
-            <!--                                  placeholder="5sena ndiro piece joint"-->
-            <!--                                  rows="10"-->
-            <!--                        ></textarea>-->
-
-            <!--                    </div>-->
-            <!--                    &lt;!&ndash;                            <div class="p-field p-col-12 p-md-3">&ndash;&gt;-->
-            <!--                    &lt;!&ndash;                                <label for="150">Email cloture piece joints</label>&ndash;&gt;-->
-            <!--                    &lt;!&ndash;                                <input class="p-mb-2 p-mr-2" type="text" pInputText&ndash;&gt;-->
-            <!--                    &lt;!&ndash;                                       placeholder="Email cloture piece joints"&ndash;&gt;-->
-            <!--                    &lt;!&ndash;                                       id="150" [(ngModel)]="selectedOrdreKosc.emailCloturePieceJoints"&ndash;&gt;-->
-            <!--                    &lt;!&ndash;                                />&ndash;&gt;-->
-
-            <!--                    &lt;!&ndash;                            </div>&ndash;&gt;-->
-            <!--                </div>-->
-            <!--            </p-tabPanel>-->
-            <!--            <p-tabPanel header="Suivi">-->
-            <!--                <div class="p-grid">-->
-            <!--                    <div class="p-field p-col-12 p-md-3">-->
-            <!--                        <label for="151">Template suivi</label>-->
-            <!--                        <p-dropdown [(ngModel)]="selectedOrdreKosc.templateSuiviVo" [filter]="true"-->
-            <!--                                    [options]="templateSuivis" [showClear]="true" filterMatchMode="contains"-->
-            <!--                                    id="151"-->
-            <!--                                    optionLabel="libelle"-->
-            <!--                                    placeholder="Template suivi">-->
-            <!--                        </p-dropdown>-->
-
-            <!--                    </div>-->
-
-            <!--                    <div class="p-col-1">-->
-            <!--                        <label></label>-->
-            <!--                        <button (click)="openCreateTemplateSuivi('templateSuivi')"-->
-            <!--                                class="p-button-success one-colonne-btn-success-align" icon="pi pi-plus"-->
-            <!--                                pButton pRipple-->
-            <!--                                type="button"></button>-->
-            <!--                    </div>-->
-            <!--                    <div class="p-field p-col-12 p-md-3">-->
-            <!--                        <label for="152">Objet suivi</label>-->
-            <!--                        <input [(ngModel)]="selectedOrdreKosc.objetSuivi" class="p-mb-2 p-mr-2" id="152"-->
-            <!--                               pInputText-->
-            <!--                               placeholder="Objet suivi" type="text"-->
-            <!--                        />-->
-
-            <!--                    </div>-->
-            <!--                    <div class="p-field p-col-12 p-md-5">-->
-            <!--                        <label for="153">Corps suivi</label>-->
-            <!--                        <textarea [(ngModel)]="selectedOrdreKosc.corpsSuivi" cols="30" id="153" pInputTextarea-->
-            <!--                                  placeholder="Corps suivi" rows="10"-->
-            <!--                        ></textarea>-->
-
-            <!--                    </div>-->
-            <!--                    <div class="p-field align-inputswitch p-col-12  p-md-3">-->
-            <!--                        <div class="label-inputswitch">-->
-            <!--                            <label for="154">Envoye suivi</label>-->
-            <!--                        </div>-->
-            <!--                        <div class="input-switch">-->
-            <!--                            <p-inputSwitch [(ngModel)]="selectedOrdreKosc.envoyeSuivi" id="154"-->
-            <!--                            >-->
-            <!--                            </p-inputSwitch>-->
-
-            <!--                        </div>-->
-            <!--                    </div>-->
-            <!--                    <div class="p-field p-col-12 p-md-3">-->
-            <!--                        <label for="155">Date envoi suivi</label>-->
-            <!--                        <p-calendar [(ngModel)]="selectedOrdreKosc.dateEnvoiSuivi" [showSeconds]="false"-->
-            <!--                                    [showTime]="true"-->
-            <!--                                    dateFormat="{{dateFormat}}"-->
-            <!--                                    id="155"-->
-            <!--                                    placeholder="Date envoi suivi">-->
-            <!--                        </p-calendar>-->
-
-            <!--                    </div>-->
-
-            <!--                    <div class="p-col-1">-->
-            <!--                        <label></label>-->
-            <!--                    </div>-->
-            <!--                    <div class="p-field align-inputswitch p-col-12  p-md-3">-->
-            <!--                        <div class="label-inputswitch">-->
-            <!--                            <label for="154">Annuler envoi email</label>-->
-            <!--                        </div>-->
-            <!--                        <div class="input-switch">-->
-            <!--                            <p-inputSwitch [(ngModel)]="selectedOrdreKosc.existingOtp" id="156"-->
-            <!--                            >-->
-            <!--                            </p-inputSwitch>-->
-
-            <!--                        </div>-->
-            <!--                    </div>-->
-
-            <!--                </div>-->
-            <!--            </p-tabPanel>-->
             <p-tabPanel header="Report">
                 <p-blockUI [blocked]="blocked"></p-blockUI>
                 <div class="p-grid">

@@ -8,6 +8,19 @@
                 <div class="p-grid">
 
                     <div class="p-field p-col-12 p-md-3">
+                        <label for="1">Reference</label>
+                        <input [(ngModel)]="selectedOrdreKosc.reference" class="p-mb-2 p-mr-2" id="1"
+                               pInputText [disabled]="true"
+                               placeholder="Reference" type="text"/>
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="2">Reference work order</label>
+                        <input [(ngModel)]="selectedOrdreKosc.referenceWorkOrder"
+                               class="p-mb-2 p-mr-2" id="2" [disabled]="true"
+                               pInputText placeholder="Reference work order"
+                               type="text"/>
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
                         <label for="26">Date premier appel</label>
                         <p-calendar [(ngModel)]="selectedOrdreKosc.datePremierAppel" [showSeconds]="false"
                                     [showTime]="true" [disabled]="true"
@@ -38,15 +51,6 @@
 
                     </div>
 
-
-                    <div class="p-field p-col-12 p-md-3">
-                        <label for="29">Date prise rdv</label>
-                        <p-calendar [(ngModel)]="selectedOrdreKosc.datePriseRdv" [showSeconds]="false" [showTime]="true"
-                                    dateFormat="{{dateFormat}}" id="29" [disabled]="true"
-                                    placeholder="Date prise rdv">
-                        </p-calendar>
-
-                    </div>
                     <div class="p-field p-col-12 p-md-3">
                         <label for="50">Date dernier appel</label>
                         <p-calendar [(ngModel)]="selectedOrdreKosc.dateDernierAppel" [showSeconds]="false"
@@ -57,6 +61,8 @@
                         </p-calendar>
 
                     </div>
+
+
                     <div class="p-field p-col-11 p-md-3">
                         <label for="51">Etat demande kosc</label>
                         <p-dropdown [(ngModel)]="selectedOrdreKosc.etatDemandeKoscVo"
@@ -66,30 +72,6 @@
                                     optionLabel="libelle"
                                     placeholder="Etat demande kosc">
                         </p-dropdown>
-                    </div>
-
-                    <div class="p-field p-col-11 p-md-3">
-                        <label for="32">Departement</label>
-                        <p-dropdown [(ngModel)]="selectedOrdreKosc.departementVo" [filter]="true"
-                                    [options]="departements" [showClear]="true" filterMatchMode="contains"
-                                    id="32" [disabled]="true"
-                                    optionLabel="libelle"
-                                    placeholder="Departement">
-                        </p-dropdown>
-
-                    </div>
-
-
-                    <div class="p-field p-col-11 p-md-3">
-                        <label for="33">Technicien</label>
-                        <p-dropdown [(ngModel)]="selectedOrdreKosc.technicienVo" [filter]="true"
-                                    (onClick)="findAppropriateTechnicien(selectedOrdreKosc.dateRdv,selectedOrdreKosc.departementVo?.code)"
-                                    [options]="appropriateTechniciens" [showClear]="true" filterMatchMode="contains"
-                                    id="33" [disabled]="true"
-                                    optionLabel="identifiant"
-                                    placeholder="Technicien">
-                        </p-dropdown>
-
                     </div>
 
 

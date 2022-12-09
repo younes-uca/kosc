@@ -81,6 +81,7 @@ public class OrdreKoscImportAdminServiceImpl implements OrdreKoscImportAdminServ
             OrdreKosc foundedOrdreKosc = ordreKoscDao.findByReferenceWorkOrderAndEtat(ordreKosc.getReferenceWorkOrder());
                     if (foundedOrdreKosc == null) {
                         // findOrSave operator departement and technicien
+                        ordreKosc.setDateEnvoiCri(null);
                         findOrSaveDepartement(ordreKosc);
                         findOrSaveOperator(ordreKosc);
                         findOrSaveTechnicien(ordreKosc);

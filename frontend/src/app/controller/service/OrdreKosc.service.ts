@@ -174,6 +174,11 @@ export class OrdreKoscService {
         return this.http.put<OrdreKoscVo>(this.API, this.selectedOrdreKosc);
     }
 
+    public editPasEncore(): Observable<OrdreKoscVo> {
+        return this.http.put<OrdreKoscVo>(this.API + 'edit-pas-pncore/', this.selectedOrdreKosc);
+
+    }
+
     public  updateEtat(): Observable<OrdreKoscVo> {
         return this.http.put<OrdreKoscVo>(this.API+"update-etat/", this.selectedOrdreKosc);
     }
@@ -429,4 +434,6 @@ export class OrdreKoscService {
     sendMailCri() {
         return this.http.post<OrdreKoscVo>(this.API + 'send-mail-cri', {...this.selectedOrdreKosc});
     }
+
+
 }

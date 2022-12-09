@@ -12,6 +12,8 @@ public interface OrdreKoscPriseRdvAdminService  {
     List<OrdreKosc> findByCriteriaPriseRdv(OrdreKoscVo ordreKoscVo);
 
 
+    OrdreKosc editPasEncore(OrdreKosc ordreKosc);
+
     OrdreKosc findByReferenceWorkOrder(String referenceWorkOrder);
 
     OrdreKosc updateNonJoignable(OrdreKosc ordreKosc);

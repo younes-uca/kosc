@@ -1,5 +1,6 @@
 package com.maneo.kosc.service.admin.impl.kosc;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -123,28 +124,6 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
     public List<OrdreKosc> findSuivi() {
         String query = "SELECT item FROM OrdreKosc item WHERE item.etatDemandeKosc.code IN ('ok','ko')  AND item.codeDecharge is null ";
         return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public List<OrdreKosc> genererCodeDecharge(List<OrdreKosc> ordreKoscs) {
-        LocalDate todaysDate = LocalDate.now();
-        if (ordreKoscs != null) {
-            for (OrdreKosc ordreKosc : ordreKoscs) {
-                if (ordreKosc.getEtatDemandeKosc() != null ) {
-                    if(Objects.equals(ordreKosc.getEtatDemandeKosc().getCode(), "ko") && ordreKosc.getDateEnvoiCri() == null){
-                        ordreKosc.setDateEnvoiCri(DateUtil.toDate(todaysDate));
-                    }
-                    else if(Objects.equals(ordreKosc.getEtatDemandeKosc().getCode(), "ok") && ordreKosc.getCodeDecharge() == null){
-                    ordreKosc.setCodeDecharge("D"+DateUtil.formateDate("yyMMdd",DateUtil.toDate(todaysDate)) + "-MN" + ordreKosc.getId());
-                    ordreKosc.setDateEnvoiCri(DateUtil.toDate(todaysDate));
-                    }
-                    update(ordreKosc);
-                }
-            }
-            update(ordreKoscs);
-        }
-
-        return ordreKoscs;
     }
 
     @Override
@@ -480,6 +459,17 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
     }
 
     @Override
+    public List<OrdreKosc> findByMontantDevis(BigDecimal montantDevis) {
+        return ordreKoscDao.findByMontantDevis(montantDevis);
+
+    }
+
+    @Override
+    public int deleteByMontantDevis(BigDecimal montantDevis) {
+        return ordreKoscDao.deleteByMontantDevis(montantDevis);
+    }
+
+    @Override
     @Transactional
     public int deleteBySourceReplanificationId(Long id) {
         return ordreKoscDao.deleteBySourceReplanificationId(id);
@@ -654,6 +644,7 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
         String query = "SELECT o FROM OrdreKosc o where 1=1";
         System.out.println("haaa ordreKoscVo.getConfort() "+ordreKoscVo.getConfort());
         query += SearchUtil.addConstraint("o", "id", "=", ordreKoscVo.getId());
+        query += SearchUtil.addConstraint("o", "montantDevis", "=", ordreKoscVo.getMontantDevis());
         query += SearchUtil.addConstraint("o", "erdv", "=", ordreKoscVo.getErdv());
         query += SearchUtil.addConstraint("o", "confort", "=", ordreKoscVo.getConfort());
         query += SearchUtil.addConstraint("o", "reference", "LIKE", ordreKoscVo.getReference());

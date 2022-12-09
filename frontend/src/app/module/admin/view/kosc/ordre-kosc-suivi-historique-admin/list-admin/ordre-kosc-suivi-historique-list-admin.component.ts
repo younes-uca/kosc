@@ -81,6 +81,8 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
     items: MenuItem[];
 
     home: MenuItem;
+    objetDefaultCri = eval(this.selectedDefaultTemplateConfiguration.templateEmailCriVo?.objet);
+    corpsDefaultCri = eval(this.selectedDefaultTemplateConfiguration.templateEmailCriVo?.corps);
 
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
         , private operatorService: OperatorService
@@ -209,6 +211,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         this.defaultTemplateConfigurationService.findDefaultTemplateConfiguration().subscribe((data) =>
             this.selectedDefaultTemplateConfiguration = data,
         );
+
         this.loadEtatDemandeKoscIncluding(['planification']);
         this.setDateEnvoiMinAndMax();
         this.initExport();
@@ -287,7 +290,6 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'edit');
         if (isPermistted) {
             this.ordreKoscService.findByIdWithAssociatedList(ordreKosc).subscribe(res => {
-
                 this.selectedOrdreKosc = res;
                 this.selectedOrdreKosc.dateDebutTraitement = DateUtils.toDate(ordreKosc.dateDebutTraitement);
                 this.selectedOrdreKosc.submissionDate = DateUtils.toDate(ordreKosc.submissionDate);
@@ -300,6 +302,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
                 this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
                 this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
                 this.selectedOrdreKosc.dateOuverture = DateUtils.toDate(ordreKosc.dateOuverture);
+                // console.log('haaa dateEnvoiCri ==> ' + ordreKosc.dateEnvoiCri);
                 this.selectedOrdreKosc.dateEnvoiCri = DateUtils.toDate(ordreKosc.dateEnvoiCri);
                 this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
                 this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
@@ -308,13 +311,11 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
                 this.selectedOrdreKosc.dateEnvoiCloture = DateUtils.toDate(ordreKosc.dateEnvoiCloture);
                 this.selectedOrdreKosc.dateEnvoiSuivi = DateUtils.toDate(ordreKosc.dateEnvoiSuivi);
                 this.editOrdreKoscDialog = true;
-
                 this.selectedOrdreKosc.fromCri = this.selectedDefaultTemplateConfiguration.emailManeo;
                 this.selectedOrdreKosc.toCri = this.selectedDefaultTemplateConfiguration.emailKosc;
-                this.selectedOrdreKosc.objetCri = eval(this.selectedDefaultTemplateConfiguration?.templateEmailCriVo?.objet);
-                this.selectedOrdreKosc.corpsCri = eval(this.selectedDefaultTemplateConfiguration?.templateEmailCriVo?.corps);
-               console.log(this.selectedDefaultTemplateConfiguration?.templateEmailCriVo?.objet);
-               console.log(this.selectedDefaultTemplateConfiguration?.templateEmailCriVo?.corps);
+                this.selectedOrdreKosc.objetCri = this.objetDefaultCri;
+                this.selectedOrdreKosc.corpsCri = this.corpsDefaultCri;
+
             });
         } else {
             this.messageService.add({
@@ -347,7 +348,6 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
                 this.selectedOrdreKosc.dateEnvoiReplanification = DateUtils.toDate(ordreKosc.dateEnvoiReplanification);
                 this.selectedOrdreKosc.dateEnvoiCloture = DateUtils.toDate(ordreKosc.dateEnvoiCloture);
                 this.selectedOrdreKosc.dateEnvoiSuivi = DateUtils.toDate(ordreKosc.dateEnvoiSuivi);
-
                 this.viewOrdreKoscDialog = true;
             });
         } else {
@@ -1051,10 +1051,9 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
     }
 
     private setDateEnvoiMinAndMax() {
-        let today =new Date();
-        this.searchOrdreKosc.dateRdvMin=null;
-        this.searchOrdreKosc.dateRdvMax= moment(today).format("yyyy-MM-DD");
-        // console.log(this.searchOrdreKosc.dateEnvoiPlanificationMax)
+        // let today =new Date();
+        // this.searchOrdreKosc.dateRdvMin=null;
+        // this.searchOrdreKosc.dateRdvMax= moment(today).format("yyyy-MM-DD");
     }
 
     get selectedDefaultTemplateConfiguration(): DefaultTemplateConfigurationVo {
@@ -1064,5 +1063,13 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
 
     set selectedDefaultTemplateConfiguration(value: DefaultTemplateConfigurationVo) {
         this.defaultTemplateConfigurationService.selectedDefaultTemplateConfiguration = value;
+    }
+
+    public formatDdMmYy(date: Date): string {
+        return date != null ? this.datePipe.transform(date, 'd/M/yyyy') : '';
+    }
+
+    public formatHhMm(date: Date): string {
+        return date != null ? this.datePipe.transform(date, 'hh:mm') : '';
     }
 }

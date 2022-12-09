@@ -11,6 +11,7 @@ import com.maneo.kosc.bean.template.*;
 import com.maneo.kosc.security.bean.User;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -779,6 +780,8 @@ public class OrdreKosc {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCri;
 
+    private BigDecimal montantDevis;
+
 
     @ManyToOne
     private Operator operator;
@@ -834,6 +837,14 @@ public class OrdreKosc {
 
     public void setEtatDemandeKoscs(List<EtatDemandeKosc> etatDemandeKoscs) {
         this.etatDemandeKoscs = etatDemandeKoscs;
+    }
+
+    public BigDecimal getMontantDevis() {
+        return montantDevis;
+    }
+
+    public void setMontantDevis(BigDecimal montantDevis) {
+        this.montantDevis = montantDevis;
     }
 
     public Boolean getConfort() {

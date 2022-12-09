@@ -254,29 +254,6 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
         this.searchOrdreKosc.nbrHeureDateSubmissionAndNowMax = null;
     }
 
-    isDateSubmisson72(ordreKoscVo: OrdreKoscVo) {
-        if (ordreKoscVo.nbrHeureDateSubmissionAndNow > 48 && ordreKoscVo.nbrHeureDateSubmissionAndNow <= 72 && (ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION WO' || ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION ERDV')) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    isDateSubmisson48(ordreKoscVo: OrdreKoscVo) {
-        if (ordreKoscVo.nbrHeureDateSubmissionAndNow > 24 && ordreKoscVo.nbrHeureDateSubmissionAndNow <= 48 && (ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION WO' || ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION ERDV')) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    isDateSubmisson24(ordreKoscVo: OrdreKoscVo) {
-        if (ordreKoscVo.nbrHeureDateSubmissionAndNow <= 24 && (ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION WO' || ordreKoscVo.etatDemandeKoscVo.libelle == 'INITIALISATION ERDV')) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 
     // methods

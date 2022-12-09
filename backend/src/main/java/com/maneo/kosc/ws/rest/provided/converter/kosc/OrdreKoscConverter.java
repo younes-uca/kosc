@@ -114,6 +114,9 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
                 item.setId(NumberUtil.toLong(vo.getId()));
             if (StringUtil.isNotEmpty(vo.getNbrHeureDateSubmissionAndNow()))
                 item.setNbrHeureDateSubmissionAndNow(NumberUtil.toLong(vo.getNbrHeureDateSubmissionAndNow()));
+
+            if (StringUtil.isNotEmpty(vo.getMontantDevis()))
+                item.setMontantDevis(NumberUtil.toBigDecimal(vo.getMontantDevis()));
             if (StringUtil.isNotEmpty(vo.getReference()))
                 item.setReference(vo.getReference());
             if (StringUtil.isNotEmpty(vo.getReferenceWorkOrder()))
@@ -679,6 +682,9 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
                 vo.setId(NumberUtil.toString(item.getId()));
             if (item.getNbrHeureDateSubmissionAndNow() != null)
                 vo.setNbrHeureDateSubmissionAndNow(NumberUtil.toString(item.getNbrHeureDateSubmissionAndNow()));
+
+            if (item.getMontantDevis() != null)
+                vo.setMontantDevis(NumberUtil.toString(item.getMontantDevis()));
 
             if (StringUtil.isNotEmpty(item.getReference()))
                 vo.setReference(item.getReference());

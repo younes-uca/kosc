@@ -18,15 +18,17 @@ import java.util.Date;
 public class OrderKoscEmailingAdminServiceImpl implements OrderKoscEmailingAdminService {
     @Autowired
     private OrdreKoscDao ordreKoscDao;
-private UserDao userDao;
+    @Autowired
+    private UserDao userDao;
 
     @Autowired
     private EmailSenderAdminService emailSenderAdminService;
 
+    Date now = new Date();
 
     @Override
     public void sendConfirmationEmailToClient(OrdreKosc ordreKosc) {
-        
+
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromConfirmationClient());
         emailDetails.setTo(ordreKosc.getToConfirmationClient());
@@ -35,23 +37,22 @@ private UserDao userDao;
         try {
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeConfirmationClient(true);
-            ordreKosc.setDateEnvoiConfirmationClient(new Date());
+            ordreKosc.setDateEnvoiConfirmationClient(now);
         } catch (Exception exception) {
-          //  OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
+            //  OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
             ordreKosc.setEnvoyeConfirmationClient(false);
             ordreKosc.setDateEnvoiConfirmationClient(null);
-           // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
+            // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKosc.setDatePriseRdv(new Date());
+        ordreKosc.setDatePriseRdv(now);
         saveAndInitDateDernierAppel(ordreKosc);
-
 
 
     }
 
     @Override
     public void sendMailPlanificationEmail(OrdreKosc ordreKosc) {
-        
+
 
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromPlanification());
@@ -61,23 +62,22 @@ private UserDao userDao;
         try {
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyePlanification(true);
-            ordreKosc.setDateEnvoiPlanification( new Date());
-            ordreKosc.setDateEnvoiPlanification( new Date());
+            ordreKosc.setDateEnvoiPlanification(now);
 
         } catch (Exception exception) {
-           // OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
+            // OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
             ordreKosc.setEnvoyePlanification(false);
             ordreKosc.setDateEnvoiPlanification(null);
             //ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKosc.setDatePriseRdv(new Date());
+        ordreKosc.setDatePriseRdv(now);
         saveAndInitDateDernierAppel(ordreKosc);
 
     }
 
     @Override
     public void sendClientInjoignableEmailToClient(OrdreKosc ordreKosc) {
-        
+
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromClientInjoinable());
         emailDetails.setTo(ordreKosc.getToClientInjoinable());
@@ -87,22 +87,22 @@ private UserDao userDao;
 
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeClientInjoinable(true);
-            ordreKosc.setDateEnvoiClientInjoinable(new Date());
+            ordreKosc.setDateEnvoiClientInjoinable(now);
 
         } catch (Exception exception) {
-           // OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
+            // OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
             ordreKosc.setEnvoyeClientInjoinable(false);
             ordreKosc.setDateEnvoiClientInjoinable(null);
-           // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
+            // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKosc.setDatePriseRdv(new Date());
+        ordreKosc.setDatePriseRdv(now);
         saveAndInitDateDernierAppel(ordreKosc);
 
     }
 
     @Override
     public void sendClientInjoignableEmailToKosc(OrdreKosc ordreKosc) {
-        
+
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromClientInjoinableKosc());
         emailDetails.setTo(ordreKosc.getToClientInjoinableKosc());
@@ -112,21 +112,21 @@ private UserDao userDao;
 
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeClientInjoinableKosc(true);
-            ordreKosc.setDateEnvoiClientInjoinableKosc(new Date());
+            ordreKosc.setDateEnvoiClientInjoinableKosc(now);
         } catch (Exception exception) {
             //OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
             ordreKosc.setEnvoyeClientInjoinableKosc(false);
             ordreKosc.setDateEnvoiClientInjoinableKosc(null);
             //ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKosc.setDatePriseRdv(new Date());
+        ordreKosc.setDatePriseRdv(now);
         saveAndInitDateDernierAppel(ordreKosc);
 
     }
 
     @Override
     public void sendRefusClientEmail(OrdreKosc ordreKosc) {
-        
+
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromRefus());
         emailDetails.setTo(ordreKosc.getToRefus());
@@ -136,22 +136,22 @@ private UserDao userDao;
 
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeRefus(true);
-            ordreKosc.setDateEnvoiRefus(new Date());
+            ordreKosc.setDateEnvoiRefus(now);
 
         } catch (Exception exception) {
-           // OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
+            // OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
             ordreKosc.setEnvoyeRefus(false);
             ordreKosc.setDateEnvoiRefus(null);
-           // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
+            // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKosc.setDatePriseRdv(new Date());
+        ordreKosc.setDatePriseRdv(now);
         saveAndInitDateDernierAppel(ordreKosc);
 
     }
 
     @Override
     public void sendAutreEmail(OrdreKosc ordreKosc) {
-        
+
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromAutre());
         emailDetails.setTo(ordreKosc.getToAutre());
@@ -160,7 +160,7 @@ private UserDao userDao;
         try {
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeAutre(true);
-            ordreKosc.setDateEnvoiAutre(new Date());
+            ordreKosc.setDateEnvoiAutre(now);
 
         } catch (Exception exception) {
             //OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
@@ -168,14 +168,14 @@ private UserDao userDao;
             ordreKosc.setDateEnvoiAutre(null);
             //ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKosc.setDatePriseRdv(new Date());
+        ordreKosc.setDatePriseRdv(now);
         saveAndInitDateDernierAppel(ordreKosc);
 
     }
 
     @Override
     public void sendMauvaisContactEmail(OrdreKosc ordreKosc) {
-        
+
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromMauvaisContact());
         emailDetails.setTo(ordreKosc.getToMauvaisContact());
@@ -184,26 +184,25 @@ private UserDao userDao;
         try {
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeMauvaisContact(true);
-            ordreKosc.setDateEnvoiMauvaisContact(new Date());
+            ordreKosc.setDateEnvoiMauvaisContact(now);
 
 
         } catch (Exception exception) {
-           // OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
+            // OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
             ordreKosc.setEnvoyeMauvaisContact(false);
             ordreKosc.setDateEnvoiMauvaisContact(null);
-           // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
+            // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKosc.setDatePriseRdv(new Date());
+        ordreKosc.setDatePriseRdv(now);
         saveAndInitDateDernierAppel(ordreKosc);
 
 
     }
 
 
-
     @Override
     public void sendMailReplanification(OrdreKosc ordreKosc) {
-        
+
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromReplanification());
         emailDetails.setTo(ordreKosc.getToReplanification());
@@ -212,7 +211,7 @@ private UserDao userDao;
         try {
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeReplanification(true);
-            ordreKosc.setDateEnvoiReplanification(new Date());
+            ordreKosc.setDateEnvoiReplanification(now);
 
         } catch (Exception exception) {
             //OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
@@ -220,13 +219,13 @@ private UserDao userDao;
             ordreKosc.setDateEnvoiReplanification(null);
             //ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKosc.setDatePriseRdv(new Date());
+        ordreKosc.setDatePriseRdv(now);
         saveAndInitDateDernierAppel(ordreKosc);
     }
 
     @Override
     public void sendMailReportDemandeManeoClientInjoignable(OrdreKosc ordreKosc) {
-        
+
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromReportDemandeManeoClientInjoignable());
         emailDetails.setTo(ordreKosc.getToReportDemandeManeoClientInjoignable());
@@ -236,15 +235,15 @@ private UserDao userDao;
 
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeReportDemandeManeoClientInjoignable(true);
-            ordreKosc.setDateEnvoiReportDemandeManeoClientInjoignable(new Date());
+            ordreKosc.setDateEnvoiReportDemandeManeoClientInjoignable(now);
 
         } catch (Exception exception) {
             //OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
             ordreKosc.setEnvoyeReportDemandeManeoClientInjoignable(false);
             ordreKosc.setDateEnvoiReportDemandeManeoClientInjoignable(null);
-           // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
+            // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKosc.setDatePriseRdv(new Date());
+        ordreKosc.setDatePriseRdv(now);
         saveAndInitDateDernierAppel(ordreKosc);
 
 
@@ -252,7 +251,7 @@ private UserDao userDao;
 
     @Override
     public void sendMailReportDemandeManeoClientJoignableAccepte(OrdreKosc ordreKosc) {
-        
+
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromReportDemandeManeoClientJoignableAccepte());
         emailDetails.setTo(ordreKosc.getToReportDemandeManeoClientJoignableAccepte());
@@ -261,7 +260,7 @@ private UserDao userDao;
         try {
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeReportDemandeManeoClientJoignableAccepte(true);
-            ordreKosc.setDateEnvoiReportDemandeManeoClientJoignableAccepte(new Date());
+            ordreKosc.setDateEnvoiReportDemandeManeoClientJoignableAccepte(now);
 
         } catch (Exception exception) {
             //OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
@@ -269,14 +268,14 @@ private UserDao userDao;
             ordreKosc.setDateEnvoiReportDemandeManeoClientJoignableAccepte(null);
             //ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKosc.setDatePriseRdv(new Date());
+        ordreKosc.setDatePriseRdv(now);
         saveAndInitDateDernierAppel(ordreKosc);
 
     }
 
     @Override
     public void sendMailReportDemandeManeoClientJoignableRefus(OrdreKosc ordreKosc) {
-        
+
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromReportDemandeManeoClientJoignableRefus());
         emailDetails.setTo(ordreKosc.getToReportDemandeManeoClientJoignableRefus());
@@ -286,15 +285,15 @@ private UserDao userDao;
 
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeReportDemandeManeoClientJoignableRefus(true);
-            ordreKosc.setDateEnvoiReportDemandeManeoClientJoignableRefus(new Date());
+            ordreKosc.setDateEnvoiReportDemandeManeoClientJoignableRefus(now);
 
         } catch (Exception exception) {
-          //  OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
+            //  OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
             ordreKosc.setEnvoyeReportDemandeManeoClientJoignableRefus(false);
             ordreKosc.setDateEnvoiReportDemandeManeoClientJoignableRefus(null);
-           // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
+            // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKosc.setDatePriseRdv(new Date());
+        ordreKosc.setDatePriseRdv(now);
         saveAndInitDateDernierAppel(ordreKosc);
 
 
@@ -302,7 +301,7 @@ private UserDao userDao;
 
     @Override
     public void sendMailReportDemandeClientClientInjoignable(OrdreKosc ordreKosc) {
-        
+
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromReportDemandeClientClientInjoignable());
         emailDetails.setTo(ordreKosc.getToReportDemandeClientClientInjoignable());
@@ -312,22 +311,22 @@ private UserDao userDao;
 
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeReportDemandeClientClientInjoignable(true);
-            ordreKosc.setDateEnvoiReportDemandeClientClientInjoignable(new Date());
+            ordreKosc.setDateEnvoiReportDemandeClientClientInjoignable(now);
 
         } catch (Exception exception) {
-           // OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
+            // OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
             ordreKosc.setEnvoyeReportDemandeClientClientInjoignable(false);
             ordreKosc.setDateEnvoiReportDemandeClientClientInjoignable(null);
             //ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKosc.setDatePriseRdv(new Date());
+        ordreKosc.setDatePriseRdv(now);
         saveAndInitDateDernierAppel(ordreKosc);
 
     }
 
     @Override
     public void sendMailReportDemandeClientClientJoignable(OrdreKosc ordreKosc) {
-        
+
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setFrom(ordreKosc.getFromReportDemandeClientClientJoignable());
         emailDetails.setTo(ordreKosc.getToReportDemandeClientClientJoignable());
@@ -337,15 +336,15 @@ private UserDao userDao;
 
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeReportDemandeClientClientJoignable(true);
-            ordreKosc.setDateEnvoiReportDemandeClientClientJoignable(new Date());
+            ordreKosc.setDateEnvoiReportDemandeClientClientJoignable(now);
 
         } catch (Exception exception) {
             //OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
             ordreKosc.setEnvoyeReportDemandeClientClientJoignable(false);
             ordreKosc.setDateEnvoiReportDemandeClientClientJoignable(null);
-           // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
+            // ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKosc.setDatePriseRdv(new Date());
+        ordreKosc.setDatePriseRdv(now);
         saveAndInitDateDernierAppel(ordreKosc);
 
     }
@@ -362,7 +361,7 @@ private UserDao userDao;
 
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyeCri(true);
-            ordreKosc.setDateEnvoiCri(new Date());
+            ordreKosc.setDateEnvoiCri(now);
 
         } catch (Exception exception) {
             //OrdreKosc myOrderKosc = ordreKoscAdminService.findById(ordreKosc.getId());
@@ -370,7 +369,7 @@ private UserDao userDao;
             ordreKosc.setDateEnvoiCri(null);
             //ordreKosc.setEtatDemandeKosc(myOrderKosc.getEtatDemandeKosc());
         }
-        ordreKosc.setDatePriseRdv(new Date());
+        ordreKosc.setDatePriseRdv(now);
         saveAndInitDateDernierAppel(ordreKosc);
 
 
@@ -378,13 +377,17 @@ private UserDao userDao;
 
 
     private void saveAndInitDateDernierAppel(OrdreKosc ordreKosc) {
-        if (ordreKosc.getDateTroisiemeAppel() != null) {
+        ordreKosc.setDateEnvoiCri(null);
+        if (ordreKosc.getDateTroisiemeAppel() == null && ordreKosc.getDateDeuxiemeAppel() != null) {
+            ordreKosc.setDateTroisiemeAppel(now);
             ordreKosc.setDateDernierAppel(ordreKosc.getDateTroisiemeAppel());
             ordreKosc.setNumeroDernierAppel(3L);
-        } else if (ordreKosc.getDateDeuxiemeAppel() != null) {
+        } else if (ordreKosc.getDatePremierAppel() != null && ordreKosc.getDateDeuxiemeAppel() == null) {
+            ordreKosc.setDateDeuxiemeAppel(now);
             ordreKosc.setDateDernierAppel(ordreKosc.getDateDeuxiemeAppel());
             ordreKosc.setNumeroDernierAppel(2L);
-        } else if (ordreKosc.getDatePremierAppel() != null) {
+        } else if (ordreKosc.getDatePremierAppel() == null) {
+            ordreKosc.setDatePremierAppel(now);
             ordreKosc.setDateDernierAppel(ordreKosc.getDatePremierAppel());
             ordreKosc.setNumeroDernierAppel(1L);
         }
@@ -392,59 +395,60 @@ private UserDao userDao;
         ordreKoscDao.save(ordreKosc);
 
     }
-    private void prepareUser(OrdreKosc ordreKosc){
 
-        if(ordreKosc.getUserMauvaisContact()!=null && StringUtil.isNotEmpty(ordreKosc.getUserMauvaisContact().getEmail())){
+    private void prepareUser(OrdreKosc ordreKosc) {
+
+        if (ordreKosc.getUserMauvaisContact() != null && StringUtil.isNotEmpty(ordreKosc.getUserMauvaisContact().getEmail())) {
             ordreKosc.setUserMauvaisContact(userDao.findByEmail(ordreKosc.getUserMauvaisContact().getEmail()));
         }
-        if(ordreKosc.getUserAutre()!=null && StringUtil.isNotEmpty(ordreKosc.getUserAutre().getEmail())){
+        if (ordreKosc.getUserAutre() != null && StringUtil.isNotEmpty(ordreKosc.getUserAutre().getEmail())) {
             ordreKosc.setUserAutre(userDao.findByEmail(ordreKosc.getUserAutre().getEmail()));
         }
-        if(ordreKosc.getUserCri()!=null && StringUtil.isNotEmpty(ordreKosc.getUserCri().getEmail())){
+        if (ordreKosc.getUserCri() != null && StringUtil.isNotEmpty(ordreKosc.getUserCri().getEmail())) {
             ordreKosc.setUserCri(userDao.findByEmail(ordreKosc.getUserCri().getEmail()));
         }
-        if(ordreKosc.getUserFtl()!=null && StringUtil.isNotEmpty(ordreKosc.getUserFtl().getEmail())){
+        if (ordreKosc.getUserFtl() != null && StringUtil.isNotEmpty(ordreKosc.getUserFtl().getEmail())) {
             ordreKosc.setUserFtl(userDao.findByEmail(ordreKosc.getUserFtl().getEmail()));
         }
-        if(ordreKosc.getUserRefus()!=null && StringUtil.isNotEmpty(ordreKosc.getUserRefus().getEmail())){
+        if (ordreKosc.getUserRefus() != null && StringUtil.isNotEmpty(ordreKosc.getUserRefus().getEmail())) {
             ordreKosc.setUserRefus(userDao.findByEmail(ordreKosc.getUserRefus().getEmail()));
         }
 
-        if(ordreKosc.getUserClientInjoinable()!=null && StringUtil.isNotEmpty(ordreKosc.getUserClientInjoinable().getEmail())){
+        if (ordreKosc.getUserClientInjoinable() != null && StringUtil.isNotEmpty(ordreKosc.getUserClientInjoinable().getEmail())) {
             ordreKosc.setUserClientInjoinable(userDao.findByEmail(ordreKosc.getUserClientInjoinable().getEmail()));
         }
 
-        if(ordreKosc.getUserClientInjoinableKosc()!=null && StringUtil.isNotEmpty(ordreKosc.getUserClientInjoinableKosc().getEmail())){
+        if (ordreKosc.getUserClientInjoinableKosc() != null && StringUtil.isNotEmpty(ordreKosc.getUserClientInjoinableKosc().getEmail())) {
             ordreKosc.setUserClientInjoinableKosc(userDao.findByEmail(ordreKosc.getUserClientInjoinableKosc().getEmail()));
         }
 
-        if(ordreKosc.getUserConfirmationClient()!=null && StringUtil.isNotEmpty(ordreKosc.getUserConfirmationClient().getEmail())){
+        if (ordreKosc.getUserConfirmationClient() != null && StringUtil.isNotEmpty(ordreKosc.getUserConfirmationClient().getEmail())) {
             ordreKosc.setUserConfirmationClient(userDao.findByEmail(ordreKosc.getUserConfirmationClient().getEmail()));
         }
-        if(ordreKosc.getUserPlanification()!=null && StringUtil.isNotEmpty(ordreKosc.getUserPlanification().getEmail())){
+        if (ordreKosc.getUserPlanification() != null && StringUtil.isNotEmpty(ordreKosc.getUserPlanification().getEmail())) {
             ordreKosc.setUserPlanification(userDao.findByEmail(ordreKosc.getUserPlanification().getEmail()));
         }
 
-        if(ordreKosc.getUserReplanification()!=null && StringUtil.isNotEmpty(ordreKosc.getUserReplanification().getEmail())){
+        if (ordreKosc.getUserReplanification() != null && StringUtil.isNotEmpty(ordreKosc.getUserReplanification().getEmail())) {
             ordreKosc.setUserReplanification(userDao.findByEmail(ordreKosc.getUserReplanification().getEmail()));
         }
-        if(ordreKosc.getUserImportation()!=null && StringUtil.isNotEmpty(ordreKosc.getUserImportation().getEmail())){
+        if (ordreKosc.getUserImportation() != null && StringUtil.isNotEmpty(ordreKosc.getUserImportation().getEmail())) {
             ordreKosc.setUserImportation(userDao.findByEmail(ordreKosc.getUserImportation().getEmail()));
         }
-        if(ordreKosc.getUserReportDemandeClientClientInjoignable()!=null && StringUtil.isNotEmpty(ordreKosc.getUserReportDemandeClientClientInjoignable().getEmail())){
+        if (ordreKosc.getUserReportDemandeClientClientInjoignable() != null && StringUtil.isNotEmpty(ordreKosc.getUserReportDemandeClientClientInjoignable().getEmail())) {
             ordreKosc.setUserReportDemandeClientClientInjoignable(userDao.findByEmail(ordreKosc.getUserReportDemandeClientClientInjoignable().getEmail()));
         }
-        if(ordreKosc.getUserReportDemandeClientClientJoignable()!=null && StringUtil.isNotEmpty(ordreKosc.getUserReportDemandeClientClientJoignable().getEmail())){
+        if (ordreKosc.getUserReportDemandeClientClientJoignable() != null && StringUtil.isNotEmpty(ordreKosc.getUserReportDemandeClientClientJoignable().getEmail())) {
             ordreKosc.setUserReportDemandeClientClientJoignable(userDao.findByEmail(ordreKosc.getUserReportDemandeClientClientJoignable().getEmail()));
         }
 
-        if(ordreKosc.getUserReportDemandeManeoClientJoignableAccepte()!=null && StringUtil.isNotEmpty(ordreKosc.getUserReportDemandeManeoClientJoignableAccepte().getEmail())){
+        if (ordreKosc.getUserReportDemandeManeoClientJoignableAccepte() != null && StringUtil.isNotEmpty(ordreKosc.getUserReportDemandeManeoClientJoignableAccepte().getEmail())) {
             ordreKosc.setUserReportDemandeManeoClientJoignableAccepte(userDao.findByEmail(ordreKosc.getUserReportDemandeManeoClientJoignableAccepte().getEmail()));
         }
-        if(ordreKosc.getUserReportDemandeManeoClientJoignableRefus()!=null && StringUtil.isNotEmpty(ordreKosc.getUserReportDemandeManeoClientJoignableRefus().getEmail())){
+        if (ordreKosc.getUserReportDemandeManeoClientJoignableRefus() != null && StringUtil.isNotEmpty(ordreKosc.getUserReportDemandeManeoClientJoignableRefus().getEmail())) {
             ordreKosc.setUserReportDemandeManeoClientJoignableRefus(userDao.findByEmail(ordreKosc.getUserReportDemandeManeoClientJoignableRefus().getEmail()));
         }
-        if(ordreKosc.getUserReportDemandeManeoClientInjoignable()!=null && StringUtil.isNotEmpty(ordreKosc.getUserReportDemandeManeoClientInjoignable().getEmail())){
+        if (ordreKosc.getUserReportDemandeManeoClientInjoignable() != null && StringUtil.isNotEmpty(ordreKosc.getUserReportDemandeManeoClientInjoignable().getEmail())) {
             ordreKosc.setUserReportDemandeManeoClientInjoignable(userDao.findByEmail(ordreKosc.getUserReportDemandeManeoClientInjoignable().getEmail()));
         }
 

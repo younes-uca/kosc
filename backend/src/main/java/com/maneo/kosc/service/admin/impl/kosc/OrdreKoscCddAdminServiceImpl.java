@@ -3,14 +3,19 @@ package com.maneo.kosc.service.admin.impl.kosc;
 import com.maneo.kosc.bean.kosc.OrdreKosc;
 import com.maneo.kosc.dao.kosc.OrdreKoscDao;
 import com.maneo.kosc.service.admin.facade.kosc.OrdreKoscCddAdminService;
+import com.maneo.kosc.service.util.DateUtil;
 import com.maneo.kosc.service.util.SearchUtil;
+import com.maneo.kosc.service.util.StringUtil;
 import com.maneo.kosc.ws.rest.provided.vo.referentiel.EtatDemandeKoscVo;
 import com.maneo.kosc.ws.rest.provided.vo.kosc.OrdreKoscVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 //import static jdk.internal.org.jline.utils.Colors.s;
 
@@ -31,6 +36,7 @@ public class OrdreKoscCddAdminServiceImpl implements OrdreKoscCddAdminService {
         String query = "SELECT o FROM OrdreKosc o where 1=1";
 
         query += SearchUtil.addConstraint("o", "reference", "LIKE", ordreKoscVo.getReference());
+        query += SearchUtil.addConstraint("o", "montantDevis", "=", ordreKoscVo.getMontantDevis());
         query += SearchUtil.addConstraint("o", "referenceWorkOrder", "LIKE", ordreKoscVo.getReferenceWorkOrder());
         query += SearchUtil.addConstraintDate("o", "datePriseRdv", "=", ordreKoscVo.getDatePriseRdv());
         query += SearchUtil.addConstraintDate("o", "dateCri", "=", ordreKoscVo.getDateCri());
@@ -61,10 +67,9 @@ public class OrdreKoscCddAdminServiceImpl implements OrdreKoscCddAdminService {
                     query+= " AND o.etatDemandeKosc.id IN ("+convertId(ordreKoscVo.getEtatDemandeKoscVos())+")";
             }
 
-
-        query += " AND o.codeDecharge is NULL";
-
-        query += " ORDER BY o.nbrHeureDateSubmissionAndNow DESC, o.submissionDate ASC";
+        //query += " AND o.codeDecharge is NULL";
+       // query += SearchUtil.addConstraintMinMaxDate("o", "dateRdv", null,new Date() ); khaoula
+        query += " ORDER BY o.dateRdv DESC, o.submissionDate ASC";
 
 
         List<OrdreKosc> resultList = entityManager.createQuery(query).getResultList();
@@ -73,6 +78,24 @@ public class OrdreKoscCddAdminServiceImpl implements OrdreKoscCddAdminService {
     }
 
 
+
+    @Override
+    public List<OrdreKosc> genererCodeDecharge(List<OrdreKosc> ordreKoscs) {
+        Date now = new Date();
+        if (ordreKoscs != null) {
+            for (OrdreKosc ordreKosc : ordreKoscs) {
+                if (ordreKosc.getEtatDemandeKosc() != null ) {
+                    ordreKosc.setDateCri(new Date());
+                     if(Objects.equals(ordreKosc.getEtatDemandeKosc().getCode(), "ok") && StringUtil.isEmpty(ordreKosc.getCodeDecharge())){
+                        ordreKosc.setCodeDecharge("D"+DateUtil.formateDate("yyMMdd",now) + "-MN" + ordreKosc.getId());
+                    }
+                    ordreKoscDao.save(ordreKosc);
+                }
+            }
+        }
+
+        return ordreKoscs;
+    }
 
 
     private String convertId(List<EtatDemandeKoscVo> etatDemandeKoscVos) {

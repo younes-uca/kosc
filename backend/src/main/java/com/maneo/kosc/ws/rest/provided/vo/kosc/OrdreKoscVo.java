@@ -270,6 +270,7 @@ public class OrdreKoscVo {
     private String nbrHeureDateSubmissionAndNow;
     private String nbrHeureDateSubmissionAndNowMin;
     private String nbrHeureDateSubmissionAndNowMax;
+    private String montantDevis;
 
 
 
@@ -3046,5 +3047,13 @@ public class OrdreKoscVo {
 
     public void setOperatorComment(String operatorComment) {
         this.operatorComment = operatorComment;
+    }
+
+    public String getMontantDevis() {
+        return montantDevis;
+    }
+
+    public void setMontantDevis(String montantDevis) {
+        this.montantDevis = montantDevis;
     }
 }

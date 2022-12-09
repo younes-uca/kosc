@@ -4,6 +4,7 @@ import com.maneo.kosc.bean.technicien.Technicien;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -124,6 +125,8 @@ public interface OrdreKoscDao extends JpaRepository<OrdreKosc, Long> {
     List<OrdreKosc> findBySourceReplanificationId(Long id);
 
     int deleteBySourceReplanificationId(Long id);
+    List<OrdreKosc> findByMontantDevis(BigDecimal montantDevis);
+    int deleteByMontantDevis(BigDecimal montantDevis);
 
 
     OrdreKosc findByReferenceWorkOrderAndReference(String referenceWorkOrder, String reference);

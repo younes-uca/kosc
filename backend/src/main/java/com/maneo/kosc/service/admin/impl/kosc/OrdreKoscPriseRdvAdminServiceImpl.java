@@ -30,7 +30,6 @@ public class OrdreKoscPriseRdvAdminServiceImpl implements OrdreKoscPriseRdvAdmin
     private EntityManager entityManager;
 
 
-
     public List<OrdreKosc> findByCriteriaPriseRdv(OrdreKoscVo ordreKoscVo) {
 
 
@@ -69,8 +68,8 @@ public class OrdreKoscPriseRdvAdminServiceImpl implements OrdreKoscPriseRdvAdmin
             query += SearchUtil.addConstraint("o", "technicien.identifiant", "LIKE", ordreKoscVo.getTechnicienVo().getIdentifiant());
         }
 
-        if (ListUtil.isNotEmpty(ordreKoscVo.getEtatDemandeKoscVos())){
-            query+= " AND o.etatDemandeKosc.id IN ("+etatDemandeKoscService.convertId(ordreKoscVo.getEtatDemandeKoscVos())+")";
+        if (ListUtil.isNotEmpty(ordreKoscVo.getEtatDemandeKoscVos())) {
+            query += " AND o.etatDemandeKosc.id IN (" + etatDemandeKoscService.convertId(ordreKoscVo.getEtatDemandeKoscVos()) + ")";
         }
 
         query += " ORDER BY o.nbrHeureDateSubmissionAndNow DESC, o.submissionDate ASC";
@@ -83,28 +82,48 @@ public class OrdreKoscPriseRdvAdminServiceImpl implements OrdreKoscPriseRdvAdmin
     }
 
 
-    private void initDateDernierAppel(OrdreKosc ordreKosc) {
-        if(ordreKosc.getDateTroisiemeAppel()!=null){
+    @Override
+    public OrdreKosc editPasEncore(OrdreKosc ordreKosc) {
+        ordreKosc.setDateEnvoiCri(null);
+        if (ordreKosc.getDateTroisiemeAppel() == null && ordreKosc.getDateDeuxiemeAppel() != null) {
+            ordreKosc.setDateTroisiemeAppel(new Date());
             ordreKosc.setDateDernierAppel(ordreKosc.getDateTroisiemeAppel());
             ordreKosc.setNumeroDernierAppel(3L);
-        }else if(ordreKosc.getDateDeuxiemeAppel()!=null){
+        } else if (ordreKosc.getDatePremierAppel() != null && ordreKosc.getDateDeuxiemeAppel() == null) {
+            ordreKosc.setDateDeuxiemeAppel(new Date());
             ordreKosc.setDateDernierAppel(ordreKosc.getDateDeuxiemeAppel());
             ordreKosc.setNumeroDernierAppel(2L);
-        }else if(ordreKosc.getDatePremierAppel()!=null){
+        } else if (ordreKosc.getDatePremierAppel() == null) {
+            ordreKosc.setDatePremierAppel(new Date());
+            ordreKosc.setDateDernierAppel(ordreKosc.getDatePremierAppel());
+            ordreKosc.setNumeroDernierAppel(1L);
+        }
+        ordreKoscDao.save(ordreKosc);
+        return ordreKosc;
+    }
+
+    private void initDateDernierAppel(OrdreKosc ordreKosc) {
+        if (ordreKosc.getDateTroisiemeAppel() != null) {
+            ordreKosc.setDateDernierAppel(ordreKosc.getDateTroisiemeAppel());
+            ordreKosc.setNumeroDernierAppel(3L);
+        } else if (ordreKosc.getDateDeuxiemeAppel() != null) {
+            ordreKosc.setDateDernierAppel(ordreKosc.getDateDeuxiemeAppel());
+            ordreKosc.setNumeroDernierAppel(2L);
+        } else if (ordreKosc.getDatePremierAppel() != null) {
             ordreKosc.setDateDernierAppel(ordreKosc.getDatePremierAppel());
             ordreKosc.setNumeroDernierAppel(1L);
         }
     }
 
-    private void calculerDifferenceDateSubmission(List<OrdreKosc> ordreKoscs){
-        if(ordreKoscs != null){
+    private void calculerDifferenceDateSubmission(List<OrdreKosc> ordreKoscs) {
+        if (ordreKoscs != null) {
             for (OrdreKosc ordreKosc : ordreKoscs) {
                 Date now = new Date();
                 Long totalJourWithoutWeekEnd = DateUtil.totalJourWithoutWeekEnd(ordreKosc.getSubmissionDate(), now);
-                Long jourFierie = jourFerieAdminService.calcNombreJourTotal(ordreKosc.getSubmissionDate() , now);
-                System.out.println("totalJourWithoutWeekEnd = " + totalJourWithoutWeekEnd+"  jourFierie = " + jourFierie);
+                Long jourFierie = jourFerieAdminService.calcNombreJourTotal(ordreKosc.getSubmissionDate(), now);
+                System.out.println("totalJourWithoutWeekEnd = " + totalJourWithoutWeekEnd + "  jourFierie = " + jourFierie);
                 long res = DateUtil.calculerDifferenceHeure(ordreKosc.getSubmissionDate());
-                ordreKosc.setNbrHeureDateSubmissionAndNow((totalJourWithoutWeekEnd -jourFierie-1)*24);
+                ordreKosc.setNbrHeureDateSubmissionAndNow((totalJourWithoutWeekEnd - jourFierie - 1) * 24);
                 ordreKoscDao.save(ordreKosc);
             }
         }

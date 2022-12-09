@@ -165,52 +165,16 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
     public editPasEncore() {
-        let date: Date = new Date();
 
-        if (this.selectedOrdreKosc.datePremierAppel == null) {
-            this.selectedOrdreKosc.datePremierAppel = date;
-            this.messageService.add({
-                severity: 'success',
-                summary: 'Remarque',
-                detail: 'OrdreKosc avec reference ' + this.ordreKoscService.selectedOrdreKosc.reference + ' est mis à jour avec succes'
-            });
-        } else if (this.selectedOrdreKosc.dateDeuxiemeAppel == null && this.selectedOrdreKosc.datePremierAppel) {
-            if (this.selectedOrdreKosc.datePremierAppel.getDate() < date.getDate()) {
-                this.selectedOrdreKosc.dateDeuxiemeAppel = date;
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Remarque',
-                    detail: 'OrdreKosc avec reference ' + this.ordreKoscService.selectedOrdreKosc.reference + ' est mis à jour avec succes'
-                });
-            } else {
-                this.messageService.add({
-                    severity: 'info',
-                    summary: 'Remarque',
-                    detail: 'Vous avez d\éj\à appel\é ce client aujourd\'hui'
-                });
-            }
-        } else if (this.selectedOrdreKosc.dateTroisiemeAppel == null && this.selectedOrdreKosc.dateDeuxiemeAppel && this.selectedOrdreKosc.datePremierAppel) {
-            if (this.selectedOrdreKosc.dateDeuxiemeAppel.getDate() <= date.getDate()) {
-                this.selectedOrdreKosc.dateTroisiemeAppel = date;
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Remarque',
-                    detail: 'OrdreKosc avec reference ' + this.ordreKoscService.selectedOrdreKosc.reference + ' est mis à jour avec succes'
-                });
-            } else {
-                this.messageService.add({
-                    severity: 'info',
-                    summary: 'Remarque',
-                    detail: 'Vous avez d\éj\à appel\é ce client aujourd\'hui'
-                });
-            }
-        } else {
-            this.messageService.add({
-                severity: 'info',
-                summary: 'Remarque',
-                detail: 'Le troisi\ème appel est d\éj\à fait !'
-            });
-        }
+        this.ordreKoscService.editPasEncore().subscribe(ordreKosc => {
+            const myIndex = this.ordreKoscs.findIndex(e => e.id === this.selectedOrdreKosc.id);
+            this.ordreKoscs[myIndex] = ordreKosc;
+            this.editOrdreKoscDialog = false;
+            this.submitted = false;
+            this.selectedOrdreKosc = new OrdreKoscVo();
+        }, error => {
+            console.log(error);
+        });
         // this.editWithShowOption(false);
         this.displayPriseRdv = false;
     }
@@ -739,23 +703,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
 
-    /*   goToMailReplanification() {
-           this.indexEdit = 3;
-           this.emailIndex = 2;
-           this.selectedOrdreKosc.etatDemandeKoscVo = this.findEtatDemandeByCode(this.etats[0]);
-           this.selectedOrdreKosc.fromReport = this.selectedDefaultTemplateConfiguration.emailManeo;
-           this.selectedOrdreKosc.toReport = this.selectedDefaultTemplateConfiguration.emailKosc;
-           this.selectedOrdreKosc.objetReport = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportVo.objet);
-           this.selectedOrdreKosc.corpsReport = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportVo.corps);
 
-
-           this.selectedOrdreKosc.fromReplanification = this.selectedDefaultTemplateConfiguration.emailManeo;
-           this.selectedOrdreKosc.toReplanification = this.selectedDefaultTemplateConfiguration.emailKosc;
-           this.selectedOrdreKosc.objetReplanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailReplanificationVo.objet);
-           this.selectedOrdreKosc.corpsReplanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailReplanificationVo.corps);
-
-
-       }*/
 
     public findEtatDemandeByCode(code: string) {
         let res = this.etatDemandeKoscService.findByCode(code, this.etatDemandeKoscs);
