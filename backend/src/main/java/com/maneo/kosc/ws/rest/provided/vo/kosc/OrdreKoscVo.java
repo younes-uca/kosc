@@ -418,6 +418,15 @@ public class OrdreKoscVo {
     private User userReportDemandeClientClientJoignable;
     private User userImportation;
 
+    private String result;
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
 
     public String getNumeroDernierAppel() {
         return numeroDernierAppel;

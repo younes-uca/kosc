@@ -16,11 +16,5 @@ public interface OrdreKoscPriseRdvAdminService  {
 
     OrdreKosc findByReferenceWorkOrder(String referenceWorkOrder);
 
-    OrdreKosc updateNonJoignable(OrdreKosc ordreKosc);
 
-    OrdreKosc updateMauvaisContact(OrdreKosc ordreKosc);
-
-    OrdreKosc updateClientRefus(OrdreKosc ordreKosc);
-
-    OrdreKosc updateAutre(OrdreKosc ordreKosc);
 }

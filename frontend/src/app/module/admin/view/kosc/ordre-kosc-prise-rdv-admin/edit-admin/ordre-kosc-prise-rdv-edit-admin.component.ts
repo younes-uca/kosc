@@ -172,6 +172,33 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.editOrdreKoscDialog = false;
             this.submitted = false;
             this.selectedOrdreKosc = new OrdreKoscVo();
+            let result = ordreKosc.result;
+            console.log(result);
+            if (result == 1){
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Remarque',
+                    detail: 'OrdreKosc avec reference ' + this.ordreKoscService.selectedOrdreKosc.reference + ' est mis à jour avec succes'
+                });
+            }else if (result == -1){
+                this.messageService.add({
+                    severity: 'info',
+                    summary: 'Remarque',
+                    detail: 'Vous avez d\éj\à appel\é ce client aujourd\'hui'
+                });
+            }else if(result == -2){
+                this.messageService.add({
+                    severity: 'info',
+                    summary: 'Remarque',
+                    detail: 'Vous avez d\éj\à appel\é ce client aujourd\'hui'
+                });
+            }else if(result == -3){
+                this.messageService.add({
+                    severity: 'info',
+                    summary: 'Remarque',
+                    detail: 'Le troisi\ème appel est d\éj\à fait !'
+                });
+            }
         }, error => {
             console.log(error);
         });

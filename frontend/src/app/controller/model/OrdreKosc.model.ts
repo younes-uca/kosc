@@ -385,4 +385,5 @@ export class OrdreKoscVo {
 
 
 
+     public result: number;
 }
