@@ -85,21 +85,34 @@ public class OrdreKoscPriseRdvAdminServiceImpl implements OrdreKoscPriseRdvAdmin
     @Override
     public OrdreKosc editPasEncore(OrdreKosc ordreKosc) {
         ordreKosc.setDateEnvoiCri(null);
+        int result = 1;
         if (ordreKosc.getDateTroisiemeAppel() == null && ordreKosc.getDateDeuxiemeAppel() != null) {
-            ordreKosc.setDateTroisiemeAppel(new Date());
-            ordreKosc.setDateDernierAppel(ordreKosc.getDateTroisiemeAppel());
-            ordreKosc.setNumeroDernierAppel(3L);
+            Date dateTroisieme = new Date();
+            if(ordreKosc.getDateDeuxiemeAppel().before(dateTroisieme) || ordreKosc.getDateDeuxiemeAppel().equals(dateTroisieme)){
+                ordreKosc.setDateTroisiemeAppel(dateTroisieme);
+                ordreKosc.setDateDernierAppel(ordreKosc.getDateTroisiemeAppel());
+                ordreKosc.setNumeroDernierAppel(3L);
+            }else{
+                result = -1;
+            }
         } else if (ordreKosc.getDatePremierAppel() != null && ordreKosc.getDateDeuxiemeAppel() == null) {
-            ordreKosc.setDateDeuxiemeAppel(new Date());
-            ordreKosc.setDateDernierAppel(ordreKosc.getDateDeuxiemeAppel());
-            ordreKosc.setNumeroDernierAppel(2L);
+            Date dateDeuxieme = new Date();
+            if ( ordreKosc.getDatePremierAppel().before(dateDeuxieme)){
+                ordreKosc.setDateDeuxiemeAppel(dateDeuxieme);
+                ordreKosc.setDateDernierAppel(ordreKosc.getDateDeuxiemeAppel());
+                ordreKosc.setNumeroDernierAppel(2L);
+            }else {
+                result = -2;
+            }
         } else if (ordreKosc.getDatePremierAppel() == null) {
             ordreKosc.setDatePremierAppel(new Date());
             ordreKosc.setDateDernierAppel(ordreKosc.getDatePremierAppel());
             ordreKosc.setNumeroDernierAppel(1L);
+        }else if(ordreKosc.getDateTroisiemeAppel() != null){
+            result = -3;
         }
-        ordreKoscDao.save(ordreKosc);
-        return ordreKosc;
+        ordreKosc.setResult(result);
+        return ordreKoscDao.save(ordreKosc);
     }
 
     private void initDateDernierAppel(OrdreKosc ordreKosc) {
@@ -135,29 +148,6 @@ public class OrdreKoscPriseRdvAdminServiceImpl implements OrdreKoscPriseRdvAdmin
         return ordreKoscDao.findByReferenceWorkOrder(referenceWorkOrder);
     }
 
-    @Override
-    public OrdreKosc updateNonJoignable(OrdreKosc ordreKosc) {
-        OrdreKosc foundedOrdreKosc = findByReferenceWorkOrder(ordreKosc.getReferenceWorkOrder());
-        foundedOrdreKosc.getEtatDemandeKosc().setCode("report-demande-client-cl-j");
-        return ordreKoscDao.save(foundedOrdreKosc);
-    }
 
-    @Override
-    public OrdreKosc updateMauvaisContact(OrdreKosc ordreKosc) {
-        ordreKosc.getEtatDemandeKosc().setCode("mauvais-contact");
-        return ordreKoscDao.save(ordreKosc);
-    }
-
-    @Override
-    public OrdreKosc updateClientRefus(OrdreKosc ordreKosc) {
-        ordreKosc.getEtatDemandeKosc().setCode("refus-client");
-        return ordreKoscDao.save(ordreKosc);
-    }
-
-    @Override
-    public OrdreKosc updateAutre(OrdreKosc ordreKosc) {
-        ordreKosc.getEtatDemandeKosc().setCode("autre");
-        return ordreKoscDao.save(ordreKosc);
-    }
 
 }
