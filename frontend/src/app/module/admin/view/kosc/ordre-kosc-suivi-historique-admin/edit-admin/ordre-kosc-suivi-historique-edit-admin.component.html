@@ -1690,37 +1690,38 @@
                 <p-blockUI [blocked]="blocked"></p-blockUI>
                 <div class="p-grid">
                     <div class="p-field p-col-12 p-md-4">
-                        <label for="30">Date cri</label>
+                        <label for="30">Date cri<span style="color: red;">*</span></label>
                         <p-calendar dateFormat="{{dateFormat}}" [(ngModel)]="selectedOrdreKosc.dateCri"
+                                    [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscDateCri}" class="p-mb-2 p-mr-2"
                                     [showSeconds]="false" [showTime]="true"
                                     id="30"
                                     placeholder="Date cri">
                         </p-calendar>
-
+                        <small *ngIf='!validOrdreKoscDateCri' class='p-error'>Date Cri est obligatoire.</small>
 
                     </div>
                     <div class="p-field p-col-12 p-md-4">
-                        <label for="160">From</label>
+                        <label for="160">De<span style="color: red;">*</span></label>
                         <input [(ngModel)]="selectedOrdreKosc.fromCri"
                                [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscFromCri}" class="p-mb-2 p-mr-2"
                                id="160"
-                               pInputText placeholder="From"
+                               pInputText placeholder="De"
                                type="text"/>
-                        <small *ngIf='!validOrdreKoscFromCri' class='p-error'>From est obligatoire.</small>
+                        <small *ngIf='!validOrdreKoscFromCri' class='p-error'>De est obligatoire.</small>
                     </div>
 
 
                     <div class="p-field p-col-12 p-md-4">
-                        <label for="161">To</label>
+                        <label for="161">A<span style="color: red;">*</span></label>
                         <input [(ngModel)]="selectedOrdreKosc.toCri"
                                [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscToCri}" class="p-mb-2 p-mr-2"
                                id="161"
-                               pInputText placeholder="To"
+                               pInputText placeholder="A"
                                type="text"/>
-                        <small *ngIf='!validOrdreKoscToCri' class='p-error'>To est obligatoire.</small>
+                        <small *ngIf='!validOrdreKoscToCri' class='p-error'>A est obligatoire.</small>
                     </div>
                 <div class="p-field p-col-12 p-md-4">
-                    <label for="158">Objet</label>
+                    <label for="158">Objet<span style="color: red;">*</span></label>
                     <input [(ngModel)]="selectedOrdreKosc.objetCri"
                            [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscObjetCri}" class="p-mb-2 p-mr-2"
                            id="158"
@@ -1731,7 +1732,7 @@
 
 
                 <div class="p-field p-col-12 p-md-8">
-                    <label for="159">Corps</label>
+                    <label for="159">Corps<span style="color: red;">*</span></label>
                     <textarea [(ngModel)]="selectedOrdreKosc.corpsCri"
                               [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscCorpsCri}" cols="30" id="159"
                               pInputTextarea placeholder="Corps cri"
@@ -1914,7 +1915,7 @@
     <app-operator-create-admin></app-operator-create-admin>
     <app-departement-create-admin></app-departement-create-admin>
     <app-technicien-create-admin></app-technicien-create-admin>
-<!--    <app-client-create-admin></app-client-create-admin>-->
+
 <!--    <app-template-email-client-injoinable-create-admin></app-template-email-client-injoinable-create-admin>-->
 <!--    <app-template-email-kosc-create-admin></app-template-email-kosc-create-admin>-->
 <!--    <app-template-email-planification-create-admin></app-template-email-planification-create-admin>-->

@@ -871,6 +871,37 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
 
     }
 
+    private _validOrdreKoscCodeDecharge = true;
+    private _validOrdreKoscMontantDevis = true;
+    private _validOrdreKoscEtatDemandeKosc = true;
+
+
+    get validOrdreKoscEtatDemandeKosc(): boolean {
+        return this._validOrdreKoscEtatDemandeKosc;
+    }
+
+    set validOrdreKoscEtatDemandeKosc(value: boolean) {
+        this._validOrdreKoscEtatDemandeKosc = value;
+    }
+
+    get validOrdreKoscCodeDecharge(): boolean {
+        return this._validOrdreKoscCodeDecharge;
+    }
+
+    set validOrdreKoscCodeDecharge(value: boolean) {
+        this._validOrdreKoscCodeDecharge = value;
+    }
+
+    get validOrdreKoscMontantDevis(): boolean {
+        return this._validOrdreKoscMontantDevis;
+    }
+
+    set validOrdreKoscMontantDevis(value: boolean) {
+        this._validOrdreKoscMontantDevis = value;
+    }
+
+
+
     _validOrdreKoscObjetCri = true;
 
     get validOrdreKoscObjetCri(): boolean {
@@ -966,8 +997,38 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
         }
     }
 
+    private validateOrdreKoscCodeDecharge() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.codeDecharge)) {
+            this.errorMessages.push('code decharge non valide');
+            this.validOrdreKoscCodeDecharge = false;
+        } else {
+            this.validOrdreKoscCodeDecharge = true;
+        }
+    }
+
+    private validateOrdreKoscEtatDemandeKosc() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.dateCri)) {
+            this.errorMessages.push('etat demande non valide');
+            this.validOrdreKoscEtatDemandeKosc = false;
+        } else {
+            this.validOrdreKoscEtatDemandeKosc = true;
+        }
+    }
+
+    private validateOrdreKoscMontantDevis() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.dateCri)) {
+            this.errorMessages.push('montant devis non valide');
+            this.validOrdreKoscMontantDevis = false;
+        } else {
+            this.validOrdreKoscMontantDevis = true;
+        }
+    }
+
     private validateFormCri(): void {
         this.errorMessages = new Array<string>();
+        this.validateOrdreKoscEtatDemandeKosc();
+        this.validateOrdreKoscMontantDevis();
+        this.validateOrdreKoscCodeDecharge();
         this.validateOrdreKoscDateCri();
         this.validateOrdreKoscObjetCri();
         this.validateOrdreKoscCorpsCri();
