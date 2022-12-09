@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 public class DateUtil {
@@ -53,11 +54,23 @@ public class DateUtil {
             }
         }
     }
-    public static Date parseTimestampUniversalFormat(String date) {
+   /* public static Date parseTimestampUniversalFormat(String date) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
             date=date.replace("T"," ");
             date=date.replace("Z","");
+            Date parsedDate = dateFormat.parse(date);
+            Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+            return timestamp;
+        } catch (Exception e) {
+            return null;
+        }
+    }*/
+
+    public static Date parseTimestampUniversalFormat(String date) {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSS");
+            dateFormat.setTimeZone(TimeZone.getTimeZone("UTC+1"));
             Date parsedDate = dateFormat.parse(date);
             Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
             return timestamp;
