@@ -703,23 +703,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
     }
 
 
-    /*   goToMailReplanification() {
-           this.indexEdit = 3;
-           this.emailIndex = 2;
-           this.selectedOrdreKosc.etatDemandeKoscVo = this.findEtatDemandeByCode(this.etats[0]);
-           this.selectedOrdreKosc.fromReport = this.selectedDefaultTemplateConfiguration.emailManeo;
-           this.selectedOrdreKosc.toReport = this.selectedDefaultTemplateConfiguration.emailKosc;
-           this.selectedOrdreKosc.objetReport = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportVo.objet);
-           this.selectedOrdreKosc.corpsReport = eval(this.selectedDefaultTemplateConfiguration.templateEmailReportVo.corps);
 
-
-           this.selectedOrdreKosc.fromReplanification = this.selectedDefaultTemplateConfiguration.emailManeo;
-           this.selectedOrdreKosc.toReplanification = this.selectedDefaultTemplateConfiguration.emailKosc;
-           this.selectedOrdreKosc.objetReplanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailReplanificationVo.objet);
-           this.selectedOrdreKosc.corpsReplanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailReplanificationVo.corps);
-
-
-       }*/
 
     public findEtatDemandeByCode(code: string) {
         let res = this.etatDemandeKoscService.findByCode(code, this.etatDemandeKoscs);
