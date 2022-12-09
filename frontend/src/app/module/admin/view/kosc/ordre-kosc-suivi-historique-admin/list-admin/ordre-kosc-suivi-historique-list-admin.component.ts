@@ -213,8 +213,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         this.defaultTemplateConfigurationService.findDefaultTemplateConfiguration().subscribe((data) =>
             this.selectedDefaultTemplateConfiguration = data,
         );
-        this.searchOrdreKosc.dateRdvMin = new Date().toDateString();
-
+        this.searchOrdreKosc.dateRdvMin =this.datePipe.transform(new Date(),"d-MMMM-y");
         this.loadEtatDemandeKoscIncluding(['planification']);
         this.setDateEnvoiMinAndMax();
         this.initExport();
