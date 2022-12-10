@@ -11,6 +11,5 @@ public interface OrdreKoscCddAdminService {
     public List<OrdreKosc> findByCriteriaCdd(OrdreKoscVo ordreKoscVo);
 
 
-    List<OrdreKosc> genererCodeDecharge(List<OrdreKosc> ordreKoscs);
 
 }
