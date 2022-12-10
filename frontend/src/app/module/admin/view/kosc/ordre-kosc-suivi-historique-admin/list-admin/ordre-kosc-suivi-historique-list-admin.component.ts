@@ -124,6 +124,13 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         }, error => console.log(error));
     }
 
+    public formatDdMmYy(date: Date): string {
+        return date != null ? this.datePipe.transform(date, 'd/M/yyyy') : '';
+    }
+
+    public formatHhMm(date: Date): string {
+        return date != null ? this.datePipe.transform(date, 'hh:mm') : '';
+    }
     public async loadEtatDemandeKoscIncluding(etatNonDesire : Array<String>) {
         await this.roleService.findAll();
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
@@ -137,65 +144,6 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
     }
 
 
-    get ordreKoscs(): Array<OrdreKoscVo> {
-        return this.ordreKoscService.ordreKoscsSuiviCdd;
-    }
-
-    set ordreKoscs(value: Array<OrdreKoscVo>) {
-        this.ordreKoscService.ordreKoscsSuiviCdd = value;
-    }
-
-    get ordreKoscSelections(): Array<OrdreKoscVo> {
-        return this.ordreKoscService.ordreKoscSelections;
-    }
-
-    set ordreKoscSelections(value: Array<OrdreKoscVo>) {
-        this.ordreKoscService.ordreKoscSelections = value;
-    }
-
-    get selectedOrdreKosc(): OrdreKoscVo {
-        return this.ordreKoscService.selectedOrdreKosc;
-    }
-
-    set selectedOrdreKosc(value: OrdreKoscVo) {
-        this.ordreKoscService.selectedOrdreKosc = value;
-    }
-
-    get createOrdreKoscDialog(): boolean {
-        return this.ordreKoscService.createOrdreKoscDialog;
-    }
-
-    set createOrdreKoscDialog(value: boolean) {
-        this.ordreKoscService.createOrdreKoscDialog = value;
-    }
-
-    get editOrdreKoscDialog(): boolean {
-        return this.ordreKoscService.editOrdreKoscDialog;
-    }
-
-    set editOrdreKoscDialog(value: boolean) {
-        this.ordreKoscService.editOrdreKoscDialog = value;
-    }
-
-    get viewOrdreKoscDialog(): boolean {
-        return this.ordreKoscService.viewOrdreKoscDialog;
-    }
-
-    set viewOrdreKoscDialog(value: boolean) {
-        this.ordreKoscService.viewOrdreKoscDialog = value;
-    }
-
-    get searchOrdreKosc(): OrdreKoscVo {
-        return this.ordreKoscService.searchOrdreKoscCdd;
-    }
-
-    set searchOrdreKosc(value: OrdreKoscVo) {
-        this.ordreKoscService.searchOrdreKoscCdd = value;
-    }
-
-    get dateFormat() {
-        return environment.dateFormatList;
-    }
 
     ngAfterViewInit(): void {
         this.searchRequestCdd();
@@ -1041,10 +989,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
             );
         }
     }
-    /*private updateListe(){
-        this.ordreKoscs=this.ordreKoscs.filter(e => e.codeDecharge == null);
-        console.log("after update :"+ this.ordreKoscs);
-    }*/
+
     isEtatNotEmpty(ordreKoscVo : OrdreKoscVo){
 
         if (ordreKoscVo.etatDemandeKoscVo !== null ){
@@ -1054,6 +999,65 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         }
     }
 
+    get ordreKoscs(): Array<OrdreKoscVo> {
+        return this.ordreKoscService.ordreKoscsSuiviCdd;
+    }
+
+    set ordreKoscs(value: Array<OrdreKoscVo>) {
+        this.ordreKoscService.ordreKoscsSuiviCdd = value;
+    }
+
+    get ordreKoscSelections(): Array<OrdreKoscVo> {
+        return this.ordreKoscService.ordreKoscSelections;
+    }
+
+    set ordreKoscSelections(value: Array<OrdreKoscVo>) {
+        this.ordreKoscService.ordreKoscSelections = value;
+    }
+
+    get selectedOrdreKosc(): OrdreKoscVo {
+        return this.ordreKoscService.selectedOrdreKosc;
+    }
+
+    set selectedOrdreKosc(value: OrdreKoscVo) {
+        this.ordreKoscService.selectedOrdreKosc = value;
+    }
+
+    get createOrdreKoscDialog(): boolean {
+        return this.ordreKoscService.createOrdreKoscDialog;
+    }
+
+    set createOrdreKoscDialog(value: boolean) {
+        this.ordreKoscService.createOrdreKoscDialog = value;
+    }
+
+    get editOrdreKoscDialog(): boolean {
+        return this.ordreKoscService.editOrdreKoscDialog;
+    }
+
+    set editOrdreKoscDialog(value: boolean) {
+        this.ordreKoscService.editOrdreKoscDialog = value;
+    }
+
+    get viewOrdreKoscDialog(): boolean {
+        return this.ordreKoscService.viewOrdreKoscDialog;
+    }
+
+    set viewOrdreKoscDialog(value: boolean) {
+        this.ordreKoscService.viewOrdreKoscDialog = value;
+    }
+
+    get searchOrdreKosc(): OrdreKoscVo {
+        return this.ordreKoscService.searchOrdreKoscCdd;
+    }
+
+    set searchOrdreKosc(value: OrdreKoscVo) {
+        this.ordreKoscService.searchOrdreKoscCdd = value;
+    }
+
+    get dateFormat() {
+        return environment.dateFormatList;
+    }
 
     get selectedDefaultTemplateConfiguration(): DefaultTemplateConfigurationVo {
 
@@ -1064,11 +1068,4 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         this.defaultTemplateConfigurationService.selectedDefaultTemplateConfiguration = value;
     }
 
-    public formatDdMmYy(date: Date): string {
-        return date != null ? this.datePipe.transform(date, 'd/M/yyyy') : '';
-    }
-
-    public formatHhMm(date: Date): string {
-        return date != null ? this.datePipe.transform(date, 'hh:mm') : '';
-    }
 }

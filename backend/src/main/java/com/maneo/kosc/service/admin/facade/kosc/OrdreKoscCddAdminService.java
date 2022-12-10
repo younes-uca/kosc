@@ -12,4 +12,5 @@ public interface OrdreKoscCddAdminService {
 
 
     List<OrdreKosc> genererCodeDecharge(List<OrdreKosc> ordreKoscs);
+
 }
