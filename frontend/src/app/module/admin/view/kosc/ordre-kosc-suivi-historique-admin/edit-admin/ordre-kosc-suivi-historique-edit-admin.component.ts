@@ -1007,7 +1007,7 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
     }
 
     private validateOrdreKoscEtatDemandeKosc() {
-        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.dateCri)) {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.etatDemandeKoscVo.libelle)) {
             this.errorMessages.push('etat demande non valide');
             this.validOrdreKoscEtatDemandeKosc = false;
         } else {
@@ -1016,7 +1016,7 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
     }
 
     private validateOrdreKoscMontantDevis() {
-        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.dateCri)) {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.montantDevis)) {
             this.errorMessages.push('montant devis non valide');
             this.validOrdreKoscMontantDevis = false;
         } else {

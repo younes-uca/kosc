@@ -215,7 +215,6 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         );
         this.searchOrdreKosc.dateRdvMin =this.datePipe.transform(new Date(),"d-MMMM-y");
         this.loadEtatDemandeKoscIncluding(['planification']);
-        this.setDateEnvoiMinAndMax();
         this.initExport();
         this.initCol();
         this.loadOperator();
@@ -1055,11 +1054,6 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         }
     }
 
-    private setDateEnvoiMinAndMax() {
-        // let today =new Date();
-        // this.searchOrdreKosc.dateRdvMin=null;
-        // this.searchOrdreKosc.dateRdvMax= moment(today).format("yyyy-MM-DD");
-    }
 
     get selectedDefaultTemplateConfiguration(): DefaultTemplateConfigurationVo {
 

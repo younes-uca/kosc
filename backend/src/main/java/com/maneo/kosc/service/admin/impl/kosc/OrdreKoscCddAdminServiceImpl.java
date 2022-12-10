@@ -40,6 +40,7 @@ public class OrdreKoscCddAdminServiceImpl implements OrdreKoscCddAdminService {
         query += SearchUtil.addConstraint("o", "referenceWorkOrder", "LIKE", ordreKoscVo.getReferenceWorkOrder());
         query += SearchUtil.addConstraintDate("o", "datePriseRdv", "=", ordreKoscVo.getDatePriseRdv());
         query += SearchUtil.addConstraintDate("o", "dateCri", "=", ordreKoscVo.getDateCri());
+        query += SearchUtil.addConstraintMinMaxDate("o", "dateCri", ordreKoscVo.getDateCriMin(), ordreKoscVo.getDateCriMax());
         query += SearchUtil.addConstraintMinMax("o", "nbrHeureDateSubmissionAndNow", ordreKoscVo.getNbrHeureDateSubmissionAndNowMin(), ordreKoscVo.getNbrHeureDateSubmissionAndNowMax());
         //query += SearchUtil.addConstraintMinMaxDate("o", "dateEnvoiCri", ordreKoscVo.getDateEnvoiCriMin(), ordreKoscVo.getDateEnvoiCriMax());
        // query += SearchUtil.addConstraintMinMaxDate("o", "dateEnvoiPlanification", ordreKoscVo.getDateEnvoiPlanificationMin(), ordreKoscVo.getDateEnvoiPlanificationMax());

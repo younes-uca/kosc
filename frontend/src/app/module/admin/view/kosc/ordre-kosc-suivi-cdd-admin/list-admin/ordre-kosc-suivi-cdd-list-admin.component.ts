@@ -138,10 +138,7 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
 
         ];
         this.home = {icon: 'pi pi-home', routerLink: '/'};
-
-
         this.loadEtatDemandeKoscIncluding(['ok', 'ko']);
-        //this.setCriMinAndMax();
         this.initExport();
         this.initCol();
         this.loadOperator();
@@ -940,11 +937,7 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
             return false;
         }
     }
-    setCriMinAndMax(){
-        let today =new Date();
-        this.searchOrdreKosc.dateEnvoiCriMin = today.toLocaleDateString();
-        this.searchOrdreKosc.dateEnvoiCriMax = today.toLocaleDateString();
-    }
+
     // getters and setters
 
     get ordreKoscs(): Array<OrdreKoscVo> {

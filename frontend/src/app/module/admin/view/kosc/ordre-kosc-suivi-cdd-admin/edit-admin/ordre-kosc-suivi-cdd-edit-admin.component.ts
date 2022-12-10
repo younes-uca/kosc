@@ -39,7 +39,28 @@ import {TemplateEmailPlanificationService} from 'src/app/controller/service/Temp
     templateUrl: './ordre-kosc-suivi-cdd-edit-admin.component.html',
     styleUrls: ['./ordre-kosc-suivi-cdd-edit-admin.component.css']
 })
+
 export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
+
+    // declarations
+    _submitted = false;
+    private _errorMessages = new Array<string>();
+    _validOrdreKoscReferenceWorkOrder = true;
+
+    _validOperatorReference = true;
+    _validOperatorLibelle = true;
+    _validDepartementLibelle = true;
+    _validDepartementCode = true;
+    _validDepartementRegion = true;
+    _validTechnicienIdentifiant = true;
+    _validTemplateEmailClientInjoinableLibelle = true;
+
+    _validTemplateEmailClientInjoinableKoscCode = true;
+
+    _validTemplateEmailClientInjoinableCode = true;
+    _validTemplateEmailClientInjoinableKoscLibelle = true;
+
+
 
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService
         , private stringUtilService: StringUtilService
@@ -60,7 +81,6 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
 
     }
 
-    _submitted = false;
 
     get submitted(): boolean {
         return this._submitted;
@@ -70,7 +90,6 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
         this._submitted = value;
     }
 
-    private _errorMessages = new Array<string>();
 
     get errorMessages(): string[] {
         return this._errorMessages;
@@ -80,7 +99,6 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
         this._errorMessages = value;
     }
 
-    _validOrdreKoscReferenceWorkOrder = true;
 
     get validOrdreKoscReferenceWorkOrder(): boolean {
         return this._validOrdreKoscReferenceWorkOrder;
@@ -90,7 +108,6 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
         this._validOrdreKoscReferenceWorkOrder = value;
     }
 
-    _validOperatorReference = true;
 
     get validOperatorReference(): boolean {
         return this._validOperatorReference;
@@ -100,7 +117,6 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
         this._validOperatorReference = value;
     }
 
-    _validOperatorLibelle = true;
 
     get validOperatorLibelle(): boolean {
         return this._validOperatorLibelle;
@@ -110,7 +126,6 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
         this._validOperatorLibelle = value;
     }
 
-    _validDepartementLibelle = true;
 
     get validDepartementLibelle(): boolean {
         return this._validDepartementLibelle;
@@ -120,7 +135,6 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
         this._validDepartementLibelle = value;
     }
 
-    _validDepartementCode = true;
 
     get validDepartementCode(): boolean {
         return this._validDepartementCode;
@@ -130,7 +144,6 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
         this._validDepartementCode = value;
     }
 
-    _validDepartementRegion = true;
 
     get validDepartementRegion(): boolean {
         return this._validDepartementRegion;
@@ -140,7 +153,6 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
         this._validDepartementRegion = value;
     }
 
-    _validTechnicienIdentifiant = true;
 
     get validTechnicienIdentifiant(): boolean {
         return this._validTechnicienIdentifiant;
@@ -150,7 +162,7 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
         this._validTechnicienIdentifiant = value;
     }
 
-    _validTemplateEmailClientInjoinableCode = true;
+
 
     get validTemplateEmailClientInjoinableCode(): boolean {
         return this._validTemplateEmailClientInjoinableCode;
@@ -160,7 +172,6 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
         this._validTemplateEmailClientInjoinableCode = value;
     }
 
-    _validTemplateEmailClientInjoinableLibelle = true;
 
     get validTemplateEmailClientInjoinableLibelle(): boolean {
         return this._validTemplateEmailClientInjoinableLibelle;
@@ -170,7 +181,6 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
         this._validTemplateEmailClientInjoinableLibelle = value;
     }
 
-    _validTemplateEmailClientInjoinableKoscCode = true;
 
     get validTemplateEmailClientInjoinableKoscCode(): boolean {
         return this._validTemplateEmailClientInjoinableKoscCode;
@@ -180,7 +190,6 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
         this._validTemplateEmailClientInjoinableKoscCode = value;
     }
 
-    _validTemplateEmailClientInjoinableKoscLibelle = true;
 
     get validTemplateEmailClientInjoinableKoscLibelle(): boolean {
         return this._validTemplateEmailClientInjoinableKoscLibelle;
@@ -190,19 +199,11 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
         this._validTemplateEmailClientInjoinableKoscLibelle = value;
     }
 
-    _validTemplateEmailPlanificationCode = true;
-
-    get validTemplateEmailPlanificationCode(): boolean {
-        return this._validTemplateEmailPlanificationCode;
-    }
-
-    set validTemplateEmailPlanificationCode(value: boolean) {
-        this._validTemplateEmailPlanificationCode = value;
-    }
+    
 
 // methods
 
-    _validTemplateEmailPlanificationLibelle = true;
+
 
 // getters and setters
 
@@ -215,53 +216,8 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
     }
 
 
-    get validTemplateEmailPlanificationLibelle(): boolean {
-        return this._validTemplateEmailPlanificationLibelle;
-    }
 
-    set validTemplateEmailPlanificationLibelle(value: boolean) {
-        this._validTemplateEmailPlanificationLibelle = value;
-    }
 
-    _validTemplateEmailReplanificationCode = true;
-
-    get validTemplateEmailReplanificationCode(): boolean {
-        return this._validTemplateEmailReplanificationCode;
-    }
-
-    set validTemplateEmailReplanificationCode(value: boolean) {
-        this._validTemplateEmailReplanificationCode = value;
-    }
-
-    _validTemplateEmailReplanificationLibelle = true;
-
-    get validTemplateEmailReplanificationLibelle(): boolean {
-        return this._validTemplateEmailReplanificationLibelle;
-    }
-
-    set validTemplateEmailReplanificationLibelle(value: boolean) {
-        this._validTemplateEmailReplanificationLibelle = value;
-    }
-
-    _validTemplateEmailReportCode = true;
-
-    get validTemplateEmailReportCode(): boolean {
-        return this._validTemplateEmailReportCode;
-    }
-
-    set validTemplateEmailReportCode(value: boolean) {
-        this._validTemplateEmailReportCode = value;
-    }
-
-    _validTemplateEmailReportLibelle = true;
-
-    get validTemplateEmailReportLibelle(): boolean {
-        return this._validTemplateEmailReportLibelle;
-    }
-
-    set validTemplateEmailReportLibelle(value: boolean) {
-        this._validTemplateEmailReportLibelle = value;
-    }
 
     _validEtatDemandeKoscCode = true;
 
@@ -688,7 +644,6 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
             });
         }
     }
-
 
 
     public async openCreateDepartement(departement: string) {

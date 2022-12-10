@@ -852,6 +852,7 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
         query += SearchUtil.addConstraintMinMaxDate("o", "dateEnvoiClientInjoinableKosc", ordreKoscVo.getDateEnvoiClientInjoinableKoscMin(), ordreKoscVo.getDateEnvoiClientInjoinableKoscMax());
         query += SearchUtil.addConstraintMinMaxDate("o", "dateEnvoiCloture", ordreKoscVo.getDateEnvoiClotureMin(), ordreKoscVo.getDateEnvoiClotureMax());
         query += SearchUtil.addConstraintMinMaxDate("o", "dateEnvoiSuivi", ordreKoscVo.getDateEnvoiSuiviMin(), ordreKoscVo.getDateEnvoiSuiviMax());
+        query += SearchUtil.addConstraintMinMaxDate("o", "dateCri", ordreKoscVo.getDateCriMin(), ordreKoscVo.getDateCriMax());
         if (ordreKoscVo.getOperatorVo() != null) {
             query += SearchUtil.addConstraint("o", "operator.id", "=", ordreKoscVo.getOperatorVo().getId());
             query += SearchUtil.addConstraint("o", "operator.reference", "LIKE", ordreKoscVo.getOperatorVo().getReference());

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-//import static jdk.internal.org.jline.utils.Colors.s;
 
 @Service
 public class OrdreKoscSuiviCddAdminServiceImpl implements OrdreKoscSuiviCddAdminService {
@@ -33,7 +32,7 @@ public class OrdreKoscSuiviCddAdminServiceImpl implements OrdreKoscSuiviCddAdmin
         query += SearchUtil.addConstraint("o", "reference", "LIKE", ordreKoscVo.getReference());
         query += SearchUtil.addConstraint("o", "referenceWorkOrder", "LIKE", ordreKoscVo.getReferenceWorkOrder());
         query += SearchUtil.addConstraintDate("o", "datePriseRdv", "=", ordreKoscVo.getDatePriseRdv());
-
+        query += SearchUtil.addConstraintMinMaxDate("o", "dateCri", ordreKoscVo.getDateCriMin(), ordreKoscVo.getDateCriMax());
         query += SearchUtil.addConstraintMinMaxDate("o", "datePriseRdv", ordreKoscVo.getDatePriseRdvMin(), ordreKoscVo.getDatePriseRdvMax());
         query += SearchUtil.addConstraintMinMaxDate("o", "dateEnvoiSuivi", ordreKoscVo.getDateEnvoiSuiviMin(), ordreKoscVo.getDateEnvoiSuiviMax());
         query += SearchUtil.addConstraintMinMax("o", "nbrHeureDateSubmissionAndNow", ordreKoscVo.getNbrHeureDateSubmissionAndNowMin(), ordreKoscVo.getNbrHeureDateSubmissionAndNowMax());
