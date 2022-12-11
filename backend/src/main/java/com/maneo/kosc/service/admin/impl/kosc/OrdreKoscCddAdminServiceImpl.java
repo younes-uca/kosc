@@ -29,7 +29,6 @@ public class OrdreKoscCddAdminServiceImpl implements OrdreKoscCddAdminService {
     private EntityManager entityManager;
 
 
-
     public List<OrdreKosc> findByCriteriaCdd(OrdreKoscVo ordreKoscVo) {
 
 
@@ -43,7 +42,7 @@ public class OrdreKoscCddAdminServiceImpl implements OrdreKoscCddAdminService {
         query += SearchUtil.addConstraintMinMaxDate("o", "dateCri", ordreKoscVo.getDateCriMin(), ordreKoscVo.getDateCriMax());
         query += SearchUtil.addConstraintMinMax("o", "nbrHeureDateSubmissionAndNow", ordreKoscVo.getNbrHeureDateSubmissionAndNowMin(), ordreKoscVo.getNbrHeureDateSubmissionAndNowMax());
         //query += SearchUtil.addConstraintMinMaxDate("o", "dateEnvoiCri", ordreKoscVo.getDateEnvoiCriMin(), ordreKoscVo.getDateEnvoiCriMax());
-       // query += SearchUtil.addConstraintMinMaxDate("o", "dateEnvoiPlanification", ordreKoscVo.getDateEnvoiPlanificationMin(), ordreKoscVo.getDateEnvoiPlanificationMax());
+        // query += SearchUtil.addConstraintMinMaxDate("o", "dateEnvoiPlanification", ordreKoscVo.getDateEnvoiPlanificationMin(), ordreKoscVo.getDateEnvoiPlanificationMax());
 
         if (ordreKoscVo.getOperatorVo() != null) {
             query += SearchUtil.addConstraint("o", "operator.id", "=", ordreKoscVo.getOperatorVo().getId());
@@ -65,11 +64,11 @@ public class OrdreKoscCddAdminServiceImpl implements OrdreKoscCddAdminService {
         }
 
         if (ordreKoscVo.getEtatDemandeKoscVos() != null) {
-                    query+= " AND o.etatDemandeKosc.id IN ("+convertId(ordreKoscVo.getEtatDemandeKoscVos())+")";
-            }
+            query += " AND o.etatDemandeKosc.id IN (" + convertId(ordreKoscVo.getEtatDemandeKoscVos()) + ")";
+        }
 
         //query += " AND o.codeDecharge is NULL";
-        query += SearchUtil.addConstraintMinMaxDate("o", "dateRdv", ordreKoscVo.getDateRdvMin(),ordreKoscVo.getDateRdvMax());
+        query += SearchUtil.addConstraintMinMaxDate("o", "dateRdv", ordreKoscVo.getDateRdvMin(), ordreKoscVo.getDateRdvMax());
         query += " ORDER BY o.dateRdv DESC, o.submissionDate ASC";
 
 
@@ -79,36 +78,17 @@ public class OrdreKoscCddAdminServiceImpl implements OrdreKoscCddAdminService {
     }
 
 
-
-    @Override
-    public List<OrdreKosc> genererCodeDecharge(List<OrdreKosc> ordreKoscs) {
-        Date now = new Date();
-        if (ordreKoscs != null) {
-            for (OrdreKosc ordreKosc : ordreKoscs) {
-                if (ordreKosc.getEtatDemandeKosc() != null ) {
-                    ordreKosc.setDateCri(new Date());
-                     if(Objects.equals(ordreKosc.getEtatDemandeKosc().getCode(), "ok") && StringUtil.isEmpty(ordreKosc.getCodeDecharge())){
-                        ordreKosc.setCodeDecharge("D"+DateUtil.formateDate("yyMMdd",now) + "-MN" + ordreKosc.getId());
-                    }
-                    ordreKoscDao.save(ordreKosc);
-                }
-            }
-        }
-
-        return ordreKoscs;
-    }
-
-
     private String convertId(List<EtatDemandeKoscVo> etatDemandeKoscVos) {
-        String res="";
-        for(EtatDemandeKoscVo etatDemandeKoscVo: etatDemandeKoscVos){
-            res+="'"+etatDemandeKoscVo.getId()+"' ,";
+        String res = "";
+        for (EtatDemandeKoscVo etatDemandeKoscVo : etatDemandeKoscVos) {
+            res += "'" + etatDemandeKoscVo.getId() + "' ,";
         }
-        return  res.substring(0,res.length()-2);
+        return res.substring(0, res.length() - 2);
     }
+
     private String convertIdItem(EtatDemandeKoscVo etatDemandeKoscVo) {
-        String res="'"+etatDemandeKoscVo.getId()+"' ,";
-        return  res.substring(0,res.length()-2);
+        String res = "'" + etatDemandeKoscVo.getId() + "' ,";
+        return res.substring(0, res.length() - 2);
     }
 
 }

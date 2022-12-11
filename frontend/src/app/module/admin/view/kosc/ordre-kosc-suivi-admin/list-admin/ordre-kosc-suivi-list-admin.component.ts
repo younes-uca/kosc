@@ -266,13 +266,6 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
         }
     }
 
-    generateDischargeCode() {
-        console.log(this.ordreKoscs);
-        this.ordreKoscService.genererCodeDecharge().subscribe(ordreKoscs => {
-                this.ordreKoscs = ordreKoscs;
-            }, error => console.log(error)
-        );
-    }
 
     public async loadOrdreKoscs() {
         await this.roleService.findAll();
