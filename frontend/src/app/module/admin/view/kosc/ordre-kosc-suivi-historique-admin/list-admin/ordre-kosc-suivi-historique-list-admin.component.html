@@ -93,11 +93,7 @@
                defaultLabel="Etat demande kosc"
                optionLabel="libelle" [virtualScroll]="false"></p-multiSelect>
       </span>
-                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
-                                        <input class="p-mr-2" pInputText id="3"
-                                               type="text" [(ngModel)]="searchOrdreKosc.montantDevis">
-                                        <label for="3">Montant devis</label>
-                                    </span>
+
 
                 </div>
 
@@ -250,7 +246,6 @@
                         </td>
                         <td *ngIf="isEtatNotEmpty(ordreKosc)"
                             [hidden]="!isEtatNotEmpty(ordreKosc)">
-
                             <p-badge
                                     value=" {{ordreKosc.etatDemandeKoscVo?.libelle}}"
                                     severity="{{ordreKosc.etatDemandeKoscVo?.style}}">
@@ -261,7 +256,7 @@
                                 [style]="stylefyConfort(ordreKosc)">{{ordreKosc.dateCri | date :'dd/MM/yyyy HH:mm' }}</span>
                         </td>
 
-                        <td><span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.montantDevis}}</span></td>
+
                         <td>
                             <button (click)="editOrdreKosc(ordreKosc)" class="p-button-rounded p-button-success p-mr-2"
                                     icon="pi pi-pencil"
