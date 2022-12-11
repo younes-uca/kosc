@@ -981,14 +981,6 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         this.searchOrdreKosc.dateEnvoiCriMax = today.toLocaleDateString();
     }
 
-    public generateCodeDecharge() {
-        if(this.ordreKoscs != null){
-            this.ordreKoscService.genererCodeDecharge().subscribe(ordreKoscs =>{
-                this.ordreKoscs=ordreKoscs;
-                }
-            );
-        }
-    }
 
     isEtatNotEmpty(ordreKoscVo : OrdreKoscVo){
 

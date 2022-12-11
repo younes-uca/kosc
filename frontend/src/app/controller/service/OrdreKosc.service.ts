@@ -69,11 +69,6 @@ export class OrdreKoscService {
         return this.http.get<Array<OrdreKoscVo>>(this.API + 'suivi/');
     }
 
-    public genererCodeDecharge(): Observable<Array<OrdreKoscVo>> {
-        console.log("list: "+this.ordreKoscsSuiviCdd);
-        console.log("list: "+this.API);
-        return this.http.put<Array<OrdreKoscVo>>(this.API + 'generate/', [...this.ordreKoscsSuiviCdd]);
-    }
 
     public sendConfirmationEmailToClient(): Observable<OrdreKoscVo> {
 
