@@ -82,37 +82,28 @@ public class OrdreKoscPriseRdvAdminServiceImpl implements OrdreKoscPriseRdvAdmin
     }
 
 
+//    datePremierAppel inferieur strictement de dateDeuxiemeAppel et dateDeuxiemeAppel inferieur ou egale à dateTroisiemeAppel
     @Override
     public OrdreKosc editPasEncore(OrdreKosc ordreKosc) {
         ordreKosc.setDateEnvoiCri(null);
         int result = 1;
-        if (ordreKosc.getDateTroisiemeAppel() == null && ordreKosc.getDateDeuxiemeAppel() != null) {
-            Date dateTroisieme = new Date();
-            if(ordreKosc.getDateDeuxiemeAppel().before(dateTroisieme) || ordreKosc.getDateDeuxiemeAppel().equals(dateTroisieme)){
-                ordreKosc.setDateTroisiemeAppel(dateTroisieme);
-                ordreKosc.setDateDernierAppel(ordreKosc.getDateTroisiemeAppel());
-                ordreKosc.setNumeroDernierAppel(3L);
-            }else{
-                result = -1;
-            }
-        } else if (ordreKosc.getDatePremierAppel() != null && ordreKosc.getDateDeuxiemeAppel() == null) {
-            Date dateDeuxieme = new Date();
-            if ( ordreKosc.getDatePremierAppel().before(dateDeuxieme)){
-                ordreKosc.setDateDeuxiemeAppel(dateDeuxieme);
-                ordreKosc.setDateDernierAppel(ordreKosc.getDateDeuxiemeAppel());
-                ordreKosc.setNumeroDernierAppel(2L);
-            }else {
-                result = -2;
-            }
-        } else if (ordreKosc.getDatePremierAppel() == null) {
-            ordreKosc.setDatePremierAppel(new Date());
-            ordreKosc.setDateDernierAppel(ordreKosc.getDatePremierAppel());
-            ordreKosc.setNumeroDernierAppel(1L);
-        }else if(ordreKosc.getDateTroisiemeAppel() != null){
-            result = -3;
+        Date datePremierAppel = ordreKosc.getDatePremierAppel();
+        Date dateDeuxiemeAppel = ordreKosc.getDateDeuxiemeAppel();
+        Date dateTroisiemeAppel = ordreKosc.getDateTroisiemeAppel();
+        if( DateUtil.difference(datePremierAppel, dateDeuxiemeAppel) >= 0 ){
+            result = -1;
+        }else if(DateUtil.difference(dateDeuxiemeAppel, dateTroisiemeAppel) > 0){
+            result = -2;
+        }else{
+            initDateDernierAppel(ordreKosc);
+            OrdreKosc savedOrdreKosc = ordreKoscDao.save(ordreKosc);
+            savedOrdreKosc.setResult(result);
+
+            return savedOrdreKosc;
         }
         ordreKosc.setResult(result);
-        return ordreKoscDao.save(ordreKosc);
+        return ordreKosc;
+
     }
 
     private void initDateDernierAppel(OrdreKosc ordreKosc) {
