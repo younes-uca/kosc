@@ -341,6 +341,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.selectedOrdreKosc.objetPlanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailPlanificationVo.objet);
             this.selectedOrdreKosc.corpsPlanification = eval(this.selectedDefaultTemplateConfiguration.templateEmailPlanificationVo.corps);
             this.selectedOrdreKosc.userPlanification = userCourant;
+            console.log(this.selectedOrdreKosc.userPlanification);
         } else if (myEtat === this.etats[6]) {
             this.indexEdit = 3;
             this.emailIndex = 2;
