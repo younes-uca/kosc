@@ -336,35 +336,21 @@ export class OrdreKoscVo {
 
     public montantDevis : string;
 
+
+    //attribut de maillage
+
     public  supplier : string;
-
-
      public   customerOperator: string;
-
-
      public   slid;
-
      public   koscContactFirstName: string;
-
      public   koscContactLastName: string;
-
-
-
      public   koscContactPhone: string;
-
      public   koscContactEmail1: string;
-
      public   koscContactEmail2: string;
-
      public   koscContactEmail3: string;
-
      public   koscSplitterPosition: string;
-
      public   koscComment: string;
-
-
      public   otpRef: string;
-
      public   operatorComment: string;
 
 

@@ -599,6 +599,10 @@ export class OrdreKoscExcelService {
         myOrdreKoscERdv.dateInterventionTechniqueFin =this.convertDate(data[i]['intervention_end_datetime']);
         // myOrdreKoscERdv.dateErdv = this.convertDate(data[i]['date_E_Rdv']);
 
+        //attribut de maillage
+        myOrdreKoscERdv.supplier = data[i]['supplier'];
+        console.log(myOrdreKoscERdv.supplier);
+
         return myOrdreKoscERdv;
 
     }
@@ -706,7 +710,11 @@ export class OrdreKoscExcelService {
         if( myOrdreKoscWork.operatorVo==null){
             myOrdreKoscWork.operatorVo=new OperatorVo();
         }
-        myOrdreKoscWork.operatorVo.reference=data[i]['opt_reference'];
+        myOrdreKoscWork.operatorVo.reference=data[i]['customer_operator'];
+        myOrdreKoscWork.operatorVo.libelle=data[i]['customer_operator'];
+        if (myOrdreKoscWork.operatorVo.libelle == null || myOrdreKoscWork.operatorVo.libelle == '' ) {
+            myOrdreKoscWork.operatorVo = null;
+        }
 
         myOrdreKoscWork.etatDemandeKoscVo.code = 'initialisation-wo';
         myOrdreKoscWork.reference = data[i]['kosc_order_ref'];
@@ -743,6 +751,22 @@ export class OrdreKoscExcelService {
         myOrdreKoscWork.profile = data[i]['profile'];
         myOrdreKoscWork.providerSlId = data[i]['provider_slid'];
         myOrdreKoscWork.endCustumorBuilding = data[i]['building_name'];
+
+        //attribut de maillage
+        myOrdreKoscWork.supplier = data[i]['supplier'];
+        myOrdreKoscWork.customerOperator = data[i]['customer_operator'];//operator libelle !!
+        myOrdreKoscWork.slid = data[i]['slid'];
+        myOrdreKoscWork.koscSplitterPosition = data[i]['kosc_splitter_position'];
+        myOrdreKoscWork.otpRef = data[i]['otp_ref'];
+        myOrdreKoscWork.operatorComment = data[i]['operator_comment'];
+        myOrdreKoscWork.koscContactFirstName = data[i]['kosc_contact_first_name'];
+        myOrdreKoscWork.koscContactLastName = data[i]['kosc_contact_last_name'];
+        myOrdreKoscWork.koscContactPhone = data[i]['kosc_contact_phone'];
+        myOrdreKoscWork.koscContactEmail1 = data[i]['kosc_contact_email_1'];
+        myOrdreKoscWork.koscContactEmail2 = data[i]['kosc_contact_email_2'];
+        myOrdreKoscWork.koscContactEmail3 = data[i]['kosc_contact_email_3'];
+        myOrdreKoscWork.koscComment = data[i]['kosc_comments'];
+
         return myOrdreKoscWork;
     }
 
@@ -878,6 +902,22 @@ export class OrdreKoscExcelService {
         myOrdreKoscData.dateAppelReplanification = this.convertDate(data[i]['Re Planification']);
         myOrdreKoscData.dateInterventionTechniqueDebut = this.convertDate(data[i]['Date intervention Technicien']);
         console.log(data[i]['Date intervention Technicien']);
+
+        //attribut de maillage
+        myOrdreKoscData.supplier = data[i]['supplier'];
+        myOrdreKoscData.customerOperator = data[i]['customer_operator'];//operator libelle !!
+        myOrdreKoscData.slid = data[i]['slid'];
+        myOrdreKoscData.koscContactFirstName = data[i]['kosc_contact_first_name'];
+        myOrdreKoscData.koscContactLastName = data[i]['kosc_contact_last_name'];
+        myOrdreKoscData.koscContactPhone = data[i]['kosc_contact_phone'];
+        myOrdreKoscData.koscContactEmail1 = data[i]['kosc_contact_email_1'];
+        myOrdreKoscData.koscContactEmail2 = data[i]['kosc_contact_email_2'];
+        myOrdreKoscData.koscContactEmail3 = data[i]['kosc_contact_email_3'];
+        myOrdreKoscData.koscSplitterPosition = data[i]['kosc_splitter_position'];
+        myOrdreKoscData.koscComment = data[i]['kosc_comments'];
+        myOrdreKoscData.otpRef = data[i]['otp_ref'];
+        myOrdreKoscData.operatorComment = data[i]['operator_comment'];
+
         return myOrdreKoscData;
     }
 
