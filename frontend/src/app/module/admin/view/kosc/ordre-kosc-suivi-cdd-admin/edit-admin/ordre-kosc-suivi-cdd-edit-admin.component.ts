@@ -199,7 +199,7 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
         this._validTemplateEmailClientInjoinableKoscLibelle = value;
     }
 
-    
+
 
 // methods
 

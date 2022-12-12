@@ -161,7 +161,8 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         this.defaultTemplateConfigurationService.findDefaultTemplateConfiguration().subscribe((data) =>
             this.selectedDefaultTemplateConfiguration = data,
         );
-        this.searchOrdreKosc.dateRdvMin =this.datePipe.transform(new Date(),"d-MMMM-y");
+        this.searchOrdreKosc.dateRdvMax =null;
+        this.searchOrdreKosc.dateRdvMax =this.datePipe.transform(new Date(),"d-MMMM-y");
         this.loadEtatDemandeKoscIncluding(['planification']);
         this.initExport();
         this.initCol();
@@ -251,7 +252,6 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
                 this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
                 this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
                 this.selectedOrdreKosc.dateOuverture = DateUtils.toDate(ordreKosc.dateOuverture);
-                // console.log('haaa dateEnvoiCri ==> ' + ordreKosc.dateEnvoiCri);
                 this.selectedOrdreKosc.dateEnvoiCri = DateUtils.toDate(ordreKosc.dateEnvoiCri);
                 this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
                 this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
@@ -981,14 +981,6 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         this.searchOrdreKosc.dateEnvoiCriMax = today.toLocaleDateString();
     }
 
-    public generateCodeDecharge() {
-        if(this.ordreKoscs != null){
-            this.ordreKoscService.genererCodeDecharge().subscribe(ordreKoscs =>{
-                this.ordreKoscs=ordreKoscs;
-                }
-            );
-        }
-    }
 
     isEtatNotEmpty(ordreKoscVo : OrdreKoscVo){
 

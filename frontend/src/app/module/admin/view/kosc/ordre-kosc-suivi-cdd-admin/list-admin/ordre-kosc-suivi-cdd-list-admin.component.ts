@@ -67,33 +67,28 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
     operators: Array<OperatorVo>;
     departements: Array<DepartementVo>;
     techniciens: Array<TechnicienVo>;
-
-    templateEmailClientInjoinables: Array<TemplateEmailClientInjoinableVo>;
-    templateEmailClientInjoinableKoscs: Array<TemplateEmailClientInjoinableKoscVo>;
-    templateEmailPlanifications: Array<TemplateEmailPlanificationVo>;
-    templateEmailReplanifications: Array<TemplateEmailReplanificationVo>;
     etatDemandeKoscs: Array<EtatDemandeKoscVo>;
-    templateEmailClotures: Array<TemplateEmailClotureVo>;
-    templateSuivis: Array<TemplateSuiviVo>;
     entryDate: Calendar;
     items: MenuItem[];
-
     home: MenuItem;
 
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
         , private operatorService: OperatorService
         , private departementService: DepartementService
         , private technicienService: TechnicienService
-        , private templateEmailClientInjoinableService: TemplateEmailClientInjoinableService
-        , private templateEmailClientInjoinableKoscService: TemplateEmailClientInjoinableKoscService
-        , private templateEmailPlanificationService: TemplateEmailPlanificationService
-        , private templateEmailReplanificationService: TemplateEmailReplanificationService
         , private etatDemandeKoscService: EtatDemandeKoscService
-        , private templateEmailClotureService: TemplateEmailClotureService
-        , private templateSuiviService: TemplateSuiviService
+
     ) {
     }
     // methods
+    public searchRequestSuiviCdd() {
+        console.log(this.searchOrdreKosc.etatDemandeKoscVos);
+        this.ordreKoscService.findByCriteriaSuiviCdd(this.searchOrdreKosc).subscribe(ordreKoscs => {
+            this.ordreKoscs = ordreKoscs;
+            console.log(ordreKoscs);
+            this.searchOrdreKosc = new OrdreKoscVo();
+        }, error => console.log(error));
+    }
 
     public async loadEtatDemandeKoscExcept(etatNonDesire : Array<String>) {
         await this.roleService.findAll();
@@ -106,15 +101,6 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
 
     }
 
-    public searchRequestSuiviCdd() {
-        console.log(this.searchOrdreKosc.etatDemandeKoscVos);
-        this.ordreKoscService.findByCriteriaSuiviCdd(this.searchOrdreKosc).subscribe(ordreKoscs => {
-            this.ordreKoscs = ordreKoscs;
-            console.log(ordreKoscs);
-            this.searchOrdreKosc = new OrdreKoscVo();
-        }, error => console.log(error));
-    }
-
     public async loadEtatDemandeKoscIncluding(etatNonDesire : Array<String>) {
         await this.roleService.findAll();
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
@@ -125,7 +111,26 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
             : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
 
     }
+    erdvAndConfort(ordreKoscVo : OrdreKoscVo){
+        if( ordreKoscVo.erdv == true && ordreKoscVo.confort)
+            return true
+        else
+            return false
+    }
+    public async loadOrdreKoscs() {
+        await this.roleService.findAll();
+        const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
+        isPermistted ? this.ordreKoscService.findAll().subscribe(ordreKoscs => this.ordreKoscs = ordreKoscs, error => console.log(error))
+            : this.messageService.add({severity: 'error', summary: 'erreur', detail: 'problème d\'autorisation'});
+    }
 
+    public searchRequest() {
+        this.ordreKoscService.findByCriteria(this.searchOrdreKosc).subscribe(ordreKoscs => {
+
+            this.ordreKoscs = ordreKoscs;
+            // this.searchOrdreKosc = new OrdreKoscVo();
+        }, error => console.log(error));
+    }
 
     ngAfterViewInit(): void {
         this.searchRequestSuiviCdd();
@@ -144,12 +149,6 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
         this.loadOperator();
         this.loadDepartement();
         this.loadTechnicien();
-        this.loadTemplateEmailClientInjoinable();
-        this.loadTemplateEmailClientInjoinableKosc();
-        this.loadTemplateEmailPlanification();
-        this.loadTemplateEmailReplanification();
-        this.loadTemplateEmailCloture();
-        this.loadTemplateSuivi();
         this.yesOrNoEnvoiMailClient = [{label: 'EnvoiMailClient', value: null}, {label: 'Oui', value: 1}, {
             label: 'Non',
             value: 0
@@ -196,26 +195,7 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
         }];
     }
 
-    erdvAndConfort(ordreKoscVo : OrdreKoscVo){
-        if( ordreKoscVo.erdv == true && ordreKoscVo.confort)
-            return true
-        else
-            return false
-    }
-    public async loadOrdreKoscs() {
-        await this.roleService.findAll();
-        const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
-        isPermistted ? this.ordreKoscService.findAll().subscribe(ordreKoscs => this.ordreKoscs = ordreKoscs, error => console.log(error))
-            : this.messageService.add({severity: 'error', summary: 'erreur', detail: 'problème d\'autorisation'});
-    }
 
-    public searchRequest() {
-        this.ordreKoscService.findByCriteria(this.searchOrdreKosc).subscribe(ordreKoscs => {
-
-            this.ordreKoscs = ordreKoscs;
-            // this.searchOrdreKosc = new OrdreKoscVo();
-        }, error => console.log(error));
-    }
 
     public async editOrdreKosc(ordreKosc: OrdreKoscVo) {
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'edit');
@@ -236,7 +216,6 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
                 this.selectedOrdreKosc.dateEnvoiCri = DateUtils.toDate(ordreKosc.dateEnvoiCri);
                 this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
                 this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
-
                 this.selectedOrdreKosc.dateEnvoiPlanification = DateUtils.toDate(ordreKosc.dateEnvoiPlanification);
                 this.selectedOrdreKosc.dateEnvoiReplanification = DateUtils.toDate(ordreKosc.dateEnvoiReplanification);
                 this.selectedOrdreKosc.dateEnvoiCloture = DateUtils.toDate(ordreKosc.dateEnvoiCloture);
@@ -354,37 +333,6 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
 
     }
 
-    public async loadTemplateEmailClientInjoinable() {
-        await this.roleService.findAll();
-        const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
-        isPermistted ? this.templateEmailClientInjoinableService.findAll().subscribe(templateEmailClientInjoinables => this.templateEmailClientInjoinables = templateEmailClientInjoinables, error => console.log(error))
-            : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
-
-    }
-
-    public async loadTemplateEmailClientInjoinableKosc() {
-        await this.roleService.findAll();
-        const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
-        isPermistted ? this.templateEmailClientInjoinableKoscService.findAll().subscribe(templateEmailClientInjoinableKoscs => this.templateEmailClientInjoinableKoscs = templateEmailClientInjoinableKoscs, error => console.log(error))
-            : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
-
-    }
-
-    public async loadTemplateEmailPlanification() {
-        await this.roleService.findAll();
-        const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
-        isPermistted ? this.templateEmailPlanificationService.findAll().subscribe(templateEmailPlanifications => this.templateEmailPlanifications = templateEmailPlanifications, error => console.log(error))
-            : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
-
-    }
-
-    public async loadTemplateEmailReplanification() {
-        await this.roleService.findAll();
-        const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
-        isPermistted ? this.templateEmailReplanificationService.findAll().subscribe(templateEmailReplanifications => this.templateEmailReplanifications = templateEmailReplanifications, error => console.log(error))
-            : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
-
-    }
 
 
     public async loadEtatDemandeKosc() {
@@ -395,21 +343,6 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
 
     }
 
-    public async loadTemplateEmailCloture() {
-        await this.roleService.findAll();
-        const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
-        isPermistted ? this.templateEmailClotureService.findAll().subscribe(templateEmailClotures => this.templateEmailClotures = templateEmailClotures, error => console.log(error))
-            : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
-
-    }
-
-    public async loadTemplateSuivi() {
-        await this.roleService.findAll();
-        const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
-        isPermistted ? this.templateSuiviService.findAll().subscribe(templateSuivis => this.templateSuivis = templateSuivis, error => console.log(error))
-            : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
-
-    }
 
     public async duplicateOrdreKosc(ordreKosc: OrdreKoscVo) {
 

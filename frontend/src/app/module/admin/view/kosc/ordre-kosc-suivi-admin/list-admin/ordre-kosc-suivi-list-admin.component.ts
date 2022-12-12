@@ -35,6 +35,7 @@ import {AuthService} from 'src/app/controller/service/Auth.service';
 import {ExportService} from 'src/app/controller/service/Export.service';
 import {error} from "protractor";
 import {DateUtils} from "../../../../../../utils/DateUtils";
+import {Calendar} from "primeng/calendar/calendar";
 
 @Component({
     selector: 'app-ordre-kosc-suivi-list-admin',
@@ -266,13 +267,6 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
         }
     }
 
-    generateDischargeCode() {
-        console.log(this.ordreKoscs);
-        this.ordreKoscService.genererCodeDecharge().subscribe(ordreKoscs => {
-                this.ordreKoscs = ordreKoscs;
-            }, error => console.log(error)
-        );
-    }
 
     public async loadOrdreKoscs() {
         await this.roleService.findAll();
