@@ -185,7 +185,7 @@
                         <td><span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.datePriseRdv | date :'dd/MM/yyyy HH:mm' }}</span></td>
 
 
-                        <td><span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.dateRdv | date :'dd/MM/yyyy H:mm' }}</span></td>
+                        <td><span [style]="stylefyConfort(ordreKosc)">{{ ordreKosc.dateRdv | date :'dd/MM/yyyy HH:mm' }}</span></td>
 
 
 
@@ -201,6 +201,7 @@
 
                         <td *ngIf="!isEtatNotEmpty(ordreKosc)"
                             [hidden]="isEtatNotEmpty(ordreKosc)">
+
 
                             {{ordreKosc.etatDemandeKoscVo?.libelle}}
 

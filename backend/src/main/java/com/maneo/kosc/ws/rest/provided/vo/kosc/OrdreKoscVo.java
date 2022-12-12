@@ -270,6 +270,7 @@ public class OrdreKoscVo {
     private String nbrHeureDateSubmissionAndNow;
     private String nbrHeureDateSubmissionAndNowMin;
     private String nbrHeureDateSubmissionAndNowMax;
+    private String montantDevis;
 
 
 
@@ -345,7 +346,8 @@ public class OrdreKoscVo {
     private Boolean envoyeReportDemandeClientClientJoignable ;
     private String dateEnvoiReportDemandeClientClientJoignable;
     private String dateCri;
-
+    private String dateCriMax;
+    private String dateCriMin;
 
     private String supplier;
 
@@ -476,6 +478,22 @@ public class OrdreKoscVo {
 
     public void setDelaiPriseRdvParHeure(String delaiPriseRdvParHeure) {
         this.delaiPriseRdvParHeure = delaiPriseRdvParHeure;
+    }
+
+    public String getDateCriMax() {
+        return dateCriMax;
+    }
+
+    public void setDateCriMax(String dateCriMax) {
+        this.dateCriMax = dateCriMax;
+    }
+
+    public String getDateCriMin() {
+        return dateCriMin;
+    }
+
+    public void setDateCriMin(String dateCriMin) {
+        this.dateCriMin = dateCriMin;
     }
 
     public String getId() {
@@ -3055,5 +3073,13 @@ public class OrdreKoscVo {
 
     public void setOperatorComment(String operatorComment) {
         this.operatorComment = operatorComment;
+    }
+
+    public String getMontantDevis() {
+        return montantDevis;
+    }
+
+    public void setMontantDevis(String montantDevis) {
+        this.montantDevis = montantDevis;
     }
 }

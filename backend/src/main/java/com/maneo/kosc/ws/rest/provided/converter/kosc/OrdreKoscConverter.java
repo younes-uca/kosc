@@ -116,6 +116,9 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
                 item.setResult(NumberUtil.toInt(vo.getResult()));
             if (StringUtil.isNotEmpty(vo.getNbrHeureDateSubmissionAndNow()))
                 item.setNbrHeureDateSubmissionAndNow(NumberUtil.toLong(vo.getNbrHeureDateSubmissionAndNow()));
+
+            if (StringUtil.isNotEmpty(vo.getMontantDevis()))
+                item.setMontantDevis(NumberUtil.toBigDecimal(vo.getMontantDevis()));
             if (StringUtil.isNotEmpty(vo.getReference()))
                 item.setReference(vo.getReference());
             if (StringUtil.isNotEmpty(vo.getReferenceWorkOrder()))
@@ -667,6 +670,57 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
                 item.setDateDernierAppel(DateUtil.parseTimestampUniversalFormat(vo.getDateDernierAppel()));
             if (StringUtil.isNotEmpty(vo.getNumeroDernierAppel()))
                 item.setNumeroDernierAppel(NumberUtil.toLong(vo.getNumeroDernierAppel()));
+
+
+
+            if (this.userPlanification && vo.getUserPlanification() != null) {
+                item.setUserPlanification(vo.getUserPlanification());
+            }
+            if (this.userReplanification && vo.getUserReplanification() != null) {
+                item.setUserReplanification(vo.getUserReplanification());
+            }
+            if (this.userRefus && vo.getUserRefus() != null) {
+                item.setUserRefus(vo.getUserRefus());
+            }
+            if (this.userMauvaisContact && vo.getUserMauvaisContact() != null) {
+                item.setUserMauvaisContact(vo.getUserMauvaisContact());
+            }
+            if (this.userConfirmationClient && vo.getUserConfirmationClient() != null) {
+                item.setUserConfirmationClient(vo.getUserConfirmationClient());
+            }
+            if (this.userCri && vo.getUserCri() != null) {
+                item.setUserCri(vo.getUserCri());
+            }
+            if (this.userCri && vo.getUserCri() != null) {
+                item.setUserCri(vo.getUserCri());
+            }
+            if (this.userFtl && vo.getUserFtl() != null) {
+                item.setUserFtl(vo.getUserFtl());
+            }
+            if (this.userClientInjoinable && vo.getUserClientInjoinable() != null) {
+                item.setUserClientInjoinable(vo.getUserClientInjoinable());
+            }
+            if (this.userAutre && vo.getUserAutre() != null) {
+                item.setUserAutre(vo.getUserAutre());
+            }
+            if (this.userClientInjoinableKosc && vo.getUserClientInjoinableKosc() != null) {
+                item.setUserClientInjoinableKosc(vo.getUserClientInjoinableKosc());
+            }
+            if (this.userReportDemandeManeoClientInjoignable && vo.getUserReportDemandeManeoClientInjoignable() != null) {
+                item.setUserReportDemandeManeoClientInjoignable(vo.getUserReportDemandeManeoClientInjoignable());
+            }
+            if (this.userReportDemandeManeoClientJoignableAccepte && vo.getUserReportDemandeManeoClientJoignableAccepte() != null) {
+                item.setUserReportDemandeManeoClientJoignableAccepte(vo.getUserReportDemandeManeoClientJoignableAccepte());
+            }
+            if (this.userReportDemandeManeoClientJoignableRefus && vo.getUserReportDemandeManeoClientJoignableRefus() != null) {
+                item.setUserReportDemandeManeoClientJoignableRefus(vo.getUserReportDemandeManeoClientJoignableRefus());
+            }
+            if (this.userReportDemandeClientClientInjoignable && vo.getUserReportDemandeClientClientInjoignable() != null) {
+                item.setUserReportDemandeClientClientInjoignable(vo.getUserReportDemandeClientClientInjoignable());
+            }
+            if (this.userImportation && vo.getUserImportation() != null) {
+                item.setUserImportation(vo.getUserImportation());
+            }
             return item;
         }
     }
@@ -683,6 +737,9 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
                 vo.setResult(NumberUtil.toString(item.getResult()));
             if (item.getNbrHeureDateSubmissionAndNow() != null)
                 vo.setNbrHeureDateSubmissionAndNow(NumberUtil.toString(item.getNbrHeureDateSubmissionAndNow()));
+
+            if (item.getMontantDevis() != null)
+                vo.setMontantDevis(NumberUtil.toString(item.getMontantDevis()));
 
             if (StringUtil.isNotEmpty(item.getReference()))
                 vo.setReference(item.getReference());

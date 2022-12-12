@@ -1,5 +1,6 @@
 package com.maneo.kosc.service.admin.facade.kosc;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -147,6 +148,8 @@ public interface OrdreKoscAdminService extends AbstractService<OrdreKosc, Long, 
     int deleteBySourceReplanificationCode(String code);
 
     List<OrdreKosc> findBySourceReplanificationId(Long id);
+    List<OrdreKosc> findByMontantDevis(BigDecimal montantDevis);
+    int deleteByMontantDevis(BigDecimal montantDevis);
 
     int deleteBySourceReplanificationId(Long id);
 

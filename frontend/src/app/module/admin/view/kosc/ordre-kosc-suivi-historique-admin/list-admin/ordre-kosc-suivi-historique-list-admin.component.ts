@@ -81,6 +81,8 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
     items: MenuItem[];
 
     home: MenuItem;
+    objetDefaultCri = eval(this.selectedDefaultTemplateConfiguration.templateEmailCriVo?.objet);
+    corpsDefaultCri = eval(this.selectedDefaultTemplateConfiguration.templateEmailCriVo?.corps);
 
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
         , private operatorService: OperatorService
@@ -122,6 +124,13 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         }, error => console.log(error));
     }
 
+    public formatDdMmYy(date: Date): string {
+        return date != null ? this.datePipe.transform(date, 'd/M/yyyy') : '';
+    }
+
+    public formatHhMm(date: Date): string {
+        return date != null ? this.datePipe.transform(date, 'hh:mm') : '';
+    }
     public async loadEtatDemandeKoscIncluding(etatNonDesire : Array<String>) {
         await this.roleService.findAll();
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
@@ -135,65 +144,6 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
     }
 
 
-    get ordreKoscs(): Array<OrdreKoscVo> {
-        return this.ordreKoscService.ordreKoscsSuiviCdd;
-    }
-
-    set ordreKoscs(value: Array<OrdreKoscVo>) {
-        this.ordreKoscService.ordreKoscsSuiviCdd = value;
-    }
-
-    get ordreKoscSelections(): Array<OrdreKoscVo> {
-        return this.ordreKoscService.ordreKoscSelections;
-    }
-
-    set ordreKoscSelections(value: Array<OrdreKoscVo>) {
-        this.ordreKoscService.ordreKoscSelections = value;
-    }
-
-    get selectedOrdreKosc(): OrdreKoscVo {
-        return this.ordreKoscService.selectedOrdreKosc;
-    }
-
-    set selectedOrdreKosc(value: OrdreKoscVo) {
-        this.ordreKoscService.selectedOrdreKosc = value;
-    }
-
-    get createOrdreKoscDialog(): boolean {
-        return this.ordreKoscService.createOrdreKoscDialog;
-    }
-
-    set createOrdreKoscDialog(value: boolean) {
-        this.ordreKoscService.createOrdreKoscDialog = value;
-    }
-
-    get editOrdreKoscDialog(): boolean {
-        return this.ordreKoscService.editOrdreKoscDialog;
-    }
-
-    set editOrdreKoscDialog(value: boolean) {
-        this.ordreKoscService.editOrdreKoscDialog = value;
-    }
-
-    get viewOrdreKoscDialog(): boolean {
-        return this.ordreKoscService.viewOrdreKoscDialog;
-    }
-
-    set viewOrdreKoscDialog(value: boolean) {
-        this.ordreKoscService.viewOrdreKoscDialog = value;
-    }
-
-    get searchOrdreKosc(): OrdreKoscVo {
-        return this.ordreKoscService.searchOrdreKoscCdd;
-    }
-
-    set searchOrdreKosc(value: OrdreKoscVo) {
-        this.ordreKoscService.searchOrdreKoscCdd = value;
-    }
-
-    get dateFormat() {
-        return environment.dateFormatList;
-    }
 
     ngAfterViewInit(): void {
         this.searchRequestCdd();
@@ -205,12 +155,15 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
             {label: 'Suivi Historique', routerLink: '/app/admin/kosc/ordre-kosc-suivi-historique/list'},
 
         ];
+
+
         this.home = {icon: 'pi pi-home', routerLink: '/'};
         this.defaultTemplateConfigurationService.findDefaultTemplateConfiguration().subscribe((data) =>
             this.selectedDefaultTemplateConfiguration = data,
         );
+        this.searchOrdreKosc.dateRdvMax =null;
+        this.searchOrdreKosc.dateRdvMax =this.datePipe.transform(new Date(),"d-MMMM-y");
         this.loadEtatDemandeKoscIncluding(['planification']);
-        this.setDateEnvoiMinAndMax();
         this.initExport();
         this.initCol();
         this.loadOperator();
@@ -287,7 +240,6 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'edit');
         if (isPermistted) {
             this.ordreKoscService.findByIdWithAssociatedList(ordreKosc).subscribe(res => {
-
                 this.selectedOrdreKosc = res;
                 this.selectedOrdreKosc.dateDebutTraitement = DateUtils.toDate(ordreKosc.dateDebutTraitement);
                 this.selectedOrdreKosc.submissionDate = DateUtils.toDate(ordreKosc.submissionDate);
@@ -300,7 +252,6 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
                 this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
                 this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
                 this.selectedOrdreKosc.dateOuverture = DateUtils.toDate(ordreKosc.dateOuverture);
-                // console.log('haaa dateEnvoiCri ==> ' + ordreKosc.dateEnvoiCri);
                 this.selectedOrdreKosc.dateEnvoiCri = DateUtils.toDate(ordreKosc.dateEnvoiCri);
                 this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
                 this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
@@ -309,13 +260,11 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
                 this.selectedOrdreKosc.dateEnvoiCloture = DateUtils.toDate(ordreKosc.dateEnvoiCloture);
                 this.selectedOrdreKosc.dateEnvoiSuivi = DateUtils.toDate(ordreKosc.dateEnvoiSuivi);
                 this.editOrdreKoscDialog = true;
-
                 this.selectedOrdreKosc.fromCri = this.selectedDefaultTemplateConfiguration.emailManeo;
                 this.selectedOrdreKosc.toCri = this.selectedDefaultTemplateConfiguration.emailKosc;
-                this.selectedOrdreKosc.objetCri = eval(this.selectedDefaultTemplateConfiguration?.templateEmailCriVo?.objet);
-                this.selectedOrdreKosc.corpsCri = eval(this.selectedDefaultTemplateConfiguration?.templateEmailCriVo?.corps);
-                console.log()
-                
+                this.selectedOrdreKosc.objetCri = this.objetDefaultCri;
+                this.selectedOrdreKosc.corpsCri = this.corpsDefaultCri;
+
             });
         } else {
             this.messageService.add({
@@ -348,7 +297,6 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
                 this.selectedOrdreKosc.dateEnvoiReplanification = DateUtils.toDate(ordreKosc.dateEnvoiReplanification);
                 this.selectedOrdreKosc.dateEnvoiCloture = DateUtils.toDate(ordreKosc.dateEnvoiCloture);
                 this.selectedOrdreKosc.dateEnvoiSuivi = DateUtils.toDate(ordreKosc.dateEnvoiSuivi);
-
                 this.viewOrdreKoscDialog = true;
             });
         } else {
@@ -535,6 +483,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
                 'Reference': e.reference,
                 'Reference work order': e.referenceWorkOrder,
                 'Code decharge': e.codeDecharge,
+                'Montant devis': e.montantDevis,
                 'Supplier service code': e.supplierServiceCode,
                 'Date debut traitement': this.datePipe.transform(e.dateDebutTraitement, 'dd/MM/yyyy hh:mm'),
                 'End custumor name': e.endCustumorName,
@@ -689,6 +638,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
             'Reference': this.searchOrdreKosc.reference ? this.searchOrdreKosc.reference : environment.emptyForExport,
             'Reference work order': this.searchOrdreKosc.referenceWorkOrder ? this.searchOrdreKosc.referenceWorkOrder : environment.emptyForExport,
             'Code decharge': this.searchOrdreKosc.codeDecharge ? this.searchOrdreKosc.codeDecharge : environment.emptyForExport,
+            'Montant devis': this.searchOrdreKosc.montantDevis ? this.searchOrdreKosc.montantDevis : environment.emptyForExport,
             'Supplier service code': this.searchOrdreKosc.supplierServiceCode ? this.searchOrdreKosc.supplierServiceCode : environment.emptyForExport,
             'Date debut traitement Min': this.searchOrdreKosc.dateDebutTraitementMin ? this.datePipe.transform(this.searchOrdreKosc.dateDebutTraitementMin, this.dateFormat) : environment.emptyForExport,
             'Date debut traitement Max': this.searchOrdreKosc.dateDebutTraitementMax ? this.datePipe.transform(this.searchOrdreKosc.dateDebutTraitementMax, this.dateFormat) : environment.emptyForExport,
@@ -713,6 +663,8 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
             'Referen dossier': this.searchOrdreKosc.referenDossier ? this.searchOrdreKosc.referenDossier : environment.emptyForExport,
             'Submission date Min': this.searchOrdreKosc.submissionDateMin ? this.datePipe.transform(this.searchOrdreKosc.submissionDateMin, this.dateFormat) : environment.emptyForExport,
             'Submission date Max': this.searchOrdreKosc.submissionDateMax ? this.datePipe.transform(this.searchOrdreKosc.submissionDateMax, this.dateFormat) : environment.emptyForExport,
+            'Date rdv Min': this.searchOrdreKosc.dateRdvMin ? this.datePipe.transform(this.searchOrdreKosc.dateRdvMin, this.dateFormat) : environment.emptyForExport,
+            'Date rdv Max': this.searchOrdreKosc.dateRdvMax ? this.datePipe.transform(this.searchOrdreKosc.dateRdvMax, this.dateFormat) : environment.emptyForExport,
             'Date premier appel Min': this.searchOrdreKosc.datePremierAppelMin ? this.datePipe.transform(this.searchOrdreKosc.datePremierAppelMin, this.dateFormat) : environment.emptyForExport,
             'Date premier appel Max': this.searchOrdreKosc.datePremierAppelMax ? this.datePipe.transform(this.searchOrdreKosc.datePremierAppelMax, this.dateFormat) : environment.emptyForExport,
             'Date deuxieme appel Min': this.searchOrdreKosc.dateDeuxiemeAppelMin ? this.datePipe.transform(this.searchOrdreKosc.dateDeuxiemeAppelMin, this.dateFormat) : environment.emptyForExport,
@@ -721,8 +673,6 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
             'Date troisieme appel Max': this.searchOrdreKosc.dateTroisiemeAppelMax ? this.datePipe.transform(this.searchOrdreKosc.dateTroisiemeAppelMax, this.dateFormat) : environment.emptyForExport,
             'Date prise rdv Min': this.searchOrdreKosc.datePriseRdvMin ? this.datePipe.transform(this.searchOrdreKosc.datePriseRdvMin, this.dateFormat) : environment.emptyForExport,
             'Date prise rdv Max': this.searchOrdreKosc.datePriseRdvMax ? this.datePipe.transform(this.searchOrdreKosc.datePriseRdvMax, this.dateFormat) : environment.emptyForExport,
-            'Date rdv Min': this.searchOrdreKosc.dateRdvMin ? this.datePipe.transform(this.searchOrdreKosc.dateRdvMin, this.dateFormat) : environment.emptyForExport,
-            'Date rdv Max': this.searchOrdreKosc.dateRdvMax ? this.datePipe.transform(this.searchOrdreKosc.dateRdvMax, this.dateFormat) : environment.emptyForExport,
             'Date appel replanification Min': this.searchOrdreKosc.dateAppelReplanificationMin ? this.datePipe.transform(this.searchOrdreKosc.dateAppelReplanificationMin, this.dateFormat) : environment.emptyForExport,
             'Date appel replanification Max': this.searchOrdreKosc.dateAppelReplanificationMax ? this.datePipe.transform(this.searchOrdreKosc.dateAppelReplanificationMax, this.dateFormat) : environment.emptyForExport,
             // 'Date intervention technique Min': this.searchOrdreKosc.dateInterventionTechniqueMin ? this.datePipe.transform(this.searchOrdreKosc.dateInterventionTechniqueMin , this.dateFormat) : environment.emptyForExport ,
@@ -865,6 +815,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
             {field: 'reference', header: 'Reference'},
             {field: 'referenceWorkOrder', header: 'Reference work order'},
             {field: 'codeDecharge', header: 'Code decharge'},
+            {field: 'montantDevis', header: 'Montant devis'},
             {field: 'supplierService', header: 'Supplier service'},
             {field: 'dateDebutTraitement', header: 'Date debut traitement'},
             {field: 'endCustumorName', header: 'End custumor name'},
@@ -1030,18 +981,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         this.searchOrdreKosc.dateEnvoiCriMax = today.toLocaleDateString();
     }
 
-    public generateCodeDecharge() {
-        if(this.ordreKoscs != null){
-            this.ordreKoscService.genererCodeDecharge().subscribe(ordreKoscs =>{
-                this.ordreKoscs=ordreKoscs;
-                }
-            );
-        }
-    }
-    /*private updateListe(){
-        this.ordreKoscs=this.ordreKoscs.filter(e => e.codeDecharge == null);
-        console.log("after update :"+ this.ordreKoscs);
-    }*/
+
     isEtatNotEmpty(ordreKoscVo : OrdreKoscVo){
 
         if (ordreKoscVo.etatDemandeKoscVo !== null ){
@@ -1051,10 +991,64 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
         }
     }
 
-    private setDateEnvoiMinAndMax() {
-        // let today =new Date();
-        // this.searchOrdreKosc.dateRdvMin=null;
-        // this.searchOrdreKosc.dateRdvMax= moment(today).format("yyyy-MM-DD");
+    get ordreKoscs(): Array<OrdreKoscVo> {
+        return this.ordreKoscService.ordreKoscsSuiviCdd;
+    }
+
+    set ordreKoscs(value: Array<OrdreKoscVo>) {
+        this.ordreKoscService.ordreKoscsSuiviCdd = value;
+    }
+
+    get ordreKoscSelections(): Array<OrdreKoscVo> {
+        return this.ordreKoscService.ordreKoscSelections;
+    }
+
+    set ordreKoscSelections(value: Array<OrdreKoscVo>) {
+        this.ordreKoscService.ordreKoscSelections = value;
+    }
+
+    get selectedOrdreKosc(): OrdreKoscVo {
+        return this.ordreKoscService.selectedOrdreKosc;
+    }
+
+    set selectedOrdreKosc(value: OrdreKoscVo) {
+        this.ordreKoscService.selectedOrdreKosc = value;
+    }
+
+    get createOrdreKoscDialog(): boolean {
+        return this.ordreKoscService.createOrdreKoscDialog;
+    }
+
+    set createOrdreKoscDialog(value: boolean) {
+        this.ordreKoscService.createOrdreKoscDialog = value;
+    }
+
+    get editOrdreKoscDialog(): boolean {
+        return this.ordreKoscService.editOrdreKoscDialog;
+    }
+
+    set editOrdreKoscDialog(value: boolean) {
+        this.ordreKoscService.editOrdreKoscDialog = value;
+    }
+
+    get viewOrdreKoscDialog(): boolean {
+        return this.ordreKoscService.viewOrdreKoscDialog;
+    }
+
+    set viewOrdreKoscDialog(value: boolean) {
+        this.ordreKoscService.viewOrdreKoscDialog = value;
+    }
+
+    get searchOrdreKosc(): OrdreKoscVo {
+        return this.ordreKoscService.searchOrdreKoscCdd;
+    }
+
+    set searchOrdreKosc(value: OrdreKoscVo) {
+        this.ordreKoscService.searchOrdreKoscCdd = value;
+    }
+
+    get dateFormat() {
+        return environment.dateFormatList;
     }
 
     get selectedDefaultTemplateConfiguration(): DefaultTemplateConfigurationVo {
@@ -1065,4 +1059,5 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
     set selectedDefaultTemplateConfiguration(value: DefaultTemplateConfigurationVo) {
         this.defaultTemplateConfigurationService.selectedDefaultTemplateConfiguration = value;
     }
+
 }

@@ -24,7 +24,6 @@ export class OrdreKoscExcelService {
     public importAll(event: any) {
         this.readDataObservable(event).subscribe(
             next => {
-                console.log("haaa next  ==> "+next)
                 this.importAllExc(next);
             }
         );
@@ -34,7 +33,6 @@ export class OrdreKoscExcelService {
         // this.showSpinner = true;
 
         return new Observable(sub => {
-            console.log(event.target.files);
             /* wire up file reader */
             const target: DataTransfer = <DataTransfer>(event.target);
             if (target.files.length !== 1) {
@@ -53,7 +51,6 @@ export class OrdreKoscExcelService {
 
                 /* save data */
                 const data = XLSX.utils.sheet_to_json(ws); // to get 2d array pass 2nd parameter as object {header: 1}
-                console.log(data); // Data will be logged in array format containing objects
 
                 let koscOrdresWork = new Array<OrdreKoscVo>();
                 for (let i = 0; i < data.length; i++) {
@@ -61,7 +58,6 @@ export class OrdreKoscExcelService {
                     myOrdreKoscWork.type ='kosc';
                     koscOrdresWork.push(myOrdreKoscWork);
                 }
-                console.log(koscOrdresWork);
                 this.ordreKoscService.ordreKoscs = koscOrdresWork;
 
                 this.ordreKoscService.importerDataBase(this.ordreKoscService.ordreKoscs).subscribe(
@@ -102,7 +98,6 @@ export class OrdreKoscExcelService {
 
     private readDataObservable(event: any): Observable<Array<OrdreKoscVo>> {
         return new Observable(subscriber => {
-            console.log(event.target.files);
             /* wire up file reader */
             const target: DataTransfer = <DataTransfer>(event.target);
             let koscOrdrers = new Array<OrdreKoscVo>();
@@ -124,28 +119,23 @@ export class OrdreKoscExcelService {
 
                     /* save data */
                     const data = XLSX.utils.sheet_to_json(ws); // to get 2d array pass 2nd parameter as object {header: 1}
-                    console.log(data); // Data will be logged in array format containing objects
 
                     for (let i = 0; i < data.length; i++) {
                         if (this.isFtl(data[i])) {
-                            console.log(data[i]["ReferenceCommandePriseInterneOC"] + " is FTEL");
                             let myCosk = this.constructFtl(data, i);
                             myCosk.type = 'ftl';
                             koscOrdrers.push(myCosk);
                         } else if (this.isKosc(data[i])) {
-                            console.log(data[i]["kosc_order_ref"] + " is KOSC");
                             let myCosk = this.constructWorkOrder(data, i);
                             myCosk.type = 'kosc';
                             koscOrdrers.push(myCosk);
                         } else if (this.isErdv(data[i])) {
-                            console.log(data[i]["kosc_order_ref"] + " is ERDV");
                             let myCosk = this.constructErdv(data, i);
                             myCosk.type = 'erdv';
                             koscOrdrers.push(myCosk);
                         }
                     }
 
-                    console.log("readData haaaa koscOrdrers =========== " + koscOrdrers);
 
                 }
                 reader.onloadend = function (event){
@@ -160,7 +150,6 @@ export class OrdreKoscExcelService {
     }
 
     private importAllExc(koscOrdrers: OrdreKoscVo[]) {
-        console.log("readAll haaaa koscOrdrers =========== " + koscOrdrers);
         this.ordreKoscService.importerAll(koscOrdrers).subscribe(
             response => {
                 if (response.length == 0) {
@@ -188,7 +177,6 @@ export class OrdreKoscExcelService {
 
     private readExcel(event: any) {
 
-        console.log(event.target.files);
         /* wire up file reader */
         const target: DataTransfer = <DataTransfer>(event.target);
         if (target.files.length !== 1) {
@@ -207,7 +195,6 @@ export class OrdreKoscExcelService {
 
             /* save data */
             const data = XLSX.utils.sheet_to_json(ws); // to get 2d array pass 2nd parameter as object {header: 1}
-            //console.log(data);
             let koscOrders = new Array<OrdreKoscVo>();
             for (let i = 1; i < data.length; i++) {
                 let myOrdreKosc = new OrdreKoscVo();
@@ -218,7 +205,6 @@ export class OrdreKoscExcelService {
                     myOrdreKosc.technicienVo=new TechnicienVo();
                 }
                 myOrdreKosc.technicienVo.identifiant=data[i]['tech_reference'];
-                console.log( "indentifiant:"+ myOrdreKosc.technicienVo.identifiant);
 
                 //save Operateur
                 if( myOrdreKosc.operatorVo==null){
@@ -382,9 +368,7 @@ export class OrdreKoscExcelService {
 
                 koscOrders.push(myOrdreKosc);
             }
-            console.log(koscOrders);
             // let objet = Object.assign(new OrdreKoscVo, data);
-            //console.log(JSON.stringify(objet)); // Data will be logged in array format containing objects
             this.ordreKoscService.ordreKoscs = koscOrders;
 
 
@@ -394,7 +378,6 @@ export class OrdreKoscExcelService {
     private readWorkOder(event: any) {
         this.showSpinner = true;
 
-        console.log(event.target.files);
         /* wire up file reader */
         const target: DataTransfer = <DataTransfer>(event.target);
         if (target.files.length !== 1) {
@@ -413,14 +396,12 @@ export class OrdreKoscExcelService {
 
             /* save data */
             const data = XLSX.utils.sheet_to_json(ws); // to get 2d array pass 2nd parameter as object {header: 1}
-            console.log(data); // Data will be logged in array format containing objects
 
             let koscOrdresWork = new Array<OrdreKoscVo>();
             for (let i = 0; i < data.length; i++) {
                 let myOrdreKoscWork = this.constructWorkOrder(data, i);
                 koscOrdresWork.push(myOrdreKoscWork);
             }
-            console.log(koscOrdresWork);
             this.ordreKoscService.ordreKoscs = koscOrdresWork;
 
             this.ordreKoscService.importerWordOrder(this.ordreKoscService.ordreKoscs).subscribe(
@@ -462,7 +443,6 @@ export class OrdreKoscExcelService {
 
         let resultat = null;
 
-        console.log(event.target.files);
         /* wire up file reader */
         const target: DataTransfer = <DataTransfer>(event.target);
         if (target.files.length !== 1) {
@@ -481,14 +461,12 @@ export class OrdreKoscExcelService {
 
             /* save data */
             const data = XLSX.utils.sheet_to_json(ws); // to get 2d array pass 2nd parameter as object {header: 1}
-            console.log(data); // Data will be logged in array format containing objects
 
             let koscOrdresFtel = new Array<OrdreKoscVo>();
             for (let i = 0; i < data.length; i++) {
                 let myOrdreKoscFtel = this.constructFtl(data, i);
                 koscOrdresFtel.push(myOrdreKoscFtel);
             }
-            console.log(koscOrdresFtel);
 
             this.ordreKoscService.importerFtel(koscOrdresFtel).subscribe(
                 response => {
@@ -526,7 +504,6 @@ export class OrdreKoscExcelService {
 
         this.showSpinner = true;
 
-        console.log(event.target.files);
         /* wire up file reader */
         const target: DataTransfer = <DataTransfer>(event.target);
         if (target.files.length !== 1) {
@@ -545,7 +522,6 @@ export class OrdreKoscExcelService {
 
             /* save data */
             const data = XLSX.utils.sheet_to_json(ws); // to get 2d array pass 2nd parameter as object {header: 1}
-            console.log(data);
 
             let koscOrdresERdv = new Array<OrdreKoscVo>();
             for (let i = 0; i < data.length; i++) {
@@ -553,7 +529,6 @@ export class OrdreKoscExcelService {
                 koscOrdresERdv.push(myOrdreKoscERdv);
             }
             this.ordreKoscService.ordreKoscs = koscOrdresERdv;
-            console.log(koscOrdresERdv);
             this.ordreKoscService.importerERdv(this.ordreKoscService.ordreKoscs).subscribe(
                 response => {
                     if (response.length == 0) {
@@ -624,6 +599,10 @@ export class OrdreKoscExcelService {
         myOrdreKoscERdv.dateInterventionTechniqueFin =this.convertDate(data[i]['intervention_end_datetime']);
         // myOrdreKoscERdv.dateErdv = this.convertDate(data[i]['date_E_Rdv']);
 
+        //attribut de maillage
+        myOrdreKoscERdv.supplier = data[i]['supplier'];
+        console.log(myOrdreKoscERdv.supplier);
+
         return myOrdreKoscERdv;
 
     }
@@ -638,7 +617,6 @@ export class OrdreKoscExcelService {
             myOrdreKoscFtel.technicienVo=new TechnicienVo();
         }
         myOrdreKoscFtel.technicienVo.identifiant=data[i]['tech_reference'];
-        console.log( "indentifiant:"+ myOrdreKoscFtel.technicienVo.identifiant);
 
         //save Operateur
         if( myOrdreKoscFtel.operatorVo==null){
@@ -727,13 +705,16 @@ export class OrdreKoscExcelService {
             myOrdreKoscWork.technicienVo=new TechnicienVo();
         }
         myOrdreKoscWork.technicienVo.identifiant=data[i]['tech_reference'];
-        console.log( "indentifiant:"+ myOrdreKoscWork.technicienVo.identifiant);
 
         //save Operateur
         if( myOrdreKoscWork.operatorVo==null){
             myOrdreKoscWork.operatorVo=new OperatorVo();
         }
-        myOrdreKoscWork.operatorVo.reference=data[i]['opt_reference'];
+        myOrdreKoscWork.operatorVo.reference=data[i]['customer_operator'];
+        myOrdreKoscWork.operatorVo.libelle=data[i]['customer_operator'];
+        if (myOrdreKoscWork.operatorVo.libelle == null || myOrdreKoscWork.operatorVo.libelle == '' ) {
+            myOrdreKoscWork.operatorVo = null;
+        }
 
         myOrdreKoscWork.etatDemandeKoscVo.code = 'initialisation-wo';
         myOrdreKoscWork.reference = data[i]['kosc_order_ref'];
@@ -760,9 +741,7 @@ export class OrdreKoscExcelService {
         myOrdreKoscWork.endCustumorContactCellPhone = data[i]['end_customer_contact_cellphone'];
         myOrdreKoscWork.endCustumorContactEmail = data[i]['end_customer_contact_email'];
         myOrdreKoscWork.company = data[i]['company_name'];//////////////////////
-        console.log(myOrdreKoscWork.submissionDate);
         myOrdreKoscWork.submissionDate =DateUtils.toDateForExcel(data[i]['submission_date']);
-        console.log(myOrdreKoscWork.submissionDate);
         myOrdreKoscWork.workOrderType = data[i]['work_order_type'];
         myOrdreKoscWork.productCode = data[i]['product_code'];
         myOrdreKoscWork.productLabel = data[i]['product_label'];
@@ -772,6 +751,22 @@ export class OrdreKoscExcelService {
         myOrdreKoscWork.profile = data[i]['profile'];
         myOrdreKoscWork.providerSlId = data[i]['provider_slid'];
         myOrdreKoscWork.endCustumorBuilding = data[i]['building_name'];
+
+        //attribut de maillage
+        myOrdreKoscWork.supplier = data[i]['supplier'];
+        myOrdreKoscWork.customerOperator = data[i]['customer_operator'];//operator libelle !!
+        myOrdreKoscWork.slid = data[i]['slid'];
+        myOrdreKoscWork.koscSplitterPosition = data[i]['kosc_splitter_position'];
+        myOrdreKoscWork.otpRef = data[i]['otp_ref'];
+        myOrdreKoscWork.operatorComment = data[i]['operator_comment'];
+        myOrdreKoscWork.koscContactFirstName = data[i]['kosc_contact_first_name'];
+        myOrdreKoscWork.koscContactLastName = data[i]['kosc_contact_last_name'];
+        myOrdreKoscWork.koscContactPhone = data[i]['kosc_contact_phone'];
+        myOrdreKoscWork.koscContactEmail1 = data[i]['kosc_contact_email_1'];
+        myOrdreKoscWork.koscContactEmail2 = data[i]['kosc_contact_email_2'];
+        myOrdreKoscWork.koscContactEmail3 = data[i]['kosc_contact_email_3'];
+        myOrdreKoscWork.koscComment = data[i]['kosc_comments'];
+
         return myOrdreKoscWork;
     }
 
@@ -786,7 +781,6 @@ export class OrdreKoscExcelService {
         //     myOrdreKoscData.technicienVo=new TechnicienVo();
         // }
         // myOrdreKoscData.technicienVo.identifiant=data[i]['tech_reference'];
-        // console.log( "indentifiant:"+ myOrdreKoscData.technicienVo.identifiant);
 
         //save Operateur
         if( myOrdreKoscData.operatorVo==null){
@@ -811,9 +805,7 @@ export class OrdreKoscExcelService {
         myOrdreKoscData.referenceWorkOrder = data[i]['work_order_ref'];
         myOrdreKoscData.workOrderType = data[i]['work_order_type'];
         myOrdreKoscData.supplierServiceCode = data[i]['supplier_service_code'];
-        console.log(myOrdreKoscData.submissionDate);
         myOrdreKoscData.submissionDate =this.convertDate(data[i]['submission_date']);
-        console.log(myOrdreKoscData.submissionDate);
         myOrdreKoscData.productCode = data[i]['product_code'];
         myOrdreKoscData.productLabel = data[i]['product_label'];
         myOrdreKoscData.provider = data[i]['provider'];
@@ -909,23 +901,38 @@ export class OrdreKoscExcelService {
         myOrdreKoscData.dateTroisiemeAppel = this.convertDate(data[i]['3 eme appel ']);
         myOrdreKoscData.dateAppelReplanification = this.convertDate(data[i]['Re Planification']);
         myOrdreKoscData.dateInterventionTechniqueDebut = this.convertDate(data[i]['Date intervention Technicien']);
+        console.log(data[i]['Date intervention Technicien']);
+
+        //attribut de maillage
+        myOrdreKoscData.supplier = data[i]['supplier'];
+        myOrdreKoscData.customerOperator = data[i]['customer_operator'];//operator libelle !!
+        myOrdreKoscData.slid = data[i]['slid'];
+        myOrdreKoscData.koscContactFirstName = data[i]['kosc_contact_first_name'];
+        myOrdreKoscData.koscContactLastName = data[i]['kosc_contact_last_name'];
+        myOrdreKoscData.koscContactPhone = data[i]['kosc_contact_phone'];
+        myOrdreKoscData.koscContactEmail1 = data[i]['kosc_contact_email_1'];
+        myOrdreKoscData.koscContactEmail2 = data[i]['kosc_contact_email_2'];
+        myOrdreKoscData.koscContactEmail3 = data[i]['kosc_contact_email_3'];
+        myOrdreKoscData.koscSplitterPosition = data[i]['kosc_splitter_position'];
+        myOrdreKoscData.koscComment = data[i]['kosc_comments'];
+        myOrdreKoscData.otpRef = data[i]['otp_ref'];
+        myOrdreKoscData.operatorComment = data[i]['operator_comment'];
+
         return myOrdreKoscData;
     }
 
     private isFtl(data: any) {
-        console.log('haa isFTL data["ReferenceCommandePriseInterneOC"] ==> ' + data["ReferenceCommandePriseInterneOC"]);
+
         if (data["ReferenceCommandePriseInterneOC"] != undefined) return true;
         else return false;
     }
 
     private isErdv(data: any) {
-        console.log('haa isErdv data["intervention_start_datetime"] ==> ' + data["intervention_start_datetime"]);
         if (data["intervention_start_datetime"] != undefined && data["intervention_start_datetime"] != '') return true;
         else return false;
     }
 
     private isKosc(data: any) {
-        console.log('haa isKosc data["work_order_ref"] ==> ' + data["work_order_ref"]);
         if (data["work_order_ref"] != undefined && data["work_order_ref"] != '') return true;
         else return false;
     }

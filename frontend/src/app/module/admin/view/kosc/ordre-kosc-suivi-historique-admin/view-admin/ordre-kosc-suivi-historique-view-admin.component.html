@@ -35,6 +35,15 @@
 
 
                     <div class="p-field p-col-12 p-md-3">
+                        <label for="3">M</label>
+                        <input [(ngModel)]="selectedOrdreKosc.codeDecharge" [(ngModel)]="selectedOrdreKosc.codeDecharge" [disabled]="true" autofocus
+                               class="p-mb-2 p-mr-2" id="3"
+                               pInputText placeholder="Code decharge"
+                               type="text">
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-3">
                         <label for="4">Supplier service</label>
                         <input [(ngModel)]="selectedOrdreKosc.supplierService" [(ngModel)]="selectedOrdreKosc.supplierService" [disabled]="true" autofocus
                                class="p-mb-2 p-mr-2" id="4"
@@ -1441,9 +1450,7 @@
     <app-operator-create-admin></app-operator-create-admin>
     <app-departement-create-admin></app-departement-create-admin>
     <app-technicien-create-admin></app-technicien-create-admin>
-    <app-client-create-admin></app-client-create-admin>
     <app-template-email-client-injoinable-create-admin></app-template-email-client-injoinable-create-admin>
-    <app-template-email-kosc-create-admin></app-template-email-kosc-create-admin>
     <app-template-email-planification-create-admin></app-template-email-planification-create-admin>
     <app-template-email-replanification-create-admin></app-template-email-replanification-create-admin>
     <app-etat-demande-kosc-create-admin></app-etat-demande-kosc-create-admin>

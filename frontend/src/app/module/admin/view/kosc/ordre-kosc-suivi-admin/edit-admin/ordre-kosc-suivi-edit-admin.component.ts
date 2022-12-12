@@ -1847,4 +1847,11 @@ export class OrdreKoscSuiviEditAdminComponent implements OnInit {
         const position = this.ordreKoscs.findIndex(e => e.id == selectedOrdreKosc.id);
         position > -1 ? this.ordreKoscs.splice(position, 1) : false;
     }
+    public formatDdMmYy(date: Date): string {
+        return date != null ? this.datePipe.transform(date, 'd/M/yyyy') : '';
+    }
+
+    public formatHhMm(date: Date): string {
+        return date != null ? this.datePipe.transform(date, 'hh:mm') : '';
+    }
 }

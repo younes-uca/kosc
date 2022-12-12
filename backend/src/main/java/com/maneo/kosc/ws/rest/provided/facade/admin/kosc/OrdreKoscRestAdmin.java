@@ -127,15 +127,6 @@ public class OrdreKoscRestAdmin {
         return ordreKoscConverter.toVo(ordreKoscService.findSuivi());
     }
 
-
-    @ApiOperation("Generate discharge code")
-    @PutMapping("/generate/")
-    public List<OrdreKoscVo> genererCodeDecharge(@RequestBody List<OrdreKoscVo> ordreKoscVos) {
-        List<OrdreKosc> ordreKoscs = ordreKoscConverter.toItem(ordreKoscVos);
-        ordreKoscCddAdminService.genererCodeDecharge(ordreKoscs);
-        List<OrdreKoscVo> ordreKoscVos1 = ordreKoscConverter.toVo(ordreKoscs);
-        return ordreKoscVos1;
-    }
     @ApiOperation("Update etat to ko or ok")
     @PutMapping("/update-etat/")
     public OrdreKoscVo updateEtat(@RequestBody OrdreKoscVo ordreKoscVo) {

@@ -1,5 +1,6 @@
 package com.maneo.kosc.service.admin.impl.kosc;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -458,6 +459,17 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
     }
 
     @Override
+    public List<OrdreKosc> findByMontantDevis(BigDecimal montantDevis) {
+        return ordreKoscDao.findByMontantDevis(montantDevis);
+
+    }
+
+    @Override
+    public int deleteByMontantDevis(BigDecimal montantDevis) {
+        return ordreKoscDao.deleteByMontantDevis(montantDevis);
+    }
+
+    @Override
     @Transactional
     public int deleteBySourceReplanificationId(Long id) {
         return ordreKoscDao.deleteBySourceReplanificationId(id);
@@ -632,6 +644,7 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
         String query = "SELECT o FROM OrdreKosc o where 1=1";
         System.out.println("haaa ordreKoscVo.getConfort() "+ordreKoscVo.getConfort());
         query += SearchUtil.addConstraint("o", "id", "=", ordreKoscVo.getId());
+        query += SearchUtil.addConstraint("o", "montantDevis", "=", ordreKoscVo.getMontantDevis());
         query += SearchUtil.addConstraint("o", "erdv", "=", ordreKoscVo.getErdv());
         query += SearchUtil.addConstraint("o", "confort", "=", ordreKoscVo.getConfort());
         query += SearchUtil.addConstraint("o", "reference", "LIKE", ordreKoscVo.getReference());
@@ -839,6 +852,7 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
         query += SearchUtil.addConstraintMinMaxDate("o", "dateEnvoiClientInjoinableKosc", ordreKoscVo.getDateEnvoiClientInjoinableKoscMin(), ordreKoscVo.getDateEnvoiClientInjoinableKoscMax());
         query += SearchUtil.addConstraintMinMaxDate("o", "dateEnvoiCloture", ordreKoscVo.getDateEnvoiClotureMin(), ordreKoscVo.getDateEnvoiClotureMax());
         query += SearchUtil.addConstraintMinMaxDate("o", "dateEnvoiSuivi", ordreKoscVo.getDateEnvoiSuiviMin(), ordreKoscVo.getDateEnvoiSuiviMax());
+        query += SearchUtil.addConstraintMinMaxDate("o", "dateCri", ordreKoscVo.getDateCriMin(), ordreKoscVo.getDateCriMax());
         if (ordreKoscVo.getOperatorVo() != null) {
             query += SearchUtil.addConstraint("o", "operator.id", "=", ordreKoscVo.getOperatorVo().getId());
             query += SearchUtil.addConstraint("o", "operator.reference", "LIKE", ordreKoscVo.getOperatorVo().getReference());

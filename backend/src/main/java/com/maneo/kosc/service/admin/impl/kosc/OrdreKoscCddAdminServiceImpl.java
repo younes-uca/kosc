@@ -29,19 +29,20 @@ public class OrdreKoscCddAdminServiceImpl implements OrdreKoscCddAdminService {
     private EntityManager entityManager;
 
 
-
     public List<OrdreKosc> findByCriteriaCdd(OrdreKoscVo ordreKoscVo) {
 
 
         String query = "SELECT o FROM OrdreKosc o where 1=1";
 
         query += SearchUtil.addConstraint("o", "reference", "LIKE", ordreKoscVo.getReference());
+        query += SearchUtil.addConstraint("o", "montantDevis", "=", ordreKoscVo.getMontantDevis());
         query += SearchUtil.addConstraint("o", "referenceWorkOrder", "LIKE", ordreKoscVo.getReferenceWorkOrder());
         query += SearchUtil.addConstraintDate("o", "datePriseRdv", "=", ordreKoscVo.getDatePriseRdv());
         query += SearchUtil.addConstraintDate("o", "dateCri", "=", ordreKoscVo.getDateCri());
+        query += SearchUtil.addConstraintMinMaxDate("o", "dateCri", ordreKoscVo.getDateCriMin(), ordreKoscVo.getDateCriMax());
         query += SearchUtil.addConstraintMinMax("o", "nbrHeureDateSubmissionAndNow", ordreKoscVo.getNbrHeureDateSubmissionAndNowMin(), ordreKoscVo.getNbrHeureDateSubmissionAndNowMax());
         //query += SearchUtil.addConstraintMinMaxDate("o", "dateEnvoiCri", ordreKoscVo.getDateEnvoiCriMin(), ordreKoscVo.getDateEnvoiCriMax());
-       // query += SearchUtil.addConstraintMinMaxDate("o", "dateEnvoiPlanification", ordreKoscVo.getDateEnvoiPlanificationMin(), ordreKoscVo.getDateEnvoiPlanificationMax());
+        // query += SearchUtil.addConstraintMinMaxDate("o", "dateEnvoiPlanification", ordreKoscVo.getDateEnvoiPlanificationMin(), ordreKoscVo.getDateEnvoiPlanificationMax());
 
         if (ordreKoscVo.getOperatorVo() != null) {
             query += SearchUtil.addConstraint("o", "operator.id", "=", ordreKoscVo.getOperatorVo().getId());
@@ -63,11 +64,11 @@ public class OrdreKoscCddAdminServiceImpl implements OrdreKoscCddAdminService {
         }
 
         if (ordreKoscVo.getEtatDemandeKoscVos() != null) {
-                    query+= " AND o.etatDemandeKosc.id IN ("+convertId(ordreKoscVo.getEtatDemandeKoscVos())+")";
-            }
+            query += " AND o.etatDemandeKosc.id IN (" + convertId(ordreKoscVo.getEtatDemandeKoscVos()) + ")";
+        }
 
         //query += " AND o.codeDecharge is NULL";
-       // query += SearchUtil.addConstraintMinMaxDate("o", "dateRdv", null,new Date() ); khaoula
+        query += SearchUtil.addConstraintMinMaxDate("o", "dateRdv", ordreKoscVo.getDateRdvMin(), ordreKoscVo.getDateRdvMax());
         query += " ORDER BY o.dateRdv DESC, o.submissionDate ASC";
 
 
@@ -77,36 +78,17 @@ public class OrdreKoscCddAdminServiceImpl implements OrdreKoscCddAdminService {
     }
 
 
-
-    @Override
-    public List<OrdreKosc> genererCodeDecharge(List<OrdreKosc> ordreKoscs) {
-        LocalDate now = LocalDate.now();
-        if (ordreKoscs != null) {
-            for (OrdreKosc ordreKosc : ordreKoscs) {
-                if (ordreKosc.getEtatDemandeKosc() != null ) {
-                    ordreKosc.setDateCri(new Date());
-                     if(Objects.equals(ordreKosc.getEtatDemandeKosc().getCode(), "ok") && StringUtil.isEmpty(ordreKosc.getCodeDecharge())){
-                        ordreKosc.setCodeDecharge("D"+DateUtil.formateDate("yyMMdd",DateUtil.toDate(now)) + "-MN" + ordreKosc.getId());
-                    }
-                    ordreKoscDao.save(ordreKosc);
-                }
-            }
-        }
-
-        return ordreKoscs;
-    }
-
-
     private String convertId(List<EtatDemandeKoscVo> etatDemandeKoscVos) {
-        String res="";
-        for(EtatDemandeKoscVo etatDemandeKoscVo: etatDemandeKoscVos){
-            res+="'"+etatDemandeKoscVo.getId()+"' ,";
+        String res = "";
+        for (EtatDemandeKoscVo etatDemandeKoscVo : etatDemandeKoscVos) {
+            res += "'" + etatDemandeKoscVo.getId() + "' ,";
         }
-        return  res.substring(0,res.length()-2);
+        return res.substring(0, res.length() - 2);
     }
+
     private String convertIdItem(EtatDemandeKoscVo etatDemandeKoscVo) {
-        String res="'"+etatDemandeKoscVo.getId()+"' ,";
-        return  res.substring(0,res.length()-2);
+        String res = "'" + etatDemandeKoscVo.getId() + "' ,";
+        return res.substring(0, res.length() - 2);
     }
 
 }
