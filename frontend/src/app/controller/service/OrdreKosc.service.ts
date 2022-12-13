@@ -170,7 +170,7 @@ export class OrdreKoscService {
     }
 
     public editPasEncore(): Observable<OrdreKoscVo> {
-        return this.http.put<OrdreKoscVo>(this.API + 'edit-pas-pncore/', this.selectedOrdreKosc);
+        return this.http.put<OrdreKoscVo>(this.API + 'edit-pas-encore/', this.selectedOrdreKosc);
 
     }
 

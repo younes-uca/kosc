@@ -173,7 +173,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
             this.submitted = false;
             this.selectedOrdreKosc = new OrdreKoscVo();
             let result = ordreKosc.result;
-            console.log(result);
+            console.log("le resultat est: " + result);
             if (result == 1){
                 this.messageService.add({
                     severity: 'success',

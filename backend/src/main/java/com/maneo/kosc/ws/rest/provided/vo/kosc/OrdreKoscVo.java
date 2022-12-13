@@ -417,13 +417,13 @@ public class OrdreKoscVo {
     private User userReportDemandeClientClientJoignable;
     private User userImportation;
 
-    private String result;
+    private int result;
 
-    public String getResult() {
+    public int getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(int result) {
         this.result = result;
     }
 

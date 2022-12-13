@@ -110,10 +110,9 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
             return null;
         } else {
             OrdreKosc item = new OrdreKosc();
+            item.setResult(vo.getResult());
             if (StringUtil.isNotEmpty(vo.getId()))
                 item.setId(NumberUtil.toLong(vo.getId()));
-            if (StringUtil.isNotEmpty(vo.getResult()))
-                item.setResult(NumberUtil.toInt(vo.getResult()));
             if (StringUtil.isNotEmpty(vo.getNbrHeureDateSubmissionAndNow()))
                 item.setNbrHeureDateSubmissionAndNow(NumberUtil.toLong(vo.getNbrHeureDateSubmissionAndNow()));
 
@@ -759,10 +758,9 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
             return null;
         } else {
             OrdreKoscVo vo = new OrdreKoscVo();
+            vo.setResult(item.getResult());
             if (item.getId() != null)
                 vo.setId(NumberUtil.toString(item.getId()));
-            if (item.getResult() != 0)
-                vo.setResult(NumberUtil.toString(item.getResult()));
             if (item.getNbrHeureDateSubmissionAndNow() != null)
                 vo.setNbrHeureDateSubmissionAndNow(NumberUtil.toString(item.getNbrHeureDateSubmissionAndNow()));
 
