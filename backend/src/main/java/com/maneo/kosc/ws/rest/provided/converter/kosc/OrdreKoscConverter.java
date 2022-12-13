@@ -927,6 +927,9 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
             if (StringUtil.isNotEmpty(item.getReserve5()))
                 vo.setReserve5(item.getReserve5());
 
+            if (item.getDateCrCommandePrise() != null)
+                vo.setDateCrCommandePrise(DateUtil.formateDate(item.getDateCrCommandePrise()));
+
 
             if (StringUtil.isNotEmpty(item.getTypeMaterielPbo()))
                 vo.setTypeMaterielPbo(item.getTypeMaterielPbo());
