@@ -754,7 +754,6 @@ export class OrdreKoscExcelService {
 
         //attribut de maillage
         myOrdreKoscWork.supplier = data[i]['supplier'];
-        myOrdreKoscWork.customerOperator = data[i]['customer_operator'];//operator libelle !!
         myOrdreKoscWork.slid = data[i]['slid'];
         myOrdreKoscWork.koscSplitterPosition = data[i]['kosc_splitter_position'];
         myOrdreKoscWork.otpRef = data[i]['otp_ref'];
@@ -832,7 +831,7 @@ export class OrdreKoscExcelService {
         myOrdreKoscData.referenceCommandePriseInterneOC = data[i]['ReferenceCommandePriseInterneOC'];
         myOrdreKoscData.referencePrise = data[i]['ReferencePrise'];
         myOrdreKoscData.referencePrestationPrise = data[i]['ReferencePrestationPrise'];
-        myOrdreKoscData.commantaireCloture = data[i]['Commentaire']; ////////?????
+        myOrdreKoscData.commantaireCloture = data[i]['Commentaire']; ////////pas sure!!!!!!!!
         myOrdreKoscData.referencePm = data[i]['Reference Pm'];
         myOrdreKoscData.referencePmTechnique = data[i]['ReferencePmTechnique'];
         myOrdreKoscData.localisationPm = data[i]['LocalisationPm'];
@@ -849,7 +848,7 @@ export class OrdreKoscExcelService {
         myOrdreKoscData.contacteImmeuble = data[i]['ContactsImmeuble'];
         myOrdreKoscData.pmaAccessible = data[i]['Pmaccessible'];
         myOrdreKoscData.infoObtentionCle = data[i]['InfoObtentionCle'];
-        myOrdreKoscData.localeIpm = data[i]['CodeLocalPM'];
+        myOrdreKoscData.localeIpm = data[i]['CodeLocalPM'];//pas sure!!!!!
         myOrdreKoscData.contactsSyndic = data[i]['ContactsSyndic'];
         myOrdreKoscData.oc1 = data[i]['OC 1'];
         myOrdreKoscData.nomModulePm1 = data[i]['NomModulePm NÂ°1'];
@@ -905,7 +904,6 @@ export class OrdreKoscExcelService {
 
         //attribut de maillage
         myOrdreKoscData.supplier = data[i]['supplier'];
-        myOrdreKoscData.customerOperator = data[i]['customer_operator'];//operator libelle !!
         myOrdreKoscData.slid = data[i]['slid'];
         myOrdreKoscData.koscContactFirstName = data[i]['kosc_contact_first_name'];
         myOrdreKoscData.koscContactLastName = data[i]['kosc_contact_last_name'];
@@ -917,6 +915,22 @@ export class OrdreKoscExcelService {
         myOrdreKoscData.koscComment = data[i]['kosc_comments'];
         myOrdreKoscData.otpRef = data[i]['otp_ref'];
         myOrdreKoscData.operatorComment = data[i]['operator_comment'];
+        myOrdreKoscData.koscContactCellphone = data[i]['kosc_contact_cellphone'];
+        myOrdreKoscData.gtr = data[i]['gtr'];
+        myOrdreKoscData.category = data[i]['category'];
+        myOrdreKoscData.buildingCode = data[i]['building_code'];
+        myOrdreKoscData.motifKoCrCommandePrise = data[i]['MotifKoCrCommandePrise'];
+        myOrdreKoscData.dateCrCommandePrise = this.convertDate(data[i]['DateCrCommandePrise']);//to check the date later !!!!!
+        myOrdreKoscData.typeCommandeRetenu = data[i]['TypeCommandeRetenu'];
+        myOrdreKoscData.typeProjectionGeographique = data[i]['TypeProjectionGeographique'];
+        myOrdreKoscData.coordonneePBOX = data[i]['CoordonneePBOX'];
+        myOrdreKoscData.codeAccesSousSol = data[i]['CodeAccesSousSol'];
+        myOrdreKoscData.autresInformations = data[i]['AutresInformations'];
+        myOrdreKoscData.informationTubeModulePm1 = data[i]['InformationTubeModulePm NÂ°1'];
+        myOrdreKoscData.informationTubeModulePm2 = data[i]['InformationTubeModulePm NÂ°2'];
+        myOrdreKoscData.informationTubeModulePm3 = data[i]['InformationTubeModulePm NÂ°3'];
+        myOrdreKoscData.informationTubeModulePm4 = data[i]['InformationTubeModulePm NÂ°4'];
+        myOrdreKoscData.reserve5 = data[i]['Reserve5'];
 
         return myOrdreKoscData;
     }

@@ -161,8 +161,36 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
             if (StringUtil.isNotEmpty(vo.getKoscContactEmail3()))
                 item.setKoscContactEmail3(vo.getKoscContactEmail3());
 
-            if (StringUtil.isNotEmpty(vo.getCustomerOperator()))
-                item.setCustomerOperator(vo.getCustomerOperator());
+            if (StringUtil.isNotEmpty(vo.getKoscContactCellphone()))
+                item.setKoscContactCellphone(vo.getKoscContactCellphone());
+            if (StringUtil.isNotEmpty(vo.getGtr()))
+                item.setGtr(vo.getGtr());
+            if (StringUtil.isNotEmpty(vo.getCategory()))
+                item.setCategory(vo.getCategory());
+            if (StringUtil.isNotEmpty(vo.getBuildingCode()))
+                item.setBuildingCode(vo.getBuildingCode());
+            if (StringUtil.isNotEmpty(vo.getMotifKoCrCommandePrise()))
+                item.setMotifKoCrCommandePrise(vo.getMotifKoCrCommandePrise());
+            if (StringUtil.isNotEmpty(vo.getTypeCommandeRetenu()))
+                item.setTypeCommandeRetenu(vo.getTypeCommandeRetenu());
+            if (StringUtil.isNotEmpty(vo.getTypeProjectionGeographique()))
+                item.setTypeProjectionGeographique(vo.getTypeProjectionGeographique());
+            if (StringUtil.isNotEmpty(vo.getCoordonneePBOX()))
+                item.setCoordonneePBOX(vo.getCoordonneePBOX());
+            if (StringUtil.isNotEmpty(vo.getCodeAccesSousSol()))
+                item.setCodeAccesSousSol(vo.getCodeAccesSousSol());
+            if (StringUtil.isNotEmpty(vo.getAutresInformations()))
+                item.setInformationTubeModulePm1(vo.getInformationTubeModulePm1());
+            if (StringUtil.isNotEmpty(vo.getInformationTubeModulePm2()))
+                item.setInformationTubeModulePm2(vo.getInformationTubeModulePm2());
+            if (StringUtil.isNotEmpty(vo.getInformationTubeModulePm3()))
+                item.setInformationTubeModulePm3(vo.getInformationTubeModulePm3());
+            if (StringUtil.isNotEmpty(vo.getInformationTubeModulePm4()))
+                item.setInformationTubeModulePm4(vo.getInformationTubeModulePm4());
+            if (StringUtil.isNotEmpty(vo.getReserve5()))
+                item.setReserve5(vo.getReserve5());
+            if (StringUtil.isNotEmpty(vo.getDateCrCommandePrise()))
+                item.setDateCrCommandePrise(DateUtil.parse(vo.getDateCrCommandePrise()));
 
 
             if (StringUtil.isNotEmpty(vo.getDelaiPriseRdvParHeure()))
@@ -856,8 +884,50 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
             if (StringUtil.isNotEmpty(item.getKoscContactEmail3()))
                 vo.setKoscContactEmail3(item.getKoscContactEmail3());
 
-            if (StringUtil.isNotEmpty(item.getCustomerOperator()))
-                vo.setCustomerOperator(item.getCustomerOperator());
+            if (StringUtil.isNotEmpty(item.getKoscContactCellphone()))
+                vo.setKoscContactCellphone(item.getKoscContactCellphone());
+
+            if (StringUtil.isNotEmpty(item.getGtr()))
+                vo.setGtr(item.getGtr());
+
+            if (StringUtil.isNotEmpty(item.getCategory()))
+                vo.setCategory(item.getCategory());
+
+            if (StringUtil.isNotEmpty(item.getBuildingCode()))
+                vo.setBuildingCode(item.getBuildingCode());
+
+            if (StringUtil.isNotEmpty(item.getMotifKoCrCommandePrise()))
+                vo.setMotifKoCrCommandePrise(item.getMotifKoCrCommandePrise());
+
+            if (StringUtil.isNotEmpty(item.getTypeCommandeRetenu()))
+                vo.setTypeCommandeRetenu(item.getTypeCommandeRetenu());
+
+            if (StringUtil.isNotEmpty(item.getTypeProjectionGeographique()))
+                vo.setTypeProjectionGeographique(item.getTypeProjectionGeographique());
+
+            if (StringUtil.isNotEmpty(item.getCoordonneePBOX()))
+                vo.setCoordonneePBOX(item.getCoordonneePBOX());
+
+            if (StringUtil.isNotEmpty(item.getCodeAccesSousSol()))
+                vo.setCodeAccesSousSol(item.getCodeAccesSousSol());
+
+            if (StringUtil.isNotEmpty(item.getAutresInformations()))
+                vo.setAutresInformations(item.getAutresInformations());
+
+            if (StringUtil.isNotEmpty(item.getInformationTubeModulePm1()))
+                vo.setInformationTubeModulePm1(item.getInformationTubeModulePm1());
+
+            if (StringUtil.isNotEmpty(item.getInformationTubeModulePm2()))
+                vo.setInformationTubeModulePm2(item.getInformationTubeModulePm2());
+
+            if (StringUtil.isNotEmpty(item.getInformationTubeModulePm3()))
+                vo.setInformationTubeModulePm3(item.getInformationTubeModulePm3());
+
+            if (StringUtil.isNotEmpty(item.getInformationTubeModulePm4()))
+                vo.setInformationTubeModulePm4(item.getInformationTubeModulePm4());
+
+            if (StringUtil.isNotEmpty(item.getReserve5()))
+                vo.setReserve5(item.getReserve5());
 
 
             if (StringUtil.isNotEmpty(item.getTypeMaterielPbo()))
