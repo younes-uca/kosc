@@ -126,6 +126,7 @@ import {
 import {UserListComponent} from "./user-list/user-list.component";
 import {RoleListComponent} from "./role-list/role-list.component";
 import {CalendrierTechnicienComponent} from "./calendrier-technicien/calendrier-technicien.component";
+import {InboxComponent} from "./inbox/inbox.component";
 
 
 @NgModule({
@@ -384,6 +385,17 @@ import {CalendrierTechnicienComponent} from "./calendrier-technicien/calendrier-
                                 {
                                     path: 'list',
                                     component: CalendrierTechnicienComponent,
+                                    canActivate: [AuthGuard]
+                                }
+                            ]
+                        },
+                        {
+
+                            path: 'inbox',
+                            children: [
+                                {
+                                    path: 'list',
+                                    component: InboxComponent,
                                     canActivate: [AuthGuard]
                                 }
                             ]
