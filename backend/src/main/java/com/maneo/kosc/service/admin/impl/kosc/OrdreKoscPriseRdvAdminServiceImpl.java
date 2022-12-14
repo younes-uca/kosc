@@ -94,6 +94,8 @@ public class OrdreKoscPriseRdvAdminServiceImpl implements OrdreKoscPriseRdvAdmin
             result = -1;
         }else if(DateUtil.difference(dateDeuxiemeAppel, dateTroisiemeAppel) > 0){
             result = -2;
+        }else if(dateTroisiemeAppel != null){
+            result = -3;
         }else{
             initDateDernierAppel(ordreKosc);
             OrdreKosc savedOrdreKosc = ordreKoscDao.save(ordreKosc);

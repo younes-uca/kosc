@@ -190,7 +190,7 @@ export class OrdreKoscPriseRdvEditAdminComponent implements OnInit {
                 this.messageService.add({
                     severity: 'info',
                     summary: 'Remarque',
-                    detail: 'Vous avez d\éj\à appel\é ce client aujourd\'hui'
+                    detail: 'La date Troisi\ème appel est incorrecte'
                 });
             }else if(result == -3){
                 this.messageService.add({
