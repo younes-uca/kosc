@@ -862,8 +862,70 @@ public class OrdreKosc {
     @Transient
     private int result;
 
+    @Transient
+    private String emailTo;
+    @Transient
+    private String emailDe;
+    @Transient
+    private String emailObjet;
+    @Transient
+    private String emailCorps;
+    @Transient
+    private Boolean emailEnvoye  = false;
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateEnvoi;
+
+    public Date getDateEnvoi() {
+        return dateEnvoi;
+    }
+
+    public void setDateEnvoi(Date dateEnvoi) {
+        this.dateEnvoi = dateEnvoi;
+    }
+
+    public Boolean getEmailEnvoye() {
+        return emailEnvoye;
+    }
+
+    public void setEmailEnvoye(boolean emailEnvoye) {
+        this.emailEnvoye = emailEnvoye;
+    }
+
     public OrdreKosc() {
         super();
+    }
+
+    public String getEmailTo() {
+        return emailTo;
+    }
+
+    public void setEmailTo(String emailTo) {
+        this.emailTo = emailTo;
+    }
+
+    public String getEmailDe() {
+        return emailDe;
+    }
+
+    public void setEmailDe(String emailDe) {
+        this.emailDe = emailDe;
+    }
+
+    public String getEmailObjet() {
+        return emailObjet;
+    }
+
+    public void setEmailObjet(String emailObjet) {
+        this.emailObjet = emailObjet;
+    }
+
+    public String getEmailCorps() {
+        return emailCorps;
+    }
+
+    public void setEmailCorps(String emailCorps) {
+        this.emailCorps = emailCorps;
     }
 
     public void setNumeroDernierAppel(Long numeroDernierAppel) {

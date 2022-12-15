@@ -419,6 +419,61 @@ public class OrdreKoscVo {
 
     private int result;
 
+    private String emailDe;
+    private String emailTo;
+    private String emailObjet;
+    private String emailCorps;
+    private Boolean emailEnvoye;
+    private String dateEnvoi;
+
+    public String getDateEnvoi() {
+        return dateEnvoi;
+    }
+
+    public void setDateEnvoi(String dateEnvoi) {
+        this.dateEnvoi = dateEnvoi;
+    }
+
+    public Boolean getEmailEnvoye() {
+        return emailEnvoye;
+    }
+
+    public void setEmailEnvoye(boolean emailEnvoye) {
+        this.emailEnvoye = emailEnvoye;
+    }
+
+    public String getEmailDe() {
+        return emailDe;
+    }
+
+    public void setEmailDe(String emailDe) {
+        this.emailDe = emailDe;
+    }
+
+    public String getEmailTo() {
+        return emailTo;
+    }
+
+    public void setEmailTo(String emailTo) {
+        this.emailTo = emailTo;
+    }
+
+    public String getEmailObjet() {
+        return emailObjet;
+    }
+
+    public void setEmailObjet(String emailObjet) {
+        this.emailObjet = emailObjet;
+    }
+
+    public String getEmailCorps() {
+        return emailCorps;
+    }
+
+    public void setEmailCorps(String emailCorps) {
+        this.emailCorps = emailCorps;
+    }
+
     public int getResult() {
         return result;
     }

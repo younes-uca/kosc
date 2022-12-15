@@ -108,6 +108,7 @@ public class OrdreKoscPriseRdvAdminServiceImpl implements OrdreKoscPriseRdvAdmin
 
     }
 
+
     private void initDateDernierAppel(OrdreKosc ordreKosc) {
         if (ordreKosc.getDateTroisiemeAppel() != null) {
             ordreKosc.setDateDernierAppel(ordreKosc.getDateTroisiemeAppel());

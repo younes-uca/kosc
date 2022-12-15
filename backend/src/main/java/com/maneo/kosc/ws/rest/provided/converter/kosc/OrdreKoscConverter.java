@@ -99,6 +99,8 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
     private Boolean userReportDemandeClientClientInjoignable;
     private Boolean userReportDemandeClientClientJoignable;
     private Boolean userImportation;
+    private boolean emailEnvoye;
+
 
     public OrdreKoscConverter() {
         init(true);
@@ -646,6 +648,8 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
                 item.setCorpsReportDemandeClientClientJoignable(vo.getCorpsReportDemandeClientClientJoignable());
             if (vo.getEnvoyeReportDemandeClientClientJoignable() != null)
                 item.setEnvoyeReportDemandeClientClientJoignable(vo.getEnvoyeReportDemandeClientClientJoignable());
+            if (vo.getEmailEnvoye() != null)
+                item.setEmailEnvoye(vo.getEmailEnvoye());
             if (StringUtil.isNotEmpty(vo.getDateEnvoiReportDemandeClientClientJoignable()))
                 item.setDateEnvoiReportDemandeClientClientJoignable(DateUtil.parse(vo.getDateEnvoiReportDemandeClientClientJoignable()));
             if (StringUtil.isNotEmpty(vo.getFromReportDemandeClientClientJoignable()))
@@ -656,6 +660,16 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
             if (StringUtil.isNotEmpty(vo.getDateCri()))
                 item.setDateCri(DateUtil.parse(vo.getDateCri()));
 
+            if (StringUtil.isNotEmpty(vo.getEmailDe()))
+                item.setEmailDe(vo.getEmailDe());
+            if (StringUtil.isNotEmpty(vo.getEmailTo()))
+                item.setEmailTo(vo.getEmailTo());
+            if (StringUtil.isNotEmpty(vo.getEmailObjet()))
+                item.setEmailObjet(vo.getEmailObjet());
+            if (StringUtil.isNotEmpty(vo.getEmailCorps()))
+                item.setEmailCorps(vo.getEmailCorps());
+            if (StringUtil.isNotEmpty(vo.getDateEnvoi()))
+                item.setDateEnvoi(DateUtil.parse(vo.getDateEnvoi()));
 
             if (vo.getOperatorVo() != null && this.operator)
                 item.setOperator(operatorConverter.toItem(vo.getOperatorVo()));
@@ -1199,6 +1213,20 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
             if (StringUtil.isNotEmpty(item.getCorpsPlanification()))
                 vo.setCorpsPlanification(item.getCorpsPlanification());
 
+            if (StringUtil.isNotEmpty(item.getEmailDe()))
+                vo.setEmailDe(item.getEmailDe());
+
+            if (StringUtil.isNotEmpty(item.getEmailTo()))
+                vo.setEmailTo(item.getEmailTo());
+
+            if (StringUtil.isNotEmpty(item.getEmailCorps()))
+                vo.setEmailCorps(item.getEmailCorps());
+
+            if (StringUtil.isNotEmpty(item.getEmailObjet()))
+                vo.setEmailObjet(item.getEmailObjet());
+            if (item.getDateEnvoi() != null)
+                vo.setDateEnvoi(DateUtil.formateDate(item.getDateEnvoi()));
+
             if (item.getEnvoyePlanification() != null)
                 vo.setEnvoyePlanification(item.getEnvoyePlanification());
 
@@ -1488,6 +1516,9 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
 
             if (item.getEnvoyeReportDemandeClientClientJoignable() != null)
                 vo.setEnvoyeReportDemandeClientClientJoignable(item.getEnvoyeReportDemandeClientClientJoignable());
+
+            if (item.getEmailEnvoye() != null)
+                vo.setEmailEnvoye(item.getEmailEnvoye());
             if (item.getDateEnvoiReportDemandeClientClientJoignable() != null)
                 vo.setDateEnvoiReportDemandeClientClientJoignable(DateUtil.formateDate(item.getDateEnvoiReportDemandeClientClientJoignable()));
 
