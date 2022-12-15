@@ -386,6 +386,12 @@ export class OrdreKoscVo {
      public  userImportation:User;
 
 
+     public emailTo: string;
+     public emailDe: string;
+     public emailObjet: string;
+     public emailCorps: string;
+     public emailEnvoye: boolean;
+     public dateEnvoi: Date
 
      public result: number;
 }
