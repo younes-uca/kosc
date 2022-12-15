@@ -570,37 +570,37 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
     }
 
     private void setEmails(OrdreKosc ordreKosc){
-        if (ordreKosc.getToClientInjoinable() != null){
+        if (ordreKosc.getEtatDemandeKosc().getCode() == "client-injoinable"){
             ordreKosc.setEmailTo(ordreKosc.getToClientInjoinable());
             ordreKosc.setEmailDe(ordreKosc.getFromClientInjoinable());
             ordreKosc.setEmailObjet(ordreKosc.getObjetClientInjoinable());
             ordreKosc.setEmailCorps(ordreKosc.getCorpsClientInjoinable());
             ordreKosc.setDateEnvoi(ordreKosc.getDateEnvoiClientInjoinable());
-        }else if (ordreKosc.getToRefus() != null){
+        }else if (ordreKosc.getEtatDemandeKosc().getCode() == "refus-client"){
             ordreKosc.setEmailTo(ordreKosc.getToRefus());
             ordreKosc.setEmailDe(ordreKosc.getFromRefus());
             ordreKosc.setEmailObjet(ordreKosc.getObjetRefus());
             ordreKosc.setEmailCorps(ordreKosc.getCorpsRefus());
             ordreKosc.setDateEnvoi(ordreKosc.getDateEnvoiRefus());
-        }else if(ordreKosc.getToConfirmationClient() != null){
+        }else if(ordreKosc.getEtatDemandeKosc().getCode() == "confirmation-client"){
             ordreKosc.setEmailTo(ordreKosc.getToConfirmationClient());
             ordreKosc.setEmailDe(ordreKosc.getFromConfirmationClient());
             ordreKosc.setEmailObjet(ordreKosc.getObjetConfirmationClient());
             ordreKosc.setEmailCorps(ordreKosc.getCorpsConfirmationClient());
             ordreKosc.setDateEnvoi(ordreKosc.getDateEnvoiConfirmationClient());
-        }else if(ordreKosc.getToMauvaisContact() != null){
+        }else if(ordreKosc.getEtatDemandeKosc().getCode() == "mauvais-contact"){
             ordreKosc.setEmailTo(ordreKosc.getToMauvaisContact());
             ordreKosc.setEmailDe(ordreKosc.getFromMauvaisContact());
             ordreKosc.setEmailObjet(ordreKosc.getObjetMauvaisContact());
             ordreKosc.setEmailCorps(ordreKosc.getCorpsMauvaisContact());
             ordreKosc.setDateEnvoi(ordreKosc.getDateEnvoiMauvaisContact());
-        }else if (ordreKosc.getToAutre() != null){
+        }else if (ordreKosc.getEtatDemandeKosc().getCode() == "autre"){
             ordreKosc.setEmailTo(ordreKosc.getToAutre());
             ordreKosc.setEmailDe(ordreKosc.getFromAutre());
             ordreKosc.setEmailObjet(ordreKosc.getObjetAutre());
             ordreKosc.setEmailCorps(ordreKosc.getCorpsAutre());
             ordreKosc.setDateEnvoi(ordreKosc.getDateEnvoiAutre());
-        }else if (ordreKosc.getToPlanification() != null){
+        }else if (ordreKosc.getEtatDemandeKosc().getCode() == "planification"){
             ordreKosc.setEmailTo(ordreKosc.getToPlanification());
             ordreKosc.setEmailDe(ordreKosc.getFromPlanification());
             ordreKosc.setEmailObjet(ordreKosc.getObjetPlanification());
