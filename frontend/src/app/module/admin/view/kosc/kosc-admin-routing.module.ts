@@ -126,6 +126,7 @@ import {
 import {UserListComponent} from "./user-list/user-list.component";
 import {RoleListComponent} from "./role-list/role-list.component";
 import {CalendrierTechnicienComponent} from "./calendrier-technicien/calendrier-technicien.component";
+import {InboxComponent} from "./inbox/inbox.component";
 import {UserAppListComponent} from "./user-app/user-app-list/user-app-list.component";
 
 
@@ -385,6 +386,17 @@ import {UserAppListComponent} from "./user-app/user-app-list/user-app-list.compo
                                 {
                                     path: 'list',
                                     component: CalendrierTechnicienComponent,
+                                    canActivate: [AuthGuard]
+                                }
+                            ]
+                        },
+                        {
+
+                            path: 'inbox',
+                            children: [
+                                {
+                                    path: 'list',
+                                    component: InboxComponent,
                                     canActivate: [AuthGuard]
                                 }
                             ]

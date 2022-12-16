@@ -114,6 +114,11 @@ export class AppMenuComponent implements OnInit {
                         //     routerLink: ['/app/admin/kosc/chercheur/list']
                         // },
                         {
+                            label: 'Inbox',
+                            icon: 'pi pi-fw pi-inbox',
+                            routerLink: ['/app/admin/kosc/inbox/list']
+                        },
+                        {
                             label: 'Technicien',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/admin/kosc/technicien/list']
@@ -143,6 +148,7 @@ export class AppMenuComponent implements OnInit {
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/admin/kosc/calendrier-technicien/list']
                         },
+
                         {
                             label: 'Region',
                             icon: 'pi pi-fw pi-plus-circle',

@@ -99,6 +99,8 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
     private Boolean userReportDemandeClientClientInjoignable;
     private Boolean userReportDemandeClientClientJoignable;
     private Boolean userImportation;
+    private boolean emailEnvoye;
+
 
     public OrdreKoscConverter() {
         init(true);
@@ -160,8 +162,36 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
             if (StringUtil.isNotEmpty(vo.getKoscContactEmail3()))
                 item.setKoscContactEmail3(vo.getKoscContactEmail3());
 
-            if (StringUtil.isNotEmpty(vo.getCustomerOperator()))
-                item.setCustomerOperator(vo.getCustomerOperator());
+            if (StringUtil.isNotEmpty(vo.getKoscContactCellphone()))
+                item.setKoscContactCellphone(vo.getKoscContactCellphone());
+            if (StringUtil.isNotEmpty(vo.getGtr()))
+                item.setGtr(vo.getGtr());
+            if (StringUtil.isNotEmpty(vo.getCategory()))
+                item.setCategory(vo.getCategory());
+            if (StringUtil.isNotEmpty(vo.getBuildingCode()))
+                item.setBuildingCode(vo.getBuildingCode());
+            if (StringUtil.isNotEmpty(vo.getMotifKoCrCommandePrise()))
+                item.setMotifKoCrCommandePrise(vo.getMotifKoCrCommandePrise());
+            if (StringUtil.isNotEmpty(vo.getTypeCommandeRetenu()))
+                item.setTypeCommandeRetenu(vo.getTypeCommandeRetenu());
+            if (StringUtil.isNotEmpty(vo.getTypeProjectionGeographique()))
+                item.setTypeProjectionGeographique(vo.getTypeProjectionGeographique());
+            if (StringUtil.isNotEmpty(vo.getCoordonneePBOX()))
+                item.setCoordonneePBOX(vo.getCoordonneePBOX());
+            if (StringUtil.isNotEmpty(vo.getCodeAccesSousSol()))
+                item.setCodeAccesSousSol(vo.getCodeAccesSousSol());
+            if (StringUtil.isNotEmpty(vo.getAutresInformations()))
+                item.setInformationTubeModulePm1(vo.getInformationTubeModulePm1());
+            if (StringUtil.isNotEmpty(vo.getInformationTubeModulePm2()))
+                item.setInformationTubeModulePm2(vo.getInformationTubeModulePm2());
+            if (StringUtil.isNotEmpty(vo.getInformationTubeModulePm3()))
+                item.setInformationTubeModulePm3(vo.getInformationTubeModulePm3());
+            if (StringUtil.isNotEmpty(vo.getInformationTubeModulePm4()))
+                item.setInformationTubeModulePm4(vo.getInformationTubeModulePm4());
+            if (StringUtil.isNotEmpty(vo.getReserve5()))
+                item.setReserve5(vo.getReserve5());
+            if (StringUtil.isNotEmpty(vo.getDateCrCommandePrise()))
+                item.setDateCrCommandePrise(DateUtil.parse(vo.getDateCrCommandePrise()));
 
 
             if (StringUtil.isNotEmpty(vo.getDelaiPriseRdvParHeure()))
@@ -618,6 +648,8 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
                 item.setCorpsReportDemandeClientClientJoignable(vo.getCorpsReportDemandeClientClientJoignable());
             if (vo.getEnvoyeReportDemandeClientClientJoignable() != null)
                 item.setEnvoyeReportDemandeClientClientJoignable(vo.getEnvoyeReportDemandeClientClientJoignable());
+            if (vo.getEmailEnvoye() != null)
+                item.setEmailEnvoye(vo.getEmailEnvoye());
             if (StringUtil.isNotEmpty(vo.getDateEnvoiReportDemandeClientClientJoignable()))
                 item.setDateEnvoiReportDemandeClientClientJoignable(DateUtil.parse(vo.getDateEnvoiReportDemandeClientClientJoignable()));
             if (StringUtil.isNotEmpty(vo.getFromReportDemandeClientClientJoignable()))
@@ -628,6 +660,16 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
             if (StringUtil.isNotEmpty(vo.getDateCri()))
                 item.setDateCri(DateUtil.parse(vo.getDateCri()));
 
+            if (StringUtil.isNotEmpty(vo.getEmailDe()))
+                item.setEmailDe(vo.getEmailDe());
+            if (StringUtil.isNotEmpty(vo.getEmailTo()))
+                item.setEmailTo(vo.getEmailTo());
+            if (StringUtil.isNotEmpty(vo.getEmailObjet()))
+                item.setEmailObjet(vo.getEmailObjet());
+            if (StringUtil.isNotEmpty(vo.getEmailCorps()))
+                item.setEmailCorps(vo.getEmailCorps());
+            if (StringUtil.isNotEmpty(vo.getDateEnvoi()))
+                item.setDateEnvoi(DateUtil.parse(vo.getDateEnvoi()));
 
             if (vo.getOperatorVo() != null && this.operator)
                 item.setOperator(operatorConverter.toItem(vo.getOperatorVo()));
@@ -854,8 +896,53 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
             if (StringUtil.isNotEmpty(item.getKoscContactEmail3()))
                 vo.setKoscContactEmail3(item.getKoscContactEmail3());
 
-            if (StringUtil.isNotEmpty(item.getCustomerOperator()))
-                vo.setCustomerOperator(item.getCustomerOperator());
+            if (StringUtil.isNotEmpty(item.getKoscContactCellphone()))
+                vo.setKoscContactCellphone(item.getKoscContactCellphone());
+
+            if (StringUtil.isNotEmpty(item.getGtr()))
+                vo.setGtr(item.getGtr());
+
+            if (StringUtil.isNotEmpty(item.getCategory()))
+                vo.setCategory(item.getCategory());
+
+            if (StringUtil.isNotEmpty(item.getBuildingCode()))
+                vo.setBuildingCode(item.getBuildingCode());
+
+            if (StringUtil.isNotEmpty(item.getMotifKoCrCommandePrise()))
+                vo.setMotifKoCrCommandePrise(item.getMotifKoCrCommandePrise());
+
+            if (StringUtil.isNotEmpty(item.getTypeCommandeRetenu()))
+                vo.setTypeCommandeRetenu(item.getTypeCommandeRetenu());
+
+            if (StringUtil.isNotEmpty(item.getTypeProjectionGeographique()))
+                vo.setTypeProjectionGeographique(item.getTypeProjectionGeographique());
+
+            if (StringUtil.isNotEmpty(item.getCoordonneePBOX()))
+                vo.setCoordonneePBOX(item.getCoordonneePBOX());
+
+            if (StringUtil.isNotEmpty(item.getCodeAccesSousSol()))
+                vo.setCodeAccesSousSol(item.getCodeAccesSousSol());
+
+            if (StringUtil.isNotEmpty(item.getAutresInformations()))
+                vo.setAutresInformations(item.getAutresInformations());
+
+            if (StringUtil.isNotEmpty(item.getInformationTubeModulePm1()))
+                vo.setInformationTubeModulePm1(item.getInformationTubeModulePm1());
+
+            if (StringUtil.isNotEmpty(item.getInformationTubeModulePm2()))
+                vo.setInformationTubeModulePm2(item.getInformationTubeModulePm2());
+
+            if (StringUtil.isNotEmpty(item.getInformationTubeModulePm3()))
+                vo.setInformationTubeModulePm3(item.getInformationTubeModulePm3());
+
+            if (StringUtil.isNotEmpty(item.getInformationTubeModulePm4()))
+                vo.setInformationTubeModulePm4(item.getInformationTubeModulePm4());
+
+            if (StringUtil.isNotEmpty(item.getReserve5()))
+                vo.setReserve5(item.getReserve5());
+
+            if (item.getDateCrCommandePrise() != null)
+                vo.setDateCrCommandePrise(DateUtil.formateDate(item.getDateCrCommandePrise()));
 
 
             if (StringUtil.isNotEmpty(item.getTypeMaterielPbo()))
@@ -1125,6 +1212,20 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
 
             if (StringUtil.isNotEmpty(item.getCorpsPlanification()))
                 vo.setCorpsPlanification(item.getCorpsPlanification());
+
+            if (StringUtil.isNotEmpty(item.getEmailDe()))
+                vo.setEmailDe(item.getEmailDe());
+
+            if (StringUtil.isNotEmpty(item.getEmailTo()))
+                vo.setEmailTo(item.getEmailTo());
+
+            if (StringUtil.isNotEmpty(item.getEmailCorps()))
+                vo.setEmailCorps(item.getEmailCorps());
+
+            if (StringUtil.isNotEmpty(item.getEmailObjet()))
+                vo.setEmailObjet(item.getEmailObjet());
+            if (item.getDateEnvoi() != null)
+                vo.setDateEnvoi(DateUtil.formateDate(item.getDateEnvoi()));
 
             if (item.getEnvoyePlanification() != null)
                 vo.setEnvoyePlanification(item.getEnvoyePlanification());
@@ -1415,6 +1516,9 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
 
             if (item.getEnvoyeReportDemandeClientClientJoignable() != null)
                 vo.setEnvoyeReportDemandeClientClientJoignable(item.getEnvoyeReportDemandeClientClientJoignable());
+
+            if (item.getEmailEnvoye() != null)
+                vo.setEmailEnvoye(item.getEmailEnvoye());
             if (item.getDateEnvoiReportDemandeClientClientJoignable() != null)
                 vo.setDateEnvoiReportDemandeClientClientJoignable(DateUtil.formateDate(item.getDateEnvoiReportDemandeClientClientJoignable()));
 
