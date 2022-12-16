@@ -1,0 +1,77 @@
+.faa-custom-card {
+  border-radius: 25px;
+  -webkit-box-shadow: 5px 5px 10px 5px lightgrey;
+  box-shadow: 5px 5px 10px 5px lightgrey;
+  float: left;
+  margin: 10px;
+  margin-bottom: 30px;
+  padding: 20px !important;
+  background: #FFF;
+  height: 250px;
+  color: darkslategray;
+  position: relative;
+  min-width:200px;
+  max-width: 400px;
+}
+
+.faa-custom-card .custom-card-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.faa-custom-card .card-bottom-button {
+  bottom: 10px;
+  right: 20px;
+  position: absolute;
+}
+
+.custom-card-date {
+  font-size: smaller;
+  font-style: italic;
+  padding-bottom: 3px;
+}
+
+.custom-card-tipper {
+  visibility: visible;
+  background: orangered;
+  color: white;
+  font-size: 11px;
+  min-width: 60px;
+  max-width: 120px;
+  border-radius: 5px 5px 5px 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  position: absolute;
+  top: -5px;
+  left: 29px;
+  height: 17px;
+  vertical-align: baseline;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+}
+
+.custom-card-disabled {
+  filter: grayscale(90%);
+  background: #f1f1f1;
+}
+
+.custom-card-hidden {
+  visibility: hidden;
+}
+
+.custom-card-validated {
+  background-color: #0d8e4f;
+}
+
+.custom-card-ongoing {
+  background-color: #FF475A;
+}
+
+.custom-card-init {
+  background-color: #0a3e41;
+}
+
+.custom-card-nostatus {
+  background-color: royalblue;
+}
+

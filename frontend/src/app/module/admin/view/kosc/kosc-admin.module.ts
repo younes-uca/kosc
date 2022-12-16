@@ -426,12 +426,22 @@ import {
     TemplateEmailReportDemandeClientClientJoignableListAdminComponent
 } from "./template-email-report-demande-client-client-joignable-admin/list-admin/template-email-report-demande-client-client-joignable-list-admin.component";
 import {RoleListComponent} from "./role-list/role-list.component";
+import {UserAppEditComponent} from "./user-app/user-app-edit/user-app-edit.component";
+import {UserAppListComponent} from "./user-app/user-app-list/user-app-list.component";
+import {UserAppViewComponent} from "./user-app/user-app-view/user-app-view.component";
+import {UserAppAddComponent} from "./user-app/user-app-add/user-app-add.component";
+import {CustomCardComponent} from "./user-app/custom-card/custom-card.component";
 
 
 
 
 @NgModule({
     declarations: [
+        CustomCardComponent,
+        UserAppAddComponent,
+        UserAppEditComponent,
+        UserAppListComponent,
+        UserAppViewComponent,
         RoleListComponent,
         OrdreKoscSuiviCddViewAdminComponent,
         OrdreKoscSuiviCddEditAdminComponent,

@@ -13,6 +13,10 @@ export class UserService {
     API = environment.apiUrl+"users/";
     private role$: any;
     private _users: User[] = [];
+    userCreateDialog: boolean;
+    userDialogTitle: string;
+    userEditDialog: boolean;
+    userViewDialog: boolean;
 
     constructor(private http: HttpClient,private roleService:RoleService) {
         this.role$ = this.roleService.role$;
