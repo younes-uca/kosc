@@ -5,16 +5,26 @@ public class EmailDetails {
     private String to;
     private String objet;
     private String corps;
+    private String attachment;
 
 
     public EmailDetails() {
     }
 
-    public EmailDetails(String from, String to, String objet, String corps) {
+    public EmailDetails(String from, String to, String objet, String corps, String attachment) {
         this.from = from;
         this.to = to;
         this.objet = objet;
         this.corps = corps;
+        this.attachment = attachment;
+    }
+
+    public String getAttachment() {
+        return attachment;
+    }
+
+    public void setAttachment(String attachment) {
+        this.attachment = attachment;
     }
 
     public String getFrom() {

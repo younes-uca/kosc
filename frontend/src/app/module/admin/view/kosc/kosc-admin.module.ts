@@ -426,6 +426,7 @@ import {
     TemplateEmailReportDemandeClientClientJoignableListAdminComponent
 } from "./template-email-report-demande-client-client-joignable-admin/list-admin/template-email-report-demande-client-client-joignable-list-admin.component";
 import {RoleListComponent} from "./role-list/role-list.component";
+import {FileUploadModule} from "primeng/fileupload";
 
 
 
@@ -645,6 +646,7 @@ import {RoleListComponent} from "./role-list/role-list.component";
         ProgressSpinnerModule,
         BlockUIModule,
         BreadcrumbModule,
+        FileUploadModule,
 
     ],
     exports: [

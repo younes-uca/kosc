@@ -357,9 +357,10 @@ public class OrderKoscEmailingAdminServiceImpl implements OrderKoscEmailingAdmin
         emailDetails.setTo(ordreKosc.getToCri());
         emailDetails.setObjet(ordreKosc.getObjetCri());
         emailDetails.setCorps(ordreKosc.getCorpsCri());
+        emailDetails.setAttachment(ordreKosc.getCorpsCri());
         try {
 
-            emailSenderAdminService.sendEmail(emailDetails);
+            emailSenderAdminService.sendMailWithAttachment(emailDetails);
             ordreKosc.setEnvoyeCri(true);
             ordreKosc.setDateEnvoiCri(now);
 

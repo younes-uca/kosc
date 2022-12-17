@@ -4,4 +4,6 @@ import com.maneo.kosc.bean.template.EmailDetails;
 
 public interface EmailSenderAdminService {
     void sendEmail(EmailDetails emailDetails);
+
+    void sendMailWithAttachment(EmailDetails emailDetails);
 }
