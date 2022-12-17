@@ -1,0 +1,56 @@
+<p-dialog [(visible)]="userEditDialog" [style]="{width: '70vw'}" [header]="userDialogTitle" [modal]="true"
+          styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Utilisateur">
+                <div class="p-fluid p-formgrid p-grid">
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="2">Email<span style="color: red;">*</span></label>
+                        <input class="p-mb-2 p-mr-2" type="text" maxlength="30" pInputText placeholder="Email"
+                               [(ngModel)]="user.email" id="2" [ngClass]="{'ng-invalid ng-dirty' : !validEmailUser}"
+                        >
+                        <small class='p-error' *ngIf='!validEmailUser'>Email est obligatoire.</small>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="28">Prénom</label>
+                        <input class="p-mb-2 p-mr-2" type="text" maxlength="30" pInputText placeholder="Prenom"
+                               [(ngModel)]="user.prenom" id="28"
+                        >
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="29">Nom d'usage</label>
+                        <input class="p-mb-2 p-mr-2" type="text" maxlength="30" pInputText placeholder="Nom d'usage"
+                               [(ngModel)]="user.nom" id="29">
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="Username">Username</label>
+                        <input class="p-mb-2 p-mr-2" type="text" maxlength="30" pInputText placeholder="Username"
+                               [(ngModel)]="user.username" id="Username">
+                    </div>
+
+
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="{{'Cancel'}}" icon="pi pi-times" (click)="hideDialog()"></button>
+        <button pButton pRipple label="{{'enregistrer' }}" icon="pi pi-check"
+                (click)="editUserSubmit()"></button>
+
+
+    </ng-template>
+
+
+</p-dialog>
+
+

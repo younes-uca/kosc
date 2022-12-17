@@ -17,7 +17,8 @@ export const environment = {
     baseUrl: 'http://localhost:8036/api/',
     apiUrl: 'http://localhost:8036/api/',
     loginUrl: 'http://localhost:8036/',
-    rootAppUrl: 'app',
+    rootAppUrl: 'app', emailValidation: undefined
+
 };
 
 /*

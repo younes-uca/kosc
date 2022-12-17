@@ -1,0 +1,51 @@
+<p-dialog [(visible)]="userViewDialog" [style]="{width: '70vw'}" [header]="userDialogTitle" [modal]="true"
+          styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Utilisateur">
+                <div class="p-fluid p-formgrid p-grid">
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="2">Email</label>
+                        <input class="p-mb-2 p-mr-2" type="text" maxlength="30" pInputText placeholder="Email"
+                               [(ngModel)]="user.email" id="2" [disabled]="true"
+                        >
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="28">Prénom</label>
+                        <input class="p-mb-2 p-mr-2" type="text" maxlength="30" pInputText placeholder="Prenom"
+                               [(ngModel)]="user.prenom" id="28"  [disabled]="true"
+                        >
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="29">Nom d'usage</label>
+                        <input class="p-mb-2 p-mr-2" type="text" maxlength="30" pInputText placeholder="Nom d'usage"
+                               [(ngModel)]="user.nom" id="29"  [disabled]="true">
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="Username">Username</label>
+                        <input class="p-mb-2 p-mr-2" type="text" maxlength="30" pInputText placeholder="Username"
+                               [(ngModel)]="user.username" id="Username" [disabled]="true">
+                    </div>
+
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="{{'Cancel'}}" icon="pi pi-times" (click)="hideDialog()"></button>
+
+
+    </ng-template>
+
+
+</p-dialog>
+
+

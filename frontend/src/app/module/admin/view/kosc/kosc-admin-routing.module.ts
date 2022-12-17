@@ -126,6 +126,8 @@ import {
 import {UserListComponent} from "./user-list/user-list.component";
 import {RoleListComponent} from "./role-list/role-list.component";
 import {CalendrierTechnicienComponent} from "./calendrier-technicien/calendrier-technicien.component";
+import {InboxComponent} from "./inbox/inbox.component";
+import {UserAppListComponent} from "./user-app/user-app-list/user-app-list.component";
 
 
 @NgModule({
@@ -388,6 +390,17 @@ import {CalendrierTechnicienComponent} from "./calendrier-technicien/calendrier-
                                 }
                             ]
                         },
+                        {
+
+                            path: 'inbox',
+                            children: [
+                                {
+                                    path: 'list',
+                                    component: InboxComponent,
+                                    canActivate: [AuthGuard]
+                                }
+                            ]
+                        },
 
                         {
 
@@ -500,7 +513,7 @@ import {CalendrierTechnicienComponent} from "./calendrier-technicien/calendrier-
                             children: [
                                 {
                                     path: 'Gestion_users',
-                                    component: UserListComponent,
+                                    component: UserAppListComponent,
                                     canActivate: [AuthGuard]
                                 },
                                 {

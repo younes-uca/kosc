@@ -349,38 +349,36 @@ public class OrdreKoscVo {
     private String dateCriMax;
     private String dateCriMin;
 
+    //attribut  de maillage
     private String supplier;
-
-
-    private String customerOperator;
-
-
     private String slid;
-
     private String koscContactFirstName;
-
     private String koscContactLastName;
-
-
-
     private String koscContactPhone;
-
     private String koscContactEmail1;
-
     private String koscContactEmail2;
-
     private String koscContactEmail3;
-
     private String koscSplitterPosition;
-
     private String koscComment;
-
-
     private String otpRef;
-
     private String operatorComment;
-    
-    
+
+    private String koscContactCellphone;
+    private String gtr;
+    private String category;
+    private String buildingCode;
+    private String motifKoCrCommandePrise;
+    private String dateCrCommandePrise;
+    private String typeCommandeRetenu;
+    private String typeProjectionGeographique;
+    private String coordonneePBOX;
+    private String codeAccesSousSol;
+    private String autresInformations;
+    private String informationTubeModulePm1;
+    private String informationTubeModulePm2;
+    private String informationTubeModulePm3;
+    private String informationTubeModulePm4;
+    private String reserve5;
 
     private OperatorVo operatorVo;
     private DepartementVo departementVo;
@@ -420,6 +418,61 @@ public class OrdreKoscVo {
     private User userImportation;
 
     private int result;
+
+    private String emailDe;
+    private String emailTo;
+    private String emailObjet;
+    private String emailCorps;
+    private Boolean emailEnvoye;
+    private String dateEnvoi;
+
+    public String getDateEnvoi() {
+        return dateEnvoi;
+    }
+
+    public void setDateEnvoi(String dateEnvoi) {
+        this.dateEnvoi = dateEnvoi;
+    }
+
+    public Boolean getEmailEnvoye() {
+        return emailEnvoye;
+    }
+
+    public void setEmailEnvoye(boolean emailEnvoye) {
+        this.emailEnvoye = emailEnvoye;
+    }
+
+    public String getEmailDe() {
+        return emailDe;
+    }
+
+    public void setEmailDe(String emailDe) {
+        this.emailDe = emailDe;
+    }
+
+    public String getEmailTo() {
+        return emailTo;
+    }
+
+    public void setEmailTo(String emailTo) {
+        this.emailTo = emailTo;
+    }
+
+    public String getEmailObjet() {
+        return emailObjet;
+    }
+
+    public void setEmailObjet(String emailObjet) {
+        this.emailObjet = emailObjet;
+    }
+
+    public String getEmailCorps() {
+        return emailCorps;
+    }
+
+    public void setEmailCorps(String emailCorps) {
+        this.emailCorps = emailCorps;
+    }
 
     public int getResult() {
         return result;
@@ -2979,14 +3032,6 @@ public class OrdreKoscVo {
         this.supplier = supplier;
     }
 
-    public String getCustomerOperator() {
-        return customerOperator;
-    }
-
-    public void setCustomerOperator(String customer_operator) {
-        this.customerOperator = customer_operator;
-    }
-
     public String getSlid() {
         return slid;
     }
@@ -3081,5 +3126,133 @@ public class OrdreKoscVo {
 
     public void setMontantDevis(String montantDevis) {
         this.montantDevis = montantDevis;
+    }
+
+    public String getKoscContactCellphone() {
+        return koscContactCellphone;
+    }
+
+    public void setKoscContactCellphone(String koscContactCellphone) {
+        this.koscContactCellphone = koscContactCellphone;
+    }
+
+    public String getGtr() {
+        return gtr;
+    }
+
+    public void setGtr(String gtr) {
+        this.gtr = gtr;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getBuildingCode() {
+        return buildingCode;
+    }
+
+    public void setBuildingCode(String buildingCode) {
+        this.buildingCode = buildingCode;
+    }
+
+    public String getMotifKoCrCommandePrise() {
+        return motifKoCrCommandePrise;
+    }
+
+    public void setMotifKoCrCommandePrise(String motifKoCrCommandePrise) {
+        this.motifKoCrCommandePrise = motifKoCrCommandePrise;
+    }
+
+    public String getDateCrCommandePrise() {
+        return dateCrCommandePrise;
+    }
+
+    public void setDateCrCommandePrise(String dateCrCommandePrise) {
+        this.dateCrCommandePrise = dateCrCommandePrise;
+    }
+
+    public String getTypeCommandeRetenu() {
+        return typeCommandeRetenu;
+    }
+
+    public void setTypeCommandeRetenu(String typeCommandeRetenu) {
+        this.typeCommandeRetenu = typeCommandeRetenu;
+    }
+
+    public String getTypeProjectionGeographique() {
+        return typeProjectionGeographique;
+    }
+
+    public void setTypeProjectionGeographique(String typeProjectionGeographique) {
+        this.typeProjectionGeographique = typeProjectionGeographique;
+    }
+
+    public String getCoordonneePBOX() {
+        return coordonneePBOX;
+    }
+
+    public void setCoordonneePBOX(String coordonneePBOX) {
+        this.coordonneePBOX = coordonneePBOX;
+    }
+
+    public String getCodeAccesSousSol() {
+        return codeAccesSousSol;
+    }
+
+    public void setCodeAccesSousSol(String codeAccesSousSol) {
+        this.codeAccesSousSol = codeAccesSousSol;
+    }
+
+    public String getAutresInformations() {
+        return autresInformations;
+    }
+
+    public void setAutresInformations(String autresInformations) {
+        this.autresInformations = autresInformations;
+    }
+
+    public String getInformationTubeModulePm1() {
+        return informationTubeModulePm1;
+    }
+
+    public void setInformationTubeModulePm1(String informationTubeModulePm1) {
+        this.informationTubeModulePm1 = informationTubeModulePm1;
+    }
+
+    public String getInformationTubeModulePm2() {
+        return informationTubeModulePm2;
+    }
+
+    public void setInformationTubeModulePm2(String informationTubeModulePm2) {
+        this.informationTubeModulePm2 = informationTubeModulePm2;
+    }
+
+    public String getInformationTubeModulePm3() {
+        return informationTubeModulePm3;
+    }
+
+    public void setInformationTubeModulePm3(String informationTubeModulePm3) {
+        this.informationTubeModulePm3 = informationTubeModulePm3;
+    }
+
+    public String getInformationTubeModulePm4() {
+        return informationTubeModulePm4;
+    }
+
+    public void setInformationTubeModulePm4(String informationTubeModulePm4) {
+        this.informationTubeModulePm4 = informationTubeModulePm4;
+    }
+
+    public String getReserve5() {
+        return reserve5;
+    }
+
+    public void setReserve5(String reserve5) {
+        this.reserve5 = reserve5;
     }
 }

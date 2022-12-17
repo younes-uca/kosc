@@ -340,7 +340,6 @@ export class OrdreKoscVo {
     //attribut de maillage
 
     public  supplier : string;
-     public   customerOperator: string;
      public   slid;
      public   koscContactFirstName: string;
      public   koscContactLastName: string;
@@ -352,7 +351,22 @@ export class OrdreKoscVo {
      public   koscComment: string;
      public   otpRef: string;
      public   operatorComment: string;
-
+     public   koscContactCellphone: string;
+     public   gtr: string;
+     public   category: string;
+     public   buildingCode: string;
+     public   motifKoCrCommandePrise: string;
+     public   dateCrCommandePrise: Date;
+     public   typeCommandeRetenu: string;
+     public   typeProjectionGeographique: string;
+     public   coordonneePBOX: string;
+     public   codeAccesSousSol: string;
+     public   autresInformations: string;
+     public   informationTubeModulePm1: string;
+     public   informationTubeModulePm2: string;
+     public   informationTubeModulePm3: string;
+     public   informationTubeModulePm4: string;
+     public   reserve5: string;
 
      public  userPlanification :User;
      public  userReplanification :User;
@@ -372,6 +386,12 @@ export class OrdreKoscVo {
      public  userImportation:User;
 
 
+     public emailTo: string;
+     public emailDe: string;
+     public emailObjet: string;
+     public emailCorps: string;
+     public emailEnvoye: boolean;
+     public dateEnvoi: Date
 
      public result: number;
 }

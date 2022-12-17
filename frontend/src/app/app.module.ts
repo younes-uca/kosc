@@ -144,7 +144,7 @@ import {FullCalendarModule} from "primeng/fullcalendar";
         AppErrorComponent,
         AppAccessdeniedComponent,
         HomeComponent,
-        CalendrierTechnicienComponent
+        CalendrierTechnicienComponent,
     ],
     providers: [
         /*    { provide: LocationStrategy, useClass: HashLocationStrategy }, */

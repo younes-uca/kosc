@@ -1,0 +1,195 @@
+<p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+
+<div class="p-grid">
+    <div class="p-col-12">
+        <p-toast></p-toast>
+        <div class="card">
+            <p-toolbar styleClass="p-mb-4">
+                <ng-template pTemplate="left">
+                    <button (click)="this.findByCriteriaShow = !this.findByCriteriaShow"
+                            class="p-button-success p-mr-2 p-mb-2"
+                            icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}"
+                            label="Chercher"
+                            pButton
+                            pRipple></button>
+                </ng-template>
+
+
+            </p-toolbar>
+            <p-toolbar *ngIf="findByCriteriaShow">
+
+                <div class="align-form-search">
+                                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input [(ngModel)]="searchOrdreKosc.reference" class="p-mr-2" id="1"
+                                           pInputText type="text">
+                                    <label for="1">Ordre Reference</label>
+                                </span>
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input [(ngModel)]="searchOrdreKosc.referenceWorkOrder" class="p-mr-2" id="2"
+                                           pInputText type="text">
+                                    <label for="2">Reference work order</label>
+                                </span>
+
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                <p-dropdown [(ngModel)]="searchOrdreKosc.departementVo" [filter]="true"
+                                            [options]="departements"
+                                            [showClear]="true" id="98" optionLabel="libelle"
+                                            placeholder="Departement">
+                                </p-dropdown>
+                            </span>
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                <p-dropdown [(ngModel)]="searchOrdreKosc.technicienVo" [filter]="true"
+                                            [options]="techniciens"
+                                            [showClear]="true" id="99" optionLabel="identifiant"
+                                            placeholder="Technicien">
+                                </p-dropdown>
+                            </span>
+
+
+                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+
+                    <p-multiSelect [options]="etatDemandeKoscs"
+                                   [(ngModel)]="searchOrdreKosc.etatDemandeKoscVos"
+                                   defaultLabel="Etat"
+                                   optionLabel="libelle" [virtualScroll]="false"></p-multiSelect>
+                              </span>
+                </div>
+
+                <div class="align-search-button">
+                    <button (click)="searchRequest()" class="p-button-info p-mr-2" icon="pi pi-sort-amount-down"
+                            label="Valider"
+                            pButton pRipple></button>
+                </div>
+            </p-toolbar>
+
+
+
+            <p-table #dt [(selection)]="selectedOrdreKosc" [columns]="cols"
+                     [globalFilterFields]="['reference', 'referenceWorkOrder', 'codeDecharge', 'supplierService', 'dateDebutTraitement', 'endCustumorName', 'endCustumorSiret', 'endCustumorFirstName', 'endCustumorLastName', 'endCustumorZipcode', 'endCustumorStreetName', 'endCustumorStreetNumber', 'endCustumorCity', 'endCustumorBuilding', 'endCustumorStairs', 'endCustumorFloor', 'endCustumorContactFirstName', 'endCustumorContactLastName', 'endCustumorContactPhone', 'endCustumorContactCellPhone', 'endCustumorContactEmail', 'operatorVolibelle', 'company', 'referenDossier', 'submissionDate', 'datePremierAppel', 'dateDeuxiemeAppel', 'dateTroisiemeAppel', 'datePriseRdv', 'dateRdv', 'dateAppelReplanification', 'dateInterventionTechnique', 'dateOuverture', 'envoiMailClient', 'envoiMailKosc', 'coordonnePboY', 'hauteurPbo', 'typeMaterielPbo', 'typePbo', 'conditionSyndics', 'typeRacordementPboPto', 'codeAccesImmeuble', 'contacteImmeuble', 'pmaAccessible', 'infoObtentionCle', 'localeIpm', 'contactsSyndic', 'racordementLong', 'oc1', 'nomModulePm1', 'positionModulePm1', 'referenceCableModulePm1', 'referenceTubeModulePm1', 'informationFibreModulePm1', 'referenceCablePbo1', 'informationTubePbo1', 'informationFibrePbo1', 'connecteurPriseNumero1', 'connecteurPriseCouleur1', 'oc2', 'nomModulePm2', 'positionModulePm2', 'referenceCableModulePm2', 'referenceTubeModulePm2', 'informationFibreModulePm2', 'referenceCablePbo2', 'informationTubePbo2', 'informationFibrePbo2', 'connecteurPriseNumero2', 'connecteurPriseCouleur2', 'oc3', 'nomModulePm3', 'positionModulePm3', 'referenceCableModulePm3', 'referenceTubeModulePm3', 'informationFibreModulePm3', 'referenceCablePbo3', 'informationTubePbo3', 'informationFibrePbo3', 'connecteurPriseNumero3', 'connecteurPriseCouleur3', 'oc4', 'nomModulePm4', 'positionModulePm4', 'referenceCableModulePm4', 'referenceTubeModulePm4', 'informationFibreModulePm4', 'referenceCablePbo4', 'informationTubePbo4', 'informationFibrePbo4', 'connecteurPriseNumero4', 'connecteurPriseCouleur4', 'departementVolibelle', 'technicienVoidentifiant', 'dateEnvoiCri', 'pboReel', 'numeroSerieOnt', 'workOrderType', 'product', 'provider', 'providerFileType', 'spliter', 'existingOtp', 'profile', 'providerSlId', 'referencePrestationPrise', 'clientVoid', 'dateInterventionTechniqueDebut', 'dateInterventionTechniqueFin', 'templateEmailClientInjoinableVolibelle', 'objetClient', 'envoyeClient', 'dateEnvoiClient', 'templateEmailKoscVolibelle', 'objetKosc', 'envoyeKosc', 'dateEnvoiKosc', 'templateEmailPlanificationVolibelle', 'objetPlanification', 'envoyePlanification', 'dateEnvoiPlanification', 'templateEmailReplanificationVolibelle', 'objetReplanification', 'envoyeReplanification', 'dateEnvoiReplanification', 'templateEmailReportVolibelle', 'objetReport', 'envoyeReport', 'dateEnvoiReport', 'etatDemandeKoscVolibelle', 'templateEmailClotureVolibelle', 'objetCloture', 'envoyeCloture', 'dateEnvoiCloture', 'emailCloturePieceJoints', 'templateSuiviVolibelle', 'objetSuivi', 'envoyeSuivi', 'dateEnvoiSuivi']"
+                     [paginator]="true"
+                     [rowHover]="true"
+                     [rowsPerPageOptions]="[8,25,50]"
+                     [rows]="25" [showCurrentPageReport]="true" [value]="ordreKoscs"
+                     currentPageReportTemplate="Les éléments de {first} à {last} sur {totalRecords} "
+                     dataKey="id" styleClass="p-datatable-customers">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+                        <h5 class="p-m-0">Liste des emails</h5>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input (input)="dt.filterGlobal($event.target.value, 'contains')" pInputText
+                                   placeholder="Chercher..."
+                                   type="text"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template let-ordreKosc pTemplate="body">
+                    <tr>
+                        <td style="width: 50px;">
+                            <p-tableCheckbox [value]="ordreKosc"></p-tableCheckbox>
+                        </td>
+
+                        <td style="width: 50px">
+
+                            <button (click)="showEmail()" class="p-button-rounded p-button-info p-mr-2"
+                                    icon="pi pi-list" pButton
+                                    pRipple></button>
+
+                        </td>
+
+                        <td style="font-weight: bolder; font-size: 1em; font-family: Monaco,sans-serif, monospace;">{{ordreKosc.emailTo}}</td>
+
+                        <td style="font-weight: bold; font-size: 1em;">{{ordreKosc.emailObjet}}</td>
+
+                        <td style="width: 150px">{{ordreKosc.dateEnvoi | date :'dd/MM/yyyy HH:mm' }}</td>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        En totale
+                        il {{ordreKoscs ? ordreKoscs.length == 1 ? 'y a' : 'y a' : 'y a' }} {{ordreKoscs ? ordreKoscs.length : 0 }} {{ordreKoscs ? ordreKoscs.length == 1 ? 'email' : 'emails' : 0 }}
+                        .
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>
+
+<p-dialog [(visible)]="displayEmail" [modal]="true"
+          [style]="{width: '70vw'}"
+          styleClass="p-fluid">
+<!--    <ng-template let-ordreKosc pTemplate="header">-->
+<!--        <h5>{{ordreKosc.endCustumorFirstName}} {{ordreKosc.endCustumorLastName}}</h5>-->
+<!--    </ng-template>-->
+
+    <ng-template pTemplate="body">
+        <p-tabView>
+            <div class="p-grid">
+
+                <div class="p-field p-col-12 p-md-6">
+                    <label for="8">Prenom</label>
+                    <input [(ngModel)]="selectedOrdreKosc.endCustumorFirstName"
+                           class="p-mb-2 p-mr-2" id="8"
+                           pInputText [disabled]="true"
+                           placeholder="Prénom" type="text"
+                    />
+
+                </div>
+                <div class="p-field p-col-12  p-md-6">
+                    <label for="9">Nom</label>
+                    <input [(ngModel)]="selectedOrdreKosc.endCustumorLastName" class="p-mb-2 p-mr-2"
+                           id="9" [disabled]="true"
+                           pInputText
+                           placeholder="Nom" type="text"
+                    />
+
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <label for="139">DE</label>
+                    <input [(ngModel)]="selectedOrdreKosc.emailDe"
+                           class="p-mb-2 p-mr-2"
+                           id="139" [disabled]="true"
+                           pInputText placeholder="DE"
+                           type="text"/>
+                </div>
+
+
+                <div class="p-field p-col-12 p-md-4">
+                    <label for="140">A</label>
+                    <input [(ngModel)]="selectedOrdreKosc.emailTo"
+                           class="p-mb-2 p-mr-2"
+                           id="140" [disabled]="true"
+                           pInputText placeholder="A"
+                           type="text"/>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <label for="137">Objet</label>
+                    <input [(ngModel)]="selectedOrdreKosc.emailObjet"
+                           class="p-mb-2 p-mr-2"
+                           id="137" [disabled]="true"
+                           pInputText placeholder="Objet Refus Client"
+                           type="text"/>
+                </div>
+
+
+                <div class="p-field p-col-12 p-md-12">
+                    <label for="138">Corps</label>
+                    <textarea [(ngModel)]="selectedOrdreKosc.emailCorps"
+                              id="138" [disabled]="true"
+                              pInputTextarea placeholder="Corps"
+                              rows="10"></textarea>
+                </div>
+
+
+            </div>
+
+        </p-tabView>
+    </ng-template>
+
+</p-dialog>
+

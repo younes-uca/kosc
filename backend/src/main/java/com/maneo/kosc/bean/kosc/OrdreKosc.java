@@ -465,46 +465,6 @@ public class OrdreKosc {
     @Column(columnDefinition = "TEXT")
     private String corpsConfirmationClient;
 
-    @Column(columnDefinition = "TEXT")
-    private String supplier;
-
-    @Column(columnDefinition = "TEXT")
-    private String customerOperator;
-
-    @Column(columnDefinition = "TEXT")
-    private String slid;
-
-    @Column(columnDefinition = "TEXT")
-    private String koscContactFirstName;
-
-    @Column(columnDefinition = "TEXT")
-    private String koscContactLastName;
-
-    @Column(columnDefinition = "TEXT")
-    private String koscContactPhone;
-
-    @Column(columnDefinition = "TEXT")
-    private String koscContactEmail1;
-
-    @Column(columnDefinition = "TEXT")
-    private String koscContactEmail2;
-
-    @Column(columnDefinition = "TEXT")
-    private String koscContactEmail3;
-
-    @Column(columnDefinition = "TEXT")
-    private String koscSplitterPosition;
-
-    @Column(columnDefinition = "TEXT")
-    private String koscComment;
-
-
-    @Column(columnDefinition = "TEXT")
-    private String otpRef;
-
-    @Column(columnDefinition = "TEXT")
-    private String operatorComment;
-
     @Lob
     @Column(columnDefinition = "TEXT")
     private String fromConfirmationClient;
@@ -783,6 +743,80 @@ public class OrdreKosc {
     private BigDecimal montantDevis;
 
 
+    //attribut de maillage
+    @Column(columnDefinition = "TEXT")
+    private String supplier;
+
+    @Column(columnDefinition = "TEXT")
+    private String slid;
+
+    @Column(columnDefinition = "TEXT")
+    private String koscContactFirstName;
+
+    @Column(columnDefinition = "TEXT")
+    private String koscContactLastName;
+
+    @Column(columnDefinition = "TEXT")
+    private String koscContactPhone;
+
+    @Column(columnDefinition = "TEXT")
+    private String koscContactEmail1;
+
+    @Column(columnDefinition = "TEXT")
+    private String koscContactEmail2;
+
+    @Column(columnDefinition = "TEXT")
+    private String koscContactEmail3;
+
+    @Column(columnDefinition = "TEXT")
+    private String koscSplitterPosition;
+
+    @Column(columnDefinition = "TEXT")
+    private String koscComment;
+
+    @Column(columnDefinition = "TEXT")
+    private String otpRef;
+
+    @Column(columnDefinition = "TEXT")
+    private String operatorComment;
+
+    @Column(columnDefinition = "TEXT")
+    private String koscContactCellphone;
+    @Column(columnDefinition = "TEXT")
+    private String gtr;
+    @Column(columnDefinition = "TEXT")
+    private String category;
+    @Column(columnDefinition = "TEXT")
+    private String buildingCode;
+    @Column(columnDefinition = "TEXT")
+    private String motifKoCrCommandePrise;
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")// a verfier le format de date !!!!!!
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateCrCommandePrise;
+    @Column(columnDefinition = "TEXT")
+    private String typeCommandeRetenu;
+    @Column(columnDefinition = "TEXT")
+    private String typeProjectionGeographique;
+    @Column(columnDefinition = "TEXT")
+    private String coordonneePBOX;
+    @Column(columnDefinition = "TEXT")
+    private String codeAccesSousSol;
+    @Column(columnDefinition = "TEXT")
+    private String autresInformations;
+    @Column(columnDefinition = "TEXT")
+    private String informationTubeModulePm1;
+    @Column(columnDefinition = "TEXT")
+    private String informationTubeModulePm2;
+    @Column(columnDefinition = "TEXT")
+    private String informationTubeModulePm3;
+    @Column(columnDefinition = "TEXT")
+    private String informationTubeModulePm4;
+    @Column(columnDefinition = "TEXT")
+    private String reserve5;
+
+
+
+
     @ManyToOne
     private Operator operator;
     @ManyToOne
@@ -828,8 +862,70 @@ public class OrdreKosc {
     @Transient
     private int result;
 
+    @Transient
+    private String emailTo;
+    @Transient
+    private String emailDe;
+    @Transient
+    private String emailObjet;
+    @Transient
+    private String emailCorps;
+    @Transient
+    private Boolean emailEnvoye  = false;
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateEnvoi;
+
+    public Date getDateEnvoi() {
+        return dateEnvoi;
+    }
+
+    public void setDateEnvoi(Date dateEnvoi) {
+        this.dateEnvoi = dateEnvoi;
+    }
+
+    public Boolean getEmailEnvoye() {
+        return emailEnvoye;
+    }
+
+    public void setEmailEnvoye(boolean emailEnvoye) {
+        this.emailEnvoye = emailEnvoye;
+    }
+
     public OrdreKosc() {
         super();
+    }
+
+    public String getEmailTo() {
+        return emailTo;
+    }
+
+    public void setEmailTo(String emailTo) {
+        this.emailTo = emailTo;
+    }
+
+    public String getEmailDe() {
+        return emailDe;
+    }
+
+    public void setEmailDe(String emailDe) {
+        this.emailDe = emailDe;
+    }
+
+    public String getEmailObjet() {
+        return emailObjet;
+    }
+
+    public void setEmailObjet(String emailObjet) {
+        this.emailObjet = emailObjet;
+    }
+
+    public String getEmailCorps() {
+        return emailCorps;
+    }
+
+    public void setEmailCorps(String emailCorps) {
+        this.emailCorps = emailCorps;
     }
 
     public void setNumeroDernierAppel(Long numeroDernierAppel) {
@@ -2995,14 +3091,6 @@ public class OrdreKosc {
         this.supplier = supplier;
     }
 
-    public String getCustomerOperator() {
-        return customerOperator;
-    }
-
-    public void setCustomerOperator(String customerOperator) {
-        this.customerOperator = customerOperator;
-    }
-
     public String getSlid() {
         return slid;
     }
@@ -3088,6 +3176,134 @@ public class OrdreKosc {
 
     public void setOperatorComment(String operatorComment) {
         this.operatorComment = operatorComment;
+    }
+
+    public String getKoscContactCellphone() {
+        return koscContactCellphone;
+    }
+
+    public void setKoscContactCellphone(String koscContactCellphone) {
+        this.koscContactCellphone = koscContactCellphone;
+    }
+
+    public String getGtr() {
+        return gtr;
+    }
+
+    public void setGtr(String gtr) {
+        this.gtr = gtr;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getBuildingCode() {
+        return buildingCode;
+    }
+
+    public void setBuildingCode(String buildingCode) {
+        this.buildingCode = buildingCode;
+    }
+
+    public String getMotifKoCrCommandePrise() {
+        return motifKoCrCommandePrise;
+    }
+
+    public void setMotifKoCrCommandePrise(String motifKoCrCommandePrise) {
+        this.motifKoCrCommandePrise = motifKoCrCommandePrise;
+    }
+
+    public Date getDateCrCommandePrise() {
+        return dateCrCommandePrise;
+    }
+
+    public void setDateCrCommandePrise(Date dateCrCommandePrise) {
+        this.dateCrCommandePrise = dateCrCommandePrise;
+    }
+
+    public String getTypeCommandeRetenu() {
+        return typeCommandeRetenu;
+    }
+
+    public void setTypeCommandeRetenu(String typeCommandeRetenu) {
+        this.typeCommandeRetenu = typeCommandeRetenu;
+    }
+
+    public String getTypeProjectionGeographique() {
+        return typeProjectionGeographique;
+    }
+
+    public void setTypeProjectionGeographique(String typeProjectionGeographique) {
+        this.typeProjectionGeographique = typeProjectionGeographique;
+    }
+
+    public String getCoordonneePBOX() {
+        return coordonneePBOX;
+    }
+
+    public void setCoordonneePBOX(String coordonneePBOX) {
+        this.coordonneePBOX = coordonneePBOX;
+    }
+
+    public String getCodeAccesSousSol() {
+        return codeAccesSousSol;
+    }
+
+    public void setCodeAccesSousSol(String codeAccesSousSol) {
+        this.codeAccesSousSol = codeAccesSousSol;
+    }
+
+    public String getAutresInformations() {
+        return autresInformations;
+    }
+
+    public void setAutresInformations(String autresInformations) {
+        this.autresInformations = autresInformations;
+    }
+
+    public String getInformationTubeModulePm1() {
+        return informationTubeModulePm1;
+    }
+
+    public void setInformationTubeModulePm1(String informationTubeModulePm1) {
+        this.informationTubeModulePm1 = informationTubeModulePm1;
+    }
+
+    public String getInformationTubeModulePm2() {
+        return informationTubeModulePm2;
+    }
+
+    public void setInformationTubeModulePm2(String informationTubeModulePm2) {
+        this.informationTubeModulePm2 = informationTubeModulePm2;
+    }
+
+    public String getInformationTubeModulePm3() {
+        return informationTubeModulePm3;
+    }
+
+    public void setInformationTubeModulePm3(String informationTubeModulePm3) {
+        this.informationTubeModulePm3 = informationTubeModulePm3;
+    }
+
+    public String getInformationTubeModulePm4() {
+        return informationTubeModulePm4;
+    }
+
+    public void setInformationTubeModulePm4(String informationTubeModulePm4) {
+        this.informationTubeModulePm4 = informationTubeModulePm4;
+    }
+
+    public String getReserve5() {
+        return reserve5;
+    }
+
+    public void setReserve5(String reserve5) {
+        this.reserve5 = reserve5;
     }
 }
 
