@@ -37,6 +37,9 @@ export class InboxComponent implements OnInit {
     ngOnInit(): void {
 
         this.loadEtatDemandeKoscIncluding(['planification']);
+        this.loadDepartement();
+        this.loadTechnicien();
+
         // this.loadOrdreKoscs();
         this.items = [
             {label: 'Inbox', routerLink: '/app/admin/kosc/inbox/list'},
@@ -44,15 +47,16 @@ export class InboxComponent implements OnInit {
         ];
 
         this.home = {icon: 'pi pi-home', routerLink: '/'};
+        this.searchRequest();
+
     }
 
 
     displayEmail = false;
 
-    async showEmail() {
-
+    async showEmail(ordreKosc: OrdreKoscVo) {
+        this.selectedOrdreKosc = ordreKosc;
         this.displayEmail = true;
-
 
     }
 
@@ -79,8 +83,11 @@ export class InboxComponent implements OnInit {
 
     public searchRequest() {
         console.log(" this.searchOrdreKosc :" + this.searchOrdreKosc.etatDemandeKoscVos);
-        this.ordreKoscService.findByCriteriaSuiviRdv(this.searchOrdreKosc).subscribe(ordreKoscs => {
+        this.ordreKoscService.findByCriteria(this.searchOrdreKosc).subscribe(ordreKoscs => {
             this.ordreKoscs = ordreKoscs;
+            this.ordreKoscs.forEach( e => {
+                console.log(e.emailObjet);
+            })
 
         }, error => console.log(error));
     }
