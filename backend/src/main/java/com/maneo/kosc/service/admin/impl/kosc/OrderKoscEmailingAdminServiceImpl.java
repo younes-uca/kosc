@@ -26,6 +26,48 @@ public class OrderKoscEmailingAdminServiceImpl implements OrderKoscEmailingAdmin
 
     Date now = new Date();
 
+
+    private void setEmails(OrdreKosc ordreKosc){
+        if (ordreKosc.getToClientInjoinable() != null){
+            ordreKosc.setEmailTo(ordreKosc.getToClientInjoinable());
+            ordreKosc.setEmailDe(ordreKosc.getFromClientInjoinable());
+            ordreKosc.setEmailObjet(ordreKosc.getObjetClientInjoinable());
+            ordreKosc.setEmailCorps(ordreKosc.getCorpsClientInjoinable());
+            ordreKosc.setDateEnvoi(ordreKosc.getDateEnvoiClientInjoinable());
+        }else if (ordreKosc.getToRefus() != null){
+            ordreKosc.setEmailTo(ordreKosc.getToRefus());
+            ordreKosc.setEmailDe(ordreKosc.getFromRefus());
+            ordreKosc.setEmailObjet(ordreKosc.getObjetRefus());
+            ordreKosc.setEmailCorps(ordreKosc.getCorpsRefus());
+            ordreKosc.setDateEnvoi(ordreKosc.getDateEnvoiRefus());
+        }else if(ordreKosc.getToConfirmationClient() != null){
+            ordreKosc.setEmailTo(ordreKosc.getToConfirmationClient());
+            ordreKosc.setEmailDe(ordreKosc.getFromConfirmationClient());
+            ordreKosc.setEmailObjet(ordreKosc.getObjetConfirmationClient());
+            ordreKosc.setEmailCorps(ordreKosc.getCorpsConfirmationClient());
+            ordreKosc.setDateEnvoi(ordreKosc.getDateEnvoiConfirmationClient());
+        }else if(ordreKosc.getToMauvaisContact() != null){
+            ordreKosc.setEmailTo(ordreKosc.getToMauvaisContact());
+            ordreKosc.setEmailDe(ordreKosc.getFromMauvaisContact());
+            ordreKosc.setEmailObjet(ordreKosc.getObjetMauvaisContact());
+            ordreKosc.setEmailCorps(ordreKosc.getCorpsMauvaisContact());
+            ordreKosc.setDateEnvoi(ordreKosc.getDateEnvoiMauvaisContact());
+        }else if (ordreKosc.getToAutre() != null){
+            ordreKosc.setEmailTo(ordreKosc.getToAutre());
+            ordreKosc.setEmailDe(ordreKosc.getFromAutre());
+            ordreKosc.setEmailObjet(ordreKosc.getObjetAutre());
+            ordreKosc.setEmailCorps(ordreKosc.getCorpsAutre());
+            ordreKosc.setDateEnvoi(ordreKosc.getDateEnvoiAutre());
+        }else if (ordreKosc.getToPlanification() != null){
+            ordreKosc.setEmailTo(ordreKosc.getToPlanification());
+            ordreKosc.setEmailDe(ordreKosc.getFromPlanification());
+            ordreKosc.setEmailObjet(ordreKosc.getObjetPlanification());
+            ordreKosc.setEmailCorps(ordreKosc.getCorpsPlanification());
+            ordreKosc.setDateEnvoi(ordreKosc.getDateEnvoiPlanification());
+
+        }
+    }
+
     @Override
     public void sendConfirmationEmailToClient(OrdreKosc ordreKosc) {
 
@@ -392,6 +434,7 @@ public class OrderKoscEmailingAdminServiceImpl implements OrderKoscEmailingAdmin
             ordreKosc.setDateDernierAppel(ordreKosc.getDatePremierAppel());
             ordreKosc.setNumeroDernierAppel(1L);
         }
+        setEmails(ordreKosc);
         prepareUser(ordreKosc);
         ordreKoscDao.save(ordreKosc);
 

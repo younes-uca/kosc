@@ -862,15 +862,15 @@ public class OrdreKosc {
     @Transient
     private int result;
 
-    @Transient
+    @Column(columnDefinition = "TEXT")
     private String emailTo;
-    @Transient
+    @Column(columnDefinition = "TEXT")
     private String emailDe;
-    @Transient
+    @Column(columnDefinition = "TEXT")
     private String emailObjet;
-    @Transient
+    @Column(columnDefinition = "TEXT")
     private String emailCorps;
-    @Transient
+    @Column(columnDefinition = "TEXT")
     private Boolean emailEnvoye  = false;
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     @Temporal(TemporalType.TIMESTAMP)
