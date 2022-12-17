@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="card">
+    <div class="info">
+        <span>Current Profile</span>
+        <button pButton  pRipple type="button" (click)="showEditFunction()" *ngIf="editButton" class="p-button-warning" label="Edit Profile"></button>
+        <button pButton  pRipple type="button"  (click)="showEditFunction()" *ngIf="!editButton" class="p-button-help" label="Show Profile"></button>
+    </div>
+        <div class="forms" *ngIf="!showEdit">
+            <div class="inputs">
+    <span>Prénom</span>
+    <input type="text" readonly value="{{user.prenom}}">
+</div> <div class="inputs">
+    <span>Nom</span>
+    <input type="text" readonly value="{{user.nom}}">
+</div> 
+      <div class="inputs">
+    <span>Email</span>
+    <input type="text" readonly value="{{user.email}}"> </div>
+    <div class="inputs">
+        <span>Login</span>
+        <input type="text" readonly value="{{user.username}}" [(ngModel)]="user.username">
+    </div>
+  <div class="inputs">
+        <span>Role</span>
+        <input type="text" readonly value="{{user.roles[0]?.authority}}">
+    </div>
+        </div>
+
+
+        <div class="forms" *ngIf="showEdit">
+            <div class="inputs">
+                <span>Prénom</span>
+                <input type="text"  value="{{user.prenom}}"  [(ngModel)]="user.prenom">
+            </div> <div class="inputs">
+            <span>Nom</span>
+            <input type="text"  value="{{user.nom}}"  [(ngModel)]="user.nom">
+        </div>
+            <div class="inputs">
+                <span>Email</span>
+                <input type="text"  value="{{user.email}}"  [(ngModel)]="user.email"> </div>
+            <div class="inputs">
+                <span>Login</span>
+                <input type="text"  value="{{user.username}}" [(ngModel)]="user.username">
+            </div>
+            <div class="inputs">
+                <span>Mot de Passe</span>
+                <button pButton pRipple type="button" label="Changer Mot de Passe" class="p-button-help p-button-text"
+                (click)="changePaswordDialog(true)"
+                ></button>
+            </div>
+<div >
+                <button  pButton pRipple type="button" label="Save Changes" (click)="updateUser()" class="myButton" style="left:470px;top:20px">
+                </button>
+        </div>
+            <p-dialog [(visible)]="showChangePasword" position="bottom" modal="true">
+                <div class="inputs">
+                    <span>Old Password</span>
+                    <input type="password"  [(ngModel)]="oldPassword" [ngClass]="{'ng-invalid ng-dirty' : errorPassword}"
+                    >
+                    <small class='p-error' *ngIf='errorPassword'>Mot de passe incorrect</small>
+                </div>
+                <div class="inputs">
+                    <span>new Password</span>
+                    <input type="password" [(ngModel)]="newPassword">
+                </div>
+                <ng-template pTemplate="footer">
+                    <p-button icon="pi pi-check" (click)="ChangePasword()" label="change password" styleClass="p-button-text"></p-button>
+                    <p-button  (click)="changePaswordDialog(false)" label="Cancel" styleClass="p-button-text"></p-button>
+                </ng-template>
+            </p-dialog>
+        </div>
+    </div>
+</div>
