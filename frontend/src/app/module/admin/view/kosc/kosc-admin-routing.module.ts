@@ -128,6 +128,7 @@ import {RoleListComponent} from "./role-list/role-list.component";
 import {CalendrierTechnicienComponent} from "./calendrier-technicien/calendrier-technicien.component";
 import {InboxComponent} from "./inbox/inbox.component";
 import {UserAppListComponent} from "./user-app/user-app-list/user-app-list.component";
+import {ProfileComponent} from "./profile/profile.component";
 
 
 @NgModule({
@@ -519,6 +520,17 @@ import {UserAppListComponent} from "./user-app/user-app-list/user-app-list.compo
                                 {
                                     path: 'Gestion_roles',
                                     component: RoleListComponent,
+                                    canActivate: [AuthGuard]
+                                }
+                            ]
+                        },
+                        {
+
+                            path: 'profile',
+                            children: [
+                                {
+                                    path: 'profile',
+                                    component: ProfileComponent,
                                     canActivate: [AuthGuard]
                                 }
                             ]

@@ -10,7 +10,7 @@ import {RoleService} from "./role.service";
 export class UserService {
 
     // declarations
-    API = environment.apiUrl+"users/";
+    API = environment.apiUrl;
     private role$: any;
     private _users: User[] = [];
     userCreateDialog: boolean;
@@ -92,12 +92,11 @@ export class UserService {
     }
 
     update(user: User) {
-        this.http.put<User>(this.API, user).subscribe(user => {
+        return this.http.put<User>(this.API, user).subscribe(user => {
             const index = this._users.findIndex(userToBeFound => user.id == userToBeFound.id);
             index > -1 ? this._users[index] = user : false;
             console.log("updated User")
             console.log(user)
-            console.log("hiwa hiwa")
         }, (error: HttpErrorResponse) => {
             console.log(error.error)
         });
@@ -107,5 +106,9 @@ export class UserService {
         this.http.delete<number>(this.API + "id/" + id).subscribe(res => {
             res == 1 ? this._users = this._users.filter(user => user.id != id) : false;
         })
+    }
+
+    findByUsername(username){
+        return this.http.get<User>(this.API+'username/'+username);
     }
 }
