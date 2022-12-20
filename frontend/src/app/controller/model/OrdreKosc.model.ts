@@ -23,7 +23,7 @@ export class OrdreKoscVo {
     public id: number;
     public erdv: null | boolean;
     public confort: null | boolean;
-    public delaiPriseRdvParHeure : string;
+    public delaiPriseRdvParHeure: string;
     public reference: string;
     public referenceWorkOrder: string;
     public codeDecharge: string;
@@ -285,7 +285,7 @@ export class OrdreKoscVo {
     public templateEmailClientInjoinableVo: TemplateEmailClientInjoinableVo;
     public templateEmailClientInjoinableKoscVo: TemplateEmailClientInjoinableKoscVo;
     public etatDemandeKoscVo: EtatDemandeKoscVo;
-    public etatDemandeKoscVos : Array<EtatDemandeKoscVo>
+    public etatDemandeKoscVos: Array<EtatDemandeKoscVo>
     public templateEmailClotureVo: TemplateEmailClotureVo;
     public templateSuiviVo: TemplateSuiviVo;
     public causeKoOkVo: CauseKoOkVo;
@@ -334,64 +334,83 @@ export class OrdreKoscVo {
 
     public dateCri: Date;
 
-    public montantDevis : string;
+    public montantDevis: string;
 
 
     //attribut de maillage
 
-    public  supplier : string;
-     public   slid;
-     public   koscContactFirstName: string;
-     public   koscContactLastName: string;
-     public   koscContactPhone: string;
-     public   koscContactEmail1: string;
-     public   koscContactEmail2: string;
-     public   koscContactEmail3: string;
-     public   koscSplitterPosition: string;
-     public   koscComment: string;
-     public   otpRef: string;
-     public   operatorComment: string;
-     public   koscContactCellphone: string;
-     public   gtr: string;
-     public   category: string;
-     public   buildingCode: string;
-     public   motifKoCrCommandePrise: string;
-     public   dateCrCommandePrise: Date;
-     public   typeCommandeRetenu: string;
-     public   typeProjectionGeographique: string;
-     public   coordonneePBOX: string;
-     public   codeAccesSousSol: string;
-     public   autresInformations: string;
-     public   informationTubeModulePm1: string;
-     public   informationTubeModulePm2: string;
-     public   informationTubeModulePm3: string;
-     public   informationTubeModulePm4: string;
-     public   reserve5: string;
+    public supplier: string;
+    public slid;
+    public koscContactFirstName: string;
+    public koscContactLastName: string;
+    public koscContactPhone: string;
+    public koscContactEmail1: string;
+    public koscContactEmail2: string;
+    public koscContactEmail3: string;
+    public koscSplitterPosition: string;
+    public koscComment: string;
+    public otpRef: string;
+    public operatorComment: string;
+    public koscContactCellphone: string;
+    public gtr: string;
+    public category: string;
+    public buildingCode: string;
+    public motifKoCrCommandePrise: string;
+    public dateCrCommandePrise: Date;
+    public typeCommandeRetenu: string;
+    public typeProjectionGeographique: string;
+    public coordonneePBOX: string;
+    public codeAccesSousSol: string;
+    public autresInformations: string;
+    public informationTubeModulePm1: string;
+    public informationTubeModulePm2: string;
+    public informationTubeModulePm3: string;
+    public informationTubeModulePm4: string;
+    public reserve5: string;
 
-     public  userPlanification :User;
-     public  userReplanification :User;
-     public  userRefus;
-     public  userMauvaisContact:User;
-     public  userConfirmationClient:User;
-     public  userCri:User;
-     public  userFtl:User;
-     public  userClientInjoinable:User;
-     public  userAutre:User;
-     public  userClientInjoinableKosc:User;
-     public  userReportDemandeManeoClientInjoignable:User;
-     public  userReportDemandeManeoClientJoignableAccepte:User;
-     public  userReportDemandeManeoClientJoignableRefus:User;
-     public  userReportDemandeClientClientInjoignable:User;
-     public  userReportDemandeClientClientJoignable:User;
-     public  userImportation:User;
+    public userPlanification: User;
+    public userReplanification: User;
+    public userRefus;
+    public userMauvaisContact: User;
+    public userConfirmationClient: User;
+    public userCri: User;
+    public userFtl: User;
+    public userClientInjoinable: User;
+    public userAutre: User;
+    public userClientInjoinableKosc: User;
+    public userReportDemandeManeoClientInjoignable: User;
+    public userReportDemandeManeoClientJoignableAccepte: User;
+    public userReportDemandeManeoClientJoignableRefus: User;
+    public userReportDemandeClientClientInjoignable: User;
+    public userReportDemandeClientClientJoignable: User;
+    public userImportation: User;
+
+    public yearDateRdv: number;
+    public monthDateRdv: number;
+
+    public object: String;
+    public from: String;
+    public to: String;
+    public corps: String;
+    public envoi: null | boolean ;
+    public dateEnvoi: Date;
+    public dateEnvoiMin: Date;
+    public dateEnvoiMax: Date;
+
+    public objectSearch: String;
+    public fromSearch: String;
+    public toSearch: String;
+    public envoiSearch: null | boolean ;
+    public dateEnvoiMinSearch: Date;
+    public dateEnvoiMaxSearch: Date;
 
 
-     public emailTo: string;
-     public emailDe: string;
-     public emailObjet: string;
-     public emailCorps: string;
-     public emailEnvoye: boolean;
-     public dateEnvoi: Date
 
-     public result: number;
+    public emailTo: string;
+    public emailDe: string;
+    public emailObjet: string;
+    public emailCorps: string;
+    public emailEnvoye: boolean;
+
+    public result: number;
 }

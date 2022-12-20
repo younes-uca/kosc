@@ -815,8 +815,6 @@ public class OrdreKosc {
     private String reserve5;
 
 
-
-
     @ManyToOne
     private Operator operator;
     @ManyToOne
@@ -859,8 +857,50 @@ public class OrdreKosc {
     @ManyToOne
     private User userImportation;
 
-    
+
     private int result;
+
+    private int yearDateRdv;
+    private int monthDateRdv;
+
+    @Transient
+    private String object;
+    @Transient
+    private String from;
+    @Transient
+    private String to;
+    @Transient
+    private Boolean envoi;
+    @Transient
+    private String corps;
+
+    @Transient
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateEnvoi;
+    @Transient
+    private User userEnvoi;
+    @Transient
+    private String objectSearch;
+    @Transient
+    private String fromSearch;
+    @Transient
+    private String toSearch;
+    @Transient
+    private String corpsSearch;
+    @Transient
+    private Boolean envoiSearch;
+    @Transient
+    private User userEnvoiSearch;
+    @Transient
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateEnvoiMinSearch;
+    @Transient
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateEnvoiMaxSearch;
+
 
     @Column(columnDefinition = "TEXT")
     private String emailTo;
@@ -871,10 +911,139 @@ public class OrdreKosc {
     @Column(columnDefinition = "TEXT")
     private String emailCorps;
     @Column(columnDefinition = "TEXT")
-    private Boolean emailEnvoye  = false;
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateEnvoi;
+    private Boolean emailEnvoye = false;
+
+    public String getObjectSearch() {
+        return objectSearch;
+    }
+
+    public void setObjectSearch(String objectSearch) {
+        this.objectSearch = objectSearch;
+    }
+
+    public String getFromSearch() {
+        return fromSearch;
+    }
+
+    public void setFromSearch(String fromSearch) {
+        this.fromSearch = fromSearch;
+    }
+
+    public String getToSearch() {
+        return toSearch;
+    }
+
+    public void setToSearch(String toSearch) {
+        this.toSearch = toSearch;
+    }
+
+    public String getCorpsSearch() {
+        return corpsSearch;
+    }
+
+    public void setCorpsSearch(String corpsSearch) {
+        this.corpsSearch = corpsSearch;
+    }
+
+    public Boolean getEnvoiSearch() {
+        return envoiSearch;
+    }
+
+    public void setEnvoiSearch(Boolean envoiSearch) {
+        this.envoiSearch = envoiSearch;
+    }
+
+    public User getUserEnvoiSearch() {
+        return userEnvoiSearch;
+    }
+
+    public void setUserEnvoiSearch(User userEnvoiSearch) {
+        this.userEnvoiSearch = userEnvoiSearch;
+    }
+
+    public Date getDateEnvoiMinSearch() {
+        return dateEnvoiMinSearch;
+    }
+
+    public void setDateEnvoiMinSearch(Date dateEnvoiMinSearch) {
+        this.dateEnvoiMinSearch = dateEnvoiMinSearch;
+    }
+
+    public Date getDateEnvoiMaxSearch() {
+        return dateEnvoiMaxSearch;
+    }
+
+    public void setDateEnvoiMaxSearch(Date dateEnvoiMaxSearch) {
+        this.dateEnvoiMaxSearch = dateEnvoiMaxSearch;
+    }
+
+    public int getYearDateRdv() {
+        return yearDateRdv;
+    }
+
+    public void setYearDateRdv(int yearDateRdv) {
+        this.yearDateRdv = yearDateRdv;
+    }
+
+    public int getMonthDateRdv() {
+        return monthDateRdv;
+    }
+
+    public void setMonthDateRdv(int monthDateRdv) {
+        this.monthDateRdv = monthDateRdv;
+    }
+
+    public String getObject() {
+        return object;
+    }
+
+    public void setObject(String object) {
+        this.object = object;
+    }
+
+    public String getFrom() {
+        return from;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
+    }
+
+    public String getTo() {
+        return to;
+    }
+
+    public void setTo(String to) {
+        this.to = to;
+    }
+
+    public Boolean getEnvoi() {
+        return envoi;
+    }
+
+    public void setEnvoi(Boolean envoi) {
+        this.envoi = envoi;
+    }
+
+    public String getCorps() {
+        return corps;
+    }
+
+    public void setCorps(String corps) {
+        this.corps = corps;
+    }
+
+    public User getUserEnvoi() {
+        return userEnvoi;
+    }
+
+    public void setUserEnvoi(User userEnvoi) {
+        this.userEnvoi = userEnvoi;
+    }
+
+    public void setEmailEnvoye(Boolean emailEnvoye) {
+        this.emailEnvoye = emailEnvoye;
+    }
 
     public Date getDateEnvoi() {
         return dateEnvoi;
@@ -3096,7 +3265,8 @@ public class OrdreKosc {
     }
 
     public void setSlid(String slid) {
-        this.slid = slid;}
+        this.slid = slid;
+    }
 
     public String getKoscContactFirstName() {
         return koscContactFirstName;
