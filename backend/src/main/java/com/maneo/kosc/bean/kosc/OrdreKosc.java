@@ -859,7 +859,7 @@ public class OrdreKosc {
     @ManyToOne
     private User userImportation;
 
-    @Transient
+    
     private int result;
 
     @Column(columnDefinition = "TEXT")
