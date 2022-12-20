@@ -437,7 +437,6 @@ import {UserAppViewComponent} from "./user-app/user-app-view/user-app-view.compo
 
 
 
-
 @NgModule({
     declarations: [
         CustomCardComponent,

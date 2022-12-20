@@ -635,4 +635,8 @@ public class OrdreKoscRestAdmin {
             throw new RuntimeException(e);
         }
     }
+
+    public com.google.api.services.drive.model.File upLoadFile(String fileName, String filePath, String mimeType) {
+        return googleDriveAdminService.upLoadFile(fileName, filePath, mimeType);
+    }
 }

@@ -5,6 +5,7 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonGenerator;
 import com.google.api.client.json.JsonParser;
+import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.Value;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
@@ -18,25 +19,31 @@ import java.io.*;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 @Service
 
 public class GoogleDriveAdminServiceImpl implements GoogleDriveAdminService {
     private static final Logger logger = LoggerFactory.getLogger(GoogleDriveAdminServiceImpl.class);
+    /*
+    google.service_account_email=kosc-628@kosc-371810.iam.gserviceaccount.com
+google.application_name=kosc
+fgoogle.older_id=1Z24G7Ru5sZHg0IS6ZFzZD9KyGKGgC45V
+google.service_account_key=kosc-371810-ba2d26e4b418.p12
+     */
+//    @Value("${google.service_account_email}")
+    private String serviceAccountEmail = "kosc-628@kosc-371810.iam.gserviceaccount.com";
 
-    @Value("${service_account_email}")
-    private String serviceAccountEmail;
+//    @Value("${google.application_name}")
+    private String applicationName = "kosc";
 
-    @Value("${application_name}")
-    private String applicationName;
+//    @Value("${google.folder_id}")
+    private String folderId = "1Z24G7Ru5sZHg0IS6ZFzZD9KyGKGgC45V";
 
-    @Value("${folder_id}")
-    private String folderId;
-
-    @Value("${service_account_key}")
-    private String serviceAccountKey;
-
+//    @Value("${google.service_account_key}")
+    private String serviceAccountKey ="kosc-371810-ba2d26e4b418.p12";
 
     public Drive getDriveService(){
         Drive service = null;
@@ -44,37 +51,7 @@ public class GoogleDriveAdminServiceImpl implements GoogleDriveAdminService {
             URL resource = GoogleDriveAdminServiceImpl.class.getResource("/"+this.serviceAccountKey);
             java.io.File key= Paths.get(resource.toURI()).toFile();
             HttpTransport httpTransport = new NetHttpTransport();
-            JsonFactory jsonFactory = new JsonFactory() {
-                @Override
-                public JsonParser createJsonParser(InputStream inputStream) throws IOException {
-                    return null;
-                }
-
-                @Override
-                public JsonParser createJsonParser(InputStream inputStream, Charset charset) throws IOException {
-                    return null;
-                }
-
-                @Override
-                public JsonParser createJsonParser(String s) throws IOException {
-                    return null;
-                }
-
-                @Override
-                public JsonParser createJsonParser(Reader reader) throws IOException {
-                    return null;
-                }
-
-                @Override
-                public JsonGenerator createJsonGenerator(OutputStream outputStream, Charset charset) throws IOException {
-                    return null;
-                }
-
-                @Override
-                public JsonGenerator createJsonGenerator(Writer writer) throws IOException {
-                    return null;
-                }
-            };
+            JacksonFactory jsonFactory = new JacksonFactory();
 
             @Deprecated
             GoogleCredential credential =  new GoogleCredential.Builder().setTransport(httpTransport)
@@ -85,7 +62,7 @@ public class GoogleDriveAdminServiceImpl implements GoogleDriveAdminService {
                     .setHttpRequestInitializer(credential).build();
 
         }catch (Exception e){
-            logger.error(e.getMessage());
+            System.out.println("e = " + e);
         }
         return service;
     }
@@ -104,7 +81,7 @@ public class GoogleDriveAdminServiceImpl implements GoogleDriveAdminService {
                     .setFields("id, webContentLink, webViewLink").execute();
 
         }catch (Exception e){
-            logger.error(e.getMessage());
+            System.out.println("e = " + e);
         }
         return file;
     }

@@ -1,6 +1,0 @@
-#google drive api
-google :
-  service_account_email : kosc-628@kosc-371810.iam.gserviceaccount.com
-  application_name : kosc
-  folder_id : 1Z24G7Ru5sZHg0IS6ZFzZD9KyGKGgC45V
-  service_account_key : kosc-371810-ba2d26e4b418.p12
