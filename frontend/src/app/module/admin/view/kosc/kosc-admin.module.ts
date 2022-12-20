@@ -434,6 +434,7 @@ import {UserAppAddComponent} from "./user-app/user-app-add/user-app-add.componen
 import {UserAppEditComponent} from "./user-app/user-app-edit/user-app-edit.component";
 import {UserAppListComponent} from "./user-app/user-app-list/user-app-list.component";
 import {UserAppViewComponent} from "./user-app/user-app-view/user-app-view.component";
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -625,6 +626,7 @@ import {UserAppViewComponent} from "./user-app/user-app-view/user-app-view.compo
         DefaultTemplateConfigurationAdminComponent,
         StatisticKoscAdminComponent,
         InboxComponent,
+        ProfileComponent,
 
     ],
     imports: [
