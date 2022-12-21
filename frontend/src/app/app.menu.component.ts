@@ -106,6 +106,11 @@ export class AppMenuComponent implements OnInit {
                         label: 'Suivi Cdd',
                         icon: 'pi pi-fw pi-plus-circle',
                         routerLink: ['/app/admin/kosc/ordre-kosc-suivi-cdd/list']
+                    },
+                    {
+                        label: 'Emailing',
+                        icon: 'pi pi-fw pi-plus-circle',
+                        routerLink: ['/app/admin/kosc/emailing/list']
                     }
                 ]
             },

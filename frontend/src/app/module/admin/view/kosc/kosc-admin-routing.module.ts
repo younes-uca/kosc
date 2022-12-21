@@ -129,6 +129,7 @@ import {CalendrierTechnicienComponent} from "./calendrier-technicien/calendrier-
 import {InboxComponent} from "./inbox/inbox.component";
 import {UserAppListComponent} from "./user-app/user-app-list/user-app-list.component";
 import {ProfileComponent} from "./profile/profile.component";
+import {EmailingAdminComponent} from "./emailing-admin/emailing-admin.component";
 
 
 @NgModule({
@@ -613,6 +614,17 @@ import {ProfileComponent} from "./profile/profile.component";
                                 {
                                     path: 'list',
                                     component: TemplateEmailReportDemandeManeoClientInjoignableListAdminComponent ,
+                                    canActivate: [AuthGuard]
+                                }
+                            ]
+                        },
+                        {
+
+                            path: 'emailing',
+                            children: [
+                                {
+                                    path: 'list',
+                                    component: EmailingAdminComponent,
                                     canActivate: [AuthGuard]
                                 }
                             ]

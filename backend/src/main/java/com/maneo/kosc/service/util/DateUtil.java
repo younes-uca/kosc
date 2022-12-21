@@ -82,8 +82,8 @@ public class DateUtil {
     public static Date parseTimestamp(String date) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-            date=date.replace("T"," ");
-            date=date.replace("Z","");
+            date = date.replace("T", " ");
+            date = date.replace("Z", "");
             Date parsedDate = dateFormat.parse(date);
             Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
             return timestamp;
@@ -96,7 +96,7 @@ public class DateUtil {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
             //date=date.replace("T"," ");
-           // date=date.replace("Z","");
+            // date=date.replace("Z","");
             Date parsedDate = dateFormat.parse(date);
             Time timestamp = new java.sql.Time(parsedDate.getTime());
             return timestamp;
@@ -104,8 +104,6 @@ public class DateUtil {
             return null;
         }
     }
-
-
 
 
     public static Date parseTimestamp(String date, String pattern) {
@@ -149,39 +147,42 @@ public class DateUtil {
         return date;
     }
 
-    public static Date getDemain(){
-      return getNowPlusDay(1);
+    public static Date getDemain() {
+        return getNowPlusDay(1);
     }
-    public static Date getApresDemain(){
+
+    public static Date getApresDemain() {
         return getNowPlusDay(2);
 
     }
-    public static Date getApresApresDemain(){
+
+    public static Date getApresApresDemain() {
         return getNowPlusDay(3);
     }
 
-    public static Date getApresApresApresDemain(){
+    public static Date getApresApresApresDemain() {
         return getNowPlusDay(4);
     }
 
 
-    private static Date getNowPlusDay(int day){
+    private static Date getNowPlusDay(int day) {
         Date today = new Date();
         Date result = new Date(today.getTime() + (1000 * 60 * 60 * 24 * day));
 
         return result;
     }
 
-    public static long calculerDifferenceHeure(Date date){
-        if(date == null){
+    public static long calculerDifferenceHeure(Date date) {
+        if (date == null) {
             return 0L;
         }
         return calculerDifferenceHeure(date, new Date());
     }
-    public static long calculerDifferenceHeure(Date startDate, Date endDate){
+
+    public static long calculerDifferenceHeure(Date startDate, Date endDate) {
 
         //milliseconds
-        long different =  endDate.getTime() - startDate.getTime();
+        long different = endDate.getTime() - startDate.getTime();
 
         long secondsInMilli = 1000;
         long minutesInMilli = secondsInMilli * 60;
@@ -192,7 +193,7 @@ public class DateUtil {
         different = (different % daysInMilli);
 
         long elapsedHours = elapsedDays * 24 + different / hoursInMilli;
-        different =  different % hoursInMilli;
+        different = different % hoursInMilli;
 
         long elapsedMinutes = different / minutesInMilli;
         different = different % minutesInMilli;
@@ -239,9 +240,8 @@ public class DateUtil {
     }
 
 
-
     public static LocalDate convert(Date dateToConvert) {
-        if(dateToConvert != null){
+        if (dateToConvert != null) {
             String pattern = "dd/MM/yyyy";
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
 
@@ -273,8 +273,8 @@ public class DateUtil {
     }
 
     public static Long totalJourWithoutWeekEnd(LocalDate dateMin, LocalDate dateMax) {
-         Long i = 0L;
-        if(dateMax != null && dateMin!=null){
+        Long i = 0L;
+        if (dateMax != null && dateMin != null) {
             for (LocalDate date = dateMin; date.compareTo(dateMax) <= 0; date = date.plusDays(1)) {
                 if (!isWeekEnd(date)) {
                     i++;
@@ -304,14 +304,14 @@ public class DateUtil {
         return i;
     }
 
-    public static long difference(Date date1, Date date2){
-        if(date1 != null && date2 != null){
+    public static long difference(Date date1, Date date2) {
+        if (date1 != null && date2 != null) {
             return date1.getTime() - date2.getTime();
-        }else if ( date1 != null && date2 == null){
+        } else if (date1 != null && date2 == null) {
             return date1.getTime();
-        }else if(date2 != null && date1 == null){
-            return -1*date2.getTime();
-        }else {
+        } else if (date2 != null && date1 == null) {
+            return -1 * date2.getTime();
+        } else {
             return 0;
         }
     }
@@ -321,10 +321,28 @@ public class DateUtil {
             String formateDate1 = formateDate("yy-MM-dd", date1);
             String formateDate2 = formateDate("yy-MM-dd", date2);
             return formateDate1.equals(formateDate2);
-        }else if(date1 == null && date2 == null){
+        } else if (date1 == null && date2 == null) {
             return true;
-        }else {
+        } else {
             return false;
+        }
+    }
+
+    public static int getYear(Date date) {
+        if (date != null) {
+            int yearDate = date.getYear() + 1900;
+            return yearDate;
+        } else {
+            return 0;
+        }
+    }
+
+    public static int getMonth(Date date) {
+        if (date != null) {
+            int monthDate =date.getMonth() + 1;
+            return monthDate;
+        } else {
+            return 0;
         }
     }
 }
