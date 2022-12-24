@@ -435,6 +435,10 @@ import {UserAppEditComponent} from "./user-app/user-app-edit/user-app-edit.compo
 import {UserAppListComponent} from "./user-app/user-app-list/user-app-list.component";
 import {UserAppViewComponent} from "./user-app/user-app-view/user-app-view.component";
 import { ProfileComponent } from './profile/profile.component';
+import {EmailingEditAdminComponent} from "./emailing-admin/edit-admin/emailing-edit-admin.component";
+import {EmailingListAdminComponent} from "./emailing-admin/list-admin/emailing-list-admin.component";
+import {EmailingViewAdminComponent} from "./emailing-admin/view-admin/emailing-view-admin.component";
+import {EmailingAdminComponent} from "./emailing-admin/emailing-admin.component";
 
 
 
@@ -446,6 +450,10 @@ import { ProfileComponent } from './profile/profile.component';
         UserAppListComponent,
         UserAppViewComponent,
         RoleListComponent,
+        EmailingEditAdminComponent,
+        EmailingListAdminComponent,
+        EmailingViewAdminComponent,
+        EmailingAdminComponent,
         OrdreKoscSuiviCddViewAdminComponent,
         OrdreKoscSuiviCddEditAdminComponent,
         OrdreKoscSuiviCddListAdminComponent,

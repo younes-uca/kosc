@@ -7,6 +7,7 @@ import com.maneo.kosc.service.admin.facade.*;
 import com.maneo.kosc.service.admin.facade.kosc.OrderKoscEmailingAdminService;
 
 
+import com.maneo.kosc.service.util.DateUtil;
 import com.maneo.kosc.service.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -100,6 +101,8 @@ public class OrderKoscEmailingAdminServiceImpl implements OrderKoscEmailingAdmin
         emailDetails.setTo(ordreKosc.getToPlanification());
         emailDetails.setObjet(ordreKosc.getObjetPlanification());
         emailDetails.setCorps(ordreKosc.getCorpsPlanification());
+        ordreKosc.setYearDateRdv(DateUtil.getYear(ordreKosc.getDateRdv()));
+        ordreKosc.setMonthDateRdv(DateUtil.getMonth(ordreKosc.getDateRdv()));
         try {
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyePlanification(true);

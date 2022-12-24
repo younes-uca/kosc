@@ -419,10 +419,6 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
 
     prepareColumnExport(): void {
         this.exportDataDevis = this.ordreKoscsExport.map(e => {
-                console.log('Reference' + e.reference);
-                console.log('Montant devis' + e.montantDevis);
-                console.log('Etat demande kosc' + e.etatDemandeKoscVo);
-                console.log('Operator' + e.operatorVo?.libelle);
                 return {
                     'Reference': e.reference,
                     'Reference work order': e.referenceWorkOrder,

@@ -388,21 +388,23 @@ export class OrdreKoscVo {
     public yearDateRdv: number;
     public monthDateRdv: number;
 
-    public object: String;
-    public from: String;
-    public to: String;
-    public corps: String;
+    public object: string;
+    public from: string;
+    public to: string;
+    public corps: string;
     public envoi: null | boolean ;
     public dateEnvoi: Date;
-    public dateEnvoiMin: Date;
-    public dateEnvoiMax: Date;
+    public dateEnvoiMin: string;
+    public dateEnvoiMax: string;
+    public userEnvoi: User;
 
-    public objectSearch: String;
-    public fromSearch: String;
-    public toSearch: String;
+    public objectSearch: string;
+    public fromSearch: string;
+    public toSearch: string;
     public envoiSearch: null | boolean ;
-    public dateEnvoiMinSearch: Date;
-    public dateEnvoiMaxSearch: Date;
+    public dateEnvoiMinSearch: string;
+    public dateEnvoiMaxSearch: string;
+    public userEnvoiSearch: User;
 
 
 

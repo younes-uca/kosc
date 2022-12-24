@@ -230,7 +230,7 @@ export class OrdreKoscService {
         return this.http.post<Array<OrdreKoscVo>>(this.API + 'search-suivi-rdv', ordreKosc);
     }
 
-    public findByAnneAndMoins(annee, mois): Observable<Array<OrdreKoscVo>> {
+    public findByAnneAndMoins(annee, mois){
         return this.http.get<Array<OrdreKoscVo>>(this.API + 'find-by-year-month/year/' + annee + '/month/' + mois);
     }
 

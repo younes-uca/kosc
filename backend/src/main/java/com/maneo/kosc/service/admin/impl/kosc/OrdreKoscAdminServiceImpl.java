@@ -524,7 +524,7 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
 
     @Override
     public List<OrdreKosc> findByYearAndMonth(int annee, int mois) {
-        String query = "SELECT k FROM OrdreKosc k WHERE k.yearDateRdv=" + annee + " and k.monthDateRdv " + mois;
+        String query = "SELECT k FROM OrdreKosc k WHERE k.yearDateRdv = " + annee + " and k.monthDateRdv = " + mois;
         return entityManager.createQuery(query).getResultList();
     }
 
