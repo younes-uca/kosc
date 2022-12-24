@@ -40,7 +40,7 @@ public interface OrdreKoscAdminService extends AbstractService<OrdreKosc, Long, 
      */
     int deleteById(Long id);
 
-
+    List<OrdreKosc> findByYearAndMonth(int annee, int mois);
 
 
     List<OrdreKosc> findSuivi();
@@ -82,9 +82,6 @@ public interface OrdreKoscAdminService extends AbstractService<OrdreKosc, Long, 
     List<OrdreKosc> findByTemplateEmailPlanificationId(Long id);
 
     int deleteByTemplateEmailPlanificationId(Long id);
-
-
-
 
 
     List<OrdreKosc> findByTemplateEmailReplanificationId(Long id);
@@ -148,7 +145,9 @@ public interface OrdreKoscAdminService extends AbstractService<OrdreKosc, Long, 
     int deleteBySourceReplanificationCode(String code);
 
     List<OrdreKosc> findBySourceReplanificationId(Long id);
+
     List<OrdreKosc> findByMontantDevis(BigDecimal montantDevis);
+
     int deleteByMontantDevis(BigDecimal montantDevis);
 
     int deleteBySourceReplanificationId(Long id);
@@ -161,7 +160,6 @@ public interface OrdreKoscAdminService extends AbstractService<OrdreKosc, Long, 
      * @return 1 if OrdreKosc deleted successfully
      */
     int deleteByReferenceWorkOrder(String referenceWorkOrder);
-
 
 
     List<OrdreKosc> findByCriteriaOrderKoscImport(OrdreKoscVo ordreKoscVo);

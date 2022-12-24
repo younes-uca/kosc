@@ -1,0 +1,110 @@
+<p-dialog [(visible)]="editOrdreKoscDialog" [draggable]="false"
+          [maximizable]="true" [modal]="true"
+          [resizable]="false" [style]="{width: '70vw'}" header="Emailing" styleClass="p-fluid">
+
+
+    <ng-template pTemplate="content">
+        <p-tabView [(activeIndex)]="indexEdit">
+            <p-tabPanel header="Information">
+
+                <div class="p-grid">
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="1">Object</label>
+                        <input [(ngModel)]="selectedOrdreKosc.object" [disabled]="false" class="p-mb-2 p-mr-2"
+                               id="1" pInputText
+                               placeholder="Object" type="text"
+                        />
+
+                    </div>
+
+                    <div class="p-field p-col-11 p-md-2">
+                        <label for="999">User Envoi</label>
+                        <p-dropdown [(ngModel)]="selectedOrdreKosc.userEnvoi" [disabled]="false"
+                                    [filter]="true" [options]="" [showClear]="true"
+                                    filterMatchMode="contains"
+                                    id="999"
+                                    optionLabel="username"
+                                    placeholder="UserEnvoi">
+                        </p-dropdown>
+
+                    </div>
+<!--                    <div class="p-col-1">-->
+<!--                        <label></label>-->
+<!--                        <button (click)="openCreateTechnicien('technicien')"-->
+<!--                                class="p-button-success one-colonne-btn-success-align" icon="pi pi-plus"-->
+<!--                                pButton pRipple-->
+<!--                                type="button"></button>-->
+<!--                    </div>-->
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="30">Date envoi</label>
+                        <p-calendar [(ngModel)]="selectedOrdreKosc.dateEnvoi" [disabled]="false" [showSeconds]="false"
+                                    [showTime]="true"
+                                    dateFormat="{{dateFormat}}" id="30"
+                                    placeholder="Date envoi">
+                        </p-calendar>
+
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="1">De</label>
+                        <input [(ngModel)]="selectedOrdreKosc.from" [disabled]="false" class="p-mb-2 p-mr-2"
+                               id="1" pInputText
+                               placeholder="From" type="text"
+                        />
+
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="1">A</label>
+                        <input [(ngModel)]="selectedOrdreKosc.to" [disabled]="false" class="p-mb-2 p-mr-2"
+                               id="1" pInputText
+                               placeholder="To" type="text"
+                        />
+
+                    </div>
+
+                    <div class="p-field align-inputswitch p-col-12  p-md-3">
+                        <div class="label-inputswitch">
+                            <label for="13">Envoi</label>
+                        </div>
+                        <div class="input-switch">
+                            <p-inputSwitch id="13" [(ngModel)]="selectedOrdreKosc.envoi"
+                            >
+                            </p-inputSwitch>
+
+                        </div>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-8">
+                        <label for="159">Corps</label>
+                        <textarea [(ngModel)]="selectedOrdreKosc.corps"
+                                   cols="30" id="159"
+                                  pInputTextarea placeholder="Corps cri"
+                                  rows="10"></textarea>
+                    </div>
+
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <div class="p-grid">
+            <div>
+                <button (click)="hideEditDialog()" class="p-button-text" icon="pi pi-times" label="Annuler"
+                        pButton pRipple></button>
+            </div>
+            <div>
+                <button (click)="edit()" icon="pi pi-check" label="Valider" pButton pRipple
+                        style="margin:5px"></button>
+            </div>
+        </div>
+    </ng-template>
+
+
+
+</p-dialog>

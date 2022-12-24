@@ -5,39 +5,21 @@ import {Router} from '@angular/router';
 import {environment} from 'src/environments/environment';
 import {RoleService} from 'src/app/controller/service/role.service';
 import {DatePipe} from '@angular/common';
-
-
 import {OperatorService} from 'src/app/controller/service/Operator.service';
 import {DepartementService} from 'src/app/controller/service/Departement.service';
 import {TechnicienService} from 'src/app/controller/service/Technicien.service';
-
-import {TemplateEmailClientInjoinableService} from 'src/app/controller/service/TemplateEmailClientInjoinable.service';
-
-import {TemplateEmailPlanificationService} from 'src/app/controller/service/TemplateEmailPlanification.service';
-import {TemplateEmailReplanificationService} from 'src/app/controller/service/TemplateEmailReplanification.service';
 import {EtatDemandeKoscService} from 'src/app/controller/service/EtatDemandeKosc.service';
-import {TemplateEmailClotureService} from 'src/app/controller/service/TemplateEmailCloture.service';
-import {TemplateSuiviService} from 'src/app/controller/service/TemplateSuivi.service';
-
-import {TemplateEmailReplanificationVo} from 'src/app/controller/model/TemplateEmailReplanification.model';
 import {EtatDemandeKoscVo} from 'src/app/controller/model/EtatDemandeKosc.model';
-import {TemplateEmailPlanificationVo} from 'src/app/controller/model/TemplateEmailPlanification.model';
-import {TemplateEmailClotureVo} from 'src/app/controller/model/TemplateEmailCloture.model';
-import {TemplateSuiviVo} from 'src/app/controller/model/TemplateSuivi.model';
 import {OperatorVo} from 'src/app/controller/model/Operator.model';
 import {DepartementVo} from 'src/app/controller/model/Departement.model';
-import {TemplateEmailClientInjoinableKoscVo} from 'src/app/controller/model/TemplateEmailClientInjoinableKosc.model';
-
 import {TechnicienVo} from 'src/app/controller/model/Technicien.model';
-import {TemplateEmailClientInjoinableVo} from 'src/app/controller/model/TemplateEmailClientInjoinable.model';
 import {ConfirmationService, MenuItem, MessageService} from 'primeng/api';
 import {AuthService} from 'src/app/controller/service/Auth.service';
 import {ExportService} from 'src/app/controller/service/Export.service';
-import {
-    TemplateEmailClientInjoinableKoscService
-} from "../../../../../../controller/service/TemplateEmailClientInjoinableKosc.service";
 import {Calendar} from "primeng/calendar";
 import {DateUtils} from "../../../../../../utils/DateUtils";
+import {ifError} from "assert";
+import {StringUtilService} from "../../../../../../controller/service/StringUtil.service";
 
 @Component({
     selector: 'app-ordre-kosc-suivi-cdd-list-admin',
@@ -47,11 +29,20 @@ import {DateUtils} from "../../../../../../utils/DateUtils";
 
 export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
     // declarations
+    private _errorMessages = new Array<string>();
     findByCriteriaShow = false;
+    displayView = false;
+    showYearDateRdvAndMonthDateRdv = false;
     cols: any[] = [];
     excelPdfButons: MenuItem[];
     exportData: any[] = [];
     criteriaData: any[] = [];
+    colsDevis: any[] = [];
+    exportDataDevis: any[] = [];
+    criteriaDataDevis: any[] = [];
+    // ordreKoscsExporter: Array<OrdreKoscVo>
+    _validOrdreKoscYearDateRdv = true;
+    _validOrdreKoscMonthDateRdv = true;
     fileName = 'OrdreKosc';
     yesOrNoEnvoiMailClient: any[] = [];
     yesOrNoEnvoiMailKosc: any[] = [];
@@ -77,9 +68,10 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
         , private departementService: DepartementService
         , private technicienService: TechnicienService
         , private etatDemandeKoscService: EtatDemandeKoscService
-
+        , private stringUtilService: StringUtilService
     ) {
     }
+
     // methods
     public searchRequestSuiviCdd() {
         console.log(this.searchOrdreKosc.etatDemandeKoscVos);
@@ -90,10 +82,10 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
         }, error => console.log(error));
     }
 
-    public async loadEtatDemandeKoscExcept(etatNonDesire : Array<String>) {
+    public async loadEtatDemandeKoscExcept(etatNonDesire: Array<String>) {
         await this.roleService.findAll();
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
-        isPermistted ? this.etatDemandeKoscService.findAll().subscribe(etatDemandeKoscs =>{
+        isPermistted ? this.etatDemandeKoscService.findAll().subscribe(etatDemandeKoscs => {
                 this.etatDemandeKoscs = etatDemandeKoscs;
                 this.searchOrdreKosc.etatDemandeKoscVos = this.etatDemandeKoscs.filter(e => etatNonDesire.indexOf(e.code) == -1);
             }, error => console.log(error))
@@ -101,28 +93,39 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
 
     }
 
-    public async loadEtatDemandeKoscIncluding(etatNonDesire : Array<String>) {
+
+    public async loadEtatDemandeKoscIncluding(etatNonDesire: Array<String>) {
         await this.roleService.findAll();
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
-        isPermistted ? this.etatDemandeKoscService.findAll().subscribe(etatDemandeKoscs =>{
+        isPermistted ? this.etatDemandeKoscService.findAll().subscribe(etatDemandeKoscs => {
                 this.etatDemandeKoscs = etatDemandeKoscs;
                 this.searchOrdreKosc.etatDemandeKoscVos = this.etatDemandeKoscs.filter(e => etatNonDesire.indexOf(e.code) != -1);
             }, error => console.log(error))
             : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
 
     }
-    erdvAndConfort(ordreKoscVo : OrdreKoscVo){
-        if( ordreKoscVo.erdv == true && ordreKoscVo.confort)
+
+    erdvAndConfort(ordreKoscVo: OrdreKoscVo) {
+        if (ordreKoscVo.erdv == true && ordreKoscVo.confort)
             return true
         else
             return false
     }
+
     public async loadOrdreKoscs() {
         await this.roleService.findAll();
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
         isPermistted ? this.ordreKoscService.findAll().subscribe(ordreKoscs => this.ordreKoscs = ordreKoscs, error => console.log(error))
             : this.messageService.add({severity: 'error', summary: 'erreur', detail: 'problème d\'autorisation'});
     }
+
+    //
+    // public loadOrdreKoscsByAnneeAndMois() {
+    //     this.ordreKoscService.findByAnneAndMoins(this.YearDateRdvDateRdv, this.monthDateRdv).subscribe(ordreKoscs => {
+    //         console.log(ordreKoscs), this.ordreKoscsExport = ordreKoscs, error => console.log(error)
+    //     })
+    //
+    // }
 
     public searchRequest() {
         this.ordreKoscService.findByCriteria(this.searchOrdreKosc).subscribe(ordreKoscs => {
@@ -143,12 +146,13 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
 
         ];
         this.home = {icon: 'pi pi-home', routerLink: '/'};
-        this.loadEtatDemandeKoscIncluding(['ok', 'ko']);
+        this.loadEtatDemandeKoscIncluding(['ko', 'ok']);
         this.initExport();
         this.initCol();
         this.loadOperator();
         this.loadDepartement();
         this.loadTechnicien();
+
         this.yesOrNoEnvoiMailClient = [{label: 'EnvoiMailClient', value: null}, {label: 'Oui', value: 1}, {
             label: 'Non',
             value: 0
@@ -195,6 +199,10 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
         }];
     }
 
+    public showExportByYearDateRdvAndMonthDateRdv() {
+        this.displayView = true
+        this.showYearDateRdvAndMonthDateRdv = true;
+    }
 
 
     public async editOrdreKosc(ordreKosc: OrdreKoscVo) {
@@ -333,6 +341,13 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
 
     }
 
+    // public async loadExportDevis() {
+    //     await this.roleService.findAll();
+    //     const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
+    //     isPermistted ? this.ordreKoscService.findByAnneAndMoins(this.selectedOrdreKosc.yearDateRdv, this.selectedOrdreKosc.monthDateRdv).subscribe(ordreKoscs => this.ordreKoscsExport = ordreKoscs, error => console.log(error))
+    //         : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
+    //
+    // }
 
 
     public async loadEtatDemandeKosc() {
@@ -385,14 +400,57 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
                 }
             }
         ];
+
+    }
+
+    public exportDevis() {
+        this.validateForm();
+        let yearDate = this.selectedOrdreKosc.yearDateRdv;
+        let monthDate = this.selectedOrdreKosc.monthDateRdv;
+        this.ordreKoscService.findByAnneAndMoins(yearDate, monthDate).subscribe(ordreKoscs => {
+            this.ordreKoscsExport = ordreKoscs;
+            console.log(this.ordreKoscsExport);
+            this.prepareColumnExport();
+            this.exportService.exporterExcel(this.criteriaDataDevis, this.exportDataDevis, this.fileName);
+        });
+
+
     }
 
     prepareColumnExport(): void {
+        this.exportDataDevis = this.ordreKoscsExport.map(e => {
+                console.log('Reference' + e.reference);
+                console.log('Montant devis' + e.montantDevis);
+                console.log('Etat demande kosc' + e.etatDemandeKoscVo);
+                console.log('Operator' + e.operatorVo?.libelle);
+                return {
+                    'Reference': e.reference,
+                    'Reference work order': e.referenceWorkOrder,
+                    'Operator': e.operatorVo?.libelle,
+                    'Etat demande kosc': e.etatDemandeKoscVo?.libelle,
+                    'Type Ko': e.causeKoOkVo?.libelle,
+                    'Date envoi cri': this.datePipe.transform(e.dateEnvoiCri, 'dd/MM/yyyy hh:mm'),
+                    'Montant devis': e.montantDevis,
+                }
+            }
+        );
+
+        this.criteriaDataDevis = [{
+            'Reference': this.searchOrdreKosc.reference ? this.searchOrdreKosc.reference : environment.emptyForExport,
+            'Reference work order': this.searchOrdreKosc.referenceWorkOrder ? this.searchOrdreKosc.referenceWorkOrder : environment.emptyForExport,
+            'Operator': this.searchOrdreKosc.operatorVo?.libelle ? this.searchOrdreKosc.operatorVo?.libelle : environment.emptyForExport,
+            'Etat demande kosc': this.searchOrdreKosc.etatDemandeKoscVo?.libelle ? this.searchOrdreKosc.etatDemandeKoscVo?.libelle : environment.emptyForExport,
+            'Type Ko': this.searchOrdreKosc.causeKoOkVo?.libelle ? this.searchOrdreKosc.causeKoOkVo?.libelle : environment.emptyForExport,
+            'Date envoi cri Min': this.searchOrdreKosc.dateEnvoiCriMin ? this.datePipe.transform(this.searchOrdreKosc.dateEnvoiCriMin, this.dateFormat) : environment.emptyForExport,
+            'Date envoi cri Max': this.searchOrdreKosc.dateEnvoiCriMax ? this.datePipe.transform(this.searchOrdreKosc.dateEnvoiCriMax, this.dateFormat) : environment.emptyForExport,
+            'Montant devis': this.searchOrdreKosc.montantDevis ? this.searchOrdreKosc.montantDevis : environment.emptyForExport,
+
+        }];
+
         this.exportData = this.ordreKoscs.map(e => {
             return {
                 'Reference': e.reference,
                 'Reference work order': e.referenceWorkOrder,
-                'Code decharge': e.codeDecharge,
                 'Supplier service code': e.supplierServiceCode,
                 'Date debut traitement': this.datePipe.transform(e.dateDebutTraitement, 'dd/MM/yyyy hh:mm'),
                 'End custumor name': e.endCustumorName,
@@ -698,11 +756,23 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
 
     }
 
+
     private initCol() {
+        this.colsDevis = [
+            {field: 'reference', header: 'Reference'},
+            {field: 'referenceWorkOrder', header: 'Reference work order'},
+            {field: 'operatorVo?.libelle', header: 'Operator'},
+            {field: 'etatDemandeKosc?.libelle', header: 'Etat demande kosc'},
+            {field: 'causeKoOkVo?.libelle', header: 'Type Ko'},
+            {field: 'dateEnvoiCri', header: 'Date envoi cri'},
+            {field: 'montantDevis', header: 'Montant devis'},
+
+        ]
+
+
         this.cols = [
             {field: 'reference', header: 'Reference'},
             {field: 'referenceWorkOrder', header: 'Reference work order'},
-            {field: 'codeDecharge', header: 'Code decharge'},
             {field: 'supplierService', header: 'Supplier service'},
             {field: 'dateDebutTraitement', header: 'Date debut traitement'},
             {field: 'endCustumorName', header: 'End custumor name'},
@@ -840,44 +910,81 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
             {field: 'envoyeSuivi', header: 'Envoye suivi'},
             {field: 'dateEnvoiSuivi', header: 'Date envoi suivi'},
         ];
+
     }
 
     stylefyConfort(ordreKosc: OrdreKoscVo): string {
-        return ordreKosc.confort?'color:red;':'color:black;';
+        return ordreKosc.confort ? 'color:red;' : 'color:black;';
 
     }
 
-    isErdvAndReferenceEmpty(ordreKoscVo : OrdreKoscVo){
-        if (ordreKoscVo.erdv == true && ordreKoscVo.reference != null){
+    isErdvAndReferenceEmpty(ordreKoscVo: OrdreKoscVo) {
+        if (ordreKoscVo.erdv == true && ordreKoscVo.reference != null) {
             return true;
-        }else {
-            return false;
-        }
-    }
-    isErdvAndReferencWorkOrdereEmpty(ordreKoscVo : OrdreKoscVo){
-        if (ordreKoscVo.erdv == true && ordreKoscVo.referenceWorkOrder != null){
-            return true;
-        }else {
+        } else {
             return false;
         }
     }
 
-    isEtatNotEmpty(ordreKoscVo : OrdreKoscVo){
-
-        if (ordreKoscVo.etatDemandeKoscVo != null ){
+    isErdvAndReferencWorkOrdereEmpty(ordreKoscVo: OrdreKoscVo) {
+        if (ordreKoscVo.erdv == true && ordreKoscVo.referenceWorkOrder != null) {
             return true;
-        }else {
+        } else {
             return false;
         }
+    }
+
+    isEtatNotEmpty(ordreKoscVo: OrdreKoscVo) {
+
+        if (ordreKoscVo.etatDemandeKoscVo != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private validateOrdreKoscYearDateRdv() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.yearDateRdv)) {
+            this.errorMessages.push('Annee non valide');
+            this.validOrdreKoscYearDateRdv = false;
+        } else {
+            this.validOrdreKoscYearDateRdv = true;
+        }
+    }
+
+    private validateOrdreKoscMonthDateRdv() {
+        if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.monthDateRdv)) {
+            this.errorMessages.push('Mois non valide');
+            this.validOrdreKoscMonthDateRdv = false;
+        } else {
+            this.validOrdreKoscMonthDateRdv = true;
+        }
+    }
+
+    public validateForm(): void {
+        this.errorMessages = new Array<string>()
+        this.validateOrdreKoscYearDateRdv();
+        this.validateOrdreKoscMonthDateRdv();
+
     }
 
     // getters and setters
+
 
     get ordreKoscs(): Array<OrdreKoscVo> {
         return this.ordreKoscService.ordreKoscsSuiviCdd;
     }
 
     set ordreKoscs(value: Array<OrdreKoscVo>) {
+        this.ordreKoscService.ordreKoscsSuiviCdd = value;
+    }
+
+
+    get ordreKoscsExport(): Array<OrdreKoscVo> {
+        return this.ordreKoscService.ordreKoscsSuiviCdd;
+    }
+
+    set ordreKoscsExport(value: Array<OrdreKoscVo>) {
         this.ordreKoscService.ordreKoscsSuiviCdd = value;
     }
 
@@ -932,5 +1039,30 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
     get dateFormat() {
         return environment.dateFormatList;
     }
+
+    get errorMessages(): string[] {
+        return this._errorMessages;
+    }
+
+    set errorMessages(value: string[]) {
+        this._errorMessages = value;
+    }
+
+    get validOrdreKoscYearDateRdv(): boolean {
+        return this._validOrdreKoscYearDateRdv;
+    }
+
+    set validOrdreKoscYearDateRdv(value: boolean) {
+        this._validOrdreKoscYearDateRdv = value;
+    }
+
+    get validOrdreKoscMonthDateRdv(): boolean {
+        return this._validOrdreKoscMonthDateRdv;
+    }
+
+    set validOrdreKoscMonthDateRdv(value: boolean) {
+        this._validOrdreKoscMonthDateRdv = value;
+    }
+
 
 }

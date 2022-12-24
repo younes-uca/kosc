@@ -55,22 +55,5 @@ public class EmailSenderAdminServiceImpl implements EmailSenderAdminService {
         mailSender.send(message);
     }
 
-/*    public DriveFiles getDriveFiles(String accessToken) {
-        String requestUri = "https://www.googleapis.com/drive/v3/files";
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("Authorization", "Bearer " + accessToken);
 
-        HttpEntity request = new HttpEntity(headers);
-        MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter =
-                new MappingJackson2HttpMessageConverter();
-        restTemplate.getMessageConverters().add(mappingJackson2HttpMessageConverter);
-        ResponseEntity<String> response = restTemplate.exchange(requestUri, HttpMethod.GET, request, String.class);
-
-        Gson gson = new Gson();
-        DriveFiles driveFiles = gson.fromJson(response.getBody(), DriveFiles.class);
-
-        return driveFiles;
-    }*/
 }

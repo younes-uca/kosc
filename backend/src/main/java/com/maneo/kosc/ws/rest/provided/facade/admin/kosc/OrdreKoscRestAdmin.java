@@ -2,12 +2,10 @@ package com.maneo.kosc.ws.rest.provided.facade.admin.kosc;
 
 
 import com.maneo.kosc.bean.kosc.OrdreKosc;
-import com.maneo.kosc.service.admin.facade.GoogleDriveAdminService;
 import com.maneo.kosc.service.admin.facade.kosc.*;
 import com.maneo.kosc.ws.rest.provided.converter.kosc.OrdreKoscConverter;
 import com.maneo.kosc.ws.rest.provided.vo.kosc.OrdreKoscVo;
 import com.maneo.kosc.ws.rest.provided.vo.StatisticResultVo;
-import io.opencensus.internal.DefaultVisibilityForTesting;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +18,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -42,8 +39,7 @@ public class OrdreKoscRestAdmin {
 
     @Autowired
     private OrdreKoscAdminService ordreKoscService;
-    @Autowired
-    private GoogleDriveAdminService  googleDriveAdminService;
+
 
     @Autowired
     private OrdreKoscPriseRdvAdminService ordreKoscPriseRdvService;
@@ -61,6 +57,8 @@ public class OrdreKoscRestAdmin {
     private OrdreKoscSuivRdvAdminService ordreKoscSuiviRdvService;
     @Autowired
     private OrdreKoscSuiviCddAdminService ordreKoscSuiviCddAdminService;
+    @Autowired
+    private OrderKoscBoiteEmailAdminService orderKoscBoiteEmailAdminService;
 
     @GetMapping("/calculerStatistic/submissionDateMin/{submissionDateMin}/submissionDateMax/{submissionDateMax}")
     public List<StatisticResultVo> calculerStatistic(@PathVariable Date submissionDateMin, @PathVariable Date submissionDateMax) {
@@ -625,18 +623,17 @@ public class OrdreKoscRestAdmin {
         orderKoscEmailingAdminService.sendMailCri(ordreKosc);
         return ordreKoscConverter.toVo(ordreKosc);
     }
-    @PostMapping("/upload-file-to-google-drive")
-    public void upLoadFile(){
-        File file = new File("C:\\Users\\dell\\Pictures\\Saved Pictures\\1666978065049.jfif");
-        com.google.api.services.drive.model.File file1 = googleDriveAdminService.upLoadFile(file.getName(), file.getAbsolutePath(), "image/jpg");
-        try {
-            System.err.println(file1.toPrettyString());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
+    @PostMapping("/find-email")
+    public List<OrdreKoscVo> findEmail(@RequestBody OrdreKoscVo ordreKoscVo) {
+        List<OrdreKosc> ordreKoscs = orderKoscBoiteEmailAdminService.findEmail(ordreKoscVo);
+        return ordreKoscConverter.toVo(ordreKoscs);
     }
 
-    public com.google.api.services.drive.model.File upLoadFile(String fileName, String filePath, String mimeType) {
-        return googleDriveAdminService.upLoadFile(fileName, filePath, mimeType);
+    @GetMapping("/find-by-year-month/year/{annee}/month/{mois}")
+    public List<OrdreKoscVo> findByYearAndMonth(@PathVariable int annee, @PathVariable int mois) {
+        return ordreKoscConverter.toVo(ordreKoscService.findByYearAndMonth(annee, mois));
+
+
     }
 }

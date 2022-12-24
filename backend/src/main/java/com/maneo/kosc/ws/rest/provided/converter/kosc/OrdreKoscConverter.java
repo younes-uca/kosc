@@ -101,6 +101,9 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
     private Boolean userImportation;
     private boolean emailEnvoye;
 
+    private Boolean userEnvoi;
+    private Boolean userEnvoiSearch;
+
 
     public OrdreKoscConverter() {
         init(true);
@@ -113,6 +116,64 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
         } else {
             OrdreKosc item = new OrdreKosc();
             item.setResult(vo.getResult());
+
+            vo.setUserEnvoi(item.getUserEnvoi());
+            vo.setObject(item.getObject());
+            if (item.getDateEnvoi() != null)
+                vo.setDateEnvoi(DateUtil.formateDate(item.getDateEnvoi()));
+            vo.setTo(item.getTo());
+            vo.setFrom(item.getFrom());
+            vo.setEnvoi(item.getEnvoi());
+            vo.setCorps(item.getCorps());
+
+            vo.setResult(item.getResult());
+            vo.setYearDateRdv(item.getYearDateRdv());
+            vo.setMonthDateRdv(item.getMonthDateRdv());
+
+            if (StringUtil.isNotEmpty(vo.getObject()))
+                item.setObject(vo.getObject());
+            if (StringUtil.isNotEmpty(vo.getCorps()))
+                item.setCorps(vo.getCorps());
+            if (StringUtil.isNotEmpty(vo.getEnvoi()))
+                item.setEnvoi(vo.getEnvoi());
+
+            if (StringUtil.isNotEmpty(vo.getDateEnvoi()))
+                item.setDateEnvoi(DateUtil.parse(vo.getDateEnvoi()));
+
+//            if (StringUtil.isNotEmpty(vo.getDateEnvoiMin()))
+//                item.setDateEnvoiMin(DateUtil.parse(vo.getDateEnvoiMin()));
+//
+//            if (StringUtil.isNotEmpty(vo.getDateEnvoiMax()))
+//                item.setDateEnvoiMax(DateUtil.parse(vo.getDateEnvoiMax()));
+
+            if (this.userEnvoi && vo.getUserEnvoi() != null) {
+                item.setUserEnvoi(vo.getUserEnvoi());
+            }
+            if (StringUtil.isNotEmpty(vo.getFrom()))
+                item.setFrom(vo.getFrom());
+            if (StringUtil.isNotEmpty(vo.getTo()))
+                item.setTo(vo.getTo());
+
+            if (StringUtil.isNotEmpty(vo.getObjectSearch()))
+                item.setObjectSearch(vo.getObjectSearch());
+
+            if (StringUtil.isNotEmpty(vo.getEnvoiSearch()))
+                item.setEnvoiSearch(vo.getEnvoiSearch());
+
+            if (StringUtil.isNotEmpty(vo.getDateEnvoiMinSearch()))
+                item.setDateEnvoiMinSearch(DateUtil.parse(vo.getDateEnvoiMinSearch()));
+
+            if (StringUtil.isNotEmpty(vo.getDateEnvoiMaxSearch()))
+                item.setDateEnvoiMaxSearch(DateUtil.parse(vo.getDateEnvoiMaxSearch()));
+
+            if (this.userEnvoiSearch && vo.getUserEnvoiSearch() != null) {
+                item.setUserEnvoiSearch(vo.getUserEnvoiSearch());
+            }
+            if (StringUtil.isNotEmpty(vo.getFromSearch()))
+                item.setFromSearch(vo.getFromSearch());
+            if (StringUtil.isNotEmpty(vo.getToSearch()))
+                item.setToSearch(vo.getToSearch());
+
             if (StringUtil.isNotEmpty(vo.getId()))
                 item.setId(NumberUtil.toLong(vo.getId()));
             if (StringUtil.isNotEmpty(vo.getNbrHeureDateSubmissionAndNow()))
@@ -773,6 +834,50 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
         } else {
             OrdreKoscVo vo = new OrdreKoscVo();
             vo.setResult(item.getResult());
+
+
+            if (StringUtil.isNotEmpty(item.getObject()))
+                vo.setObject(item.getObject());
+            if (StringUtil.isNotEmpty(item.getCorps()))
+                vo.setCorps(item.getCorps());
+            if (StringUtil.isNotEmpty(item.getEnvoi()))
+                vo.setEnvoi(item.getEnvoi());
+            if (item.getDateEnvoi() != null)
+                vo.setDateEnvoi(DateUtil.formateDate(item.getDateEnvoi()));
+//            if (item.getDateEnvoiMin() != null)
+//                vo.setDateEnvoiMin(DateUtil.formateDate(item.getDateEnvoiMin()));
+//            if (item.getDateEnvoiMax() != null)
+//                vo.setDateEnvoiMax(DateUtil.formateDate(item.getDateEnvoiMax()));
+            if (this.userEnvoi && item.getUserEnvoi() != null) {
+                vo.setUserEnvoi(item.getUserEnvoi());
+            }
+            if (StringUtil.isNotEmpty(item.getFrom()))
+                vo.setFrom(item.getFrom());
+            if (StringUtil.isNotEmpty(item.getTo()))
+                vo.setTo(item.getTo());
+
+            if (StringUtil.isNotEmpty(item.getObjectSearch()))
+                vo.setObjectSearch(item.getObjectSearch());
+
+            if (StringUtil.isNotEmpty(item.getEnvoiSearch()))
+                vo.setEnvoiSearch(item.getEnvoiSearch());
+
+            if (item.getDateEnvoiMinSearch() != null)
+                vo.setDateEnvoiMinSearch(DateUtil.formateDate(item.getDateEnvoiMinSearch()));
+
+            if (item.getDateEnvoiMaxSearch() != null)
+                vo.setDateEnvoiMaxSearch(DateUtil.formateDate(item.getDateEnvoiMaxSearch()));
+
+            if (this.userEnvoiSearch && item.getUserEnvoiSearch() != null) {
+                vo.setUserEnvoiSearch(item.getUserEnvoiSearch());
+            }
+
+            if (StringUtil.isNotEmpty(item.getFromSearch()))
+                vo.setFromSearch(item.getFromSearch());
+
+            if (StringUtil.isNotEmpty(item.getToSearch()))
+                vo.setToSearch(item.getToSearch());
+
             if (item.getId() != null)
                 vo.setId(NumberUtil.toString(item.getId()));
             if (item.getNbrHeureDateSubmissionAndNow() != null)
@@ -1673,6 +1778,8 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
         userReportDemandeClientClientInjoignable = value;
         userReportDemandeClientClientJoignable = value;
         userImportation = value;
+        userEnvoi = value;
+        userEnvoiSearch = value;
     }
 
 

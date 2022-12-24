@@ -24,6 +24,7 @@ import com.maneo.kosc.service.admin.facade.template.*;
 import com.maneo.kosc.ws.rest.provided.vo.StatisticResultVo;
 import com.maneo.kosc.ws.rest.provided.vo.StatisticVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -108,7 +109,7 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
             query += " AND o.etatDemandeKosc.id IN (" + etatDemandeKoscService.convertId(ordreKoscVo.getEtatDemandeKoscVos()) + ")";
         }
 
-        query+= " ORDER BY  o.submissionDate DESC";
+        query += " ORDER BY  o.submissionDate DESC";
 
 
         return entityManager.createQuery(query).getResultList();
@@ -282,7 +283,6 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
     public int deleteByTemplateEmailPlanificationId(Long id) {
         return ordreKoscDao.deleteByTemplateEmailPlanificationId(id);
     }
-
 
 
     @Override
@@ -522,18 +522,24 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
         return res;
     }
 
+    @Override
+    public List<OrdreKosc> findByYearAndMonth(int annee, int mois) {
+        String query = "SELECT k FROM OrdreKosc k WHERE k.yearDateRdv=" + annee + " and k.monthDateRdv " + mois;
+        return entityManager.createQuery(query).getResultList();
+    }
+
 
     @Override
     public OrdreKosc update(OrdreKosc ordreKosc) {
 
-            OrdreKosc foundedOrdreKosc = findById(ordreKosc.getId());
-            if (foundedOrdreKosc == null) return null;
-            else {
-                initDateDernierAppel(ordreKosc);
-                EtatDemandeKosc etatDemandeKosc = etatDemandeKoscService.findByCode(ordreKosc.getEtatDemandeKosc().getCode());
-                ordreKosc.setEtatDemandeKosc(etatDemandeKosc);
-                return ordreKoscDao.save(ordreKosc);
-            }
+        OrdreKosc foundedOrdreKosc = findById(ordreKosc.getId());
+        if (foundedOrdreKosc == null) return null;
+        else {
+            initDateDernierAppel(ordreKosc);
+            EtatDemandeKosc etatDemandeKosc = etatDemandeKoscService.findByCode(ordreKosc.getEtatDemandeKosc().getCode());
+            ordreKosc.setEtatDemandeKosc(etatDemandeKosc);
+            return ordreKoscDao.save(ordreKosc);
+        }
     }
 
     private void prepareSave(OrdreKosc ordreKosc) {
@@ -570,13 +576,13 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
 
 
     private void initDateDernierAppel(OrdreKosc ordreKosc) {
-        if(ordreKosc.getDateTroisiemeAppel()!=null){
+        if (ordreKosc.getDateTroisiemeAppel() != null) {
             ordreKosc.setDateDernierAppel(ordreKosc.getDateTroisiemeAppel());
             ordreKosc.setNumeroDernierAppel(3L);
-        }else if(ordreKosc.getDateDeuxiemeAppel()!=null){
+        } else if (ordreKosc.getDateDeuxiemeAppel() != null) {
             ordreKosc.setDateDernierAppel(ordreKosc.getDateDeuxiemeAppel());
             ordreKosc.setNumeroDernierAppel(2L);
-        }else if(ordreKosc.getDatePremierAppel()!=null){
+        } else if (ordreKosc.getDatePremierAppel() != null) {
             ordreKosc.setDateDernierAppel(ordreKosc.getDatePremierAppel());
             ordreKosc.setNumeroDernierAppel(1L);
         }
@@ -644,7 +650,7 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
     public List<OrdreKosc> findByCriteria(OrdreKoscVo ordreKoscVo) {
 
         String query = "SELECT o FROM OrdreKosc o where 1=1";
-        System.out.println("haaa ordreKoscVo.getConfort() "+ordreKoscVo.getConfort());
+        System.out.println("haaa ordreKoscVo.getConfort() " + ordreKoscVo.getConfort());
         query += SearchUtil.addConstraint("o", "id", "=", ordreKoscVo.getId());
         query += SearchUtil.addConstraint("o", "montantDevis", "=", ordreKoscVo.getMontantDevis());
         query += SearchUtil.addConstraint("o", "erdv", "=", ordreKoscVo.getErdv());
@@ -875,7 +881,6 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
         }
 
 
-
         if (ordreKoscVo.getTemplateEmailReplanificationVo() != null) {
             query += SearchUtil.addConstraint("o", "templateEmailReplanification.id", "=", ordreKoscVo.getTemplateEmailReplanificationVo().getId());
         }
@@ -913,8 +918,8 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
             query += SearchUtil.addConstraint("o", "etatDemandeKosc.code", "LIKE", ordreKoscVo.getEtatDemandeKoscVo().getCode());
         }*/
 
-        if (ListUtil.isNotEmpty(ordreKoscVo.getEtatDemandeKoscVos())){
-            query+= " AND o.etatDemandeKosc.id IN ("+etatDemandeKoscService.convertId(ordreKoscVo.getEtatDemandeKoscVos())+")";
+        if (ListUtil.isNotEmpty(ordreKoscVo.getEtatDemandeKoscVos())) {
+            query += " AND o.etatDemandeKosc.id IN (" + etatDemandeKoscService.convertId(ordreKoscVo.getEtatDemandeKoscVos()) + ")";
         }
 
 
@@ -993,6 +998,7 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
             ordreKosc.setTechnicien(loadedTechnicien);
         }
     }
+
     private void findOrSaveEtatDemande(OrdreKosc ordreKosc) {
         EtatDemandeKosc loadedEtatDemande = etatDemandeKoscService.findByIdOrCode(ordreKosc.getEtatDemandeKosc());
         if (loadedEtatDemande == null) {
@@ -1013,7 +1019,6 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
         }
         ordreKosc.setTemplateEmailPlanification(loadedTemplateEmailPlanification);
     }
-
 
 
     private void findTemplateEmailReplanification(OrdreKosc ordreKosc) {
@@ -1206,8 +1211,12 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
         ordreKosc.setClient(loadedClient);
     } */
 
+    @Scheduled(cron = "0 */5 * ? * *")
+    public void scheduleTaskUsingCronExpression() {
 
-
-
+        long now = System.currentTimeMillis() / 1000;
+        System.out.println(
+                "schedule tasks using cron jobs - " + now);
+    }
 }
 
