@@ -902,8 +902,11 @@ export class OrdreKoscExcelService {
         myOrdreKoscData.reserve4 = data[i]['Reserve4'];
         myOrdreKoscData.racordementLong = this.convertBoleen(data[i]['RaccordementLong']);
         myOrdreKoscData.datePremierAppel = this.convertDate(data[i]['1 er appel ']);
+        console.log(myOrdreKoscData.datePremierAppel);
         myOrdreKoscData.dateDeuxiemeAppel = this.convertDate(data[i]['2 eme appel ']);
+        // console.log(myOrdreKoscData.dateDeuxiemeAppel);
         myOrdreKoscData.dateTroisiemeAppel = this.convertDate(data[i]['3 eme appel ']);
+        // console.log(myOrdreKoscData.dateTroisiemeAppel);
         myOrdreKoscData.dateAppelReplanification = this.convertDate(data[i]['Re Planification']);
         myOrdreKoscData.dateInterventionTechniqueDebut = this.convertDate(data[i]['Date intervention Technicien']);
         console.log(data[i]['Date intervention Technicien']);
