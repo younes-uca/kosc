@@ -234,7 +234,7 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
             label: 'Non',
             value: 0
         }];
-        this.searchRequestSuiviRdv();
+        this.ordreKoscs = new Array<OrdreKoscVo>();
     }
 
     // methods

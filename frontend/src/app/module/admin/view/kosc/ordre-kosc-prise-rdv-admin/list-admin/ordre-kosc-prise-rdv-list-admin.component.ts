@@ -191,7 +191,7 @@ export class OrdreKoscPriseRdvListAdminComponent implements OnInit {
             value: 0
         }];
 
-        this.searchRequestPriseRdv();
+        this.ordreKoscs = new Array<OrdreKoscVo>();
     }
 
     private setValidation(value: boolean) {

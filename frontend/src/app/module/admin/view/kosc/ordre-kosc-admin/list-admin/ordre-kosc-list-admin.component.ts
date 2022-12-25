@@ -327,7 +327,7 @@ export class OrdreKoscListAdminComponent implements OnInit {
             label: 'Non',
             value: 0
         }];
-        this.searchRequest();
+        this.ordreKoscs = new Array<OrdreKoscVo>();
     }
 
     // methods

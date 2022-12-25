@@ -39,6 +39,7 @@ export class OrdreKoscService {
     private _ordreKoscsPriseRdv: Array<OrdreKoscVo>;
     private _ordreKoscsSuiviRdv: Array<OrdreKoscVo>;
     private _ordreKoscsSuiviCdd: Array<OrdreKoscVo>;
+    private _ordreKoscsSuiviHistoriqueCdd: Array<OrdreKoscVo>;
     private _searchOrdreKoscSuiviRdv: OrdreKoscVo;
 
 
@@ -398,7 +399,6 @@ export class OrdreKoscService {
         this._searchOrdreKoscCdd = value;
     }
 
-
     get searchOrdreKoscSuiviRdv(): OrdreKoscVo {
         if (this._searchOrdreKoscSuiviRdv == null) {
             this._searchOrdreKoscSuiviRdv = new OrdreKoscVo();
@@ -408,6 +408,18 @@ export class OrdreKoscService {
 
     set searchOrdreKoscSuiviRdv(value: OrdreKoscVo) {
         this._searchOrdreKoscSuiviRdv = value;
+    }
+
+
+    get ordreKoscsSuiviHistoriqueCdd(): Array<OrdreKoscVo> {
+        if (this._ordreKoscsSuiviHistoriqueCdd == null){
+            this._ordreKoscsSuiviHistoriqueCdd = new Array<OrdreKoscVo>();
+        }
+        return this._ordreKoscsSuiviHistoriqueCdd;
+    }
+
+    set ordreKoscsSuiviHistoriqueCdd(value: Array<OrdreKoscVo>) {
+        this._ordreKoscsSuiviHistoriqueCdd = value;
     }
 
     sendMailReportDemandeManeoClientInjoignable() {
@@ -439,6 +451,7 @@ export class OrdreKoscService {
     sendMailCri() {
         return this.http.post<OrdreKoscVo>(this.API + 'send-mail-cri', {...this.selectedOrdreKosc});
     }
+
 
 
 }
