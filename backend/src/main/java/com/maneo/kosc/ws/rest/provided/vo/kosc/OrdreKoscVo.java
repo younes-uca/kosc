@@ -419,12 +419,180 @@ public class OrdreKoscVo {
 
     private int result;
 
+    private int yearDateRdv;
+    private int monthDateRdv;
+
+    private String object;
+    private String from;
+    private String to;
+    private String corps;
+    private Boolean envoi;
+    private User userEnvoi;
+    private String dateEnvoi;
+    private String dateEnvoiMin;
+    private String dateEnvoiMax;
+    private String objectSearch;
+    private String fromSearch;
+    private String toSearch;
+    private String corpsSearch;
+    private Boolean envoiSearch;
+    private User userEnvoiSearch;
+    private String dateEnvoiMinSearch;
+    private String dateEnvoiMaxSearch;
     private String emailDe;
     private String emailTo;
     private String emailObjet;
     private String emailCorps;
     private Boolean emailEnvoye;
-    private String dateEnvoi;
+
+
+    public String getObjectSearch() {
+        return objectSearch;
+    }
+
+    public void setObjectSearch(String objectSearch) {
+        this.objectSearch = objectSearch;
+    }
+
+    public String getFromSearch() {
+        return fromSearch;
+    }
+
+    public void setFromSearch(String fromSearch) {
+        this.fromSearch = fromSearch;
+    }
+
+    public String getToSearch() {
+        return toSearch;
+    }
+
+    public void setToSearch(String toSearch) {
+        this.toSearch = toSearch;
+    }
+
+    public String getCorpsSearch() {
+        return corpsSearch;
+    }
+
+    public void setCorpsSearch(String corpsSearch) {
+        this.corpsSearch = corpsSearch;
+    }
+
+    public Boolean getEnvoiSearch() {
+        return envoiSearch;
+    }
+
+    public void setEnvoiSearch(Boolean envoiSearch) {
+        this.envoiSearch = envoiSearch;
+    }
+
+    public User getUserEnvoiSearch() {
+        return userEnvoiSearch;
+    }
+
+    public void setUserEnvoiSearch(User userEnvoiSearch) {
+        this.userEnvoiSearch = userEnvoiSearch;
+    }
+
+    public String getDateEnvoiMinSearch() {
+        return dateEnvoiMinSearch;
+    }
+
+    public void setDateEnvoiMinSearch(String dateEnvoiMinSearch) {
+        this.dateEnvoiMinSearch = dateEnvoiMinSearch;
+    }
+
+    public String getDateEnvoiMaxSearch() {
+        return dateEnvoiMaxSearch;
+    }
+
+    public void setDateEnvoiMaxSearch(String dateEnvoiMaxSearch) {
+        this.dateEnvoiMaxSearch = dateEnvoiMaxSearch;
+    }
+
+    public int getYearDateRdv() {
+        return yearDateRdv;
+    }
+
+    public void setYearDateRdv(int yearDateRdv) {
+        this.yearDateRdv = yearDateRdv;
+    }
+
+    public int getMonthDateRdv() {
+        return monthDateRdv;
+    }
+
+    public void setMonthDateRdv(int monthDateRdv) {
+        this.monthDateRdv = monthDateRdv;
+    }
+
+    public String getObject() {
+        return object;
+    }
+
+    public void setObject(String object) {
+        this.object = object;
+    }
+
+    public String getFrom() {
+        return from;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
+    }
+
+    public String getTo() {
+        return to;
+    }
+
+    public void setTo(String to) {
+        this.to = to;
+    }
+
+    public String getCorps() {
+        return corps;
+    }
+
+    public void setCorps(String corps) {
+        this.corps = corps;
+    }
+
+    public Boolean getEnvoi() {
+        return envoi;
+    }
+
+    public void setEnvoi(Boolean envoi) {
+        this.envoi = envoi;
+    }
+
+    public User getUserEnvoi() {
+        return userEnvoi;
+    }
+
+    public void setUserEnvoi(User userEnvoi) {
+        this.userEnvoi = userEnvoi;
+    }
+
+    public String getDateEnvoiMin() {
+        return dateEnvoiMin;
+    }
+
+    public void setDateEnvoiMin(String dateEnvoiMin) {
+        this.dateEnvoiMin = dateEnvoiMin;
+    }
+
+    public String getDateEnvoiMax() {
+        return dateEnvoiMax;
+    }
+
+    public void setDateEnvoiMax(String dateEnvoiMax) {
+        this.dateEnvoiMax = dateEnvoiMax;
+    }
+
+    public void setEmailEnvoye(Boolean emailEnvoye) {
+        this.emailEnvoye = emailEnvoye;
+    }
 
     public String getDateEnvoi() {
         return dateEnvoi;

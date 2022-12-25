@@ -44,6 +44,7 @@ public class OrdreKoscRestAdmin {
     @Autowired
     private OrdreKoscAdminService ordreKoscService;
 
+
     @Autowired
     private OrdreKoscPriseRdvAdminService ordreKoscPriseRdvService;
     @Autowired
@@ -63,6 +64,8 @@ public class OrdreKoscRestAdmin {
     private OrdreKoscSuivRdvAdminService ordreKoscSuiviRdvService;
     @Autowired
     private OrdreKoscSuiviCddAdminService ordreKoscSuiviCddAdminService;
+    @Autowired
+    private OrderKoscBoiteEmailAdminService orderKoscBoiteEmailAdminService;
 
     @GetMapping("/calculerStatistic/submissionDateMin/{submissionDateMin}/submissionDateMax/{submissionDateMax}")
     public List<StatisticResultVo> calculerStatistic(@PathVariable Date submissionDateMin, @PathVariable Date submissionDateMax) {
@@ -179,7 +182,8 @@ public class OrdreKoscRestAdmin {
     @ApiOperation("Search ordreKosc by a specific criteria")
     @PostMapping("/search-order-kosc-import")
     public List<OrdreKoscVo> findByCriteriaOrderKoscImport(@RequestBody OrdreKoscVo ordreKoscVo) {
-        return ordreKoscConverter.toVo(ordreKoscService.findByCriteriaOrderKoscImport(ordreKoscVo));
+        List<OrdreKoscVo> ordreKoscVos = ordreKoscConverter.toVo(ordreKoscService.findByCriteriaOrderKoscImport(ordreKoscVo));
+        return ordreKoscVos;
     }
 
 
@@ -632,5 +636,18 @@ public class OrdreKoscRestAdmin {
         OrdreKosc ordreKosc = ordreKoscConverter.toItem(ordreKoscVo);
         orderKoscEmailingAdminService.sendMailCri(ordreKosc);
         return ordreKoscConverter.toVo(ordreKosc);
+    }
+
+    @PostMapping("/find-email")
+    public List<OrdreKoscVo> findEmail(@RequestBody OrdreKoscVo ordreKoscVo) {
+        List<OrdreKosc> ordreKoscs = orderKoscBoiteEmailAdminService.findEmail(ordreKoscVo);
+        return ordreKoscConverter.toVo(ordreKoscs);
+    }
+
+    @GetMapping("/find-by-year-month/year/{annee}/month/{mois}")
+    public List<OrdreKoscVo> findByYearAndMonth(@PathVariable int annee, @PathVariable int mois) {
+        return ordreKoscConverter.toVo(ordreKoscService.findByYearAndMonth(annee, mois));
+
+
     }
 }

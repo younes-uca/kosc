@@ -1,5 +1,4 @@
 package com.maneo.kosc.service.admin.impl.kosc;
-
 import com.maneo.kosc.bean.kosc.OrdreKosc;
 import com.maneo.kosc.bean.template.EmailDetails;
 import com.maneo.kosc.dao.kosc.OrdreKoscDao;
@@ -8,11 +7,13 @@ import com.maneo.kosc.service.admin.facade.*;
 import com.maneo.kosc.service.admin.facade.kosc.OrderKoscEmailingAdminService;
 
 
+import com.maneo.kosc.service.util.DateUtil;
 import com.maneo.kosc.service.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+
 
 @Service
 public class OrderKoscEmailingAdminServiceImpl implements OrderKoscEmailingAdminService {
@@ -25,7 +26,6 @@ public class OrderKoscEmailingAdminServiceImpl implements OrderKoscEmailingAdmin
     private EmailSenderAdminService emailSenderAdminService;
 
     Date now = new Date();
-
 
     private void setEmails(OrdreKosc ordreKosc){
         if (ordreKosc.getToClientInjoinable() != null){
@@ -101,6 +101,8 @@ public class OrderKoscEmailingAdminServiceImpl implements OrderKoscEmailingAdmin
         emailDetails.setTo(ordreKosc.getToPlanification());
         emailDetails.setObjet(ordreKosc.getObjetPlanification());
         emailDetails.setCorps(ordreKosc.getCorpsPlanification());
+        ordreKosc.setYearDateRdv(DateUtil.getYear(ordreKosc.getDateRdv()));
+        ordreKosc.setMonthDateRdv(DateUtil.getMonth(ordreKosc.getDateRdv()));
         try {
             emailSenderAdminService.sendEmail(emailDetails);
             ordreKosc.setEnvoyePlanification(true);
@@ -399,9 +401,10 @@ public class OrderKoscEmailingAdminServiceImpl implements OrderKoscEmailingAdmin
         emailDetails.setTo(ordreKosc.getToCri());
         emailDetails.setObjet(ordreKosc.getObjetCri());
         emailDetails.setCorps(ordreKosc.getCorpsCri());
+        emailDetails.setAttachment(ordreKosc.getCorpsCri());
         try {
 
-            emailSenderAdminService.sendEmail(emailDetails);
+            emailSenderAdminService.sendMailWithAttachment(emailDetails);
             ordreKosc.setEnvoyeCri(true);
             ordreKosc.setDateEnvoiCri(now);
 
@@ -497,6 +500,7 @@ public class OrderKoscEmailingAdminServiceImpl implements OrderKoscEmailingAdmin
 
 
     }
+
 
 
 }

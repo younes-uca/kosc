@@ -8,20 +8,65 @@
                 <ng-template pTemplate="left">
 
                     <button (click)="this.findByCriteriaShow = !this.findByCriteriaShow"
-                            class="p-button-success p-mr-2 p-mb-2"
+                            class="p-button-success p-mr-2 p-mb-2" style="margin-right: 10px"
                             icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}"
                             label="Chercher"
                             pButton
                             pRipple></button>
+
                 </ng-template>
                 <ng-template pTemplate="right">
                     <div class="flex">
+                        <p-button (click)="showExportByYearDateRdvAndMonthDateRdv()" icon="pi pi-download"
+                                  label="Exporter Devis" style="margin-right: 6px"
+                                  styleClass="p-button-danger"></p-button>
                         <p-splitButton [model]="excelPdfButons" icon="pi pi-download" label="Exporter"
                                        styleClass="p-button-help"></p-splitButton>
                     </div>
                 </ng-template>
 
             </p-toolbar>
+
+            <p-dialog [(visible)]="displayView" [style]="{width: '50vw'}" [draggable]="false"
+                      [modal]="true">
+                <ng-template pTemplate="content">
+                    <h5>Exporter les KoscOrdres par annee et mois</h5>
+                    <p-tabView *ngIf="showYearDateRdvAndMonthDateRdv">
+
+                        <div class="p-grid">
+                            <div class="p-field p-col-12 p-md-4" style="margin-top: 20px">
+                                <label for="1">Annee<span style="color: red;">*</span></label>
+                                <p-inputNumber class="p-mb-2 p-mr-2" id="1"
+                                               placeholder="annee"
+                                               [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscYearDateRdv}"
+                                               [(ngModel)]="selectedOrdreKosc.yearDateRdv"></p-inputNumber>
+                                <small class='p-error' *ngIf='!validOrdreKoscYearDateRdv'>Annee est obligatoire</small>
+                            </div>
+
+                            <div class="p-field p-col-12 p-md-4" style="margin-top: 20px">
+                                <label for="1">Mois<span style="color: red;">*</span></label>
+                                <p-inputNumber class="p-mb-2 p-mr-2" id="1"
+                                               placeholder="mois"
+                                               [ngClass]="{'ng-invalid ng-dirty' : !validOrdreKoscMonthDateRdv}"
+                                               [(ngModel)]="selectedOrdreKosc.monthDateRdv"></p-inputNumber>
+                                <small class='p-error' *ngIf='!validOrdreKoscMonthDateRdv'>Mois est obligatoire</small>
+                            </div>
+
+                            <div  class="p-field p-col-12 p-md-4" style="margin-top: 43px" >
+                                <button (click)="exportDevis()" icon="pi pi-check" label="Valider" pButton pRipple
+                                     ></button>
+
+                            </div>
+
+                        </div>
+
+
+
+                    </p-tabView>
+
+                </ng-template>
+
+            </p-dialog>
             <p-toolbar *ngIf="findByCriteriaShow">
 
                 <div class="align-form-search">
@@ -219,10 +264,7 @@
                         <td><span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.codeDecharge}}</span></td>
 
 
-
                         <td><span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.operatorVo?.libelle}}</span></td>
-
-
 
 
                         <td><span
@@ -238,7 +280,6 @@
                             </p-badge>
 
                         </td>
-
 
 
                         <td><span

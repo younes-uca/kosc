@@ -39,8 +39,7 @@ export class OrdreKoscService {
     private _ordreKoscsPriseRdv: Array<OrdreKoscVo>;
     private _ordreKoscsSuiviRdv: Array<OrdreKoscVo>;
     private _ordreKoscsSuiviCdd: Array<OrdreKoscVo>;
-    private _searchOrdreKoscSuiviRdv:OrdreKoscVo;
-
+    private _searchOrdreKoscSuiviRdv: OrdreKoscVo;
 
 
     constructor(private http: HttpClient, private roleService: RoleService) {
@@ -50,10 +49,10 @@ export class OrdreKoscService {
         });
     }
 
-    public deleteIfEtatNotIn(etats: Array<EtatDemandeKoscVo>, ordreKoscs: Array<OrdreKoscVo>, ordreKosc: OrdreKoscVo){
+    public deleteIfEtatNotIn(etats: Array<EtatDemandeKoscVo>, ordreKoscs: Array<OrdreKoscVo>, ordreKosc: OrdreKoscVo) {
         if (ordreKoscs != null) {
             var indice = etats.findIndex(e => e.code === ordreKosc.etatDemandeKoscVo.code);
-            if (indice == -1){
+            if (indice == -1) {
                 var indiceOrdreKosc = ordreKoscs.findIndex(e => e.id == ordreKosc.id);
                 ordreKoscs.splice(indiceOrdreKosc, 1);
             }
@@ -61,8 +60,8 @@ export class OrdreKoscService {
         }
     }
 
-    public calculerStatistic(ordreKosc: OrdreKoscVo) : Observable<Array<StatisticVo>>{
-        return this.http.get<Array<StatisticVo>>(this.API + 'calculerStatistic/submissionDateMin/' + this.searchOrdreKosc.submissionDateMin +'/submissionDateMax/' + this.searchOrdreKosc.submissionDateMax);
+    public calculerStatistic(ordreKosc: OrdreKoscVo): Observable<Array<StatisticVo>> {
+        return this.http.get<Array<StatisticVo>>(this.API + 'calculerStatistic/submissionDateMin/' + this.searchOrdreKosc.submissionDateMin + '/submissionDateMax/' + this.searchOrdreKosc.submissionDateMax);
     }
 
     public findSuivi() {
@@ -89,28 +88,29 @@ export class OrdreKoscService {
         return this.http.post<Array<OrdreKoscVo>>(this.API + 'ftel', ordreKoscs);
     }
 
-    uploadFile(file):Observable<any>{
+    uploadFile(file): Observable<any> {
         //Create from data
         const formData = new FormData();
 
         //Store form name as "file" with file data
-        formData.append("file",file,file.name);
+        formData.append("file", file, file.name);
 
         return this.http.post<File>(this.API + 'upload', formData);
     }
 
     download(filename: string): Observable<HttpEvent<Blob>> {
-        return this.http.get(this.API+ 'download/'+filename, {
+        return this.http.get(this.API + 'download/' + filename, {
             reportProgress: true,
             observe: 'events',
             responseType: 'blob'
         });
     }
 
-    public importerAll(ordreKoscs:Array<OrdreKoscVo>): Observable<Array<OrdreKoscVo>>{
+    public importerAll(ordreKoscs: Array<OrdreKoscVo>): Observable<Array<OrdreKoscVo>> {
         return this.http.post<Array<OrdreKoscVo>>(this.API + 'import-all', ordreKoscs);
     }
-    public importerERdv(ordreKoscs:Array<OrdreKoscVo>): Observable<Array<OrdreKoscVo>>{
+
+    public importerERdv(ordreKoscs: Array<OrdreKoscVo>): Observable<Array<OrdreKoscVo>> {
         return this.http.post<Array<OrdreKoscVo>>(this.API + 'eRdv', ordreKoscs);
     }
 
@@ -174,14 +174,15 @@ export class OrdreKoscService {
 
     }
 
-    public  updateEtat(): Observable<OrdreKoscVo> {
-        return this.http.put<OrdreKoscVo>(this.API+"update-etat/", this.selectedOrdreKosc);
+    public updateEtat(): Observable<OrdreKoscVo> {
+        return this.http.put<OrdreKoscVo>(this.API + "update-etat/", this.selectedOrdreKosc);
     }
 
     public findByCriteria(ordreKosc: OrdreKoscVo): Observable<Array<OrdreKoscVo>> {
         // console.log(ordreKosc);
         return this.http.post<Array<OrdreKoscVo>>(this.API + 'search', ordreKosc);
     }
+
     public findByCriteriaOrderKoscImport(ordreKosc: OrdreKoscVo): Observable<Array<OrdreKoscVo>> {
 
         return this.http.post<Array<OrdreKoscVo>>(this.API + 'search-order-kosc-import', ordreKosc);
@@ -205,11 +206,11 @@ export class OrdreKoscService {
         return this.http.post<Array<OrdreKoscVo>>(this.API + 'search/suivi', ordreKosc);
     }
 
-    public  findByIdWithAssociatedList (ordreKosc: OrdreKoscVo): Observable<OrdreKoscVo> {
+    public findByIdWithAssociatedList(ordreKosc: OrdreKoscVo): Observable<OrdreKoscVo> {
         return this.http.get<OrdreKoscVo>(this.API + 'detail/id/' + ordreKosc.id);
     }
 
-    public async findByIdWithAssociatedList2 (ordreKosc: OrdreKoscVo): Promise<Observable<OrdreKoscVo>> {
+    public async findByIdWithAssociatedList2(ordreKosc: OrdreKoscVo): Promise<Observable<OrdreKoscVo>> {
         return this.http.get<OrdreKoscVo>(this.API + 'detail/id/' + ordreKosc.id);
     }
 
@@ -227,6 +228,14 @@ export class OrdreKoscService {
 
     public findByCriteriaSuiviRdv(ordreKosc: OrdreKoscVo): Observable<Array<OrdreKoscVo>> {
         return this.http.post<Array<OrdreKoscVo>>(this.API + 'search-suivi-rdv', ordreKosc);
+    }
+
+    public findByAnneAndMoins(annee, mois){
+        return this.http.get<Array<OrdreKoscVo>>(this.API + 'find-by-year-month/year/' + annee + '/month/' + mois);
+    }
+
+    public findEmail(ordreKosc: OrdreKoscVo): Observable<Array<OrdreKoscVo>> {
+        return this.http.post<Array<OrdreKoscVo>>(this.API + 'find-email', ordreKosc);
     }
 
     get indexEdit(): number {
@@ -298,6 +307,7 @@ export class OrdreKoscService {
     set ordreKoscsSuiviRdv(value: Array<OrdreKoscVo>) {
         this._ordreKoscsSuiviRdv = value;
     }
+
 ////////////////////////
 
 
