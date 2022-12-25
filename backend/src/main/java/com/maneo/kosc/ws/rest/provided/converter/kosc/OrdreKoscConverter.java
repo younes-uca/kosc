@@ -116,19 +116,9 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
         } else {
             OrdreKosc item = new OrdreKosc();
             item.setResult(vo.getResult());
+            item.setYearDateRdv(vo.getYearDateRdv());
+            item.setMonthDateRdv(vo.getMonthDateRdv());
 
-            vo.setUserEnvoi(item.getUserEnvoi());
-            vo.setObject(item.getObject());
-            if (item.getDateEnvoi() != null)
-                vo.setDateEnvoi(DateUtil.formateDate(item.getDateEnvoi()));
-            vo.setTo(item.getTo());
-            vo.setFrom(item.getFrom());
-            vo.setEnvoi(item.getEnvoi());
-            vo.setCorps(item.getCorps());
-
-            vo.setResult(item.getResult());
-            vo.setYearDateRdv(item.getYearDateRdv());
-            vo.setMonthDateRdv(item.getMonthDateRdv());
 
             if (StringUtil.isNotEmpty(vo.getObject()))
                 item.setObject(vo.getObject());
@@ -476,7 +466,7 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
                 item.setDateTroisiemeAppel(DateUtil.parseTimestampUniversalFormat(vo.getDateTroisiemeAppel()));
             if (StringUtil.isNotEmpty(vo.getDatePriseRdv()))
                 item.setDatePriseRdv(DateUtil.parseTimestampUniversalFormat(vo.getDatePriseRdv()));
-             if (StringUtil.isNotEmpty(vo.getDateRdv()))
+            if (StringUtil.isNotEmpty(vo.getDateRdv()))
                 item.setDateRdv(DateUtil.parseTimestampUniversalFormat(vo.getDateRdv()));
             if (StringUtil.isNotEmpty(vo.getDateOuverture()))
                 item.setDateOuverture(DateUtil.parse(vo.getDateOuverture()));
@@ -774,7 +764,6 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
                 item.setNumeroDernierAppel(NumberUtil.toLong(vo.getNumeroDernierAppel()));
 
 
-
             if (this.userPlanification && vo.getUserPlanification() != null) {
                 item.setUserPlanification(vo.getUserPlanification());
             }
@@ -834,6 +823,8 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
         } else {
             OrdreKoscVo vo = new OrdreKoscVo();
             vo.setResult(item.getResult());
+            vo.setYearDateRdv(item.getYearDateRdv());
+            vo.setMonthDateRdv(item.getMonthDateRdv());
 
 
             if (StringUtil.isNotEmpty(item.getObject()))
@@ -1894,7 +1885,6 @@ public class OrdreKoscConverter extends AbstractConverter<OrdreKosc, OrdreKoscVo
     public void setDepartementConverter(DepartementConverter departementConverter) {
         this.departementConverter = departementConverter;
     }
-
 
 
     public TemplateEmailMauvaisContactConverter getTemplateEmailMauvaisContactConverter() {
