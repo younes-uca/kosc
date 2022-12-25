@@ -909,7 +909,7 @@ export class OrdreKoscExcelService {
         // console.log(myOrdreKoscData.dateTroisiemeAppel);
         myOrdreKoscData.dateAppelReplanification = this.convertDate(data[i]['Re Planification']);
         myOrdreKoscData.dateInterventionTechniqueDebut = this.convertDate(data[i]['Date intervention Technicien']);
-        console.log(data[i]['Date intervention Technicien']);
+        // console.log(data[i]['Date intervention Technicien']);
 
         //attribut de maillage
         myOrdreKoscData.supplier = data[i]['supplier'];
