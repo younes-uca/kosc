@@ -33,6 +33,9 @@ import {
 
 import {TemplateEmailPlanificationVo} from 'src/app/controller/model/TemplateEmailPlanification.model';
 import {TemplateEmailPlanificationService} from 'src/app/controller/service/TemplateEmailPlanification.service';
+import {CauseKoOkVo} from "../../../../../../controller/model/CauseKoOk.model";
+import {CauseKoOkService} from "../../../../../../controller/service/CauseKoOk.service";
+import * as moment from "moment";
 
 @Component({
     selector: 'app-ordre-kosc-suivi-cdd-edit-admin',
@@ -44,6 +47,8 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
 
     // declarations
     _submitted = false;
+    showCauseKo = false;
+    showCodeDecharge = false;
     private _errorMessages = new Array<string>();
     _validOrdreKoscReferenceWorkOrder = true;
 
@@ -61,7 +66,6 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
     _validTemplateEmailClientInjoinableKoscLibelle = true;
 
 
-
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService
         , private stringUtilService: StringUtilService
         , private roleService: RoleService
@@ -77,6 +81,7 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
         , private departementService: DepartementService
         , private templateEmailClientInjoinableKoscService: TemplateEmailClientInjoinableKoscService
         , private templateEmailPlanificationService: TemplateEmailPlanificationService
+        , private causeKoOkService: CauseKoOkService
     ) {
 
     }
@@ -163,7 +168,6 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
     }
 
 
-
     get validTemplateEmailClientInjoinableCode(): boolean {
         return this._validTemplateEmailClientInjoinableCode;
     }
@@ -200,9 +204,7 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
     }
 
 
-
 // methods
-
 
 
 // getters and setters
@@ -214,9 +216,6 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
     set searchordreKosc(value: OrdreKoscVo) {
         this.ordreKoscService.searchOrdreKoscSuiviCdd = value;
     }
-
-
-
 
 
     _validEtatDemandeKoscCode = true;
@@ -296,6 +295,7 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
     }
 
     get editOrdreKoscDialog(): boolean {
+        this.showAttributesOkKo();
         return this.ordreKoscService.editOrdreKoscDialog;
 
     }
@@ -555,6 +555,7 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
 
 // methods
     ngOnInit(): void {
+        this.loadCauseKoOks();
 
         this.selectedOperator = new OperatorVo();
         this.operatorService.findAll().subscribe((data) => this.operators = data);
@@ -579,6 +580,13 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
         this.templateSuiviService.findAll().subscribe((data) => this.templateSuivis = data);
     }
 
+    public async loadCauseKoOks() {
+        await this.roleService.findAll();
+        const isPermistted = await this.roleService.isPermitted('CauseKoOk', 'list');
+        isPermistted ? this.causeKoOkService.findAll().subscribe(causeKoOks => this.causeKoOks = causeKoOks, error => console.log(error))
+            : this.messageService.add({severity: 'error', summary: 'erreur', detail: 'problème d\'autorisation'});
+    }
+
     public edit() {
         this.submitted = true;
         this.validateForm();
@@ -592,6 +600,38 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
             });
         }
     }
+
+    public showAttributesOkKo() {
+            let etat = this.selectedOrdreKosc.etatDemandeKoscVo;
+            if (etat != null && etat.code == 'ok') {
+                this.showCodeDecharge = true;
+                this.showCauseKo = false;
+            } else if (etat != null && etat.code == 'ko') {
+                this.showCauseKo = true;
+                this.showCodeDecharge = false;
+            }
+    }
+
+    public changeEtatKoscOrdre() {
+        let etat = this.selectedOrdreKosc.etatDemandeKoscVo;
+        if (etat != null && etat.code == 'ok') {
+            this.genereCodeDecharge();
+            this.selectedOrdreKosc.causeKoOkVo = null;
+            this.showCodeDecharge = true;
+            this.showCauseKo = false;
+        } else if (etat != null && etat.code == 'ko') {
+            this.selectedOrdreKosc.codeDecharge = null;
+            this.showCauseKo = true;
+            this.showCodeDecharge = false;
+        }
+    }
+
+    private genereCodeDecharge() {
+        let now = new Date();
+        let codeDecharge = 'D' + moment(now).format('yyMMDD').slice(-6) + '-MN' + this.selectedOrdreKosc.id;
+        this.selectedOrdreKosc.codeDecharge = codeDecharge;
+    }
+
 
     public editWithShowOption(showList: boolean) {
         this.ordreKoscService.edit().subscribe(ordreKosc => {
@@ -753,5 +793,13 @@ export class OrdreKoscSuiviCddEditAdminComponent implements OnInit {
         } else {
             this.validOrdreKoscReferenceWorkOrder = true;
         }
+    }
+
+    get causeKoOks(): Array<CauseKoOkVo> {
+        return this.causeKoOkService.causeKoOks;
+    }
+
+    set causeKoOks(value: Array<CauseKoOkVo>) {
+        this.causeKoOkService.causeKoOks = value;
     }
 }

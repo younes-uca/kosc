@@ -119,13 +119,6 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
             : this.messageService.add({severity: 'error', summary: 'erreur', detail: 'problème d\'autorisation'});
     }
 
-    //
-    // public loadOrdreKoscsByAnneeAndMois() {
-    //     this.ordreKoscService.findByAnneAndMoins(this.YearDateRdvDateRdv, this.monthDateRdv).subscribe(ordreKoscs => {
-    //         console.log(ordreKoscs), this.ordreKoscsExport = ordreKoscs, error => console.log(error)
-    //     })
-    //
-    // }
 
     public searchRequest() {
         this.ordreKoscService.findByCriteria(this.searchOrdreKosc).subscribe(ordreKoscs => {
@@ -205,6 +198,7 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
     public async editOrdreKosc(ordreKosc: OrdreKoscVo) {
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'edit');
         if (isPermistted) {
+
             this.ordreKoscService.findByIdWithAssociatedList(ordreKosc).subscribe(res => {
                 this.selectedOrdreKosc = res;
                 this.selectedOrdreKosc.dateDebutTraitement = DateUtils.toDate(ordreKosc.dateDebutTraitement);
