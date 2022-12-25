@@ -40,6 +40,7 @@ public class OrdreKoscRestAdmin {
     @Autowired
     private OrdreKoscAdminService ordreKoscService;
 
+
     @Autowired
     private OrdreKoscPriseRdvAdminService ordreKoscPriseRdvService;
     @Autowired
@@ -632,6 +633,7 @@ public class OrdreKoscRestAdmin {
     @GetMapping("/find-by-year-month/year/{annee}/month/{mois}")
     public List<OrdreKoscVo> findByYearAndMonth(@PathVariable int annee, @PathVariable int mois) {
         return ordreKoscConverter.toVo(ordreKoscService.findByYearAndMonth(annee, mois));
+
 
     }
 }

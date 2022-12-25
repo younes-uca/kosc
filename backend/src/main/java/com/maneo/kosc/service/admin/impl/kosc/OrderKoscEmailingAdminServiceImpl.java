@@ -1,5 +1,4 @@
 package com.maneo.kosc.service.admin.impl.kosc;
-
 import com.maneo.kosc.bean.kosc.OrdreKosc;
 import com.maneo.kosc.bean.template.EmailDetails;
 import com.maneo.kosc.dao.kosc.OrdreKoscDao;
@@ -15,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+
 @Service
 public class OrderKoscEmailingAdminServiceImpl implements OrderKoscEmailingAdminService {
     @Autowired
@@ -26,7 +26,6 @@ public class OrderKoscEmailingAdminServiceImpl implements OrderKoscEmailingAdmin
     private EmailSenderAdminService emailSenderAdminService;
 
     Date now = new Date();
-
 
     private void setEmails(OrdreKosc ordreKosc){
         if (ordreKosc.getToClientInjoinable() != null){
@@ -402,9 +401,10 @@ public class OrderKoscEmailingAdminServiceImpl implements OrderKoscEmailingAdmin
         emailDetails.setTo(ordreKosc.getToCri());
         emailDetails.setObjet(ordreKosc.getObjetCri());
         emailDetails.setCorps(ordreKosc.getCorpsCri());
+        emailDetails.setAttachment(ordreKosc.getCorpsCri());
         try {
 
-            emailSenderAdminService.sendEmail(emailDetails);
+            emailSenderAdminService.sendMailWithAttachment(emailDetails);
             ordreKosc.setEnvoyeCri(true);
             ordreKosc.setDateEnvoiCri(now);
 
@@ -500,6 +500,7 @@ public class OrderKoscEmailingAdminServiceImpl implements OrderKoscEmailingAdmin
 
 
     }
+
 
 
 }

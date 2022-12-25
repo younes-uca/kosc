@@ -77,6 +77,7 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
     items: MenuItem[];
 
     home: MenuItem;
+    calander : Calendar;
 
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
         , private operatorService: OperatorService

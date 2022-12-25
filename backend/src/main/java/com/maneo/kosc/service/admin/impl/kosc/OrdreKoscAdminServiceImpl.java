@@ -24,6 +24,7 @@ import com.maneo.kosc.service.admin.facade.template.*;
 import com.maneo.kosc.ws.rest.provided.vo.StatisticResultVo;
 import com.maneo.kosc.ws.rest.provided.vo.StatisticVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -1210,6 +1211,12 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
         ordreKosc.setClient(loadedClient);
     } */
 
+    @Scheduled(cron = "0 */5 * ? * *")
+    public void scheduleTaskUsingCronExpression() {
 
+        long now = System.currentTimeMillis() / 1000;
+        System.out.println(
+                "schedule tasks using cron jobs - " + now);
+    }
 }
 

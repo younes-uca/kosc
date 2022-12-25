@@ -52,6 +52,8 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
     _validTemplateEmailPlanificationLibelle = true;
     _validOrdreKoscToCri = true;
     _validTechnicienIdentifiant = true;
+    uploadedFiles: any[] = [];
+
 
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService
         , private stringUtilService: StringUtilService
@@ -66,7 +68,13 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
         , private causeKoOkService: CauseKoOkService) {
 
     }
+    onUpload(event) {
+        for(let file of event.files) {
+            this.uploadedFiles.push(file);
+        }
 
+        this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+    }
     public changeEtatKoscOrdre() {
         let etat = this.selectedOrdreKosc.etatDemandeKoscVo;
         if (etat != null && etat.code == 'ok') {
