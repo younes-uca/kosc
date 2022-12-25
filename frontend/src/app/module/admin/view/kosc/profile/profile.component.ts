@@ -23,11 +23,11 @@ export class ProfileComponent implements OnInit {
       this.CurrentUser();
   }
 
-   CurrentUser(){
+    CurrentUser(){
     const tokenDecoded = this.tokenService.decode();
     const username = tokenDecoded.sub;
     this.userService.findByUsername(username).subscribe(user =>{
-        this._user=user;
+        this.user=user;
         }
     )
 

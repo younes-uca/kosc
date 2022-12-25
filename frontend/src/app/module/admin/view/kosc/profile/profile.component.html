@@ -8,21 +8,21 @@
         <div class="forms" *ngIf="!showEdit">
             <div class="inputs">
     <span>Prénom</span>
-    <input type="text" readonly value="{{user.prenom}}">
+    <input type="text" readonly value="{{user.prenom != null ? user.prenom:'undefined'}}">
 </div> <div class="inputs">
     <span>Nom</span>
-    <input type="text" readonly value="{{user.nom}}">
+    <input type="text" readonly value="{{user.nom!= null ? user.nom:'undefined'}}">
 </div> 
       <div class="inputs">
     <span>Email</span>
-    <input type="text" readonly value="{{user.email}}"> </div>
+    <input type="text" readonly value="{{user.email!= null ? user.email:'undefined'}}"> </div>
     <div class="inputs">
         <span>Login</span>
-        <input type="text" readonly value="{{user.username}}" [(ngModel)]="user.username">
+        <input type="text" readonly value="{{user.username!= null ? user.username:'undefined'}}">
     </div>
   <div class="inputs">
         <span>Role</span>
-        <input type="text" readonly value="{{user.roles[0]?.authority}}">
+        <input type="text" readonly value="{{user.roles[0]?.authority!= null ? user.roles[0]?.authority:'undefined'}}">
     </div>
         </div>
 
@@ -30,17 +30,17 @@
         <div class="forms" *ngIf="showEdit">
             <div class="inputs">
                 <span>Prénom</span>
-                <input type="text"  value="{{user.prenom}}"  [(ngModel)]="user.prenom">
+                <input type="text"   [(ngModel)]="user.prenom">
             </div> <div class="inputs">
             <span>Nom</span>
-            <input type="text"  value="{{user.nom}}"  [(ngModel)]="user.nom">
+            <input type="text"    [(ngModel)]="user.nom">
         </div>
             <div class="inputs">
                 <span>Email</span>
-                <input type="text"  value="{{user.email}}"  [(ngModel)]="user.email"> </div>
+                <input type="text"   [(ngModel)]="user.email"> </div>
             <div class="inputs">
                 <span>Login</span>
-                <input type="text"  value="{{user.username}}" [(ngModel)]="user.username">
+                <input type="text"   [(ngModel)]="user.username">
             </div>
             <div class="inputs">
                 <span>Mot de Passe</span>
