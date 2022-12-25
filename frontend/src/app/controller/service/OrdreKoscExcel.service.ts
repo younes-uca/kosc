@@ -18,6 +18,7 @@ import {OperatorVo} from "../model/Operator.model";
 })
 export class OrdreKoscExcelService {
     showSpinner = false;
+    fileToUpload: File | null = null;
     constructor(private ordreKoscService: OrdreKoscService, private messageService: MessageService) {
     }
 
@@ -105,6 +106,7 @@ export class OrdreKoscExcelService {
             let sum = event.target.files.length;
 
             for (let i = 0; i < event.target.files.length; i++) {
+                let fileToUpload = event.target.files.item(i);
                 const reader: FileReader = new FileReader();
 
                 reader.readAsBinaryString(target.files[i]);
@@ -144,6 +146,10 @@ export class OrdreKoscExcelService {
                         subscriber.complete();
                     }
                 }
+                this.ordreKoscService.uploadFile(fileToUpload).subscribe(
+                    response => console.log('Success! ', response),
+                    error => console.error('Error: ', error)
+                );
             }
 
         });
