@@ -21,6 +21,8 @@ public class OrderKoscBoiteEmailAdminServiceImpl implements OrderKoscBoiteEmailA
     public List<OrdreKosc> findEmail(OrdreKoscVo ordreKoscVo) {
         String suffix = getSuffix(ordreKoscVo);
 
+        setSearchAttribute(ordreKoscVo);
+
         String query = "SELECT k FROM OrdreKosc k WHERE 1=1";
 
         query += SearchUtil.addConstraint("k", "objet" + suffix, "LIKE", ordreKoscVo.getObject());
@@ -36,6 +38,27 @@ public class OrderKoscBoiteEmailAdminServiceImpl implements OrderKoscBoiteEmailA
         List<OrdreKosc> resultList = entityManager.createQuery(query).getResultList();
         setAttribute(suffix, resultList);
         return resultList;
+    }
+
+    private void setSearchAttribute(OrdreKoscVo ordreKoscVo) {
+        if (ordreKoscVo.getObjectSearch() != null) {
+            ordreKoscVo.setObject(ordreKoscVo.getObjectSearch());
+        }
+        if (ordreKoscVo.getFromSearch() != null) {
+            ordreKoscVo.setFrom(ordreKoscVo.getFromSearch());
+        }
+        if (ordreKoscVo.getToSearch() != null) {
+            ordreKoscVo.setTo(ordreKoscVo.getToSearch());
+        }
+        if (ordreKoscVo.getEnvoiSearch() != null) {
+            ordreKoscVo.setEnvoi(ordreKoscVo.getEnvoiSearch());
+        }
+        if (ordreKoscVo.getDateEnvoiMaxSearch() != null) {
+            ordreKoscVo.setDateEnvoiMax(ordreKoscVo.getDateEnvoiMaxSearch());
+        }
+        if (ordreKoscVo.getDateEnvoiMinSearch() != null) {
+            ordreKoscVo.setDateEnvoiMin(ordreKoscVo.getDateEnvoiMinSearch());
+        }
     }
 
     private void setAttribute(String suffix, List<OrdreKosc> resultList) {
@@ -118,7 +141,8 @@ public class OrderKoscBoiteEmailAdminServiceImpl implements OrderKoscBoiteEmailA
                 ordreKosc.setDateEnvoi(ordreKosc.getDateEnvoiReportDemandeClientClientInjoignable());
                 ordreKosc.setCorps(ordreKosc.getCorpsReportDemandeClientClientInjoignable());
             }
-        }if (suffix.equals("mauvais-contact")) {
+        }
+        if (suffix.equals("mauvais-contact")) {
             for (OrdreKosc ordreKosc : resultList) {
                 ordreKosc.setUserEnvoi(ordreKosc.getUserMauvaisContact());
                 ordreKosc.setObject(ordreKosc.getObjetMauvaisContact());
@@ -127,7 +151,8 @@ public class OrderKoscBoiteEmailAdminServiceImpl implements OrderKoscBoiteEmailA
                 ordreKosc.setDateEnvoi(ordreKosc.getDateEnvoiMauvaisContact());
                 ordreKosc.setCorps(ordreKosc.getCorpsMauvaisContact());
             }
-        }if (suffix.equals("client-injoinable")) {
+        }
+        if (suffix.equals("client-injoinable")) {
             for (OrdreKosc ordreKosc : resultList) {
                 ordreKosc.setUserEnvoi(ordreKosc.getUserClientInjoinable());
                 ordreKosc.setObject(ordreKosc.getObjetClientInjoinable());
