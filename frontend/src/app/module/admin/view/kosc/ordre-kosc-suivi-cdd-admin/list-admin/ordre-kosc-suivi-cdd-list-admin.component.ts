@@ -128,10 +128,6 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
         }, error => console.log(error));
     }
 
-    ngAfterViewInit(): void {
-        this.searchRequestSuiviCdd();
-    }
-
     ngOnInit(): void {
 
         this.items = [
@@ -190,6 +186,7 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
             label: 'Non',
             value: 0
         }];
+        this.ordreKoscs = new Array<OrdreKoscVo>();
     }
 
     public showExportByYearDateRdvAndMonthDateRdv() {

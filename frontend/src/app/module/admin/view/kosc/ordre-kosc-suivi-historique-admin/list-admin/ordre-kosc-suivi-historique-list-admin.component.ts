@@ -143,12 +143,6 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
 
     }
 
-
-
-    ngAfterViewInit(): void {
-        this.searchRequestCdd();
-    }
-
     ngOnInit(): void {
 
         this.items = [
@@ -219,6 +213,7 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
             label: 'Non',
             value: 0
         }];
+        this.ordreKoscs = new Array<OrdreKoscVo>();
     }
 
     // methods
@@ -992,11 +987,11 @@ export class OrdreKoscSuiviHistoriqueListAdminComponent implements OnInit {
     }
 
     get ordreKoscs(): Array<OrdreKoscVo> {
-        return this.ordreKoscService.ordreKoscsSuiviCdd;
+        return this.ordreKoscService.ordreKoscsSuiviHistoriqueCdd;
     }
 
     set ordreKoscs(value: Array<OrdreKoscVo>) {
-        this.ordreKoscService.ordreKoscsSuiviCdd = value;
+        this.ordreKoscService.ordreKoscsSuiviHistoriqueCdd = value;
     }
 
     get ordreKoscSelections(): Array<OrdreKoscVo> {

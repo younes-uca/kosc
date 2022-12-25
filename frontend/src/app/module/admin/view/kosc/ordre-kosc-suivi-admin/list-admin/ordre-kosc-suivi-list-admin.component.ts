@@ -234,7 +234,7 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
             label: 'Non',
             value: 0
         }];
-        this.searchRequestSuiviRdv();
+        this.ordreKoscs = new Array<OrdreKoscVo>();
     }
 
     // methods
@@ -274,14 +274,6 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
         isPermistted ? this.ordreKoscService.findSuivi().subscribe(ordreKoscs => this.ordreKoscs = ordreKoscs, error => console.log(error))
             : this.messageService.add({severity: 'error', summary: 'erreur', detail: 'problème d\'autorisation'});
-    }
-
-    public searchRequest() {
-        this.ordreKoscService.findSuiviByCriteria(this.searchOrdreKosc).subscribe(ordreKoscs => {
-
-            this.ordreKoscs = ordreKoscs;
-
-        }, error => console.log(error));
     }
 
     public async editOrdreKosc(ordreKosc: OrdreKoscVo) {
