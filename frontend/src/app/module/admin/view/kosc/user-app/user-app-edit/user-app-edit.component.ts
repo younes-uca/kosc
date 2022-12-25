@@ -15,11 +15,16 @@ export class UserAppEditComponent implements OnInit {
     readonly emailValidationRegex = environment.emailValidation;
     _validEmailUser = true;
     private _errorMessages = new Array<string>();
+    password: string;
+    confirmPassword: string;
+    isMatch: boolean = true;
+
 
     constructor(private userService: UserService, private messageService: MessageService, private stringUtilService: StringUtilService) {
     }
 
     ngOnInit(): void {
+        this.initVariables();
 
     }
 
@@ -71,6 +76,7 @@ export class UserAppEditComponent implements OnInit {
     editUserSubmit() {
         this.validateForm();
             this.submitted = true;
+            console.log(this.user.password)
             this.userService.update(this.user);
         this.userEditDialog = false;
         }
@@ -82,11 +88,15 @@ export class UserAppEditComponent implements OnInit {
             this.validEmailUser = false;
         } else {
             this.validEmailUser = true;
+
         }
     }
 
     private validateForm(): void {
         this.errorMessages = new Array<string>();
+        if(this.password!=null && this.password.length!=0){
+            this.changePassword();
+        }
         this.validateEmailUser();
 
     }
@@ -168,5 +178,27 @@ export class UserAppEditComponent implements OnInit {
 
     set errorMessages(value: string[]) {
         this._errorMessages = value;
+    }
+
+    changePassword() {
+if(this.password===this.confirmPassword){
+    this.user.password=this.password;
+    this.isMatch=true;
+}else{
+    this.isMatch=false;
+    this.errorMessages.push('les mots de passe sont incompatible');
+    this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'les Mots de Passe sont incompatible'
+    })
+}
+
+    }
+
+    private initVariables() {
+        this.password='';
+        this.confirmPassword='';
+        this.isMatch=true;
     }
 }

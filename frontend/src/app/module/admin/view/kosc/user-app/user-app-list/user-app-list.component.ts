@@ -348,7 +348,7 @@ export class UserAppListComponent implements OnInit {
     }
 
 
-    private openCreateDialog() {
+     openCreateDialog() {
         this.userDialogTitle = 'Ajouter un utilisateur';
         this.userCreateDialog = true;
         this.user = new User();

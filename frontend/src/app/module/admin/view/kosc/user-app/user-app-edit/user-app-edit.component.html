@@ -27,7 +27,7 @@
                         <small class='p-error' *ngIf='!validEmailUser'>Email est obligatoire.</small>
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="Username">Username</label>
+                        <label for="Username">Login</label>
                         <input class="p-mb-2 p-mr-2" type="text" maxlength="30" pInputText placeholder="Username"
                                [(ngModel)]="user.username" id="Username">
                     </div>
@@ -52,8 +52,15 @@
                     <div class="p-field p-col-12 p-md-3">
                         <label for="Password">Password</label>
                         <input class="p-mb-2 p-mr-2" type="password" pPassword placeholder="Password"
-                               [(ngModel)]="user.password" id="Password"
+                               [(ngModel)]="password" id="Password"
                         >
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="Confirmer Password">Confirmer Password</label>
+                        <input class="p-mb-2 p-mr-2" type="password" pPassword placeholder="Confirmer Password"
+                               [(ngModel)]="confirmPassword" id="Confirmer Password" [ngClass]="{'ng-invalid ng-dirty' : !isMatch}"
+                        >
+                        <small class='p-error' *ngIf='!isMatch'>les mots de passe sont incompatible</small>
                     </div>
                 </div>
             </p-tabPanel>
