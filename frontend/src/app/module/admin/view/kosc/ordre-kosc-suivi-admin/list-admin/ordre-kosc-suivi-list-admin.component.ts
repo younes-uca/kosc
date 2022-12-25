@@ -276,14 +276,6 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
             : this.messageService.add({severity: 'error', summary: 'erreur', detail: 'problème d\'autorisation'});
     }
 
-    public searchRequest() {
-        this.ordreKoscService.findSuiviByCriteria(this.searchOrdreKosc).subscribe(ordreKoscs => {
-
-            this.ordreKoscs = ordreKoscs;
-
-        }, error => console.log(error));
-    }
-
     public async editOrdreKosc(ordreKosc: OrdreKoscVo) {
 
         const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'edit');
