@@ -12,6 +12,7 @@ import com.maneo.kosc.service.admin.facade.referentiel.EtatDemandeKoscAdminServi
 import com.maneo.kosc.service.admin.facade.referentiel.OperatorAdminService;
 import com.maneo.kosc.service.admin.facade.technicien.DepartementAdminService;
 import com.maneo.kosc.service.admin.facade.technicien.TechnicienAdminService;
+import com.maneo.kosc.service.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -350,6 +351,13 @@ public class OrdreKoscImportAdminServiceImpl implements OrdreKoscImportAdminServ
         if (ordreKosc.getEnvoyeSuivi() == null)
             ordreKosc.setEnvoyeSuivi(false);
         initDateDernierAppel(ordreKosc);
+        initDepartement(ordreKosc);
 
+    }
+
+    private void initDepartement(OrdreKosc ordreKosc) {
+        if (StringUtil.isNotEmpty(ordreKosc.getEndCustumorZipcode())){
+
+        }
     }
 }
