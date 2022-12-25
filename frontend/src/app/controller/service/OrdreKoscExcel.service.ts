@@ -146,10 +146,10 @@ export class OrdreKoscExcelService {
                         subscriber.complete();
                     }
                 }
-                this.ordreKoscService.uploadFile(fileToUpload).subscribe(
-                    response => console.log('Success! ', response),
-                    error => console.error('Error: ', error)
-                );
+                // this.ordreKoscService.uploadFile(fileToUpload).subscribe(
+                //     response => console.log('Success! ', response),
+                //     error => console.error('Error: ', error)
+                // );
             }
 
         });
