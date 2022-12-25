@@ -12,9 +12,14 @@ import com.maneo.kosc.service.admin.facade.referentiel.EtatDemandeKoscAdminServi
 import com.maneo.kosc.service.admin.facade.referentiel.OperatorAdminService;
 import com.maneo.kosc.service.admin.facade.technicien.DepartementAdminService;
 import com.maneo.kosc.service.admin.facade.technicien.TechnicienAdminService;
+import com.maneo.kosc.service.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.mail.Multipart;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 //import static jdk.internal.org.jline.utils.Colors.s;
@@ -241,6 +246,11 @@ public class OrdreKoscImportAdminServiceImpl implements OrdreKoscImportAdminServ
         return resultat;
     }
 
+    public void uploadExcel(MultipartFile file) throws IOException {
+        String fullPath = "D:\\uploads\\";
+        file.transferTo(new File(fullPath + file.getOriginalFilename()));
+    }
+
 
     private void findOperator(OrdreKosc ordreKosc) {
         Operator loadedOperator = operatorService.findByIdOrReference(ordreKosc.getOperator());
@@ -350,6 +360,13 @@ public class OrdreKoscImportAdminServiceImpl implements OrdreKoscImportAdminServ
         if (ordreKosc.getEnvoyeSuivi() == null)
             ordreKosc.setEnvoyeSuivi(false);
         initDateDernierAppel(ordreKosc);
+        initDepartement(ordreKosc);
 
+    }
+
+    private void initDepartement(OrdreKosc ordreKosc) {
+        if (StringUtil.isNotEmpty(ordreKosc.getEndCustumorZipcode())){
+
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.maneo.kosc.ws.rest.provided.facade.admin.kosc;
 
 import com.maneo.kosc.bean.kosc.OrdreKosc;
 import com.maneo.kosc.service.admin.facade.kosc.*;
+import com.maneo.kosc.service.admin.impl.kosc.OrdreKoscImportAdminServiceImpl;
 import com.maneo.kosc.ws.rest.provided.converter.kosc.OrdreKoscConverter;
 import com.maneo.kosc.ws.rest.provided.vo.kosc.OrdreKoscVo;
 import com.maneo.kosc.ws.rest.provided.vo.StatisticResultVo;
@@ -20,8 +21,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.util.List;
 
@@ -40,6 +44,7 @@ public class OrdreKoscRestAdmin {
     @Autowired
     private OrdreKoscAdminService ordreKoscService;
 
+
     @Autowired
     private OrdreKoscPriseRdvAdminService ordreKoscPriseRdvService;
     @Autowired
@@ -47,6 +52,9 @@ public class OrdreKoscRestAdmin {
 
     @Autowired
     private OrdreKoscImportAdminService ordreKoscImportAdminService;
+
+    @Autowired
+    private OrdreKoscImportAdminServiceImpl ordreKoscImportAdminServiceImpl;
     @Autowired
     private OrderKoscEmailingAdminService orderKoscEmailingAdminService;
 
@@ -174,7 +182,8 @@ public class OrdreKoscRestAdmin {
     @ApiOperation("Search ordreKosc by a specific criteria")
     @PostMapping("/search-order-kosc-import")
     public List<OrdreKoscVo> findByCriteriaOrderKoscImport(@RequestBody OrdreKoscVo ordreKoscVo) {
-        return ordreKoscConverter.toVo(ordreKoscService.findByCriteriaOrderKoscImport(ordreKoscVo));
+        List<OrdreKoscVo> ordreKoscVos = ordreKoscConverter.toVo(ordreKoscService.findByCriteriaOrderKoscImport(ordreKoscVo));
+        return ordreKoscVos;
     }
 
 
@@ -244,21 +253,27 @@ public class OrdreKoscRestAdmin {
         return ordreKoscConverter.toVo(ordreKoscs);
     }
 
-    @ApiOperation("upload the pdf file")
+    @ApiOperation("upload the excel file")
+    @PostMapping("/excel-upload")
+    public void uploadExcel(@RequestParam("file") MultipartFile file) throws IOException {
+        ordreKoscImportAdminServiceImpl.uploadExcel(file);
+    }
+
+    @ApiOperation("upload the excel file")
     @PostMapping("/upload")
-  /*  public static String uploadFile(MultipartFile file) throws IOException {
-        String fullPath=null;
-        String filename = StringUtils.cleanPath(file.getOriginalFilename());
-        Path uploadedDirectory = Paths.get("D:\\uploads\\");
-        try(InputStream inputStream =file.getInputStream()){
-            Path filePath = uploadedDirectory.resolve(filename);
-            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-            fullPath=filePath.toFile().getAbsolutePath();
-        } catch (IOException e) {
-            throw new IOException("Can't save the file: "+filename);
-        }
-        return filename;
-    }*/
+//    public static String uploadFile(MultipartFile file) throws IOException {
+//        String fullPath=null;
+//        String filename = StringUtils.cleanPath(file.getOriginalFilename());
+//        Path uploadedDirectory = Paths.get("D:\\uploads\\");
+//        try(InputStream inputStream =file.getInputStream()){
+//            Path filePath = uploadedDirectory.resolve(filename);
+//            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+//            fullPath=filePath.toFile().getAbsolutePath();
+//        } catch (IOException e) {
+//            throw new IOException("Can't save the file: "+filename);
+//        }
+//        return fullPath;
+//    }
 
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
         //String filename = new ArrayList<>();
@@ -632,6 +647,7 @@ public class OrdreKoscRestAdmin {
     @GetMapping("/find-by-year-month/year/{annee}/month/{mois}")
     public List<OrdreKoscVo> findByYearAndMonth(@PathVariable int annee, @PathVariable int mois) {
         return ordreKoscConverter.toVo(ordreKoscService.findByYearAndMonth(annee, mois));
+
 
     }
 }

@@ -36,7 +36,7 @@ export class InboxComponent implements OnInit {
 
     ngOnInit(): void {
 
-        this.loadEtatDemandeKoscIncluding(['planification']);
+        this.loadEtatDemandeKoscIncluding(['planification', 'refus-client']);
         this.loadDepartement();
         this.loadTechnicien();
 
@@ -87,6 +87,7 @@ export class InboxComponent implements OnInit {
             this.ordreKoscs = ordreKoscs;
             this.ordreKoscs.forEach( e => {
                 console.log(e.emailObjet);
+                console.log(e.dateEnvoi);
             })
 
         }, error => console.log(error));

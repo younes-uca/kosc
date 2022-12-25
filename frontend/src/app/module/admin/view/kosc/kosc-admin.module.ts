@@ -426,6 +426,8 @@ import {
     TemplateEmailReportDemandeClientClientJoignableListAdminComponent
 } from "./template-email-report-demande-client-client-joignable-admin/list-admin/template-email-report-demande-client-client-joignable-list-admin.component";
 import {RoleListComponent} from "./role-list/role-list.component";
+
+import {FileUploadModule} from "primeng/fileupload";
 import { InboxComponent } from './inbox/inbox.component';
 import {CustomCardComponent} from "./user-app/custom-card/custom-card.component";
 import {UserAppAddComponent} from "./user-app/user-app-add/user-app-add.component";
@@ -437,7 +439,6 @@ import {EmailingEditAdminComponent} from "./emailing-admin/edit-admin/emailing-e
 import {EmailingListAdminComponent} from "./emailing-admin/list-admin/emailing-list-admin.component";
 import {EmailingViewAdminComponent} from "./emailing-admin/view-admin/emailing-view-admin.component";
 import {EmailingAdminComponent} from "./emailing-admin/emailing-admin.component";
-
 
 
 
@@ -667,6 +668,7 @@ import {EmailingAdminComponent} from "./emailing-admin/emailing-admin.component"
         ProgressSpinnerModule,
         BlockUIModule,
         BreadcrumbModule,
+        FileUploadModule,
 
     ],
     exports: [

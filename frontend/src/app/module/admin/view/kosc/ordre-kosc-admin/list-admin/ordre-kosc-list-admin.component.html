@@ -1,4 +1,3 @@
-
 <p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
 
 
@@ -8,14 +7,18 @@
         <div class="card">
             <p-toolbar styleClass="p-mb-4">
                 <ng-template pTemplate="left">
-<!--                    <button pButton pRipple label="Nouveau" icon="pi pi-plus" class="p-button-success p-mr-2 p-mb-2"-->
-<!--                            (click)="openCreateOrdreKosc('orderKosc')"></button>-->
+                    <!--                    <button pButton pRipple label="Nouveau" icon="pi pi-plus" class="p-button-success p-mr-2 p-mb-2"-->
+                    <!--                            (click)="openCreateOrdreKosc('orderKosc')"></button>-->
 
 
                     <button pButton pRipple label="Chercher"
                             icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}"
                             class="p-button-success p-mr-2 p-mb-2"
                             (click)="this.findByCriteriaShow = !this.findByCriteriaShow"></button>
+
+                    <button pButton pRipple label="Actualiser" icon="pi pi-refresh" class="p-button-success p-mr-2 p-mb-2"
+                            (click)="searchRequest()"></button>
+
                 </ng-template>
                 <ng-template pTemplate="right">
                     <div class="flex">
@@ -45,35 +48,35 @@
                                    (change)="importerDataBase($event)" #fileUpload>
                         </button>
 
-<!--                        <p-dialog [(visible)]="showSpinner" [showHeader]="false" [resizable]="false" [modal]="true" [focusOnShow]="false">-->
+                        <!--                        <p-dialog [(visible)]="showSpinner" [showHeader]="false" [resizable]="false" [modal]="true" [focusOnShow]="false">-->
 
-                        <div  *ngIf="showSpinner" class="my-spinner">
+                        <div *ngIf="showSpinner" class="my-spinner">
                             <p-progressSpinner
-                                               [style]="{width: '60px', height: '60px' }"
-                                               styleClass="custom-spinner" strokeWidth="8" fill="#EEEEEE"
-                                               animationDuration=".5s"></p-progressSpinner>
+                                    [style]="{width: '60px', height: '60px' }"
+                                    styleClass="custom-spinner" strokeWidth="8" fill="#EEEEEE"
+                                    animationDuration=".5s"></p-progressSpinner>
                         </div>
 
-<!--                        </p-dialog>-->
+                        <!--                        </p-dialog>-->
 
 
                         <!--  <ng-template pTemplate="footer">
                               <p-button  (click)="display=false" label="Close" styleClass="p-button-text"></p-button>
                           </ng-template>
                       </p-dialog> -->
-<!--                        <button type="button" class="btn-rex p-mr-2 p-mb-2" style="background-color: #95a400">-->
-<!--                            <i class="pi pi-plus"></i>&nbsp;Importer Ftel-->
-<!--                            <input type="file" class="file-input"-->
-<!--                                   accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"-->
-<!--                                   (change)="readFtel($event)" #fileUpload>-->
-<!--                        </button>-->
-<!--                        <button type="button" class="btn-rex p-mr-2 p-mb-2" style="background-color: #b73106">-->
-<!--                            <i class="pi pi-plus"></i>&nbsp;Importer E-Rdv-->
-<!--                            <input type="file" class="file-input"-->
-<!--                                   accept=".csv, app
-lication/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"-->
-<!--                                   (change)="readERdv($event)" #fileUpload>-->
-<!--                        </button>-->
+                        <!--                        <button type="button" class="btn-rex p-mr-2 p-mb-2" style="background-color: #95a400">-->
+                        <!--                            <i class="pi pi-plus"></i>&nbsp;Importer Ftel-->
+                        <!--                            <input type="file" class="file-input"-->
+                        <!--                                   accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"-->
+                        <!--                                   (change)="readFtel($event)" #fileUpload>-->
+                        <!--                        </button>-->
+                        <!--                        <button type="button" class="btn-rex p-mr-2 p-mb-2" style="background-color: #b73106">-->
+                        <!--                            <i class="pi pi-plus"></i>&nbsp;Importer E-Rdv-->
+                        <!--                            <input type="file" class="file-input"-->
+                        <!--                                   accept=".csv, app
+                        lication/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"-->
+                        <!--                                   (change)="readERdv($event)" #fileUpload>-->
+                        <!--                        </button>-->
                         <!-- <p-button label="Importer Ftel" icon="pi pi-plus" styleClass="p-button-help p-mr-2 p-mb-2" (onClick)="readFtel($event)" ></p-button> -->
                     </div>
                 </ng-template>
@@ -692,7 +695,8 @@ lication/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.
                                  </span>
 
                     <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
-                                     <p-dropdown id="390" [options]="yesOrNoConfort" [(ngModel)]="searchOrdreKosc.confort"
+                                     <p-dropdown id="390" [options]="yesOrNoConfort"
+                                                 [(ngModel)]="searchOrdreKosc.confort"
                                                  [filter]="false" [showClear]="true" placeholder="Confort"
                                                  optionLabel="label" optionValue="value">
                                      </p-dropdown>
@@ -703,7 +707,7 @@ lication/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.
                     <p-multiSelect [options]="etatDemandeKoscs"
                                    [(ngModel)]="searchOrdreKosc.etatDemandeKoscVos"
                                    defaultLabel="Etat demande kosc"
-                                   optionLabel="libelle" [virtualScroll]="false" ></p-multiSelect>
+                                   optionLabel="libelle" [virtualScroll]="false"></p-multiSelect>
                               </span>
                     <!--
 
@@ -1204,16 +1208,14 @@ lication/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.
                                                  <label for="186-2">Date envoi client injoinable kosc Max</label>
                                              </span> -->
 
-<!--                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
-<!--                                 <p-dropdown [options]="etatDemandeKoscs"-->
-<!--                                             [(ngModel)]="searchOrdreKosc.etatDemandeKoscVo"-->
-<!--                                             id="189"-->
-<!--                                             [filter]="true" [showClear]="true" placeholder="Etat demande kosc"-->
-<!--                                             optionLabel="libelle">-->
-<!--                                 </p-dropdown>-->
-<!--                             </span>-->
-
-
+                    <!--                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">-->
+                    <!--                                 <p-dropdown [options]="etatDemandeKoscs"-->
+                    <!--                                             [(ngModel)]="searchOrdreKosc.etatDemandeKoscVo"-->
+                    <!--                                             id="189"-->
+                    <!--                                             [filter]="true" [showClear]="true" placeholder="Etat demande kosc"-->
+                    <!--                                             optionLabel="libelle">-->
+                    <!--                                 </p-dropdown>-->
+                    <!--                             </span>-->
 
 
                     <!--
@@ -1359,21 +1361,20 @@ lication/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.
                         </th>
 
 
-                 <!--       <th pSortableColumn="codeDecharge">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>Code decharge</span>
-                                <p-sortIcon field="codeDecharge"></p-sortIcon>
-                                <p-columnFilter type="text" field="ordreKosc.codeDecharge" display="menu"
-                                                class="ml-auto"></p-columnFilter>
-                            </div>
-                        </th>-->
+                        <!--       <th pSortableColumn="codeDecharge">
+                                   <div class="p-d-flex p-jc-between p-ai-center">
+                                       <span>Code decharge</span>
+                                       <p-sortIcon field="codeDecharge"></p-sortIcon>
+                                       <p-columnFilter type="text" field="ordreKosc.codeDecharge" display="menu"
+                                                       class="ml-auto"></p-columnFilter>
+                                   </div>
+                               </th>-->
                         <th pSortableColumn="submissionDate">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>Submission date</span>
                                 <p-sortIcon field="submissionDate"></p-sortIcon>
                             </div>
                         </th>
-
 
 
                         <th pSortableColumn="supplierServiceCode">
@@ -1386,20 +1387,19 @@ lication/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.
                         </th>
 
 
+                        <!--                        <th pSortableColumn="operator">-->
+                        <!--                            <div class="p-d-flex p-jc-between p-ai-center">-->
+                        <!--                                <span>Operator</span>-->
+                        <!--                                <p-sortIcon field="operator"></p-sortIcon>-->
+                        <!--                            </div>-->
+                        <!--                        </th>-->
 
-<!--                        <th pSortableColumn="operator">-->
-<!--                            <div class="p-d-flex p-jc-between p-ai-center">-->
-<!--                                <span>Operator</span>-->
-<!--                                <p-sortIcon field="operator"></p-sortIcon>-->
-<!--                            </div>-->
-<!--                        </th>-->
-
-<!--                        <th pSortableColumn="technicien">-->
-<!--                            <div class="p-d-flex p-jc-between p-ai-center">-->
-<!--                                <span>Technicien</span>-->
-<!--                                <p-sortIcon field="technicien"></p-sortIcon>-->
-<!--                            </div>-->
-<!--                        </th>-->
+                        <!--                        <th pSortableColumn="technicien">-->
+                        <!--                            <div class="p-d-flex p-jc-between p-ai-center">-->
+                        <!--                                <span>Technicien</span>-->
+                        <!--                                <p-sortIcon field="technicien"></p-sortIcon>-->
+                        <!--                            </div>-->
+                        <!--                        </th>-->
 
 
                         <th pSortableColumn="departement">
@@ -1410,51 +1410,49 @@ lication/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.
                         </th>
 
 
-
-
                         <!--                        <th pSortableColumn="endCustumorName">-->
-<!--                            <div class="p-d-flex p-jc-between p-ai-center">-->
-<!--                                <span>End custumor name</span>-->
-<!--                                <p-sortIcon field="endCustumorName"></p-sortIcon>-->
-<!--                                <p-columnFilter type="text" field="ordreKosc.endCustumorName" display="menu"-->
-<!--                                                class="ml-auto"></p-columnFilter>-->
-<!--                            </div>-->
-<!--                        </th>-->
+                        <!--                            <div class="p-d-flex p-jc-between p-ai-center">-->
+                        <!--                                <span>End custumor name</span>-->
+                        <!--                                <p-sortIcon field="endCustumorName"></p-sortIcon>-->
+                        <!--                                <p-columnFilter type="text" field="ordreKosc.endCustumorName" display="menu"-->
+                        <!--                                                class="ml-auto"></p-columnFilter>-->
+                        <!--                            </div>-->
+                        <!--                        </th>-->
 
 
-<!--                        <th pSortableColumn="endCustumorSiret">-->
-<!--                            <div class="p-d-flex p-jc-between p-ai-center">-->
-<!--                                <span>End custumor siret</span>-->
-<!--                                <p-sortIcon field="endCustumorSiret"></p-sortIcon>-->
-<!--                                <p-columnFilter type="text" field="ordreKosc.endCustumorSiret" display="menu"-->
-<!--                                                class="ml-auto"></p-columnFilter>-->
-<!--                            </div>-->
-<!--                        </th>-->
+                        <!--                        <th pSortableColumn="endCustumorSiret">-->
+                        <!--                            <div class="p-d-flex p-jc-between p-ai-center">-->
+                        <!--                                <span>End custumor siret</span>-->
+                        <!--                                <p-sortIcon field="endCustumorSiret"></p-sortIcon>-->
+                        <!--                                <p-columnFilter type="text" field="ordreKosc.endCustumorSiret" display="menu"-->
+                        <!--                                                class="ml-auto"></p-columnFilter>-->
+                        <!--                            </div>-->
+                        <!--                        </th>-->
 
 
-<!--                        <th pSortableColumn="endCustumorFirstName">-->
-<!--                            <div class="p-d-flex p-jc-between p-ai-center">-->
-<!--                                <span>End custumor first name</span>-->
-<!--                                <p-sortIcon field="endCustumorFirstName"></p-sortIcon>-->
-<!--                                <p-columnFilter type="text" field="ordreKosc.endCustumorFirstName" display="menu"-->
-<!--                                                class="ml-auto"></p-columnFilter>-->
-<!--                            </div>-->
-<!--                        </th>-->
+                        <!--                        <th pSortableColumn="endCustumorFirstName">-->
+                        <!--                            <div class="p-d-flex p-jc-between p-ai-center">-->
+                        <!--                                <span>End custumor first name</span>-->
+                        <!--                                <p-sortIcon field="endCustumorFirstName"></p-sortIcon>-->
+                        <!--                                <p-columnFilter type="text" field="ordreKosc.endCustumorFirstName" display="menu"-->
+                        <!--                                                class="ml-auto"></p-columnFilter>-->
+                        <!--                            </div>-->
+                        <!--                        </th>-->
 
 
-<!--                        <th pSortableColumn="endCustumorLastName">-->
-<!--                            <div class="p-d-flex p-jc-between p-ai-center">-->
-<!--                                <span>End custumor last name</span>-->
-<!--                                <p-sortIcon field="endCustumorLastName"></p-sortIcon>-->
-<!--                                <p-columnFilter type="text" field="ordreKosc.endCustumorLastName" display="menu"-->
-<!--                                                class="ml-auto"></p-columnFilter>-->
-<!--                            </div>-->
-<!--                        </th>-->
+                        <!--                        <th pSortableColumn="endCustumorLastName">-->
+                        <!--                            <div class="p-d-flex p-jc-between p-ai-center">-->
+                        <!--                                <span>End custumor last name</span>-->
+                        <!--                                <p-sortIcon field="endCustumorLastName"></p-sortIcon>-->
+                        <!--                                <p-columnFilter type="text" field="ordreKosc.endCustumorLastName" display="menu"-->
+                        <!--                                                class="ml-auto"></p-columnFilter>-->
+                        <!--                            </div>-->
+                        <!--                        </th>-->
                         <th pSortableColumn="endCustumorLastName">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>End custumor</span>
-                                <p-sortIcon ></p-sortIcon>
-                                <p-columnFilter type="text"  display="menu"
+                                <p-sortIcon></p-sortIcon>
+                                <p-columnFilter type="text" display="menu"
                                                 class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
@@ -1591,8 +1589,6 @@ lication/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.
                         -->
 
 
-
-
                         <!--
                         <th pSortableColumn="company">
                             <div class="p-d-flex p-jc-between p-ai-center">
@@ -1613,9 +1609,6 @@ lication/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.
                             </div>
                         </th>
                         -->
-
-
-
 
 
                         <!--
@@ -2242,10 +2235,6 @@ lication/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.
                             </div>
                         </th>
                         -->
-
-
-
-
 
 
                         <!--
@@ -3315,23 +3304,24 @@ lication/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.
                         </td>
 
 
-<!--                        <td >   <span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.codeDecharge}}</span></td>-->
+                        <!--                        <td >   <span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.codeDecharge}}</span></td>-->
 
-                        <td> <span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.submissionDate | date :'dd/MM/yyyy' }}</span></td>
+                        <td><span
+                                [style]="stylefyConfort(ordreKosc)">{{ordreKosc.submissionDate | date :'dd/MM/yyyy' }}</span>
+                        </td>
 
-                        <td >   <span [style]="stylefyConfort(ordreKosc)"> {{ordreKosc.supplierServiceCode}}</span></td>
+                        <td><span [style]="stylefyConfort(ordreKosc)"> {{ordreKosc.supplierServiceCode}}</span></td>
 
 
+                        <!--                        <td>{{ordreKosc.operatorVo?.libelle}}</td>-->
+                        <!--                        <td>{{ordreKosc.technicienVo?.identifiant}}</td>-->
 
-
-<!--                        <td>{{ordreKosc.operatorVo?.libelle}}</td>-->
-<!--                        <td>{{ordreKosc.technicienVo?.identifiant}}</td>-->
-
-                        <td>   <span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.departementVo?.libelle}}</span></td>
+                        <td><span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.departementVo?.libelle}}</span></td>
                         <td>
-                            <button pButton type="button" (click)="showEndCustumorTab(ordreKosc)" label="{{ordreKosc.endCustumorFirstName}} {{ordreKosc.endCustumorLastName}}" class="p-button-link" [style]="stylefyConfort(ordreKosc)"></button>
-                    </td>
-
+                            <button pButton type="button" (click)="showEndCustumorTab(ordreKosc)"
+                                    label="{{ordreKosc.endCustumorFirstName}} {{ordreKosc.endCustumorLastName}}"
+                                    class="p-button-link" [style]="stylefyConfort(ordreKosc)"></button>
+                        </td>
 
 
                         <!-- <td><span ordreKosc.etatDemandeKoscVo?.code == 'initialisation-erd' ? '':''">{{ordreKosc.etatDemandeKoscVo?.libelle}}</span></td>-->
@@ -3353,22 +3343,19 @@ lication/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.
                         </td>
 
 
-
                         <!--              <td>{{ordreKosc.dateDebutTraitement | date :'dd/MM/yyyy HH:mm' }}</td>-->
 
 
-<!--                        <td>{{ordreKosc.endCustumorName}}</td>-->
+                        <!--                        <td>{{ordreKosc.endCustumorName}}</td>-->
 
 
-<!--                        <td>{{ordreKosc.endCustumorSiret}}</td>-->
+                        <!--                        <td>{{ordreKosc.endCustumorSiret}}</td>-->
 
 
-<!--                        <td>{{ordreKosc.endCustumorFirstName}}</td>-->
+                        <!--                        <td>{{ordreKosc.endCustumorFirstName}}</td>-->
 
 
-<!--                        <td>{{ordreKosc.endCustumorLastName}}</td>        -->
-
-
+                        <!--                        <td>{{ordreKosc.endCustumorLastName}}</td>        -->
 
 
                         <!--                         <td>{{ordreKosc.erdv}}</td>-->
@@ -3659,7 +3646,6 @@ lication/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.
                         <!--
                             <td>{{ordreKosc.connecteurPriseCouleur4}}</td>
                         -->
-
 
 
                         <!--
@@ -4075,17 +4061,17 @@ lication/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.
 
 
                         <td>
-<!--                            <button pButton pRipple icon="pi pi-pencil"-->
-<!--                                    class="p-button-rounded p-button-success p-mr-2"-->
-<!--                                    (click)="editOrdreKosc(ordreKosc)"></button>-->
+                            <!--                            <button pButton pRipple icon="pi pi-pencil"-->
+                            <!--                                    class="p-button-rounded p-button-success p-mr-2"-->
+                            <!--                                    (click)="editOrdreKosc(ordreKosc)"></button>-->
                             <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2"
                                     (click)="viewOrdreKosc(ordreKosc)"></button>
                             <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-mr-2"
                                     (click)="deleteOrdreKosc(ordreKosc)"></button>
 
-<!--                            <button pButton pRipple icon="pi pi-copy"-->
-<!--                                    class="p-button-rounded p-button-raised p-button-warning"-->
-<!--                                    (click)="duplicateOrdreKosc(ordreKosc)"></button>-->
+                            <!--                            <button pButton pRipple icon="pi pi-copy"-->
+                            <!--                                    class="p-button-rounded p-button-raised p-button-warning"-->
+                            <!--                                    (click)="duplicateOrdreKosc(ordreKosc)"></button>-->
                         </td>
                     </tr>
                 </ng-template>

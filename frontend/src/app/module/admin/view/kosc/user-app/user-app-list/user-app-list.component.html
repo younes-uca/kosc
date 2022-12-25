@@ -1,5 +1,5 @@
-<app-badge-card-view
-        ></app-badge-card-view>
+<!--<app-badge-card-view
+        ></app-badge-card-view>-->
 
 <div class="p-grid">
     <div class="p-col-12">
@@ -87,9 +87,9 @@
                             <input pInputText type="text" maxlength="30" placeholder="Chercher..."
                                    />
                         </span>
-                        <app-select-box-sort-table-gestion-equipe-admin *ngIf="isCardDisplayActivated"
-                                                                     >
-                        </app-select-box-sort-table-gestion-equipe-admin>
+<!--                        <app-select-box-sort-table-gestion-equipe-admin *ngIf="isCardDisplayActivated"-->
+<!--                                                                     >-->
+<!--                        </app-select-box-sort-table-gestion-equipe-admin>-->
                     </div>
                 </ng-template>
 
@@ -133,33 +133,33 @@
                             </div>
                         </th>
                         <th>Actions</th>
-                        <th>
+                     <!--   <th>
                             <p-inputSwitch [(ngModel)]="checked"></p-inputSwitch>
-                        </th>
+                        </th>-->
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-user>
 
                     <!--        Blocs cartes        -->
-                    <td class="p-col-fixed" >
-                    <app-custom-card *ngIf="checked" [dateCreation]="user.createdAt"
-                                     [cardTitle]="user.nom + ' ' + user.prenom">
-                        <div card-body>
-                            <ul>
-                                <li><b>{{'username'}} :</b>
-                                    {{user.username}}</li>
-                                <li><b>Email :</b>
-                                    {{user.email}}</li>
-                                <li><b>{{'updatedAt'}}</b>
-                                    {{user.updatedAt | date:'dd/MM/yyyy'}}</li>
-                            </ul>
-                        </div>
-                        <div card-buttons>
-                            <ng-template [ngTemplateOutlet]="boutonsActions"
-                                         [ngTemplateOutletContext]="{user: user}"></ng-template>
-                        </div>
-                    </app-custom-card>
-                    </td>
+<!--                    <td class="p-col-fixed" >-->
+<!--                    <app-custom-card *ngIf="checked" [dateCreation]="user.createdAt"-->
+<!--                                     [cardTitle]="user.nom + ' ' + user.prenom">-->
+<!--                        <div card-body>-->
+<!--                            <ul>-->
+<!--                                <li><b>{{'username'}} :</b>-->
+<!--                                    {{user.username}}</li>-->
+<!--                                <li><b>Email :</b>-->
+<!--                                    {{user.email}}</li>-->
+<!--                                <li><b>{{'updatedAt'}}</b>-->
+<!--                                    {{user.updatedAt | date:'dd/MM/yyyy'}}</li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                        <div card-buttons>-->
+<!--                            <ng-template [ngTemplateOutlet]="boutonsActions"-->
+<!--                                         [ngTemplateOutletContext]="{user: user}"></ng-template>-->
+<!--                        </div>-->
+<!--                    </app-custom-card>-->
+<!--                    </td>-->
                     <!--                    <tr *ngFor="let user of users">-->
                     <tr *ngIf="!checked">
                         <td>

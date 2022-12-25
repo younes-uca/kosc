@@ -343,6 +343,7 @@ export class OrdreKoscListAdminComponent implements OnInit {
     public searchRequest() {
         this.ordreKoscService.findByCriteriaOrderKoscImport(this.searchOrdreKosc).subscribe(ordreKoscs => {
             this.ordreKoscs = ordreKoscs;
+            console.log(this.ordreKoscs);
         }, error => console.log(error));
     }
 
