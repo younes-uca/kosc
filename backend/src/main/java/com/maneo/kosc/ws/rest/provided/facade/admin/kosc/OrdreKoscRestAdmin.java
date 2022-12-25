@@ -175,7 +175,8 @@ public class OrdreKoscRestAdmin {
     @ApiOperation("Search ordreKosc by a specific criteria")
     @PostMapping("/search-order-kosc-import")
     public List<OrdreKoscVo> findByCriteriaOrderKoscImport(@RequestBody OrdreKoscVo ordreKoscVo) {
-        return ordreKoscConverter.toVo(ordreKoscService.findByCriteriaOrderKoscImport(ordreKoscVo));
+        List<OrdreKoscVo> ordreKoscVos = ordreKoscConverter.toVo(ordreKoscService.findByCriteriaOrderKoscImport(ordreKoscVo));
+        return ordreKoscVos;
     }
 
 
