@@ -43,6 +43,7 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
     showSpinner = false;
     blocked = false;
     showCauseKo = false;
+    showCodeDecharge = false;
     _validOrdreKoscReferenceWorkOrder = true;
     _validOperatorReference = true;
     _validOperatorLibelle = true;
@@ -68,22 +69,26 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
         , private causeKoOkService: CauseKoOkService) {
 
     }
+
     onUpload(event) {
-        for(let file of event.files) {
+        for (let file of event.files) {
             this.uploadedFiles.push(file);
         }
 
         this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
     }
+
     public changeEtatKoscOrdre() {
         let etat = this.selectedOrdreKosc.etatDemandeKoscVo;
         if (etat != null && etat.code == 'ok') {
             this.genereCodeDecharge();
             this.selectedOrdreKosc.causeKoOkVo = null;
+            this.showCodeDecharge = true;
             this.showCauseKo = false;
         } else if (etat != null && etat.code == 'ko') {
             this.selectedOrdreKosc.codeDecharge = null;
             this.showCauseKo = true;
+            this.showCodeDecharge = false;
         }
     }
 
@@ -192,6 +197,7 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
         this.editOrdreKoscDialog = false;
         this.setValidation(true);
     }
+
     private updateListe() {
         this.ordreKoscs = this.ordreKoscs.filter(e => e.codeDecharge != null);
         console.log("after update :" + this.ordreKoscs);
@@ -236,16 +242,17 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
     }
 
 
-
 //validation methods
     private validateForm(): void {
         this.errorMessages = new Array<string>();
         //this.validateOrdreKoscReferenceWorkOrder();
 
     }
+
     private setValidation(value: boolean) {
         this.validOrdreKoscReferenceWorkOrder = value;
     }
+
     private validateOrdreKoscObjetCri() {
         if (this.stringUtilService.isEmpty(this.selectedOrdreKosc.objetCri)) {
             this.errorMessages.push('Objet cri non valide');
