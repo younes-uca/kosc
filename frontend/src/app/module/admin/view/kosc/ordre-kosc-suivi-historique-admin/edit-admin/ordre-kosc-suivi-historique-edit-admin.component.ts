@@ -139,7 +139,8 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
             console.log('date backend :' + ordreKosc.datePriseRdv)
             const myIndex = this.ordreKoscs.findIndex(e => e.id === this.selectedOrdreKosc.id);
             this.ordreKoscs[myIndex] = ordreKosc;
-            this.ordreKoscService.deleteIfEtatNotIn(this.searchOrdreKosc.etatDemandeKoscVos, this.ordreKoscs, ordreKosc);
+            this.ordreKoscService.deleteIfEtatNotIn(this.searchOrdreKosc.etatDemandeKoscVos, this.ordreKoscs, this.selectedOrdreKosc);
+            console.log(this.searchOrdreKosc.etatDemandeKoscVos)
             this.updateListe();
             this.editOrdreKoscDialog = false;
             this.submitted = false;
@@ -351,19 +352,19 @@ export class OrdreKoscSuiviHistoriqueEditAdminComponent implements OnInit {
 // getters and setters
 
     get searchOrdreKosc(): OrdreKoscVo {
-        return this.ordreKoscService.searchOrdreKoscSuiviCdd;
+        return this.ordreKoscService.searchOrdreKoscCdd;
     }
 
     set searchordreKosc(value: OrdreKoscVo) {
-        this.ordreKoscService.searchOrdreKoscSuiviCdd = value;
+        this.ordreKoscService.searchOrdreKoscCdd = value;
     }
 
     get ordreKoscs(): Array<OrdreKoscVo> {
-        return this.ordreKoscService.ordreKoscsSuiviCdd;
+        return this.ordreKoscService.ordreKoscsSuiviHistoriqueCdd;
     }
 
     set ordreKoscs(value: Array<OrdreKoscVo>) {
-        this.ordreKoscService.ordreKoscs = value;
+        this.ordreKoscService.ordreKoscsSuiviHistoriqueCdd = value;
     }
 
     get selectedOrdreKosc(): OrdreKoscVo {

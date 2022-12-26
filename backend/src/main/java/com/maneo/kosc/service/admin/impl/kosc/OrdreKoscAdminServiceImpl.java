@@ -13,6 +13,7 @@ import com.maneo.kosc.bean.referentiel.SourceReplanification;
 import com.maneo.kosc.bean.technicien.Departement;
 import com.maneo.kosc.bean.technicien.Technicien;
 import com.maneo.kosc.bean.template.*;
+import com.maneo.kosc.security.service.facade.UserService;
 import com.maneo.kosc.service.admin.facade.kosc.OrdreKoscAdminService;
 import com.maneo.kosc.service.admin.facade.referentiel.CauseKoOkAdminService;
 import com.maneo.kosc.service.admin.facade.referentiel.EtatDemandeKoscAdminService;
@@ -83,6 +84,8 @@ public class OrdreKoscAdminServiceImpl extends AbstractServiceImpl<OrdreKosc> im
     private TemplateEmailCriAdminService templateEmailCriService;
 
 
+    @Autowired
+    private UserService userService;
     @Autowired
     private EntityManager entityManager;
 

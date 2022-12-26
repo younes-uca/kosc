@@ -51,11 +51,14 @@ export class OrdreKoscService {
     }
 
     public deleteIfEtatNotIn(etats: Array<EtatDemandeKoscVo>, ordreKoscs: Array<OrdreKoscVo>, ordreKosc: OrdreKoscVo) {
+        console.log(etats);
         if (ordreKoscs != null) {
             var indice = etats.findIndex(e => e.code === ordreKosc.etatDemandeKoscVo.code);
             if (indice == -1) {
                 var indiceOrdreKosc = ordreKoscs.findIndex(e => e.id == ordreKosc.id);
+                debugger
                 ordreKoscs.splice(indiceOrdreKosc, 1);
+                console.log('OrdreKoscs: '+ordreKosc);
             }
 
         }
