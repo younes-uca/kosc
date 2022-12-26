@@ -14,7 +14,8 @@
                             pButton
                             pRipple></button>
 
-                    <button pButton pRipple label="Actualiser" icon="pi pi-refresh" class="p-button-warning p-mr-2 p-mb-2"
+                    <button pButton pRipple label="Actualiser" icon="pi pi-refresh"
+                            class="p-button-warning p-mr-2 p-mb-2"
                             (click)="searchRequest()"></button>
 
                 </ng-template>
@@ -55,14 +56,13 @@
                                 <small class='p-error' *ngIf='!validOrdreKoscMonthDateRdv'>Mois est obligatoire</small>
                             </div>
 
-                            <div  class="p-field p-col-12 p-md-4" style="margin-top: 43px" >
+                            <div class="p-field p-col-12 p-md-4" style="margin-top: 43px">
                                 <button (click)="exportDevis()" icon="pi pi-check" label="Valider" pButton pRipple
-                                     ></button>
+                                ></button>
 
                             </div>
 
                         </div>
-
 
 
                     </p-tabView>
@@ -191,12 +191,12 @@
                         </th>
 
 
-<!--                        <th pSortableColumn="operator">-->
-<!--                            <div class="p-d-flex p-jc-between p-ai-center">-->
-<!--                                <span>Operator</span>-->
-<!--                                <p-sortIcon field="operator"></p-sortIcon>-->
-<!--                            </div>-->
-<!--                        </th>-->
+                        <!--                        <th pSortableColumn="operator">-->
+                        <!--                            <div class="p-d-flex p-jc-between p-ai-center">-->
+                        <!--                                <span>Operator</span>-->
+                        <!--                                <p-sortIcon field="operator"></p-sortIcon>-->
+                        <!--                            </div>-->
+                        <!--                        </th>-->
 
 
                         <th pSortableColumn="datePriseRdv">
@@ -274,7 +274,7 @@
                         <td><span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.codeDecharge}}</span></td>
 
 
-<!--                        <td><span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.operatorVo?.libelle}}</span></td>-->
+                        <!--                        <td><span [style]="stylefyConfort(ordreKosc)">{{ordreKosc.operatorVo?.libelle}}</span></td>-->
 
 
                         <td><span
@@ -290,7 +290,7 @@
                             </p-badge>
 
                         </td>
-                        <td>{{ordreKosc.causeKoOkVo?.code}}</td>
+                        <td>{{getLibelleCauseKo(ordreKosc)}}</td>
 
 
                         <td><span
