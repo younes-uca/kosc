@@ -332,14 +332,6 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
 
     }
 
-    // public async loadExportDevis() {
-    //     await this.roleService.findAll();
-    //     const isPermistted = await this.roleService.isPermitted('OrdreKosc', 'list');
-    //     isPermistted ? this.ordreKoscService.findByAnneAndMoins(this.selectedOrdreKosc.yearDateRdv, this.selectedOrdreKosc.monthDateRdv).subscribe(ordreKoscs => this.ordreKoscsExport = ordreKoscs, error => console.log(error))
-    //         : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
-    //
-    // }
-
 
     public async loadEtatDemandeKosc() {
         await this.roleService.findAll();
@@ -400,7 +392,6 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
         let monthDate = this.selectedOrdreKosc.monthDateRdv;
         this.ordreKoscService.findByAnneAndMoins(yearDate, monthDate).subscribe(ordreKoscs => {
             this.ordreKoscsExport = ordreKoscs;
-            console.log(this.ordreKoscsExport);
             this.prepareColumnExport();
             this.exportService.exporterExcel(this.criteriaDataDevis, this.exportDataDevis, this.fileName);
         });
@@ -410,14 +401,26 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
 
     prepareColumnExport(): void {
         this.exportDataDevis = this.ordreKoscsExport.map(e => {
-                return {
-                    'Reference': e.reference,
-                    'Reference work order': e.referenceWorkOrder,
-                    'Operator': e.operatorVo?.libelle,
-                    'Etat demande kosc': e.etatDemandeKoscVo?.libelle,
-                    'Type Ko': e.causeKoOkVo?.libelle,
-                    'Date envoi cri': this.datePipe.transform(e.dateEnvoiCri, 'dd/MM/yyyy hh:mm'),
-                    'Montant devis': e.montantDevis,
+                if (e.causeKoOkVo != null) {
+                    return {
+                        'Reference': e.reference,
+                        'Reference work order': e.referenceWorkOrder,
+                        'Operator': e.operatorVo?.libelle,
+                        'Etat demande kosc': e.etatDemandeKoscVo?.libelle,
+                        'Type Ko': e.causeKoOkVo?.libelle,
+                        'Date envoi cri': this.datePipe.transform(e.dateEnvoiCri, 'dd/MM/yyyy hh:mm'),
+                        'Montant devis': e.montantDevis,
+                    }
+                } else {
+                    return {
+                        'Reference': e.reference,
+                        'Reference work order': e.referenceWorkOrder,
+                        'Operator': e.operatorVo?.libelle,
+                        'Etat demande kosc': e.etatDemandeKoscVo?.libelle,
+                        'Type Ko': "-",
+                        'Date envoi cri': this.datePipe.transform(e.dateEnvoiCri, 'dd/MM/yyyy hh:mm'),
+                        'Montant devis': e.montantDevis,
+                    }
                 }
             }
         );
@@ -898,6 +901,14 @@ export class OrdreKoscSuiviCddListAdminComponent implements OnInit {
             {field: 'dateEnvoiSuivi', header: 'Date envoi suivi'},
         ];
 
+    }
+
+    public getLibelleCauseKo(ordreKosc: OrdreKoscVo): string {
+        if (ordreKosc.causeKoOkVo != null) {
+            return ordreKosc.causeKoOkVo?.code
+        } else {
+            return "-"
+        }
     }
 
     stylefyConfort(ordreKosc: OrdreKoscVo): string {
