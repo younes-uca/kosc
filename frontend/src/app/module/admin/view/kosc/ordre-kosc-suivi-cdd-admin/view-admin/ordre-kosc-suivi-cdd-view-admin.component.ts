@@ -56,6 +56,38 @@ export class OrdreKoscSuiviCddViewAdminComponent implements OnInit {
     ) {
     }
 
+// methods
+    ngOnInit(): void {
+        this.selectedOperator = new OperatorVo();
+        this.operatorService.findAll().subscribe((data) => this.operators = data);
+        this.selectedDepartement = new DepartementVo();
+        this.departementService.findAll().subscribe((data) => this.departements = data);
+        this.selectedTechnicien = new TechnicienVo();
+        this.technicienService.findAll().subscribe((data) => this.techniciens = data);
+        this.selectedTemplateEmailClientInjoinable = new TemplateEmailClientInjoinableVo();
+        this.templateEmailClientInjoinableService.findAll().subscribe((data) => this.templateEmailClientInjoinables = data);
+        this.selectedTemplateEmailClientInjoinableKosc = new TemplateEmailClientInjoinableKoscVo();
+        this.templateEmailClientInjoinableKoscService.findAll().subscribe((data) => this.templateEmailClientInjoinableKoscs = data);
+        this.selectedTemplateEmailPlanification = new TemplateEmailPlanificationVo();
+        this.templateEmailPlanificationService.findAll().subscribe((data) => this.templateEmailPlanifications = data);
+        this.selectedTemplateEmailReplanification = new TemplateEmailReplanificationVo();
+        this.templateEmailReplanificationService.findAll().subscribe((data) => this.templateEmailReplanifications = data);
+        this.selectedEtatDemandeKosc = new EtatDemandeKoscVo();
+        this.etatDemandeKoscService.findAll().subscribe((data) => this.etatDemandeKoscs = data);
+        this.selectedTemplateEmailCloture = new TemplateEmailClotureVo();
+        this.templateEmailClotureService.findAll().subscribe((data) => this.templateEmailClotures = data);
+        this.selectedTemplateSuivi = new TemplateSuiviVo();
+        this.templateSuiviService.findAll().subscribe((data) => this.templateSuivis = data);
+    }
+
+    hideViewDialog() {
+        this.viewOrdreKoscDialog = false;
+    }
+
+
+
+// getters and setters
+
     get ordreKoscs(): Array<OrdreKoscVo> {
         return this.ordreKoscService.ordreKoscs;
     }
@@ -63,9 +95,6 @@ export class OrdreKoscSuiviCddViewAdminComponent implements OnInit {
     set ordreKoscs(value: Array<OrdreKoscVo>) {
         this.ordreKoscService.ordreKoscs = value;
     }
-
-// getters and setters
-
     get selectedOrdreKosc(): OrdreKoscVo {
         return this.ordreKoscService.selectedOrdreKosc;
     }
@@ -330,33 +359,5 @@ export class OrdreKoscSuiviCddViewAdminComponent implements OnInit {
 
     get dateFormatColumn() {
         return environment.dateFormatList;
-    }
-
-// methods
-    ngOnInit(): void {
-        this.selectedOperator = new OperatorVo();
-        this.operatorService.findAll().subscribe((data) => this.operators = data);
-        this.selectedDepartement = new DepartementVo();
-        this.departementService.findAll().subscribe((data) => this.departements = data);
-        this.selectedTechnicien = new TechnicienVo();
-        this.technicienService.findAll().subscribe((data) => this.techniciens = data);
-        this.selectedTemplateEmailClientInjoinable = new TemplateEmailClientInjoinableVo();
-        this.templateEmailClientInjoinableService.findAll().subscribe((data) => this.templateEmailClientInjoinables = data);
-        this.selectedTemplateEmailClientInjoinableKosc = new TemplateEmailClientInjoinableKoscVo();
-        this.templateEmailClientInjoinableKoscService.findAll().subscribe((data) => this.templateEmailClientInjoinableKoscs = data);
-        this.selectedTemplateEmailPlanification = new TemplateEmailPlanificationVo();
-        this.templateEmailPlanificationService.findAll().subscribe((data) => this.templateEmailPlanifications = data);
-        this.selectedTemplateEmailReplanification = new TemplateEmailReplanificationVo();
-        this.templateEmailReplanificationService.findAll().subscribe((data) => this.templateEmailReplanifications = data);
-        this.selectedEtatDemandeKosc = new EtatDemandeKoscVo();
-        this.etatDemandeKoscService.findAll().subscribe((data) => this.etatDemandeKoscs = data);
-        this.selectedTemplateEmailCloture = new TemplateEmailClotureVo();
-        this.templateEmailClotureService.findAll().subscribe((data) => this.templateEmailClotures = data);
-        this.selectedTemplateSuivi = new TemplateSuiviVo();
-        this.templateSuiviService.findAll().subscribe((data) => this.templateSuivis = data);
-    }
-
-    hideViewDialog() {
-        this.viewOrdreKoscDialog = false;
     }
 }

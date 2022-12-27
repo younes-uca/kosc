@@ -126,6 +126,11 @@ export class UserAppEditComponent implements OnInit {
     resetPassword() {
 this.password=this.user.username;
 this.confirmPassword=this.user.username;
+this.messageService.add({
+    severity:'info',
+    summary:'Mot de passe',
+    detail:'le mot de passe a été réinitialisé'
+})
     }
 
     // getters and setters
