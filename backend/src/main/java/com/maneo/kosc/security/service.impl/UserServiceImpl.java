@@ -1,9 +1,6 @@
 package com.maneo.kosc.security.service.impl;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import com.maneo.kosc.bean.Chercheur;
 
@@ -140,6 +137,10 @@ public class UserServiceImpl implements UserService {
             foundedUser.setEnabled(user.isEnabled());
             foundedUser.setCredentialsNonExpired(user.isCredentialsNonExpired());
             foundedUser.setAccountNonLocked(user.isAccountNonLocked());
+            if(!Objects.equals(user.getPassword(), foundedUser.getPassword())){
+                foundedUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+                foundedUser.setPasswordChanged(true);
+            }
             foundedUser.setAccountNonExpired(user.isAccountNonExpired());
             foundedUser.setAuthorities(new ArrayList<>());
             Collection<Role> roles = new ArrayList<Role>();

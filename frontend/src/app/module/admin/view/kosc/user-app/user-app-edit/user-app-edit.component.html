@@ -62,6 +62,9 @@
                         >
                         <small class='p-error' *ngIf='!isMatch'>les mots de passe sont incompatible</small>
                     </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <button pButton pRipple label="Reset Password" (click)="resetPassword()" class="p-button-outlined p-button-warning p-mb-2 p-mr-2" style="margin-top: 18px"></button>
+                    </div>
                 </div>
             </p-tabPanel>
         </p-tabView>
@@ -72,10 +75,7 @@
         <button pButton pRipple label="{{'Annuler'}}" icon="pi pi-times" (click)="hideDialog()"></button>
         <button pButton pRipple label="{{'Enregistrer' }}" icon="pi pi-check"
                 (click)="editUserSubmit()"></button>
-
-
     </ng-template>
-
 
 </p-dialog>
 

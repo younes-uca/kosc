@@ -58,7 +58,7 @@ export class OrdreKoscService {
                 var indiceOrdreKosc = ordreKoscs.findIndex(e => e.id == ordreKosc.id);
                 debugger
                 ordreKoscs.splice(indiceOrdreKosc, 1);
-                console.log('OrdreKoscs: '+ordreKosc);
+                console.log('OrdreKoscs: '+ordreKoscs);
             }
 
         }
