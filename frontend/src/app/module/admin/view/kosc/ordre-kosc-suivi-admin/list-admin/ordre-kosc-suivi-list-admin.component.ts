@@ -33,9 +33,9 @@ import {TechnicienVo} from 'src/app/controller/model/Technicien.model';
 import {ConfirmationService, MenuItem, MessageService} from 'primeng/api';
 import {AuthService} from 'src/app/controller/service/Auth.service';
 import {ExportService} from 'src/app/controller/service/Export.service';
-import {error} from "protractor";
 import {DateUtils} from "../../../../../../utils/DateUtils";
 import {Calendar} from "primeng/calendar/calendar";
+import {StringUtilService} from "../../../../../../controller/service/StringUtil.service";
 
 @Component({
     selector: 'app-ordre-kosc-suivi-list-admin',
@@ -77,7 +77,7 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
     items: MenuItem[];
 
     home: MenuItem;
-    calander : Calendar;
+    calander: Calendar;
 
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
         , private operatorService: OperatorService
@@ -90,8 +90,12 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
         , private etatDemandeKoscService: EtatDemandeKoscService
         , private templateEmailClotureService: TemplateEmailClotureService
         , private templateSuiviService: TemplateSuiviService
+        , private stringUtilService: StringUtilService
+        , private datepipe: DatePipe
     ) {
     }
+
+
 
     get ordreKoscs(): Array<OrdreKoscVo> {
         return this.ordreKoscService.ordreKoscsSuiviRdv;
@@ -176,8 +180,6 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
 
         ];
         this.home = {icon: 'pi pi-home', routerLink: '/'};
-
-        //this.searchOrdreKosc.dateEnvoiCri = new Date();
         this.loadEtatDemandeKoscIncluding(['planification']);
         this.initExport();
         this.initCol();
@@ -293,7 +295,7 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
                 this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
                 this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
                 this.selectedOrdreKosc.dateOuverture = DateUtils.toDate(ordreKosc.dateOuverture);
-                this.selectedOrdreKosc.dateEnvoiCri = new Date();
+                this.selectedOrdreKosc.dateEnvoiCri = DateUtils.toDate(ordreKosc.dateEnvoiCri);;
                 this.selectedOrdreKosc.dateInterventionTechniqueDebut = DateUtils.toDate(ordreKosc.dateInterventionTechniqueDebut);
                 this.selectedOrdreKosc.dateInterventionTechniqueFin = DateUtils.toDate(ordreKosc.dateInterventionTechniqueFin);
                 this.selectedOrdreKosc.dateEnvoiClientInjoinable = DateUtils.toDate(ordreKosc.dateEnvoiClientInjoinable);
@@ -451,8 +453,6 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
             : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
 
     }
-
-
 
 
     public async loadTemplateEmailCloture() {
@@ -978,8 +978,8 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
         ];
     }
 
-    erdvAndConfort(ordreKoscVo : OrdreKoscVo){
-        if( ordreKoscVo.erdv == true && ordreKoscVo.confort)
+    erdvAndConfort(ordreKoscVo: OrdreKoscVo) {
+        if (ordreKoscVo.erdv == true && ordreKoscVo.confort)
             return true
         else
             return false
@@ -1004,21 +1004,28 @@ export class OrdreKoscSuiviListAdminComponent implements OnInit {
             : this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Problème de permission'});
     }
 
-  UpdateEtatToOkOrKo(ordreKosc: OrdreKoscVo, codeEtat: string) {
-   ordreKosc.etatDemandeKoscVo.code=codeEtat;
-   this.selectedOrdreKosc=ordreKosc;
-      this.ordreKoscService.updateEtat().subscribe(result => {
-          const position = this.ordreKoscs.indexOf(ordreKosc);
-          position > -1 ? this.ordreKoscs.splice(position, 1) : false;
-          if(codeEtat=='ok')
-              this.messageService.add({severity: 'success', summary: codeEtat, detail:'OrdreKosc with reference ' +result.reference + ' updated to '+ codeEtat});
-          else if( codeEtat=='ko')
-              this.messageService.add({severity: 'success', summary: codeEtat, detail:'OrdreKosc with reference ' +result.reference + ' updated to '+ codeEtat});
+    UpdateEtatToOkOrKo(ordreKosc: OrdreKoscVo, codeEtat: string) {
+        ordreKosc.etatDemandeKoscVo.code = codeEtat;
+        this.selectedOrdreKosc = ordreKosc;
+        this.ordreKoscService.updateEtat().subscribe(result => {
+                const position = this.ordreKoscs.indexOf(ordreKosc);
+                position > -1 ? this.ordreKoscs.splice(position, 1) : false;
+                if (codeEtat == 'ok')
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: codeEtat,
+                        detail: 'OrdreKosc with reference ' + result.reference + ' updated to ' + codeEtat
+                    });
+                else if (codeEtat == 'ko')
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: codeEtat,
+                        detail: 'OrdreKosc with reference ' + result.reference + ' updated to ' + codeEtat
+                    });
 
-          }
-      )
+            }
+        )
     }
-
 
 
 }

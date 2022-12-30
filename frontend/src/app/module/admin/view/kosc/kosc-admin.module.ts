@@ -442,6 +442,7 @@ import {EmailingAdminComponent} from "./emailing-admin/emailing-admin.component"
 
 
 
+
 @NgModule({
     declarations: [
         CustomCardComponent,
@@ -635,7 +636,6 @@ import {EmailingAdminComponent} from "./emailing-admin/emailing-admin.component"
         StatisticKoscAdminComponent,
         InboxComponent,
         ProfileComponent,
-
     ],
     imports: [
         CommonModule,
