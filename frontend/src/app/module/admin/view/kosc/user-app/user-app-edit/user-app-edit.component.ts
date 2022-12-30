@@ -100,7 +100,38 @@ export class UserAppEditComponent implements OnInit {
         this.validateEmailUser();
 
     }
+    changePassword() {
+        debugger
+        if(this.password===this.confirmPassword){
+            this.user.password=this.password;
+            this.isMatch=true;
+        }else{
+            this.isMatch=false;
+            this.errorMessages.push('les mots de passe sont incompatible');
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: 'les Mots de Passe sont incompatible'
+            })
+        }
 
+    }
+
+    private initVariables() {
+        this.password='';
+        this.confirmPassword='';
+        this.isMatch=true;
+    }
+
+    resetPassword() {
+this.password=this.user.username;
+this.confirmPassword=this.user.username;
+this.messageService.add({
+    severity:'info',
+    summary:'Mot de passe',
+    detail:'le mot de passe a été réinitialisé'
+})
+    }
 
     // getters and setters
 
@@ -180,25 +211,5 @@ export class UserAppEditComponent implements OnInit {
         this._errorMessages = value;
     }
 
-    changePassword() {
-if(this.password===this.confirmPassword){
-    this.user.password=this.password;
-    this.isMatch=true;
-}else{
-    this.isMatch=false;
-    this.errorMessages.push('les mots de passe sont incompatible');
-    this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: 'les Mots de Passe sont incompatible'
-    })
-}
 
-    }
-
-    private initVariables() {
-        this.password='';
-        this.confirmPassword='';
-        this.isMatch=true;
-    }
 }
