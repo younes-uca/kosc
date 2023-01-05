@@ -17,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileNotFoundException;
@@ -28,6 +29,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static java.nio.file.Files.copy;
 import static java.nio.file.Paths.get;
@@ -40,6 +43,9 @@ import static org.springframework.http.HttpHeaders.CONTENT_DISPOSITION;
 @RequestMapping("api/admin/ordreKosc")
 public class OrdreKoscRestAdmin {
 
+    private  RestTemplate restApi = new RestTemplate();
+
+    // get all paramater map
 
     @Autowired
     private OrdreKoscAdminService ordreKoscService;

@@ -42,6 +42,7 @@ export class DateUtils {
                 ':' + this.pad(dt.getSeconds()) +
                 '.' + (dt.getMilliseconds() / 1000).toFixed(3).slice(2, 5) +
                 'Z';
+
         }
 
     }
@@ -51,7 +52,8 @@ export class DateUtils {
         if (date == null || Number.isNaN(date)) {
             return null;
         } else {
-            return new Date(this.toString(date).split('T')[0]);
+            return new Date(date.split('T')[0]);
+
         }
     }
 

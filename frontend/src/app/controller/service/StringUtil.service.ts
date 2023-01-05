@@ -16,4 +16,5 @@ export class StringUtilService {
     public isNotEmpty(value: any): boolean {
         return !this.isEmpty(value);
     }
+
 }

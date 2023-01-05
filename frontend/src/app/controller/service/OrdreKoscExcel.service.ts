@@ -801,6 +801,7 @@ export class OrdreKoscExcelService {
             myOrdreKoscData.departementVo = new DepartementVo();
         }
         myOrdreKoscData.departementVo.code = data[i]['zip_code']; //////zip code
+        myOrdreKoscData.departementVo.libelle = data[i]['zip_code'];
 
         myOrdreKoscData.etatDemandeKoscVo.code = 'initialisation-wo';
         myOrdreKoscData.etatDemandeKoscVo.libelle = 'initialisation-wo';
@@ -968,7 +969,7 @@ export class OrdreKoscExcelService {
     convertDate(date ) {
         if (date != null){
             const myDate = new Date(Math.round((date - 25569) * 86400 * 1000));
-            return DateUtils.toDate(myDate);
+            return new Date(DateUtils.toString(myDate).split('T')[0]);
 
         }
      return null;
