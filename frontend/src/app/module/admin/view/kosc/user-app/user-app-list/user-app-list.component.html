@@ -11,62 +11,8 @@
                             class="p-button-success p-mr-2 p-mb-2"
                             (click)="openCreateDialog()"></button>
 
-
-                    <button pButton pRipple label="Recherche"
-                            icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}"
-                            class="p-button-success p-mr-2 p-mb-2"
-                            (click)="this.findByCriteriaShow = !this.findByCriteriaShow"></button>
-                </ng-template>
-                <ng-template pTemplate="right">
-                    <div class="flex">
-                        <button pButton pRipple label="Importer"
-                                icon="pi pi-upload"
-                                class="p-mr-4"
-                                [disabled]="btnChargementDisabled"
-                        ></button>
-                        <p-splitButton label="Exporter" icon="pi pi-download" styleClass="p-button-help"
-                                       [model]="excelPdfButons"></p-splitButton>
-                    </div>
                 </ng-template>
 
-            </p-toolbar>
-            <p-toolbar *ngIf="findByCriteriaShow">
-
-               <!-- <div class="align-form-search">
-
-
-
-
-                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
-                                    <input class="p-mr-2" pInputText id="200"
-                                           type="text" maxlength="30" [(ngModel)]="searchChercheur.email">
-                                    <label for="200">Email</label>
-                                </span>
-
-
-                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
-                                    <input class="p-mr-2" pInputText id="19"
-                                           type="text" maxlength="30" [(ngModel)]="searchChercheur.prenom">
-                                    <label for="19">Pr&eacute;nom</label>
-                                </span>
-
-                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
-                                    <input class="p-mr-2" pInputText id="20"
-                                           type="text" maxlength="30" [(ngModel)]="searchChercheur.nom">
-                                    <label for="20">Nom usage</label>
-                                </span>
-
-
-
-                </div>
-
-                <div class="align-search-button">
-                    <button pButton pRipple label="Effacer" icon="pi pi-times"
-                            class="p-button-info p-mr-2" (click)="clearRequest()"></button>
-
-                    <button pButton pRipple label="Valider" icon="pi pi-sort-amount-down"
-                            class="p-button-info p-mr-2" (click)="searchRequest()"></button>
-                </div>-->
             </p-toolbar>
 
 

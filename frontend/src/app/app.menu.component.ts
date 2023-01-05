@@ -68,11 +68,6 @@ export class AppMenuComponent implements OnInit {
 
         this.modeladmin =
             [
-            /*    {
-                    label: 'Profile',
-                    icon: 'pi pi-fw pi-user',
-                    routerLink: ['/app/admin/kosc/profile/profile']
-                },*/
                 {
                 label: 'Kosc Ordre',
                 icon: 'pi pi-wallet',
@@ -301,16 +296,21 @@ export class AppMenuComponent implements OnInit {
                     icon: 'pi pi-users',
                     items: [
                         {
-                            label: 'User',
+                            label: 'Users',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/admin/kosc/ordre-kosc-gestion-utilisateur/Gestion_users']
                         },{
-                            label: 'Role',
+                            label: 'Roles',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/admin/kosc/ordre-kosc-gestion-utilisateur/Gestion_roles']
                         }
                     ]
-                }
+                },
+                {
+                label: 'Profile',
+                icon: 'pi pi-fw pi-user',
+                routerLink: ['/app/admin/kosc/profile/profile']
+            }
             ]
         this.modelchercheur =
             [

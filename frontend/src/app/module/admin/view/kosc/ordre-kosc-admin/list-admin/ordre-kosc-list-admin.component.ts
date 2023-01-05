@@ -125,6 +125,7 @@ export class OrdreKoscListAdminComponent implements OnInit {
     items: MenuItem[];
 
     home: MenuItem;
+    loading=[false,false,false,false];
 
     constructor(private datePipe: DatePipe, private ordreKoscService: OrdreKoscService, private messageService: MessageService, private confirmationService: ConfirmationService, private roleService: RoleService, private router: Router, private authService: AuthService, private exportService: ExportService
         , private operatorService: OperatorService
@@ -341,6 +342,7 @@ export class OrdreKoscListAdminComponent implements OnInit {
     }
 
     public searchRequest() {
+        this.load(2);
         this.ordreKoscService.findByCriteriaOrderKoscImport(this.searchOrdreKosc).subscribe(ordreKoscs => {
             this.ordreKoscs = ordreKoscs;
             console.log(this.ordreKoscs);
@@ -1340,6 +1342,12 @@ export class OrdreKoscListAdminComponent implements OnInit {
             return false
     }
 
+
+    load(index) {
+        this.loading[index] = true;
+        setTimeout(() =>  this.loading[index] = false, 1000);
+    }
+// getters and setters
     get ordreKoscs(): Array<OrdreKoscVo> {
         return this.ordreKoscService.ordreKoscs;
     }
